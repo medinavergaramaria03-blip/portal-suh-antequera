@@ -1,0 +1,536 @@
+<!doctype html><html><head>
+  <meta name="robots" content="noindex, nofollow"><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Calculadora EPADI</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+/* Diseño: formulario en una columna con el resultado fijo a la derecha; en móvil, barra inferior con el total. */
+:root{
+  --bg:#F2F5FA; --surface:#FFFFFF; --ink:#16213A; --muted:#556182; --line:#D8DFEC;
+  --accent:#2C4A82; --accent-soft:#E3EAF7; --accent-ink:#FFFFFF;
+  --sev0:#1B7A57; --sev1:#52780F; --sev2:#A35F00; --sev3:#C0392B; --on-sev:#FFFFFF;
+  --font:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0F1626; --surface:#172036; --ink:#E8EDF8; --muted:#9AA7C4; --line:#2A3652;
+    --accent:#8FB0F5; --accent-soft:#22304F; --accent-ink:#0F1626;
+    --sev0:#4FC79B; --sev1:#A3C957; --sev2:#F0A941; --sev3:#F2786B; --on-sev:#0F1626;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0F1626; --surface:#172036; --ink:#E8EDF8; --muted:#9AA7C4; --line:#2A3652;
+  --accent:#8FB0F5; --accent-soft:#22304F; --accent-ink:#0F1626;
+  --sev0:#4FC79B; --sev1:#A3C957; --sev2:#F0A941; --sev3:#F2786B; --on-sev:#0F1626;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{
+  background:var(--bg); color:var(--ink); font:15px/1.5 var(--font);
+  padding-block:20px 110px;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));
+  padding-right:max(16px, env(safe-area-inset-right, 0px));
+}
+button{font:inherit;color:inherit}
+[data-sev="0"]{--c:var(--sev0)} [data-sev="1"]{--c:var(--sev1)} [data-sev="2"]{--c:var(--sev2)} [data-sev="3"]{--c:var(--sev3)}
+
+.wrap{max-width:1080px;margin:0 auto}
+.top{display:flex;flex-direction:column;gap:6px;margin-bottom:20px}
+.eyebrow{margin:0;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:500}
+h1{margin:0;font-size:30px;line-height:1.15;font-weight:600;letter-spacing:-.01em;text-wrap:balance}
+.lead{margin:0;color:var(--muted);max-width:60ch}
+.top-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.btn{min-height:40px;padding:0 14px;border-radius:8px;border:1px solid var(--line);background:var(--surface);cursor:pointer;font-weight:500}
+.btn:hover{border-color:var(--accent)}
+.btn.primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn:focus-visible,.step:focus-visible,.bar:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+.layout{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:24px;align-items:start}
+.main{display:flex;flex-direction:column;gap:16px;min-width:0}
+.aside{position:sticky;top:16px;min-width:0}
+
+.note{padding:10px 14px;border-radius:8px;background:var(--accent-soft);border:1px solid var(--line);font-size:14px}
+.steps{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:6px}
+.step{min-height:40px;padding:4px 6px;border:1px solid var(--line);border-radius:8px;background:var(--surface);cursor:pointer;font-size:13px;font-weight:500;text-align:center;line-height:1.2}
+.step.done{background:var(--accent-soft);border-color:var(--accent);color:var(--accent)}
+
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px;min-width:0;scroll-margin-top:12px}
+.card-h{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:14px}
+h2{margin:0;font-size:18px;line-height:1.25;font-weight:600}
+.sub{margin:2px 0 0;color:var(--muted);font-size:14px;max-width:56ch}
+.badge{flex:none;padding:3px 10px;border-radius:999px;border:1px solid var(--line);font-size:12.5px;color:var(--muted);white-space:nowrap}
+.badge.done{background:var(--accent-soft);border-color:var(--accent);color:var(--accent);font-weight:500}
+.scale-line{margin:14px 0 0;padding-top:12px;border-top:1px solid var(--line);font-size:14px;color:var(--muted)}
+.scale-line b{color:var(--ink);font-weight:600}
+
+fieldset{border:0;margin:0;padding:0;min-width:0}
+legend{padding:0;font-weight:500;margin-bottom:8px}
+.item{padding:14px 0;border-top:1px solid var(--line)}
+.item:first-of-type{border-top:0;padding-top:0}
+.opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:8px}
+.opt{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:10px;min-height:44px;padding:8px 12px;border:1px solid var(--line);border-radius:8px;cursor:pointer;background:var(--surface)}
+.opt:hover{border-color:var(--accent)}
+.opt input{margin:0;width:18px;height:18px;accent-color:var(--accent)}
+.opt:has(input:checked){border-color:var(--accent);background:var(--accent-soft)}
+.opt:has(input:focus-visible){outline:2px solid var(--accent);outline-offset:2px}
+.pts{font:500 13px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.opt:has(input:checked) .pts{color:var(--accent)}
+.hint{display:block;color:var(--muted);font-size:13px;font-weight:400}
+.cols2{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:8px}
+
+.age-row{display:flex;flex-wrap:wrap;align-items:center;gap:12px 16px}
+.age-row label{font-weight:500}
+input[type=number]{width:120px;min-height:44px;padding:0 12px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);font:500 18px var(--mono)}
+input[type=number]:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+.pf-row{display:flex;flex-wrap:wrap;align-items:center;gap:8px 16px;padding:10px 0;border-top:1px solid var(--line)}
+.pf-row:first-child{border-top:0;padding-top:0}
+.pf-q{flex:1 1 260px;min-width:0;display:flex;gap:10px}
+.pf-n{flex:none;width:22px;font:500 13px var(--mono);color:var(--muted);padding-top:2px}
+.seg{display:flex;gap:6px}
+.seg label{position:relative;display:flex;align-items:center;justify-content:center;min-width:96px;min-height:44px;padding:0 14px;border:1px solid var(--line);border-radius:8px;cursor:pointer;background:var(--surface);font-weight:500}
+.seg input{position:absolute;inset:0;opacity:0;margin:0;cursor:pointer}
+.seg label:has(input:focus-visible){outline:2px solid var(--accent);outline-offset:2px}
+.seg label:has(input[value="ok"]:checked){background:color-mix(in srgb,var(--sev0) 16%,var(--surface));border-color:var(--sev0);color:var(--sev0)}
+.seg label:has(input[value="err"]:checked){background:color-mix(in srgb,var(--sev3) 16%,var(--surface));border-color:var(--sev3);color:var(--sev3)}
+.edu{margin-top:12px}
+
+.result{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px;display:flex;flex-direction:column;gap:14px;scroll-margin-top:12px}
+.result h2{font-size:16px}
+.total{display:flex;align-items:baseline;gap:6px}
+.total b{font:500 56px/1 var(--mono);font-variant-numeric:tabular-nums}
+.total span{color:var(--muted);font:500 20px var(--mono)}
+.pill{display:inline-block;padding:4px 12px;border-radius:999px;font-weight:600;font-size:14px;color:var(--c);background:color-mix(in srgb,var(--c) 15%,var(--surface));border:1px solid color-mix(in srgb,var(--c) 45%,transparent)}
+.status{margin:0;color:var(--muted);font-size:14px}
+.cells{display:grid;grid-template-columns:repeat(11,minmax(0,1fr));gap:3px;padding-top:4px}
+.cell{display:grid;place-items:center;height:34px;border-radius:6px;font:500 13px var(--mono);color:var(--c);background:color-mix(in srgb,var(--c) 16%,var(--surface))}
+.cell.on{background:var(--c);color:var(--on-sev);transform:translateY(-3px);box-shadow:0 3px 0 color-mix(in srgb,var(--c) 40%,transparent)}
+.legend{list-style:none;margin:0;padding:0;display:grid;gap:2px}
+.legend li{display:grid;grid-template-columns:12px 54px 1fr;align-items:center;gap:8px;padding:4px 8px;border-radius:6px;font-size:14px;color:var(--muted)}
+.legend li::before{content:"";width:10px;height:10px;border-radius:3px;background:var(--c)}
+.legend li.on{background:color-mix(in srgb,var(--c) 14%,var(--surface));color:var(--ink);font-weight:600}
+.legend .rg{font-family:var(--mono);font-size:13px}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th{font-weight:500;color:var(--muted);text-align:left;font-size:12px;letter-spacing:.06em;text-transform:uppercase;padding:0 0 6px}
+td{padding:7px 0;border-top:1px solid var(--line);vertical-align:top}
+td.r-p,th.r-p{text-align:right;font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+td.r-d{color:var(--muted);padding-inline:8px}
+tr.pending td{color:var(--muted)}
+.fine{margin:0;font-size:12.5px;color:var(--muted)}
+.foot{margin:24px auto 0;max-width:1080px;font-size:13px;color:var(--muted);display:grid;gap:6px}
+.foot p{margin:0;max-width:90ch}
+#fallback{width:100%;min-height:150px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);font:13px/1.5 var(--mono);padding:8px}
+
+.bar{display:none}
+@media (max-width:959px){
+  .layout{grid-template-columns:minmax(0,1fr)}
+  .aside{position:static}
+  .bar{
+    display:flex;align-items:center;gap:12px;position:fixed;left:0;right:0;bottom:0;z-index:20;
+    padding:10px max(16px, env(safe-area-inset-right, 0px)) calc(10px + env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px));
+    background:var(--surface);border:0;border-top:1px solid var(--line);cursor:pointer;text-align:left;width:100%;min-height:56px
+  }
+  .bar-l{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:500}
+  .bar-m{flex:1;font:500 17px var(--mono)}
+}
+@media (max-width:560px){
+  h1{font-size:26px}
+  .steps{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .card,.result{padding:14px}
+  .seg{width:100%}.seg label{flex:1}
+}
+@media (prefers-reduced-motion:no-preference){
+  .cell{transition:transform .18s ease,background-color .18s ease}
+}
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <p class="eyebrow">Urgencias · Hospital de Antequera</p>
+    <h1>Calculadora EPADI</h1>
+    <p class="lead">Índice de fragilidad de 0 (no frágil) a 10 (riesgo alto). Completa los seis bloques y el resultado aparece al terminar.</p>
+    <div class="top-actions">
+      <button type="button" class="btn" id="example">Cargar caso de ejemplo</button>
+      <button type="button" class="btn" id="reset">Limpiar todo</button>
+    </div>
+  </header>
+
+  <div class="layout">
+    <form class="main" id="f" autocomplete="off">
+      <div class="note" id="exnote" hidden>Estás viendo un caso de ejemplo con datos ficticios. Pulsa «Limpiar todo» para empezar con un paciente.</div>
+
+      <nav class="steps" aria-label="Bloques del EPADI" id="steps"></nav>
+
+      <section class="card" id="s-edad">
+        <div class="card-h">
+          <div><h2>Edad</h2><p class="sub">Años cumplidos del paciente.</p></div>
+          <span class="badge" data-badge="edad">Pendiente</span>
+        </div>
+        <div class="age-row">
+          <label for="age">Edad (años)</label>
+          <input type="number" id="age" inputmode="numeric" min="0" max="120" step="1" placeholder="0">
+          <span class="hint">Menos de 75 años: 0 · 75 a 84: 1 · 85 o más: 2 puntos</span>
+        </div>
+        <p class="fine" style="margin-top:10px">La hoja del área indica «&gt; 85». Aquí, 85 años se puntúa con 2.</p>
+      </section>
+
+      <section class="card" id="s-pf">
+        <div class="card-h">
+          <div><h2>Test de Pfeiffer</h2><p class="sub">Cuestionario de 10 preguntas (SPMSQ). Si el paciente no contesta, cuenta como error.</p></div>
+          <span class="badge" data-badge="pf">Pendiente</span>
+        </div>
+        <div id="pf-list"></div>
+        <div class="edu">
+          <label class="opt" style="grid-template-columns:auto minmax(0,1fr)">
+            <input type="checkbox" id="pf-edu">
+            <span class="txt">No sabe leer ni escribir<span class="hint">Se admite un error más: el punto de corte pasa de 3 a 4 errores.</span></span>
+          </label>
+        </div>
+        <p class="scale-line" data-line="pf"></p>
+      </section>
+
+      <section class="card" id="s-bar">
+        <div class="card-h">
+          <div><h2>Índice de Barthel</h2><p class="sub">Actividades básicas de la vida diaria. Elige lo que el paciente hace de verdad, no lo que podría hacer.</p></div>
+          <span class="badge" data-badge="bar">Pendiente</span>
+        </div>
+        <div id="bar-list"></div>
+        <p class="scale-line" data-line="bar"></p>
+      </section>
+
+      <section class="card" id="s-ch">
+        <div class="card-h">
+          <div><h2>Índice de Charlson abreviado</h2><p class="sub">Marca las enfermedades que tiene el paciente.</p></div>
+          <span class="badge" data-badge="ch">Pendiente</span>
+        </div>
+        <div class="cols2" id="ch-list"></div>
+        <p class="scale-line" data-line="ch"></p>
+      </section>
+
+      <section class="card" id="s-gj">
+        <div class="card-h">
+          <div><h2>Escala de Gijón</h2><p class="sub">Valoración sociofamiliar. Elige una opción en cada apartado.</p></div>
+          <span class="badge" data-badge="gj">Pendiente</span>
+        </div>
+        <div id="gj-list"></div>
+        <p class="scale-line" data-line="gj"></p>
+      </section>
+
+      <section class="card" id="s-plu">
+        <div class="card-h">
+          <div><h2>Pluripatológico</h2><p class="sub">¿Es paciente pluripatológico según el proceso asistencial?</p></div>
+          <span class="badge" data-badge="plu">Pendiente</span>
+        </div>
+        <div class="opts">
+          <label class="opt"><input type="radio" name="plu" value="si"><span class="txt">Sí (según proceso)</span><span class="pts">1</span></label>
+          <label class="opt"><input type="radio" name="plu" value="no"><span class="txt">No</span><span class="pts">0</span></label>
+        </div>
+      </section>
+    </form>
+
+    <aside class="aside">
+      <div class="result" id="result" aria-live="polite">
+        <h2>Resultado EPADI</h2>
+        <div class="total"><b id="total">–</b><span>/ 10</span></div>
+        <div id="pill-wrap"></div>
+        <p class="status" id="status"></p>
+        <div class="cells" id="cells" aria-hidden="true"></div>
+        <ul class="legend" id="legend">
+          <li data-sev="0" data-k="0"><span class="rg">0</span><span>No frágil</span></li>
+          <li data-sev="1" data-k="1"><span class="rg">1–3</span><span>Fragilidad baja</span></li>
+          <li data-sev="2" data-k="2"><span class="rg">4–6</span><span>Fragilidad intermedia</span></li>
+          <li data-sev="3" data-k="3"><span class="rg">7–10</span><span>Fragilidad alta</span></li>
+        </ul>
+        <table>
+          <thead><tr><th>Bloque</th><th>Dato</th><th class="r-p">Puntos</th></tr></thead>
+          <tbody id="rows">
+            <tr data-row="edad"><td>Edad</td><td class="r-d">—</td><td class="r-p">—</td></tr>
+            <tr data-row="pf"><td>Pfeiffer</td><td class="r-d">—</td><td class="r-p">—</td></tr>
+            <tr data-row="bar"><td>Barthel</td><td class="r-d">—</td><td class="r-p">—</td></tr>
+            <tr data-row="ch"><td>Charlson abreviado</td><td class="r-d">—</td><td class="r-p">—</td></tr>
+            <tr data-row="gj"><td>Escala de Gijón</td><td class="r-d">—</td><td class="r-p">—</td></tr>
+            <tr data-row="plu"><td>Pluripatológico</td><td class="r-d">—</td><td class="r-p">—</td></tr>
+          </tbody>
+        </table>
+        <button type="button" class="btn primary" id="copy" disabled>Copiar resumen</button>
+        <textarea id="fallback" readonly hidden aria-label="Resumen para copiar"></textarea>
+        <p class="fine">Los datos se quedan en esta pantalla: no se guardan ni se envían.</p>
+      </div>
+    </aside>
+  </div>
+
+  <div class="foot">
+    <p>Puntuaciones del EPADI según la hoja del Área de Gestión Sanitaria Norte de Málaga. Barthel: versión original de Mahoney y Barthel. Pfeiffer: SPMSQ, versión española. Escala de Gijón: Díaz Palacios y cols. (1993). Charlson abreviado: tabla de comorbilidad facilitada.</p>
+    <p>Herramienta de apoyo no oficial. No sustituye el juicio clínico ni el registro en la historia del paciente.</p>
+  </div>
+</div>
+
+<button type="button" class="bar" id="bar" aria-label="Ver resultado EPADI">
+  <span class="bar-l">EPADI</span>
+  <span class="bar-m" id="bar-m">0 / 6 bloques</span>
+  <span id="bar-pill"></span>
+</button>
+
+<script>
+(function(){
+var $=function(s,r){return (r||document).querySelector(s)};
+var $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
+
+// SCORING START
+var ptsAge=function(a){return a>=85?2:a>=75?1:0};
+var ptsPf=function(e){return e>=3?1:0};
+var ptsBar=function(t){return t>60?0:t>=21?1:2};
+var ptsCh=function(s){return s>=3?2:0};
+var ptsGj=function(s){return s>=17?2:s>=10?1:0};
+var sevOf=function(n){return n===0?0:n<=3?1:n<=6?2:3};
+// SCORING END
+
+var SEV_LABEL=['No frágil','Fragilidad baja','Fragilidad intermedia','Fragilidad alta'];
+
+var PF=[
+ {q:'¿Qué día es hoy?',h:'Día, mes y año'},
+ {q:'¿Qué día de la semana es hoy?'},
+ {q:'¿Dónde estamos ahora?',h:'Nombre del lugar'},
+ {q:'¿Cuál es su número de teléfono?',h:'Si no tiene teléfono: ¿cuál es su dirección?'},
+ {q:'¿Cuántos años tiene?'},
+ {q:'¿Cuál es su fecha de nacimiento?',h:'Día, mes y año'},
+ {q:'¿Quién es ahora el presidente del Gobierno?'},
+ {q:'¿Quién fue el anterior presidente del Gobierno?'},
+ {q:'¿Cuáles son los dos apellidos de su madre?'},
+ {q:'Restar de 3 en 3 desde 20',h:'Correcto: 17, 14, 11, 8, 5, 2'}
+];
+var BAR=[
+ {n:'Comer',o:[[10,'Independiente'],[5,'Necesita ayuda para cortar, extender la mantequilla…'],[0,'Dependiente']]},
+ {n:'Lavarse o bañarse',o:[[5,'Independiente'],[0,'Dependiente']]},
+ {n:'Vestirse',o:[[10,'Independiente'],[5,'Necesita ayuda, pero hace la mitad sin ayuda'],[0,'Dependiente']]},
+ {n:'Arreglarse',h:'Lavarse cara y manos, peinarse, afeitarse, dientes',o:[[5,'Independiente'],[0,'Dependiente']]},
+ {n:'Deposiciones',o:[[10,'Continente'],[5,'Accidente ocasional (uno por semana como máximo)'],[0,'Incontinente']]},
+ {n:'Micción',o:[[10,'Continente'],[5,'Accidente ocasional (uno en 24 h como máximo)'],[0,'Incontinente, o sondado sin poder manejarse solo']]},
+ {n:'Uso del retrete',o:[[10,'Independiente'],[5,'Necesita ayuda'],[0,'Dependiente']]},
+ {n:'Trasladarse sillón-cama',o:[[15,'Independiente'],[10,'Mínima ayuda, física o verbal'],[5,'Gran ayuda, pero puede sentarse'],[0,'Dependiente, no se mantiene sentado']]},
+ {n:'Deambulación',o:[[15,'Independiente, camina 50 m'],[10,'Necesita ayuda, física o verbal'],[5,'Independiente en silla de ruedas'],[0,'Dependiente']]},
+ {n:'Subir y bajar escaleras',o:[[10,'Independiente'],[5,'Necesita ayuda'],[0,'Incapaz']]}
+];
+var CH=[
+ ['Accidente cerebrovascular (ACV)',1],['Diabetes',1],['EPOC',1],
+ ['Insuficiencia cardiaca / cardiopatía isquémica',1],['Demencia',1],['Enfermedad arterial periférica',1],
+ ['Insuficiencia renal crónica (diálisis)',2],['Cáncer',2]
+];
+var GJ=[
+ {n:'Situación familiar',o:[
+  'Vive con pareja y/o familia sin conflicto',
+  'Vive con pareja de similar edad',
+  'Vive con pareja y/o familia y/o otros, pero no pueden o no quieren atenderle',
+  'Vive solo; hijos y/o familiares próximos que no cubren todas las necesidades',
+  'Vive solo; familia lejana, desatendido o sin familia']},
+ {n:'Situación económica',o:[
+  'Más de 1,5 veces el salario mínimo',
+  'Desde 1,5 veces el salario mínimo hasta la pensión mínima contributiva',
+  'Desde la pensión mínima contributiva hasta la pensión no contributiva',
+  'LISMI, FAS o pensión no contributiva',
+  'Sin ingresos o inferiores al apartado anterior']},
+ {n:'Vivienda',o:[
+  'Adecuada a las necesidades',
+  'Barreras arquitectónicas en la vivienda o el portal (peldaños, puertas estrechas, baño…)',
+  'Humedades, mala higiene, equipamiento inadecuado (sin baño completo, agua caliente, calefacción…)',
+  'Ausencia de ascensor o de teléfono',
+  'Vivienda inadecuada (chabola, cueva) o sin vivienda']},
+ {n:'Relaciones sociales',o:[
+  'Relaciones sociales',
+  'Relación social solo con familia y vecinos',
+  'Relación social solo con familia o vecinos',
+  'No sale del domicilio, recibe visitas',
+  'No sale del domicilio, no recibe visitas']},
+ {n:'Apoyos de la red social',o:[
+  'Con apoyo familiar o vecinal',
+  'Voluntariado social, ayuda domiciliaria',
+  'No tiene apoyo',
+  'Pendiente de ingreso en residencia geriátrica',
+  'Tiene cuidados permanentes']}
+];
+var BLOCKS=[['edad','Edad','s-edad'],['pf','Pfeiffer','s-pf'],['bar','Barthel','s-bar'],['ch','Charlson','s-ch'],['gj','Gijón','s-gj'],['plu','Pluripatológico','s-plu']];
+
+function opt(type,name,value,label,pts){
+  return '<label class="opt"><input type="'+type+'" name="'+name+'" value="'+value+'"><span class="txt">'+label+'</span>'+(pts!=null?'<span class="pts">'+pts+'</span>':'')+'</label>';
+}
+
+$('#pf-list').innerHTML=PF.map(function(p,i){
+  return '<div class="pf-row" role="group" aria-labelledby="pfq'+i+'"><div class="pf-q"><span class="pf-n">'+(i+1)+'</span><div><span id="pfq'+i+'">'+p.q+'</span>'+(p.h?'<span class="hint">'+p.h+'</span>':'')+'</div></div>'
+   +'<div class="seg"><label><input type="radio" name="pf'+i+'" value="ok"><span>Correcta</span></label><label><input type="radio" name="pf'+i+'" value="err"><span>Error</span></label></div></div>';
+}).join('');
+
+$('#bar-list').innerHTML=BAR.map(function(b,i){
+  return '<fieldset class="item"><legend>'+b.n+(b.h?'<span class="hint">'+b.h+'</span>':'')+'</legend><div class="opts">'
+   +b.o.map(function(o){return opt('radio','bar'+i,o[0],o[1],o[0])}).join('')+'</div></fieldset>';
+}).join('');
+
+$('#ch-list').innerHTML=CH.map(function(c,i){return opt('checkbox','ch',c[1],c[0],c[1])}).join('')
+  +'<label class="opt"><input type="checkbox" id="ch-none"><span class="txt">Ninguna de las anteriores</span><span class="pts">0</span></label>';
+
+$('#gj-list').innerHTML=GJ.map(function(g,i){
+  return '<fieldset class="item"><legend>'+g.n+'</legend><div class="opts" style="grid-template-columns:repeat(auto-fit,minmax(230px,1fr))">'
+   +g.o.map(function(l,k){return opt('radio','gj'+i,k+1,l,k+1)}).join('')+'</div></fieldset>';
+}).join('');
+
+$('#steps').innerHTML=BLOCKS.map(function(b){return '<button type="button" class="step" data-step="'+b[0]+'" data-target="'+b[2]+'">'+b[1]+'</button>'}).join('');
+$('#cells').innerHTML=Array.apply(null,{length:11}).map(function(_,i){return '<span class="cell" data-sev="'+sevOf(i)+'" data-n="'+i+'">'+i+'</span>'}).join('');
+
+function pl(n,one,many){return n+' '+(n===1?one:many)}
+
+function calc(){
+  var out={}, v=$('#age').value.trim(), age=v===''?null:Number(v);
+  var ageOk=age!==null&&Number.isInteger(age)&&age>=0&&age<=120;
+  out.edad={done:ageOk,pts:ageOk?ptsAge(age):0,detail:ageOk?age+' años':'—'};
+
+  var ans=0,err=0,i;
+  for(i=0;i<10;i++){var r=$('input[name="pf'+i+'"]:checked');if(r){ans++;if(r.value==='err')err++}}
+  var low=$('#pf-edu').checked, adj=low?Math.max(0,err-1):err;
+  var lvl=adj<=2?'normal':adj<=4?'deterioro leve':adj<=7?'deterioro moderado':'deterioro grave';
+  out.pf={done:ans===10,pts:ans===10?ptsPf(adj):0,detail:ans===10?pl(err,'error','errores')+(low?' (ajust. '+adj+')':''):'—',
+    line:'<b>'+pl(err,'error','errores')+'</b>'+(low?' · ajustado: <b>'+adj+'</b>':'')+' · '+ans+' de 10 respondidas'+(ans===10?' · '+lvl:'')};
+
+  var bs=0,ba=0;
+  for(i=0;i<10;i++){var b=$('input[name="bar'+i+'"]:checked');if(b){ba++;bs+=Number(b.value)}}
+  var band=bs>60?'más de 60':bs>=21?'21 a 60':'0 a 20';
+  out.bar={done:ba===10,pts:ba===10?ptsBar(bs):0,detail:ba===10?bs+' / 100':'—',
+    line:'<b>'+bs+' de 100</b> · '+ba+' de 10 apartados'+(ba===10?' · banda '+band:'')};
+
+  var cs=0,cc=$$('input[name="ch"]:checked');
+  cc.forEach(function(c){cs+=Number(c.value)});
+  var none=$('#ch-none').checked, cdone=cc.length>0||none;
+  var clvl=cs<=1?'ausencia de comorbilidad':cs===2?'baja comorbilidad':'alta comorbilidad';
+  out.ch={done:cdone,pts:cdone?ptsCh(cs):0,detail:cdone?pl(cs,'punto','puntos'):'—',
+    line:cdone?'<b>'+pl(cs,'punto','puntos')+'</b> · '+clvl:'Marca las que apliquen o «Ninguna de las anteriores».'};
+
+  var gs=0,ga=0;
+  for(i=0;i<5;i++){var g=$('input[name="gj'+i+'"]:checked');if(g){ga++;gs+=Number(g.value)}}
+  var glvl=gs<=9?'buena o aceptable situación social':gs<=14?'riesgo social':'problema social';
+  out.gj={done:ga===5,pts:ga===5?ptsGj(gs):0,detail:ga===5?pl(gs,'punto','puntos'):'—',
+    line:'<b>'+pl(gs,'punto','puntos')+'</b> · '+ga+' de 5 apartados'+(ga===5?' · '+glvl:'')};
+
+  var p=$('input[name="plu"]:checked');
+  out.plu={done:!!p,pts:p&&p.value==='si'?1:0,detail:p?(p.value==='si'?'Sí':'No'):'—'};
+  return out;
+}
+
+var last=null;
+function update(){
+  var c=calc(); last=c;
+  var total=0,doneN=0,missing=[];
+  BLOCKS.forEach(function(b){
+    var k=b[0],x=c[k];
+    var badge=$('[data-badge="'+k+'"]');
+    badge.textContent=x.done?pl(x.pts,'punto','puntos')+' EPADI':'Pendiente';
+    badge.classList.toggle('done',x.done);
+    $('[data-step="'+k+'"]').classList.toggle('done',x.done);
+    var row=$('[data-row="'+k+'"]');
+    row.classList.toggle('pending',!x.done);
+    row.children[1].textContent=x.detail;
+    row.children[2].textContent=x.done?x.pts:'—';
+    var line=$('[data-line="'+k+'"]'); if(line&&x.line) line.innerHTML=x.line;
+    if(x.done){total+=x.pts;doneN++}else missing.push(b[1]);
+  });
+  var complete=missing.length===0, s=sevOf(total);
+  $('#total').textContent=complete?total:'–';
+  $('#pill-wrap').innerHTML=complete?'<span class="pill" data-sev="'+s+'">'+SEV_LABEL[s]+'</span>':'';
+  $('#status').textContent=complete?'Resultado completo.':'Suma parcial: '+pl(total,'punto','puntos')+'. Faltan: '+missing.join(', ')+'.';
+  $$('#cells .cell').forEach(function(e){e.classList.toggle('on',complete&&Number(e.dataset.n)===total)});
+  $$('#legend li').forEach(function(e){e.classList.toggle('on',complete&&Number(e.dataset.k)===s)});
+  $('#copy').disabled=!complete;
+  $('#bar-m').textContent=complete?total+' / 10':doneN+' / 6 bloques';
+  $('#bar-pill').innerHTML=complete?'<span class="pill" data-sev="'+s+'">'+SEV_LABEL[s]+'</span>':'';
+}
+
+var form=$('#f');
+form.addEventListener('submit',function(e){e.preventDefault()});
+form.addEventListener('input',function(e){if(e.target.id==='age')update()});
+form.addEventListener('change',function(e){
+  var t=e.target;
+  if(t.id==='ch-none'&&t.checked){$$('input[name="ch"]').forEach(function(x){x.checked=false})}
+  if(t.name==='ch'&&t.checked){$('#ch-none').checked=false}
+  update();
+});
+
+function scrollTo(el){
+  var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  el.scrollIntoView({behavior:reduce?'auto':'smooth',block:'start'});
+}
+$('#steps').addEventListener('click',function(e){
+  var b=e.target.closest('.step'); if(b) scrollTo($('#'+b.dataset.target));
+});
+$('#bar').addEventListener('click',function(){scrollTo($('#result'))});
+
+function clearAll(){
+  form.reset();
+  $('#exnote').hidden=true;
+  update();
+}
+$('#reset').addEventListener('click',clearAll);
+
+function setR(name,val){var el=$('input[name="'+name+'"][value="'+val+'"]');if(el)el.checked=true}
+$('#example').addEventListener('click',function(){
+  form.reset();
+  $('#age').value='82';
+  var errs=[0,6,7,9];
+  for(var i=0;i<10;i++) setR('pf'+i,errs.indexOf(i)>-1?'err':'ok');
+  [5,0,5,0,10,5,5,10,10,5].forEach(function(v,i){setR('bar'+i,v)});
+  $$('input[name="ch"]').forEach(function(x,i){x.checked=(i===1||i===2||i===3)});
+  [3,2,2,3,2].forEach(function(v,i){setR('gj'+i,v)});
+  setR('plu','si');
+  $('#exnote').hidden=false;
+  update();
+  scrollTo($('#result'));
+});
+
+$('#copy').addEventListener('click',function(){
+  if(!last) return;
+  var c=last,total=0;
+  BLOCKS.forEach(function(b){total+=c[b[0]].pts});
+  var s=sevOf(total);
+  var lines=[
+    'EPADI: '+total+'/10 · '+SEV_LABEL[s],
+    'Edad: '+c.edad.detail+' ('+pl(c.edad.pts,'punto','puntos')+')',
+    'Pfeiffer: '+c.pf.detail+' ('+pl(c.pf.pts,'punto','puntos')+')',
+    'Barthel: '+c.bar.detail+' ('+pl(c.bar.pts,'punto','puntos')+')',
+    'Charlson abreviado: '+c.ch.detail+' ('+pl(c.ch.pts,'punto','puntos')+')',
+    'Escala de Gijón: '+c.gj.detail+' ('+pl(c.gj.pts,'punto','puntos')+')',
+    'Pluripatológico: '+c.plu.detail+' ('+pl(c.plu.pts,'punto','puntos')+')'
+  ];
+  var text=lines.join('\n'), btn=$('#copy'), fb=$('#fallback');
+  function ok(){fb.hidden=true;btn.textContent='Copiado';setTimeout(function(){btn.textContent='Copiar resumen'},2000)}
+  function fail(){fb.hidden=false;fb.value=text;fb.focus();fb.select();btn.textContent='Selecciona y copia el texto'}
+  try{
+    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(text).then(ok,fail)}else{fail()}
+  }catch(e){fail()}
+});
+
+update();
+})();
+</script>
+
+
+<!-- Barra común del Portal SUH Antequera -->
+<style>
+  .suhdock{position:fixed;left:14px;bottom:14px;z-index:2147483000;display:flex;align-items:center;gap:4px;padding:5px;border-radius:999px;background:#0c2a4a;box-shadow:0 10px 30px -8px rgba(12,42,74,.55);font:600 13px/1 'Plus Jakarta Sans',system-ui,-apple-system,'Segoe UI',sans-serif;transition:opacity .2s}
+  .suhdock a{display:inline-flex;align-items:center;justify-content:center;gap:7px;height:34px;min-width:34px;padding:0 9px;border-radius:999px;color:#fff;text-decoration:none}
+  .suhdock a:hover{background:rgba(255,255,255,.14)}
+  .suhdock a.suhdock-home{background:#fff;color:#0c2a4a;padding:0 12px 0 4px}
+  .suhdock a.suhdock-home img{width:26px;height:26px;border-radius:50%;object-fit:contain;background:#fff}
+  .suhdock svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  .suhdock .suhdock-x{opacity:.6;min-width:26px;padding:0}
+  .suhdock.suhdock-min a:not(.suhdock-home){display:none}
+  .suhdock.suhdock-min a.suhdock-home span{display:none}
+  .suhdock.suhdock-min a.suhdock-home{padding:0 4px}
+  @media print{.suhdock{display:none!important}}
+</style>
+<nav class="suhdock" aria-label="Portal SUH Antequera">
+  <a class="suhdock-home" href="../index.html#herramientas" title="Volver al Portal de Supervisión SUH Antequera"><img src="../img/logo-suh.jpg" alt=""><span>Portal SUH</span></a>
+  <a href="https://www.instagram.com/suh_antequera_/" target="_blank" rel="noopener" title="Instagram @suh_antequera_"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><path d="M17.5 6.5h.01"/></svg></a>
+  <a href="https://www.facebook.com/p/Suh-Antequera-61568582212569/" target="_blank" rel="noopener" title="Facebook SUH Antequera"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+  <a href="https://x.com/saludnortemalag" target="_blank" rel="noopener" title="X @saludnortemalag" style="font-size:15px">𝕏</a>
+  <a class="suhdock-x" href="#" title="Minimizar barra" onclick="this.parentNode.classList.toggle('suhdock-min');return false;"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></a>
+</nav>
+</body></html>

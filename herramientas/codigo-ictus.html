@@ -1,0 +1,1121 @@
+<!doctype html><html><head>
+  <meta name="robots" content="noindex, nofollow"><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Código Ictus Antequera</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Source+Sans+3:wght@400;500;600;700&display=swap">
+<style>
+/* Concepto: panel de guardia. Cabecera verde institucional, franja de estado con 4 casillas que cambian con los datos del caso,
+   pestañas de trabajo debajo. El rojo se reserva a "activar código" y a las contraindicaciones. */
+:root{
+  --bg:#f1f5f2; --surface:#ffffff; --surface2:#e7eee9; --ink:#13211a; --muted:#546458; --line:#d1dcd4;
+  --hdr:#0b4d2c; --hdr-ink:#f2faf5; --hdr-mute:#a9cdb8;
+  --brand:#0a6a3b; --brand-ink:#ffffff; --link:#0a6a3b;
+  --info:#1b4f8f; --info-bg:#dce8f6;
+  --ok:#0c6b37; --ok-bg:#d9f1e2;
+  --warn:#7d5200; --warn-bg:#fbebc0;
+  --stop:#9c1f18; --stop-bg:#f9dad7;
+  --act:#ffffff; --act-bg:#b3261e;
+  --idle:#546458; --idle-bg:#e7eee9;
+  --f-disp:'Barlow Condensed','Arial Narrow',sans-serif;
+  --f-body:'Source Sans 3',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --f-mono:'IBM Plex Mono',ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0d1511; --surface:#15201a; --surface2:#1d2a22; --ink:#e3eee7; --muted:#9bb0a2; --line:#2b3a31;
+    --hdr:#0a2c1a; --hdr-ink:#eaf6ef; --hdr-mute:#8fb8a0;
+    --brand:#1d8c55; --brand-ink:#ffffff; --link:#6fd69d;
+    --info:#8ab8f0; --info-bg:#13293f;
+    --ok:#72d9a1; --ok-bg:#12301f;
+    --warn:#f0c456; --warn-bg:#35290a;
+    --stop:#ffa198; --stop-bg:#3d1714;
+    --act:#ffffff; --act-bg:#c9372c;
+    --idle:#9bb0a2; --idle-bg:#1d2a22;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0d1511; --surface:#15201a; --surface2:#1d2a22; --ink:#e3eee7; --muted:#9bb0a2; --line:#2b3a31;
+  --hdr:#0a2c1a; --hdr-ink:#eaf6ef; --hdr-mute:#8fb8a0;
+  --brand:#1d8c55; --brand-ink:#ffffff; --link:#6fd69d;
+  --info:#8ab8f0; --info-bg:#13293f;
+  --ok:#72d9a1; --ok-bg:#12301f;
+  --warn:#f0c456; --warn-bg:#35290a;
+  --stop:#ffa198; --stop-bg:#3d1714;
+  --act:#ffffff; --act-bg:#c9372c;
+  --idle:#9bb0a2; --idle-bg:#1d2a22;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.45}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--hdr);z-index:30}
+.wrap{max-width:1120px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--f-disp);margin:0;line-height:1.1;text-wrap:balance}
+p{margin:0}
+button{font:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--info);outline-offset:2px}
+
+/* cabecera */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--hdr);color:var(--hdr-ink)}
+.top-in{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:12px 8px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:12px;min-width:0}
+.brand svg{width:34px;height:34px;flex:none}
+.brand h1{font-size:30px;font-weight:700;letter-spacing:.02em;text-transform:uppercase}
+.brand p{font-size:14px;color:var(--hdr-mute)}
+.ver{font-family:var(--f-mono);font-size:12px;color:var(--hdr-mute);border:1px solid color-mix(in srgb,var(--hdr-mute) 45%,transparent);padding:4px 9px;border-radius:999px;white-space:nowrap}
+.tabs{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tabs button{flex:none;background:none;border:0;color:var(--hdr-mute);font-family:var(--f-disp);font-size:19px;font-weight:600;letter-spacing:.03em;text-transform:uppercase;padding:10px 14px 9px;border-bottom:3px solid transparent}
+.tabs button[aria-selected="true"]{color:var(--hdr-ink);border-bottom-color:#7fe0a8}
+
+/* contacto teleictus */
+.hot{display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center;margin-top:16px;padding:10px 14px;background:var(--info-bg);color:var(--info);border-radius:10px;font-weight:600}
+.hot .n{font-family:var(--f-mono);font-size:18px;font-weight:500;letter-spacing:.02em}
+.hot button{background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:5px 10px;font-size:14px}
+.hot .sp{flex:1}
+
+/* franja de estado */
+.strip{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:12px}
+.tile{border-radius:12px;padding:12px 14px;display:flex;flex-direction:column;gap:3px;min-width:0;background:var(--idle-bg);color:var(--idle)}
+.tile .l{font-size:12px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;opacity:.85}
+.tile .h{font-family:var(--f-disp);font-size:26px;font-weight:700;line-height:1.05;text-transform:uppercase;overflow-wrap:anywhere}
+.tile .s{font-size:14px;line-height:1.3}
+.tile[data-state="ok"]{background:var(--ok-bg);color:var(--ok)}
+.tile[data-state="info"]{background:var(--info-bg);color:var(--info)}
+.tile[data-state="warn"]{background:var(--warn-bg);color:var(--warn)}
+.tile[data-state="stop"]{background:var(--stop-bg);color:var(--stop)}
+.tile[data-state="act"]{background:var(--act-bg);color:var(--act)}
+
+/* paneles y tarjetas */
+main{padding-block:0 56px}
+.panel{margin-top:18px}
+.cols{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));align-items:start}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px;min-width:0}
+.card h2{font-size:24px;font-weight:700;text-transform:uppercase;letter-spacing:.02em;margin-bottom:4px}
+.card h3{font-size:19px;font-weight:600;text-transform:uppercase;letter-spacing:.03em;margin:14px 0 6px}
+.sub{color:var(--muted);font-size:14px;margin-bottom:10px}
+.fgrid{display:grid;gap:10px 12px;grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr));margin-top:8px}
+.f{display:flex;flex-direction:column;gap:4px;min-width:0}
+.f>label,.lab{font-size:13px;font-weight:600;color:var(--muted)}
+input[type=text],input[type=number],input[type=datetime-local],select,textarea{
+  width:100%;min-height:42px;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:8px;padding:8px 10px;font:inherit}
+input[type=number]{font-variant-numeric:tabular-nums}
+textarea{min-height:84px;resize:vertical}
+.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.row .grow{flex:1;min-width:0}
+.btn{border:1px solid var(--line);background:var(--surface2);color:var(--ink);border-radius:8px;padding:8px 12px;font-weight:600;font-size:14px}
+.btn.pri{background:var(--brand);border-color:var(--brand);color:var(--brand-ink)}
+.btn.danger{background:var(--stop-bg);color:var(--stop);border-color:transparent}
+.btn.sm{padding:5px 9px;font-size:13px}
+.chk{display:flex;gap:10px;align-items:flex-start;padding:9px 10px;border:1px solid var(--line);border-radius:8px;cursor:pointer;margin-top:6px;background:var(--surface)}
+.chk input{margin-top:3px;width:18px;height:18px;flex:none;accent-color:var(--brand)}
+.chk span{min-width:0}
+.chk:has(input:checked){background:var(--info-bg);border-color:var(--info)}
+.chk.bad:has(input:checked){background:var(--stop-bg);border-color:var(--stop)}
+.chk.mid:has(input:checked){background:var(--warn-bg);border-color:var(--warn)}
+.chk small{display:block;color:var(--muted);font-size:13px}
+.seg{display:flex;gap:6px;flex-wrap:wrap}
+.seg label{flex:1;min-width:110px;text-align:center;border:1px solid var(--line);border-radius:8px;padding:8px;cursor:pointer;font-weight:600;font-size:14px;background:var(--surface)}
+.seg label:has(input:checked){background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.seg input{position:absolute;opacity:0;pointer-events:none}
+.seg label:has(input:focus-visible){outline:3px solid var(--info);outline-offset:2px}
+
+/* tiempo */
+.elapsed{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin:12px 0 4px}
+.elapsed b{font-family:var(--f-disp);font-size:40px;line-height:1;font-variant-numeric:tabular-nums}
+.elapsed span{color:var(--muted);font-size:14px}
+.tl{position:relative;display:flex;height:26px;border-radius:7px;overflow:hidden;margin-top:14px}
+.tl>div{display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff;white-space:nowrap}
+.tl .s0{background:#0c7a40}.tl .s1{background:#1b5fa8}.tl .s2{background:#a36a00}.tl .s3{background:#7b6f6a}
+.tlw{position:relative;padding-bottom:20px}
+.mark{position:absolute;top:-8px;width:0;height:0;border-left:7px solid transparent;border-right:7px solid transparent;border-top:10px solid var(--ink);transform:translateX(-7px);transition:left .3s}
+.mark::after{content:"";position:absolute;left:-1px;top:0;width:2px;height:40px;background:var(--ink)}
+.tk{position:absolute;top:32px;font-family:var(--f-mono);font-size:11px;color:var(--muted);transform:translateX(-50%)}
+
+/* pasos */
+ol.steps{margin:8px 0 0;padding:0;list-style:none;counter-reset:s}
+ol.steps li{counter-increment:s;display:grid;grid-template-columns:30px 1fr;gap:8px;padding:8px 0;border-top:1px solid var(--line)}
+ol.steps li:first-child{border-top:0}
+ol.steps li::before{content:counter(s);font-family:var(--f-disp);font-size:20px;font-weight:700;color:var(--brand-ink);background:var(--brand);width:26px;height:26px;border-radius:50%;display:grid;place-items:center;line-height:1}
+.note{font-size:14px;color:var(--muted);margin-top:8px}
+.pill{display:inline-block;font-size:12px;font-weight:700;padding:2px 8px;border-radius:999px;background:var(--idle-bg);color:var(--idle);letter-spacing:.03em}
+.pill.ok{background:var(--ok-bg);color:var(--ok)}.pill.warn{background:var(--warn-bg);color:var(--warn)}.pill.stop{background:var(--stop-bg);color:var(--stop)}.pill.info{background:var(--info-bg);color:var(--info)}
+ul.lst{margin:6px 0 0;padding-left:20px}ul.lst li{margin:3px 0}
+.callout{padding:10px 12px;border-radius:10px;margin-top:10px;font-size:15px}
+.callout.stop{background:var(--stop-bg);color:var(--stop)}.callout.warn{background:var(--warn-bg);color:var(--warn)}.callout.ok{background:var(--ok-bg);color:var(--ok)}.callout.info{background:var(--info-bg);color:var(--info)}
+.callout b{font-weight:700}
+
+/* escalas */
+.score{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin:10px 0 2px}
+.score b{font-family:var(--f-disp);font-size:44px;line-height:1;font-variant-numeric:tabular-nums}
+.score em{font-style:normal;color:var(--muted);font-size:14px}
+.nih{display:grid;grid-template-columns:1fr;gap:6px}
+.nih .it{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:8px;align-items:center;padding:6px 0;border-top:1px solid var(--line)}
+.nih .it:first-child{border-top:0}
+.nih .it>label{font-size:14px;font-weight:600}
+@media (max-width:520px){.nih .it{grid-template-columns:1fr}}
+.asp{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,190px),1fr));gap:6px}
+.asp .chk{margin-top:0}
+.tbl{width:100%;border-collapse:collapse;font-size:15px}
+.tbl th,.tbl td{border-bottom:1px solid var(--line);padding:7px 8px;text-align:left;font-variant-numeric:tabular-nums}
+.tbl th{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+.tbl tr.hit td{background:var(--ok-bg);color:var(--ok);font-weight:700}
+.scroll{overflow-x:auto}
+.crit{list-style:none;margin:8px 0 0;padding:0}
+.crit li{display:grid;grid-template-columns:78px 1fr;gap:10px;align-items:start;padding:8px 0;border-top:1px solid var(--line)}
+.crit li:first-child{border-top:0}
+details{border:1px solid var(--line);border-radius:10px;background:var(--surface);margin-top:8px}
+details>summary{cursor:pointer;padding:12px 14px;font-family:var(--f-disp);font-size:20px;font-weight:600;text-transform:uppercase;letter-spacing:.03em;list-style:none;display:flex;justify-content:space-between;gap:8px}
+details>summary::after{content:"+";font-family:var(--f-mono)}
+details[open]>summary::after{content:"–"}
+details>div{padding:0 14px 14px}
+pre.rep{margin:10px 0 0;padding:14px;background:var(--surface2);border-radius:10px;font-family:var(--f-mono);font-size:13px;line-height:1.5;white-space:pre-wrap;overflow-wrap:anywhere;user-select:text}
+.foot{margin-top:28px;padding-top:16px;border-top:1px solid var(--line);font-size:13px;color:var(--muted)}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(18px + env(safe-area-inset-bottom,0px));background:var(--ink);color:var(--bg);padding:9px 16px;border-radius:999px;font-weight:600;font-size:14px;opacity:0;pointer-events:none;transition:opacity .2s;z-index:50}
+.toast.on{opacity:1}
+[hidden]{display:none!important}
+@media (max-width:760px){
+  .strip{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .tile .h{font-size:22px}
+  .brand h1{font-size:26px}
+}
+@media (max-width:360px){.strip{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<header class="top">
+  <div class="wrap">
+    <div class="top-in">
+      <div class="brand">
+        <svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="13" fill="none" stroke="currentColor" stroke-width="2.6"/><path d="M16 7v9l6 4" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <div><h1>Código Ictus</h1><p>Urgencias · Hospital de Antequera</p></div>
+      </div>
+      <div class="ver">PNT Ictus isquémico ASNM · v6 · 05/02/2026</div>
+    </div>
+    <nav class="tabs" role="tablist" aria-label="Secciones">
+      <button role="tab" data-tab="caso" aria-selected="true">Caso</button>
+      <button role="tab" data-tab="escalas" aria-selected="false">Escalas</button>
+      <button role="tab" data-tab="fibrinolisis" aria-selected="false">Fibrinolisis</button>
+      <button role="tab" data-tab="trombectomia" aria-selected="false">Trombectomía</button>
+      <button role="tab" data-tab="medidas" aria-selected="false">Medidas</button>
+      <button role="tab" data-tab="informe" aria-selected="false">Informe</button>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="hot">
+    <span>Teleictus (CATI), busca</span>
+    <span class="n" id="n1">[busca interno]</span><button type="button" data-copy="[busca interno]">Copiar</button>
+    <span class="n" id="n2">[teléfono interno]</span><button type="button" data-copy="[teléfono interno]">Copiar</button>
+    <span class="sp"></span>
+    <span style="font-weight:500;font-size:14px">El móvil de Teleictus está en el despacho del médico de urgencias</span>
+  </div>
+
+  <section class="strip" aria-live="polite" id="strip">
+    <div class="tile" id="t-win" data-state="idle"><span class="l">Ventana</span><strong class="h">–</strong><span class="s">Introduce las horas</span></div>
+    <div class="tile" id="t-act" data-state="idle"><span class="l">Código ictus</span><strong class="h">–</strong><span class="s"></span></div>
+    <div class="tile" id="t-lys" data-state="idle"><span class="l">Fibrinolisis IV</span><strong class="h">–</strong><span class="s"></span></div>
+    <div class="tile" id="t-thr" data-state="idle"><span class="l">Trombectomía</span><strong class="h">–</strong><span class="s"></span></div>
+  </section>
+
+  <!-- ===================== CASO ===================== -->
+  <section class="panel" id="p-caso">
+    <div class="cols">
+      <div style="display:grid;gap:14px;min-width:0">
+        <div class="card">
+          <h2>Tiempos</h2>
+          <p class="sub">La ventana se cuenta desde la última vez que se vio bien al paciente.</p>
+          <div class="fgrid" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr))">
+            <div class="f" id="f-last"><label for="lastSeen">Inicio de síntomas / última vez bien</label>
+              <div class="row"><input class="grow" type="datetime-local" id="lastSeen" data-k="lastSeen"><button class="btn sm" type="button" data-now="lastSeen">Ahora</button></div></div>
+            <div class="f"><label for="arrival">Llegada a urgencias</label>
+              <div class="row"><input class="grow" type="datetime-local" id="arrival" data-k="arrival"><button class="btn sm" type="button" data-now="arrival">Ahora</button></div></div>
+          </div>
+          <label class="chk"><input type="checkbox" id="despertar" data-k="despertar"><span>Ictus del despertar u hora de inicio desconocida<small>Sin testigos: se toma como inicio la última vez asintomático. Con testigos: el punto medio del sueño debe estar a 9 h o menos.</small></span></label>
+          <div class="fgrid" id="despBox" hidden style="grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr))">
+            <div class="f"><label for="bedtime">Se acostó / última vez asintomático</label><input type="datetime-local" id="bedtime" data-k="bedtime"></div>
+            <div class="f"><label for="wake">Se despertó con síntomas</label><input type="datetime-local" id="wake" data-k="wake"></div>
+          </div>
+          <div class="lab" style="margin-top:12px">Calcular la ventana a</div>
+          <div class="seg" style="margin-top:4px">
+            <label><input type="radio" name="evalAt" value="now" data-k="evalAt">Ahora</label>
+            <label><input type="radio" name="evalAt" value="arrival" data-k="evalAt">Hora de llegada</label>
+          </div>
+          <div class="elapsed"><b id="elapsed">–</b><span id="elapsedSub">Rellena la hora de inicio</span></div>
+          <div class="tlw">
+            <div class="tl"><div class="s0" style="width:15%">≤ 4,5 h</div><div class="s1" style="width:15%">4,5 – 9 h</div><div class="s2" style="width:50%">9 – 24 h</div><div class="s3" style="width:20%">&gt; 24 h</div></div>
+            <i class="mark" id="mark" style="left:0%" hidden></i>
+            <span class="tk" style="left:0%;transform:none">0</span><span class="tk" style="left:15%">4,5</span><span class="tk" style="left:30%">9</span><span class="tk" style="left:80%">24 h</span>
+          </div>
+          <p class="note" id="doorNote"></p>
+        </div>
+
+        <div class="card">
+          <h2>Paciente</h2>
+          <div class="fgrid">
+            <div class="f"><label for="pid">Identificador (opcional)</label><input type="text" id="pid" data-k="pid" placeholder="Iniciales o NUHSA" autocomplete="off"></div>
+            <div class="f"><label for="age">Edad (años)</label><input type="number" id="age" data-k="age" min="0" max="120" inputmode="numeric"></div>
+            <div class="f"><label for="weight">Peso (kg)</label><input type="number" id="weight" data-k="weight" min="20" max="250" step="0.1" inputmode="decimal"></div>
+          </div>
+          <div class="lab" style="margin-top:12px">Circulación afectada</div>
+          <div class="seg" style="margin-top:4px">
+            <label><input type="radio" name="circ" value="ant" data-k="circ">Anterior</label>
+            <label><input type="radio" name="circ" value="post" data-k="circ">Posterior</label>
+          </div>
+          <label class="chk"><input type="checkbox" data-k="focal"><span>Déficit neurológico focal de inicio súbito<small>Se marca solo si Cincinnati, RACE o NIHSS son positivos. Márcalo a mano si la clínica lo justifica.</small></span></label>
+          <p class="note">Rankin previo, Cincinnati, RACE, NIHSS y ASPECTS están en la pestaña Escalas.</p>
+        </div>
+
+        <div class="card">
+          <h2>Constantes y analítica</h2>
+          <div class="fgrid">
+            <div class="f"><label for="sbp">TA sistólica (mmHg)</label><input type="number" id="sbp" data-k="sbp" inputmode="numeric"></div>
+            <div class="f"><label for="dbp">TA diastólica (mmHg)</label><input type="number" id="dbp" data-k="dbp" inputmode="numeric"></div>
+            <div class="f"><label for="glu">Glucemia (mg/dl)</label><input type="number" id="glu" data-k="glu" inputmode="numeric"></div>
+            <div class="f"><label for="sat">Sat O₂ (%)</label><input type="number" id="sat" data-k="sat" inputmode="numeric"></div>
+            <div class="f"><label for="temp">Temperatura (°C)</label><input type="number" id="temp" data-k="temp" step="0.1" inputmode="decimal"></div>
+            <div class="f"><label for="plt">Plaquetas (×10³/µl)</label><input type="number" id="plt" data-k="plt" inputmode="numeric"></div>
+            <div class="f"><label for="anticoag">Anticoagulación oral</label>
+              <select id="anticoag" data-k="anticoag"><option value="">Sin dato</option><option value="no">Ninguna</option><option value="aco">Acenocumarol / warfarina</option><option value="naco">NACO (dabigatrán, rivaroxabán, apixabán, edoxabán)</option></select></div>
+            <div class="f" id="f-inr" hidden><label for="inr">INR (Coaguchek)</label><input type="number" id="inr" data-k="inr" step="0.1" inputmode="decimal"></div>
+            <div class="f" id="f-naco" hidden><label for="nacoH">Horas desde la última dosis de NACO</label><input type="number" id="nacoH" data-k="nacoH" inputmode="numeric"></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>Neuroimagen</h2>
+          <div class="fgrid" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr))">
+            <div class="f"><label for="angio">AngioTAC</label>
+              <select id="angio" data-k="angio"><option value="">Pendiente</option><option value="none">Sin oclusión de gran vaso</option><option value="lvo">Oclusión o estenosis severa de gran vaso</option><option value="distal">Oclusión de segmento distal</option></select></div>
+            <div class="f"><label for="mismatch">TC perfusión</label>
+              <select id="mismatch" data-k="mismatch"><option value="">No realizado / pendiente</option><option value="gt20">Penumbra significativa (mismatch &gt; 20 %)</option><option value="le20">Sin penumbra significativa (mismatch ≤ 20 %)</option></select></div>
+          </div>
+          <div id="vesBox" hidden>
+            <div class="lab" style="margin-top:12px">Vaso afectado</div>
+            <div class="asp" id="vesList"></div>
+          </div>
+          <p class="note">El ASPECTS se puntúa en la pestaña Escalas.</p>
+        </div>
+      </div>
+
+      <div style="min-width:0">
+        <div class="card" id="stepsCard">
+          <h2>Qué hacer ahora</h2>
+          <p class="sub" id="stepsSub">Según la ventana calculada</p>
+          <ol class="steps" id="steps"></ol>
+          <div id="imgBox"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== ESCALAS ===================== -->
+  <section class="panel" id="p-escalas" hidden>
+    <div class="cols">
+      <div style="display:grid;gap:14px;min-width:0">
+        <div class="card">
+          <h2>Rankin modificada previa</h2>
+          <p class="sub">Estado funcional antes del ictus. Se activa el código en pacientes independientes: Rankin menor de 3.</p>
+          <div id="mrsList"></div>
+          <div class="callout" id="mrsRes" hidden></div>
+        </div>
+        <div class="card">
+          <h2>Cincinnati</h2>
+          <p class="sub">Triaje de enfermería. Un solo signo positivo basta para sospechar ictus.</p>
+          <label class="chk"><input type="checkbox" data-k="cinc.face"><span>Desviación de la comisura labial<small>Un lado de la cara se mueve peor al sonreír o enseñar los dientes</small></span></label>
+          <label class="chk"><input type="checkbox" data-k="cinc.arm"><span>Debilidad de la extremidad superior<small>Un brazo cae o no se mueve al mantener ambos elevados</small></span></label>
+          <label class="chk"><input type="checkbox" data-k="cinc.speech"><span>Alteración del habla<small>Palabras mal pronunciadas o inapropiadas, o no puede hablar</small></span></label>
+          <div class="score"><b id="cincN">0</b><em>de 3 signos</em></div>
+          <div class="callout" id="cincRes"></div>
+        </div>
+        <div class="card">
+          <h2>ASPECTS</h2>
+          <p class="sub">TAC simple. Se resta 1 punto por cada región de la ACM con cambio isquémico precoz. Marca las regiones afectadas.</p>
+          <div class="asp" id="aspList"></div>
+          <div class="row" style="margin-top:10px"><button class="btn sm" type="button" id="aspNormal">TAC sin alteraciones (10)</button></div>
+          <div class="score"><b id="aspN">–</b><em>de 10</em></div>
+          <div class="callout" id="aspRes"></div>
+        </div>
+      </div>
+      <div style="display:grid;gap:14px;min-width:0">
+        <div class="card">
+          <h2>RACE (prehospitalaria)</h2>
+          <p class="sub">Sustituye a la GADSS. Puntuación 0 a 9. Con 5 o más se sospecha oclusión de gran vaso (sensibilidad 85 %, especificidad 69 %).</p>
+          <div class="lab">Hemiparesia</div>
+          <div class="seg" style="margin:4px 0 8px">
+            <label><input type="radio" name="raceSide" value="R" data-k="raceSide">Derecha (afasia)</label>
+            <label><input type="radio" name="raceSide" value="L" data-k="raceSide">Izquierda (agnosia)</label>
+          </div>
+          <div class="nih" id="raceList"></div>
+          <div class="score"><b id="raceN">–</b><em>de 9</em></div>
+          <div class="callout" id="raceRes"></div>
+        </div>
+        <div class="card">
+          <h2>NIHSS</h2>
+          <p class="sub">Numeración de la hoja del protocolo. Se puntúa lo observado en el momento de la exploración.</p>
+          <div class="row" style="margin-bottom:6px"><button class="btn sm" type="button" id="nihZero">Exploración normal (todo 0)</button></div>
+          <div class="nih" id="nihssList"></div>
+          <div class="score"><b id="nihN">–</b><em>de 42</em></div>
+          <div class="callout" id="nihRes"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FIBRINOLISIS ===================== -->
+  <section class="panel" id="p-fibrinolisis" hidden>
+    <div class="cols">
+      <div style="display:grid;gap:14px;min-width:0">
+        <div class="card">
+          <h2>Indicación</h2>
+          <div id="lysInd"></div>
+          <ul class="lst">
+            <li>Hasta 4,5 h: sin límite superior de edad, incluso en ictus graves o en ictus menores muy discapacitantes.</li>
+            <li>De 4,5 a 9 h y despertar: TC perfusión con penumbra significativa (mismatch superior al 20 %) y sin indicación o posibilidad de trombectomía.</li>
+            <li>En candidatos a trombectomía con oclusión de gran vaso antes de 4,5 h: TNK previa a la trombectomía siempre que sea posible.</li>
+            <li>Se recomienda TNK (preferible) o alteplasa. Mayores de 18 años y consentimiento informado del paciente o familiares.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h2>Contraindicaciones absolutas</h2>
+          <p class="sub">Si hay alguna, no se fibrinoliza. La trombectomía se valora aparte.</p>
+          <div id="absAuto"></div>
+          <div id="absList"></div>
+        </div>
+        <div class="card">
+          <h2>Contraindicaciones relativas</h2>
+          <p class="sub">Valorar riesgo y beneficio con el intensivista.</p>
+          <div id="relAuto"></div>
+          <div id="relList"></div>
+        </div>
+      </div>
+      <div style="display:grid;gap:14px;min-width:0">
+        <div class="card">
+          <h2>Dosis</h2>
+          <div id="dose"></div>
+        </div>
+        <div class="card">
+          <h2>Antes de fibrinolizar</h2>
+          <ul class="lst">
+            <li>Ingreso en UCI. El tratamiento se inicia con el intensivista.</li>
+            <li>Glucemia mayor de 140: insulina rápida subcutánea según protocolo.</li>
+            <li>TA mayor de 185/110: hasta 2 bolos de 10 mg de labetalol iv, o nicardipino 5 mg/h, o urapidil 25 a 50 mg iv.</li>
+            <li>Revisar analítica, con atención a plaquetas y coagulación. No retrasar la infusión por la analítica salvo sospecha de alteración sanguínea, heparina, warfarina u otros anticoagulantes.</li>
+            <li>Consentimiento informado de familiares o paciente.</li>
+          </ul>
+          <h3>Después</h3>
+          <ul class="lst">
+            <li>Mantener TA por debajo de 180/105: cada 15 min las 2 primeras horas, cada 30 min durante 6 horas y cada hora hasta las 24 h.</li>
+            <li>Sin heparina, AAS ni anticoagulantes orales durante 24 h. Sin sonda nasogástrica ni uretral en las primeras 12 h.</li>
+            <li>Si aparece cefalea intensa, hipertensión aguda, náuseas o vómitos: detener la infusión y pedir TC urgente.</li>
+            <li>Repetir la exploración neurológica con frecuencia. TAC craneal de control a las 24 h, antes si el intensivista detecta alguna incidencia.</li>
+          </ul>
+          <h3>Sangrado intracraneal sintomático</h3>
+          <ul class="lst">
+            <li>Detener la infusión. Tipar y cruzar sangre. Fibrinógeno inmediato y cada 6 h.</li>
+            <li>Crioprecipitado 10 a 20 unidades al inicio (1 unidad sube 5 a 10 mg/dl de fibrinógeno). Se puede usar plasma fresco congelado. Plaquetas si el recuento es bajo.</li>
+            <li>Consultar con neurocirugía. Si hay inestabilidad hemodinámica, suero fisiológico y sangre según necesidad.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== TROMBECTOMIA ===================== -->
+  <section class="panel" id="p-trombectomia" hidden>
+    <div class="cols">
+      <div style="display:grid;gap:14px;min-width:0">
+        <div class="card">
+          <h2>Criterios de trombectomía</h2>
+          <p class="sub">Entre 9 y 24 h son los criterios de 2026. Se rellenan con los datos del caso.</p>
+          <ul class="crit" id="crit"></ul>
+          <div id="critNote"></div>
+        </div>
+        <div class="card">
+          <h2>Oclusión de gran vaso</h2>
+          <ul class="lst">
+            <li>Arteria carótida común y carótida interna.</li>
+            <li>Arteria cerebral media, segmentos M1 y M2.</li>
+            <li>Arteria cerebral anterior, segmentos A1 y A2.</li>
+            <li>Arterias vertebrales, arteria basilar y arteria cerebral posterior en segmento P1.</li>
+          </ul>
+          <p class="note">En oclusiones de segmentos distales a los mencionados, la valoración es individual con Teleictus.</p>
+        </div>
+      </div>
+      <div style="display:grid;gap:14px;min-width:0">
+        <div class="card">
+          <h2>Contactar con Teleictus</h2>
+          <ol class="steps">
+            <li><span>Llamar al busca <b style="font-family:var(--f-mono)">[busca interno]</b> o <b style="font-family:var(--f-mono)">[teléfono interno]</b>.</span></li>
+            <li><span>En la intranet: botón Teleconsulta, Crear teleconsulta, especialidad Neurología, tipo Ictus.</span></li>
+            <li><span>Rellenar datos del paciente, tiempos, Rankin previo, peso, tensiones, glucemia, INR y NIHSS desglosado si es posible.</span></li>
+            <li><span>Abrir la plataforma de vídeo en Chrome o con el código QR desde el móvil, para la exploración conjunta.</span></li>
+            <li><span>El neurólogo indica el traslado y contacta con el neurorradiólogo intervencionista de Carlos Haya.</span></li>
+          </ol>
+          <p class="note">Si el paciente tiene fibrilación auricular y toma acenocumarol: Coaguchek e INR. El peso es imprescindible para calcular la dosis.</p>
+          <h3>Datos listos para la teleconsulta</h3>
+          <div id="ready" style="display:flex;flex-wrap:wrap;gap:6px;margin-top:6px"></div>
+        </div>
+        <div class="card">
+          <h2>Traslado</h2>
+          <ul class="lst">
+            <li>Lo indica el clínico y lo coordina el 061.</li>
+            <li>En primer lugar, helicóptero (solo de día). Si no vuela o no está disponible, DCCU, para evitar demoras.</li>
+            <li>Al avisar al helicóptero, avisar a Admisión de urgencias para activar la ambulancia de traslado al helicóptero.</li>
+            <li>Terminado el procedimiento y estabilizado el paciente, vuelve a nuestro centro según indique Neurología.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h2>Quién activa qué</h2>
+          <ul class="lst">
+            <li>Enfermería de triaje: ante toda sospecha de ictus, Preferente (P1) y activa el Código Ictus. Entre 9 y 24 h no activa código: P1 y valora el equipo de críticos.</li>
+            <li>Equipo ictus: equipo de críticos de urgencias, intensivista y radiólogo.</li>
+            <li>Ictus de menos de 9 h o del despertar: llamar a UCI para valorar fibrinolisis (TNK según peso). Si hay oclusión de gran vaso, se llama a Teleictus.</li>
+            <li>Ictus de más de 9 h con oclusión de gran vaso: llamar a Teleictus directamente.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== MEDIDAS ===================== -->
+  <section class="panel" id="p-medidas" hidden>
+    <div class="cols">
+      <div style="display:grid;gap:14px;min-width:0">
+        <div class="card">
+          <h2>Acciones con tus datos</h2>
+          <p class="sub">Se calculan con las constantes de la pestaña Caso.</p>
+          <div id="acts"></div>
+        </div>
+        <div class="card">
+          <h2>Valoración inicial</h2>
+          <ul class="lst">
+            <li>Estabilización ABC. Objetivo: decidir el tratamiento en menos de 60 minutos desde la llegada.</li>
+            <li>Constantes: TA, FC, temperatura, Sat O₂ y glucemia.</li>
+            <li>Exploración neurológica con NIHSS y ECG.</li>
+            <li>Vía periférica (no en el brazo paralítico) y analítica con hemograma, coagulación y bioquímica. Troponinas y Rx de tórax.</li>
+            <li>Neuroimagen: TC y AngioTC craneal, y TC perfusión según indicación. La TC craneal se hace lo antes posible, con independencia del código.</li>
+          </ul>
+          <h3>Anamnesis</h3>
+          <ul class="lst">
+            <li>Hora exacta de inicio y evolución de los síntomas.</li>
+            <li>Estado neurológico previo (Rankin) y factores de riesgo vascular.</li>
+            <li>Fármacos y drogas.</li>
+          </ul>
+        </div>
+      </div>
+      <div style="display:grid;gap:14px;min-width:0">
+        <div class="card">
+          <h2>Normas generales</h2>
+          <ul class="lst">
+            <li>No usar soluciones glucosadas.</li>
+            <li>No hacer punciones arteriales.</li>
+            <li>No colocar sonda vesical, salvo retención urinaria, insuficiencia cardiaca o tratamiento endovascular.</li>
+            <li>No colocar sonda nasogástrica de forma sistemática, salvo deterioro de consciencia o vómitos de repetición.</li>
+            <li>No dar antiagregantes, heparinas ni otros anticoagulantes antes de la TAC o la trombolisis.</li>
+          </ul>
+        </div>
+        <details>
+          <summary>Procesos que simulan un ictus</summary>
+          <div><ul class="lst"><li>Crisis epilépticas.</li><li>Procesos expansivos intracraneales: tumores, hemorragias.</li><li>Trastornos metabólicos, sobre todo hipoglucemia.</li><li>Infecciones: encefalitis, abscesos.</li><li>Tóxicos: drogas, alcohol.</li><li>Síncope, vértigo, síndrome conversivo.</li></ul></div>
+        </details>
+        <details>
+          <summary>Convulsiones</summary>
+          <div><p class="note">Benzodiacepinas iv seguidas de uno de estos fármacos:</p><ul class="lst"><li>Fenitoína 18 mg/kg iv en 1 h.</li><li>Valproato 15 mg/kg iv en bolo lento (más de 15 minutos).</li><li>Levetiracetam 500 mg en 100 cc de SF en 5 minutos (500 a 1000 mg).</li></ul></div>
+        </details>
+        <details>
+          <summary>Tensión arterial</summary>
+          <div>
+            <p class="note">Candidatos a fibrinolisis: mantener por debajo de 180/105 antes y durante las primeras 24 h.</p>
+            <ul class="lst">
+              <li><b>Labetalol:</b> ampolla de 20 ml con 100 mg. Bolos de 10 a 20 mg (2 a 4 ml) en 1 o 2 minutos, repetibles cada 10 a 20 minutos hasta 200 a 300 mg. Mantenimiento 50 mg cada 6 a 8 h. Contraindicado en insuficiencia cardiaca, asma, bloqueo AV de 2.º o 3.er grado y bradicardia severa.</li>
+              <li><b>Nicardipino:</b> perfusión de 5 mg/h iv, subir 2,5 mg/h cada 5 a 15 minutos hasta 15 mg/h.</li>
+              <li><b>Urapidil:</b> ampolla de 50 mg, media ampolla en bolo lento de 5 minutos, repetible hasta 1 o 2 ampollas. Perfusión: 5 ampollas en 250 ml a 2 a 8 ml/h. Mantenimiento 9 a 30 mg/h. Contraindicado en estenosis aórtica y shunt arteriovenoso (salvo diálisis). Reducir al 75 % en insuficiencia hepática o renal grave.</li>
+            </ul>
+            <p class="note">Sin fibrinolisis, ictus isquémico: no tratar salvo insuficiencia cardiaca, angor, IAM o disección aórtica. Se puede reiniciar el antihipertensivo tras 24 h en pacientes neurológicamente estables. Evitar descensos mayores del 15 % en las primeras 24 h. Ictus hemorrágico: TA por debajo de 190/110.</p>
+          </div>
+        </details>
+        <details>
+          <summary>Tratamiento complementario</summary>
+          <div><ul class="lst"><li>Citicolina 1000 mg iv cada 12 h.</li><li>Nimodipino 30 mg cada 6 h vía oral.</li><li>Piracetam 3 g cada 8 h vía oral o iv.</li><li>Atorvastatina 80 mg cada 24 h vía oral. No suspender en fase aguda.</li></ul></div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== INFORME ===================== -->
+  <section class="panel" id="p-informe" hidden>
+    <div class="cols">
+      <div style="display:grid;gap:14px;min-width:0">
+        <div class="card">
+          <h2>Informe del caso</h2>
+          <p class="sub">Se compone con los datos introducidos. Los datos solo existen en esta pantalla: no se guardan ni se envían.</p>
+          <div class="f"><label for="obs">Observaciones (se añaden al informe)</label><textarea id="obs" data-k="obs"></textarea></div>
+          <div class="row" style="margin-top:12px">
+            <button class="btn pri" type="button" id="copyRep">Copiar informe completo</button>
+            <button class="btn" type="button" id="copyTele">Copiar resumen para Teleictus</button>
+          </div>
+          <div class="row" style="margin-top:10px">
+            <button class="btn sm" type="button" id="loadEx">Cargar caso de ejemplo</button>
+            <button class="btn sm danger" type="button" id="clearAll">Limpiar caso</button>
+          </div>
+          <p class="note" id="fallbackNote" hidden>Tu navegador no permitió copiar. El texto está seleccionado: pulsa Ctrl+C (o mantén pulsado en el móvil) para copiarlo.</p>
+        </div>
+        <div class="card">
+          <h2>Resumen para Teleictus</h2>
+          <pre class="rep" id="teleTxt"></pre>
+        </div>
+      </div>
+      <div class="card" style="min-width:0">
+        <h2>Informe completo</h2>
+        <pre class="rep" id="repTxt"></pre>
+      </div>
+    </div>
+  </section>
+
+  <p class="foot">Herramienta de apoyo basada en el PNT Ictus isquémico del Área Sanitaria Norte de Málaga (versión 6, 05/02/2026), los esquemas de actuación y radiológico 2026 y la sesión «Actualización en la atención a pacientes con código ictus ASNM». No sustituye al juicio clínico: la decisión final es del equipo ictus (críticos de urgencias, intensivista, radiólogo y neurólogo de Teleictus). Las dosis deben confirmarse con la ficha técnica y el protocolo vigente.</p>
+</main>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+(function(){
+'use strict';
+var $=function(s,r){return (r||document).querySelector(s)};
+var $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
+
+/* ---------- datos clínicos ---------- */
+var MRS=[
+ [0,'Sin síntomas',''],
+ [1,'Sin incapacidad importante','Capaz de realizar sus actividades y obligaciones habituales'],
+ [2,'Incapacidad leve','Incapaz de realizar algunas actividades previas, pero capaz de velar por sus intereses y asuntos sin ayuda'],
+ [3,'Incapacidad moderada','Restringe significativamente sus actividades; requiere ayuda para sus necesidades personales'],
+ [4,'Incapacidad moderadamente severa','Requiere ayuda para la mayoría de sus actividades personales'],
+ [5,'Incapacidad severa','Totalmente dependiente; necesita asistencia día y noche']
+];
+var NIHSS=[
+ ['n1a','1A. Nivel de conciencia',['Alerta','Somnolencia','Estupor','Coma']],
+ ['n1b','1B. Preguntas (mes y edad)',['Responde ambas bien','Responde una sola','Ambas incorrectas']],
+ ['n1c','1C. Órdenes (abrir/cerrar ojos, apretar mano)',['Obedece ambas','Obedece una','No obedece']],
+ ['n2','2. Mirada conjugada',['Normal','Parálisis parcial','Desviación forzada']],
+ ['n3','3. Campos visuales',['Normal','Hemianopsia parcial','Hemianopsia completa','Hemianopsia bilateral']],
+ ['n4','4. Paresia facial',['Normal','Asimetría menor','Parálisis parcial (central)','Parálisis total']],
+ ['n5','5. Motor miembro superior derecho',['Normal','Desviación del miembro','Algún esfuerzo vs gravedad','Sin esfuerzo vs gravedad','Sin movimiento']],
+ ['n6','6. Motor miembro superior izquierdo',['Normal','Desviación del miembro','Algún esfuerzo vs gravedad','Sin esfuerzo vs gravedad','Sin movimiento']],
+ ['n7','7. Motor miembro inferior derecho',['Normal','Desviación del miembro','Algún esfuerzo vs gravedad','Sin esfuerzo vs gravedad','Sin movimiento']],
+ ['n8','8. Motor miembro inferior izquierdo',['Normal','Desviación del miembro','Algún esfuerzo vs gravedad','Sin esfuerzo vs gravedad','Sin movimiento']],
+ ['n9','9. Ataxia',['Ausente','En una extremidad','En dos o más']],
+ ['n10','10. Sensibilidad',['Normal','Pérdida leve o moderada','Pérdida grave o total']],
+ ['n11','11. Lenguaje',['Normal','Afasia leve a moderada','Afasia grave','Mutismo']],
+ ['n12','12. Disartria',['Normal','Leve a moderada','Ininteligible']],
+ ['n13','13. Extinción / negligencia',['Normal','Parcial','Completa']]
+];
+var RACE=[
+ ['face','Paresia facial (enseñar dientes)',['Ausente (mueca simétrica)','Ligera (algo asimétrica)','Moderada o severa (totalmente asimétrica)']],
+ ['arm','Paresia braquial (brazo contra gravedad)',['Ausente (mantiene más de 10 s)','Moderada (menos de 10 s)','Severa (no lo mantiene)']],
+ ['leg','Paresia crural (pierna contra gravedad)',['Ausente (mantiene más de 5 s)','Moderada (menos de 5 s)','Severa (no la mantiene)']],
+ ['gaze','Desviación oculocefálica',['Ausente','Presente']],
+ ['cog','Afasia',['Realiza ambas órdenes','Realiza una orden','No obedece ninguna']]
+];
+var ASP=[
+ ['M1','M1 · cortical anterior de la ACM'],['M2','M2 · cortical lateral al ribete insular'],['M3','M3 · cortical posterior de la ACM'],
+ ['M4','M4 · cortical anterior, 2 cm sobre M1'],['M5','M5 · cortical lateral, 2 cm sobre M2'],['M6','M6 · cortical posterior, 2 cm sobre M3'],
+ ['M7','M7 · núcleo lenticular'],['M8','M8 · núcleo caudado'],['M9','M9 · cápsula interna'],['M10','M10 · ribete insular']
+];
+var VES=[['ACC','Arteria carótida común'],['ACI','Arteria carótida interna'],['M1','ACM segmento M1'],['M2','ACM segmento M2'],['A1','ACA segmento A1'],['A2','ACA segmento A2'],['BAS','Arteria basilar'],['VER','Arterias vertebrales'],['P1','ACP segmento P1']];
+var ABS=[
+ ['hemo','Hemorragia intracraneal en el TC'],
+ ['prev3m','Ictus previo o TCE grave en los 3 meses previos'],
+ ['hsa','Síntomas sugestivos de hemorragia subaracnoidea'],
+ ['puncion','Punción arterial no compresible en los últimos 7 días'],
+ ['hemprev','Historia de hemorragia intracraneal previa'],
+ ['neo','Neoplasia intracraneal, malformación arteriovenosa o aneurisma','Los aneurismas no rotos de menos de 10 mm no contraindican'],
+ ['cirugia','Cirugía intracraneal o espinal reciente'],
+ ['sangrado','Sangrado activo interno'],
+ ['diatesis','Diátesis hemorrágica aguda'],
+ ['heparina','Heparina en las 48 h previas con TTPA superior a la normalidad'],
+ ['multilobar','Infarto multilobar en el TC (hipodensidad mayor de 1/3 del hemisferio) o reciente de menos de 3 meses']
+];
+var REL=[
+ ['menor','Síntomas menores o de rápida mejoría'],
+ ['emb','Embarazo'],
+ ['conv','Convulsión al inicio con alteraciones neurológicas residuales postictales'],
+ ['cirmay','Cirugía mayor o traumatismo grave en los 14 días anteriores'],
+ ['hgi','Hemorragia gastrointestinal o del tracto urinario en los 21 días anteriores'],
+ ['iam','Infarto agudo de miocardio en los 3 meses anteriores']
+];
+var TNK=[[60,'< 60 kg','3,0',3000,'15,0'],[70,'60 a < 70 kg','3,5',3500,'17,5'],[80,'70 a < 80 kg','4,0',4000,'20,0'],[90,'80 a < 90 kg','4,5',4500,'22,5'],[1e9,'≥ 90 kg','5,0',5000,'25,0']];
+
+/* ---------- estado ---------- */
+function fresh(){return {
+ lastSeen:'',arrival:'',despertar:false,bedtime:'',wake:'',evalAt:'now',
+ pid:'',age:'',weight:'',circ:'ant',focal:false,
+ sbp:'',dbp:'',glu:'',sat:'',temp:'',plt:'',anticoag:'',inr:'',nacoH:'',
+ angio:'',mismatch:'',ves:{},
+ mrs:'',cinc:{face:false,arm:false,speech:false},
+ raceSide:'R',race:{face:0,arm:0,leg:0,gaze:0,cog:0},raceTouched:false,
+ nihss:{},nihssTouched:false,
+ asp:{},aspDone:false,
+ abs:{},rel:{},obs:''
+};}
+var S=fresh();
+function getP(p){return p.split('.').reduce(function(o,k){return o==null?o:o[k]},S)}
+function setP(p,v){var a=p.split('.'),o=S;for(var i=0;i<a.length-1;i++){if(o[a[i]]==null)o[a[i]]={};o=o[a[i]]}o[a[a.length-1]]=v}
+
+/* ---------- utilidades ---------- */
+function num(v){if(v===''||v==null)return null;var n=parseFloat(String(v).replace(',','.'));return isNaN(n)?null:n}
+function pad(n){return String(n).padStart(2,'0')}
+function toLocal(d){return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate())+'T'+pad(d.getHours())+':'+pad(d.getMinutes())}
+function dt(v){if(!v)return null;var d=new Date(v);return isNaN(d.getTime())?null:d}
+function fmtD(d){return d?d.toLocaleString('es-ES',{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'}):''}
+function fmtDur(h){if(h==null||h<0)return '–';var m=Math.round(h*60),H=Math.floor(m/60);return H+' h '+pad(m%60)+' min'}
+function fmt1(n){return String(Math.round(n*10)/10).replace('.',',')}
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+
+/* ---------- cálculo ---------- */
+function compute(now){
+ now=now||new Date();
+ var R={now:now},ls=dt(S.lastSeen),arr=dt(S.arrival),bed=dt(S.bedtime),wake=dt(S.wake);
+ R.arr=arr;R.ls=ls;
+ R.ref=(S.evalAt==='arrival'&&arr)?arr:now;
+ R.refIsNow=(R.ref===now);
+ var hLast=null,hMid=null,mid=null;
+ if(S.despertar){
+  if(bed&&wake&&wake>bed){mid=new Date((bed.getTime()+wake.getTime())/2);hMid=(R.ref-mid)/36e5;hLast=(R.ref-bed)/36e5}
+ }else if(ls){hLast=(R.ref-ls)/36e5;hMid=hLast}
+ R.hLast=hLast;R.hMid=hMid;R.mid=mid;
+ var cat=null;
+ if(hLast!==null){
+  if(hLast<0||hMid<0)cat='neg';
+  else if(S.despertar)cat=hMid<=9?'wd':(hLast<=24?'w2':'w3');
+  else cat=hLast<=4.5?'w0':(hLast<9?'w1':(hLast<=24?'w2':'w3'));
+ }
+ R.cat=cat;
+ R.doorMin=arr&&R.refIsNow?(now-arr)/6e4:null;
+
+ R.cincN=['face','arm','speech'].filter(function(k){return S.cinc[k]}).length;
+ R.raceTot=S.raceTouched?Object.keys(S.race).reduce(function(a,k){return a+(+S.race[k]||0)},0):null;
+ R.nihssTot=S.nihssTouched?NIHSS.reduce(function(a,it){return a+(+S.nihss[it[0]]||0)},0):null;
+ R.asp=S.aspDone?10-ASP.filter(function(a){return S.asp[a[0]]}).length:null;
+ R.mrs=S.mrs===''?null:+S.mrs;
+ R.focal=!!S.focal||R.cincN>0||(R.nihssTot||0)>0||(R.raceTot||0)>0;
+ R.post=S.circ==='post';
+ R.age=num(S.age);R.w=num(S.weight);
+ R.lvo=S.angio==='lvo';R.distal=S.angio==='distal';
+ R.ves=VES.filter(function(v){return S.ves[v[0]]}).map(function(v){return v[1]});
+ R.nihssThr=R.post?10:5;
+
+ var ab=[],re=[],warn=[];
+ ABS.forEach(function(a){if(S.abs[a[0]])ab.push(a[1])});
+ var sbp=num(S.sbp),dbp=num(S.dbp),glu=num(S.glu),plt=num(S.plt),inr=num(S.inr),nh=num(S.nacoH);
+ if((sbp!=null&&sbp>185)||(dbp!=null&&dbp>110))ab.push('HTA grave no controlada (TAS > 185 o TAD > 110 mmHg)');
+ if(glu!=null&&glu<50)ab.push('Glucemia < 50 mg/dl');
+ if(plt!=null&&plt<100)ab.push('Plaquetas < 100.000/mm³');
+ if(S.anticoag==='aco'){
+  if(inr==null)warn.push('Anticoagulación con acenocumarol: pedir INR (Coaguchek) antes de decidir.');
+  else if(inr>1.7)ab.push('Acenocumarol con INR > 1,7');
+  else re.push('Anticoagulante oral, independientemente del INR');
+ }
+ if(S.anticoag==='naco'){
+  if(nh==null)warn.push('NACO: falta indicar las horas desde la última dosis. Menos de 12 h o desconocido contraindica.');
+  else if(nh<12)ab.push('NACO en las últimas 12 h');
+  else re.push('Anticoagulante oral (NACO), independientemente del INR');
+ }
+ if(R.age!=null&&R.age<18)ab.push('Edad menor de 18 años');
+ REL.forEach(function(a){if(S.rel[a[0]])re.push(a[1])});
+ if(R.age!=null&&R.age>80)re.push('Edad mayor de 80 años');
+ if(R.nihssTot!=null&&R.nihssTot>25)re.push('Ictus severo (NIHSS > 25)');
+ R.abs=ab;R.rel=re;R.warn=warn;
+ R.hta=(sbp!=null&&sbp>185)||(dbp!=null&&dbp>110);
+ R.sbp=sbp;R.dbp=dbp;R.glu=glu;
+
+ /* criterios 9-24 h */
+ var nOK=R.nihssTot!=null?R.nihssTot>=R.nihssThr:null;
+ R.crit=[
+  {t:'Contactar con Teleictus',d:'Siempre, para valorar el tratamiento endovascular. Busca [busca interno].',s:'todo'},
+  {t:'mRS previo ≤ 3',d:R.mrs==null?'Falta el Rankin previo (pestaña Escalas).':'Rankin previo '+R.mrs+'.',s:R.mrs==null?'pend':(R.mrs<=3?'ok':'no')},
+  {t:'ASPECTS ≥ 3',d:R.asp==null?'Falta puntuar el TAC (pestaña Escalas).':'ASPECTS '+R.asp+'. Con 0 a 2 solo se valora individualmente si hay 7 h o menos de evolución.',s:R.asp==null?'pend':(R.asp>=3?'ok':'no')},
+  {t:R.post?'NIHSS ≥ 10 (circulación posterior)':'NIHSS ≥ 5',d:R.nihssTot==null?'Falta el NIHSS.':'NIHSS '+R.nihssTot+'. Valoración individual en afasia o disfasia.',s:nOK==null?'pend':(nOK?'ok':'no')},
+  {t:'Oclusión o estenosis severa de gran vaso',d:S.angio===''?'AngioTAC pendiente.':(R.lvo?('Presente'+(R.ves.length?': '+R.ves.join(', '):'')+'.'):(R.distal?'Oclusión distal: valoración individual.':'Sin oclusión de gran vaso.')),s:S.angio===''?'pend':(R.lvo?'ok':(R.distal?'ind':'no'))},
+  {t:'TC perfusión: área de penumbra',d:S.mismatch===''?'Pendiente. Sirve para valorar el área de penumbra.':(S.mismatch==='gt20'?'Penumbra significativa.':'Sin penumbra significativa.'),s:S.mismatch===''?'pend':(S.mismatch==='gt20'?'ok':'no')}
+ ];
+ return R;
+}
+
+/* ---------- decisiones (casillas de estado) ---------- */
+function decide(R){
+ var T={};
+ var c=R.cat;
+ // ventana
+ if(c===null)T.win={st:'idle',h:'Sin horas',s:'Rellena la hora de inicio en Caso'};
+ else if(c==='neg')T.win={st:'stop',h:'Revisar horas',s:'La hora de inicio es posterior a la de referencia'};
+ else if(c==='w0')T.win={st:'ok',h:'≤ 4,5 h',s:'Evolución '+fmtDur(R.hLast)};
+ else if(c==='w1')T.win={st:'info',h:'4,5 a 9 h',s:'Evolución '+fmtDur(R.hLast)};
+ else if(c==='wd')T.win={st:'info',h:'Despertar',s:'Punto medio del sueño a '+fmtDur(R.hMid)};
+ else if(c==='w2')T.win={st:'warn',h:'9 a 24 h',s:'Evolución '+fmtDur(R.hLast)+'. Prioridad 1'};
+ else T.win={st:'stop',h:'> 24 h',s:'Fuera de las ventanas del protocolo'};
+
+ // activación
+ var mrsBad=R.mrs!=null&&R.mrs>=3;
+ if(c===null||c==='neg')T.act={st:'idle',h:'Pendiente',s:'Necesita la ventana'};
+ else if(c==='w3')T.act={st:'stop',h:'No activar',s:'Más de 24 h. Valoración individual por el equipo'};
+ else if(R.mrs==null)T.act={st:'warn',h:'Falta Rankin',s:'Pestaña Escalas: se activa con Rankin menor de 3'};
+ else if(R.mrs>=4||(R.mrs===3&&c!=='w2'))T.act={st:R.mrs>=4?'stop':'warn',h:R.mrs>=4?'No activar':'Valorar',s:R.mrs>=4?'Rankin previo '+R.mrs+': paciente dependiente':'Rankin 3: no cumple menor de 3. Decide el equipo de críticos'};
+ else if(!R.focal)T.act={st:'warn',h:'Sin déficit focal',s:'Marca Cincinnati, RACE, NIHSS o el déficit focal'};
+ else if(c==='w0'||c==='w1'||c==='wd')T.act={st:'act',h:'Activar código ictus',s:'Prioridad 1. Críticos, intensivista y radiólogo'};
+ else{ // w2
+  if(R.nihssTot==null)T.act={st:'warn',h:'Prioridad 1',s:'Valora el equipo de críticos. Falta NIHSS (≥ '+R.nihssThr+')'};
+  else if(R.nihssTot>=R.nihssThr)T.act={st:'act',h:'Activar código ictus',s:'NIHSS '+R.nihssTot+' y mRS ≤ 3. Llamar al radiólogo'};
+  else T.act={st:'warn',h:'Prioridad 1',s:'NIHSS '+R.nihssTot+' por debajo de '+R.nihssThr+'. Valoración individual (afasia o disfasia)'};
+ }
+
+ // fibrinolisis
+ var tnk=null;
+ if(R.w!=null){var b=TNK.filter(function(r){return R.w<r[0]})[0];tnk=b}
+ var drug=tnk?'TNK '+tnk[4]+' mg':'TNK según peso';
+ if(c===null||c==='neg')T.lys={st:'idle',h:'Pendiente',s:'Necesita la ventana'};
+ else if(c==='w2'||c==='w3')T.lys={st:'stop',h:'No indicada',s:'Más de 9 h desde la última vez bien'};
+ else if(R.abs.length)T.lys={st:'stop',h:'Contraindicada',s:R.abs[0]+(R.abs.length>1?' (+'+(R.abs.length-1)+')':'')};
+ else if(R.warn.length)T.lys={st:'warn',h:'Revisar anticoagulación',s:R.warn[0]}
+ else if(c==='w0'){
+  T.lys={st:'ok',h:'Indicada',s:drug+(R.rel.length?'. '+R.rel.length+' contraindicación(es) relativa(s)':'')};
+  if(!R.focal)T.lys={st:'warn',h:'Confirmar déficit',s:'Sin déficit focal registrado'};
+ }else{
+  if(S.mismatch==='gt20')T.lys={st:'ok',h:'Ampliada indicada',s:drug+(R.lvo?'. Con oclusión: decidir con UCI y Teleictus, con o sin trombectomía':'')+(R.rel.length?'. Relativas: '+R.rel.length:'')};
+  else if(S.mismatch==='le20')T.lys={st:'stop',h:'No indicada',s:'Sin penumbra significativa (mismatch ≤ 20 %)'};
+  else T.lys={st:'warn',h:'Falta TC perfusión',s:'Ampliada si mismatch > 20 %'};
+ }
+
+ // trombectomía
+ var unmet=R.crit.filter(function(x){return x.s==='no'}).map(function(x){return x.t});
+ var pend=R.crit.filter(function(x){return x.s==='pend'}).length;
+ if(c===null||c==='neg')T.thr={st:'idle',h:'Pendiente',s:'Necesita la ventana'};
+ else if(c==='w3')T.thr={st:'stop',h:'Fuera de ventana',s:'Más de 24 h'};
+ else if(S.angio==='')T.thr={st:'idle',h:'Pendiente',s:'Falta el AngioTAC'};
+ else if(S.angio==='none')T.thr={st:'idle',h:'Sin oclusión',s:'Sin oclusión de gran vaso: no hay indicación de trombectomía'};
+ else if(R.distal)T.thr={st:'warn',h:'Individual',s:'Oclusión distal: consultar con Teleictus ([busca interno])'};
+ else if(c==='w2'){
+  if(unmet.length)T.thr={st:'stop',h:'No cumple',s:unmet.join('; ')};
+  else if(pend)T.thr={st:'warn',h:'Faltan datos',s:'Completa escalas y TC perfusión, y llama a Teleictus'};
+  else T.thr={st:'act',h:'Llamar a Teleictus',s:'Cumple criterios. Busca [busca interno]'};
+ }else T.thr={st:'act',h:'Llamar a Teleictus',s:'Oclusión de gran vaso: trombectomía con o sin fibrinolisis. Busca [busca interno]'};
+ return T;
+}
+
+/* ---------- pasos y pruebas ---------- */
+function stepsFor(R){
+ var c=R.cat;
+ if(c===null||c==='neg')return {sub:'Introduce la hora de inicio para ver los pasos',steps:['Triaje: todo déficit neurológico focal de inicio súbito se clasifica como Preferente (P1).','Anota la hora de inicio o la última vez que se vio bien al paciente. Sin ese dato no se puede decidir.','Valora el Rankin previo: el código se activa en pacientes independientes (Rankin menor de 3).'],img:''};
+ if(c==='w0')return {sub:'Menos de 4,5 h: código ictus y valoración de fibrinolisis',steps:[
+  'Triaje: P1 y activar Código Ictus. Aviso al equipo: críticos de urgencias, intensivista y radiólogo.',
+  'Sala de críticos. Constantes, glucemia, ECG, vía periférica (no en el brazo paralítico) y analítica con coagulación.',
+  'Llamar a UCI para valorar fibrinolisis (TNK según peso). No retrasar la infusión por pruebas prescindibles.',
+  'TAC craneal y AngioTAC.',
+  'Si hay oclusión de gran vaso, llamar a Teleictus ([busca interno]) para valorar trombectomía.',
+  'Decidir el tratamiento en menos de 60 minutos desde la llegada.'],
+  img:'TAC craneal y AngioTAC. Posibilidades terapéuticas: fibrinolisis, tratamiento endovascular si hay oclusión en el AngioTAC.'};
+ if(c==='w1'||c==='wd')return {sub:c==='wd'?'Ictus del despertar: código ictus y fibrinolisis ampliada':'4,5 a 9 h: código ictus y fibrinolisis ampliada',steps:[
+  'Triaje: P1 y activar Código Ictus. Aviso a críticos de urgencias, intensivista y radiólogo.',
+  'Sala de críticos. Constantes, glucemia, ECG, vía periférica y analítica con coagulación.',
+  c==='wd'?'Despertar sin testigos: inicio en la última vez asintomático. Con testigos: el punto medio del sueño debe estar a 9 h o menos.':'Hora de inicio conocida: confirmar con familiares o testigos.',
+  'TAC craneal, AngioTAC y TC perfusión.',
+  'Fibrinolisis ampliada (TNK preferible) si hay penumbra significativa (mismatch mayor del 20 %) y no hay indicación o posibilidad de trombectomía.',
+  'Si hay oclusión de gran vaso: UCI llama a Teleictus ([busca interno]) y se valora fibrinolisis con o sin trombectomía.'],
+  img:'TAC, AngioTAC y TC perfusión. Con stop en el AngioTAC: tratamiento endovascular y fibrinolisis si hay penumbra significativa. Sin stop: valorar fibrinolisis si el mismatch es mayor del 20 %.'};
+ if(c==='w2')return {sub:'9 a 24 h: ictus prioridad 1 atendido por el equipo ictus',steps:[
+  'Triaje de enfermería: P1. No activa el código; no se activa extrahospitalariamente.',
+  'Valoración inicial por el equipo de críticos.',
+  'Se activa el código ictus si NIHSS ≥ 5 (≥ 10 en circulación posterior) y mRS previo ≤ 3. Se llama al radiólogo.',
+  'TAC craneal, AngioTAC craneal y TC perfusión para valorar el área de penumbra.',
+  'Con oclusión o estenosis severa de gran vaso y ASPECTS ≥ 3: contactar con Teleictus ([busca interno]) para decidir la trombectomía.'],
+  img:'TAC craneal, AngioTAC craneal y TC perfusión. Trombectomía mecánica si hay oclusión o estenosis severa de gran vaso y criterios cumplidos.'};
+ return {sub:'Más de 24 h',steps:['Fuera de las ventanas del protocolo (límite de 24 h, también en circulación posterior).','Prioridad 1 y manejo según valoración clínica. Ante dudas, consultar con neurología o Teleictus ([busca interno]).'],img:''};
+}
+
+/* ---------- informe ---------- */
+function cat2txt(R){
+ return {w0:'Hasta 4,5 h',w1:'4,5 a 9 h',wd:'Ictus del despertar (punto medio del sueño ≤ 9 h)',w2:'9 a 24 h',w3:'Más de 24 h',neg:'Horas incongruentes'}[R.cat]||'Sin calcular';
+}
+function nihssBreak(){return NIHSS.map(function(it){return it[0].replace('n','')+':'+(+S.nihss[it[0]]||0)}).join(' ')}
+function buildReport(R,D){
+ var L=[];
+ var ex=(S.pid==='EJEMPLO')?'  *** CASO DE EJEMPLO, NO ES UN PACIENTE REAL ***':'';
+ L.push('INFORME CÓDIGO ICTUS · Urgencias, Hospital de Antequera'+ex);
+ L.push('Protocolo: PNT Ictus isquémico ASNM v6 (05/02/2026)');
+ L.push('Generado: '+fmtD(R.now));
+ L.push('Paciente: '+(S.pid||'sin identificar')+' · Edad: '+(S.age||'?')+' años · Peso: '+(S.weight||'?')+' kg');
+ L.push('');L.push('TIEMPOS');
+ if(S.despertar){
+  L.push('- Ictus del despertar. Se acostó/última vez asintomático: '+(fmtD(dt(S.bedtime))||'?')+'. Despertó con síntomas: '+(fmtD(dt(S.wake))||'?'));
+  if(R.mid)L.push('- Punto medio del sueño: '+fmtD(R.mid));
+ }else L.push('- Inicio de síntomas / última vez bien: '+(fmtD(R.ls)||'?'));
+ L.push('- Llegada a urgencias: '+(fmtD(R.arr)||'?'));
+ L.push('- Evolución a '+(R.refIsNow?'la hora del informe':'la llegada')+': '+fmtDur(R.hLast)+(S.despertar&&R.hMid!=null?' desde la última vez asintomático; '+fmtDur(R.hMid)+' desde el punto medio del sueño':''));
+ L.push('- Ventana: '+cat2txt(R));
+ if(R.doorMin!=null&&R.doorMin>=0)L.push('- Tiempo desde la llegada: '+Math.round(R.doorMin)+' min (objetivo: decidir en menos de 60 min)');
+ L.push('');L.push('SITUACIÓN PREVIA Y ESCALAS');
+ L.push('- Rankin previo: '+(R.mrs==null?'sin valorar':R.mrs+(R.mrs<3?' (independiente, cumple menor de 3)':' (no cumple menor de 3)')));
+ var cs=[];if(S.cinc.face)cs.push('desviación comisura');if(S.cinc.arm)cs.push('debilidad brazo');if(S.cinc.speech)cs.push('alteración del habla');
+ L.push('- Cincinnati: '+R.cincN+'/3'+(cs.length?' ('+cs.join(', ')+')':''));
+ L.push('- RACE: '+(R.raceTot==null?'sin valorar':R.raceTot+'/9, hemiparesia '+(S.raceSide==='R'?'derecha':'izquierda')+(R.raceTot>=5?'. ≥ 5: sospecha de oclusión de gran vaso':'')));
+ L.push('- NIHSS: '+(R.nihssTot==null?'sin valorar':R.nihssTot+'/42 ('+nihssBreak()+')'));
+ L.push('- ASPECTS: '+(R.asp==null?'sin valorar':R.asp+'/10'+(S.asp&&ASP.filter(function(a){return S.asp[a[0]]}).length?' (afectadas: '+ASP.filter(function(a){return S.asp[a[0]]}).map(function(a){return a[0]}).join(', ')+')':'')));
+ L.push('- Circulación afectada: '+(R.post?'posterior':'anterior')+'. Déficit focal súbito: '+(R.focal?'sí':'no'));
+ L.push('');L.push('NEUROIMAGEN');
+ L.push('- AngioTAC: '+({'':'pendiente',none:'sin oclusión de gran vaso',lvo:'oclusión o estenosis severa de gran vaso'+(R.ves.length?' ('+R.ves.join(', ')+')':''),distal:'oclusión de segmento distal'}[S.angio]));
+ L.push('- TC perfusión: '+({'':'no realizado o pendiente',gt20:'penumbra significativa (mismatch > 20 %)',le20:'sin penumbra significativa (mismatch ≤ 20 %)'}[S.mismatch]));
+ L.push('');L.push('CONSTANTES Y ANALÍTICA');
+ L.push('- TA: '+(S.sbp||'?')+'/'+(S.dbp||'?')+' mmHg · Glucemia: '+(S.glu||'?')+' mg/dl · Sat O2: '+(S.sat||'?')+' % · Tª: '+(S.temp||'?')+' °C');
+ L.push('- Plaquetas: '+(S.plt||'?')+' ×10³/µl · Anticoagulación oral: '+({'':'sin dato',no:'ninguna',aco:'acenocumarol/warfarina, INR '+(S.inr||'?'),naco:'NACO, última dosis hace '+(S.nacoH||'?')+' h'}[S.anticoag]));
+ L.push('');L.push('DECISIÓN SEGÚN PROTOCOLO');
+ L.push('- Código ictus: '+D.act.h+'. '+D.act.s);
+ L.push('- Fibrinolisis IV: '+D.lys.h+'. '+D.lys.s);
+ L.push('- Trombectomía: '+D.thr.h+'. '+D.thr.s);
+ if(R.abs.length){L.push('');L.push('CONTRAINDICACIONES ABSOLUTAS');R.abs.forEach(function(x){L.push('- '+x)})}
+ if(R.rel.length){L.push('');L.push('CONTRAINDICACIONES RELATIVAS');R.rel.forEach(function(x){L.push('- '+x)})}
+ if(R.w!=null){
+  var b=TNK.filter(function(r){return R.w<r[0]})[0];
+  L.push('');L.push('DOSIS (peso '+fmt1(R.w)+' kg)');
+  L.push('- TNK: '+b[4]+' mg ('+b[3]+' U), '+b[2]+' ml de solución reconstituida, bolo iv');
+  var tot=Math.min(0.9*R.w,90);
+  L.push('- Alteplasa (alternativa): 0,9 mg/kg = '+fmt1(tot)+' mg. Bolo 10 % ('+fmt1(tot*0.1)+' mg) en 1 min y resto ('+fmt1(tot*0.9)+' mg) en 1 h');
+ }
+ if(S.obs.trim()){L.push('');L.push('OBSERVACIONES');L.push(S.obs.trim())}
+ L.push('');L.push('Herramienta de apoyo. La decisión final corresponde al equipo ictus.');
+ return L.join('\n');
+}
+function buildTele(R){
+ var L=[];
+ L.push('TELECONSULTA ICTUS · Hospital de Antequera'+(S.pid==='EJEMPLO'?' (EJEMPLO)':''));
+ L.push('Paciente: '+(S.pid||'sin identificar')+' · '+(S.age||'?')+' años · '+(S.weight||'?')+' kg');
+ L.push('Rankin previo: '+(R.mrs==null?'?':R.mrs));
+ L.push('Inicio síntomas/última vez bien: '+((S.despertar?fmtD(dt(S.bedtime)):fmtD(R.ls))||'?')+(S.despertar?' (ictus del despertar)':''));
+ L.push('Llegada: '+(fmtD(R.arr)||'?')+' · Evolución: '+fmtDur(R.hLast));
+ L.push('NIHSS: '+(R.nihssTot==null?'?':R.nihssTot+' ('+nihssBreak()+')')+' · RACE: '+(R.raceTot==null?'?':R.raceTot));
+ L.push('TA: '+(S.sbp||'?')+'/'+(S.dbp||'?')+' · Glucemia: '+(S.glu||'?')+' · INR: '+(S.inr||'?')+' · Anticoag: '+({'':'?',no:'no',aco:'acenocumarol',naco:'NACO ('+(S.nacoH||'?')+' h)'}[S.anticoag]));
+ L.push('AngioTAC: '+({'':'pendiente',none:'sin OGV',lvo:'OGV'+(R.ves.length?' '+R.ves.join(', '):''),distal:'oclusión distal'}[S.angio])+' · ASPECTS: '+(R.asp==null?'?':R.asp)+' · TC perfusión: '+({'':'?',gt20:'mismatch > 20 %',le20:'mismatch ≤ 20 %'}[S.mismatch]));
+ if(R.abs.length)L.push('Contraindicaciones absolutas fibrinolisis: '+R.abs.join('; '));
+ if(S.obs.trim())L.push('Comentarios: '+S.obs.trim());
+ return L.join('\n');
+}
+
+/* ---------- pintado ---------- */
+function tile(id,o){var el=$(id);el.dataset.state=o.st;$('.h',el).textContent=o.h;$('.s',el).textContent=o.s}
+function pillFor(s){return {ok:['ok','Cumple'],no:['stop','No cumple'],pend:['warn','Pendiente'],todo:['info','Acción'],ind:['warn','Individual']}[s]}
+
+function update(){
+ var R=compute(),D=decide(R);
+ tile('#t-win',D.win);tile('#t-act',D.act);tile('#t-lys',D.lys);tile('#t-thr',D.thr);
+ // tiempo
+ $('#despBox').hidden=!S.despertar;$('#f-last').style.opacity=S.despertar?.45:1;
+ $('#elapsed').textContent=R.hLast==null?'–':(R.cat==='neg'?'Horas incongruentes':fmtDur(R.hLast));
+ var sub='Rellena la hora de inicio';
+ if(R.hLast!=null&&R.cat!=='neg'){sub=S.despertar?('desde la última vez asintomático. Punto medio del sueño a '+fmtDur(R.hMid)):('desde la última vez bien, calculado a '+(R.refIsNow?'las '+R.now.toLocaleTimeString('es-ES',{hour:'2-digit',minute:'2-digit'}):'la hora de llegada'))}
+ else if(R.cat==='neg')sub='La hora de inicio es posterior a la de referencia';
+ $('#elapsedSub').textContent=sub;
+ var mk=$('#mark');
+ var pos=S.despertar?R.hMid:R.hLast;
+ if(pos==null||pos<0||R.cat==='neg')mk.hidden=true;else{mk.hidden=false;mk.style.left=Math.min(pos,30)/30*100+'%'}
+ $('#doorNote').textContent=(R.doorMin!=null&&R.doorMin>=0)?('Han pasado '+Math.round(R.doorMin)+' min desde la llegada. Objetivo: decidir el tratamiento en menos de 60 min.'):'';
+ $('#f-inr').hidden=S.anticoag!=='aco';$('#f-naco').hidden=S.anticoag!=='naco';
+ $('#vesBox').hidden=!R.lvo;
+ // pasos
+ var st=stepsFor(R);$('#stepsSub').textContent=st.sub;
+ $('#steps').innerHTML=st.steps.map(function(x){return '<li><span>'+esc(x)+'</span></li>'}).join('');
+ $('#imgBox').innerHTML=st.img?'<div class="callout info"><b>Pruebas de imagen.</b> '+esc(st.img)+'</div>':'';
+
+ // escalas
+ var mr=$('#mrsRes');
+ if(R.mrs==null)mr.hidden=true;else{mr.hidden=false;mr.className='callout '+(R.mrs<3?'ok':'stop');mr.innerHTML=R.mrs<3?'<b>Rankin '+R.mrs+': independiente.</b> Cumple el criterio de situación previa (capaz de asearse, vestirse, caminar y comer).':'<b>Rankin '+R.mrs+'.</b> No cumple menor de 3. '+(R.mrs===3?'Entre 9 y 24 h se admite mRS ≤ 3 por criterio del equipo de críticos.':'Paciente dependiente: no se activa el código.')}
+ $('#cincN').textContent=R.cincN;
+ var cr=$('#cincRes');cr.className='callout '+(R.cincN>0?'stop':'info');cr.innerHTML=R.cincN>0?'<b>Sospecha de ictus.</b> Preferente (P1) y activar Código Ictus si cumple ventana y Rankin.':'Sin signos de Cincinnati. Si la clínica sugiere ictus, se sigue clasificando como P1.';
+ $('#raceN').textContent=R.raceTot==null?'–':R.raceTot;
+ var rr=$('#raceRes');
+ if(R.raceTot==null){rr.className='callout info';rr.textContent='Sin valorar.'}
+ else if(R.raceTot>=5){rr.className='callout stop';rr.innerHTML='<b>RACE ≥ 5.</b> Alta probabilidad de oclusión de gran vaso: candidato a técnicas endovasculares en centro terciario.'}
+ else{rr.className='callout ok';rr.textContent='RACE menor de 5: baja probabilidad de oclusión de gran vaso. No descarta ictus.'}
+ $('#raceLast').textContent=S.raceSide==='R'?'Afasia (dar 2 órdenes: cerrar los ojos y hacer el puño con la mano)':'Agnosia (asomatognosia y anosognosia)';
+ $('#raceGaze').textContent='Desviación oculocefálica hacia la '+(S.raceSide==='R'?'izquierda':'derecha');
+ var so=$('#sel-race-cog');
+ var opts=S.raceSide==='R'?['Realiza ambas órdenes','Realiza una orden','No obedece ninguna']:['Reconoce su brazo y el déficit','Asomatognosia o anosognosia','Asomatognosia y anosognosia'];
+ for(var i=0;i<3;i++)so.options[i].text=i+' · '+opts[i];
+ $('#nihN').textContent=R.nihssTot==null?'–':R.nihssTot;
+ var nr=$('#nihRes');
+ if(R.nihssTot==null){nr.className='callout info';nr.textContent='Sin valorar.'}
+ else{
+  var g=R.nihssTot===0?'sin déficit':R.nihssTot<=4?'déficit leve':R.nihssTot<=15?'déficit moderado':R.nihssTot<=20?'moderado a grave':'grave';
+  var ok=R.nihssTot>=R.nihssThr;
+  nr.className='callout '+(ok?'warn':'info');
+  nr.innerHTML='<b>'+g+'.</b> Entre 9 y 24 h el umbral es ≥ '+R.nihssThr+(R.post?' (circulación posterior)':' (≥ 10 si es posterior)')+': '+(ok?'lo alcanza.':'no lo alcanza.')+(R.nihssTot>25?' Mayor de 25: contraindicación relativa de fibrinolisis.':'');
+ }
+ $('#aspN').textContent=R.asp==null?'–':R.asp;
+ var ar=$('#aspRes');
+ if(R.asp==null){ar.className='callout info';ar.textContent='Sin valorar.'}
+ else{ar.className='callout '+(R.asp>=3?(R.asp>7?'ok':'warn'):'stop');
+  ar.innerHTML=(R.asp===10?'<b>TAC normal.</b> ':'')+(R.asp>7?'Afectación de menos de 1/3 del territorio de la ACM. ':'<b>Afectación superior a 1/3 de la ACM:</b> mayor riesgo de sangrado con trombólisis. ')+(R.asp>=3?'Cumple ASPECTS ≥ 3 para trombectomía.':'Menor de 3: solo se valora individualmente con 7 h o menos de evolución.')}
+
+ // fibrinolisis
+ var li=$('#lysInd');li.innerHTML='<div class="callout '+({ok:'ok',info:'info',warn:'warn',stop:'stop',act:'ok',idle:'info'}[D.lys.st])+'"><b>'+esc(D.lys.h)+'.</b> '+esc(D.lys.s)+'</div>';
+ $('#absAuto').innerHTML=R.abs.length?'<div class="callout stop"><b>Detectadas:</b><ul class="lst">'+R.abs.map(function(x){return '<li>'+esc(x)+'</li>'}).join('')+'</ul></div>':'<div class="callout ok">Ninguna contraindicación absoluta marcada.</div>';
+ $('#relAuto').innerHTML=(R.rel.length?'<div class="callout warn"><b>Detectadas:</b><ul class="lst">'+R.rel.map(function(x){return '<li>'+esc(x)+'</li>'}).join('')+'</ul></div>':'<div class="callout ok">Ninguna contraindicación relativa marcada.</div>')+R.warn.map(function(x){return '<div class="callout warn">'+esc(x)+'</div>'}).join('');
+ // dosis
+ var dh='';
+ if(R.w==null)dh='<div class="callout warn"><b>Falta el peso.</b> Es imprescindible para calcular la dosis. Se introduce en la pestaña Caso.</div>';
+ var hit=R.w!=null?TNK.filter(function(r){return R.w<r[0]})[0]:null;
+ dh+='<h3 style="margin-top:6px">Tenecteplasa (TNK), preferible</h3><div class="scroll"><table class="tbl"><thead><tr><th>Peso</th><th>Volumen</th><th>Unidades</th><th>mg</th></tr></thead><tbody>'+
+  TNK.map(function(r){return '<tr'+(r===hit?' class="hit"':'')+'><td>'+r[1]+'</td><td>'+r[2]+' ml</td><td>'+r[3]+' U</td><td>'+r[4]+' mg</td></tr>'}).join('')+'</tbody></table></div>'+
+  '<p class="note">Referencia 0,25 mg/kg. Metalyse 5.000 U (25 mg): reconstituir con 5 ml de agua para preparaciones inyectables estéril y administrar en bolo iv el volumen que indica la tabla.</p>';
+ if(R.w!=null){var tot=Math.min(0.9*R.w,90);dh+='<h3>Alteplasa (alternativa)</h3><div class="score"><b>'+fmt1(tot)+' mg</b><em>0,9 mg/kg, máximo 90 mg</em></div><p class="note">Bolo del 10 % ('+fmt1(tot*0.1)+' mg) en 1 minuto y el resto ('+fmt1(tot*0.9)+' mg) en perfusión continua durante 1 hora, a partir de los 3 a 5 minutos.</p>'}
+ $('#dose').innerHTML=dh;
+
+ // trombectomía
+ $('#crit').innerHTML=R.crit.map(function(x){var p=pillFor(x.s);return '<li><span class="pill '+p[0]+'">'+p[1]+'</span><span><b>'+esc(x.t)+'</b><br><span class="note" style="margin:0">'+esc(x.d)+'</span></span></li>'}).join('');
+ var cn='';
+ if(R.cat==='w0'||R.cat==='w1'||R.cat==='wd')cn='<div class="callout info">Con menos de 9 h o del despertar, ante una oclusión de gran vaso se llama a Teleictus además de valorar la fibrinolisis. Los criterios de la lista son los de 9 a 24 h.</div>';
+ else if(R.cat==='w3')cn='<div class="callout stop">Más de 24 h desde la última vez bien: fuera de ventana.</div>';
+ $('#critNote').innerHTML=cn;
+ var rd=[['Edad',R.age!=null],['Peso',R.w!=null],['Rankin previo',R.mrs!=null],['Hora de inicio',(S.despertar?!!S.bedtime:!!S.lastSeen)],['Hora de llegada',!!S.arrival],['TA',R.sbp!=null&&R.dbp!=null],['Glucemia',R.glu!=null],['INR',S.anticoag!=='aco'||num(S.inr)!=null],['NIHSS',R.nihssTot!=null],['AngioTAC',S.angio!=='']];
+ $('#ready').innerHTML=rd.map(function(x){return '<span class="pill '+(x[1]?'ok':'warn')+'">'+(x[1]?'✓ ':'Falta ')+x[0]+'</span>'}).join('');
+
+ // medidas
+ var A=[];
+ var sat=num(S.sat),tp=num(S.temp);
+ if(sat!=null&&sat<94)A.push(['warn','Sat O₂ menor de 94 %','Administrar oxígeno.']);
+ if(tp!=null&&tp>37.5)A.push(['warn','Temperatura mayor de 37,5 °C','Paracetamol 1 g iv.']);
+ if(R.glu!=null){
+  var g=R.glu;
+  if(g<60)A.push(['stop','Glucemia '+g+' mg/dl','Glucosa 50 % iv y suero glucosado 10 %. Objetivo: normoglucemia. Descartar hipoglucemia como simulador del ictus.']);
+  else if(g>400)A.push(['warn','Glucemia '+g+' mg/dl','Perfusión de 50 UI de insulina rápida a 30 ml/h.']);
+  else if(g>300)A.push(['warn','Glucemia '+g+' mg/dl','Insulina ultrarrápida: + 6 UI.']);
+  else if(g>250)A.push(['warn','Glucemia '+g+' mg/dl','Insulina ultrarrápida: + 4 UI.']);
+  else if(g>200)A.push(['warn','Glucemia '+g+' mg/dl','Insulina ultrarrápida: + 2 UI.']);
+  else if(g>155)A.push(['warn','Glucemia '+g+' mg/dl','Insulina ultrarrápida 0,1 UI/kg subcutánea (Humalog, NovoRapid).']);
+  else A.push(['ok','Glucemia '+g+' mg/dl','Sin ajuste.']);
+ }
+ if(R.sbp!=null||R.dbp!=null){
+  var lysCand=(R.cat==='w0'||R.cat==='w1'||R.cat==='wd');
+  if(R.hta)A.push(['stop','TA '+(S.sbp||'?')+'/'+(S.dbp||'?')+' mmHg','Mayor de 185/110: labetalol hasta 2 bolos de 10 mg iv, nicardipino 5 mg/h o urapidil 25 a 50 mg iv antes de fibrinolizar. Mantener por debajo de 180/105 las primeras 24 h.']);
+  else if(lysCand)A.push(['ok','TA '+(S.sbp||'?')+'/'+(S.dbp||'?')+' mmHg','Dentro de rango para fibrinolisis. Mantener por debajo de 180/105 las primeras 24 h.']);
+  else A.push(['info','TA '+(S.sbp||'?')+'/'+(S.dbp||'?')+' mmHg','Ictus isquémico sin fibrinolisis: no tratar salvo insuficiencia cardiaca, angor, IAM o disección aórtica. Evitar descensos mayores del 15 % en 24 h.']);
+ }
+ $('#acts').innerHTML=A.length?A.map(function(a){return '<div class="callout '+a[0]+'"><b>'+esc(a[1])+'.</b> '+esc(a[2])+'</div>'}).join(''):'<div class="callout info">Introduce TA, glucemia, saturación o temperatura en la pestaña Caso para ver las acciones.</div>';
+
+ // informe
+ var rep=buildReport(R,D),tele=buildTele(R);
+ $('#repTxt').textContent=rep;$('#teleTxt').textContent=tele;
+ return {R:R,D:D,rep:rep,tele:tele};
+}
+
+/* ---------- construcción de formularios ---------- */
+function build(){
+ $('#mrsList').innerHTML=MRS.map(function(m){return '<label class="chk"><input type="radio" name="mrs" value="'+m[0]+'" data-k="mrs"><span><b>'+m[0]+' · '+m[1]+'</b>'+(m[2]?'<small>'+m[2]+'</small>':'')+'</span></label>'}).join('');
+ $('#nihssList').innerHTML=NIHSS.map(function(it){return '<div class="it"><label for="sel-'+it[0]+'">'+it[1]+'</label><select id="sel-'+it[0]+'" data-k="nihss.'+it[0]+'">'+it[2].map(function(o,i){return '<option value="'+i+'">'+i+' · '+o+'</option>'}).join('')+'</select></div>'}).join('');
+ $('#raceList').innerHTML=RACE.map(function(it){
+  var lab=it[0]==='cog'?'<span id="raceLast">Afasia</span>':(it[0]==='gaze'?'<span id="raceGaze">Desviación oculocefálica</span>':it[1]);
+  return '<div class="it"><label for="sel-race-'+it[0]+'">'+lab+'</label><select id="sel-race-'+it[0]+'" data-k="race.'+it[0]+'">'+it[2].map(function(o,i){return '<option value="'+i+'">'+i+' · '+o+'</option>'}).join('')+'</select></div>'}).join('');
+ $('#aspList').innerHTML=ASP.map(function(a){return '<label class="chk bad"><input type="checkbox" data-k="asp.'+a[0]+'"><span>'+a[1]+'</span></label>'}).join('');
+ $('#vesList').innerHTML=VES.map(function(v){return '<label class="chk"><input type="checkbox" data-k="ves.'+v[0]+'"><span>'+v[1]+'</span></label>'}).join('');
+ $('#absList').innerHTML=ABS.map(function(a){return '<label class="chk bad"><input type="checkbox" data-k="abs.'+a[0]+'"><span>'+a[1]+(a[2]?'<small>'+a[2]+'</small>':'')+'</span></label>'}).join('');
+ $('#relList').innerHTML=REL.map(function(a){return '<label class="chk mid"><input type="checkbox" data-k="rel.'+a[0]+'"><span>'+a[1]+'</span></label>'}).join('');
+}
+function sync(){
+ $$('[data-k]').forEach(function(el){
+  var v=getP(el.dataset.k);
+  if(el.type==='checkbox')el.checked=!!v;
+  else if(el.type==='radio')el.checked=String(v)===el.value;
+  else el.value=(v==null?'':v);
+ });
+}
+
+/* ---------- eventos ---------- */
+function onInput(e){
+ var el=e.target;if(!el.dataset||!el.dataset.k)return;
+ var v;
+ if(el.type==='checkbox')v=el.checked;
+ else if(el.type==='radio'){if(!el.checked)return;v=el.value}
+ else v=el.value;
+ setP(el.dataset.k,v);
+ if(el.closest('#nihssList'))S.nihssTouched=true;
+ if(el.closest('#raceList'))S.raceTouched=true;
+ if(el.closest('#aspList'))S.aspDone=true;
+ update();
+}
+document.addEventListener('input',onInput);
+document.addEventListener('change',onInput);
+
+function toast(t){var x=$('#toast');x.textContent=t;x.classList.add('on');clearTimeout(toast._t);toast._t=setTimeout(function(){x.classList.remove('on')},1600)}
+function selectNode(n){try{var r=document.createRange();r.selectNodeContents(n);var s=window.getSelection();s.removeAllRanges();s.addRange(r)}catch(e){}}
+function copyText(text,node,msg){
+ var ok=function(){$('#fallbackNote').hidden=true;toast(msg||'Copiado')};
+ var fail=function(){if(node){selectNode(node);$('#fallbackNote').hidden=false}toast('Selecciona y copia manualmente')};
+ try{
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(text).then(ok,function(){legacy()})}else legacy();
+ }catch(e){legacy()}
+ function legacy(){
+  try{var ta=document.createElement('textarea');ta.value=text;ta.style.cssText='position:fixed;opacity:0;top:0;left:0';document.body.appendChild(ta);ta.select();var r=document.execCommand('copy');document.body.removeChild(ta);r?ok():fail()}catch(e){fail()}
+ }
+}
+$('#copyRep').addEventListener('click',function(){copyText($('#repTxt').textContent,$('#repTxt'),'Informe copiado')});
+$('#copyTele').addEventListener('click',function(){copyText($('#teleTxt').textContent,$('#teleTxt'),'Resumen copiado')});
+$$('[data-copy]').forEach(function(b){b.addEventListener('click',function(){copyText(b.dataset.copy,null,'Número copiado')})});
+$$('[data-now]').forEach(function(b){b.addEventListener('click',function(){var k=b.dataset.now;S[k]=toLocal(new Date());$('#'+k).value=S[k];update()})});
+$('#aspNormal').addEventListener('click',function(){S.asp={};S.aspDone=true;sync();update()});
+$('#nihZero').addEventListener('click',function(){S.nihss={};S.nihssTouched=true;sync();update()});
+
+var clr=$('#clearAll'),clrT=null;
+clr.addEventListener('click',function(){
+ if(clr.dataset.arm==='1'){clearTimeout(clrT);clr.dataset.arm='0';clr.textContent='Limpiar caso';S=fresh();sync();update();toast('Caso limpiado');return}
+ clr.dataset.arm='1';clr.textContent='Pulsa de nuevo para borrar todo';clrT=setTimeout(function(){clr.dataset.arm='0';clr.textContent='Limpiar caso'},4000);
+});
+$('#loadEx').addEventListener('click',function(){
+ var n=new Date();
+ S=fresh();
+ S.pid='EJEMPLO';S.age='68';S.weight='78';S.circ='ant';
+ S.lastSeen=toLocal(new Date(n-190*6e4));S.arrival=toLocal(new Date(n-45*6e4));
+ S.mrs='1';S.cinc={face:true,arm:true,speech:true};
+ S.raceSide='R';S.race={face:1,arm:2,leg:1,gaze:1,cog:1};S.raceTouched=true;
+ S.nihss={n2:1,n4:2,n5:3,n7:2,n11:2,n12:1};S.nihssTouched=true;
+ S.asp={M2:true};S.aspDone=true;
+ S.sbp='162';S.dbp='88';S.glu='126';S.sat='96';S.temp='36.6';S.plt='214';S.anticoag='no';
+ S.angio='lvo';S.ves={M1:true};S.mismatch='gt20';
+ sync();update();showTab('caso');toast('Caso de ejemplo cargado');
+});
+
+function showTab(t){
+ $$('.panel').forEach(function(p){p.hidden=(p.id!=='p-'+t)});
+ $$('.tabs button').forEach(function(b){b.setAttribute('aria-selected',b.dataset.tab===t?'true':'false')});
+ try{window.scrollTo({top:0})}catch(e){}
+}
+$$('.tabs button').forEach(function(b){b.addEventListener('click',function(){showTab(b.dataset.tab)})});
+
+build();sync();update();
+var h=(location.hash||'').replace('#','');
+if(['caso','escalas','fibrinolisis','trombectomia','medidas','informe'].indexOf(h)>-1)showTab(h);
+setInterval(function(){if(S.lastSeen||S.bedtime)update()},30000);
+window.__ictus={S:function(){return S},set:function(f){f(S);sync();return update()},compute:compute,decide:decide,fresh:function(){S=fresh();sync();return update()}};
+})();
+</script>
+
+
+<!-- Barra común del Portal SUH Antequera -->
+<style>
+  .suhdock{position:fixed;left:14px;bottom:14px;z-index:2147483000;display:flex;align-items:center;gap:4px;padding:5px;border-radius:999px;background:#0c2a4a;box-shadow:0 10px 30px -8px rgba(12,42,74,.55);font:600 13px/1 'Plus Jakarta Sans',system-ui,-apple-system,'Segoe UI',sans-serif;transition:opacity .2s}
+  .suhdock a{display:inline-flex;align-items:center;justify-content:center;gap:7px;height:34px;min-width:34px;padding:0 9px;border-radius:999px;color:#fff;text-decoration:none}
+  .suhdock a:hover{background:rgba(255,255,255,.14)}
+  .suhdock a.suhdock-home{background:#fff;color:#0c2a4a;padding:0 12px 0 4px}
+  .suhdock a.suhdock-home img{width:26px;height:26px;border-radius:50%;object-fit:contain;background:#fff}
+  .suhdock svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  .suhdock .suhdock-x{opacity:.6;min-width:26px;padding:0}
+  .suhdock.suhdock-min a:not(.suhdock-home){display:none}
+  .suhdock.suhdock-min a.suhdock-home span{display:none}
+  .suhdock.suhdock-min a.suhdock-home{padding:0 4px}
+  @media print{.suhdock{display:none!important}}
+</style>
+<nav class="suhdock" aria-label="Portal SUH Antequera">
+  <a class="suhdock-home" href="../index.html#herramientas" title="Volver al Portal de Supervisión SUH Antequera"><img src="../img/logo-suh.jpg" alt=""><span>Portal SUH</span></a>
+  <a href="https://www.instagram.com/suh_antequera_/" target="_blank" rel="noopener" title="Instagram @suh_antequera_"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><path d="M17.5 6.5h.01"/></svg></a>
+  <a href="https://www.facebook.com/p/Suh-Antequera-61568582212569/" target="_blank" rel="noopener" title="Facebook SUH Antequera"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+  <a href="https://x.com/saludnortemalag" target="_blank" rel="noopener" title="X @saludnortemalag" style="font-size:15px">𝕏</a>
+  <a class="suhdock-x" href="#" title="Minimizar barra" onclick="this.parentNode.classList.toggle('suhdock-min');return false;"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></a>
+</nav>
+</body></html>

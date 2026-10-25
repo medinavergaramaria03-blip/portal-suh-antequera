@@ -1,0 +1,671 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta name="robots" content="noindex, nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Educación para la salud · Urgencias Antequera</title>
+<style>
+:root{
+  --bg:#f4f7f6; --card:#fff; --ink:#17302d; --muted:#5a6e6b; --line:#d9e2e0;
+  --brand:#0f5e57; --brand-2:#0b4742; --brand-soft:#e3f1ee; --warn:#a4310f; --warn-soft:#fdeee8; --ok:#1b7a43;
+  --radius:12px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+h1,h2,h3,p{margin:0}
+button,input,select,textarea{font:inherit;color:inherit}
+.topbar{background:var(--brand);color:#fff;padding:14px 20px}
+.topbar .in{max-width:1300px;margin:0 auto;display:flex;flex-wrap:wrap;gap:10px 24px;align-items:center;justify-content:space-between}
+.topbar h1{font-size:1.15rem;font-weight:650;letter-spacing:.2px}
+.topbar small{opacity:.85;display:block;font-weight:400;font-size:.82rem}
+.topbar .btn-ghost{border:1px solid rgba(255,255,255,.5);background:transparent;color:#fff;padding:6px 12px;border-radius:8px;cursor:pointer}
+.topbar .btn-ghost:hover{background:rgba(255,255,255,.12)}
+.notice{max-width:1300px;margin:14px auto 0;padding:10px 14px;background:var(--warn-soft);border:1px solid #f1c3b3;border-radius:var(--radius);color:#6b2410;font-size:.9rem}
+.layout{max-width:1300px;margin:14px auto 90px;padding:0 16px;display:grid;grid-template-columns:minmax(320px,430px) 1fr;gap:16px;align-items:start}
+@media (max-width:900px){.layout{grid-template-columns:1fr}}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px}
+.panel h2{font-size:1rem;margin-bottom:10px;color:var(--brand-2)}
+.step{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;background:var(--brand);color:#fff;font-size:.78rem;margin-right:6px}
+.search{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:#fbfdfc}
+.search:focus,.fld input:focus,textarea:focus{outline:2px solid var(--brand);outline-offset:1px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}
+.chip{border:1px solid var(--line);background:#fff;border-radius:999px;padding:4px 11px;font-size:.84rem;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--brand);border-color:var(--brand);color:#fff}
+.list{display:flex;flex-direction:column;gap:6px;max-height:420px;overflow:auto;padding-right:2px}
+.item{display:flex;gap:10px;align-items:flex-start;padding:9px 10px;border:1px solid var(--line);border-radius:10px;cursor:pointer;background:#fff}
+.item:hover{border-color:var(--brand)}
+.item.sel{background:var(--brand-soft);border-color:var(--brand)}
+.item input{margin-top:4px;accent-color:var(--brand);width:17px;height:17px}
+.item b{display:block;font-size:.95rem}
+.item span{font-size:.8rem;color:var(--muted)}
+.opts{display:grid;gap:6px}
+.opt{display:flex;gap:8px;align-items:center;font-size:.92rem}
+.opt input{accent-color:var(--brand);width:17px;height:17px}
+.opt.locked{color:var(--muted)}
+.sub{font-size:.8rem;color:var(--muted);margin:10px 0 6px;text-transform:uppercase;letter-spacing:.5px}
+.fld{display:grid;gap:4px;margin-bottom:8px;font-size:.85rem;color:var(--muted)}
+.fld input,textarea{width:100%;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:#fbfdfc;color:var(--ink)}
+textarea{min-height:84px;resize:vertical}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.preview-head{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;align-items:center;margin-bottom:12px}
+.tabs{display:flex;gap:4px;background:var(--bg);padding:4px;border-radius:10px}
+.tab{border:0;background:transparent;padding:7px 14px;border-radius:8px;cursor:pointer;font-weight:550;color:var(--muted)}
+.tab[aria-selected="true"]{background:#fff;color:var(--brand-2);box-shadow:0 1px 3px rgba(0,0,0,.12)}
+.actions{display:flex;flex-wrap:wrap;gap:8px}
+.btn{border:1px solid var(--brand);background:var(--brand);color:#fff;padding:9px 15px;border-radius:10px;cursor:pointer;font-weight:600}
+.btn:hover{background:var(--brand-2)}
+.btn.sec{background:#fff;color:var(--brand-2)}
+.btn.sec:hover{background:var(--brand-soft)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.empty{padding:40px 16px;text-align:center;color:var(--muted);border:2px dashed var(--line);border-radius:var(--radius)}
+#textview{display:none}
+#textview textarea{min-height:520px;font:14px/1.5 ui-monospace,Menlo,Consolas,monospace;white-space:pre-wrap}
+/* Hoja */
+.paper{background:#fff;border:1px solid var(--line);border-radius:6px;padding:26px 30px;box-shadow:0 2px 8px rgba(0,0,0,.05);font-size:14px;line-height:1.45}
+.paper.big{font-size:17px}
+.sh-head{display:flex;justify-content:space-between;gap:16px;align-items:flex-end;border-bottom:3px solid var(--brand);padding-bottom:10px;margin-bottom:12px}
+.sh-service{font-size:1.15em;font-weight:700;color:var(--brand-2);text-transform:uppercase;letter-spacing:.4px}
+.sh-center{color:var(--muted);font-size:.92em}
+.sh-title{font-size:1.05em;font-weight:650;text-align:right}
+.sh-fields{display:grid;grid-template-columns:repeat(4,1fr);gap:8px 14px;margin-bottom:14px;font-size:.88em}
+.sh-fields div{border-bottom:1px solid #9bb0ac;padding-bottom:2px;min-height:1.9em}
+.sh-fields small{display:block;color:var(--muted);font-size:.78em;text-transform:uppercase;letter-spacing:.4px}
+.sh-sec{margin-bottom:14px;break-inside:avoid-page}
+.sh-sec>h2{background:var(--brand-soft);color:var(--brand-2);padding:5px 10px;border-left:5px solid var(--brand);font-size:1.12em;margin-bottom:8px}
+.blk{margin:0 0 8px}
+.blk h3{font-size:.95em;color:var(--brand-2);margin-bottom:2px}
+.blk ul{margin:2px 0 0;padding-left:20px}
+.blk li{margin:1px 0}
+.blk.alarm{border:1.5px solid var(--warn);background:var(--warn-soft);border-radius:6px;padding:7px 10px;break-inside:avoid}
+.blk.alarm h3{color:var(--warn)}
+.sh-extra{border:1px dashed #9bb0ac;border-radius:6px;padding:8px 10px;margin-bottom:12px;white-space:pre-wrap}
+.sh-urg{display:flex;gap:14px;flex-wrap:wrap;border:2px solid var(--warn);color:var(--warn);border-radius:6px;padding:8px 12px;font-weight:650;margin:10px 0;break-inside:avoid}
+.sh-foot{border-top:1px solid var(--line);padding-top:7px;color:var(--muted);font-size:.8em}
+.draft{display:inline-block;margin-top:4px;border:1px solid var(--warn);color:var(--warn);padding:1px 7px;border-radius:4px;font-size:.95em}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(20px);background:#17302d;color:#fff;padding:10px 18px;border-radius:10px;opacity:0;pointer-events:none;transition:.25s;z-index:20}
+.toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
+dialog{border:0;border-radius:var(--radius);padding:20px;max-width:480px;width:calc(100% - 32px);box-shadow:0 10px 40px rgba(0,0,0,.3)}
+dialog::backdrop{background:rgba(0,0,0,.4)}
+.mbar{display:none}
+@media (max-width:900px){
+  .mbar{display:flex;position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid var(--line);padding:8px 12px;gap:8px;z-index:10}
+  .mbar .btn{flex:1;padding:10px 6px}
+  .sh-fields{grid-template-columns:1fr 1fr}
+  .paper{padding:16px}
+}
+@media print{
+  @page{size:A4;margin:14mm 14mm 16mm}
+  body{background:#fff}
+  .topbar,.notice,.panel,.preview-head,.mbar,.toast,#textview,dialog,.layout>.panel{display:none!important}
+  .layout{display:block;margin:0;padding:0;max-width:none}
+  #previewPanel{display:block!important;border:0;padding:0;background:#fff}
+  #previewPanel .preview-head{display:none!important}
+  #sheetWrap{display:block!important}
+  .paper{border:0;box-shadow:0 0 0;padding:0;font-size:11.5pt}
+  .paper.big{font-size:14pt}
+  .sh-sec>h2,.blk.alarm,.sh-urg,.sh-head{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="in">
+    <h1 id="appTitle">Educación, prevención y promoción de la salud
+      <small id="appSub">Servicio de Urgencias · Hospital de Antequera</small></h1>
+    <button class="btn-ghost" id="btnCfg" type="button">⚙ Configurar cabecera</button>
+  </div>
+</header>
+
+<div class="notice"><b>Contenido orientativo en borrador.</b> Las fichas son mensajes generales de educación sanitaria, no una pauta clínica individual. Requieren revisión clínica y validación por la unidad antes de su uso asistencial. No se incluyen dosis de medicamentos: la pauta debe ser siempre la del informe de alta.</div>
+
+<main class="layout">
+  <section class="panel" aria-label="Selección">
+    <h2><span class="step">1</span>Motivo de consulta</h2>
+    <input class="search" id="q" type="search" placeholder="Buscar patología (p. ej. lumbalgia, fiebre, herida…)" aria-label="Buscar patología">
+    <div class="chips" id="chips" role="group" aria-label="Filtrar por área"></div>
+    <div class="list" id="list"></div>
+    <p class="sub" id="selCount">Ninguna seleccionada</p>
+
+    <h2 style="margin-top:16px"><span class="step">2</span>Apartados a incluir</h2>
+    <div class="opts" id="sections"></div>
+
+    <h2 style="margin-top:16px"><span class="step">3</span>Promoción y prevención</h2>
+    <div class="opts" id="modules"></div>
+
+    <h2 style="margin-top:16px"><span class="step">4</span>Datos de la hoja</h2>
+    <div class="row2">
+      <label class="fld">Paciente (opcional)<input id="fPac" autocomplete="off"></label>
+      <label class="fld">NHC (opcional)<input id="fNhc" autocomplete="off"></label>
+      <label class="fld">Fecha<input id="fFecha" type="date"></label>
+      <label class="fld">Profesional<input id="fProf" autocomplete="off"></label>
+    </div>
+    <label class="fld">Indicaciones individualizadas (se añaden al final)
+      <textarea id="fExtra" placeholder="Ej.: Control de tensión arterial en su centro de salud en una semana…"></textarea></label>
+    <label class="opt"><input type="checkbox" id="optBig"> Letra grande en la hoja impresa</label>
+    <p class="sub" style="text-transform:none;letter-spacing:0;margin-top:8px">Los datos del paciente no se guardan: se borran al cerrar o recargar la página.</p>
+    <button class="btn sec" id="btnClear" type="button" style="margin-top:10px;width:100%">Limpiar selección</button>
+  </section>
+
+  <section class="panel" id="previewPanel" aria-label="Vista previa">
+    <div class="preview-head">
+      <div class="tabs" role="tablist">
+        <button class="tab" role="tab" id="tabSheet" aria-selected="true" type="button">Hoja imprimible</button>
+        <button class="tab" role="tab" id="tabText" aria-selected="false" type="button">Texto para historia</button>
+      </div>
+      <div class="actions">
+        <button class="btn" id="btnCopy" type="button" disabled>Copiar para historia clínica</button>
+        <button class="btn sec" id="btnPrint" type="button" disabled>Imprimir / PDF</button>
+        <button class="btn sec" id="btnTxt" type="button" disabled>Descargar .txt</button>
+      </div>
+    </div>
+    <div id="sheetWrap"></div>
+    <div id="textview"><textarea id="textOut" readonly aria-label="Texto plano para la historia clínica"></textarea></div>
+  </section>
+</main>
+
+<div class="mbar">
+  <button class="btn" id="mCopy" type="button" disabled>Copiar</button>
+  <button class="btn sec" id="mPrint" type="button" disabled>Imprimir</button>
+</div>
+
+<dialog id="dlg">
+  <h2 style="margin-bottom:10px">Cabecera de la hoja</h2>
+  <label class="fld">Servicio<input id="cService"></label>
+  <label class="fld">Centro<input id="cCenter"></label>
+  <label class="fld">Pie de la hoja (teléfono de contacto, etc.)<input id="cFoot" placeholder="Ej.: Teléfono de información del hospital…"></label>
+  <label class="opt"><input type="checkbox" id="cDraft"> Mostrar «Borrador pendiente de validación» en la impresión</label>
+  <div class="actions" style="margin-top:14px;justify-content:flex-end">
+    <button class="btn sec" id="cCancel" type="button">Cancelar</button>
+    <button class="btn" id="cSave" type="button">Guardar</button>
+  </div>
+</dialog>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+"use strict";
+/* ================= CONTENIDOS ================= */
+var SECTIONS = [
+  {k:"resumen", t:"Qué le ha ocurrido", on:true},
+  {k:"cuidados", t:"Cuidados en casa", on:true},
+  {k:"medicacion", t:"Medicación", on:true},
+  {k:"alimentacion", t:"Alimentación y actividad", on:true},
+  {k:"alarma", t:"Signos de alarma: vuelva a Urgencias", on:true, locked:true},
+  {k:"seguimiento", t:"Seguimiento", on:true},
+  {k:"prevencion", t:"Prevención específica", on:true}
+];
+
+var MED_BASE = "Tome solo los medicamentos indicados en su informe, con la pauta y duración que figuran en él.";
+
+var DATA = [
+{id:"abdominal", n:"Dolor abdominal", cat:"Digestivo",
+ resumen:"Ha consultado por dolor de abdomen. Tras la valoración no se ha encontrado una causa que exija ingreso o cirugía urgente, pero el dolor puede cambiar en las horas o días siguientes, por lo que es importante vigilarlo.",
+ cuidados:["Descanse y observe cómo evoluciona el dolor: intensidad, lugar, vómitos, fiebre y deposiciones.","No tome laxantes ni otros medicamentos por su cuenta.","Mantenga a mano su informe de alta por si necesita volver."],
+ medicacion:[MED_BASE,"Evite antiinflamatorios (por ejemplo, ibuprofeno) salvo que se los hayan indicado, sobre todo si tiene molestias de estómago, enfermedad del riñón o del corazón."],
+ alimentacion:["Empiece con líquidos a pequeños sorbos y siga con dieta blanda (arroz, pollo o pescado a la plancha, fruta cocida) según la tolere.","Evite alcohol, grasas y comidas copiosas hasta encontrarse bien."],
+ alarma:["El dolor aumenta, se hace constante o se localiza en un punto concreto.","Vómitos repetidos o no tolera líquidos.","Fiebre, abdomen duro o muy distendido.","Sangre en el vómito o en las heces, o heces negras.","Mareo, desmayo, palidez o sudoración intensa.","No puede orinar o no expulsa gases ni heces."],
+ seguimiento:["Si los síntomas persisten o no mejoran en los días siguientes, consulte con su médico de Atención Primaria.","Si le han pedido pruebas o una revisión, acuda a la cita indicada."],
+ prevencion:["Coma de forma regular y tranquila, mastique despacio y limite el alcohol."]},
+
+{id:"gastro", n:"Gastroenteritis aguda (vómitos y diarrea)", cat:"Digestivo",
+ resumen:"Presenta una infección intestinal que causa vómitos y/o diarrea. Suele ser autolimitada y mejora en pocos días con hidratación y dieta adecuada.",
+ cuidados:["Reponga líquidos poco a poco y con frecuencia: agua, caldos o suero de rehidratación oral.","Lávese las manos con agua y jabón tras ir al baño y antes de cocinar o comer.","Evite compartir toallas y cubiertos; limpie con lejía diluida las superficies del baño.","Evite acudir al trabajo o a reuniones mientras tenga diarrea."],
+ medicacion:[MED_BASE,"No tome antibióticos ni antidiarreicos por su cuenta."],
+ alimentacion:["Reintroduzca la comida de forma progresiva: arroz, patata, zanahoria cocida, pollo o pescado a la plancha, plátano, manzana.","Evite durante unos días lácteos, grasas, picantes, café y alcohol.","Los refrescos y zumos comerciales no sustituyen al suero de rehidratación."],
+ alarma:["No tolera líquidos o los vómitos no cesan.","Orina muy poco o muy oscura, sed intensa, boca seca, mareo al levantarse.","Sangre o moco en las heces, o heces negras.","Fiebre alta o dolor abdominal intenso y mantenido.","Diarrea que dura más de varios días, o si toma anticoagulantes, diuréticos o insulina y se encuentra peor."],
+ seguimiento:["Si no mejora en 2-3 días, consulte con su médico de Atención Primaria."],
+ prevencion:["Lavado de manos frecuente, correcta conservación de alimentos y cocinado completo de carnes, huevos y pescados."]},
+
+{id:"hta", n:"Tensión arterial elevada", cat:"Cardio-respiratorio",
+ resumen:"Se han registrado cifras de tensión arterial elevadas. En la valoración no se han detectado signos de daño urgente, pero necesita control y seguimiento en su centro de salud.",
+ cuidados:["Mida su tensión en reposo, sentado, tras unos minutos tranquilo, y anote las cifras para enseñarlas a su médico.","Evite el estrés, el tabaco y el café en exceso.","No se automedique para bajar la tensión."],
+ medicacion:[MED_BASE,"No suspenda ni cambie su tratamiento habitual sin hablar con su médico."],
+ alimentacion:["Reduzca la sal y los alimentos procesados, embutidos y precocinados.","Aumente verduras, frutas, legumbres y pescado; limite el alcohol.","Mantenga actividad física regular adaptada a su situación."],
+ alarma:["Dolor o presión en el pecho.","Falta de aire.","Dolor de cabeza intenso y repentino, alteración de la visión o confusión.","Debilidad, pérdida de fuerza o sensibilidad en la cara o extremidades, o dificultad para hablar.","Desmayo o mareo intenso."],
+ seguimiento:["Pida cita con su médico de Atención Primaria para revisar la tensión y su tratamiento."],
+ prevencion:["Peso saludable, no fumar, ejercicio regular y controles periódicos de tensión, colesterol y glucemia."]},
+
+{id:"dolortor", n:"Dolor torácico de causa no urgente", cat:"Cardio-respiratorio",
+ resumen:"Ha consultado por dolor en el pecho. Tras las pruebas y la valoración realizadas, no se ha encontrado una causa urgente que requiera ingreso, pero puede reaparecer y debe saber cuándo volver.",
+ cuidados:["Descanse y evite esfuerzos intensos hasta que se lo autorice su médico.","No fume y evite el alcohol.","Si el dolor se relaciona con movimientos o con la respiración, vigile si cambia."],
+ medicacion:[MED_BASE],
+ alimentacion:["Comidas ligeras y regulares; evite los excesos y el café en abundancia."],
+ alarma:["Dolor u opresión en el pecho que aparece con el esfuerzo, dura más de unos minutos o no cede con el reposo.","Dolor que se extiende al brazo, mandíbula, cuello o espalda.","Falta de aire, sudoración fría, náuseas o mareo.","Palpitaciones intensas o desmayo.","Si ocurre, llame al 112 y no conduzca usted mismo."],
+ seguimiento:["Acuda a la revisión que le hayan indicado y consulte con su médico de Atención Primaria."],
+ prevencion:["Controle tensión, colesterol y glucemia; no fume; mantenga actividad física regular y peso saludable."]},
+
+{id:"asma", n:"Crisis de asma / EPOC reagudizada", cat:"Cardio-respiratorio",
+ resumen:"Ha tenido una crisis respiratoria por asma o enfermedad pulmonar crónica. Ha mejorado con el tratamiento, pero puede reaparecer si no se controlan los desencadenantes y el tratamiento de mantenimiento.",
+ cuidados:["Evite el humo del tabaco, el polvo, los ambientes cargados y los desencadenantes que conozca.","Revise con su equipo de salud la técnica de uso de sus inhaladores.","Descanse y manténgase hidratado."],
+ medicacion:[MED_BASE,"Use los inhaladores de mantenimiento y de rescate como se le haya indicado; lleve siempre el de rescate consigo.","No suspenda el tratamiento de mantenimiento aunque se encuentre bien."],
+ alimentacion:["Alimentación variada y mantenerse activo según tolerancia."],
+ alarma:["Falta de aire que no mejora con su inhalador de rescate.","Dificultad para hablar frases completas o respiración muy rápida.","Labios o uñas azulados.","Fiebre alta o esputo con sangre o muy purulento.","Cansancio extremo o confusión."],
+ seguimiento:["Revisión con su médico de Atención Primaria o neumología en el plazo indicado en su informe."],
+ prevencion:["No fumar y evitar el humo ajeno; vacunación de gripe y neumococo según indicación; plan de acción por escrito."]},
+
+{id:"fiebre", n:"Fiebre en adultos", cat:"Infecciosas",
+ resumen:"La fiebre es una respuesta del cuerpo a una infección, frecuentemente vírica. Tras la valoración no se ha encontrado una causa que requiera ingreso.",
+ cuidados:["Beba abundantes líquidos y descanse.","Vista ropa ligera y mantenga la habitación ventilada; no se abrigue en exceso.","Controle la temperatura una o dos veces al día y anótela.","Evite el contacto con personas vulnerables mientras tenga fiebre."],
+ medicacion:[MED_BASE,"Los antitérmicos tratan la molestia, no la causa: utilícelos solo con la pauta indicada.","No tome antibióticos sin que se los hayan recetado."],
+ alimentacion:["Comidas ligeras; priorice la hidratación."],
+ alarma:["Fiebre que persiste más de 3 días o reaparece tras mejorar.","Rigidez de cuello, dolor de cabeza intenso o manchas rojo-moradas en la piel que no desaparecen al presionar.","Falta de aire, dolor torácico o tos con sangre.","Confusión, somnolencia excesiva o convulsión.","Orina escasa, vómitos continuos o dolor abdominal intenso.","Si tiene defensas bajas, está embarazada o se encuentra en tratamiento oncológico, consulte siempre."],
+ seguimiento:["Si no mejora, consulte con su médico de Atención Primaria."],
+ prevencion:["Lavado de manos, vacunas al día según su calendario y evitar el contacto cercano con personas enfermas."]},
+
+{id:"respiratoria", n:"Catarro, gripe o infección respiratoria", cat:"Infecciosas",
+ resumen:"Tiene una infección de las vías respiratorias, generalmente causada por virus. Mejora con cuidados en casa y los antibióticos no suelen ser necesarios.",
+ cuidados:["Descanse y beba abundantes líquidos.","Lávese las manos con frecuencia y ventile los espacios.","Al toser o estornudar, cúbrase con el codo y use pañuelos desechables.","Use mascarilla si convive con personas vulnerables y evite visitar a mayores o enfermos mientras tenga síntomas."],
+ medicacion:[MED_BASE,"Los antibióticos no sirven para los virus: solo se toman si se los ha recetado su médico.","Evite descongestionantes o jarabes si tiene tensión alta o problemas de corazón, salvo indicación médica."],
+ alimentacion:["Comidas ligeras, caldos y líquidos calientes pueden aliviar la garganta."],
+ alarma:["Falta de aire, respiración muy rápida o silbidos intensos.","Dolor en el pecho al respirar.","Fiebre alta más de 3 días o empeoramiento tras unos días de mejoría.","Labios azulados, confusión o somnolencia.","Esputo con sangre."],
+ seguimiento:["La tos puede durar algunas semanas; si no mejora o empeora, consulte con su médico."],
+ prevencion:["Vacunación anual de gripe y COVID-19 según indicación; no fumar; lavado de manos."]},
+
+{id:"faringitis", n:"Dolor de garganta (faringoamigdalitis)", cat:"Infecciosas",
+ resumen:"Presenta inflamación de la garganta, que en la mayoría de casos es de causa vírica y mejora sola en unos días.",
+ cuidados:["Beba líquidos tibios y descanse la voz.","Haga gárgaras con agua tibia y sal.","Evite el tabaco y los ambientes secos o con humo."],
+ medicacion:[MED_BASE,"Si le han recetado antibiótico, complete la pauta indicada aunque se encuentre mejor."],
+ alimentacion:["Alimentos blandos y templados; evite los muy ácidos, picantes o calientes."],
+ alarma:["Dificultad para tragar saliva, para respirar o para abrir la boca.","Babeo, voz apagada o hinchazón del cuello.","Fiebre alta que no cede.","Erupción en la piel."],
+ seguimiento:["Si no mejora en pocos días, consulte con su médico de Atención Primaria."],
+ prevencion:["Evite compartir vasos y cubiertos; lavado de manos."]},
+
+{id:"itu", n:"Infección urinaria (cistitis)", cat:"Genitourinario",
+ resumen:"Tiene una infección de las vías urinarias bajas, que produce molestias al orinar, aumento de la frecuencia y urgencia.",
+ cuidados:["Beba líquidos con regularidad y orine con frecuencia, sin aguantarse.","Mantenga una buena higiene genital; limpie de delante hacia atrás.","Orine tras las relaciones sexuales."],
+ medicacion:[MED_BASE,"Complete el antibiótico exactamente como se le ha indicado, aunque desaparezcan los síntomas."],
+ alimentacion:["Mantenga una buena hidratación; evite el exceso de café y alcohol."],
+ alarma:["Fiebre, escalofríos o dolor en el costado o la espalda.","Vómitos que impiden tomar la medicación.","Sangre en la orina o imposibilidad para orinar.","Los síntomas no mejoran tras 2-3 días de tratamiento.","Si está embarazada, es diabética o tiene un sondaje, consulte siempre."],
+ seguimiento:["Consulte con su médico de Atención Primaria si los síntomas reaparecen con frecuencia."],
+ prevencion:["Buena hidratación, higiene adecuada y evitar retener la orina."]},
+
+{id:"colico", n:"Cólico renoureteral (piedras en el riñón)", cat:"Genitourinario",
+ resumen:"Ha tenido un dolor típico de cálculo en las vías urinarias. Muchos cálculos se eliminan solos con la orina en los días siguientes.",
+ cuidados:["Beba líquidos con regularidad según le haya indicado su médico.","Cuele la orina si se lo han indicado, para recoger el cálculo y llevarlo a la consulta.","Puede aplicar calor local si le alivia."],
+ medicacion:[MED_BASE,"Tome el tratamiento del dolor solo con la pauta indicada.","Evite antiinflamatorios si tiene enfermedad del riñón, de estómago o toma anticoagulantes, salvo indicación médica."],
+ alimentacion:["Reduzca la sal y modere las proteínas animales; mantenga una dieta equilibrada."],
+ alarma:["Fiebre o escalofríos.","Dolor intenso que no cede con el tratamiento pautado.","Vómitos que impiden tomar la medicación.","No orina o sale muy poca orina.","Sangre abundante en la orina."],
+ seguimiento:["Acuda a la revisión en urología o con su médico de Atención Primaria según su informe."],
+ prevencion:["Buena hidratación diaria y alimentación pobre en sal ayudan a prevenir nuevos cálculos."]},
+
+{id:"lumbalgia", n:"Lumbalgia (dolor de espalda)", cat:"Traumatología",
+ resumen:"Presenta dolor en la zona lumbar de origen muscular o mecánico, sin signos de gravedad en la valoración. Suele mejorar en pocos días o semanas.",
+ cuidados:["Manténgase activo con movimientos suaves: el reposo prolongado en cama retrasa la recuperación.","Aplique calor local suave si le alivia.","Evite levantar pesos, giros bruscos y estar mucho tiempo sentado sin moverse.","Duerma en una postura cómoda sobre un colchón firme."],
+ medicacion:[MED_BASE,"Evite antiinflamatorios si tiene molestias de estómago o enfermedad del riñón o del corazón, salvo indicación médica."],
+ alimentacion:["Vuelva de forma gradual a sus actividades habituales y al ejercicio suave, como caminar."],
+ alarma:["Pérdida de fuerza en las piernas o dificultad para caminar.","Adormecimiento en la zona genital o entre las piernas.","Pérdida de control de la orina o de las heces, o imposibilidad para orinar.","Fiebre con dolor de espalda.","Dolor intenso nocturno que no mejora o antecedente de cáncer."],
+ seguimiento:["Si no mejora tras unas semanas, consulte con su médico de Atención Primaria."],
+ prevencion:["Ejercicio regular de fortalecimiento de la espalda y abdomen, buena postura, peso saludable y evitar el sedentarismo."]},
+
+{id:"esguince", n:"Esguince o contusión", cat:"Traumatología",
+ resumen:"Presenta una lesión de partes blandas (ligamentos o músculos) sin fractura en la valoración realizada. Mejora con cuidados y recuperación progresiva.",
+ cuidados:["Reposo relativo de la zona las primeras 48 horas.","Frío local envuelto en un paño, durante periodos cortos y varias veces al día.","Compresión suave con vendaje, sin apretar en exceso.","Mantenga la zona elevada por encima del nivel del corazón cuando esté en reposo.","Use las muletas o el vendaje solo si se lo han indicado."],
+ medicacion:[MED_BASE],
+ alimentacion:["Comience a mover la zona de forma suave cuando el dolor lo permita y retome el ejercicio de forma progresiva."],
+ alarma:["Hinchazón, dolor o color morado que aumentan.","Hormigueo, frialdad, color pálido o azulado en los dedos.","No puede apoyar o mover la zona.","Dolor intenso e inesperado en la pantorrilla."],
+ seguimiento:["Si persiste el dolor tras unos días, consulte con su médico de Atención Primaria."],
+ prevencion:["Calzado adecuado, calentamiento previo al deporte y fortalecimiento de la musculatura."]},
+
+{id:"fractura", n:"Fractura con férula o yeso", cat:"Traumatología",
+ resumen:"Presenta una fractura o lesión que requiere inmovilización. Es importante el cuidado de la férula o yeso y asistir al control en traumatología.",
+ cuidados:["Mantenga el yeso o la férula seco: protéjalo con una bolsa al ducharse.","Mantenga elevada la extremidad en reposo y mueva los dedos con frecuencia.","No introduzca objetos bajo el yeso para rascar ni lo retire o recorte por su cuenta.","No apoye el miembro si no se lo han permitido."],
+ medicacion:[MED_BASE],
+ alimentacion:["Mantenga una alimentación equilibrada con calcio y vitamina D; no fume."],
+ alarma:["Dolor intenso que no cede con el tratamiento.","Dedos hinchados, fríos, pálidos, azulados o con hormigueo o pérdida de sensibilidad.","Mal olor o secreción por el yeso.","El yeso se moja, se rompe o se aprieta mucho."],
+ seguimiento:["Acuda a la consulta de traumatología en la fecha indicada en su informe."],
+ prevencion:["Prevención de caídas, ejercicio y consumo adecuado de calcio y vitamina D."]},
+
+{id:"tce", n:"Traumatismo craneoencefálico leve", cat:"Neurológico",
+ resumen:"Ha sufrido un golpe en la cabeza. Tras la valoración y las pruebas realizadas, no se han detectado signos de gravedad, pero pueden aparecer síntomas en las horas siguientes.",
+ cuidados:["Durante las primeras 24 horas debe estar acompañado por una persona adulta que pueda vigilarle.","Descanse y no realice esfuerzos físicos ni deportes hasta que se lo autorice su médico.","Puede aplicar frío local sobre el chichón.","Evite el alcohol y los sedativos en ese periodo.","No es necesario mantenerse despierto: puede dormir, pero el acompañante debe poder despertarle."],
+ medicacion:[MED_BASE,"Si toma anticoagulantes o antiagregantes, siga las indicaciones específicas de su informe."],
+ alimentacion:["Dieta ligera las primeras horas."],
+ alarma:["Vómitos repetidos o dolor de cabeza intenso que va a más.","Somnolencia excesiva o dificultad para despertarle.","Confusión, comportamiento extraño o pérdida de memoria.","Convulsiones.","Debilidad, torpeza, dificultad para hablar o ver doble, pupilas distintas.","Salida de sangre o líquido claro por oído o nariz."],
+ seguimiento:["Si persisten los dolores de cabeza, mareos o alteraciones de la concentración tras varios días, consulte con su médico."],
+ prevencion:["Use casco en moto, bicicleta y patinete; cinturón de seguridad; prevención de caídas en el hogar."]},
+
+{id:"cefalea", n:"Cefalea (dolor de cabeza)", cat:"Neurológico",
+ resumen:"Ha consultado por dolor de cabeza. Tras la valoración no se han detectado signos de gravedad. Estos dolores son frecuentes y se pueden controlar con hábitos adecuados.",
+ cuidados:["Descanse en un lugar tranquilo, oscuro y con poco ruido.","Aplique frío o calor local, según le alivie.","Anote cuándo aparece el dolor y qué lo desencadena para comentarlo con su médico."],
+ medicacion:[MED_BASE,"Evite el uso continuado de analgésicos: puede empeorar la cefalea."],
+ alimentacion:["Mantenga horarios regulares de comidas y sueño; hidrátese bien; limite el café y el alcohol."],
+ alarma:["Dolor muy intenso de inicio brusco, «el peor de su vida».","Fiebre con rigidez de cuello.","Debilidad, alteración del habla o de la visión, o confusión.","Convulsión o pérdida de conciencia.","Dolor tras un golpe en la cabeza o que empeora progresivamente."],
+ seguimiento:["Consulte con su médico de Atención Primaria si el dolor se repite con frecuencia."],
+ prevencion:["Sueño regular, ejercicio, control del estrés y evitar los desencadenantes conocidos."]},
+
+{id:"mareo", n:"Mareo o vértigo", cat:"Neurológico",
+ resumen:"Ha consultado por mareo o sensación de giro. Tras la valoración no se han detectado signos de gravedad.",
+ cuidados:["Levántese despacio: primero siéntese y espere unos segundos antes de ponerse de pie.","Evite conducir, subir a alturas o manejar maquinaria mientras tenga mareo.","Si nota que va a marearse, siéntese o túmbese para evitar caídas.","Retire alfombras sueltas y mantenga buena iluminación en casa."],
+ medicacion:[MED_BASE,"Los fármacos para el mareo pueden producir sueño: use solo los indicados."],
+ alimentacion:["Beba líquidos con regularidad; limite alcohol y cafeína."],
+ alarma:["Pérdida de fuerza o sensibilidad en la cara, brazos o piernas.","Dificultad para hablar, ver doble o caminar.","Dolor de cabeza muy intenso y repentino.","Desmayo, dolor en el pecho o palpitaciones.","Vómitos incoercibles."],
+ seguimiento:["Si el mareo persiste o se repite, consulte con su médico de Atención Primaria."],
+ prevencion:["Hidratación adecuada, revisión de la medicación y prevención de caídas."]},
+
+{id:"diabetes", n:"Descompensación de la diabetes", cat:"Endocrino",
+ resumen:"Ha consultado por cifras de glucosa alteradas (altas o bajas). Mantener un buen control ayuda a prevenir complicaciones.",
+ cuidados:["Mida su glucemia con la frecuencia que le haya indicado su equipo de salud y anote los valores.","Beba abundante agua si tiene cifras altas, salvo indicación contraria.","Revise sus pies a diario y no camine descalzo.","Si usa insulina o fármacos que pueden bajar el azúcar, tenga siempre a mano una fuente de azúcar de acción rápida."],
+ medicacion:[MED_BASE,"No suspenda la insulina ni los antidiabéticos aunque coma menos, sin consultar a su equipo de salud."],
+ alimentacion:["Siga una dieta equilibrada con horarios regulares; limite azúcares y bebidas azucaradas.","Mantenga actividad física regular según su situación."],
+ alarma:["Glucemia muy alta con sed intensa, orina abundante, vómitos o aliento afrutado.","Glucemia baja que no se corrige, con sudor frío, temblor, confusión o pérdida de conocimiento.","Respiración rápida o dolor abdominal intenso.","Heridas en los pies que no cicatrizan o están enrojecidas."],
+ seguimiento:["Revisión con su médico de Atención Primaria o enfermería para ajustar el tratamiento. Escuela de Pacientes de Andalucía ofrece guías y talleres sobre diabetes."],
+ prevencion:["Educación diabetológica, control periódico de la hemoglobina glicosilada, revisión de ojos, riñón y pies."]},
+
+{id:"ansiedad", n:"Crisis de ansiedad", cat:"Salud mental",
+ resumen:"Ha tenido una crisis de ansiedad, con síntomas físicos como palpitaciones, sensación de ahogo, temblor u hormigueo. Es desagradable pero no peligrosa y pasa en minutos.",
+ cuidados:["Respire despacio: inspire por la nariz y suelte el aire lentamente por la boca; repita varias veces.","Concéntrese en lo que ve, oye y toca en el momento presente.","Busque un lugar tranquilo y recuerde que la crisis pasa sola.","Mantenga rutinas regulares de sueño y actividad física."],
+ medicacion:[MED_BASE,"No tome ansiolíticos por su cuenta ni los combine con alcohol."],
+ alimentacion:["Reduzca el café, las bebidas energéticas, el tabaco y el alcohol."],
+ alarma:["Dolor en el pecho que dura, falta de aire que no cede o desmayo.","Pensamientos de hacerse daño o de morir: llame al 024 (línea de atención a la conducta suicida) o al 112.","Síntomas que se repiten y limitan su vida diaria."],
+ seguimiento:["Consulte con su médico de Atención Primaria para valoración y seguimiento."],
+ prevencion:["Ejercicio regular, sueño adecuado, técnicas de relajación y pedir ayuda a tiempo."]},
+
+{id:"herida", n:"Herida o sutura", cat:"Piel y heridas",
+ resumen:"Se ha tratado una herida. Su cuidado correcto reduce el riesgo de infección y favorece la cicatrización.",
+ cuidados:["Mantenga la herida limpia y seca; lávese las manos antes de tocarla.","Si no le han indicado otra cosa, limpie con agua y jabón suave o suero y cubra con apósito limpio.","Evite mojarla o rascarla; proteja la herida de golpes.","Evite la exposición solar directa sobre la cicatriz."],
+ medicacion:[MED_BASE,"Compruebe si necesita vacuna antitetánica y consúltelo si no está seguro de tenerla al día."],
+ alimentacion:["Alimentación equilibrada con proteínas y vitaminas; no fumar mejora la cicatrización."],
+ alarma:["Enrojecimiento, calor, hinchazón o dolor que aumentan.","Pus o mal olor, o fiebre.","La herida se abre o sangra de forma persistente.","Pérdida de sensibilidad o movilidad por debajo de la herida."],
+ seguimiento:["Retire los puntos o acuda a la cura en la fecha indicada en su centro de salud."],
+ prevencion:["Compruebe que su vacuna antitetánica está al día."]},
+
+{id:"quemadura", n:"Quemadura leve", cat:"Piel y heridas",
+ resumen:"Presenta una quemadura de poca extensión y profundidad, que puede tratarse en casa con los cuidados adecuados.",
+ cuidados:["No reviente las ampollas ni retire la piel.","Mantenga la zona limpia, cubierta con apósito no adherente y proteja del sol.","No aplique pomadas caseras, pasta de dientes, aceite ni hielo directo.","Evite el roce de la ropa con la zona."],
+ medicacion:[MED_BASE],
+ alimentacion:["Beba líquidos y mantenga una alimentación equilibrada."],
+ alarma:["Aumento de dolor, enrojecimiento o secreción.","Fiebre.","Ampollas que se extienden o piel oscura o blanquecina.","Dificultad para mover la zona."],
+ seguimiento:["Acuda a su centro de salud para las curas que le hayan indicado."],
+ prevencion:["Precaución con líquidos calientes, cocina, estufas y exposición solar; mantenga fuera del alcance de los niños plancha y estufas."]},
+
+{id:"alergia", n:"Reacción alérgica leve (urticaria)", cat:"Piel y heridas",
+ resumen:"Ha presentado una reacción alérgica leve, con picor y ronchas en la piel, que ha respondido al tratamiento.",
+ cuidados:["Evite el posible desencadenante (alimento, medicamento, picadura) mientras no se aclare la causa.","Mantenga la piel fresca y evite rascarse.","Anote qué comió o utilizó antes de la reacción para comentarlo con su médico."],
+ medicacion:[MED_BASE,"Algunos antihistamínicos producen sueño: evite conducir si lo notan."],
+ alimentacion:["Evite el alimento sospechoso hasta valorar la causa."],
+ alarma:["Hinchazón de labios, lengua o cara.","Dificultad para respirar, ronquera o sensación de cierre de la garganta.","Mareo, desmayo, vómitos o dolor abdominal intenso.","Si ocurre, llame al 112."],
+ seguimiento:["Consulte con su médico de Atención Primaria si se repite, para valorar estudio alergológico."],
+ prevencion:["Identificar y evitar desencadenantes; llevar la medicación de rescate si se la han prescrito."]},
+
+{id:"caida", n:"Caída en persona mayor", cat:"Mayores",
+ resumen:"Ha sufrido una caída. Tras la valoración no se han detectado lesiones graves, pero las caídas pueden repetirse y es importante prevenirlas.",
+ cuidados:["Vigile la aparición de dolor, hematomas o hinchazón en los días siguientes.","Levántese despacio y use apoyo si lo necesita.","Mantenga el hogar seguro: buena iluminación, sin alfombras sueltas, barras en el baño.","Use calzado cerrado, firme y con suela antideslizante."],
+ medicacion:[MED_BASE,"Pida a su médico o farmacéutico que revise sus medicamentos: algunos pueden causar mareo o somnolencia."],
+ alimentacion:["Mantenga una alimentación con calcio, vitamina D y proteínas, y beba líquidos con regularidad.","Realice ejercicio adaptado de fuerza y equilibrio, como caminar o programas de actividad física para mayores."],
+ alarma:["Dolor intenso o imposibilidad para mover o apoyar una extremidad.","Dolor de cabeza, vómitos, somnolencia o confusión tras la caída.","Nuevas caídas o mareos frecuentes.","Si toma anticoagulantes y se golpea la cabeza, consulte siempre."],
+ seguimiento:["Comente la caída con su médico de Atención Primaria para valorar el riesgo de nuevas caídas."],
+ prevencion:["Ejercicio de equilibrio, revisión de medicación y de la vista, y adaptación del hogar."]},
+
+{id:"fiebreninos", n:"Fiebre en niños (información para familias)", cat:"Familias",
+ resumen:"La fiebre es una respuesta frecuente a las infecciones y suele ser leve y pasajera. Lo importante es el estado general del niño más que la cifra de temperatura.",
+ cuidados:["Ofrezca líquidos con frecuencia y mantenga al niño cómodo, con ropa ligera.","No lo abrigue en exceso ni use baños de agua fría, alcohol o friegas.","Controle la temperatura y observe cómo se comporta: juego, alimentación y alerta."],
+ medicacion:["Dé los antitérmicos solo a la dosis y con el intervalo indicados por su pediatra o en el informe, ajustados al peso del niño.","No dé aspirina a niños ni antibióticos que no hayan sido recetados."],
+ alimentacion:["Ofrezca líquidos y comida según el apetito; no lo fuerce a comer."],
+ alarma:["Lactante menor de 3 meses con fiebre: consulte siempre.","Respiración rápida, dificultad para respirar o hundimiento de las costillas.","Rigidez de cuello, manchas rojo-moradas que no desaparecen al presionar.","Somnolencia excesiva, irritabilidad extrema, gemido o no responde.","Convulsión o vómitos repetidos; orina muy escasa o signos de deshidratación.","Fiebre de más de 3 días o que reaparece."],
+ seguimiento:["Consulte con su pediatra o centro de salud si no mejora o ante cualquier duda."],
+ prevencion:["Calendario de vacunación al día y lavado de manos."]}
+];
+
+var MODULES = [
+ {id:"tabaco", t:"Tabaco: apoyo para dejar de fumar", items:["Dejar de fumar es lo más importante que puede hacer por su salud, a cualquier edad.","Pregunte en su centro de salud por los programas y tratamientos de ayuda para dejar de fumar.","La aplicación S'Acabó (Ministerio de Sanidad) ofrece consejos y seguimiento para las primeras semanas sin fumar."]},
+ {id:"alimentacion", t:"Alimentación saludable", items:["Priorice frutas, verduras, legumbres, cereales integrales, pescado y aceite de oliva.","Reduzca la sal, los azúcares añadidos y los ultraprocesados.","Mantenga horarios regulares y beba agua como bebida principal."]},
+ {id:"actividad", t:"Actividad física", items:["Muévase a diario: caminar, subir escaleras o montar en bicicleta ya suman.","Empiece poco a poco y aumente de forma progresiva, adaptando el ejercicio a su situación de salud.","Limite el tiempo sentado y haga pausas activas."]},
+ {id:"alcohol", t:"Alcohol y otras sustancias", items:["Cuanto menos alcohol, mejor: no existe un consumo totalmente seguro.","No conduzca ni maneje maquinaria tras beber, ni combine alcohol con medicamentos.","Si le preocupa su consumo, consulte con su médico o equipo de salud."]},
+ {id:"medseg", t:"Medicación segura", items:["Al empezar: conozca para qué sirve cada medicamento, cómo y cuándo tomarlo.","Al usarlo: respete dosis, horarios y duración; no lo comparta ni se automedique.","Al incorporar uno nuevo: avise a su médico y farmacéutico de todo lo que toma, incluidos productos naturales.","Al revisar: lleve su lista de medicación a las consultas y revísela periódicamente.","Al finalizar: no suspenda un tratamiento sin consultar; deseche los sobrantes en el punto SIGRE de la farmacia.","Puede consultar el prospecto oficial en la aplicación CIMA de la AEMPS."]},
+ {id:"caidas", t:"Prevención de caídas en el hogar", items:["Buena iluminación, suelos sin obstáculos ni alfombras sueltas.","Barras de apoyo y suelo antideslizante en el baño.","Calzado cerrado y estable; levántese despacio."]},
+ {id:"vacunas", t:"Vacunación", items:["Compruebe en su centro de salud que su calendario de vacunación está al día.","Consulte la vacunación de gripe, COVID-19, neumococo y tétanos según su edad y situación."]}
+];
+
+/* ================= ESTADO ================= */
+var cfg = {service:"Servicio de Urgencias", center:"Hospital de Antequera", foot:"", draft:true};
+var state = {sel:[], sec:{}, mod:[], cat:"Todas", q:""};
+SECTIONS.forEach(function(s){ state.sec[s.k] = s.on; });
+
+function load(){ try{ var s=localStorage.getItem("urgAnt.cfg"); if(s){ var o=JSON.parse(s); for(var k in o) cfg[k]=o[k]; } }catch(e){} }
+function save(){ try{ localStorage.setItem("urgAnt.cfg", JSON.stringify(cfg)); }catch(e){} }
+
+/* ================= UTILIDADES ================= */
+function $(id){ return document.getElementById(id); }
+function esc(s){ return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c];}); }
+function norm(s){ return s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,""); }
+function toast(m){ var t=$("toast"); t.textContent=m; t.classList.add("on"); clearTimeout(toast._t); toast._t=setTimeout(function(){t.classList.remove("on");},2200); }
+function fmtDate(v){ if(!v) return ""; var p=v.split("-"); return p.length===3 ? p[2]+"/"+p[1]+"/"+p[0] : v; }
+function todayISO(){ var d=new Date(); var m=("0"+(d.getMonth()+1)).slice(-2), dd=("0"+d.getDate()).slice(-2); return d.getFullYear()+"-"+m+"-"+dd; }
+
+/* ================= UI: SELECTOR ================= */
+function cats(){ var c=["Todas"]; DATA.forEach(function(d){ if(c.indexOf(d.cat)<0) c.push(d.cat); }); return c; }
+
+function renderChips(){
+  var box=$("chips"); box.innerHTML="";
+  cats().forEach(function(c){
+    var b=document.createElement("button"); b.type="button"; b.className="chip"; b.textContent=c;
+    b.setAttribute("aria-pressed", String(state.cat===c));
+    b.onclick=function(){ state.cat=c; renderChips(); renderList(); };
+    box.appendChild(b);
+  });
+}
+
+function renderList(){
+  var box=$("list"); box.innerHTML="";
+  var q=norm(state.q);
+  var shown=DATA.filter(function(d){
+    return (state.cat==="Todas"||d.cat===state.cat) && (!q || norm(d.n+" "+d.cat).indexOf(q)>=0);
+  });
+  if(!shown.length){ box.innerHTML='<div class="empty">No hay resultados.</div>'; return; }
+  shown.forEach(function(d){
+    var on=state.sel.indexOf(d.id)>=0;
+    var lab=document.createElement("label"); lab.className="item"+(on?" sel":"");
+    lab.innerHTML='<input type="checkbox"'+(on?" checked":"")+'><div><b>'+esc(d.n)+'</b><span>'+esc(d.cat)+'</span></div>';
+    lab.querySelector("input").onchange=function(e){
+      var i=state.sel.indexOf(d.id);
+      if(e.target.checked){ if(i<0) state.sel.push(d.id); } else if(i>=0){ state.sel.splice(i,1); }
+      lab.classList.toggle("sel", e.target.checked);
+      update();
+    };
+    box.appendChild(lab);
+  });
+}
+
+function renderOpts(){
+  var s=$("sections"); s.innerHTML="";
+  SECTIONS.forEach(function(x){
+    var l=document.createElement("label"); l.className="opt"+(x.locked?" locked":"");
+    l.innerHTML='<input type="checkbox"'+(state.sec[x.k]?" checked":"")+(x.locked?" disabled":"")+'> '+esc(x.t)+(x.locked?" (siempre incluido)":"");
+    l.querySelector("input").onchange=function(e){ state.sec[x.k]=e.target.checked; update(); };
+    s.appendChild(l);
+  });
+  var m=$("modules"); m.innerHTML="";
+  MODULES.forEach(function(x){
+    var l=document.createElement("label"); l.className="opt";
+    l.innerHTML='<input type="checkbox"> '+esc(x.t);
+    l.querySelector("input").onchange=function(e){
+      var i=state.mod.indexOf(x.id);
+      if(e.target.checked){ if(i<0) state.mod.push(x.id); } else if(i>=0){ state.mod.splice(i,1); }
+      update();
+    };
+    m.appendChild(l);
+  });
+}
+
+/* ================= MODELO Y SALIDAS ================= */
+function model(){
+  var path=state.sel.map(function(id){ return DATA.filter(function(d){return d.id===id;})[0]; }).filter(Boolean);
+  var blocks=path.map(function(d){
+    var parts=[];
+    SECTIONS.forEach(function(s){
+      if(!(state.sec[s.k] || s.locked)) return;
+      var v=d[s.k]; if(!v||!v.length) return;
+      parts.push({k:s.k, t:s.t, text:(typeof v==="string"?v:null), items:(typeof v==="string"?null:v)});
+    });
+    return {n:d.n, parts:parts};
+  });
+  var mods=state.mod.map(function(id){ return MODULES.filter(function(m){return m.id===id;})[0]; }).filter(Boolean);
+  return {blocks:blocks, mods:mods};
+}
+
+function hdr(){
+  return {
+    pac:$("fPac").value.trim(), nhc:$("fNhc").value.trim(),
+    fecha:fmtDate($("fFecha").value), prof:$("fProf").value.trim(),
+    extra:$("fExtra").value.trim()
+  };
+}
+
+function renderSheet(m){
+  var h=hdr();
+  var out='<article class="paper'+($("optBig").checked?" big":"")+'" id="sheet">';
+  out+='<div class="sh-head"><div><p class="sh-service">'+esc(cfg.service)+'</p><p class="sh-center">'+esc(cfg.center)+'</p></div>';
+  out+='<p class="sh-title">Recomendaciones al alta<br>Educación para la salud</p></div>';
+  out+='<div class="sh-fields"><div><small>Paciente</small>'+esc(h.pac)+'</div><div><small>NHC</small>'+esc(h.nhc)+'</div><div><small>Fecha</small>'+esc(h.fecha)+'</div><div><small>Profesional</small>'+esc(h.prof)+'</div></div>';
+  m.blocks.forEach(function(b){
+    out+='<section class="sh-sec"><h2>'+esc(b.n)+'</h2>';
+    b.parts.forEach(function(p){
+      var cls="blk"+(p.k==="alarma"?" alarm":"");
+      out+='<div class="'+cls+'"><h3>'+esc(p.t)+'</h3>';
+      if(p.text) out+='<p>'+esc(p.text)+'</p>';
+      else out+='<ul>'+p.items.map(function(i){return '<li>'+esc(i)+'</li>';}).join("")+'</ul>';
+      out+='</div>';
+    });
+    out+='</section>';
+  });
+  if(m.mods.length){
+    out+='<section class="sh-sec"><h2>Promoción de la salud y prevención</h2>';
+    m.mods.forEach(function(x){
+      out+='<div class="blk"><h3>'+esc(x.t)+'</h3><ul>'+x.items.map(function(i){return '<li>'+esc(i)+'</li>';}).join("")+'</ul></div>';
+    });
+    out+='</section>';
+  }
+  if(h.extra){ out+='<section class="sh-sec"><h2>Indicaciones individualizadas</h2><div class="sh-extra">'+esc(h.extra)+'</div></section>'; }
+  out+='<div class="sh-urg"><span>Urgencia vital: 112</span><span>Emergencias sanitarias: 061</span><span>Salud Responde: 955 54 50 60</span></div>';
+  out+='<div class="sh-foot">Información general de educación sanitaria: no sustituye las indicaciones individualizadas de su médico. Conserve su informe de alta y vuelva a Urgencias si aparece alguno de los signos de alarma.';
+  if(cfg.foot) out+='<br>'+esc(cfg.foot);
+  if(cfg.draft) out+='<br><span class="draft">Borrador pendiente de validación clínica</span>';
+  out+='</div></article>';
+  return out;
+}
+
+function renderText(m){
+  var h=hdr(), L=[];
+  L.push("RECOMENDACIONES AL ALTA · EDUCACIÓN PARA LA SALUD");
+  L.push(cfg.service+" · "+cfg.center);
+  if(h.fecha) L.push("Fecha: "+h.fecha);
+  if(h.pac) L.push("Paciente: "+h.pac+(h.nhc?" (NHC "+h.nhc+")":""));
+  else if(h.nhc) L.push("NHC: "+h.nhc);
+  if(h.prof) L.push("Profesional: "+h.prof);
+  m.blocks.forEach(function(b){
+    L.push(""); L.push("== "+b.n.toUpperCase()+" ==");
+    b.parts.forEach(function(p){
+      if(p.text){ L.push(p.t+": "+p.text); }
+      else { L.push(p.t+":"); p.items.forEach(function(i){ L.push("- "+i); }); }
+    });
+  });
+  if(m.mods.length){
+    L.push(""); L.push("== PROMOCIÓN DE LA SALUD Y PREVENCIÓN ==");
+    m.mods.forEach(function(x){ L.push(x.t+":"); x.items.forEach(function(i){ L.push("- "+i); }); });
+  }
+  if(h.extra){ L.push(""); L.push("== INDICACIONES INDIVIDUALIZADAS =="); L.push(h.extra); }
+  L.push(""); L.push("Urgencia vital: 112 · Emergencias sanitarias: 061 · Salud Responde: 955 54 50 60");
+  L.push("Información general de educación sanitaria; no sustituye las indicaciones individualizadas.");
+  return L.join("\n");
+}
+
+function update(){
+  var m=model(), has=m.blocks.length>0 || m.mods.length>0;
+  var n=state.sel.length;
+  $("selCount").textContent = n? (n+(n===1?" patología seleccionada":" patologías seleccionadas")) : "Ninguna seleccionada";
+  var wrap=$("sheetWrap");
+  if(!has){
+    wrap.innerHTML='<div class="empty">Seleccione uno o más motivos de consulta (o módulos de prevención) para generar la hoja.</div>';
+    $("textOut").value="";
+  } else {
+    wrap.innerHTML=renderSheet(m);
+    $("textOut").value=renderText(m);
+  }
+  ["btnCopy","btnPrint","btnTxt","mCopy","mPrint"].forEach(function(id){ $(id).disabled=!has; });
+}
+
+/* ================= ACCIONES ================= */
+function copyText(){
+  var t=$("textOut").value; if(!t) return;
+  function ok(){ toast("Texto copiado: péguelo en la historia clínica"); }
+  function fallback(){
+    var ta=$("textOut"); ta.removeAttribute("readonly"); ta.select();
+    try{ document.execCommand("copy"); ok(); }catch(e){ toast("No se pudo copiar: use la pestaña «Texto para historia»"); }
+    ta.setAttribute("readonly",""); window.getSelection().removeAllRanges();
+  }
+  if(navigator.clipboard && window.isSecureContext){ navigator.clipboard.writeText(t).then(ok, fallback); } else { fallback(); }
+}
+function downloadTxt(){
+  var t=$("textOut").value; if(!t) return;
+  var a=document.createElement("a");
+  a.href=URL.createObjectURL(new Blob([t],{type:"text/plain;charset=utf-8"}));
+  a.download="recomendaciones-urgencias-antequera.txt";
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(function(){ URL.revokeObjectURL(a.href); },1000);
+}
+function doPrint(){ showTab("sheet"); window.print(); }
+function showTab(w){
+  var s=(w==="sheet");
+  $("sheetWrap").style.display = s?"block":"none";
+  $("textview").style.display = s?"none":"block";
+  $("tabSheet").setAttribute("aria-selected", String(s));
+  $("tabText").setAttribute("aria-selected", String(!s));
+}
+
+function applyCfgToUI(){ $("appSub").textContent = cfg.service+" · "+cfg.center; }
+
+/* ================= INIT ================= */
+load();
+applyCfgToUI();
+$("fFecha").value=todayISO();
+renderChips(); renderList(); renderOpts(); update();
+
+$("q").oninput=function(e){ state.q=e.target.value; renderList(); };
+["fPac","fNhc","fFecha","fProf","fExtra","optBig"].forEach(function(id){ $(id).addEventListener("input", update); $(id).addEventListener("change", update); });
+$("btnCopy").onclick=copyText; $("mCopy").onclick=copyText;
+$("btnPrint").onclick=doPrint; $("mPrint").onclick=doPrint;
+$("btnTxt").onclick=downloadTxt;
+$("tabSheet").onclick=function(){ showTab("sheet"); };
+$("tabText").onclick=function(){ showTab("text"); };
+$("btnClear").onclick=function(){ state.sel=[]; state.mod=[]; renderList(); renderOpts(); update(); };
+
+var dlg=$("dlg");
+$("btnCfg").onclick=function(){
+  $("cService").value=cfg.service; $("cCenter").value=cfg.center; $("cFoot").value=cfg.foot; $("cDraft").checked=!!cfg.draft;
+  if(dlg.showModal) dlg.showModal(); else dlg.setAttribute("open","");
+};
+$("cCancel").onclick=function(){ dlg.close(); };
+$("cSave").onclick=function(){
+  cfg.service=$("cService").value.trim()||"Servicio de Urgencias";
+  cfg.center=$("cCenter").value.trim()||"Hospital de Antequera";
+  cfg.foot=$("cFoot").value.trim(); cfg.draft=$("cDraft").checked;
+  save(); applyCfgToUI(); update(); dlg.close(); toast("Cabecera guardada");
+};
+</script>
+
+<!-- Barra común del Portal SUH Antequera -->
+<style>
+  .suhdock{position:fixed;left:14px;bottom:14px;z-index:2147483000;display:flex;align-items:center;gap:4px;padding:5px;border-radius:999px;background:#0c2a4a;box-shadow:0 10px 30px -8px rgba(12,42,74,.55);font:600 13px/1 'Plus Jakarta Sans',system-ui,-apple-system,'Segoe UI',sans-serif;transition:opacity .2s}
+  .suhdock a{display:inline-flex;align-items:center;justify-content:center;gap:7px;height:34px;min-width:34px;padding:0 9px;border-radius:999px;color:#fff;text-decoration:none}
+  .suhdock a:hover{background:rgba(255,255,255,.14)}
+  .suhdock a.suhdock-home{background:#fff;color:#0c2a4a;padding:0 12px 0 4px}
+  .suhdock a.suhdock-home img{width:26px;height:26px;border-radius:50%;object-fit:contain;background:#fff}
+  .suhdock svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  .suhdock .suhdock-x{opacity:.6;min-width:26px;padding:0}
+  .suhdock.suhdock-min a:not(.suhdock-home){display:none}
+  .suhdock.suhdock-min a.suhdock-home span{display:none}
+  .suhdock.suhdock-min a.suhdock-home{padding:0 4px}
+  @media print{.suhdock{display:none!important}}
+</style>
+<nav class="suhdock" aria-label="Portal SUH Antequera">
+  <a class="suhdock-home" href="../index.html#herramientas" title="Volver al Portal de Supervisión SUH Antequera"><img src="../img/logo-suh.jpg" alt=""><span>Portal SUH</span></a>
+  <a href="https://www.instagram.com/suh_antequera_/" target="_blank" rel="noopener" title="Instagram @suh_antequera_"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><path d="M17.5 6.5h.01"/></svg></a>
+  <a href="https://www.facebook.com/p/Suh-Antequera-61568582212569/" target="_blank" rel="noopener" title="Facebook SUH Antequera"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+  <a href="https://x.com/saludnortemalag" target="_blank" rel="noopener" title="X @saludnortemalag" style="font-size:15px">𝕏</a>
+  <a class="suhdock-x" href="#" title="Minimizar barra" onclick="this.parentNode.classList.toggle('suhdock-min');return false;"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></a>
+</nav>
+</body>
+</html>

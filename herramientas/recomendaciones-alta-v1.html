@@ -1,0 +1,2239 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta name="robots" content="noindex, nofollow">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recomendaciones al Alta - SUH Hospital de Antequera | ASNM</title>
+  <meta name="description" content="Portal clínico interactivo de Recomendaciones al Alta de Urgencias del Hospital de Antequera - Área de Gestión Sanitaria Norte de Málaga (ASNM)">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --sas-green-dark: #004d34;
+      --sas-green-primary: #006847;
+      --sas-green-light: #00875a;
+      --sas-green-subtle: #e8f5f0;
+      --sas-accent: #0284c7;
+      --sas-accent-light: #e0f2fe;
+      --asnm-teal: #0d9488;
+      --asnm-teal-light: #f0fdfa;
+      --danger: #dc2626;
+      --danger-bg: #fef2f2;
+      --danger-border: #fecaca;
+      --warning: #d97706;
+      --warning-bg: #fffbeb;
+      --success: #16a34a;
+      --success-bg: #f0fdf4;
+      --gray-50: #f8fafc;
+      --gray-100: #f1f5f9;
+      --gray-200: #e2e8f0;
+      --gray-300: #cbd5e1;
+      --gray-400: #94a3b8;
+      --gray-500: #64748b;
+      --gray-600: #475569;
+      --gray-700: #334155;
+      --gray-800: #1e293b;
+      --gray-900: #0f172a;
+      --card-bg: #ffffff;
+      --body-bg: #f8fafc;
+      --border-color: #e2e8f0;
+      --radius-sm: 6px;
+      --radius-md: 10px;
+      --radius-lg: 16px;
+      --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+      --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.07), 0 2px 4px -2px rgba(0,0,0,0.05);
+      --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.08), 0 4px 6px -4px rgba(0,0,0,0.04);
+      --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    body.dark-mode {
+      --sas-green-subtle: #064e3b;
+      --card-bg: #1e293b;
+      --body-bg: #0f172a;
+      --border-color: #334155;
+      --gray-50: #1e293b;
+      --gray-100: #334155;
+      --gray-200: #475569;
+      --gray-700: #cbd5e1;
+      --gray-800: #f1f5f9;
+      --gray-900: #f8fafc;
+      color: #f1f5f9;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: var(--body-bg);
+      color: var(--gray-800);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* TOP HEADER & LOGOS */
+    header.main-header {
+      background: linear-gradient(135deg, var(--sas-green-dark) 0%, var(--sas-green-primary) 70%, #00563b 100%);
+      color: #ffffff;
+      padding: 1.25rem 2rem;
+      box-shadow: 0 4px 20px rgba(0, 77, 52, 0.25);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-content {
+      max-width: 1440px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .header-branding {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+    }
+
+    .brand-logos {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      background: rgba(255, 255, 255, 0.08);
+      padding: 0.5rem 0.85rem;
+      border-radius: var(--radius-md);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    .brand-titles h1 {
+      font-size: 1.35rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+    }
+
+    .brand-titles p {
+      font-size: 0.825rem;
+      opacity: 0.9;
+      font-weight: 400;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.6rem 1.15rem;
+      font-size: 0.875rem;
+      font-weight: 600;
+      border-radius: var(--radius-sm);
+      border: none;
+      cursor: pointer;
+      transition: var(--transition);
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .btn-light {
+      background: #ffffff;
+      color: var(--sas-green-dark);
+      box-shadow: var(--shadow-sm);
+    }
+    .btn-light:hover {
+      background: #f8fafc;
+      transform: translateY(-1px);
+    }
+
+    .btn-primary {
+      background: var(--sas-green-primary);
+      color: #ffffff;
+    }
+    .btn-primary:hover {
+      background: var(--sas-green-light);
+    }
+
+    .btn-accent {
+      background: var(--sas-accent);
+      color: #ffffff;
+    }
+    .btn-accent:hover {
+      background: #0369a1;
+    }
+
+    .btn-danger {
+      background: var(--danger);
+      color: #ffffff;
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      color: #ffffff;
+    }
+    .btn-outline:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .btn-sm {
+      padding: 0.4rem 0.75rem;
+      font-size: 0.8rem;
+    }
+
+    /* NAVIGATION TABS */
+    .tabs-nav-container {
+      background: #ffffff;
+      border-bottom: 1px solid var(--border-color);
+      box-shadow: var(--shadow-sm);
+      position: sticky;
+      top: 76px;
+      z-index: 90;
+    }
+
+    body.dark-mode .tabs-nav-container {
+      background: var(--gray-800);
+    }
+
+    .tabs-nav {
+      max-width: 1440px;
+      margin: 0 auto;
+      display: flex;
+      padding: 0 1.5rem;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .tabs-nav::-webkit-scrollbar {
+      display: none;
+    }
+
+    .tab-btn {
+      padding: 0.95rem 1.35rem;
+      background: none;
+      border: none;
+      border-bottom: 3px solid transparent;
+      color: var(--gray-600);
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: var(--transition);
+      white-space: nowrap;
+    }
+
+    .tab-btn:hover {
+      color: var(--sas-green-primary);
+    }
+
+    .tab-btn.active {
+      color: var(--sas-green-primary);
+      border-bottom-color: var(--sas-green-primary);
+      background: var(--sas-green-subtle);
+    }
+
+    body.dark-mode .tab-btn {
+      color: var(--gray-400);
+    }
+    body.dark-mode .tab-btn.active {
+      color: #34d399;
+      border-bottom-color: #34d399;
+    }
+
+    /* MAIN CONTAINER */
+    .app-container {
+      max-width: 1440px;
+      margin: 1.75rem auto 3rem auto;
+      padding: 0 1.5rem;
+    }
+
+    .tab-pane {
+      display: none;
+      animation: fadeIn 0.25s ease-in-out;
+    }
+    .tab-pane.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* SEARCH & FILTER BAR */
+    .control-panel {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 1.75rem;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .search-row {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .search-box {
+      flex: 1;
+      position: relative;
+    }
+
+    .search-box svg {
+      position: absolute;
+      left: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--gray-400);
+      pointer-events: none;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 0.75rem 1rem 0.75rem 2.85rem;
+      font-size: 0.95rem;
+      border: 1.5px solid var(--border-color);
+      border-radius: var(--radius-md);
+      background: var(--body-bg);
+      color: inherit;
+      outline: none;
+      transition: var(--transition);
+    }
+
+    .search-input:focus {
+      border-color: var(--sas-green-primary);
+      box-shadow: 0 0 0 3px rgba(0, 104, 71, 0.15);
+      background: var(--card-bg);
+    }
+
+    .filter-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .chip-btn {
+      padding: 0.4rem 0.9rem;
+      border-radius: 9999px;
+      border: 1px solid var(--border-color);
+      background: var(--gray-50);
+      color: var(--gray-700);
+      font-size: 0.825rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .chip-btn:hover {
+      border-color: var(--sas-green-light);
+      background: var(--sas-green-subtle);
+      color: var(--sas-green-dark);
+    }
+
+    .chip-btn.active {
+      background: var(--sas-green-primary);
+      border-color: var(--sas-green-primary);
+      color: #ffffff;
+      font-weight: 600;
+    }
+
+    /* GRID OF PROTOCOLS */
+    .protocols-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .protocol-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .protocol-card:hover {
+      border-color: var(--sas-green-light);
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
+    }
+
+    .card-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.25rem 0.65rem;
+      border-radius: 6px;
+      font-size: 0.725rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.75rem;
+      width: fit-content;
+    }
+
+    .badge-resp { background: #e0f2fe; color: #0369a1; }
+    .badge-dig { background: #fef3c7; color: #92400e; }
+    .badge-trauma { background: #fee2e2; color: #991b1b; }
+    .badge-ped { background: #f3e8ff; color: #6b21a8; }
+    .badge-prev { background: #dcfce7; color: #166534; }
+    .badge-seg { background: #ffedd5; color: #9a3412; }
+
+    .protocol-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: var(--gray-900);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .protocol-desc {
+      font-size: 0.875rem;
+      color: var(--gray-600);
+      margin-bottom: 1rem;
+      flex-grow: 1;
+    }
+
+    .protocol-summary-points {
+      list-style: none;
+      margin-bottom: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .protocol-summary-points li {
+      font-size: 0.825rem;
+      color: var(--gray-700);
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+
+    .protocol-summary-points li svg {
+      flex-shrink: 0;
+      margin-top: 0.2rem;
+      color: var(--sas-green-primary);
+    }
+
+    .protocol-card-actions {
+      display: flex;
+      gap: 0.5rem;
+      border-top: 1px solid var(--border-color);
+      padding-top: 1rem;
+      margin-top: auto;
+    }
+
+    /* DETAILED MODAL / FLYOUT */
+    .modal-backdrop {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(15, 23, 42, 0.65);
+      backdrop-filter: blur(4px);
+      z-index: 1000;
+      padding: 1.5rem;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-backdrop.active {
+      display: flex;
+    }
+
+    .modal-window {
+      background: var(--card-bg);
+      border-radius: var(--radius-lg);
+      max-width: 900px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      border: 1px solid var(--border-color);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .modal-header {
+      padding: 1.5rem 2rem;
+      background: linear-gradient(135deg, var(--sas-green-dark) 0%, var(--sas-green-primary) 100%);
+      color: #ffffff;
+      border-top-left-radius: var(--radius-lg);
+      border-top-right-radius: var(--radius-lg);
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .modal-header h2 {
+      font-size: 1.4rem;
+      font-weight: 800;
+    }
+
+    .modal-header p {
+      font-size: 0.875rem;
+      opacity: 0.9;
+    }
+
+    .modal-close-btn {
+      background: rgba(255, 255, 255, 0.2);
+      border: none;
+      color: #fff;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      transition: var(--transition);
+    }
+    .modal-close-btn:hover {
+      background: rgba(255, 255, 255, 0.4);
+    }
+
+    .modal-body {
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      line-height: 1.6;
+    }
+
+    .section-block {
+      background: var(--gray-50);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 1.25rem 1.5rem;
+    }
+
+    .section-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--sas-green-dark);
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    body.dark-mode .section-title {
+      color: #34d399;
+    }
+
+    .warning-box {
+      background: var(--danger-bg);
+      border: 1.5px solid var(--danger-border);
+      border-radius: var(--radius-md);
+      padding: 1.25rem 1.5rem;
+    }
+
+    .warning-title {
+      color: var(--danger);
+      font-weight: 800;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    /* IMPRESIÓN Y HOJA DEL PACIENTE */
+    .print-sheet-wrapper {
+      background: #ffffff;
+      border: 1px solid var(--gray-300);
+      border-radius: var(--radius-lg);
+      padding: 2.5rem;
+      box-shadow: var(--shadow-md);
+      max-width: 900px;
+      margin: 0 auto;
+      color: #1e293b;
+    }
+
+    .print-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid var(--sas-green-primary);
+      padding-bottom: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .print-h-left {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .print-patient-info-box {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      background: var(--gray-50);
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius-sm);
+      padding: 1rem;
+      margin-bottom: 1.5rem;
+      font-size: 0.85rem;
+    }
+
+    .patient-field label {
+      display: block;
+      font-size: 0.725rem;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--gray-500);
+      margin-bottom: 0.2rem;
+    }
+
+    .patient-field input {
+      width: 100%;
+      border: 1px solid var(--gray-300);
+      border-radius: 4px;
+      padding: 0.35rem 0.5rem;
+      font-size: 0.85rem;
+      background: #ffffff;
+    }
+
+    .print-warning-banner {
+      background: #fef2f2;
+      border: 2px solid #ef4444;
+      border-radius: 8px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+
+    .print-signatures {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-top: 3rem;
+      padding-top: 1rem;
+      border-top: 1px dashed var(--gray-300);
+    }
+
+    .signature-line {
+      border-top: 1px solid #475569;
+      margin-top: 3rem;
+      text-align: center;
+      font-size: 0.8rem;
+      color: #475569;
+      padding-top: 0.4rem;
+    }
+
+    /* HISTORIA DE ENFERMERÍA (DIRAYA) */
+    .diraya-workspace {
+      display: grid;
+      grid-template-columns: 340px 1fr;
+      gap: 1.75rem;
+    }
+
+    .diraya-sidebar {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .diraya-output-container {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .code-editor-box {
+      background: #0f172a;
+      color: #e2e8f0;
+      border-radius: var(--radius-md);
+      padding: 1.25rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.875rem;
+      line-height: 1.6;
+      height: 480px;
+      overflow-y: auto;
+      border: 1px solid #334155;
+      white-space: pre-wrap;
+    }
+
+    .copy-success-banner {
+      display: none;
+      background: #16a34a;
+      color: #ffffff;
+      padding: 0.75rem 1rem;
+      border-radius: var(--radius-md);
+      font-size: 0.875rem;
+      font-weight: 600;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    /* CONTACTOS Y TELÉFONOS */
+    .emergency-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 2rem;
+    }
+
+    .emergency-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 1.25rem 1.5rem;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+    }
+
+    .emergency-card.primary-alert {
+      background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
+      border: 1.5px solid #f87171;
+    }
+
+    .emergency-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 1.5rem;
+    }
+
+    .emergency-card.primary-alert .emergency-icon {
+      background: #dc2626;
+      color: #fff;
+    }
+
+    .emergency-num {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: var(--gray-900);
+      line-height: 1.2;
+    }
+
+    .emergency-name {
+      font-size: 0.85rem;
+      color: var(--gray-600);
+      font-weight: 500;
+    }
+
+    /* APPS DIRECTORY */
+    .apps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .app-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 1.25rem;
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+      transition: var(--transition);
+    }
+    .app-card:hover {
+      border-color: var(--sas-green-light);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .app-avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: var(--sas-green-subtle);
+      color: var(--sas-green-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      flex-shrink: 0;
+    }
+
+    .app-info h4 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+    }
+
+    .app-info p {
+      font-size: 0.8rem;
+      color: var(--gray-600);
+      margin-bottom: 0.6rem;
+    }
+
+    .app-link {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--sas-accent);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+    .app-link:hover {
+      text-decoration: underline;
+    }
+
+    /* PRINT STYLES - CRITICAL FOR A4 DISCHARGE SHEETS */
+    @media print {
+      body {
+        background: #ffffff !important;
+        color: #000000 !important;
+        font-size: 10.5pt;
+      }
+      .main-header,
+      .tabs-nav-container,
+      .no-print,
+      .protocol-card-actions,
+      .control-panel,
+      .modal-backdrop {
+        display: none !important;
+      }
+      .app-container {
+        padding: 0 !important;
+        margin: 0 !important;
+        max-width: 100% !important;
+      }
+      .tab-pane {
+        display: none !important;
+      }
+      #pane-print {
+        display: block !important;
+      }
+      .print-sheet-wrapper {
+        border: none !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+        max-width: 100% !important;
+      }
+      .print-header {
+        border-bottom: 2pt solid #006847 !important;
+      }
+      .print-warning-banner {
+        background: #fff5f5 !important;
+        border: 1.5pt solid #dc2626 !important;
+      }
+      @page {
+        margin: 1.5cm;
+        size: A4 portrait;
+      }
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      .diraya-workspace {
+        grid-template-columns: 1fr;
+      }
+      .header-content {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .protocols-grid {
+        grid-template-columns: 1fr;
+      }
+      .print-patient-info-box {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER INSTITUCIONAL -->
+  <header class="main-header">
+    <div class="header-content">
+      <div class="header-branding">
+        <div class="brand-logos" style="background: #ffffff; padding: 0.35rem 0.65rem; border-radius: var(--radius-md); box-shadow: 0 2px 8px rgba(0,0,0,0.18); display: flex; align-items: center; gap: 0.75rem;">
+          <!-- Logo SUH Hospital de Antequera -->
+          <img src="data:image/jpeg;base64,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" alt="SUH Servicio de Urgencias Hospital de Antequera" style="height: 50px; width: auto; object-fit: contain; display: block;" onerror="this.src='logo_suh_antequera.jpg'">
+          <div style="width: 1px; height: 42px; background: #cbd5e1;"></div>
+          <!-- Logo Salud Norte Málaga y Junta de Andalucía -->
+          <img src="data:image/jpeg;base64,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" alt="Salud Norte Málaga - Junta de Andalucía" style="height: 50px; width: auto; object-fit: contain; display: block;" onerror="this.src='logo_salud_norte_malaga.jpg'">
+        </div>
+        <div class="brand-titles">
+          <h1>Servicio de Urgencias Hospital Antequera (SUH)</h1>
+          <p>Área de Gestión Sanitaria Norte de Málaga • Recomendaciones Oficiales al Alta</p>
+        </div>
+      </div>
+      <div class="header-actions no-print">
+        <button class="btn btn-outline btn-sm" id="btn-toggle-dark" title="Alternar tema oscuro">
+          <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3a9 9 0 109 9c0-.46-.04-.92-.1-1.36a5.389 5.389 0 01-4.4 2.26 5.403 5.403 0 01-3.14-9.8c-.44-.06-.9-.1-1.36-.1z"/></svg>
+          Tema
+        </button>
+        <button class="btn btn-light" onclick="switchTab('print')">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9V2h12v7M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2M6 14h12v8H6z"/></svg>
+          Hoja para Paciente (Imprimir)
+        </button>
+        <button class="btn btn-accent" onclick="switchTab('diraya')">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>
+          Copia para Diraya
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- NAVEGACIÓN POR PESTAÑAS -->
+  <nav class="tabs-nav-container no-print">
+    <div class="tabs-nav">
+      <button class="tab-btn active" onclick="switchTab('explorer')">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 6h16M4 10h16M4 14h16M4 18h16"/></svg>
+        Explorador Clínico de Guías
+      </button>
+      <button class="tab-btn" onclick="switchTab('print')">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/></svg>
+        Hoja de Alta Imprimible (A4)
+      </button>
+      <button class="tab-btn" onclick="switchTab('diraya')">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"/></svg>
+        Nota de Enfermería (Diraya Clínico)
+      </button>
+      <button class="tab-btn" onclick="switchTab('directory')">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+        Teléfonos de Urgencias & Apps Oficiales
+      </button>
+    </div>
+  </nav>
+
+  <!-- CONTENEDOR PRINCIPAL -->
+  <main class="app-container">
+
+    <!-- PESTAÑA 1: EXPLORADOR DE GUÍAS -->
+    <section id="pane-explorer" class="tab-pane active">
+      <div class="control-panel no-print">
+        <div class="search-row">
+          <div class="search-box">
+            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+            <input type="text" id="search-input" class="search-input" placeholder="Buscar por patología, síntoma, medicamento (ej. Asma, Esguince, Dieta blanda, Fiebre, Yeso, Cefalea...)" oninput="filterProtocols()">
+          </div>
+          <button class="btn btn-outline" style="color:var(--gray-700); border-color:var(--border-color);" onclick="resetFilters()">Restablecer</button>
+        </div>
+        <div class="filter-chips">
+          <button class="chip-btn active" data-category="all" onclick="setCategoryFilter('all', this)">Todas las categorías</button>
+          <button class="chip-btn" data-category="respiratorio" onclick="setCategoryFilter('respiratorio', this)">Respiratorio</button>
+          <button class="chip-btn" data-category="digestivo" onclick="setCategoryFilter('digestivo', this)">Digestivo</button>
+          <button class="chip-btn" data-category="trauma" onclick="setCategoryFilter('trauma', this)">Traumatología & Yesos</button>
+          <button class="chip-btn" data-category="pediatria" onclick="setCategoryFilter('pediatria', this)">Pediatría & Fiebre</button>
+          <button class="chip-btn" data-category="preventiva" onclick="setCategoryFilter('preventiva', this)">Cardiovascular & Estilos de Vida</button>
+          <button class="chip-btn" data-category="seguridad" onclick="setCategoryFilter('seguridad', this)">Seguridad, Salud Mental & Medicamentos</button>
+        </div>
+      </div>
+
+      <div class="protocols-grid" id="protocols-grid">
+        <!-- Renderizado dinámico vía JavaScript con todos los protocolos oficiales -->
+      </div>
+    </section>
+
+    <!-- PESTAÑA 2: HOJA IMPRIMIBLE PARA EL PACIENTE -->
+    <section id="pane-print" class="tab-pane">
+      <div class="no-print" style="margin-bottom: 1.5rem; display: flex; justify-content: space-between; align-items: center; background: var(--sas-green-subtle); padding: 1rem 1.5rem; border-radius: var(--radius-md); border: 1px solid var(--sas-green-primary);">
+        <div>
+          <h3 style="color: var(--sas-green-dark); font-size: 1.1rem; font-weight: 700;">Modo Impresión A4 de Recomendaciones para el Paciente</h3>
+          <p style="font-size: 0.85rem; color: var(--gray-700);">Completa los datos del paciente o selecciona una patología para pre-cargar todas las instrucciones contrastadas.</p>
+        </div>
+        <div style="display: flex; gap: 0.75rem;">
+          <select id="select-print-protocol" class="search-input" style="width: auto; padding: 0.5rem 1rem;" onchange="loadProtocolIntoPrint(this.value)">
+            <option value="">-- Cargar patología predefinida --</option>
+          </select>
+          <button class="btn btn-primary" onclick="window.print()">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9V2h12v7M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2M6 14h12v8H6z"/></svg>
+            Imprimir / Guardar PDF
+          </button>
+        </div>
+      </div>
+
+      <div class="print-sheet-wrapper" id="printable-sheet">
+        <!-- Encabezado Oficial -->
+        <div class="print-header">
+          <div class="print-h-left" style="display: flex; align-items: center; gap: 1.25rem;">
+            <img src="data:image/jpeg;base64,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" alt="SUH Servicio de Urgencias Hospital de Antequera" style="height: 58px; width: auto; object-fit: contain; display: block;" onerror="this.src='logo_suh_antequera.jpg'">
+            <div style="width: 1.5px; height: 50px; background: #cbd5e1;"></div>
+            <img src="data:image/jpeg;base64,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" alt="Salud Norte Málaga - Junta de Andalucía" style="height: 58px; width: auto; object-fit: contain; display: block;" onerror="this.src='logo_salud_norte_malaga.jpg'">
+            <div>
+              <div style="font-size: 0.725rem; text-transform: uppercase; font-weight: 700; color: #006847; letter-spacing: 0.05em;">Junta de Andalucía • Consejería de Sanidad, Presidencia y Emergencias</div>
+              <div style="font-size: 1.15rem; font-weight: 800; color: #0f172a;">Hospital de Antequera — SUH</div>
+              <div style="font-size: 0.8rem; color: #475569;">Área de Gestión Sanitaria Norte de Málaga (ASNM) • @saludnortemalag</div>
+            </div>
+          </div>
+          <div style="text-align: right;">
+            <div style="font-size: 0.725rem; font-weight: 700; color: #64748b;">DOCUMENTO DE INFORMACIÓN CLÍNICA</div>
+            <div style="font-size: 1.1rem; font-weight: 800; color: #006847;" id="print-sheet-title">INFORME DE CUIDADOS AL ALTA</div>
+            <div style="font-size: 0.75rem; color: #64748b;" id="print-current-date">Fecha: 25/10/2026</div>
+          </div>
+        </div>
+
+        <!-- Datos del Paciente -->
+        <div class="print-patient-info-box">
+          <div class="patient-field">
+            <label>Nombre y Apellidos</label>
+            <input type="text" id="p-name" placeholder="Nombre del paciente">
+          </div>
+          <div class="patient-field">
+            <label>NUHSA / DNI / CIP</label>
+            <input type="text" id="p-nuhsa" placeholder="AN000000000">
+          </div>
+          <div class="patient-field">
+            <label>Proceso / Diagnóstico Urgencias</label>
+            <input type="text" id="p-diag" value="Gastroenteritis Aguda / Cuidados Generales">
+          </div>
+          <div class="patient-field">
+            <label>Fecha y Hora de Alta</label>
+            <input type="text" id="p-date" value="25/10/2026 - 19:30">
+          </div>
+          <div class="patient-field">
+            <label>Profesional Responsable (Enfermería / Medicina)</label>
+            <input type="text" id="p-prof" placeholder="D.U.E. Responsable SUH Antequera">
+          </div>
+          <div class="patient-field">
+            <label>Centro de Salud de Referencia</label>
+            <input type="text" id="p-cs" value="C.S. Antequera Centro / Estación">
+          </div>
+        </div>
+
+        <!-- Contenido Clínico de Recomendaciones -->
+        <div id="print-content-body" style="font-size: 0.95rem; line-height: 1.6;">
+          <h4 style="font-size: 1.05rem; font-weight: 700; color: #006847; margin-bottom: 0.5rem; border-bottom: 1.5px solid #e2e8f0; padding-bottom: 0.25rem;">1. CUIDADOS Y TRATAMIENTO EN EL DOMICILIO</h4>
+          <div id="print-home-care" style="margin-bottom: 1.25rem; white-space: pre-line;">
+            • Reposo relativo en domicilio evitando sobreesfuerzos físicos.
+            • Hidratación abundante en pequeñas tomas continuas sin forzar (sales de rehidratación oral o agua).
+            • Cumplir estrictamente la pauta analgésica y farmacológica prescrita sin alterar dosis ni horarios.
+            • Dieta según tolerancia evitando alimentos grasos, fritos, picantes o bebidas azucaradas.
+          </div>
+
+          <h4 style="font-size: 1.05rem; font-weight: 700; color: #006847; margin-bottom: 0.5rem; border-bottom: 1.5px solid #e2e8f0; padding-bottom: 0.25rem;">2. RECOMENDACIONES ESPECÍFICAS DE PREVENCIÓN</h4>
+          <div id="print-prevention" style="margin-bottom: 1.25rem; white-space: pre-line;">
+            • Lavado frecuente de manos con agua y jabón antes de comer y tras usar el sanitario.
+            • No automedicarse con antibióticos ni suspender tratamientos crónicos previos sin indicación facultativa.
+            • Solicitar cita de seguimiento en su Centro de Salud / Médico de Familia o Pediatra en 48-72 horas.
+          </div>
+
+          <!-- BANNER DE SIGNOS DE ALARMA OBLIGATORIO -->
+          <div class="print-warning-banner">
+            <div style="color: #b91c1c; font-weight: 800; font-size: 1rem; margin-bottom: 0.4rem; display: flex; align-items: center; gap: 0.5rem;">
+              <svg width="20" height="20" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/></svg>
+              SIGNOS DE ALARMA — CUÁNDO VOLVER DE INMEDIATO A URGENCIAS
+            </div>
+            <div id="print-alarm-signs" style="font-size: 0.885rem; color: #991b1b; line-height: 1.5;">
+              • Dificultad para respirar, sensación de ahogo o tiraje costal.
+              • Dolor torácico o abdominal intenso que no cede con la medicación prescrita.
+              • Pérdida de conocimiento, mareo intenso con caídas o desorientación.
+              • Vómitos repetidos que impiden completamente la tolerancia de líquidos.
+              • Fiebre alta persistente (>39°C o más de 4 días de evolución).
+              • Frialdad, palidez o coloración azulada en labios o extremidades.
+            </div>
+          </div>
+
+          <!-- TELÉFONOS DE CONTACTO OFICIALES -->
+          <div style="background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 6px; padding: 0.85rem; font-size: 0.8rem; margin-top: 1rem; display: grid; grid-template-columns: repeat(4, 1fr); text-align: center; gap: 0.5rem;">
+            <div><strong>Emergencias:</strong><br><span style="font-size: 1rem; color: #b91c1c; font-weight: 800;">112 / 061</span></div>
+            <div><strong>Salud Responde:</strong><br><span style="font-size: 0.95rem; font-weight: 700;">955 54 50 60</span></div>
+            <div><strong>Hosp. Antequera:</strong><br><span style="font-size: 0.95rem; font-weight: 700;">951 06 10 00</span></div>
+            <div><strong>Línea Suicidio:</strong><br><span style="font-size: 0.95rem; color: #0284c7; font-weight: 800;">024</span></div>
+          </div>
+        </div>
+
+        <!-- Firmas -->
+        <div class="print-signatures">
+          <div>
+            <div class="signature-line">Firma y Sello del Profesional de Enfermería / SUH</div>
+          </div>
+          <div>
+            <div class="signature-line">Firma del Paciente / Familiar o Tutor Legal (Recepción de información)</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PESTAÑA 3: NOTA DE ENFERMERÍA PARA DIRAYA -->
+    <section id="pane-diraya" class="tab-pane">
+      <div class="diraya-workspace">
+        <div class="diraya-sidebar no-print">
+          <h3 style="font-size: 1.1rem; font-weight: 700; color: var(--sas-green-dark);">Configurador de Registro Diraya</h3>
+          <p style="font-size: 0.825rem; color: var(--gray-600);">Adapta los datos antes de exportar a la Estación Clínica / Diraya Enfermería del SAS.</p>
+          
+          <div>
+            <label style="font-size: 0.775rem; font-weight: 700; text-transform: uppercase; color: var(--gray-500); display: block; margin-bottom: 0.35rem;">Patología Asistida</label>
+            <select id="diraya-proto-select" class="search-input" style="padding: 0.5rem;" onchange="updateDirayaText()">
+              <!-- Opciones cargadas por JS -->
+            </select>
+          </div>
+
+          <div>
+            <label style="font-size: 0.775rem; font-weight: 700; text-transform: uppercase; color: var(--gray-500); display: block; margin-bottom: 0.35rem;">Tolerancia y Estado al Alta</label>
+            <select id="diraya-tol-select" class="search-input" style="padding: 0.5rem;" onchange="updateDirayaText()">
+              <option value="Tolerancia oral adecuada comprobada en observación. Afebril, hemodinámicamente estable.">Tolerancia comprobada / Estable</option>
+              <option value="Miembro inmovilizado correctamente comprobando pulsos distales, relleno capilar <2s y movilidad conservada.">Inmovilización revisada / Pulsos OK</option>
+              <option value="Crisis resuelta tras tratamiento de rescate. Murmullo vesicular conservado sin ruidos sobreañadidos.">Respiratorio estable / SatO2 >96%</option>
+              <option value="Paciente consciente, orientado en las tres esferas, sin focalidad neurológica aguda.">Neurológico estable / Glasgow 15</option>
+            </select>
+          </div>
+
+          <div>
+            <label style="font-size: 0.775rem; font-weight: 700; text-transform: uppercase; color: var(--gray-500); display: block; margin-bottom: 0.35rem;">Receptor de las Recomendaciones</label>
+            <select id="diraya-rec-select" class="search-input" style="padding: 0.5rem;" onchange="updateDirayaText()">
+              <option value="Paciente y acompañante habitual">Paciente y acompañante habitual</option>
+              <option value="Paciente">Paciente exclusivamente</option>
+              <option value="Madre / Padre / Tutor legal (Pediatría)">Madre / Padre / Tutor legal</option>
+              <option value="Cuidador principal / Familiar responsable">Cuidador principal</option>
+            </select>
+          </div>
+
+          <div>
+            <label style="font-size: 0.775rem; font-weight: 700; text-transform: uppercase; color: var(--gray-500); display: block; margin-bottom: 0.35rem;">Recursos de Salud Digital Indicados</label>
+            <div style="display: flex; flex-direction: column; gap: 0.35rem; font-size: 0.8rem;">
+              <label><input type="checkbox" id="chk-clicsalud" checked onchange="updateDirayaText()"> ClicSalud+ (Historia / Citas)</label>
+              <label><input type="checkbox" id="chk-saludand" checked onchange="updateDirayaText()"> App Salud Andalucía</label>
+              <label><input type="checkbox" id="chk-cima" onchange="updateDirayaText()"> App AEMPS CIMA (Prospectos)</label>
+              <label><input type="checkbox" id="chk-sacabo" onchange="updateDirayaText()"> App S'Acabó (Deshabituación)</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="diraya-output-container">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div>
+              <h3 style="font-size: 1.15rem; font-weight: 800; color: var(--gray-900);">Registro Normalizado de Enfermería (Taxonomía NANDA/NIC)</h3>
+              <p style="font-size: 0.825rem; color: var(--gray-600);">Texto estandarizado listo para pegar en la Evolución / Informe de Continuidad de Cuidados.</p>
+            </div>
+            <button class="btn btn-primary" onclick="copyDirayaToClipboard()">
+              <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"/></svg>
+              Copiar al Portapapeles
+            </button>
+          </div>
+
+          <div id="copy-banner" class="copy-success-banner">
+            <svg width="20" height="20" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+            ¡Texto copiado exitosamente! Listo para pegar en Diraya Clínico con Ctrl+V.
+          </div>
+
+          <pre class="code-editor-box" id="diraya-text"></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- PESTAÑA 4: DIRECTORIO DE APPS Y TELÉFONOS -->
+    <section id="pane-directory" class="tab-pane">
+      <h3 style="font-size: 1.25rem; font-weight: 800; color: var(--gray-900); margin-bottom: 1rem;">Teléfonos de Urgencias y Red de Atención Sanitaria</h3>
+      <div class="emergency-grid">
+        <div class="emergency-card primary-alert">
+          <div class="emergency-icon">🚨</div>
+          <div>
+            <div class="emergency-num">112 / 061</div>
+            <div class="emergency-name">Emergencias Sanitarias Andalucía (24 Horas)</div>
+          </div>
+        </div>
+
+        <div class="emergency-card">
+          <div class="emergency-icon" style="background:#e0f2fe; color:#0284c7;">📞</div>
+          <div>
+            <div class="emergency-num">955 54 50 60</div>
+            <div class="emergency-name">Salud Responde (Citas y Consultas SAS)</div>
+          </div>
+        </div>
+
+        <div class="emergency-card">
+          <div class="emergency-icon" style="background:#fef3c7; color:#b45309;">🏥</div>
+          <div>
+            <div class="emergency-num">951 06 10 00</div>
+            <div class="emergency-name">Hospital de Antequera (Centralita General)</div>
+          </div>
+        </div>
+
+        <div class="emergency-card">
+          <div class="emergency-icon" style="background:#fee2e2; color:#dc2626;">❤️</div>
+          <div>
+            <div class="emergency-num">024</div>
+            <div class="emergency-name">Línea de Atención a la Conducta Suicida</div>
+          </div>
+        </div>
+      </div>
+
+      <h3 style="font-size: 1.25rem; font-weight: 800; color: var(--gray-900); margin-bottom: 1rem; margin-top: 2rem;">Directorio Oficial de Apps Móviles y Portales de Salud</h3>
+      <div class="apps-grid">
+        <div class="app-card">
+          <div class="app-avatar">📱</div>
+          <div class="app-info">
+            <h4>App Salud Andalucía</h4>
+            <p>App institucional oficial que integra tarjeta sanitaria virtual, citas médicas, recetas y avisos asistenciales.</p>
+            <a href="https://www.sspa.juntadeandalucia.es/servicioandaluzdesalud/ciudadania/app-salud-andalucia" target="_blank" class="app-link">Acceder al portal SAS &rarr;</a>
+          </div>
+        </div>
+
+        <div class="app-card">
+          <div class="app-avatar" style="background:#e0f2fe; color:#0284c7;">💻</div>
+          <div class="app-info">
+            <h4>ClicSalud+ (SAS)</h4>
+            <p>Portal web para la consulta de historia clínica electrónica, informes de alta de urgencias, analíticas y radiología.</p>
+            <a href="https://www.sspa.juntadeandalucia.es/servicioandaluzdesalud/clicsalud/" target="_blank" class="app-link">Entrar a ClicSalud+ &rarr;</a>
+          </div>
+        </div>
+
+        <div class="app-card">
+          <div class="app-avatar" style="background:#fef3c7; color:#b45309;">💊</div>
+          <div class="app-info">
+            <h4>AEMPS CIMA</h4>
+            <p>Buscador de información y prospectos oficiales de todos los medicamentos autorizados en España por el Ministerio de Sanidad.</p>
+            <a href="https://cima.aemps.es/" target="_blank" class="app-link">Consultar prospectos CIMA &rarr;</a>
+          </div>
+        </div>
+
+        <div class="app-card">
+          <div class="app-avatar" style="background:#fee2e2; color:#dc2626;">🚭</div>
+          <div class="app-info">
+            <h4>App S'Acabó (SEDET)</h4>
+            <p>Aplicación avalada para deshabituación tabáquica con fijación de 'Día D', control de recaídas y consejos psicológicos.</p>
+            <a href="https://sedet.org/" target="_blank" class="app-link">Ver web de SEDET &rarr;</a>
+          </div>
+        </div>
+
+        <div class="app-card">
+          <div class="app-avatar" style="background:#f3e8ff; color:#7e22ce;">🎓</div>
+          <div class="app-info">
+            <h4>Escuela de Pacientes (EASP)</h4>
+            <p>Talleres entre iguales, guías descargables para pacientes con asma, diabetes, insuficiencia cardíaca y cuidadores.</p>
+            <a href="https://www.escueladepacientes.es/" target="_blank" class="app-link">Visitar Escuela de Pacientes &rarr;</a>
+          </div>
+        </div>
+
+        <div class="app-card">
+          <div class="app-avatar" style="background:#dcfce7; color:#15803d;">🩺</div>
+          <div class="app-info">
+            <h4>PiCuida — Red de Cuidados</h4>
+            <p>Repositorio andaluz de guías de práctica clínica, infografías de cuidados y recomendaciones para enfermería y pacientes.</p>
+            <a href="https://www.picuida.es/" target="_blank" class="app-link">Explorar PiCuida &rarr;</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- MODAL DE DETALLE CLÍNICO COMPLETO -->
+  <div class="modal-backdrop" id="protocol-modal" onclick="closeModalOnBackdrop(event)">
+    <div class="modal-window">
+      <div class="modal-header">
+        <div>
+          <span class="card-badge" id="m-badge" style="background:rgba(255,255,255,0.25); color:#fff;">CATEGORÍA</span>
+          <h2 id="m-title">Título de la Guía</h2>
+          <p id="m-subtitle">Servicio de Urgencias Hospital Antequera (ASNM)</p>
+        </div>
+        <button class="modal-close-btn" onclick="closeModal()">&times;</button>
+      </div>
+      <div class="modal-body" id="m-body">
+        <!-- Contenido inyectado dinámicamente -->
+      </div>
+    </div>
+  </div>
+
+  <script>
+    /* BASE DE DATOS CONTRASTADA DE TODAS LAS GUÍAS DEL CUADERNO SUH ANTEQUERA */
+    const protocolsData = [
+      {
+        id: "asma",
+        category: "respiratorio",
+        badge: "Respiratorio",
+        badgeClass: "badge-resp",
+        title: "Asma (Adulto y Pediátrico)",
+        summary: "Plan de acción por escrito, diferenciación estricta de inhaladores de control y de rescate, técnica de inhalación y signos de disnea grave.",
+        points: [
+          "Inhaladores de control (diario) vs de rescate (abren vía en 5-15 min).",
+          "Como norma general, los antibióticos NO están indicados en el asma.",
+          "Prohibición absoluta del humo de tabaco, aerosoles y deshumidificar estancia.",
+          "Vacunación antigripal anual y antineumocócica obligatoria."
+        ],
+        homeCare: `• Cumplir rigurosamente el plan de acción escrito acordado con el médico.
+• Medicación de control: Usar diariamente aunque no haya síntomas para desinflamar bronquios.
+• Medicación de rescate: Llevar siempre consigo. Usar ante sensación de opresión o pitos.
+• No fumar ni permitir que se fume en el domicilio. Evitar aerosoles, lejías y cambios bruscos de temperatura.
+• En días fríos, cubrir boca y nariz con una bufanda al salir a la calle.
+• Realizar lavados frecuentes de manos y vacunarse frente a la gripe y neumococo.`,
+        alarmSigns: `• La crisis de ahogo NO mejora o empeora tras usar los inhaladores de rescate.
+• Dificultad para hablar o pronunciar frases completas sin pararse a tomar aire.
+• Coloración azulada o violácea en labios, lengua o uñas (cianosis).
+• Sensación de agotamiento extremo, sudoración fría o temor a no poder respirar.`,
+        whenDoctor: `• Si lleva 2 días seguidos con síntomas a pesar del tratamiento habitual.
+• Si precisa el inhalador de rescate con más frecuencia de lo normal durante varios días.
+• Para revisar la técnica de inhalación con su enfermera de Atención Primaria.`,
+        prevention: `• Evitar alérgenos identificados (ácaros, polen, hongos, animales).
+• Realizar ejercicio físico adaptado (precalentando e inhalando medicación previa si es asma de esfuerzo).`,
+        dirayaSummary: `EDUCACIÓN SANITARIA AL ALTA POR CRISIS ASMÁTICA.
+- Se instruye al paciente/cuidador sobre la diferenciación entre fármacos de rescate (acción rápida) y controladores de base.
+- Se entrena técnica inhalatoria con cámara espaciadora.
+- Se entrega plan de acción escrito para agudizaciones y pauta médica.
+- Se advierte de la inutilidad de antibióticos salvo indicación médica expresa.
+- Se explican signos de alarma (cianosis, disnea para hablar, ineficacia de rescate) y pauta de reconsulta inmediata.
+- Conocimiento y adherencia valorados satisfactoriamente.`
+      },
+      {
+        id: "bronquiolitis",
+        category: "respiratorio",
+        badge: "Respiratorio / Pediatría",
+        badgeClass: "badge-ped",
+        title: "Bronquiolitis y Bronquitis Infantil",
+        summary: "Infección respiratoria vírica aguda en lactantes y niños pequeños. Manejo sintomático de soporte sin antibióticos sistemáticos.",
+        points: [
+          "Proceso vírico autolimitado: NO requiere antibióticos.",
+          "Hidratación oral fraccionada y lavados nasales con suero fisiológico.",
+          "Postura semiincorporada (elevar cabecero cuna) y ambiente sin humo.",
+          "Vigilancia de signos de tiraje costal y dificultad para alimentarse."
+        ],
+        homeCare: `• Hidratación: Ofrecer tomas pequeñas de líquidos o leche materna frecuentemente, sin forzar. El agua es el mejor mucolítico natural.
+• Lavados nasales: Aplicar suero fisiológico o solución salina antes de las tomas y antes de dormir para desobstruir nariz.
+• Posición: Mantener al bebé semiincorporado (elevando ligeramente el colchón) para facilitarle la respiración.
+• Ambiente: Hogar 100% libre de humos de tabaco y ambientadores. Ventilar adecuadamente.`,
+        alarmSigns: `• Respiración muy rápida o agitada con hundimiento de costillas o esternón (tiraje).
+• Movimiento exagerado del abdomen o apertura excesiva de los orificios nasales (aleteo nasal).
+• Dificultad o rechazo alimentario evidente (se fatiga al succionar o vomita con las tomas).
+• Coloración azulada en labios o uñas, o pausas en la respiración (apneas).
+• Decaimiento llamativo, somnolencia excesiva o irritabilidad que no calma.`,
+        whenDoctor: `• Fiebre alta persistente o aumento de las secreciones que no ceden con lavados nasales.`,
+        prevention: `• Lavado estricto de manos antes de coger al lactante. Evitar contacto con personas con cuadros catarrales.`,
+        dirayaSummary: `EDUCACIÓN SANITARIA EN BRONQUIOLITIS / INFECCIÓN RESPIRATORIA AGUDA.
+- Explicada etiología vírica del cuadro y la no indicación de antibióticos sistemáticos.
+- Instrucción práctica a progenitores sobre lavados nasales con suero fisiológico previos a tomas.
+- Pauta de fraccionamiento de tomas y postura semiincorporada en cuna.
+- Adiestramiento en detección de signos de dificultad respiratoria (tiraje, aleteo, rechazo de tomas, cianosis).
+- Criterios de reconsulta en SUH Antequera o AP entregados por escrito.`
+      },
+      {
+        id: "catarro",
+        category: "respiratorio",
+        badge: "Respiratorio",
+        badgeClass: "badge-resp",
+        title: "Catarro Común y Gripe",
+        summary: "Infecciones respiratorias víricas de vías altas. Evolución normal, automanejo de síntomas y uso racional de antitérmicos.",
+        points: [
+          "Evolución fisiológica: los niños sanos presentan de 7 a 14 catarros al año.",
+          "Los antibióticos NO curan el catarro ni bajan la fiebre vírica.",
+          "PROHIBIDA la aspirina en menores de 18 años.",
+          "Lavados nasales con suero y reposo en domicilio 24h tras ceder fiebre."
+        ],
+        homeCare: `• Ingesta abundante de líquidos (agua, caldos, zumos naturales e infusiones templadas).
+• Lavados nasales con suero fisiológico para fluidificar la mucosidad.
+• Bebidas templadas con miel y limón para calmar la tos (en mayores de 1 año).
+• Tratar la fiebre solo si produce malestar o dolor con paracetamol o ibuprofeno (según edad/pauta).
+• Descanso en casa para favorecer la recuperación y evitar contagios en escuelas o centros de trabajo.`,
+        alarmSigns: `• Dificultad para respirar (respiración entrecortada, silbidos en el pecho).
+• Dolor intenso de oídos o supuración ótica.
+• Fiebre superior a 39,3 °C o fiebre que dura más de 4 días seguidos.
+• Fiebre que reaparece tras haber desaparecido durante más de 24 horas.
+• Tos de intensidad tal que impide el descanso nocturno o la alimentación.`,
+        whenDoctor: `• Si pasados 7-10 días los síntomas empeoran en lugar de mejorar.`,
+        prevention: `• Lavarse las manos frecuentemente con agua y jabón. Taparse con pañuelos desechables al toser o estornudar.`,
+        dirayaSummary: `CONSEJOS AL ALTA EN CATARRO COMÚN / SÍNDROME GRIPAL.
+- Se aclara a paciente/familia el origen vírico y la evolución benigna esperada (tos como mecanismo defensivo).
+- Se recalca la contraindicación de antibióticos y de ácido acetilsalicílico en pediatría.
+- Se explican medidas de soporte: lavados salinos, hidratación, higiene de manos.
+- Criterios de alarma facilitados (duración de fiebre >4 días, otalgia, disnea). Comprensión adecuada.`
+      },
+      {
+        id: "gea-adulto",
+        category: "digestivo",
+        badge: "Digestivo",
+        badgeClass: "badge-dig",
+        title: "Gastroenteritis Aguda (GEA) en Adultos",
+        summary: "Proceso infeccioso agudo con vómitos y diarrea. Fases de reposo digestivo, fórmula de limonada alcalina y dieta astringente.",
+        points: [
+          "Primeras 12-24 horas: Reposo de sólidos, hidratación exclusiva continua (2-3 L/día).",
+          "Suero oral de farmacia o Limonada Alcalina (1L agua + 2 limones + 1/2 sal + 1/2 bicarbonato + 2-3 azúcar).",
+          "NO tomar antibióticos ni antidiarreicos sin indicación médica.",
+          "Dieta astringente gradual: arroz, zanahoria cocida, manzana oxidada con limón, pollo cocido."
+        ],
+        homeCare: `• Fase 1 (primeras 12-24h): No tomar alimentos sólidos. Beber pequeños sorbos continuos de suero oral o limonada alcalina.
+• Fórmula Limonada Alcalina: 1 litro de agua, zumo de 2 limones, 1/2 cucharadita de sal, 1/2 de bicarbonato y 2-3 cucharadas de azúcar.
+• Fase 2 (cuando baje a <3-4 deposiciones/día): Introducir arroz hervido, puré de patata con zanahoria, pechuga de ave hervida, pescado blanco hervido, pan tostado y manzana oxidada.
+• Prohibido: Leche entera, quesos grasos, verduras crudas o verdes (espinacas, acelgas), fritos, picantes, alcohol y café.`,
+        alarmSigns: `• Presencia de sangre visible en las heces o vómitos con sangre.
+• Fiebre elevada (>38,5 °C) acompañada de dolor abdominal agudo.
+• Signos de deshidratación: sed insaciable, orina escasa o muy oscura, mareo grave al levantarse, sequedad de boca.
+• Vómitos repetidos que impiden completamente beber líquidos durante más de 6-8 horas.
+• Diarrea que dura más de 5 días.`,
+        whenDoctor: `• Si no tolera la introducción de alimentos suaves tras 48 horas.`,
+        prevention: `• Lavarse las manos tras ir al baño. El paciente NO debe manipular comida para el resto de la familia mientras dure el cuadro.`,
+        dirayaSummary: `EDUCACIÓN SANITARIA AL ALTA POR GASTROENTERITIS AGUDA (ADULTO).
+- Pauta de reposo digestivo inicial y técnica de rehidratación con suero hiposódico oral fraccionado.
+- Explicada receta de limonada alcalina y transición escalonada a dieta astringente (exclusión de lácteos y grasas).
+- Advertencia sobre el riesgo y desaconsejo de antidiarreicos comerciales sin prescripción.
+- Detección de deshidratación, hematoquecia y fiebre persistente como criterios de reconsulta.
+- Alta a domicilio con adecuada tolerancia oral en observación.`
+      },
+      {
+        id: "gea-infantil",
+        category: "digestivo",
+        badge: "Digestivo / Pediatría",
+        badgeClass: "badge-ped",
+        title: "Gastroenteritis Aguda Infantil",
+        summary: "Manejo pediátrico de vómitos y diarrea. Rehidratación oral hiposódica fraccionada y prohibición de refrescos o bebidas para deportistas.",
+        points: [
+          "Sueros orales comerciales hiposódicos (Oralsuero®, Sueroral®, Bioral®).",
+          "PROHIBIDO dar Aquarius®, Gatorade®, refrescos de cola o zumos envasados.",
+          "Deshidratación leve: 2-3 ml/kg cada 5-10 minutos durante las primeras 4 horas.",
+          "Alimentación precoz tras 4 horas: NO diluir el biberón, mantener lactancia materna a demanda."
+        ],
+        homeCare: `• Rehidratación (primeras 4h): Usar exclusivamente suero oral infantil en pequeñas cucharaditas o jeringuilla (2-3 ml por kg cada 5-10 min).
+• Jamás dar bebidas para deportistas (Aquarius, etc.) ya que su alta carga de azúcar empeora la diarrea y desequilibra sales.
+• Alimentación precoz: Tras 4 horas de suero, reintroducir su alimentación habitual sin forzar. La alimentación precoz acorta la recuperación.
+• Lactancia materna: No suspender en ningún momento; ofrecer pecho a demanda.
+• Biberón: Preparar a la concentración normal recomendada, sin rebajar el número de cacitos.`,
+        alarmSigns: `• Ausencia de orina durante más de 6-8 horas (pañal seco).
+• Llanto sin lágrimas, boca muy seca o lengua blanquecina y agrietada.
+• Decaimiento llamativo, ojos hundidos o somnolencia con dificultad para despertar.
+• Diarrea con sangre roja abundante o heces oscuras como el alquitrán.
+• Vómitos continuos que impiden reponer el suero oral tras 4 horas de intentos fraccionados.`,
+        whenDoctor: `• Diarrea de más de 10-14 días de evolución o pérdida ponderal evidente.`,
+        prevention: `• Lavado estricto de manos tras cada cambio de pañal. Higiene perineal cuidadosa para evitar dermatitis.`,
+        dirayaSummary: `CUIDADOS AL ALTA EN GASTROENTERITIS AGUDA PEDIÁTRICA.
+- Se instruye a progenitores en rehidratación con solución de sales hiposódicas (2-3 ml/kg c/5-10 min).
+- Se prohíbe expresamente el uso de soluciones caseras, zumos o bebidas isotónicas comerciales.
+- Se indica mantenimiento de lactancia materna a demanda y alimentación precoz sin diluir fórmulas lácteas.
+- Alerta sobre deshidratación (oligoanuria, llanto sin lágrima, decaimiento) y vómitos incoercibles.
+- Tolerancia comprobada en área pediátrica del SUH Antequera.`
+      },
+      {
+        id: "estrenimiento",
+        category: "digestivo",
+        badge: "Digestivo",
+        badgeClass: "badge-dig",
+        title: "Estreñimiento en Adultos",
+        summary: "Pautas de reeducación intestinal, postura ergonómica a 35º en el inodoro, fibra dietética y prevención de fecalomas.",
+        points: [
+          "2 a 3 litros de agua al día, con el primer vaso de agua templada en ayunas.",
+          "Postura a 35º: colocar un banquito bajo los pies para alinear el ángulo anorrectal.",
+          "Aporte de fibra: kiwis, ciruelas, verduras crudas, pan integral y legumbres.",
+          "Evitar el uso habitual de laxantes irritantes que crean dependencia de la mucosa."
+        ],
+        homeCare: `• Ingesta hídrica: Beber entre 2 y 3 litros de agua al día. Tomar un vaso de agua en ayunas al levantarse.
+• Dieta rica en fibra: Consumir kiwis, ciruelas, verduras frescas con piel, hortalizas y legumbres a diario.
+• Postura correcta en el inodoro: Sentarse con un banquito o reposapiés debajo de los pies (ángulo de 35º) para elevar rodillas por encima de caderas.
+• Educación del hábito: Acudir al baño todos los días a la misma hora (tras el desayuno o comida) con tiempo y sin prisas. No reprimir nunca las ganas.
+• Ejercicio regular: Caminar a diario para activar el peristaltismo intestinal.`,
+        alarmSigns: `• Presencia de sangre roja fresca o heces negras pegajosas.
+• Pérdida involuntaria de peso sin causa aparente.
+• Dolor abdominal agudo e hinchazón importante que no cede.
+• Deseo imperioso de defecar con imposibilidad absoluta para expulsar heces (sospecha de fecaloma).
+• Estreñimiento de más de 3 semanas de evolución que no responde a cambios dietéticos.`,
+        whenDoctor: `• Si precisa laxantes de forma continuada para poder realizar deposición.`,
+        prevention: `• No realizar esfuerzos defecatorios forzados prolongados en la taza del váter para prevenir hemorroides y fisuras.`,
+        dirayaSummary: `PLAN DE CUIDADOS AL ALTA POR ESTREÑIMIENTO CRÓNICO / REAGUDIZADO.
+- Educación sanitaria sobre consumo hídrico (primer vaso en ayunas) y fibra soluble/insoluble.
+- Adiestramiento en posición anatómica de evacuación a 35º mediante apoyo podálico.
+- Recomendación de hábito regular horario y ejercicio físico aeróbico diario.
+- Explicación de riesgos de dependencia a laxantes irritantes. Signos de alarma facilitados.`
+      },
+      {
+        id: "proteccion-gastrica",
+        category: "digestivo",
+        badge: "Digestivo",
+        badgeClass: "badge-dig",
+        title: "Protección Gástrica y Reflujo (ERGE)",
+        summary: "Manejo dietético del ardor, dispepsia y enfermedad por reflujo gastroesofágico. Elevación de cabecera y hábitos higiénicos.",
+        points: [
+          "Cenar 2-3 horas antes de acostarse; nunca tumbarse inmediatamente tras comer.",
+          "Elevar la cabecera de la cama 15-20 cm con calzos en las patas (no usar almohadones).",
+          "Evitar fritos, grasas, tomate, cítricos, chocolate, mentol, café y bebidas con gas.",
+          "Dormir un mínimo de 8 horas y erradicar el consumo de tabaco y alcohol."
+        ],
+        homeCare: `• Comidas: Realizar 4-5 comidas ligeras al día, comiendo despacio y masticando muy bien. No permanecer muchas horas en ayunas.
+• Horarios: Cenar ligero 2 a 3 horas antes de meterse en la cama. Tras comer, reposar unos minutos sentado, no tumbado.
+• Cama inclinada: Levantar el cabecero de la cama 15 a 20 cm colocando tacos de madera o cuñas bajo el colchón.
+• Alimentos adecuados: Purés de verduras cocidas, caldos desgrasados, arroz, pescado blanco hervido, pechuga de pollo, manzana madura y pera.
+• Alimentos a evitar: Café (incluso descafeinado), té, refrescos con gas, picantes, alcohol, salsas con tomate, fritos y cítricos.`,
+        alarmSigns: `• Vómitos con sangre o posos de café (hematemesis).
+• Deposiciones negras como la pez y pegajosas (melenas).
+• Dificultad o dolor progresivo al tragar la comida (disfagia).
+• Dolor epigástrico continuo e insoportable que se irradia a la espalda y no cede.`,
+        whenDoctor: `• Síntomas diarios de pirosis que no responden a la medicación antisecretora pautada.`,
+        prevention: `• Evitar ropa o cinturones ceñidos que aumenten la presión abdominal. Mantener un peso corporal saludable.`,
+        dirayaSummary: `EDUCACIÓN DIETÉTICA Y HIGIÉNICA EN PROTECCIÓN GÁSTRICA / REFLUJO.
+- Instrucción en medidas antirreflujo nocturnas (elevación de cabecero con cuña 15-20 cm, adelanto de cena 3h).
+- Exclusión de alimentos relajantes del esfínter esofágico (chocolate, café, menta, gaseosas, grasas).
+- Hábitos de masticación pausada y no encamamiento postprandial.
+- Detección de signos de alarma digestivos (melenas, hematemesis, disfagia). Comprensión correcta.`
+      },
+      {
+        id: "esguince-tobillo",
+        category: "trauma",
+        badge: "Traumatología",
+        badgeClass: "badge-trauma",
+        title: "Esguince de Tobillo",
+        summary: "Protocolo RICE de crioterapia, elevación y reposo sin apoyo 48-72h. Fases de vendaje, ejercicios de rehabilitación y HBPM.",
+        points: [
+          "Protocolo RICE: Reposo, Hielo (15-20 min c/2h), Compresión elástica y Elevación.",
+          "Evitar el apoyo del pie durante las primeras 48-72 horas.",
+          "Grado I (3 sem vendaje), Grado II (férula yeso y revisión a las 72h), Grado III (traumatólogo).",
+          "Profilaxis con heparina (HBPM) si yeso cerrado y factores de riesgo trombótico."
+        ],
+        homeCare: `• Primeras 48-72 horas: Reposo con el pie elevado por encima del nivel del corazón. No apoyar el pie en el suelo; ayudarse de muletas.
+• Crioterapia: Aplicar bolsa de hielo o gel frío envuelto en un paño durante 15-20 minutos cada 2 horas.
+• Vendaje: Mantener el vendaje limpio y seco. Acudir a su Centro de Salud a los 3-4 días para revisión del vendaje.
+• Calzado: Cuando comience a apoyar, usar zapato cerrado y sujeto, sin tacón.
+• Ejercicios (tras 48-72h): Mover dedos, escribir letras en el aire con el pie, ejercicios de puntillas y talones según tolerancia.`,
+        alarmSigns: `• Dolor insoportable que no calma con los analgésicos recetados.
+• Dedos del pie hinchados, fríos, pálidos o de color morado/azulado.
+• Sensación de acorchamiento, pérdida de sensibilidad o imposibilidad total de mover los dedos.
+• Inflamación severa en la pantorrilla con dolor espontáneo (alerta de trombosis).`,
+        whenDoctor: `• Si transcurridas 3 semanas persiste inestabilidad o imposibilidad para la marcha normal.`,
+        prevention: `• Calentar antes de hacer ejercicio físico y utilizar tobillera en actividades deportivas iniciales.`,
+        dirayaSummary: `CUIDADOS AL ALTA EN ESGUINCE DE TOBILLO (INVERSIÓN FORZADA).
+- Se aplica y revisa vendaje comprensivo/férula. Relleno capilar <2 seg, sin parestesias distales.
+- Instruido en técnica de descarga con bastones ingleses y reposo absoluto de apoyo 48-72h.
+- Pauta de crioterapia (15-20 min/2h) y elevación por encima de cadera.
+- Informado sobre prevención de TVP y signos de alarma neurovascular. Cita de revisión en AP en 72h.`
+      },
+      {
+        id: "tce-adulto",
+        category: "trauma",
+        badge: "Traumatología",
+        badgeClass: "badge-trauma",
+        title: "TCE Adulto (Observación Domiciliaria)",
+        summary: "Pauta de vigilancia para traumatismo craneoencefálico leve. Despertares periódicos cada 2-3h, no alcohol y signos de alarma neurológica.",
+        points: [
+          "Vigilancia continua domiciliaria por un adulto durante las primeras 12 a 24 horas.",
+          "Despertar al paciente cada 2 o 3 horas durante el sueño para valorar reactividad.",
+          "Reposo relativo 24-48 horas. Dieta ligera sin alcohol ni sedantes.",
+          "Signos de alarma: anisocoria, vómitos repetidos, somnolencia extrema, otorragia/rinorrea."
+        ],
+        homeCare: `• Acompañamiento: Permanecer acompañado por un adulto responsable las primeras 24 horas.
+• Durante el sueño: Despertar al paciente cada 2-3 horas y comprobar que responde y reconoce dónde está.
+• Actividad: Reposo en casa, evitando pantallas brillantes, ruidos fuertes y ejercicio físico o levantar pesos.
+• Dieta: Dieta suave y ligera si tiene náuseas leves. Beber agua regularmente.
+• Analgesia: En caso de dolor de cabeza habitual, tomar paracetamol. Prohibido consumir alcohol o sedantes.`,
+        alarmSigns: `• Somnolencia profunda, dificultad llamativa para despertarle o confusión mental.
+• Vómitos continuos o repetidos en varias ocasiones.
+• Dolor de cabeza muy intenso que va en aumento y no cede con analgésicos.
+• Una pupila más dilatada que la otra (anisocoria) o visión doble.
+• Pérdida de fuerza o dificultad para mover brazos o piernas, o problemas para hablar.
+• Salida de sangre o líquido transparente por la nariz o los oídos.
+• Cualquier crisis convulsiva o movimientos extraños involuntarios.`,
+        whenDoctor: `• Cefalea difusa leve persistente transcurridos varios días desde el impacto.`,
+        prevention: `• Especial precaución en personas mayores de 75 años o pacientes bajo tratamiento anticoagulante.`,
+        dirayaSummary: `INSTRUCCIONES DE VIGILANCIA DOMICILIARIA POR TCE LEVE (ADULTO).
+- Paciente alerta y orientado al alta, Glasgow 15, pupilas isocóricas normorreactivas.
+- Se entrega hoja de observación domiciliaria al acompañante responsable.
+- Se instruye en despertares periódicos nocturnos cada 2-3 horas para verificar respuesta verbal y motora.
+- Desaconsejo total de ingesta etílica y sedantes.
+- Explicados detalladamente signos de alarma de hipertensión intracraneal / focalidad para reingreso inmediato.`
+      },
+      {
+        id: "tce-nino",
+        category: "trauma",
+        badge: "Traumatología / Pediatría",
+        badgeClass: "badge-ped",
+        title: "TCE Infantil (Observación en Casa)",
+        summary: "Instrucciones para familias tras traumatismo craneal infantil de carácter leve valorado por personal médico.",
+        points: [
+          "Observación domiciliaria estrecha durante las siguientes 24 horas.",
+          "Despertar al niño periódicamente durante la noche para comprobar reactividad normal.",
+          "Es habitual que siga asustado, con llanto inicial o algún vómito aislado benigno.",
+          "Alarma: vómitos continuos tras >8 horas, cefalea intensa, irritabilidad que no calma o desorientación."
+        ],
+        homeCare: `• Observación: Vigilar al niño en casa durante las 24 horas posteriores al traumatismo.
+• Noche: Despertarle 2 o 3 veces a lo largo de la noche para cerciorarse de que despierta y responde bien.
+• Comportamiento benigno normal: Puede quejarse de dolor en el chichón o tener náuseas leves. Si tiene hambre, ofrecer pequeñas cantidades de comida suave.
+• Tranquilidad: Mantener al menor en un entorno tranquilo y acogedor, sin pantallas luminosas.`,
+        alarmSigns: `• Dolor de cabeza muy fuerte o llanto/irritabilidad continua que no se calma de ningún modo.
+• Vómitos repetidos transcurridas más de 8 horas desde el golpe.
+• El niño no se despierta, está muy adormilado, desorientado o no reconoce a los padres.
+• Movimientos extraños de los ojos, pupilas desiguales o marcha tambaleante.
+• Salida de líquido claro o sangre por la nariz o los oídos.`,
+        whenDoctor: `• Si tras 48 horas el niño continúa decaído o quejoso.`,
+        prevention: `• Uso de casco homologado en bicicleta/patinete y medidas de protección en el hogar.`,
+        dirayaSummary: `INSTRUCCIONES AL ALTA POR TRAUMATISMO CRANEAL LEVE INFANTIL.
+- Exploración neurológica inicial normal, reactivo, sin signos meníngeos ni focalidad.
+- Se entregan instrucciones escritas de observación durante 24h a los progenitores.
+- Explicada pauta de control durante el sueño y diferenciación de vómito aislado frente a vómitos de alarma.
+- Se advierte de signos de reconsulta inmediata en SUH Antequera.`
+      },
+      {
+        id: "lumbalgia",
+        category: "trauma",
+        badge: "Traumatología",
+        badgeClass: "badge-trauma",
+        title: "Lumbalgia Aguda",
+        summary: "Higiene postural lumbar, limitación del reposo en cama a menos de 2-3 días, calor local y ergonomía en el trabajo y descanso.",
+        points: [
+          "Evitar el reposo en cama prolongado: máximo 2-3 días; moverse mejora el dolor.",
+          "Aplicación de calor local y analgesia pautada (paracetamol, AINEs).",
+          "Dormir de lado con almohada entre las rodillas o boca arriba con almohada bajo las piernas.",
+          "Ergonomía: doblar rodillas al levantar pesos, banquito reposapiés al sentarse."
+        ],
+        homeCare: `• Movilidad: Mantener el mayor grado de actividad física que el dolor permita. El reposo prolongado retrasa la curación.
+• Termoterapia: Aplicar calor local (manta eléctrica o bolsa de agua caliente) 15-20 minutos varias veces al día.
+• Postura para dormir: Usar colchón firme. Dormir de lado con rodillas dobladas y una almohada entre ellas, o boca arriba con almohada bajo las rodillas.
+• Levantamiento de cargas: Doblar siempre las rodillas manteniendo la espalda recta. No girar el tronco mientras sostiene un peso.
+• Descansos activos: Si trabaja sentado, levantarse cada 2 horas y hacer estiramientos suaves inclinándose adelante y atrás.`,
+        alarmSigns: `• Pérdida de control de la orina o de las heces (incontinencia o retención aguda).
+• Pérdida notable de fuerza o dificultad para mover una o ambas piernas (falla la pierna al andar).
+• Fiebre inexplicable asociada al dolor de espalda.
+• Dolor severo e insoportable que no disminuye tras varios días con la medicación.`,
+        whenDoctor: `• Si el dolor lumbar le impide realizar sus tareas cotidianas tras 1-2 semanas.`,
+        prevention: `• Evitar el sobrepeso y realizar ejercicio habitual de bajo impacto (caminar, natación, bicicleta estática).`,
+        dirayaSummary: `PLAN DE CUIDADOS EN LUMBALGIA AGUDA MECÁNICA.
+- Explicación de la importancia de evitar el reposo en cama mayor a 48h y mantener actividad adaptada.
+- Aplicación de calor seco local y toma regular de analgesia pautada.
+- Adiestramiento en higiene postural (flexión de rodillas para cargas, cojín entre piernas al dormir).
+- Entrega de criterios de alarma neurológica (síndrome de cauda equina, paresia de MMII).`
+      },
+      {
+        id: "cervicalgia",
+        category: "trauma",
+        badge: "Traumatología",
+        badgeClass: "badge-trauma",
+        title: "Dolor Cervical y Esguince Cervical",
+        summary: "Crioterapia 24h inicial y calor posterior. Uso intermitente y restrictivo del collarín cervical (<3 días) e higiene postural.",
+        points: [
+          "Primeras 24h: Frío local antiinflamatorio. A partir de las 24h: Calor local descontracturante.",
+          "Collarín cervical: Usar de forma intermitente, descansar 15-30 min cada 2-3h. NUNCA para dormir ni >3 días.",
+          "NO realizar masajes ni manipulaciones los primeros días tras el traumatismo.",
+          "Ergonomía: Colocar almohada que mantenga cuello horizontal y no sujetar teléfono con el hombro."
+        ],
+        homeCare: `• Frío y calor: Frío local las primeras 24 horas. Luego aplicar calor local (paños calientes, bufanda, manta térmica) para relajar músculos.
+• Collarín cervical: Ajustado sin comprimir la garganta. Usar solo en fases de dolor agudo, descansar 15-30 minutos tras cada 2-3 horas de uso. No dormir con él ni superar 3 días.
+• Descanso: Dormir con una almohada que conserve la columna recta (baja si duerme boca arriba, más alta si duerme de lado).
+• Postura laboral: Evitar tener la cabeza girada o inclinada mucho tiempo. Colocar la pantalla del ordenador a la altura de los ojos.
+• Teléfono: Nunca sujetar el auricular ladeando el cuello contra el hombro; usar las manos o auriculares con micrófono.`,
+        alarmSigns: `• Sensación persistente de hormigueo, entumecimiento o pinchazos en brazos o manos.
+• Pérdida demostrada de fuerza para agarrar objetos con las manos o mover los brazos.
+• Vértigo incapacitante con sensación de giro de objetos o marcha muy inestable.`,
+        whenDoctor: `• Si el dolor no remite tras una semana de tratamiento antiinflamatorio.`,
+        prevention: `• Realizar movimientos suaves de cuello a diario. La natación es el ejercicio más aconsejado para la columna cervical.`,
+        dirayaSummary: `EDUCACIÓN SANITARIA AL ALTA POR CERVICALGIA / ESGUINCE CERVICAL.
+- Instrucción en frío local inicial seguido de termoterapia por calor seco descontracturante.
+- Advertencia estricta sobre el uso restrictivo del collarín blando (intermitente, no nocturno, máx 3 días).
+- Corrección de hábitos viciosos posturales (postura ante ordenador y al hablar por teléfono).
+- Detección de parestesias o pérdida de fuerza braquial como signos de alarma.`
+      },
+      {
+        id: "inmovilizacion-yeso",
+        category: "trauma",
+        badge: "Traumatología",
+        badgeClass: "badge-trauma",
+        title: "Cuidados de Yesos y Férulas",
+        summary: "Mantenimiento del yeso seco e íntegro. Elevación antiedema, ejercicios de dedos y detección precoz de compromiso neurovascular.",
+        points: [
+          "Mantener la extremidad elevada los primeros 3-4 días por encima del nivel cardíaco.",
+          "Prohibido mojar el yeso (cubrir con bolsa hermética para aseo) y no recortar bordes.",
+          "PROHIBIDO introducir agujas u objetos punzantes para rascarse (riesgo de úlcera/infección).",
+          "Mover frecuentemente los dedos libres para reactivar el retorno circulatorio venoso."
+        ],
+        homeCare: `• Elevación: Mantener el miembro elevado sobre almohadas los primeros 3 a 4 días para evitar que se hinche.
+• Cuidado del agua: No mojar la escayola. Para el baño, cubrirla con una bolsa de plástico cerrada con cinta adhesiva o goma.
+• Picor: Jamás introducir varillas, agujas ni alambres por dentro del yeso para rascarse. Puede provocar heridas graves e infección bajo el yeso.
+• Integridad: No recortar ni limar los bordes del yeso. Si roza, colocar algodón o esparadrapo en el borde.
+• Movilidad: Mover los dedos de la mano o pie de forma continua y ejercitar las articulaciones libres.
+• Apoyo: Si su yeso permite el apoyo, no pisar hasta que hayan pasado al menos 48 horas desde su colocación (tiempo necesario para secar).`,
+        alarmSigns: `• Dedos fríos, pálidos, azulados o amoratados.
+• Sensación de hormigueo continuo, pérdida de sensibilidad o imposibilidad de mover los dedos.
+• Dolor opresivo muy intenso que no calma a pesar de elevar el miembro y tomar los analgésicos.
+• Manchas húmedas con mal olor o secreción a través del yeso, o fiebre sin otra causa.`,
+        whenDoctor: `• Si el yeso se rompe, se ablanda excesivamente o queda excesivamente holgado.`,
+        prevention: `• Al retirar la inmovilización, es normal observar vello aumentado, piel seca y atrofia muscular reversible.`,
+        dirayaSummary: `INSTRUCCIONES DE CUIDADO DE FÉRULA / YESO CERRADO.
+- Comprobada correcta colocación de inmovilización, buen acolchado y permeabilidad vascular distal.
+- Pauta de elevación de la extremidad 3-4 días y movilización activa continua de dedos.
+- Se insiste en prohibición de mojar el yeso y de introducir objetos punzantes para el rascado.
+- Adiestramiento en signos de compresión vascular/nerviosa (síndrome compartimental) para reconsulta urgente.`
+      },
+      {
+        id: "fiebre-infantil",
+        category: "pediatria",
+        badge: "Pediatría",
+        badgeClass: "badge-ped",
+        title: "Fiebre en la Infancia y Antitérmicos",
+        summary: "Manejo racional de la fiebre. Desmitificación de la cifra del termómetro, dosis por peso y advertencia contra la alternancia de fármacos.",
+        points: [
+          "La fiebre es una defensa natural. El objetivo del antitérmico es aliviar el malestar, no normalizar la cifra.",
+          "NO alternar paracetamol e ibuprofeno de forma rutinaria (aumenta toxicidad y errores).",
+          "Ibuprofeno solo a partir de los 6 meses de vida; paracetamol no en <3 meses sin médico.",
+          "Medidas de confort: estancia a 20-22 °C, ropa ligera e hidratación continua sin forzar."
+        ],
+        homeCare: `• Concepto: Tratar solo si el niño está decaído o molesto. Un niño febril pero activo y contento no necesita medicación urgente.
+• Medicación segura:
+  - Paracetamol: Cada 4 a 6 horas según el peso del niño. No dar a menores de 3 meses sin revisión médica.
+  - Ibuprofeno: Cada 6 a 8 horas según peso. Únicamente a partir de los 6 meses de edad.
+• ¿Alternar medicamentos?: NO se recomienda de forma rutinaria. Dar los dos fármacos aumenta el riesgo de sobredosis y efectos adversos.
+• Ambiente y ropa: Estancia fresca (20-22 °C). No abrigar en exceso; dejarle con ropa ligera o una sábana fina.
+• Líquidos: Ofrecer agua, caldos o zumos con frecuencia en tomas pequeñas para reponer pérdidas por sudor.`,
+        alarmSigns: `• Manchas rojas o moradas en la piel que no desaparecen al estirar la piel (petequias).
+• Somnolencia excesiva, dificultad extrema para despertarle o llanto débil continuo.
+• Dificultad para respirar, hundimiento de costillas o respiración muy quejumbrosa.
+• Rigidez de nuca o vómitos a chorro continuados.
+• Fiebre en un bebé menor de 3 meses.
+• Fiebre superior a 39,5 °C o que dura más de 4 días seguidos.`,
+        whenDoctor: `• Si la fiebre reaparece tras estar más de 24 horas sin ella o si el niño empeora de ánimo.`,
+        prevention: `• No usar antitérmicos preventivos antes de poner vacunas (puede disminuir la respuesta inmunitaria).`,
+        dirayaSummary: `EDUCACIÓN SANITARIA EN MANEJO DOMICILIARIO DE LA FIEBRE INFANTIL.
+- Desmitificada la cifra térmica; objetivo centrado en el confort y estado general del menor.
+- Desaconsejo explícito de la alternancia sistemática paracetamol/ibuprofeno por riesgo de intoxicación.
+- Revisión de dosificación correcta por peso y rango etario (>6 meses para ibuprofeno).
+- Instrucción en medidas físicas (20-22 °C, ropa liviana, hidratación continua).
+- Entrega de lista de signos de alarma de sepsis / meningitis para consulta inmediata.`
+      },
+      {
+        id: "convulsion-febril",
+        category: "pediatria",
+        badge: "Pediatría",
+        badgeClass: "badge-ped",
+        title: "Convulsión Febril en Niños",
+        summary: "Guía de actuación familiar ante una crisis convulsiva. Posición lateral de seguridad y qué NO hacer jamás durante el episodio.",
+        points: [
+          "Mantener la calma, acostar al niño de lado (Posición Lateral de Seguridad) y pedir ayuda médica.",
+          "PROHIBIDO sujetar los movimientos con fuerza o meter dedos/objetos en la boca.",
+          "Apartar objetos duros o cortantes del entorno con los que pueda golpearse.",
+          "Cronometrar la duración de la crisis y observar cómo se mueve para informar al médico."
+        ],
+        homeCare: `• Qué hacer:
+  1. Mantener la calma y llamar al 112 o pedir auxilio sanitario.
+  2. Colocar al niño en el suelo acostado de lado (posición lateral de seguridad) con la cabeza ladeada para que no aspire saliva o vómito.
+  3. Aflojar cuellos, ropa apretada y retirar gafas u objetos cercanos.
+  4. Observar la hora de inicio, cuánto dura la crisis y qué partes del cuerpo tiemblan.
+  5. Una vez terminada, dejarle descansar y dormir en un lugar seguro.
+• Qué NO se debe hacer JAMÁS:
+  - NO intentar sujetar o inmovilizar sus brazos o piernas a la fuerza.
+  - NO meter nada en su boca (ni cucharas, ni dedos, ni pañuelos) ni forzar la apertura de dientes.
+  - NO dar agua, alimentos ni medicamentos por boca durante la crisis.`,
+        alarmSigns: `• La convulsión dura más de 5 minutos seguidos.
+• El niño no recupera la consciencia o continúa adormilado y sin reaccionar tras finalizar la crisis.
+• Se repite una segunda convulsión en el mismo día.
+• Aparece dificultad respiratoria grave o color azulado en labios tras la crisis.`,
+        whenDoctor: `• Todo primer episodio de convulsión febril debe ser valorado por un médico tras la crisis.`,
+        prevention: `• Las convulsiones febriles son en su mayoría benignas y no producen secuelas neurológicas ni epilepsia futura en el niño sano.`,
+        dirayaSummary: `INSTRUCCIÓN A PADRES TRAS CRISIS CONVULSIVA FEBRIL INFANTIL.
+- Paciente recuperado de fase postcrítica, exploración neurológica normal.
+- Se instruye a progenitores en técnica de Posición Lateral de Seguridad y despeje del entorno.
+- Énfasis en qué NO hacer: prohibición de introducir objetos en la boca y no sujeción forzada de extremidades.
+- Explicada la naturaleza habitualmente benigna y autolimitada del cuadro.
+- Pauta de llamada al 112 si la crisis supera 5 minutos o si no hay recuperación de consciencia.`
+      },
+      {
+        id: "picaduras",
+        category: "pediatria",
+        badge: "Dermatología / Urgencias",
+        badgeClass: "badge-seg",
+        title: "Picaduras de Insectos y Medusas",
+        summary: "Tratamiento domiciliario de picaduras de artrópodos e himenópteros y protocolo de lavado exclusivo con agua de mar en medusas.",
+        points: [
+          "Insectos: Lavar con agua fresca y jabón, frío local y calamina/amoníaco (no en mucosas).",
+          "Abejas: Extraer el aguijón con pinzas sin exprimir el saco de veneno.",
+          "Medusas: Lavar EXCLUSIVAMENTE con agua de mar (NUNCA agua dulce) y retirar restos con plástico rígido.",
+          "Alarma anafiláctica: Hinchazón facial/lingual, dificultad respiratoria, mareo (llamar 112)."
+        ],
+        homeCare: `• Picadura de insecto habitual:
+  - Lavar con agua limpia y jabón.
+  - Aplicar frío local envuelto en un paño durante 10-15 minutos.
+  - Para el picor intenso: aplicar loción de calamina o barrita de amoníaco (evitar ojos, boca y mucosas).
+• Picadura de abeja:
+  - Si el aguijón está clavado, extraerlo suavemente con pinzas desde la base sin comprimir el veneno.
+• Picadura de medusa:
+  - Lavar la zona SIEMPRE con agua de mar. El agua dulce rompe los restos de tentáculos y libera más toxina.
+  - Retirar restos de tentáculos raspando suavemente con el borde de un plástico rígido (tarjeta). No frotar con toallas ni arena.
+  - Aplicar hielo dentro de una bolsa plástica seca durante 15 minutos y desinfectar la herida con antiséptico.`,
+        alarmSigns: `• Dificultad para respirar, silbidos en el pecho o sensación de cierre de garganta.
+• Hinchazón llamativa en labios, párpados, lengua o picor intenso en palmas y plantas.
+• Picaduras en el interior de la boca o de la garganta.
+• Mareo intenso, debilidad extrema o pérdida de conocimiento.
+• Picaduras de medusa con calambres musculares generalizados, náuseas y malestar severo.`,
+        whenDoctor: `• Si la inflamación sigue creciendo tras 24-48 horas o presenta supuración por sobreinfección.`,
+        prevention: `• Usar repelentes homologados y evitar perfumes dulces en zonas de campo o playa.`,
+        dirayaSummary: `MANEJO Y CUIDADOS AL ALTA POR PICADURA DE INSECTO / MEDUSA.
+- Lesión tratada y limpia en SUH Antequera, sin signos de afectación sistémica ni anafilaxia.
+- Se instruye en aplicación de frío local y lavado con agua salada marina (en medusas, desaconsejando agua dulce).
+- Se prohíbe el rascado y se explican signos precoces de reacción anafiláctica y anafilaxia para llamada al 112.`
+      },
+      {
+        id: "hta",
+        category: "preventiva",
+        badge: "Cardiovascular",
+        badgeClass: "badge-prev",
+        title: "Hipertensión Arterial (HTA)",
+        summary: "Control domiciliario de presión arterial, dieta hiposódica, actividad física regular y manejo de crisis hipertensiva.",
+        points: [
+          "Cifras de alarma: Presión arterial superior a 180/110 mmHg.",
+          "Cocinar sin sal y suprimir aperitivos industriales, embutidos y conservas saladas.",
+          "Caminar al menos 1 hora diaria a ritmo constante y moderar el alcohol.",
+          "Cumplir la medicación pautada a diario sin suspenderla aunque la tensión esté normal."
+        ],
+        homeCare: `• Registro: Medir y anotar la tensión arterial periódicamente (en reposo, sentado y relajado durante 5 minutos).
+• Sal y dieta: Cocinar sin sal. Evitar alimentos precocinados, embutidos, quesos curados y patatas fritas. Potenciar verduras y legumbres.
+• Medicación: Tomar las pastillas de la tensión todos los días a la misma hora. No dejarlas nunca por encontrarse bien.
+• Estilo de vida: Caminar a paso ligero una hora todos los días. Evitar el tabaco por completo.
+• Alcohol: Cuanto menos mejor; evitar bebidas alcohólicas de alta graduación.`,
+        alarmSigns: `• Cifras de presión arterial mantenidas por encima de 180 mmHg de máxima o 110 mmHg de mínima.
+• Dolor u opresión en el centro del pecho o sensación de falta de aire brusca.
+• Dolor de cabeza muy intenso y repentino que no mejora con analgésicos.
+• Pérdida repentina de fuerza o sensibilidad en la cara, brazo o pierna.
+• Dificultad para hablar o visión borrosa brusca.`,
+        whenDoctor: `• Si las cifras de tensión arterial se mantienen habitualmente por encima de 140/90 mmHg en reposo.`,
+        prevention: `• Mantener un peso corporal adecuado y controlar el estrés diario.`,
+        dirayaSummary: `EDUCACIÓN SANITARIA EN HIPERTENSIÓN ARTERIAL (HTA).
+- Paciente estabilizado en observación del SUH Antequera.
+- Instruido en técnica domiciliaria de automedida de PA y registro escrito para su MAP/Enfermera de familia.
+- Pauta estricta de restricción sódica dietética y fomento de ejercicio aeróbico diario (caminar 1h).
+- Explicada importancia de la adherencia terapéutica continuada. Criterios de crisis hipertensiva entregados.`
+      },
+      {
+        id: "estilo-vida",
+        category: "preventiva",
+        badge: "Estilo de Vida",
+        badgeClass: "badge-prev",
+        title: "Autocuidado, Marcha y Sueño",
+        summary: "Decálogo del autocuidado en salud de la Junta de Andalucía, pauta de caminar diario 1 hora e higiene del sueño reparador.",
+        points: [
+          "Caminar una hora diaria a ritmo que permita conversar cómodamente.",
+          "Higiene del sueño: 8 horas diarias continuadas, cenar ligero 2-3h antes y sin pantallas.",
+          "Decálogo de salud: Dieta mediterránea, alcohol cero en grupos de riesgo, actividad física y risa.",
+          "Cribado poblacional de cáncer de colon: Test de Sangre Oculta en Heces (TSOH) bienal (50-69 años)."
+        ],
+        homeCare: `• Caminar cada día: Salir a pasear 60 minutos al día en terreno llano, con calzado cómodo. Comenzar despacio y acelerar hasta una marcha constante.
+• Hidratación: Beber un vaso de agua antes y después de la caminata.
+• Higiene del sueño: Mantener horarios regulares para acostarse y levantarse. Dormir en un dormitorio oscuro, fresco y silencioso.
+• Pantallas: Apagar móviles, tablets y televisión al menos 30-60 minutos antes de acostarse.
+• Prevención cáncer de colon: Si tiene entre 50 y 69 años, realice el test de sangre oculta en heces cada 2 años en su Centro de Salud.`,
+        alarmSigns: `• Durante la caminata: dolor o presión en el pecho, mareo, fatiga extrema o respiración jadeante.`,
+        whenDoctor: `• Si presenta insomnio crónico que afecta a sus actividades de la vida diaria.`,
+        prevention: `• Mantener una actitud positiva, conectar con la comunidad y reír a menudo por sus beneficios neurobiológicos.`,
+        dirayaSummary: `PROMOCIÓN DE LA SALUD Y ESTILOS DE VIDA SALUDABLES.
+- Entrega y explicación del Decálogo de Autocuidado del Servicio Andaluz de Salud / ASNM.
+- Prescripción enfermera de actividad física aeróbica adaptada (caminar 1h/día).
+- Pauta de higiene del sueño para pacientes con trastornos del descanso. Información sobre cribado TSOH.`
+      },
+      {
+        id: "tabaco",
+        category: "preventiva",
+        badge: "Deshabituación",
+        badgeClass: "badge-prev",
+        title: "Deshabituación Tabáquica (Plan Antitabaco)",
+        summary: "Estrategias para dejar de fumar avaladas por el Ministerio de Sanidad y SEDET. Desmitificación, Día D y uso de App S'Acabó.",
+        points: [
+          "Fumar estresa, no relaja: la nicotina es un estimulante y la calma solo alivia la abstinencia.",
+          "Fijar una fecha límite firme ('Día D') y retirar ceniceros, mecheros y paquetes del entorno.",
+          "Apoyo digital con la App S'Acabó (SEDET) y consulta de deshabituación en Atención Primaria.",
+          "Los intentos previos son aprendizajes que multiplican las probabilidades de éxito final."
+        ],
+        homeCare: `• Decisión firme: El tabaco no tiene ningún nivel de consumo seguro. Dejarlo aporta beneficios cardiorrespiratorios inmediatos desde el primer día.
+• Plan de acción:
+  1. Elegir un 'Día D' en las próximas 2 semanas y comunicarlo a familiares y amigos.
+  2. Retirar mecheros, ceniceros y tabaco de casa y del coche.
+  3. Identificar momentos de riesgo (café, sobremesa, salidas) y planificar alternativas saludables (pasear, beber agua, fruta).
+• Soporte tecnológico: Descargar la App oficial 'S'Acabó' (SEDET) para registrar progresos y calcular el dinero ahorrado.
+• Ayuda sanitaria: Consultar en su Centro de Salud sobre los programas de apoyo y tratamientos farmacológicos financiados.`,
+        alarmSigns: `• El síndrome de abstinencia alcanza su pico en las primeras 48-72h y disminuye notablemente después.`,
+        whenDoctor: `• Para valoración de tratamiento farmacológico de cesación tabáquica en Atención Primaria.`,
+        prevention: `• Si sufre una recaída puntual, no se desanime: analice el desencadenante y retome el plan de no fumar de inmediato.`,
+        dirayaSummary: `CONSEJO SANITARIO BREVE Y DESHABITUACIÓN TABÁQUICA.
+- Se ofrece consejo antitabaco firme y motivacional de acuerdo al PAI del SAS.
+- Desmitificada la falsa creencia de relajación y reforzados beneficios inmediatos de la cesación.
+- Se orienta hacia fijación del 'Día D' y derivación al programa de tabaquismo de su Centro de Salud.
+- Recomendada descarga de la aplicación S'Acabó de la SEDET.`
+      },
+      {
+        id: "seguridad-medicacion",
+        category: "seguridad",
+        badge: "Seguridad Clínica",
+        badgeClass: "badge-seg",
+        title: "5 Momentos del Uso Seguro de Medicamentos",
+        summary: "Estrategia de la OMS y Ministerio de Sanidad para prevenir errores de medicación en el paciente y cuidadores.",
+        points: [
+          "Momento 1 (Al empezar): Conocer nombre, para qué sirve y avisar de alergias previas.",
+          "Momento 2 (Al tomar): Conocer dosis exacta, horario y conservar en envase original.",
+          "Momento 3 (Al añadir): Comprobar interacciones con medicación previa y no automedicarse.",
+          "Momento 4 (Al revisar): Mantener lista actualizada de fármacos y acordar fecha de revisión.",
+          "Momento 5 (Al finalizar): Saber cuándo suspender y desechar caducados en punto SIGRE."
+        ],
+        homeCare: `• 1. Antes de empezar: Pregunte a su médico o enfermera qué medicamento es, para qué sirve y cuáles son sus efectos secundarios frecuentes.
+• 2. Al tomarlo: Asegúrese de tomar la dosis exacta a la hora indicada. Consérvelo en su caja original con su prospecto.
+• 3. Al añadir otro fármaco: Informe siempre de todos los medicamentos, hierbas, vitaminas o suplementos que ya toma para evitar interacciones.
+• 4. Cuando revisan su tratamiento: Lleve siempre una lista escrita y actualizada de todos sus medicamentos a cualquier consulta médica o de urgencias.
+• 5. Antes de finalizarlo: No deje de tomar la medicación por su cuenta sin consultar. Pregunte si debe retirarse de golpe o de forma gradual.`,
+        alarmSigns: `• Aparición de erupción en la piel, hinchazón en la cara o dificultad respiratoria tras tomar un medicamento nuevo.
+• Confusión, mareo severo o sangrado tras combinar fármacos.`,
+        whenDoctor: `• Ante cualquier duda sobre la posología o sospecha de efecto adverso indeseado.`,
+        prevention: `• Utilice la App oficial CIMA de la AEMPS para consultar prospectos actualizados desde su teléfono móvil.`,
+        dirayaSummary: `EDUCACIÓN SANITARIA EN EL USO SEGURO DE MEDICAMENTOS (OMS / SAS).
+- Instrucción en los '5 Momentos Clave para la Seguridad de la Medicación'.
+- Verificada comprensión de la posología, vía, horarios y conservación del tratamiento prescrito en el SUH.
+- Recomendado uso de pastillero semanal y registro por escrito. Criterios de sospecha de RAM explicados.`
+      },
+      {
+        id: "salud-mental",
+        category: "seguridad",
+        badge: "Salud Mental",
+        badgeClass: "badge-seg",
+        title: "Apoyo Emocional, Línea 024 y Violencia de Género",
+        summary: "Recursos de protección ante crisis de sufrimiento emocional agudo, prevención de la conducta suicida y red de apoyo del SAS.",
+        points: [
+          "Línea 024: Teléfono público, gratuito, confidencial y 24 horas de atención a la conducta suicida.",
+          "Tarjeta cortafuegos: Plan de seguridad, identificar persona de apoyo y alejarse de medios lesivos.",
+          "Violencia de género: Red de asistencia multidisciplinar y protocolos de protección en Urgencias ASNM.",
+          "App CARS (Hospital Valdecilla) para la monitorización de conductas de riesgo autolesivo."
+        ],
+        homeCare: `• Frente a una crisis de angustia o sufrimiento agudo:
+  - No permanezca solo. Contacte y esté con un familiar, amigo o persona de confianza.
+  - Recuerde que los pensamientos dolorosos son temporales aunque en este momento parezcan abrumadores.
+  - Aléjese de cualquier objeto o medio peligroso.
+  - No consuma alcohol ni drogas, ya que aumentan la impulsividad y la desesperanza.
+  - Llame de inmediato a la Línea 024 o al 112: hay profesionales especializados dispuestos a escucharle y ayudarle.
+• Violencia de género: Si vive una situación de maltrato o violencia machista, comuníquelo con confianza a su enfermera o médico de urgencias. El SAS dispone de protocolo de acogida confidencial, derivación y protección inmediata.`,
+        alarmSigns: `• Impulso urgente o pensamientos intensos e incontrolables de querer hacerse daño.
+• Sensación de colapso emocional o desesperanza extrema.`,
+        whenDoctor: `• Acudir de inmediato al Servicio de Urgencias del Hospital de Antequera o llamar al 112 / 024.`,
+        prevention: `• Confeccionar una 'tarjeta cortafuegos' con teléfonos de personas queridas a las que llamar antes de actuar.`,
+        dirayaSummary: `INTERVENCIÓN Y APOYO EN SALUD MENTAL / DERIVACIÓN Y PROTECCIÓN.
+- Paciente valorado en SUH Antequera; se entrega y refuerza plan de seguridad / tarjeta cortafuegos.
+- Informado sobre disponibilidad 24 horas y gratuidad de la Línea 024 y contacto 112.
+- Se garantiza acompañamiento por persona de apoyo identificada y continuidad asistencial en Salud Mental / Trabajo Social del ASNM.`
+      }
+    ];
+
+    let currentCategory = 'all';
+
+    /* INICIALIZACIÓN */
+    document.addEventListener('DOMContentLoaded', () => {
+      renderProtocols();
+      populateSelects();
+      updateDirayaText();
+      
+      // Fecha en hoja de impresión
+      const today = new Date();
+      const options = { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' };
+      document.getElementById('p-date').value = today.toLocaleDateString('es-ES', options);
+      document.getElementById('print-current-date').innerText = 'Fecha: ' + today.toLocaleDateString('es-ES');
+      
+      // Tema Oscuro
+      document.getElementById('btn-toggle-dark').addEventListener('click', () => {
+        document.body.classList.toggle('dark-mode');
+      });
+    });
+
+    /* CAMBIO DE PESTAÑAS */
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('.tab-pane').forEach(pane => pane.classList.remove('active'));
+
+      const targetPane = document.getElementById(`pane-${tabId}`);
+      if (targetPane) targetPane.classList.add('active');
+
+      // Botón correspondiente
+      const tabButtons = document.querySelectorAll('.tab-btn');
+      if (tabId === 'explorer') tabButtons[0].classList.add('active');
+      if (tabId === 'print') tabButtons[1].classList.add('active');
+      if (tabId === 'diraya') tabButtons[2].classList.add('active');
+      if (tabId === 'directory') tabButtons[3].classList.add('active');
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    /* RENDER DE PROTOCOLOS */
+    function renderProtocols() {
+      const grid = document.getElementById('protocols-grid');
+      grid.innerHTML = '';
+
+      const query = document.getElementById('search-input').value.toLowerCase();
+
+      const filtered = protocolsData.filter(item => {
+        const matchesCategory = currentCategory === 'all' || item.category === currentCategory;
+        const matchesQuery = item.title.toLowerCase().includes(query) ||
+                             item.summary.toLowerCase().includes(query) ||
+                             item.points.some(p => p.toLowerCase().includes(query));
+        return matchesCategory && matchesQuery;
+      });
+
+      if (filtered.length === 0) {
+        grid.innerHTML = `
+          <div style="grid-column: 1/-1; text-align: center; padding: 3rem; background: var(--card-bg); border-radius: var(--radius-lg); border: 1px dashed var(--border-color);">
+            <svg width="48" height="48" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" style="margin: 0 auto 1rem; color: var(--gray-400);"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+            <h4 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 0.25rem;">No se encontraron guías clínicas</h4>
+            <p style="font-size: 0.875rem; color: var(--gray-500);">Prueba a buscar con otro término o selecciona "Todas las categorías".</p>
+          </div>
+        `;
+        return;
+      }
+
+      filtered.forEach(proto => {
+        const card = document.createElement('div');
+        card.className = 'protocol-card';
+        card.innerHTML = `
+          <span class="card-badge ${proto.badgeClass}">${proto.badge}</span>
+          <h3 class="protocol-title">${proto.title}</h3>
+          <p class="protocol-desc">${proto.summary}</p>
+          <ul class="protocol-summary-points">
+            ${proto.points.map(pt => `
+              <li>
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>
+                <span>${pt}</span>
+              </li>
+            `).join('')}
+          </ul>
+          <div class="protocol-card-actions">
+            <button class="btn btn-primary btn-sm" style="flex:1;" onclick="openProtocolModal('${proto.id}')">
+              <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+              Ver Guía Completa
+            </button>
+            <button class="btn btn-outline btn-sm" style="color:var(--gray-700); border-color:var(--border-color);" title="Cargar en Hoja de Impresión" onclick="loadAndSwitchToPrint('${proto.id}')">
+              <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/></svg>
+            </button>
+            <button class="btn btn-accent btn-sm" title="Copiar formato Diraya" onclick="loadAndSwitchToDiraya('${proto.id}')">
+              <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+            </button>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    function setCategoryFilter(cat, btnElement) {
+      currentCategory = cat;
+      document.querySelectorAll('.chip-btn').forEach(btn => btn.classList.remove('active'));
+      btnElement.classList.add('active');
+      renderProtocols();
+    }
+
+    function filterProtocols() {
+      renderProtocols();
+    }
+
+    function resetFilters() {
+      document.getElementById('search-input').value = '';
+      currentCategory = 'all';
+      document.querySelectorAll('.chip-btn').forEach(btn => btn.classList.remove('active'));
+      document.querySelector('.chip-btn[data-category="all"]').classList.add('active');
+      renderProtocols();
+    }
+
+    /* MODAL DE DETALLES */
+    function openProtocolModal(id) {
+      const proto = protocolsData.find(p => p.id === id);
+      if (!proto) return;
+
+      document.getElementById('m-badge').className = `card-badge ${proto.badgeClass}`;
+      document.getElementById('m-badge').innerText = proto.badge;
+      document.getElementById('m-title').innerText = proto.title;
+
+      const body = document.getElementById('m-body');
+      body.innerHTML = `
+        <div class="section-block">
+          <div class="section-title">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+            Cuidados en Domicilio y Pauta Terapéutica
+          </div>
+          <div style="white-space: pre-line;">${proto.homeCare}</div>
+        </div>
+
+        <div class="warning-box">
+          <div class="warning-title">
+            <svg width="20" height="20" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/></svg>
+            Signos de Alarma — Cuándo acuidir de inmediato a Urgencias (SUH / 112)
+          </div>
+          <div style="white-space: pre-line; color: #991b1b; font-size: 0.9rem;">${proto.alarmSigns}</div>
+        </div>
+
+        <div class="section-block">
+          <div class="section-title" style="color: #0284c7;">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+            Cuándo consultar en Atención Primaria (Médico / Pediatra / Enfermera)
+          </div>
+          <div style="white-space: pre-line;">${proto.whenDoctor}</div>
+        </div>
+
+        <div class="section-block">
+          <div class="section-title" style="color: #0d9488;">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+            Prevención y Estilo de Vida
+          </div>
+          <div style="white-space: pre-line;">${proto.prevention}</div>
+        </div>
+
+        <div style="display:flex; justify-content: flex-end; gap: 0.75rem; margin-top: 1rem;">
+          <button class="btn btn-outline" style="color:var(--gray-700); border-color:var(--border-color);" onclick="closeModal()">Cerrar</button>
+          <button class="btn btn-light" onclick="loadAndSwitchToPrint('${proto.id}'); closeModal();">Cargar en Hoja de Paciente</button>
+          <button class="btn btn-primary" onclick="loadAndSwitchToDiraya('${proto.id}'); closeModal();">Pasar a Diraya</button>
+        </div>
+      `;
+
+      document.getElementById('protocol-modal').classList.add('active');
+    }
+
+    function closeModal() {
+      document.getElementById('protocol-modal').classList.remove('active');
+    }
+
+    function closeModalOnBackdrop(e) {
+      if (e.target.id === 'protocol-modal') {
+        closeModal();
+      }
+    }
+
+    /* POBLAR SELECTS Y ENLAZAR */
+    function populateSelects() {
+      const selectPrint = document.getElementById('select-print-protocol');
+      const selectDiraya = document.getElementById('diraya-proto-select');
+
+      protocolsData.forEach(p => {
+        const opt1 = document.createElement('option');
+        opt1.value = p.id;
+        opt1.textContent = `${p.title} (${p.badge})`;
+        selectPrint.appendChild(opt1);
+
+        const opt2 = document.createElement('option');
+        opt2.value = p.id;
+        opt2.textContent = p.title;
+        selectDiraya.appendChild(opt2);
+      });
+    }
+
+    /* CARGAR EN IMPRESIÓN */
+    function loadProtocolIntoPrint(id) {
+      const proto = protocolsData.find(p => p.id === id);
+      if (!proto) return;
+
+      document.getElementById('p-diag').value = proto.title;
+      document.getElementById('print-sheet-title').innerText = 'RECOMENDACIONES: ' + proto.title.toUpperCase();
+      document.getElementById('print-home-care').innerText = proto.homeCare;
+      document.getElementById('print-prevention').innerText = proto.prevention + '\n\n' + proto.whenDoctor;
+      document.getElementById('print-alarm-signs').innerText = proto.alarmSigns;
+    }
+
+    function loadAndSwitchToPrint(id) {
+      document.getElementById('select-print-protocol').value = id;
+      loadProtocolIntoPrint(id);
+      switchTab('print');
+    }
+
+    /* CONFIGURAR DIRAYA */
+    function loadAndSwitchToDiraya(id) {
+      document.getElementById('diraya-proto-select').value = id;
+      updateDirayaText();
+      switchTab('diraya');
+    }
+
+    function updateDirayaText() {
+      const protoId = document.getElementById('diraya-proto-select').value || protocolsData[0].id;
+      const proto = protocolsData.find(p => p.id === protoId) || protocolsData[0];
+      const tolerancia = document.getElementById('diraya-tol-select').value;
+      const receptor = document.getElementById('diraya-rec-select').value;
+
+      const digitalTools = [];
+      if (document.getElementById('chk-clicsalud').checked) digitalTools.push("ClicSalud+");
+      if (document.getElementById('chk-saludand').checked) digitalTools.push("App Salud Andalucía");
+      if (document.getElementById('chk-cima').checked) digitalTools.push("AEMPS CIMA");
+      if (document.getElementById('chk-sacabo').checked) digitalTools.push("App S'Acabó (SEDET)");
+
+      const digitalStr = digitalTools.length > 0 ? digitalTools.join(", ") : "Ninguna prescripción digital adicional.";
+
+      const text = 
+`================================================================================
+REGISTRO DE CONTINUIDAD DE CUIDADOS AL ALTA — SERVICIO DE URGENCIAS ANTEQUERA
+ÁREA DE GESTIÓN SANITARIA NORTE DE MÁLAGA (ASNM) • DIRAYA CLÍNICO
+================================================================================
+FECHA/HORA: ${new Date().toLocaleString('es-ES')}
+PROCESO ATENDIDO: ${proto.title.toUpperCase()}
+VALORACIÓN CLÍNICA AL ALTA:
+- ${tolerancia}
+- Sin signos de compromiso agudo ni datos de alarma presentes en el momento del alta.
+
+INTERVENCIONES DE ENFERMERÍA AL ALTA (TAXONOMÍA NIC):
+• NIC 5602 - Enseñanza: proceso de enfermedad:
+  ${proto.points.join('\n  ')}
+• NIC 5616 - Enseñanza: medicamentos prescritos:
+  Se instruye en pauta farmacológica pautada, posología exacta, horarios y duración. Se enfatiza el uso seguro de fármacos evitando la automedicación.
+• NIC 5604 - Enseñanza: dieta prescrita y autocuidado:
+  Pautas de hidratación y régimen dietético domiciliario adaptado a la patología.
+• NIC 6610 - Identificación de riesgos:
+  Adiestramiento intensivo en signos de alarma para reconsulta urgente:
+  ${proto.alarmSigns.replace(/\n/g, '\n  ')}
+
+RECURSOS Y EDUCACIÓN DIGITAL:
+- Hoja de recomendaciones escrita oficial del SUH Antequera entregada en mano a: ${receptor}.
+- Canales digitales recomendados: ${digitalStr}.
+- Cita de seguimiento programada/aconsejada con su Médico/Pediatra y Enfermera de Familia en AP (48-72h).
+
+RESULTADOS DE ENFERMERÍA (TAXONOMÍA NOC):
+• NOC 1803 - Conocimiento: proceso de la enfermedad: Grado 4 (Conocimiento sustancial demostrado por el receptor).
+• NOC 1813 - Conocimiento: régimen terapéutico: El paciente/familiar verbaliza adecuadamente las pautas y signos de alarma. Resueltas todas las dudas planteadas.
+
+Alta a domicilio desde UGC Urgencias Hospital de Antequera.
+================================================================================`;
+
+      document.getElementById('diraya-text').innerText = text;
+    }
+
+    function copyDirayaToClipboard() {
+      const text = document.getElementById('diraya-text').innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        const banner = document.getElementById('copy-banner');
+        banner.style.display = 'flex';
+        setTimeout(() => {
+          banner.style.display = 'none';
+        }, 4000);
+      });
+    }
+  </script>
+
+<!-- Barra común del Portal SUH Antequera -->
+<style>
+  .suhdock{position:fixed;left:14px;bottom:14px;z-index:2147483000;display:flex;align-items:center;gap:4px;padding:5px;border-radius:999px;background:#0c2a4a;box-shadow:0 10px 30px -8px rgba(12,42,74,.55);font:600 13px/1 'Plus Jakarta Sans',system-ui,-apple-system,'Segoe UI',sans-serif;transition:opacity .2s}
+  .suhdock a{display:inline-flex;align-items:center;justify-content:center;gap:7px;height:34px;min-width:34px;padding:0 9px;border-radius:999px;color:#fff;text-decoration:none}
+  .suhdock a:hover{background:rgba(255,255,255,.14)}
+  .suhdock a.suhdock-home{background:#fff;color:#0c2a4a;padding:0 12px 0 4px}
+  .suhdock a.suhdock-home img{width:26px;height:26px;border-radius:50%;object-fit:contain;background:#fff}
+  .suhdock svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  .suhdock .suhdock-x{opacity:.6;min-width:26px;padding:0}
+  .suhdock.suhdock-min a:not(.suhdock-home){display:none}
+  .suhdock.suhdock-min a.suhdock-home span{display:none}
+  .suhdock.suhdock-min a.suhdock-home{padding:0 4px}
+  @media print{.suhdock{display:none!important}}
+</style>
+<nav class="suhdock" aria-label="Portal SUH Antequera">
+  <a class="suhdock-home" href="../index.html#herramientas" title="Volver al Portal de Supervisión SUH Antequera"><img src="../img/logo-suh.jpg" alt=""><span>Portal SUH</span></a>
+  <a href="https://www.instagram.com/suh_antequera_/" target="_blank" rel="noopener" title="Instagram @suh_antequera_"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><path d="M17.5 6.5h.01"/></svg></a>
+  <a href="https://www.facebook.com/p/Suh-Antequera-61568582212569/" target="_blank" rel="noopener" title="Facebook SUH Antequera"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+  <a href="https://x.com/saludnortemalag" target="_blank" rel="noopener" title="X @saludnortemalag" style="font-size:15px">𝕏</a>
+  <a class="suhdock-x" href="#" title="Minimizar barra" onclick="this.parentNode.classList.toggle('suhdock-min');return false;"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></a>
+</nav>
+</body>
+</html>

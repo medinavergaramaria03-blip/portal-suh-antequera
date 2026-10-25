@@ -1,0 +1,1403 @@
+<!doctype html><html><head>
+  <meta name="robots" content="noindex, nofollow"><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Código Trauma Antequera</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Mono:wght@500;600&family=Public+Sans:wght@400;500;600;700&display=swap">
+<style>
+/* Concepto: tablero de sala de críticos. Cabecera de señalización, pestañas fijas, formulario a la izquierda y panel de situación fijo a la derecha. */
+:root{
+  --bg:#EFF3F4; --surface:#FFFFFF; --surface2:#F5F8F9; --ink:#13242B; --muted:#55666E; --line:#D3DCDF;
+  --accent:#0C6670; --accent-ink:#FFFFFF; --accent-soft:#DDEFF1;
+  --p1:#C0272D; --p1-soft:#FBE4E4; --p2:#9A6700; --p2-soft:#FFF1CC; --p3:#2B7A3D; --p3-soft:#E0F2E4;
+  --info:#3B4E9E; --info-soft:#E4E8F8; --focus:#0C6670;
+  --f-display:'Barlow Condensed','Arial Narrow',sans-serif;
+  --f-body:'Public Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --f-mono:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0E181C; --surface:#152227; --surface2:#1B2B31; --ink:#E7EFF1; --muted:#9DB0B7; --line:#2A3C43;
+  --accent:#5CC4CE; --accent-ink:#06191C; --accent-soft:#173A40;
+  --p1:#FF7A7F; --p1-soft:#3A1B1E; --p2:#F0B843; --p2-soft:#3A2E10; --p3:#6FD08A; --p3-soft:#17301E;
+  --info:#9DB0FF; --info-soft:#1E2547; --focus:#5CC4CE; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0E181C; --surface:#152227; --surface2:#1B2B31; --ink:#E7EFF1; --muted:#9DB0B7; --line:#2A3C43;
+  --accent:#5CC4CE; --accent-ink:#06191C; --accent-soft:#173A40;
+  --p1:#FF7A7F; --p1-soft:#3A1B1E; --p2:#F0B843; --p2-soft:#3A2E10; --p3:#6FD08A; --p3-soft:#17301E;
+  --info:#9DB0FF; --info-soft:#1E2547; --focus:#5CC4CE; color-scheme:dark}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font:15px/1.5 var(--f-body);padding-inline:max(16px,env(safe-area-inset-left,0px)) max(16px,env(safe-area-inset-right,0px));padding-block:0 48px;-webkit-text-size-adjust:100%}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--surface);z-index:30}
+main,.foot{max-width:1220px;margin-inline:auto}
+.mini{display:none}
+h1,h2,h3,h4{font-family:var(--f-display);letter-spacing:.01em;text-wrap:balance;margin:0}
+h2{font-size:28px;font-weight:700;line-height:1.1}
+h3{font-size:21px;font-weight:600;line-height:1.15}
+h4{font-size:15px;font-weight:600;font-family:var(--f-body);margin:0}
+p{margin:0}
+a{color:var(--accent)}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:4px}
+.mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+.muted{color:var(--muted)}
+.small{font-size:13px}
+.ref{font-family:var(--f-mono);font-size:11.5px;color:var(--muted);letter-spacing:.02em}
+
+/* cabecera */
+.top{background:var(--surface);margin-inline:calc(-1*max(16px,env(safe-area-inset-left,0px)));padding-inline:max(16px,env(safe-area-inset-left,0px));border-bottom:1px solid var(--line)}
+.top-in{max-width:1220px;margin:0 auto;display:flex;align-items:center;gap:16px;flex-wrap:wrap;padding-block:14px 12px}
+.sign{width:46px;height:46px;border-radius:8px;background:var(--p1);color:#fff;display:grid;place-items:center;font-family:var(--f-display);font-weight:700;font-size:30px;line-height:1;flex:none}
+.brand{min-width:0;flex:1}
+.brand h1{font-size:34px;font-weight:700;line-height:1}
+.brand p{color:var(--muted);font-size:13.5px;margin-top:3px}
+.docchip{font-family:var(--f-mono);font-size:11.5px;color:var(--muted);border:1px solid var(--line);padding:4px 8px;border-radius:6px;white-space:nowrap}
+.themebtn{min-height:36px}
+
+/* pestañas */
+.tabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--surface);margin-inline:calc(-1*max(16px,env(safe-area-inset-left,0px)));padding-inline:max(16px,env(safe-area-inset-left,0px));border-bottom:1px solid var(--line)}
+.tabs-in{max-width:1220px;margin:0 auto;display:flex;gap:2px;overflow-x:auto;scrollbar-width:none}
+.tabs-in::-webkit-scrollbar{display:none}
+.tab{appearance:none;background:none;border:0;border-bottom:3px solid transparent;color:var(--muted);font:600 14px var(--f-body);padding:12px 14px 10px;cursor:pointer;white-space:nowrap;min-height:44px}
+.tab:hover{color:var(--ink)}
+.tab[aria-selected="true"]{color:var(--accent);border-bottom-color:var(--accent)}
+.view{display:none;padding-top:22px}
+.view.on{display:block}
+.view-head{display:flex;flex-direction:column;gap:4px;margin-bottom:18px;max-width:78ch}
+.view-head p{color:var(--muted)}
+
+/* layout caso */
+.case{display:grid;grid-template-columns:minmax(0,1fr) 370px;gap:22px;align-items:start}
+.panel{position:sticky;top:calc(env(safe-area-inset-top,0px) + 56px);display:flex;flex-direction:column;gap:12px;max-height:calc(100vh - 70px);overflow-y:auto;padding-bottom:6px}
+.stack{display:flex;flex-direction:column;gap:18px;min-width:0}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:18px;min-width:0}
+.card>h3{margin-bottom:4px}
+.card>.lead{color:var(--muted);font-size:13.5px;margin-bottom:14px}
+.secnum{font-family:var(--f-mono);font-size:11.5px;color:var(--muted);letter-spacing:.06em;text-transform:uppercase;display:block;margin-bottom:2px}
+.grid{display:grid;gap:12px 14px}
+.g2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.g3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.g4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.span2{grid-column:span 2}
+.field{display:flex;flex-direction:column;gap:4px;min-width:0}
+.field>label,.lbl{font-size:12.5px;font-weight:600;color:var(--muted);letter-spacing:.01em}
+input[type=text],input[type=number],input[type=time],select,textarea{font:inherit;color:var(--ink);background:var(--surface2);border:1px solid var(--line);border-radius:7px;padding:9px 10px;min-height:42px;width:100%;min-width:0}
+textarea{min-height:68px;resize:vertical;line-height:1.4}
+input:focus,select:focus,textarea:focus{border-color:var(--accent)}
+.input-unit{position:relative}
+.input-unit input{padding-right:46px}
+.input-unit span{position:absolute;right:10px;top:50%;transform:translateY(-50%);font-size:12px;color:var(--muted);pointer-events:none}
+.sub{font-family:var(--f-display);font-size:18px;font-weight:600;margin:18px 0 8px;display:flex;align-items:center;gap:8px}
+.sub:first-child{margin-top:0}
+.sub .pill{font-family:var(--f-body)}
+
+.chks{display:grid;gap:6px}
+.chks.two{grid-template-columns:repeat(2,minmax(0,1fr))}
+.chk{display:flex;gap:10px;align-items:flex-start;padding:8px 10px;border:1px solid var(--line);border-radius:7px;background:var(--surface2);cursor:pointer;line-height:1.35;font-size:14px;min-height:42px}
+.chk:hover{border-color:var(--accent)}
+.chk input{margin:2px 0 0;width:18px;height:18px;flex:none;accent-color:var(--accent)}
+.chk:has(input:checked){background:var(--accent-soft);border-color:var(--accent)}
+.chk.danger:has(input:checked){background:var(--p1-soft);border-color:var(--p1)}
+.radios{display:flex;gap:6px;flex-wrap:wrap}
+.radios label{display:flex;align-items:center;gap:7px;border:1px solid var(--line);background:var(--surface2);border-radius:7px;padding:8px 12px;cursor:pointer;font-size:14px;min-height:42px}
+.radios label:has(input:checked){background:var(--accent-soft);border-color:var(--accent);font-weight:600}
+.radios input{accent-color:var(--accent);width:16px;height:16px;margin:0}
+
+.btn{font:600 14px var(--f-body);border-radius:7px;border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:9px 14px;cursor:pointer;min-height:42px;display:inline-flex;align-items:center;justify-content:center;gap:6px}
+.btn:hover{border-color:var(--accent)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn.danger{border-color:var(--p1);color:var(--p1)}
+.btn.sm{min-height:36px;padding:6px 10px;font-size:13px}
+.btnrow{display:flex;gap:8px;flex-wrap:wrap}
+.pill{display:inline-flex;align-items:center;font:600 11.5px var(--f-body);letter-spacing:.03em;text-transform:uppercase;padding:3px 8px;border-radius:99px;background:var(--surface2);color:var(--muted);border:1px solid var(--line)}
+.pill.red{background:var(--p1-soft);color:var(--p1);border-color:transparent}
+.pill.amber{background:var(--p2-soft);color:var(--p2);border-color:transparent}
+.pill.green{background:var(--p3-soft);color:var(--p3);border-color:transparent}
+.pill.blue{background:var(--info-soft);color:var(--info);border-color:transparent}
+.pill.teal{background:var(--accent-soft);color:var(--accent);border-color:transparent}
+
+/* panel de situación */
+.status{border-radius:10px;padding:16px;border:1px solid var(--line);background:var(--surface)}
+.status .big{font-family:var(--f-display);font-weight:700;font-size:30px;line-height:1.02;margin:6px 0 4px}
+.status.s-none{background:var(--surface)}
+.status.s-p1{background:var(--p1-soft);border-color:var(--p1)}
+.status.s-p1 .big{color:var(--p1)}
+.status.s-p2{background:var(--p2-soft);border-color:var(--p2)}
+.status.s-p2 .big{color:var(--p2)}
+.status.s-p3{background:var(--p3-soft);border-color:var(--p3)}
+.status.s-p3 .big{color:var(--p3)}
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.kpi{background:var(--surface);border:1px solid var(--line);border-radius:9px;padding:10px 10px 8px;min-width:0}
+.kpi b{display:block;font:600 24px/1.1 var(--f-mono);font-variant-numeric:tabular-nums}
+.kpi span{font-size:11.5px;color:var(--muted);line-height:1.2;display:block;margin-top:2px}
+.kpi.bad b{color:var(--p1)}
+.kpi.ok b{color:var(--p3)}
+.alerts{display:flex;flex-direction:column;gap:6px;margin:0;padding:0;list-style:none}
+.alerts li{border-radius:8px;padding:8px 10px;font-size:13.5px;line-height:1.35;background:var(--surface2);border:1px solid var(--line)}
+.alerts li.red{background:var(--p1-soft);border-color:transparent}
+.alerts li.amber{background:var(--p2-soft);border-color:transparent}
+.alerts li.blue{background:var(--info-soft);border-color:transparent}
+.alerts li b{font-weight:700}
+.bar{height:8px;background:var(--surface2);border:1px solid var(--line);border-radius:99px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--accent);width:0;transition:width .25s}
+.team{display:flex;flex-direction:column;gap:4px}
+.team .chk{padding:6px 9px;min-height:36px;font-size:13.5px}
+.team .chk .tg{margin-left:auto;font-size:10.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);font-weight:600;white-space:nowrap;padding-left:6px}
+.team .chk .tg.req{color:var(--p1)}
+.next{background:var(--accent-soft);border-radius:9px;padding:10px 12px;font-size:14px}
+.next b{display:block;font-size:11.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--accent);margin-bottom:2px}
+
+/* cronología */
+.tl{display:grid;gap:6px}
+.tl-row{display:grid;grid-template-columns:minmax(0,1fr) 120px auto 70px;gap:8px;align-items:center;padding:6px 0;border-bottom:1px dashed var(--line)}
+.tl-row:last-child{border-bottom:0}
+.tl-row .el{font:600 13px var(--f-mono);color:var(--muted);text-align:right}
+.times{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:12px}
+.tbox{background:var(--surface2);border:1px solid var(--line);border-radius:8px;padding:8px 10px}
+.tbox b{display:block;font:600 18px var(--f-mono)}
+.tbox span{font-size:12px;color:var(--muted)}
+
+/* xabcde en formulario */
+.abc{border:1px solid var(--line);border-radius:9px;overflow:hidden;margin-bottom:10px}
+.abc>header{display:flex;align-items:center;gap:10px;padding:8px 12px;background:var(--surface2);border-bottom:1px solid var(--line)}
+.abc>header .letter{font:700 26px/1 var(--f-display);color:var(--accent);width:24px;text-align:center}
+.abc>header h4{flex:1}
+.abc>header .cnt{font:600 12px var(--f-mono);color:var(--muted)}
+.abc .body{padding:10px 12px;display:flex;flex-direction:column;gap:8px}
+
+/* guía actuación */
+.lanes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.lane{border-radius:10px;padding:14px;border:1px solid var(--line);background:var(--surface);display:flex;flex-direction:column;gap:8px;min-width:0}
+.lane.l1{background:var(--p1-soft);border-color:var(--p1)}
+.lane.l2{background:var(--p2-soft);border-color:var(--p2)}
+.lane.l3{background:var(--p3-soft);border-color:var(--p3)}
+.lane h3{font-size:22px}
+.lane.l1 h3{color:var(--p1)}.lane.l2 h3{color:var(--p2)}.lane.l3 h3{color:var(--p3)}
+.lane ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:3px;font-size:14px}
+.flow{display:flex;gap:8px;flex-wrap:wrap;align-items:stretch;margin-top:12px}
+.flow .node{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:8px 10px;font-size:13.5px;flex:1 1 150px;min-width:0}
+.flow .node b{display:block;font-size:11.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin-bottom:2px}
+.flow .arr{align-self:center;color:var(--muted);font-weight:700}
+.roles{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px}
+.role{background:var(--surface2);border:1px solid var(--line);border-radius:9px;padding:10px 12px}
+.role h4{margin-bottom:3px}
+.role p{font-size:13.5px;color:var(--muted)}
+.step-card{border:1px solid var(--line);border-radius:10px;background:var(--surface);margin-bottom:12px;overflow:hidden}
+.step-card>header{display:flex;gap:12px;align-items:center;padding:10px 14px;border-bottom:1px solid var(--line);background:var(--surface2)}
+.step-card .letter{font:700 34px/1 var(--f-display);color:var(--accent);width:30px;text-align:center}
+.step-card .body{padding:12px 14px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+
+/* bloques de contenido */
+.blk{min-width:0}
+.blk .tagrow{margin-bottom:5px}
+.blk ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:4px;font-size:14px}
+.blk li::marker{color:var(--muted)}
+.blk.dose ul{font-size:13.5px}
+.blk.dose li{font-family:var(--f-body)}
+.blk.dose li b{font-family:var(--f-mono);font-weight:600;font-size:13px}
+.blks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px 22px}
+.blks .full{grid-column:1/-1}
+details.acc{background:var(--surface);border:1px solid var(--line);border-radius:10px;margin-bottom:10px}
+details.acc>summary{list-style:none;cursor:pointer;padding:13px 16px;display:flex;align-items:center;gap:12px;min-height:52px}
+details.acc>summary::-webkit-details-marker{display:none}
+details.acc>summary::after{content:"+";margin-left:auto;font:600 22px/1 var(--f-mono);color:var(--muted)}
+details.acc[open]>summary::after{content:"–"}
+details.acc>summary h3{font-size:22px}
+details.acc>summary .tags{display:flex;gap:6px;flex-wrap:wrap}
+details.acc .inner{padding:4px 16px 18px;border-top:1px solid var(--line);padding-top:16px}
+.search{max-width:520px;margin-bottom:14px}
+.empty{padding:24px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:10px}
+
+/* tablas */
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:9px}
+table{border-collapse:collapse;width:100%;font-size:13.5px}
+th,td{padding:8px 10px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:11.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);background:var(--surface2);white-space:nowrap}
+tr:last-child td{border-bottom:0}
+td.num,th.num{text-align:right;font-family:var(--f-mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+.res{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:8px;margin-top:12px}
+.res .kpi b{font-size:20px}
+.callout{border-radius:9px;padding:11px 13px;font-size:14px;background:var(--p2-soft);color:var(--ink)}
+.callout.red{background:var(--p1-soft)}
+.callout.blue{background:var(--info-soft)}
+.callout b{font-weight:700}
+.two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.contact{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:10px 0;border-bottom:1px dashed var(--line)}
+.contact:last-child{border-bottom:0}
+.contact .who{flex:1 1 220px;min-width:0}
+.contact .who b{display:block}
+.contact .who span{font-size:13px;color:var(--muted)}
+.contact .num{font:600 15px var(--f-mono)}
+.sumbox{display:none}
+.sumbox.on{display:block}
+.sumbox textarea{min-height:260px;font:12.5px/1.45 var(--f-mono)}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(18px + env(safe-area-inset-bottom,0px));background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:8px;font-size:14px;z-index:50;opacity:0;pointer-events:none;transition:opacity .2s}
+.toast.on{opacity:1}
+.foot{margin-top:30px;padding-top:16px;border-top:1px solid var(--line);font-size:12.5px;color:var(--muted);max-width:90ch}
+
+@media (max-width:980px){
+  .case{grid-template-columns:minmax(0,1fr)}
+  .panel{position:static;max-height:none;overflow:visible}
+  .mini{display:block;position:sticky;top:calc(env(safe-area-inset-top,0px) + 45px);z-index:15;margin:0 calc(-1*max(16px,env(safe-area-inset-left,0px))) 14px;padding:8px max(16px,env(safe-area-inset-left,0px));background:var(--surface);border-bottom:1px solid var(--line)}
+  .mini .row{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .mini .mb{font:700 19px/1.1 var(--f-display);flex:1;min-width:0}
+  .mini .mk{font:600 12.5px var(--f-mono);color:var(--muted);white-space:nowrap}
+  .mini .nx{font-size:12.5px;color:var(--muted);margin-top:3px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .mini.s-p1{background:var(--p1-soft)}.mini.s-p1 .mb{color:var(--p1)}
+  .mini.s-p2{background:var(--p2-soft)}.mini.s-p2 .mb{color:var(--p2)}
+  .mini.s-p3{background:var(--p3-soft)}.mini.s-p3 .mb{color:var(--p3)}
+  .lanes{grid-template-columns:1fr}
+  .two{grid-template-columns:1fr}
+}
+@media (max-width:640px){
+  .g2,.g3,.g4,.blks,.chks.two,.step-card .body{grid-template-columns:1fr}
+  .span2{grid-column:auto}
+  .times{grid-template-columns:1fr}
+  .tl-row{grid-template-columns:minmax(0,1fr) 110px;grid-template-areas:"a b" "c d"}
+  .tl-row>:nth-child(1){grid-area:a}.tl-row>:nth-child(2){grid-area:b}.tl-row>:nth-child(3){grid-area:c}.tl-row>:nth-child(4){grid-area:d;text-align:right}
+  .brand h1{font-size:28px}
+  .top-in{display:grid;grid-template-columns:46px minmax(0,1fr) auto;grid-template-areas:"s b t" "c c c";gap:10px 12px;align-items:center}
+  .sign{grid-area:s}.brand{grid-area:b}.themebtn{grid-area:t}
+  .docchip{grid-area:c;justify-self:start;white-space:normal;font-size:11px}
+  .brand p{font-size:12.5px;line-height:1.35}
+  .card{padding:14px}
+  .kpis{grid-template-columns:repeat(3,1fr)}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+<header class="top"><div class="top-in">
+  <div class="sign" aria-hidden="true">T</div>
+  <div class="brand">
+    <h1>Código Trauma</h1>
+    <p>Servicio de Urgencias · Hospital de Antequera · Área Sanitaria Norte de Málaga</p>
+  </div>
+  <span class="docchip">PNT Trauma Grave v1.0 · 28/10/2025</span>
+  <button class="btn sm themebtn" id="themeBtn" type="button" aria-label="Cambiar tema claro u oscuro">Tema</button>
+</div></header>
+
+<nav class="tabs" aria-label="Secciones"><div class="tabs-in" role="tablist" id="tabs"></div></nav>
+
+<main>
+<!-- ============ CASO ============ -->
+<section class="view on" id="v-caso" role="tabpanel">
+<div class="view-head">
+  <h2>Ficha del caso</h2>
+  <p>Rellene los datos según llegan. El panel de la derecha calcula la gravedad, la prioridad y lo que toca hacer a continuación. Los datos del paciente no se guardan: se borran al cerrar la página.</p>
+</div>
+<div class="mini s-none" id="mini" aria-live="polite">
+  <div class="row"><span class="pill" id="miniPill">Esperando datos</span><span class="mb" id="miniBig">Sin criterios todavía</span><button class="btn sm" type="button" id="miniGo">Alertas</button></div>
+  <div class="row" style="margin-top:2px"><span class="mk" id="miniK">TSR – · GCS – · IS –</span></div>
+  <div class="nx" id="miniNext"></div>
+</div>
+<div class="case">
+<form class="stack" id="caseForm" autocomplete="off" onsubmit="return false">
+
+<div class="card">
+  <span class="secnum">1 · Identificación y tiempos</span>
+  <div class="grid g3">
+    <div class="field span2"><label for="nombre">Nombre y apellidos</label><input type="text" id="nombre"></div>
+    <div class="field"><label for="nuhsa">NUHSA</label><input type="text" id="nuhsa" class="mono"></div>
+    <div class="field"><label for="edad">Edad</label><div class="input-unit"><input type="number" id="edad" min="0" max="120" inputmode="numeric"><span>años</span></div></div>
+    <div class="field"><label for="sexo">Sexo</label><select id="sexo"><option value="">Sin indicar</option><option value="H">Hombre</option><option value="M">Mujer</option></select></div>
+    <div class="field"><label for="peso">Peso (para dosis)</label><div class="input-unit"><input type="number" id="peso" min="1" max="250" inputmode="decimal"><span>kg</span></div></div>
+    <div class="field span2"><label for="lugar">Lugar del accidente</label><input type="text" id="lugar"></div>
+    <div class="field"><label for="mecan">Mecanismo (texto libre)</label><input type="text" id="mecan"></div>
+  </div>
+  <div class="grid g4" style="margin-top:12px">
+    <div class="field"><label for="hTrauma">Hora del traumatismo</label><input type="time" id="hTrauma"></div>
+    <div class="field"><label for="hAviso">Hora de aviso</label><input type="time" id="hAviso"></div>
+    <div class="field"><label for="hDisp">Llegada del dispositivo</label><input type="time" id="hDisp"></div>
+    <div class="field"><label for="hSalida">Inicio del transporte</label><input type="time" id="hSalida"></div>
+  </div>
+  <div class="times" id="timesOut"></div>
+</div>
+
+<div class="card">
+  <span class="secnum">2 · Criterios de activación</span>
+  <p class="lead">Un solo criterio de cualquiera de los cuatro grupos activa el Código Trauma (PNT 5.1, anexos III a VI).</p>
+  <div class="sub">Fisiológicos <span class="pill" id="fisPill">Sin datos</span></div>
+  <p class="small muted" style="margin-bottom:10px">Se calculan solos con el Glasgow, la TAS y la FR del apartado 3: Trauma Score Revisado menor de 12 o Glasgow de 13 o menos.</p>
+  <div class="sub">Anatómicos</div><div class="chks two" data-group="anat"></div>
+  <div class="sub">Mecanismo lesional</div><div class="chks two" data-group="mec"></div>
+  <div class="sub">Edad y comorbilidad</div><div class="chks two" data-group="com"></div>
+</div>
+
+<div class="card">
+  <span class="secnum">3 · Constantes y gravedad</span>
+  <div class="grid g4">
+    <div class="field"><label for="gE">Apertura ocular</label><select id="gE"><option value="">–</option><option value="4">4 Espontánea</option><option value="3">3 A la orden</option><option value="2">2 Al dolor</option><option value="1">1 Ninguna</option></select></div>
+    <div class="field"><label for="gV">Respuesta verbal</label><select id="gV"><option value="">–</option><option value="5">5 Orientado</option><option value="4">4 Confuso</option><option value="3">3 Palabras</option><option value="2">2 Sonidos</option><option value="1">1 Ninguna</option></select></div>
+    <div class="field"><label for="gM">Respuesta motora</label><select id="gM"><option value="">–</option><option value="6">6 Obedece</option><option value="5">5 Localiza</option><option value="4">4 Retira</option><option value="3">3 Flexión</option><option value="2">2 Extensión</option><option value="1">1 Ninguna</option></select></div>
+    <div class="field"><label for="gcs">Glasgow total</label><input type="number" id="gcs" min="3" max="15" inputmode="numeric" class="mono"></div>
+    <div class="field"><label for="tas">TAS</label><div class="input-unit"><input type="number" id="tas" min="0" max="300" inputmode="numeric"><span>mmHg</span></div></div>
+    <div class="field"><label for="fr">Frecuencia respiratoria</label><div class="input-unit"><input type="number" id="fr" min="0" max="80" inputmode="numeric"><span>rpm</span></div></div>
+    <div class="field"><label for="fc">Frecuencia cardiaca</label><div class="input-unit"><input type="number" id="fc" min="0" max="250" inputmode="numeric"><span>lpm</span></div></div>
+    <div class="field"><label for="sat">SatO₂</label><div class="input-unit"><input type="number" id="sat" min="0" max="100" inputmode="numeric"><span>%</span></div></div>
+  </div>
+  <div class="grid g2" style="margin-top:12px">
+    <label class="chk danger"><input type="checkbox" id="inest"><span>Paciente inestable (hemodinámica o respiratoria), a juicio clínico</span></label>
+    <label class="chk danger"><input type="checkbox" id="vad"><span>Vía aérea difícil prevista (obesidad, barba, edad &gt;55, SAOS, edéntulo, quemadura o fractura facial, trismus, sangrado)</span></label>
+  </div>
+</div>
+
+<div class="card">
+  <span class="secnum">4 · Atención prehospitalaria</span>
+  <p class="lead">Datos de la hoja de atención prehospitalaria del trauma grave.</p>
+  <div class="grid g3">
+    <div class="field"><label for="hIOT">Hora de la intubación</label><input type="time" id="hIOT"></div>
+    <div class="field"><label for="hTorn">Hora del torniquete</label><input type="time" id="hTorn"></div>
+    <div class="field"><label for="hATB">Hora del antibiótico (fractura abierta)</label><input type="time" id="hATB"></div>
+    <div class="field span2"><label for="medic">Medicación administrada</label><textarea id="medic" rows="2"></textarea></div>
+    <div class="field"><label for="fluid">Fluidoterapia</label><textarea id="fluid" rows="2"></textarea></div>
+  </div>
+  <div class="grid g3" style="margin-top:14px">
+    <div class="field"><span class="lbl">Ácido tranexámico</span><div class="radios" id="r_txa"></div></div>
+    <div class="field"><span class="lbl">Fijación pélvica</span><div class="radios" id="r_pelv"></div></div>
+    <div class="field"><span class="lbl">Precisó extricación</span><div class="radios" id="r_extr"></div></div>
+  </div>
+  <div class="sub">Dispositivos de inmovilización</div>
+  <div class="chks two" data-group="inmov"></div>
+  <div class="field" style="margin-top:12px"><label for="obsPre">Observaciones</label><textarea id="obsPre" rows="2"></textarea></div>
+</div>
+
+<div class="card">
+  <span class="secnum">5 · Valoración primaria XABCDE</span>
+  <p class="lead">Marque cada paso cuando esté hecho. La lista completa de pautas está en la pestaña Actuación.</p>
+  <div id="abcForm"></div>
+</div>
+
+<div class="card">
+  <span class="secnum">6 · Valoración secundaria</span>
+  <p class="lead">Se hace de cabeza a pies, sin retrasar el traslado del paciente.</p>
+  <div class="grid g2" id="secForm"></div>
+  <div class="grid g3" style="margin-top:12px">
+    <div class="field"><label for="alerg">Alergias</label><input type="text" id="alerg"></div>
+    <div class="field"><label for="antec">Antecedentes médicos</label><input type="text" id="antec"></div>
+    <div class="field"><label for="ingesta">Hora de la última ingesta</label><input type="text" id="ingesta"></div>
+  </div>
+  <div class="field" style="margin-top:12px"><label for="ambiente">Ambiente y exposición</label><input type="text" id="ambiente"></div>
+</div>
+
+<div class="card">
+  <span class="secnum">7 · Pruebas, destino y firma</span>
+  <div class="chks two" data-group="pruebas"></div>
+  <div class="grid g3" style="margin-top:12px">
+    <div class="field"><label for="fast">ECO FAST</label><select id="fast"><option value="">No realizada</option><option value="neg">Negativa</option><option value="pos">Positiva (líquido libre)</option></select></div>
+    <div class="field span2"><label for="destino">Destino</label><select id="destino">
+      <option value="">Sin decidir</option>
+      <option>Alta domiciliaria</option>
+      <option>Observación</option>
+      <option>Quirófano (estabilización quirúrgica, postoperatorio en UCI)</option>
+      <option>UCI</option>
+      <option>Planta de hospitalización</option>
+      <option>Traslado a hospital de referencia (neurocirugía, cirugía torácica, cardiovascular o maxilofacial)</option>
+      <option>Traslado a unidad de grandes quemados</option>
+    </select></div>
+  </div>
+  <div class="grid g2" style="margin-top:12px">
+    <div class="field"><label for="medico">Médico</label><input type="text" id="medico"></div>
+    <div class="field"><label for="due">DUE</label><input type="text" id="due"></div>
+  </div>
+</div>
+
+<div class="card">
+  <span class="secnum">8 · Cronología</span>
+  <p class="lead">Pulse Ahora para anotar la hora. Los minutos se cuentan desde la llegada a urgencias.</p>
+  <div class="tl" id="tl"></div>
+</div>
+
+</form>
+
+<aside class="panel" aria-label="Panel de situación" id="panel">
+  <div class="status s-none" id="stBox" aria-live="polite">
+    <span class="pill" id="stPill">Esperando datos</span>
+    <div class="big" id="stBig">Sin criterios todavía</div>
+    <p class="small" id="stTxt">Marque criterios o introduzca Glasgow, TAS y FR para calcular la prioridad.</p>
+  </div>
+  <div class="kpis">
+    <div class="kpi" id="kTSR"><b>–</b><span>Trauma Score Revisado</span></div>
+    <div class="kpi" id="kGCS"><b>–</b><span>Glasgow</span></div>
+    <div class="kpi" id="kIS"><b>–</b><span>Índice de shock (FC/TAS)</span></div>
+  </div>
+  <div class="card" style="padding:12px 14px">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px"><h4>Valoración primaria</h4><span class="mono small muted" id="abcCount">0/0</span></div>
+    <div class="bar"><i id="abcBar"></i></div>
+    <div class="next" style="margin-top:10px" id="nextBox"><b>Siguiente paso</b><span id="nextTxt">X · Control de hemorragias externas</span></div>
+  </div>
+  <div class="card" style="padding:12px 14px"><h4 style="margin-bottom:8px">Alertas</h4><ul class="alerts" id="alerts"><li>Sin alertas.</li></ul></div>
+  <div class="card" style="padding:12px 14px"><h4 style="margin-bottom:8px">Equipo avisado</h4><div class="team" id="team"></div></div>
+  <div class="btnrow">
+    <button class="btn primary" type="button" id="btnSum">Resumen para copiar</button>
+    <button class="btn" type="button" id="btnEx">Cargar ejemplo</button>
+    <button class="btn danger" type="button" id="btnNew">Nuevo caso</button>
+  </div>
+  <div class="card sumbox" id="sumBox" style="padding:12px 14px">
+    <h4 style="margin-bottom:8px">Resumen del caso</h4>
+    <textarea id="sumTxt" readonly aria-label="Resumen del caso"></textarea>
+    <div class="btnrow" style="margin-top:8px"><button class="btn primary sm" type="button" id="btnCopy">Copiar</button><button class="btn sm" type="button" id="btnSumClose">Cerrar</button></div>
+  </div>
+</aside>
+</div>
+</section>
+
+<!-- ============ ACTUACIÓN ============ -->
+<section class="view" id="v-actuacion" role="tabpanel">
+<div class="view-head"><h2>Qué hacer y quién lo hace</h2><p>Recorrido del paciente, reparto de tareas en la sala de críticos y secuencia XABCDE con sus pautas (PNT 5.1, págs. 11 a 18, y sesión de junio de 2025).</p></div>
+
+<div class="card" style="margin-bottom:18px">
+  <h3>Recorrido del paciente</h3>
+  <p class="lead">Algoritmo de atención al paciente traumático en UGC-CCyU del hospital (PNT pág. 13 y 14).</p>
+  <div class="flow">
+    <div class="node"><b>Entrada</b>Aviso del 061 al busca del médico de observación, o llegada directa. Si TSR &lt;12 con IOT y ventilación, el 061 alerta al equipo de emergencias del hospital.</div>
+    <div class="arr">→</div>
+    <div class="node"><b>Clasificación</b>TSR 12 y Glasgow 14–15: sala de triaje, reevaluar GCS, TA, FR, FC y SatO₂. TSR &lt;12 o Glasgow &lt;14: sala de críticos.</div>
+  </div>
+  <div class="lanes" style="margin-top:14px">
+    <div class="lane l1"><span class="pill red">Prioridad 1</span><h3>Sala de críticos</h3>
+      <ul><li>TSR &lt;12 o Glasgow &lt;14</li><li>Historia clínica, exposición completa, valoración primaria</li><li>Equipo de emergencias</li><li><b>Inestable:</b> estabilización en sala de críticos, protocolo de transfusión masiva, ECO FAST y Rx portátil. Después UCI o quirófano.</li></ul></div>
+    <div class="lane l2"><span class="pill amber">Prioridad 2</span><h3>Sala de críticos</h3>
+      <ul><li>Politrauma con TCE y Glasgow &gt;13, trauma torácico o abdominal, extremidades con fractura, luxación o fractura abierta, heridas profundas con afectación tendinosa</li><li>El médico de policlínica u observación acompaña a Radiodiagnóstico</li><li><b>Estable:</b> Rx cervical, tórax y pelvis; TC craneal, vertebral, torácico, abdominal y pélvico; ECO abdominal. Después observación o planta/UCI.</li></ul></div>
+    <div class="lane l3"><span class="pill green">Prioridad 3</span><h3>Policlínica</h3>
+      <ul><li>TCE con Glasgow 15, extremidades sin signos de fractura o luxación, policontusiones, heridas superficiales</li><li>Analítica, Rx, ECO abdominal y TC si hace falta</li><li>Si se inestabiliza, avisar al médico de observación</li><li><b>Salida:</b> alta domiciliaria u observación hasta pasar a Traumatología o Cirugía.</li></ul></div>
+  </div>
+  <p class="small muted" style="margin-top:12px">Salidas posibles: traslado a hospital de referencia (neurocirugía, cirugía torácica, cardiovascular, maxilofacial) con equipo de traslado DCCU/061; ingreso en observación, planta o UCI; alta domiciliaria si no precisa tratamiento ni control hospitalario.</p>
+</div>
+
+<div class="card" style="margin-bottom:18px">
+  <h3>Reparto de tareas en prioridad 1</h3>
+  <p class="lead">Equipo de trauma básico: 1 médico de urgencias, 2 enfermeras, 1 auxiliar y 1 celador. El equipo avanzado añade a los especialistas que hagan falta. Con TSR &lt;12 siempre se cuenta con un intensivista (PNT pág. 11).</p>
+  <div class="roles">
+    <div class="role"><h4>Médico de observación</h4><p>Evaluación primera y rápida, inicio de soporte vital avanzado. Avisa al intensivista si hace falta. Coordina los pasos A, B, C y D. Si la vía aérea es difícil, avisa al anestesista y pide el carro de vía aérea difícil.</p></div>
+    <div class="role"><h4>Médico de urgencias</h4><p>Recibe la transferencia y apoya los pasos A, B y C. Pide las pruebas complementarias (ECO abdominal, TAC).</p></div>
+    <div class="role"><h4>2 DUE</h4><p>Asisten al médico en A-B-C. Canalizan dos vías (14 y 16 G), extraen analítica y pruebas cruzadas, sonda urinaria, administran el tratamiento y organizan el plan de cuidados.</p></div>
+    <div class="role"><h4>Auxiliar</h4><p>Prepara el material y apoya a los DUE.</p></div>
+    <div class="role"><h4>Celador</h4><p>Lleva peticiones y muestras, trae el aparataje y ayuda en las movilizaciones y la exposición del paciente.</p></div>
+    <div class="role"><h4>Código Trauma</h4><p>Médico de observación, intensivista, radiólogo, traumatólogo, cirujano y anestesista, según necesidad tras valorar al paciente.</p></div>
+  </div>
+</div>
+
+<h3 style="margin:22px 0 10px">Valoración primaria XABCDE</h3>
+<div id="abcGuide"></div>
+
+<div class="two" style="margin-top:6px">
+  <div class="card">
+    <h3>Recepción del paciente</h3>
+    <p class="lead">Transferencia en sala de críticos (PNT pág. 17).</p>
+    <div class="blk"><div class="tagrow"><span class="pill teal">Quién recibe</span></div>
+      <ul><li>Médico de observación, médico de policlínica 1, enfermero de sala de técnicas, enfermero de observación leve, auxiliar de consultas, celador de puerta y celador de policlínica.</li></ul></div>
+    <div class="blk" style="margin-top:12px"><div class="tagrow"><span class="pill teal">Qué se hace</span></div>
+      <ul><li>Transmisión de información verbal y escrita, con las incidencias durante el traslado.</li><li>Valoración médica A, B, C y D.</li><li>Monitorización y constantes.</li><li>Cambio de camilla en bloque, con protección de vía aérea y columna cervical.</li><li>Inicio del protocolo de trauma grave.</li></ul></div>
+    <div class="blk" style="margin-top:12px"><div class="tagrow"><span class="pill teal">Prealerta desde el 061</span></div>
+      <ul><li>Contactar con el médico de observación.</li><li>Informar del mecanismo lesional, el lugar del accidente y la valoración global del accidentado.</li><li>Indicar si es un paciente pediátrico.</li></ul></div>
+  </div>
+  <div class="card">
+    <h3>Armario de trauma</h3>
+    <p class="lead">Material de inmovilización. Marque lo que ha comprobado (PNT pág. 12).</p>
+    <div class="chks" id="armario"></div>
+  </div>
+</div>
+</section>
+
+<!-- ============ LESIONES ============ -->
+<section class="view" id="v-lesiones" role="tabpanel">
+<div class="view-head"><h2>Tratamiento y pautas por lesión</h2><p>Qué hacer, qué evitar, pautas y cuándo derivar. Busque por palabra (por ejemplo «tranexámico», «drenaje», «Gustilo»).</p></div>
+<div class="field search"><label for="q">Buscar en las pautas</label><input type="text" id="q" placeholder="Escriba para filtrar"></div>
+<div id="lesList"></div>
+<div class="empty" id="lesEmpty" hidden>No hay resultados para esa búsqueda.</div>
+</section>
+
+<!-- ============ HEMORRAGIA ============ -->
+<section class="view" id="v-hemorragia" role="tabpanel">
+<div class="view-head"><h2>Hemorragia masiva y transfusión</h2><p>Protocolo de transfusión masiva del hospital (PNT 5.11, págs. 111 a 121). Calcule los índices con los datos del caso y siga el esquema de activación.</p></div>
+
+<div class="two" style="margin-bottom:18px">
+  <div class="card">
+    <span class="secnum">Cuándo activarlo</span><h3>Criterios de activación</h3>
+    <p class="lead">Basta uno. La activa el médico responsable del paciente.</p>
+    <div class="chks" id="ptmCrit"></div>
+    <div class="callout red" style="margin-top:12px" id="ptmVerdict">Ningún criterio marcado.</div>
+  </div>
+  <div class="card">
+    <span class="secnum">Índices</span><h3>Calculadoras de riesgo</h3>
+    <p class="lead">Leen la TAS, la FC, el sexo, el ECO FAST y la lesión penetrante de la ficha del caso.</p>
+    <div class="sub">Índice de shock</div>
+    <div class="res" style="margin-top:0"><div class="kpi" id="ptmIS"><b>–</b><span>FC / TAS. Mayor de 0,9 tras la resucitación inicial es criterio de activación</span></div></div>
+    <div class="sub">Score ABC</div>
+    <div class="chks" id="abcScoreChk"></div>
+    <div class="res"><div class="kpi" id="abcRes"><b>–</b><span>Puntos (2 puntos: 38 %, 3 puntos: 45 %, 4 puntos: 100 % de transfusión masiva)</span></div></div>
+    <div class="sub">Score TASH</div>
+    <div class="grid g2">
+      <div class="field"><label for="tHb">Hemoglobina (g/dl)</label><input type="number" id="tHb" step="0.1" inputmode="decimal"></div>
+      <div class="field"><label for="tBE">Exceso de bases (mEq/l)</label><input type="number" id="tBE" step="0.1" inputmode="decimal"></div>
+    </div>
+    <div class="chks" style="margin-top:8px"><label class="chk"><input type="checkbox" id="tPelv"><span>Fractura inestable de pelvis</span></label><label class="chk"><input type="checkbox" id="tFem"><span>Fractura abierta de fémur</span></label></div>
+    <div class="res"><div class="kpi" id="tashRes"><b>–</b><span>Puntos (0 a 28). Más de 16 activa el protocolo; 16 puntos equivalen a un 40 % de riesgo de transfusión masiva</span></div></div>
+  </div>
+</div>
+
+<div class="two" style="margin-bottom:18px">
+  <div class="card">
+    <h3>Cómo se activa</h3>
+    <div class="blk" style="margin-top:10px"><div class="tagrow"><span class="pill teal">Llamada al Banco de Sangre</span></div>
+      <ul><li>Nombre y apellidos del paciente y NUHSA o número de historia.</li><li>Localización.</li><li>Nombre de quien avisa y teléfono de contacto.</li></ul></div>
+    <div class="blk" style="margin-top:12px"><div class="tagrow"><span class="pill teal">Papel y muestras</span></div>
+      <ul><li>Hoja de solicitud de transfusión con la casilla de <b>extrema urgencia</b> y el diagnóstico «PROTOCOLO DE HEMORRAGIA MASIVA (PHM)».</li><li>Un tubo EDTA y uno de bioquímica, bien identificados, en cuanto sea posible.</li></ul></div>
+    <div class="blk" style="margin-top:12px"><div class="tagrow"><span class="pill teal">Qué dispensa el banco</span></div>
+      <ul><li>2 concentrados de hematíes: grupo 0 negativo si no ha dado tiempo a conocer el grupo; isogrupo si se conoce. Después, de 2 en 2.</li><li>2 U de plasma fresco congelado en cuanto se descongelan, y otras 2 U después según necesidad.</li><li>1 pool de plaquetas, pedido de inmediato al CRTS de Málaga. El servicio tiene 1 pool de plaquetas congeladas.</li></ul></div>
+    <div class="blk" style="margin-top:12px"><div class="tagrow"><span class="pill blue">Niños</span></div>
+      <ul><li>Los tres hemoderivados a la vez: 30 ml/kg de hematíes, 20 ml/kg de plasma y 5 ml/kg de pool de plaquetas (tras los 30 ml/kg de hematíes).</li></ul></div>
+  </div>
+  <div class="card">
+    <h3>Objetivos y fármacos</h3>
+    <div class="tw" style="margin-top:10px"><table>
+      <thead><tr><th>Parámetro</th><th>Objetivo o pauta</th></tr></thead>
+      <tbody>
+        <tr><td>Hemoglobina</td><td>7–9 g/dl (en TCE, en torno a 10)</td></tr>
+        <tr><td>Plaquetas</td><td>Transfundir si &lt;50 ×10⁹/l, para llegar a &gt;75 ×10⁹/l (en TCE, &gt;100)</td></tr>
+        <tr><td>Plasma fresco</td><td>10–15 ml/kg si TP o TTPA ratio &gt;1,5</td></tr>
+        <tr><td>Fibrinógeno</td><td>2 g iv al inicio (3 g si hemorragia obstétrica), por vía distinta a la del ácido tranexámico. Después según nivel: &lt;1,5–2 g/l. Si el control es &lt;150 mg/dl, 2 g.</td></tr>
+        <tr><td>Ácido tranexámico</td><td>Precoz y siempre dentro de las 3 primeras horas: 15 mg/kg iv en bolo (máx. 1 g), luego 2 mg/kg/h (máx. 125 mg/h) hasta que cese el sangrado</td></tr>
+        <tr><td>Complejo protrombínico</td><td>Si persiste hemorragia con coagulopatía refractaria pese a reposición y tratamiento adecuados: 15–20 UI/kg en bolo lento de 5 min, sin perfusión. Máximo total 3.000 UI.</td></tr>
+        <tr><td>Factor VII activado</td><td>Solo si lo indica Hematología (sin indicación en ficha técnica): 90 mcg/kg, cuando se haya tratado bien al paciente y siga sangrando</td></tr>
+      </tbody></table></div>
+    <div class="blk" style="margin-top:12px"><div class="tagrow"><span class="pill teal">Reevaluación</span></div>
+      <ul><li>Control analítico cada hora, como mínimo.</li><li>Valorar cada hora si se mantiene la activación.</li></ul></div>
+  </div>
+</div>
+
+<div class="card" style="margin-bottom:18px">
+  <h3>Fibrinógeno según nivel del paciente</h3>
+  <div class="tw" style="margin-top:10px"><table><thead><tr><th>Nivel a conseguir</th><th>Nivel del paciente</th><th>50–60 kg</th><th>&gt;70 kg</th></tr></thead>
+  <tbody><tr><td rowspan="2">1,5 g/l</td><td>1,0 g/l</td><td>1–1,5 g</td><td>2 g</td></tr><tr><td>0,5 g/l</td><td>3 g</td><td>4 g</td></tr>
+  <tr><td rowspan="2">2,0 g/l</td><td>1,0 g/l</td><td>3 g</td><td>4 g</td></tr><tr><td>0,5 g/l</td><td>4 g</td><td>5 g</td></tr></tbody></table></div>
+</div>
+
+<div class="card" style="margin-bottom:18px">
+  <h3>Poblaciones especiales</h3>
+  <div class="callout" style="margin:10px 0 14px"><b>Comprobar antes de administrar:</b> para el idarucizumab el PNT escribe «5 mg» (viales de 2,5 mg). La ficha técnica habitual es 5 g, en 2 viales de 2,5 g. Confirmar la dosis con Farmacia o Hematología. El filtrado glomerular se escribe en ml/h en el PNT, la unidad habitual es ml/min.</div>
+  <div class="tw"><table><thead><tr><th>Situación</th><th>Qué hacer (PNT págs. 118–119)</th></tr></thead><tbody>
+    <tr><td>Antiagregados</td><td>Transfundir 1 pool de plaquetas si no se ha hecho ya.</td></tr>
+    <tr><td>Antivitamina K</td><td>Si INR &gt;1,5: complejo protrombínico 15–30 UI/kg en dosis única, más 1 ampolla de vitamina K iv.</td></tr>
+    <tr><td>Dabigatrán</td><td>Revertir si TTPa ratio &gt;1 y toma en las 24 h previas (48 h si FG &lt;30). Idarucizumab en 2 viales en bolo lento, separados unos 5 min (consultar con Hematología). Sin idarucizumab: complejo protrombínico 15–30 UI/kg, con consentimiento.</td></tr>
+    <tr><td>Rivaroxabán, apixabán, edoxabán</td><td>Revertir si TP ratio &gt;1 y toma en las 24 h previas (48 h si FG &lt;30). Complejo protrombínico 15–30 UI/kg, con consentimiento.</td></tr>
+    <tr><td>Heparina de bajo peso molecular</td><td>Sulfato de protamina: 1 mg (0,1 ml) por cada 100 UI de heparina, máximo 50 mg (1 vial de 5 ml). Si ha pasado más de una vida media, dividir la dosis calculada a la mitad y darla en perfusión continua. Valorar con cautela, la absorción es variable. Vidas medias: bemiparina 5,3 h, dalteparina 2 h, enoxaparina 4 h, nadroparina 8–10 h, tinzaparina 1,5 h.</td></tr>
+  </tbody></table></div>
+</div>
+
+<div class="card">
+  <h3>Cuándo desactivarlo</h3>
+  <div class="blks" style="margin-top:10px">
+    <div class="blk"><ul><li>Control anatómico del sangrado, quirúrgico o por embolización, con parámetros hemodinámicos y perfusión tisular recuperados.</li><li>El ritmo de sangrado baja y permite tratar según objetivos de laboratorio.</li></ul></div>
+    <div class="blk"><ul><li>Lo desactiva el responsable directo del paciente (médico o enfermería).</li><li>Los hemoderivados no administrados se devuelven de inmediato al Servicio de Transfusión.</li><li>Después se piden hemoderivados con una petición nueva.</li></ul></div>
+  </div>
+</div>
+</section>
+
+<!-- ============ CALCULADORAS ============ -->
+<section class="view" id="v-calc" role="tabpanel">
+<div class="view-head"><h2>Calculadoras</h2><p>Dosis y fórmulas tal como aparecen en el PNT. Compruebe siempre el resultado antes de administrar.</p></div>
+<div class="two">
+  <div class="card">
+    <h3>Dosis por peso</h3>
+    <div class="field" style="max-width:220px;margin:10px 0 12px"><label for="cw">Peso del paciente</label><div class="input-unit"><input type="number" id="cw" min="1" max="250" inputmode="decimal"><span>kg</span></div></div>
+    <div class="tw"><table><thead><tr><th>Fármaco o aporte</th><th>Pauta</th><th class="num">Resultado</th></tr></thead><tbody id="doseBody"></tbody></table></div>
+    <p class="small muted" style="margin-top:8px">Pesos pediátricos: use la calculadora de la derecha si no conoce el peso.</p>
+  </div>
+  <div class="stack">
+    <div class="card">
+      <h3>Quemados: fórmula de Parkland</h3>
+      <p class="lead">Ringer lactato, 2–4 ml/kg por % de superficie corporal quemada (SCQT). La mitad en las primeras 8 horas, descontando lo ya administrado, y la otra mitad en las 16 siguientes (PNT pág. 79).</p>
+      <div class="grid g3">
+        <div class="field"><label for="pkW">Peso</label><div class="input-unit"><input type="number" id="pkW" inputmode="decimal"><span>kg</span></div></div>
+        <div class="field"><label for="pkS">SCQT</label><div class="input-unit"><input type="number" id="pkS" min="0" max="100" inputmode="decimal"><span>%</span></div></div>
+        <div class="field"><label for="pkF">Ya administrado</label><div class="input-unit"><input type="number" id="pkF" min="0" inputmode="numeric"><span>ml</span></div></div>
+      </div>
+      <div class="res" id="pkRes"></div>
+      <p class="small muted" style="margin-top:8px">No se cuentan las quemaduras de primer grado. El PNT indica un máximo del 50 %; aquí se aplica sobre la SCQT. Diuresis horaria aceptable: más de 30 ml/h.</p>
+    </div>
+    <div class="card">
+      <h3>Paciente pediátrico</h3>
+      <p class="lead">Cinta de reanimación y valores de referencia (PNT págs. 130–132).</p>
+      <div class="field" style="max-width:220px;margin-bottom:6px"><label for="pedAge">Edad</label><div class="input-unit"><input type="number" id="pedAge" min="0" max="14" step="0.5" inputmode="decimal"><span>años</span></div></div>
+      <div class="res" id="pedRes"></div>
+    </div>
+    <div class="card">
+      <h3>Protamina para heparina</h3>
+      <p class="lead">1 mg de sulfato de protamina (0,1 ml) por cada 100 UI de heparina. Máximo 50 mg.</p>
+      <div class="field" style="max-width:220px"><label for="hepUI">Heparina administrada</label><div class="input-unit"><input type="number" id="hepUI" min="0" inputmode="numeric"><span>UI</span></div></div>
+      <div class="res" id="hepRes"></div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ============ DERIVACIÓN ============ -->
+<section class="view" id="v-deriva" role="tabpanel">
+<div class="view-head"><h2>Derivación, contactos y registro</h2><p>A quién llamar, qué comunicar y cómo se registra el caso.</p></div>
+<div class="two">
+  <div class="card">
+    <h3>Contactos y teléfonos</h3>
+    <p class="lead">Los números son los que figuran en el PNT. Los especialistas del Hospital Regional ven las imágenes en el PACS corporativo y devuelven la llamada.</p>
+    <div id="contacts"></div>
+  </div>
+  <div class="card">
+    <h3>Qué comunicar al pedir un traslado</h3>
+    <p class="lead">Lista del apartado de maxilofacial (PNT pág. 89–90), útil para cualquier derivación. Marque lo que tiene preparado.</p>
+    <div class="chks" id="dataSend"></div>
+    <div class="callout blue" style="margin-top:12px">La gestión del traslado corresponde al responsable del paciente en Antequera, que informa al área de Observación o UCI del hospital receptor. El hospital receptor indica dónde se recibe al paciente. Los hospitales emisores se comprometen a readmitir al paciente cuando termine el manejo especializado y aún precise cuidados hospitalarios.</div>
+  </div>
+</div>
+<div class="two" style="margin-top:18px">
+  <div class="card">
+    <h3>Registro y codificación</h3>
+    <div class="blk" style="margin-top:10px"><ul>
+      <li>Atención extrahospitalaria: hoja de registro del trauma grave (check list de atención prehospitalaria).</li>
+      <li>En urgencias: <b>Hoja de Registro de Datos del Trauma Grave en DIRAYA</b>.</li>
+      <li>Codificación en la historia de urgencias: <b class="mono">CIE 959.8 · Código Trauma</b>.</li>
+      <li>Al ingreso, cuando sea posible: registro de datos y localización de familiares.</li>
+    </ul></div>
+  </div>
+  <div class="card">
+    <h3>Definición y límites del proceso</h3>
+    <div class="blk" style="margin-top:10px"><ul>
+      <li>Trauma grave: lesión única que compromete la vida con más de 3 puntos en la AIS, o varias lesiones menores que suman 15 puntos en la ISS, o factores previos o del siniestro asociados a mayor gravedad.</li>
+      <li>Salida a domicilio, DCCU u hospital básico si no hay lesiones, o son leves (AIS 1) o moderadas (AIS 2) y no hay factores de riesgo.</li>
+      <li>Varias lesiones leves o moderadas con ISS &lt;15, o una lesión grave que no compromete la vida (AIS 3): interconsulta urgente a la especialidad idónea. Si hay traslado entre hospitales, se hace con el paciente estabilizado y antes de 6 horas.</li>
+      <li>En un máximo de 24 horas deben conocerse todas las lesiones primarias.</li>
+      <li>Casos marginales: embarazadas, menores de 14 años, catástrofes, lesiones graves de aparición diferida, agentes no mecánicos (fuego, químicos, electricidad).</li>
+    </ul></div>
+  </div>
+</div>
+</section>
+</main>
+
+<footer class="foot">
+  Herramienta de apoyo elaborada a partir del PNT «Atención al trauma grave en el Hospital de Antequera» (Comisión Trauma Grave ASNM, versión 1.0, 28/10/2025), el check list de atención prehospitalaria del trauma grave y la sesión «Manejo del trauma grave en urgencias» (8/6/2025). No es un documento oficial y no sustituye el PNT ni el criterio clínico. Las referencias de página remiten al PNT. Los datos que se escriben aquí no se envían ni se guardan.
+</footer>
+<div class="toast" id="toast" role="status"></div>
+<script>
+/* ===== DATOS (todo procede del PNT, el check list y la sesión) ===== */
+const ANAT=[
+ {t:"Lesión penetrante en cabeza, cuello, tronco o parte proximal de los miembros"},
+ {t:"Tórax basculante (inestable)",h:"Tórax inestable: oxígeno, analgesia y cristaloides con control para no sobrecargar. Con PaO₂ <60 mmHg o SatO₂ <90 % valorar intubación en la primera hora."},
+ {t:"Amputación proximal a muñecas o tobillos",h:"Amputación: el segmento va siempre con el paciente, lavado con suero, gasa estéril húmeda, bolsa sellada dentro de agua con hielo. Derivación urgente si es reimplantable."},
+ {t:"Dos o más fracturas de húmero o fémur"},
+ {t:"Fractura abierta o deprimida de la bóveda craneal",h:"Fractura abierta: antibiótico lo antes posible y valoración telemática por Neurocirugía (busca [busca interno])."},
+ {t:"Fractura con sospecha de afectación vascular",h:"Sospecha vascular: tracción longitudinal hasta recuperar el pulso distal, inmovilizar y pedir angio-TC."},
+ {t:"Fractura de pelvis",h:"Pelvis: cinturón pélvico o sábana. Explorar una sola vez. No voltear antes de tener imagen pélvica, salvo lesión penetrante oculta en inestable o vía aérea."},
+ {t:"Parálisis o paresia de un miembro",h:"Sospecha de lesión medular: no movilizar sin rodamiento en bloque, TC como prueba definitiva, sin metilprednisolona."},
+ {t:"Quemadura de más del 10 % de la superficie corporal",h:"Quemadura extensa: calcular SCQT, fórmula de Parkland y revisar criterios de la unidad de quemados."},
+ {t:"Lesión por inhalación o inmersión prolongada junto al traumatismo",h:"Inhalación: oxígeno al 100 % humidificado y vigilar la vía aérea, con probable intubación si hay ronquera o edema."}
+];
+const MEC=[
+ "Automóvil: fallecido dentro de la cabina",
+ "Automóvil: salida despedido del vehículo",
+ "Automóvil: más de 20 minutos para la extracción",
+ "Automóvil: velocidad superior a 45 km/h",
+ "Automóvil: deformidad &gt;50 cm en impacto frontal o hundimiento &gt;30 cm en impacto lateral",
+ "Automóvil: vuelco",
+ "Atropello de peatón o ciclista (lanzamiento o derribo)",
+ "Moto: velocidad superior a 32 km/h o salida despedido",
+ "Precipitación desde más de 3 metros de altura",
+ "Exposición a onda expansiva"
+];
+const COM=[
+ "Mayor de 55 años","Menor de 5 años","Enfermedad cardiorrespiratoria","Embarazo",
+ "Diabetes mellitus, cirrosis u obesidad mórbida","Inmunosupresión","Discrasia sanguínea o paciente anticoagulado"
+];
+const INMOV=["Collarín cervical","Tabla espinal","Dispositivo tetracameral (Dama de Elche)","Colchón de vacío","Férulas de extremidades"];
+const PRUEBAS=["Analítica y pruebas cruzadas","Gasometría","ECG","Rx de tórax","Rx de pelvis","Rx cervical","TC craneal","TC de columna","TC de tórax (angioTC)","TC de abdomen","TC de pelvis","ECO abdominal"];
+const SEC=["Cabeza y cuello","Tórax","Abdomen e hipogastrio (genitales y ano)","Pelvis","Extremidades","Espalda","Valoración neurológica"];
+const RADIOS={txa:[["si","Sí"],["no","No"],["np","No procede"]],pelv:[["si","Sí"],["no","No"],["np","No procede"]],extr:[["si","Sí"],["no","No"]]};
+const ARMARIO=[
+ "Juego de férulas semirrígidas: 2 de brazo adulto, 1 de pierna adulto, 1 de muñeca pediátrica y 2 de pierna pediátrica",
+ "1 cinturón pélvico","5 inmovilizadores tetracamerales","Collarines tipo Philadelphia: 2 de adulto y 2 pediátricos",
+ "1 colchón de vacío","4 tablas espinales","2 camillas de tijera","1 férula Braun"
+];
+const ABC=[
+ {k:"X",n:"Hemorragias catastróficas externas",
+  steps:["Compresión directa de la herida","Vendaje compresivo","Agente hemostático si no cede","Torniquete si no cede (anotar la hora)"],
+  hacer:["X va primero en la secuencia XABCDE.","Compresión directa; si no basta, vendaje compresivo y agentes hemostáticos.","Torniquete cuando lo anterior falla. Anotar la hora de colocación."],
+  evitar:[],ref:"Sesión jun-2025"},
+ {k:"A",n:"Vía aérea con control cervical",
+  steps:["Vía aérea permeable con control cervical","Aspiración y retirada de cuerpos extraños","Dificultad de vía aérea valorada","Intubación hecha si estaba indicada y confirmada con capnografía","Anestesista y carro de vía aérea difícil avisados (si procede)"],
+  hacer:["Mantener la inmovilización cervical hasta descartar lesión.","<b>Intubar</b> si Glasgow ≤8, hipoventilación, agitación o SatO₂ <90 %. Inducción en secuencia rápida con preoxigenación de 30–180 s con O₂ al 100 %.","Confirmar el tubo con capnografía continua, el método más fiable.","Si falla la laringoscopia directa: hasta dos intentos más con facilitadores o videolaringoscopio, ventilando entre intentos. Después dispositivo supraglótico (el videolaringoscopio va antes).","No intubable y no ventilable: cricotomía quirúrgica de emergencia.","Vía aérea difícil prevista: avisar al anestesista y pedir el carro de vía aérea difícil."],
+  evitar:["Intubación nasotraqueal si se sospecha fractura de base de cráneo.","Confiar en que un test normal descarta la vía aérea difícil: cuenta la suma de predictores."],ref:"PNT págs. 15, 102–110"},
+ {k:"B",n:"Ventilación",
+  steps:["Inspección: heridas soplantes, FR, trabajo respiratorio, simetría","Auscultación bilateral","Oxígeno, SatO₂ por encima del 90 % (95 % o más si TCE)","Neumotórax a tensión, abierto, tórax inestable y hemotórax masivo descartados o tratados"],
+  hacer:["<b>Neumotórax a tensión</b>: diagnóstico clínico, sin esperar a la radiografía. Aguja gruesa en el 2.º espacio intercostal, línea medioclavicular. Drenaje pleural definitivo en el 5.º espacio, línea medioaxilar.","<b>Neumotórax abierto</b>: apósito estéril que solape los bordes, fijado por tres lados.","<b>Tórax inestable</b>: oxígeno, analgesia y cristaloides controlados. Intubar si PaO₂ <60 mmHg o SatO₂ <90 %.","<b>Hemotórax masivo</b> (más de 1.500 ml): vías gruesas, cristaloides, sangre sin pruebas cruzadas y tubo de 28–32 Fr en el 5.º espacio."],
+  evitar:["Ventilación con presión positiva o anestesia general en un neumotórax conocido sin drenaje torácico."],ref:"PNT págs. 16, 26–33"},
+ {k:"C",n:"Circulación",
+  steps:["Monitorización de ECG, TA, FC y SatO₂","Dos vías de grueso calibre (14 y 16 G)","Analítica, gasometría y pruebas cruzadas","Signos de shock valorados","Ácido tranexámico si hay hemorragia grave (en menos de 3 h)","Fijación pélvica si se sospecha fractura de pelvis","ECO FAST","Transfusión masiva activada si cumple criterios"],
+  hacer:["Signos de shock: nivel de conciencia, color de la piel, relleno capilar, FC y amplitud del pulso, TA.","Controlar las hemorragias externas con compresión o elevando el miembro.","<b>Ácido tranexámico</b> 15 mg/kg iv (máx. 1 g) y después 2 mg/kg/h (máx. 125 mg/h), siempre dentro de las 3 primeras horas.","Fijación pélvica con cinturón, o sábana uniendo los miembros inferiores en rotación interna.","Si cumple criterios, activar el protocolo de transfusión masiva (pestaña Hemorragia masiva).","Hipotensión permisiva. En el TCE, evitar TAS <90 mmHg y mantener PAM >70 mmHg."],
+  evitar:["Sonda vesical con sangre en el meato, hematoma perineal o fractura pélvica con fragmentos. Si se va a hacer ECO FAST, retrasarla hasta terminar."],ref:"PNT págs. 16, 44–46 y sesión jun-2025"},
+ {k:"D",n:"Valoración neurológica",
+  steps:["Glasgow","Pupilas: tamaño, simetría y reactividad","Focalidad neurológica","Glucemia capilar","Intubación si Glasgow ≤8","Pupila midriática arreactiva o anisocoria: manitol y cabecera a 30°"],
+  hacer:["Glasgow, pupilas y signos de focalidad. Glucemia capilar.","Glasgow ≤8: intubación.","Pupila midriática y arreactiva con anisocoria: manitol al 20 % a 1 g/kg y cabecera a 30°.","Sospecha de hipertensión intracraneal: sin compresión yugular. Alternativa: suero salino hipertónico al 3 %, 250 ml en 10–15 min."],
+  evitar:["Hiperventilación salvo signos de herniación inminente (PaCO₂ 30–35 mmHg, transitoria)."],ref:"PNT págs. 16, 19–20"},
+ {k:"E",n:"Exposición y control de hipotermia",
+  steps:["Paciente desnudo para la exploración","Espalda explorada con movilización en bloque","Prevención de hipotermia (mantas)","Intimidad respetada"],
+  hacer:["Desnudar al paciente para valorar todas las lesiones.","Explorar la espalda moviendo al paciente en bloque, con la columna inmovilizada.","Cubrir con mantas tras la exploración para evitar la hipotermia.","Respetar la intimidad."],
+  evitar:[],ref:"PNT págs. 16, 43"}
+];
+const TEAM=[
+ {id:"t_medobs",n:"Médico de observación",g:"siempre"},{id:"t_medurg",n:"Médico de urgencias",g:"siempre"},
+ {id:"t_due",n:"2 DUE",g:"siempre"},{id:"t_aux",n:"Auxiliar",g:"siempre"},{id:"t_cel",n:"Celador",g:"siempre"},
+ {id:"t_int",n:"Intensivista",g:"según necesidad"},{id:"t_rad",n:"Radiólogo",g:"según necesidad"},
+ {id:"t_tra",n:"Traumatólogo",g:"según necesidad"},{id:"t_cir",n:"Cirujano",g:"según necesidad"},
+ {id:"t_ane",n:"Anestesista",g:"según necesidad"},{id:"t_ban",n:"Banco de sangre",g:"según necesidad"}
+];
+const EVENTS=[
+ ["ev_aviso","Prealerta recibida del 061"],["ev_llegada","Llegada a urgencias"],["ev_prim","Inicio de la valoración primaria"],
+ ["ev_iot","Intubación"],["ev_txa","Ácido tranexámico"],["ev_fast","ECO FAST"],["ev_ptm","Activación del protocolo de transfusión masiva"],
+ ["ev_tc","Salida a TC"],["ev_dest","Salida a destino (UCI, quirófano o traslado)"]
+];
+const PTMCRIT=[
+ "Sangrado activo no controlado que requiere cirugía o embolización urgente",
+ "Más de 2 puntos en el score ABC",
+ "Sangrado de más de 150 ml/min durante 10 minutos que persiste",
+ "Pérdida del 50 % de la volemia en 3 horas (unos 2.500 ml en 70 kg)",
+ "Pérdida de 1 volemia en 24 horas (70 ml/kg)",
+ "Hemorragia mayor con índice de shock &gt;0,9 tras la resucitación inicial",
+ "TASH &gt;16 puntos",
+ "Necesidad de transfusión de extrema urgencia (hematíes sin cruzar) en urgencias",
+ "Intensidad de resucitación &gt;3 unidades de volumen en 30 min con sangrado activo (1 unidad = 500 ml de coloides, 1.000 ml de cristaloides o 1 concentrado de hematíes)"
+];
+const DATASEND=[
+ "Identificación y edad; estado hemodinámico y respiratorio actual",
+ "Resumen de ABCDE: tipo y hora de intubación; si hubo cricotiroidotomía",
+ "Control del sangrado: medidas realizadas y respuesta",
+ "Estudios: TC (al menos imágenes o cortes axiales), Rx y laboratorio con Hb y coagulación",
+ "Fotografías externas de heridas o fracturas",
+ "Antibióticos, tétanos, analgesia, sedación y transfusiones administrados",
+ "Motivo concreto de la derivación",
+ "Tiempo desde el trauma y comorbilidades relevantes (anticoagulación, IECA, diabetes)"
+];
+const CONTACTS=[
+ {n:"Neurocirugía de guardia (HRU Málaga)",d:"Busca corporativo. Ve las imágenes en el PACS y devuelve la llamada. Deja nota escrita en Carestream.",nums:["[busca interno]"]},
+ {n:"Cirugía torácica de guardia",d:"Busca corporativo. Guardia localizada: puede no tener conexión telemática disponible al instante.",nums:["[busca interno]","[teléfono interno]"]},
+ {n:"Cirugía maxilofacial, residente de guardia",d:"Primera llamada.",nums:["[teléfono interno]","[busca interno]"]},
+ {n:"Cirugía maxilofacial, adjunto de guardia",d:"Si el residente no está operativo. Está localizado y puede tardar más en acceder al PACS.",nums:["[teléfono interno]","[busca interno]"]},
+ {n:"Líneas de aviso de emergencias",d:"112, 061 y la línea 902 505 061 activan el proceso de trauma grave.",nums:["112","061","902505061"]},
+ {n:"Banco de sangre",d:"Aviso telefónico para el protocolo de hemorragia masiva. El PNT no da la extensión.",nums:[]},
+ {n:"Unidad de grandes quemados",d:"Hospital Virgen del Rocío (Sevilla). Hasta 14 años, Unidad de Quemados del Hospital Materno Infantil. Traslado aéreo o terrestre tras la valoración inicial.",nums:[]}
+];
+
+/* ---- Secciones por lesión ---- */
+const LES=[
+{id:"shock",t:"Shock y hemorragia",tags:["Ácido tranexámico","Transfusión masiva"],ref:"Sesión jun-2025 y PNT 5.11, págs. 16 y 111–121",b:[
+ {k:"do",l:"Control de la hemorragia",it:[
+  "Hemorragia externa catastrófica: compresión directa, vendaje compresivo, agentes hemostáticos y torniquete (anotar la hora).",
+  "Signos de shock: nivel de conciencia, color de la piel, relleno capilar, FC y amplitud del pulso, TA.",
+  "Dos vías de grueso calibre (14 y 16 G) y analítica con pruebas cruzadas.",
+  "<b>Fijación pélvica</b> si se sospecha fractura de pelvis. <b>ECO FAST</b> en la sala de críticos.",
+  "Hipotensión permisiva en el trauma hemorrágico. En el TCE, evitar TAS &lt;90 mmHg."]},
+ {k:"dose",l:"Pautas y dosis",it:[
+  "<b>Ácido tranexámico</b>: 15 mg/kg iv en bolo (máx. 1 g) y después 2 mg/kg/h (máx. 125 mg/h) hasta que cese el sangrado. Siempre dentro de las 3 primeras horas desde el traumatismo.",
+  "<b>Fibrinógeno</b> 2 g iv al inicio, por una vía distinta a la del ácido tranexámico.",
+  "Hemoglobina objetivo 7–9 g/dl (en TCE, en torno a 10). Plaquetas &gt;75 ×10⁹/l (en TCE, &gt;100). Plasma 10–15 ml/kg si TP o TTPA ratio &gt;1,5.",
+  "Calculadora de dosis por peso en la pestaña Calculadoras."]},
+ {k:"derive",l:"Transfusión masiva",full:1,it:[
+  "Criterios, avisos al Banco de Sangre, fármacos, poblaciones especiales (anticoagulados, antiagregados, heparinas) y desactivación: pestaña Hemorragia masiva.",
+  "Con sangrado abdominal o pélvico que no cede, valorar cirugía, packing preperitoneal o embolización en centro de referencia."]}]},
+
+{id:"tce",t:"Traumatismo craneoencefálico",tags:["TC craneal","Neurocirugía"],ref:"PNT 5.2, págs. 19–25 y 95",b:[
+ {k:"do",l:"Valoración y pruebas",it:[
+  "A: vía aérea con control cervical. B: SatO₂ ≥95 %. C: mantener la perfusión cerebral (PAM &gt;60–70 mmHg).",
+  "D: Glasgow, pupilas (tamaño, reactividad y simetría) y déficits focales. E: exposición completa y prevención de hipotermia.",
+  "<b>TC de cráneo sin contraste</b> (prueba de referencia) si: Glasgow &lt;15, pérdida de conciencia &gt;5 min, vómitos repetidos, déficit focal, signos de fractura de base, edad &gt;65, anticoagulación, trauma facial grave o mecanismo de alta energía.",
+  "Laboratorio: hemograma, coagulación, electrolitos, glucemia y gases. La radiografía simple no se recomienda salvo que no haya TC.",
+  "TC de control en las primeras 24 h (valorar a las 12 h) en postquirúrgicos, lesiones no quirúrgicas con potencial de serlo y deterioro clínico. Si hay deterioro, antes."]},
+ {k:"dose",l:"Pautas y dosis",it:[
+  "<b>Intubar</b> si Glasgow ≤8, hipoventilación, agitación, SatO₂ &lt;90 % o PaCO₂ &gt;50 mmHg. Objetivo PaCO₂ 35–40 mmHg.",
+  "Hiperventilación leve y transitoria (PaCO₂ 30–35 mmHg) solo con signos de herniación inminente.",
+  "Evitar TAS &lt;90 mmHg. Cristaloides isotónicos, no glucosados. Meta de PAM &gt;70 mmHg. Si el shock persiste, buscar fuente fuera del cráneo.",
+  "Hipertensión intracraneal: cabecera a 30° y sin compresión yugular. <b>Manitol 0,25–1 g/kg iv</b> en bolo, con PAM adecuada, o <b>suero salino hipertónico 3 %, 250 ml en 10–15 min</b>.",
+  "Sedoanalgesia con midazolam, propofol o fentanilo si hay estabilidad hemodinámica. Evitar fiebre, glucemia &gt;180 mg/dl e hiponatremia.",
+  "<b>Levetiracetam 0,5–1 g/12 h</b> o <b>fenitoína 15 mg/kg de carga y 100 mg/8 h</b>, 7 días en TCE grave.",
+  "Antibióticos solo si hay fractura abierta o fuga de LCR."]},
+ {k:"derive",l:"Derivación a neurocirugía (HRU Málaga)",full:1,it:[
+  "Todo TCE con lesiones en el TAC se comenta por vía telemática con el neurocirujano de guardia: busca <b>[busca interno]</b>, con los datos de filiación. Ve las imágenes en el PACS corporativo y devuelve la llamada.",
+  "<b>Derivar con urgencia</b>: TCE grave (Glasgow ≤8) con lesiones subsidiarias de cirugía.",
+  "<b>Derivar en las primeras horas, para observación</b>: TCE leve (Glasgow 14–15) con hemorragia subaracnoidea postraumática profusa, focos contusivos centimétricos o hematomas extraaxiales centimétricos.",
+  "<b>Se queda 24 h en Observación en Antequera</b>, con TC de control: HSA leve o moderada, focos milimétricos, hematomas extraaxiales muy pequeños. Neurocirugía decide alta, consulta externa o traslado.",
+  "<b>No derivar</b> si la edad es muy avanzada (por lo general más de 80 ± 5 años) o hay antecedentes graves que contraindican la cirugía: manejo conservador o paliativo en Antequera.",
+  "En el traslado: intubado, ventilado, vía permeable y monitorizado, con oxigenación y PAM adecuadas. El hospital emisor se compromete a readmitir al paciente."]}]},
+
+{id:"torax",t:"Traumatismo torácico",tags:["Riesgo vital","Cirugía torácica"],ref:"PNT 5.3, págs. 26–40",b:[
+ {k:"do",l:"Lesiones que matan, en la valoración primaria",it:[
+  "<b>Neumotórax a tensión</b>: dolor, disnea, taquipnea, taquicardia, hipotensión, desviación traqueal, ausencia unilateral de ruidos y venas del cuello distendidas. Es un diagnóstico clínico: no demorar el tratamiento por la radiografía.",
+  "<b>Neumotórax abierto</b>: cerrar el defecto con un apósito estéril que solape los bordes, fijado por tres lados.",
+  "<b>Hemotórax masivo</b> (más de 1.500 ml o un tercio de la volemia): shock hipovolémico con ausencia de ruidos o matidez en un lado. Vías de gran calibre, cristaloides y sangre sin pruebas cruzadas cuanto antes.",
+  "<b>Taponamiento cardiaco</b>: ruidos apagados, hipotensión y venas distendidas (no siempre están). Con ruidos respiratorios en ambos lados es más probable que un neumotórax a tensión. Diagnóstico con ECO FAST, que puede repetirse porque aparece en cualquier momento.",
+  "<b>Lesión traqueobronquial</b>: puede requerir vía aérea definitiva. La intubación suele ser difícil (fibroscopio o intubación selectiva). Cirugía inmediata."]},
+ {k:"dose",l:"Técnicas y pautas",it:[
+  "Descompresión inicial del neumotórax a tensión: aguja gruesa en el <b>2.º espacio intercostal, línea medioclavicular</b>.",
+  "Drenaje pleural definitivo: <b>5.º espacio intercostal, línea medioaxilar</b>. En hemotórax, tubo de <b>28–32 Fr</b>.",
+  "Toracotomía urgente si salen de golpe 1.500 ml o más, o más de 200 ml/h durante 2–4 h, o hay necesidad persistente de transfusión.",
+  "Tórax inestable y contusión pulmonar: oxígeno, analgesia (intravenosa o anestésico local) y cristaloides controlados. Con PaO₂ &lt;60 mmHg o SatO₂ &lt;90 % puede hacer falta intubar en la primera hora, sobre todo con EPOC o insuficiencia renal.",
+  "La pericardiocentesis puede ayudar, pero no es definitiva. El taponamiento confirmado requiere toracotomía o esternotomía de emergencia."]},
+ {k:"info",l:"Valoración secundaria",it:[
+  "Exploración completa, ECG, pulsioximetría continua, gasometría arterial y radiografía de tórax en vertical si no se sospecha inestabilidad vertebral. TC en pacientes seleccionados.",
+  "En la radiografía: ensanchamiento mediastínico, desplazamiento de la línea media, fracturas costales múltiples y fracturas de 1.ª o 2.ª costilla (fuerza importante).",
+  "Neumotórax simple: drenaje en el 5.º espacio, línea axilar media, y radiografía de control. Un neumotórax conocido no debe recibir anestesia general ni presión positiva sin tubo torácico.",
+  "Lesión cardiaca cerrada: si el ECG es anormal, monitorizar 24 h. Con ECG normal no hace falta monitorizar. La troponina no añade información.",
+  "Rotura aórtica: sospecharla por mecanismo de deceleración y signos en la radiografía. TC helicoidal con contraste en estables. Control de FC (&lt;80 lpm con betabloqueante de acción corta, esmolol) y de PAM (60–70 mmHg). No demorar el traslado.",
+  "Lesión diafragmática (más frecuente a la izquierda): la sonda nasogástrica visible en tórax la confirma. Cuidado al colocar el drenaje."]},
+ {k:"derive",l:"Derivación a cirugía torácica",it:[
+  "Valoración telemática por el cirujano torácico de guardia: busca <b>[busca interno]</b> o <b>[teléfono interno]</b>, con datos de filiación. Deja nota escrita en Carestream.",
+  "<b>Traslado para valoración urgente</b>: shock o inestabilidad con sospecha de lesión intratorácica grave; sangrado persistente tras 1.000–1.500 cc drenados o más de 250–300 ml/h en las 3 primeras horas; neumotórax a tensión o abierto (el tratamiento inicial se hace en Antequera); sospecha de rotura traqueobronquial.",
+  "Con sangrado menor de 1.000 cc se comenta con el cirujano torácico según la situación clínica.",
+  "<b>Se quedan 24 h en Observación</b>, con prueba de imagen de control: fracturas costales o esternales, neumotórax pequeños y contusiones pulmonares pequeñas sin insuficiencia respiratoria.",
+  "<b>No derivar</b> si la situación basal, la comorbilidad o las lesiones asociadas contraindican la intervención o no aportan beneficio."]}]},
+
+{id:"abdomen",t:"Traumatismo abdominal",tags:["ECO FAST","Cirugía"],ref:"PNT 5.4 y 5.9.8, págs. 41–49 y 98–99",b:[
+ {k:"do",l:"Evaluación",it:[
+  "Hipotenso: averiguar rápido si la causa es abdominal o pélvica. Estable sin peritonismo: exploraciones repetidas.",
+  "Exploración con el paciente desnudo: inspección, auscultación, percusión y palpación; pelvis y glúteos; examen uretral, perineal y, si procede, rectal y vaginal. Tapar al paciente al terminar.",
+  "<b>ECO FAST</b> en cuatro regiones: pericardio, fosa hepatorrenal, fosa esplenorrenal y pelvis. Se repite y se hace a pie de cama.",
+  "<b>TC abdominal</b> solo en estables sin indicación de laparotomía urgente. Es la prueba para retroperitoneo y órganos pélvicos.",
+  "Lavado peritoneal: rara vez se usa si hay TC o FAST. Aspirar contenido digestivo, fibras vegetales o bilis es indicación de laparotomía; también 10 cc o más de sangre en un inestable."]},
+ {k:"dose",l:"Trauma cerrado",it:[
+  "<b>Inestable</b>: ECO FAST en la sala de críticos (radiólogo).",
+  "<b>Estable</b>: exploración. Si es valorable, normal y de baja sospecha, ECO abdominal. Si no es valorable, dudosa, patológica o de alta sospecha, TC abdominal dual.",
+  "Líquido libre con lesión de víscera sólida: avisar a Radiología vascular (embolización). Sin lesión sólida: sospechar víscera hueca y avisar a Cirugía.",
+  "El traslado a TC o a radiología vascular se hace monitorizado y con soporte, por el equipo médico de urgencias."]},
+ {k:"dose",l:"Trauma penetrante",it:[
+  "<b>Arma blanca</b>, inestable o con peritonismo: laparotomía y aviso a Cirugía. Estable con evisceración: Cirugía. Estable sin evisceración: explorar la herida; si no penetra, sutura y alta o ingreso; si penetra o no es concluyente, TC abdominal y aviso a Cirugía.",
+  "<b>Arma de fuego</b>, inestable o con peritonismo: laparotomía. Estable con evisceración: laparotomía. Sin evisceración: TC abdominal. La mayoría de las heridas de bala requieren laparotomía.",
+  "<b>Indicaciones de laparotomía</b>: cerrado con hipotensión y FAST positivo o clínica de hemorragia intraperitoneal; hipotensión con herida que penetra la fascia anterior; herida de bala transperitoneal; evisceración; sangrado de estómago, recto o vía genitourinaria tras trauma penetrante; peritonitis; aire libre o retroperitoneal; rotura del hemidiafragma."]},
+ {k:"avoid",l:"Evitar",it:[
+  "Sonda vesical con sangre en el meato, hematoma perineal, fragmentos óseos de una fractura pélvica o herida penetrante que lacere la vagina. Con ECO FAST previsto, retrasarla hasta terminarlo. Con sospecha de lesión uretral, sonda suprapúbica por médico experimentado.",
+  "Sonda nasogástrica por la nariz con fracturas faciales graves o posible fractura de base de cráneo: colocarla por la boca."]}]},
+
+{id:"musculo",t:"Fracturas, amputaciones y pelvis",tags:["Traumatología","Antibióticos"],ref:"PNT 5.5, págs. 50–60",b:[
+ {k:"do",l:"Fracturas cerradas y luxaciones",it:[
+  "Inspección, palpar todos los huesos largos, comprobar sensibilidad y pulsos distales. Analgesia adecuada.",
+  "Deformidad sin pulso distal: tracción longitudinal hasta recuperarlo e inmovilizar.",
+  "Inmovilizar: férula o cabestrillo en brazos; férulas, almohadas, yeso o tracción en piernas. Rx en dos planos o TC.",
+  "Luxación: reducción urgente si hay compromiso neurovascular, dolor intenso o isquemia. Valorar el estado neurovascular antes y después, inmovilizar y repetir la imagen.",
+  "Dolor desproporcionado, tensión excesiva o dolor al mover los dedos pasivamente: sospechar síndrome compartimental. Si es manifiesto, fasciotomía inmediata.",
+  "Fémur diafisario: fijación precoz en 24 h. Fijación externa si la cirugía definitiva se retrasa más de 48 h o hay síndrome compartimental."]},
+ {k:"dose",l:"Fractura abierta y amputación",it:[
+  "No irrigar en urgencias. Mantener el vendaje estéril previo o poner gasa con suero salino. No manipular tejidos expuestos. Fotografiar la lesión. Inmovilizar.",
+  "Antibiótico lo antes posible, idealmente en la primera hora. <b>Grado I–II</b>: cefazolina 2 g iv y luego 1 g/8 h durante 24 h (vancomicina 1 g si alergia; 1 g en niños).",
+  "<b>Grado III y amputaciones</b>: cefazolina como antes más <b>gentamicina 3–5 mg/kg/día</b>, hasta 72 h tras retirar el drenaje.",
+  "Heridas muy contaminadas (tierra): añadir penicilina G 10–20 millones UI o metronidazol 500 mg. Agua dulce: fluoroquinolona o cefalosporina de 3.ª o 4.ª generación. Agua salada: doxiciclina y ceftazidima, o una fluoroquinolona. Profilaxis antitetánica.",
+  "Registrar al recibir: hora, tipo y dosis del antibiótico, clasificación de Gustilo-Anderson, contaminación y hora del torniquete.",
+  "Gustilo-Anderson: I herida &lt;1 cm; II de 1 a 10 cm; III &gt;10 cm (IIIA cobertura suficiente, IIIB pérdida de cobertura, IIIC lesión vascular).",
+  "Cirugía: desbridamiento e irrigación idealmente en 24 h; inmediato si está muy contaminada; en 12 h en alta energía IIIA y IIIB. Angio-TC si se sospecha lesión arterial."]},
+ {k:"info",l:"Conservación del segmento amputado",it:[
+  "Nunca es demasiado pequeño para guardarlo y siempre va con el paciente.",
+  "Lavado abundante con suero (Ringer lactato), gasa estéril húmeda, bolsa de plástico sellada, y esa bolsa dentro de un recipiente con agua helada (2/3 de hielo y 1/3 de suero o agua)."]},
+ {k:"do",l:"Pelvis",it:[
+  "Inspección: longitud de los miembros, deformidad, hematomas, heridas perineales y sangrado uretral. Compresión anteroposterior y lateral <b>una sola vez</b>.",
+  "Tacto anal y vaginal para descartar fractura abierta. Si la hay, antibiótico cuanto antes.",
+  "Inmovilizar enseguida con <b>cinturón pélvico</b>, o con sábana uniendo ambos miembros inferiores en rotación interna. Detectar la hemorragia con TC.",
+  "Retirar el cinturón si no se confirma fractura o luxación sacroilíaca, si es mecánicamente estable, si no controla la estabilidad o provoca rotación interna excesiva, o si no hay más sangrado.",
+  "Cambiar la contención mecánica por fijador externo en 24–48 h. Con inestabilidad hemodinámica, fijación externa seguida de packing preperitoneal o laparotomía. Si persiste, embolización en centro de referencia.",
+  "Heparina de bajo peso molecular a las 24–48 h de la estabilización."]},
+ {k:"avoid",l:"Evitar en la pelvis",it:[
+  "Voltear con sospecha de fractura pélvica antes de tener imagen, salvo lesión penetrante oculta en un inestable o necesidad de despejar la vía aérea.",
+  "Sonda de Foley con sospecha de rotura uretral o vesical. Repetir la exploración pélvica."]},
+ {k:"derive",l:"Derivación urgente a centro de referencia",full:1,it:[
+  "Fractura Gustilo-Anderson IIIC, lesión vascular asociada, amputación reimplantable, lesión neurológica del plexo sacro.",
+  "Pelvis estable: traslado diferido al hospital de referencia para el tratamiento definitivo."]}]},
+
+{id:"columna",t:"Columna y médula espinal",tags:["TC","Derivación"],ref:"PNT 5.5.4 y 5.9.4–5.9.7, págs. 58–59 y 96–98",b:[
+ {k:"do",l:"Qué hacer",it:[
+  "El paciente llega con collarín rígido y cinchas. Explorar toda la columna con rodamiento en bloque.",
+  "Palpar relieves óseos, comprobar la movilidad activa indolora y, en conscientes, la exploración neurológica según la escala ASIA.",
+  "Tratar y revertir el shock neurogénico o hemorrágico. Analgesia adecuada.",
+  "<b>TC</b> como prueba definitiva. Con déficit neurológico, <b>RM urgente</b>. Con politrauma o alta energía cervical, angioTC de cuello.",
+  "Completar con angioTC si hay fractura de apófisis costotransversas o cualquier fractura de C0 a C3."]},
+ {k:"avoid",l:"Evitar",it:[
+  "Con la más mínima sospecha de lesión medular, movilizar al paciente fuera del rodamiento en bloque.",
+  "Metilprednisolona en la lesión medular aguda: no se recomienda.",
+  "Radiografía en un paciente despierto, sintomático, sin dolor de columna y con exploración neurológica normal."]},
+ {k:"derive",l:"Derivación",full:1,it:[
+  "<b>Cervical</b>: contactar con Neurocirugía del centro de referencia si hay déficit neurológico progresivo (radiculopatía o mielopatía) o compresión demostrable con déficit motor estable.",
+  "<b>Dorsolumbar</b>: contactar con Traumatología del centro de referencia si el déficit es incompleto y progresivo (cirugía urgente), si es completo (cirugía precoz diferida, 48–72 h), si hay síndrome de cola de caballo o inestabilidad mecánica."]}]},
+
+{id:"uro",t:"Traumatismo urológico",tags:["Riñón","Vejiga","Uretra"],ref:"PNT 5.6 y 5.9.10, págs. 65–73 y 100–101",b:[
+ {k:"info",l:"Sospecha y pruebas",it:[
+  "Aparece en el 10–20 % de los traumatismos abdominopélvicos. Se evalúa como el trauma abdominal, con consideraciones urológicas.",
+  "<b>Riñón</b>: hematomas o heridas en lumbar o flancos, fracturas costales, masa pulsátil, hematuria, anuria pese a reponer volumen, caída del hematocrito. Prueba: uro-TC con contraste.",
+  "<b>Uréter</b>: pasa inadvertido con frecuencia; la hematuria solo está en el 50–75 %. Uro-TC con fase tardía.",
+  "<b>Vejiga</b>: fractura pélvica o herida penetrante en abdomen bajo, periné o glúteos. Hematuria en el 80 %. Cistografía o cisto-TC, con al menos 350 ml de contraste diluido.",
+  "<b>Uretra</b>: sangre en el meato, retención con vejiga palpable, equimosis perineal o escrotal, próstata alta o flotante. Uretrografía retrógrada, que se pospone en el inestable."]},
+ {k:"do",l:"Manejo",it:[
+  "Riñón: la estabilidad hemodinámica manda. Grados 1–4 estables: manejo conservador con reposo, antibiótico y control de TA, creatinina y hemograma, con vigilancia de 24 h en Observación.",
+  "Repetir la imagen a los 2–4 días en grados 3–5, y siempre con fiebre, descenso inexplicable del hematocrito o dolor de flanco.",
+  "Embolización selectiva con extravasación activa, fístula arteriovenosa o pseudoaneurisma en el estable. Cirugía si hay inestabilidad sin respuesta, hematoma perirrenal expansivo o pulsátil, o lesión vascular de grado 5.",
+  "Uréter grados I y II: catéter doble J, ureteral externo o nefrostomía. En el crítico, control de daños con derivación urinaria temporal.",
+  "Vejiga: perforaciones pequeñas sin complicación, sonda y antibiótico. Con cuello vesical, fragmentos óseos o vísceras afectadas, reparación quirúrgica y cistografía a los 14–21 días.",
+  "Uretra: en el inestable, sonda suprapúbica con control ecográfico. Con cuello vesical, próstata, vagina, fragmentos óseos o lesión rectal, exploración quirúrgica.",
+  "Pene y escroto: ecografía si se sospecha rotura de cuerpos cavernosos o trauma escrotal cerrado. Trauma escrotal penetrante: exploración quirúrgica."]},
+ {k:"avoid",l:"Evitar",it:["Forzar el sondaje uretral si no entra, y sondar con sangre en el meato o hematoma perineal."]}]},
+
+{id:"quemados",t:"Quemados",tags:["Parkland","Unidad de quemados"],ref:"PNT 5.7, págs. 74–87",b:[
+ {k:"do",l:"Primeros minutos",it:[
+  "Seguridad de la escena. Retirar la fuente de calor, la ropa y los restos calientes. Irrigar con suero ligeramente frío (12–15 °C), para no provocar hipotermia.",
+  "XABCDE como en cualquier trauma. Oxígeno al 100 %. Vías periféricas y Ringer lactato 500 ml. Analgesia siempre intravenosa. Mantas contra la hipotermia. Cabecera elevada con quemadura de cara o cuello, y miembros quemados elevados.",
+  "Calcular la superficie con la regla de los 9 de Wallace, o la regla de la palma (la palma sin dedos es el 1 %). No se cuentan las quemaduras de primer grado. Valorar escarotomía o fasciotomía."]},
+ {k:"dose",l:"En el hospital",it:[
+  "<b>Intubar</b> si hay sospecha de lesión por inhalación, quemadura de cuello o cara, dificultad respiratoria (el estridor la indica de inmediato), inestabilidad hemodinámica, bajo nivel de conciencia o más del 40 % de SCQT. Si se va a intubar, iniciar después la fluidoterapia, por el edema que produce.",
+  "<b>Parkland</b>: Ringer lactato 2–4 ml/kg por % de SCQT. Mitad en las primeras 8 h y mitad en las 16 siguientes (calculadora en la pestaña Calculadoras). Diuresis horaria mayor de 30 ml/h.",
+  "Sonda urinaria y, en grandes quemados, sonda nasogástrica. Analítica con carboxihemoglobina y lactato, Rx de tórax y ECG. Profilaxis de trombosis, protección gástrica, vacuna antitetánica, control de glucemia, protección ocular y nutrición enteral en las primeras 12 h.",
+  "Curas con compresas estériles con suero. En UCI o planta, cura oclusiva con sulfadiazina argéntica cada 24–48 h."]},
+ {k:"derive",l:"Derivación a la unidad de quemados",it:[
+  "Hospital Virgen del Rocío (Sevilla). Hasta los 14 años, Unidad de Quemados del Hospital Materno Infantil.",
+  "Criterios: 2.º y 3.º grado &gt;10 % de SCQT en mayores de 50 años y menores de 10; 2.º grado &gt;20 % o 3.º grado &gt;20 % a cualquier edad; afectación de cara, manos, pies, genitales, periné o grandes articulaciones; quemadura eléctrica (incluido el rayo); lesión por inhalación; quemadura con trauma concurrente si la quemadura es el mayor riesgo; comorbilidad que empeora el pronóstico (por ejemplo, embarazo).",
+  "Se traslada tras completar la valoración y la reanimación inicial, por vía aérea o terrestre."]},
+ {k:"do",l:"Quemadura eléctrica",it:[
+  "Dos vías, sonda vesical, Ringer lactato 500 ml/h para mantener una diuresis de 100 ml/h, monitorización de ECG (24 h en Observación y ECG cada 2 h) y miembros elevados.",
+  "Analítica con mioglobina, CK y LDH. Vigilar el síndrome compartimental, sobre todo en las 6 primeras horas. Con mioglobinuria o CK &gt;1.000 UI: diuresis &gt;100 ml/h, manitol y alcalinización de la orina.",
+  "Antibiótico intravenoso de amplio espectro: amoxicilina 1 g/8 h y tobramicina 100 mg/8 h. Vacuna antitetánica."]},
+ {k:"do",l:"Química e inhalación",it:[
+  "Química: irrigar con abundante agua o suero (a 37 °C en el hospital), sin agentes neutralizantes. Puede requerir desbridamiento. Traslado a centro especializado para valoración.",
+  "Inhalación: oxigenar primero, con oxígeno al 100 % humidificado y aerosol de bicarbonato. Con sospecha de intoxicación por cianuro, <b>hidroxicobalamina 5 g iv en 5 minutos</b>. Con ronquera o edema de vía aérea alta, vigilar de cerca: probable intubación."]},
+ {k:"custom",l:"Puntuación de Clark para lesión por inhalación",full:1,html:"<div class='chks two clark'>"+["Fuego en espacio cerrado","Alteración del nivel de conciencia","Esputo carbonáceo","Quemadura peribucal","Sintomatología respiratoria","Ronquera"].map((x,i)=>"<label class='chk'><input type='checkbox' id='clark_"+i+"'><span>"+x+"</span></label>").join("")+"</div><div class='callout' id='clarkRes' style='margin-top:10px'>0 puntos. Con 2 o más puntos se diagnostica lesión por inhalación de humos.</div>"}]},
+
+{id:"facial",t:"Traumatismo maxilofacial",tags:["Vía aérea","Hemorragia"],ref:"PNT 5.8 y 5.9.3, págs. 88–93 y 95–96",b:[
+ {k:"do",l:"Manejo inmediato",it:[
+  "La vida va antes que la función: obstrucción de la vía aérea y hemorragia masiva son las amenazas primarias. Mantener la inmovilización cervical.",
+  "Vía aérea: intubación orotraqueal con secuencia rápida si hay experiencia, preferible con videolaringoscopio. Si no se puede garantizar y hay compromiso inminente, <b>cricotiroidotomía quirúrgica de emergencia</b>.",
+  "Hemorragia: presión directa, empaquetamiento oral o nasal (con precaución si se sospecha fractura de base de cráneo) y vendaje compresivo. En sangrado nasal posterior o incontrolable, taponamiento posterior o balón (Foley). Si es masivo, activar el protocolo de transfusión masiva.",
+  "Cristaloides limitados y sangre según necesidad: la pérdida visible puede subestimar el volumen real.",
+  "TC de cráneo y de macizo facial en cortes finos en cuanto la vía aérea y la hemodinámica lo permitan. AngioTC con sangrado profuso, muy alta energía, fractura de mandíbula, Le Fort II o III, o fractura compleja de cráneo, base o cóndilos."]},
+ {k:"dose",l:"Sin cirujano maxilofacial en el centro",it:[
+  "Estabilizar y no intentar reparaciones definitivas.",
+  "Lavado abundante y cobertura de las heridas sucias. Las heridas sin pérdida de sustancia se suturan en Antequera.",
+  "Fijación temporal de la mandíbula con ligaduras interdentales o férulas, si se sabe hacer.",
+  "Antibiótico profiláctico en heridas abiertas o fistulizadas según protocolo, y profilaxis antitetánica si procede.",
+  "Tener a mano un kit de cricotiroidotomía y personal entrenado."]},
+ {k:"avoid",l:"Evitar",it:["Intubación nasotraqueal si se sospecha fractura de base de cráneo.","Osteosíntesis compleja sin cirujano maxilofacial."]},
+ {k:"derive",l:"Derivación al hospital regional",full:1,it:[
+  "Llamar al cirujano maxilofacial de guardia: residente <b>[teléfono interno]</b> o <b>[busca interno]</b>; si no está operativo, adjunto <b>[teléfono interno]</b> o <b>[busca interno]</b>. Dejará nota escrita. Con TCE asociado, las 24 h de observación neurológica se hacen en origen o en destino según Neurocirugía.",
+  "<b>Traslado urgente</b>: fracturas abiertas o con gran desplazamiento; sangrado por los focos que no cede con medidas locales; arma de fuego; fracturas que comprometen la vía aérea; heridas complejas o con pérdida de sustancia; hematoma orbitario intraconal; cuerpos extraños en las fracturas.",
+  "<b>Pueden esperar y derivarse de forma diferida</b>: fracturas con poco desplazamiento (consulta a las 24–48 h), fracturas dentales no complicadas, fracturas aisladas del macizo facial y politraumatizados que necesitan tratar antes otras lesiones.",
+  "Urgencias de las primeras 24 h: vía aérea comprometida, hemorragia incontrolable, lesión ocular con riesgo para la visión, heridas con hueso expuesto o muy contaminadas. Las fracturas faciales estables pueden esperar 24–72 h."]}]},
+
+{id:"imagen",t:"Pruebas de imagen",tags:["TC","Radiología"],ref:"PNT 5.9, págs. 94–101",b:[
+ {k:"do",l:"Politraumatizado",it:[
+  "<b>TC de cuerpo entero</b>: TC de cráneo sin contraste; angioTC de cuello, tórax y abdomen; TC de abdomen en fase portal; fase excretora (opcional) con hematuria, fractura de pelvis o lesión renal o vesical.",
+  "Ampliar el angioTC al macizo facial con sangrado maxilofacial profuso, muy alta energía, fractura mandibular, Le Fort II o III, o fractura compleja de cráneo, base o cóndilos.",
+  "Trasladar al paciente a Radiodiagnóstico previo contacto con el servicio, con monitorización y soporte."]},
+ {k:"do",l:"Cuello y columna cervical",it:[
+  "TC cervical si se sospecha lesión o hay lesión en la radiografía. Con politrauma o alta energía, angioTC de cuello. Con baja energía (por ejemplo, ancianos), TC sin contraste.",
+  "AngioTC cervical con hematoma cervical expansivo, muy alta energía, casi ahorcamiento con anoxia, lesión por cinturón con edema, hematoma o dolor, fractura o luxación cervical, fractura de 1.ª o 2.ª costilla o lesión vascular torácica.",
+  "Sospecha de lesión medular: RM cervical."]},
+ {k:"do",l:"Tórax y miembros",it:[
+  "TC de tórax si la radiografía muestra consolidaciones, neumotórax, neumomediastino, enfisema subcutáneo, fractura de columna o escápula, más de 3 costillas o 1.ª o 2.ª costilla, mala definición del diafragma o alteración de tráquea, bronquios o vasos. También por clínica: sangrado por el tubo, tórax inestable, sospecha vascular, intubación por deterioro.",
+  "Miembro catastrófico: angioTC para decidir. Insalvable: amputación. Salvable con lesión vascular endovascular: radiología intervencionista y luego osteosíntesis. Salvable no endovascular: osteosíntesis y luego reparación vascular."]},
+ {k:"do",l:"Genitourinario",it:[
+  "Sospecha de lesión uretral (sangre en el meato, próstata flotante, imposibilidad de sondaje): uretrografía retrógrada y aviso a Urología. La hematuria visible o no en varones también la requiere.",
+  "Rotura ureteral no confirmada en el TC: ureterografía retrógrada o anterógrada. Lesión penetrante de vejiga: cistografía, preferible por TC.",
+  "Rotura de cuerpos cavernosos del pene: ecografía. Trauma escrotal cerrado: valorar ecografía."]}]},
+
+{id:"via",t:"Vía aérea y ventilación",tags:["Intubación","Vía aérea difícil"],ref:"PNT 5.10, págs. 102–110",b:[
+ {k:"do",l:"Antes de intubar",it:[
+  "Evaluar el entorno, el paciente y el acceso. Buscar antecedentes de intubación difícil y pensar en las lesiones añadidas según el mecanismo.",
+  "<b>Vía aérea difícil</b>. Ventilación con mascarilla: obesidad, barba, edad &gt;55, SAOS, edéntulo, quemaduras o deformidad facial, fractura mandibular. Intubación (más de 3 intentos o más de 10 min): Mallampati, apertura oral, extensión cervical, distancia tiromentoniana, mordida del labio superior, trismus, movilidad cervical alterada, sangrado. Un test normal no la descarta."]},
+ {k:"dose",l:"Secuencia rápida",it:[
+  "Preparar y revisar el material. Preoxigenar 30–180 s con O₂ al 100 %.",
+  "Presión cricoidea (maniobra de Sellick) hasta confirmar el tubo, salvo contraindicación. La maniobra BURP puede mejorar un grado la visión.",
+  "Posición supina con alineación de ejes, laringoscopia, tubo (profundidad orientativa: 3 × el diámetro del tubo, en cm), balón inflado sin tensión.",
+  "<b>Capnografía continua</b> para confirmar y vigilar el tubo. Fijar el tubo y colocar cánula orofaríngea."]},
+ {k:"do",l:"Si falla",it:[
+  "Pedir ayuda. Con buena oxigenación con mascarilla, hasta dos nuevos intentos con facilitadores o videolaringoscopio, ventilando entre intentos.",
+  "Con oxigenación inadecuada: nuevo intento con facilitadores o dispositivo supraglótico. El videolaringoscopio va antes que el supraglótico.",
+  "<b>No intubable y no ventilable</b>: cricotomía de emergencia."]},
+ {k:"avoid",l:"Lesión cervical inestable",it:[
+  "Alto nivel de sospecha. Laringoscopia directa con estabilización manual en línea (sin el collarín durante la laringoscopia). Videolaringoscopio si es difícil.",
+  "La ventilación con mascarilla es la maniobra que más desplaza el cuello. Minimizar el movimiento cervical y las variaciones hemodinámicas, para evitar la hipoxemia."]}]},
+
+{id:"pedi",t:"Trauma pediátrico",tags:["Menores de 14 años"],ref:"PNT 5.12, págs. 122–139",b:[
+ {k:"info",l:"Claves",it:[
+  "Los menores de 14 años son un límite de entrada marginal del proceso. La regla son las lesiones multisistémicas.",
+  "La causa más común de parada es no asegurar la vía aérea. En el TCE cerrado, apnea, hipoventilación e hipoxia son cinco veces más frecuentes que la hipovolemia con hipotensión.",
+  "La TAS se mantiene hasta perder el 30 % de la volemia. Taquicardia y mala perfusión de la piel son las claves. La hipotensión indica pérdida &gt;45 %.",
+  "Calculadora de peso, TAS mínima y dosis en la pestaña Calculadoras."]},
+ {k:"do",l:"Vía aérea y respiración",it:[
+  "Cabeza y cara en posición neutra, con 2,5 cm de relleno bajo el torso. Cánula de Guedel solo si está inconsciente, con la convexidad hacia arriba en lactantes.",
+  "Intubar con lesión cerebral grave que requiere ventilación controlada, vía inestable, insuficiencia respiratoria, o hipovolemia importante con sensorio disminuido o necesidad de cirugía. Tubo sin balón habitual. Profundidad: nº de tubo × 3 cm en encías. Comprobar con capnografía.",
+  "Complicaciones del tubo (DOPES): desalojo, obstrucción, neumotórax, equipo y secreciones.",
+  "Rescate: mascarilla laríngea, intubación a través de mascarilla, cricotiroidotomía con aguja (oxigena, no ventila). La quirúrgica rara vez en pequeños y posible en mayores de 12 años.",
+  "Neumotórax a tensión: aguja sobre el borde superior de la tercera costilla en la línea medioclavicular, con cuidado en lactantes. Tubo torácico en el 5.º espacio, por delante de la línea axilar media."]},
+ {k:"dose",l:"Circulación y reposición",it:[
+  "Acceso: dos intentos periféricos y después vía intraósea (18 G en menores de 1 año, 15 G en mayores) o femoral.",
+  "Reanimación de control de daños: cristaloide isotónico 20 ml/kg y, si precisa, 10–20 ml/kg de hematíes y 10–20 ml/kg de plasma. Todo candidato a transfusión precoz: activar el protocolo de transfusión masiva y valorar cirugía. Medir diuresis.",
+  "Evitar la hipotermia: calentar la sala, los fluidos, la sangre y los gases, y usar lámparas o mantas térmicas.",
+  "RCP en trauma: dos accesos, control de hemorragia, ácido tranexámico y sangre 0 Rh negativo sin cruzar en actividad eléctrica sin pulso que no responde o Hb ≤5 g/dl. Hipotermia &lt;30 °C: máximo 3 descargas antes de recalentar."]},
+ {k:"do",l:"TCE, tórax y abdomen",full:1,it:[
+  "<b>TCE</b>: reponer volumen y evitar la hipoxia son críticos. Consultar con Neurocirugía si Glasgow ≤8 o puntuación motora de 1 o 2, si hay lesiones múltiples con lesión intracraneal, o si el TC muestra hemorragia, inflamación cerebral o herniación. Lactante con fontanela abombada o diástasis de suturas: lesión grave, avisar. Suero salino hipertónico al 3 % o manitol; levetiracetam o fenitoína si hay convulsiones. Algoritmos de TC por edad en las págs. 136–137.",
+  "<b>Tórax</b>: tratamiento como en adultos. El neumotórax a tensión es la lesión con riesgo inminente de muerte más frecuente.",
+  "<b>Abdomen</b>: sonda orogástrica si hay distensión y sondaje vesical. Hipotensión con trauma abdominal: cirugía inmediata. El FAST es un cribado y no detecta lesiones intraparenquimatosas aisladas. TC con contraste en estables. El manejo no quirúrgico solo en un centro con UCI pediátrica y cirujano.",
+  "Traslado precoz a hospital pediátrico en lesiones multisistémicas."]}]}
+];
+
+/* ===== LÓGICA ===== */
+const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>Array.from(r.querySelectorAll(s));
+const plain=s=>String(s).replace(/<[^>]+>/g,"").replace(/&gt;/g,">").replace(/&lt;/g,"<").replace(/&amp;/g,"&");
+const val=id=>{const e=document.getElementById(id);return e?e.value:""};
+const num=id=>{const v=val(id);return v===""||isNaN(+v)?null:+v};
+const on=id=>{const e=document.getElementById(id);return !!(e&&e.checked)};
+const nf=(x,d=0)=>x.toLocaleString("es-ES",{minimumFractionDigits:d,maximumFractionDigits:d});
+const chk=(id,html,cls)=>"<label class='chk "+(cls||"")+"'><input type='checkbox' id='"+id+"'><span>"+html+"</span></label>";
+const tmin=v=>{if(!v)return null;const p=v.split(":");return +p[0]*60+ +p[1]};
+const hhmm=m=>{m=((m%1440)+1440)%1440;return String(Math.floor(m/60)).padStart(2,"0")+":"+String(m%60).padStart(2,"0")};
+const dmin=(a,b)=>(a===null||b===null)?null:((b-a)%1440+1440)%1440;
+const fdur=m=>m===null?"–":(m<60?m+" min":Math.floor(m/60)+" h "+String(m%60).padStart(2,"0")+" min");
+const nowMin=()=>{const d=new Date();return d.getHours()*60+d.getMinutes()};
+let toastT;
+function toast(m){const t=$("#toast");t.textContent=m;t.classList.add("on");clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove("on"),2200)}
+function copyText(text,msg){
+  const ok=()=>toast(msg||"Copiado");
+  const fb=()=>{try{const ta=document.createElement("textarea");ta.value=text;ta.style.cssText="position:fixed;opacity:0;top:0";document.body.appendChild(ta);ta.select();const r=document.execCommand("copy");ta.remove();r?ok():toast("No se pudo copiar. Selecciónelo a mano.")}catch(e){toast("No se pudo copiar. Selecciónelo a mano.")}};
+  try{navigator.clipboard.writeText(text).then(ok,fb)}catch(e){fb()}
+}
+
+/* ---- construcción de la interfaz ---- */
+const TABS=[["caso","Ficha del caso"],["actuacion","Qué hacer"],["lesiones","Por lesión"],["hemorragia","Hemorragia masiva"],["calc","Calculadoras"],["deriva","Derivación y registro"]];
+$("#tabs").innerHTML=TABS.map(t=>"<button class='tab' role='tab' type='button' data-tab='"+t[0]+"' aria-selected='false'>"+t[1]+"</button>").join("");
+function showTab(id,user){
+  if(!TABS.some(t=>t[0]===id))id="caso";
+  $$(".view").forEach(v=>v.classList.toggle("on",v.id==="v-"+id));
+  $$(".tab").forEach(b=>b.setAttribute("aria-selected",String(b.dataset.tab===id)));
+  try{if(user)location.hash=id}catch(e){}
+  if(user)window.scrollTo({top:0,behavior:"auto"});
+}
+$("#tabs").addEventListener("click",e=>{const b=e.target.closest(".tab");if(b)showTab(b.dataset.tab,true)});
+
+const GROUPS={anat:ANAT.map(a=>a.t),mec:MEC,com:COM,inmov:INMOV,pruebas:PRUEBAS};
+$$("[data-group]").forEach(el=>{const g=el.dataset.group;el.innerHTML=GROUPS[g].map((t,i)=>chk(g+"_"+i,t)).join("")});
+Object.keys(RADIOS).forEach(k=>{$("#r_"+k).innerHTML=RADIOS[k].map(o=>"<label><input type='radio' name='"+k+"' id='r_"+k+"_"+o[0]+"' value='"+o[0]+"'><span>"+o[1]+"</span></label>").join("")});
+$("#abcForm").innerHTML=ABC.map(a=>"<div class='abc'><header><span class='letter'>"+a.k+"</span><h4>"+a.n+"</h4><span class='cnt' id='cnt_"+a.k+"'>0/"+a.steps.length+"</span></header><div class='body'><div class='chks'>"+a.steps.map((s,i)=>chk("abc_"+a.k+"_"+i,s)).join("")+"</div><div class='field'><label for='abcn_"+a.k+"'>Hallazgos</label><textarea id='abcn_"+a.k+"' rows='2'></textarea></div></div></div>").join("");
+$("#abcGuide").innerHTML=ABC.map(a=>"<div class='step-card'><header><span class='letter'>"+a.k+"</span><div><h3>"+a.n+"</h3><span class='ref'>"+a.ref+"</span></div></header><div class='body'><div class='blk'><div class='tagrow'><span class='pill teal'>Hacer</span></div><ul>"+a.hacer.map(x=>"<li>"+x+"</li>").join("")+"</ul></div>"+(a.evitar.length?"<div class='blk'><div class='tagrow'><span class='pill red'>Evitar</span></div><ul>"+a.evitar.map(x=>"<li>"+x+"</li>").join("")+"</ul></div>":"<div class='blk'></div>")+"</div></div>").join("");
+$("#secForm").innerHTML=SEC.map((s,i)=>"<div class='field'><label for='sec_"+i+"'>"+s+"</label><input type='text' id='sec_"+i+"'></div>").join("");
+$("#team").innerHTML=TEAM.map(t=>"<label class='chk'><input type='checkbox' id='"+t.id+"'><span>"+t.n+"</span><span class='tg' id='tg_"+t.id+"'>"+t.g+"</span></label>").join("");
+$("#tl").innerHTML=EVENTS.map(e=>"<div class='tl-row'><label for='"+e[0]+"'>"+e[1]+"</label><input type='time' id='"+e[0]+"'><button class='btn sm' type='button' data-now='"+e[0]+"'>Ahora</button><span class='el' id='el_"+e[0]+"'></span></div>").join("");
+$("#armario").innerHTML=ARMARIO.map((t,i)=>chk("arm_"+i,t)).join("");
+$("#dataSend").innerHTML=DATASEND.map((t,i)=>chk("ds_"+i,t)).join("");
+$("#ptmCrit").innerHTML=PTMCRIT.map((t,i)=>chk("ptm_"+i,t)).join("");
+$("#abcScoreChk").innerHTML=chk("abcPen","Mecanismo penetrante (se marca solo con el criterio anatómico de lesión penetrante)")+"<p class='small muted'>TAS &lt;90, FC &gt;120 y ECO FAST positivo se toman de la ficha del caso.</p>";
+const fmtNum=n=>n.length===9?n.replace(/(\d{3})(\d{3})(\d{3})/,"$1 $2 $3"):n;
+$("#contacts").innerHTML=CONTACTS.map(c=>"<div class='contact'><div class='who'><b>"+c.n+"</b><span>"+c.d+"</span></div>"+c.nums.map(n=>"<span class='num'>"+fmtNum(n)+"</span><button class='btn sm' type='button' data-copy='"+n+"' aria-label='Copiar "+n+"'>Copiar</button>").join("")+"</div>").join("");
+
+/* ---- por lesión ---- */
+const KIND={do:["Hacer","teal"],avoid:["Evitar","red"],dose:["Pautas y dosis","amber"],derive:["Derivación","blue"],info:["Claves",""],custom:["Calculadora","teal"]};
+$("#lesList").innerHTML=LES.map(s=>"<details class='acc' id='les_"+s.id+"'><summary><h3>"+s.t+"</h3><span class='tags'>"+s.tags.map(t=>"<span class='pill'>"+t+"</span>").join("")+"</span></summary><div class='inner'><div class='blks'>"+s.b.map(b=>{const k=KIND[b.k];return "<div class='blk "+b.k+(b.full?" full":"")+"'><div class='tagrow'><span class='pill "+k[1]+"'>"+(b.l||k[0])+"</span></div>"+(b.html?b.html:"<ul>"+b.it.map(x=>"<li>"+x+"</li>").join("")+"</ul>")+"</div>"}).join("")+"</div><p class='ref' style='margin-top:14px'>Fuente: "+s.ref+"</p></div></details>").join("");
+const lesText=LES.map(s=>plain($("#les_"+s.id).textContent).toLowerCase());
+function filterLes(){
+  const q=val("q").trim().toLowerCase();let n=0;
+  LES.forEach((s,i)=>{const d=$("#les_"+s.id);const hit=!q||lesText[i].includes(q);d.hidden=!hit;d.open=!!q&&hit;if(hit)n++});
+  $("#lesEmpty").hidden=n>0;
+}
+function clark(){
+  const n=$$(".clark input:checked").length;const r=$("#clarkRes");if(!r)return;
+  r.textContent=n+(n===1?" punto. ":" puntos. ")+(n>=2?"Dos o más puntos: diagnóstico de lesión por inhalación de humos.":"Con 2 o más puntos se diagnostica lesión por inhalación de humos.");
+  r.className="callout"+(n>=2?" red":"");
+}
+
+/* ---- cálculo del caso ---- */
+const gcsP=g=>g>=13?4:g>=9?3:g>=6?2:g>=4?1:0;
+const tasP=t=>t>89?4:t>=76?3:t>=50?2:t>=1?1:0;
+const frP=f=>(f>=10&&f<=29)?4:f>29?3:f>=6?2:f>=1?1:0;
+const sel=g=>GROUPS[g].map((t,i)=>on(g+"_"+i)?i:-1).filter(i=>i>=0);
+let S={};
+function calcCase(){
+  const gcs=num("gcs"),tas=num("tas"),fr=num("fr"),fc=num("fc"),sat=num("sat"),edad=num("edad");
+  const tsr=(gcs!==null&&tas!==null&&fr!==null)?gcsP(gcs)+tasP(tas)+frP(fr):null;
+  const is=(fc!==null&&tas!==null&&tas>0)?fc/tas:null;
+  const aI=sel("anat"),mI=sel("mec"),cI=sel("com");
+  const ageCrit=edad!==null&&(edad>55||edad<5);
+  const fis=(tsr!==null&&tsr<12)||(gcs!==null&&gcs<=13);
+  const anat=aI.length>0,mec=mI.length>0,com=cI.length>0||ageCrit;
+  const inest=on("inest");
+  const hasData=fis||anat||mec||com||inest||gcs!==null||tas!==null||fr!==null;
+  const act=fis||anat||mec||com;
+  let pr=0;
+  if(fis||inest)pr=1;else if(anat||mec||com)pr=2;else if(hasData)pr=3;
+  // PTM
+  const pen=on("abcPen")||on("anat_0");
+  const fast=val("fast")==="pos";
+  const abcItems=[];if(pen)abcItems.push("mecanismo penetrante");if(tas!==null&&tas<90)abcItems.push("TAS <90");if(fc!==null&&fc>120)abcItems.push("FC >120");if(fast)abcItems.push("ECO FAST positivo");
+  const abcS=abcItems.length;
+  const hb=num("tHb"),be=num("tBE");const miss=[];
+  let tash=0;
+  if(hb===null)miss.push("Hb");else tash+=hb<7?8:hb<9?6:hb<10?4:hb<11?3:hb<12?2:0;
+  if(be===null)miss.push("EB");else tash+=be<=-10?4:be<=-6?3:be<=-2?1:0;
+  if(tas===null)miss.push("TAS");else tash+=tas<100?4:tas<=120?1:0;
+  if(fc===null)miss.push("FC");else tash+=fc>120?2:0;
+  if(fast)tash+=3;if(on("tPelv"))tash+=6;if(on("tFem"))tash+=3;if(val("sexo")==="H")tash+=1;
+  const auto=[];if(abcS>2)auto.push("ABC "+abcS);if(is!==null&&is>0.9)auto.push("índice de shock "+nf(is,2));if(tash>16)auto.push("TASH "+tash);
+  const manual=$$("[id^='ptm_']:checked").length;
+  const txaTime=tmin(val("ev_txa")),tr=tmin(val("hTrauma"));
+  const txaGiven=(document.querySelector("input[name=txa]:checked")||{}).value==="si";
+  const txaDone=txaGiven||txaTime!==null;
+  S={gcs,tas,fr,fc,sat,edad,tsr,is,aI,mI,cI,ageCrit,fis,anat,mec,com,inest,hasData,act,pr,abcS,abcItems,tash,miss,auto,manual,txaDone,txaTime,tr,fast,pen};
+}
+
+function renderPanel(){
+  const s=S;
+  // estado
+  const box=$("#stBox");box.className="status s-"+(s.pr?"p"+s.pr:"none");
+  const pill=$("#stPill"),big=$("#stBig"),txt=$("#stTxt");
+  const why=[];if(s.tsr!==null&&s.tsr<12)why.push("TSR "+s.tsr);if(s.gcs!==null&&s.gcs<=13)why.push("Glasgow "+s.gcs);if(s.inest)why.push("inestable");
+  if(s.anat)why.push(s.aI.length+(s.aI.length===1?" criterio anatómico":" criterios anatómicos"));if(s.mec)why.push(s.mI.length+(s.mI.length===1?" mecanismo de riesgo":" mecanismos de riesgo"));if(s.com)why.push("comorbilidad o edad de riesgo");
+  if(s.pr===1){pill.className="pill red";pill.textContent="Prioridad 1";big.textContent="Activar Código Trauma";
+    txt.innerHTML="<b>Sala de críticos con equipo de emergencias.</b> "+(why.length?"Por: "+why.join(", ")+". ":"")+(s.inest?"Inestable: estabilizar en la sala de críticos con protocolo de transfusión masiva si procede, ECO FAST y Rx portátil; después UCI o quirófano.":"Estable: Radiodiagnóstico acompañado de personal sanitario e inmovilizado (TC craneal, columna, tórax, abdomen y pelvis).");}
+  else if(s.pr===2){pill.className="pill amber";pill.textContent="Prioridad 2";big.textContent="Activar Código Trauma";
+    txt.innerHTML="<b>Sala de críticos.</b> "+(why.length?"Por: "+why.join(", ")+". ":"")+"Reevaluar GCS, TA, FR, FC y SatO₂ en la sala de triaje. El médico de policlínica u observación acompaña a Radiodiagnóstico.";}
+  else if(s.pr===3){pill.className="pill green";pill.textContent="Prioridad 3";big.textContent="Sin criterios de activación";
+    txt.innerHTML="<b>Consulta de policlínica</b> si es TCE con Glasgow 15, extremidades sin signos de fractura o luxación, policontusiones o heridas superficiales. Si aparece una lesión más grave, reevaluar.";}
+  else{pill.className="pill";pill.textContent="Esperando datos";big.textContent="Sin criterios todavía";txt.textContent="Marque criterios o introduzca Glasgow, TAS y FR para calcular la prioridad.";}
+  $("#fisPill").className="pill "+(s.fis?"red":(s.tsr!==null||s.gcs!==null?"green":""));
+  $("#fisPill").textContent=s.fis?"Cumple":(s.tsr!==null||s.gcs!==null?"No cumple":"Sin datos");
+  // kpis
+  const kt=$("#kTSR");kt.querySelector("b").textContent=s.tsr===null?"–":s.tsr;kt.className="kpi"+(s.tsr!==null?(s.tsr<12?" bad":" ok"):"");
+  const kg=$("#kGCS");kg.querySelector("b").textContent=s.gcs===null?"–":s.gcs;kg.className="kpi"+(s.gcs!==null?(s.gcs<=13?" bad":" ok"):"");
+  const ki=$("#kIS");ki.querySelector("b").textContent=s.is===null?"–":nf(s.is,2);ki.className="kpi"+(s.is!==null?(s.is>0.9?" bad":" ok"):"");
+  // xabcde
+  let done=0,tot=0,next=null;
+  ABC.forEach(a=>{let d=0;a.steps.forEach((st,i)=>{tot++;if(on("abc_"+a.k+"_"+i)){d++;done++}else if(!next)next=a.k+" · "+plain(st)});$("#cnt_"+a.k).textContent=d+"/"+a.steps.length});
+  $("#abcCount").textContent=done+"/"+tot;$("#abcBar").style.width=(tot?done/tot*100:0)+"%";
+  $("#nextTxt").textContent=next||"Valoración primaria completa. Siga con la valoración secundaria y las pruebas.";
+  // equipo
+  const setTag=(id,t,req)=>{const e=$("#tg_"+id);e.textContent=t;e.className="tg"+(req?" req":"")};
+  TEAM.slice(0,5).forEach(t=>setTag(t.id,"siempre",false));
+  setTag("t_int",s.tsr!==null&&s.tsr<12?"obligatorio (TSR <12)":"según necesidad",s.tsr!==null&&s.tsr<12);
+  setTag("t_ane",on("vad")?"vía aérea difícil":"según necesidad",on("vad"));
+  setTag("t_ban",(s.auto.length||s.manual)?"transfusión masiva":"según necesidad",!!(s.auto.length||s.manual));
+  // alertas
+  const A=[];const add=(c,h)=>A.push([c,h]);
+  if(s.tsr!==null&&s.tsr<12)add("red","<b>TSR menor de 12.</b> El equipo cuenta siempre con un intensivista.");
+  if(s.gcs!==null&&s.gcs<=8)add("red","<b>Glasgow ≤8.</b> Intubación indicada.");
+  if(s.auto.length)add("red","<b>Transfusión masiva:</b> los índices cumplen criterio ("+s.auto.join(", ")+"). El índice de shock cuenta tras la resucitación inicial. Ver pestaña Hemorragia masiva.");
+  if(s.inest)add("red","<b>Paciente inestable.</b> Sala de críticos, ECO FAST y Rx portátil, y UCI o quirófano.");
+  if(s.tas!==null&&s.tas>0&&s.tas<90)add("amber","<b>TAS &lt;90 mmHg.</b> En TCE hay que evitarla y mantener PAM &gt;70 mmHg.");
+  if(s.sat!==null&&s.sat<90)add("amber","<b>SatO₂ &lt;90 %.</b> Oxígeno y revisar la ventilación (B).");
+  if(on("vad"))add("amber","<b>Vía aérea difícil prevista.</b> Avisar al anestesista y pedir el carro de vía aérea difícil.");
+  // ácido tranexámico
+  const trem=s.tr!==null?dmin(s.tr,nowMin()):null;
+  if(s.txaDone)add("blue","<b>Ácido tranexámico administrado.</b>"+(s.tr!==null&&s.txaTime!==null?" A los "+fdur(dmin(s.tr,s.txaTime))+" del traumatismo.":""));
+  else if(s.tr!==null&&s.act){const rem=180-trem;add(rem>0?"amber":"red",rem>0?"<b>Ácido tranexámico:</b> quedan "+fdur(rem)+" de la ventana de 3 h desde el traumatismo, si hay hemorragia grave.":"<b>Ácido tranexámico:</b> han pasado "+fdur(trem)+" desde el traumatismo, fuera de la ventana de 3 h.");}
+  if(on("com_3"))add("blue","<b>Embarazo.</b> Es un límite de entrada marginal del proceso. Consultar el documento de trauma grave en el embarazo (Junta de Andalucía, 2024).");
+  if(s.edad!==null&&s.edad<14)add("blue","<b>Menor de 14 años.</b> Límite de entrada marginal. Ver trauma pediátrico y la calculadora pediátrica.");
+  if(s.ageCrit&&!on("com_0")&&!on("com_1"))add("blue","<b>Edad "+s.edad+" años:</b> cuenta como criterio de edad de riesgo (mayor de 55 o menor de 5).");
+  if(on("com_6"))add("amber","<b>Anticoagulado o con discrasia.</b> Valorar reversión (Hemorragia masiva, poblaciones especiales).");
+  s.aI.forEach(i=>{if(ANAT[i].h)add("blue",ANAT[i].h)});
+  const mb=$("#mini");mb.className="mini s-"+(s.pr?"p"+s.pr:"none");
+  $("#miniPill").className=pill.className;$("#miniPill").textContent=pill.textContent;$("#miniBig").textContent=big.textContent;
+  $("#miniK").textContent="TSR "+(s.tsr===null?"–":s.tsr)+" · GCS "+(s.gcs===null?"–":s.gcs)+" · IS "+(s.is===null?"–":nf(s.is,2));
+  $("#miniNext").textContent="Siguiente: "+(next||"valoración secundaria y pruebas");
+  $("#miniGo").textContent="Alertas ("+A.length+")";
+  $("#alerts").innerHTML=A.length?A.map(a=>"<li class='"+a[0]+"'>"+a[1]+"</li>").join(""):"<li>Sin alertas.</li>";
+}
+
+function renderTimes(){
+  const tr=tmin(val("hTrauma")),hd=tmin(val("hDisp")),hs=tmin(val("hSalida")),ll=tmin(val("ev_llegada"));
+  const items=[["Asistencia prehospitalaria",dmin(hd,hs)],["Del traumatismo al inicio del transporte",dmin(tr,hs)],["Del traumatismo a la llegada a urgencias",dmin(tr,ll)]];
+  let txa="–";
+  if(tr!==null){
+    if(S.txaTime!==null){const e=dmin(tr,S.txaTime);txa="A los "+fdur(e)+(e>180?" (fuera de ventana)":"")}
+    else if(S.txaDone)txa="Administrado";
+    else{const e=dmin(tr,nowMin());txa=e<=180?"Quedan "+fdur(180-e):"Superada"}
+  }
+  $("#timesOut").innerHTML=items.map(i=>"<div class='tbox'><b>"+fdur(i[1])+"</b><span>"+i[0]+"</span></div>").join("")+"<div class='tbox'><b>"+txa+"</b><span>Ventana del ácido tranexámico (3 h)</span></div>";
+  EVENTS.forEach(e=>{
+    const t=tmin(val(e[0]));const el=$("#el_"+e[0]);
+    if(t===null||ll===null||e[0]==="ev_llegada"){el.textContent=e[0]==="ev_llegada"&&t!==null?"0 min":"";return}
+    let d=t-ll;if(d>720)d-=1440;if(d<-720)d+=1440;el.textContent=(d>=0?"+":"−")+Math.abs(d)+" min";
+  });
+}
+
+function renderPtm(){
+  const s=S;
+  $("#ptmIS").querySelector("b").textContent=s.is===null?"–":nf(s.is,2);
+  $("#ptmIS").className="kpi"+(s.is!==null?(s.is>0.9?" bad":" ok"):"");
+  const ab=$("#abcRes");ab.querySelector("b").textContent=s.abcS+(s.abcS?" ("+s.abcItems.join(", ")+")":"");
+  ab.className="kpi"+(s.abcS>2?" bad":"");
+  const tt=$("#tashRes");tt.querySelector("b").textContent=s.tash+(s.miss.length?" (faltan: "+s.miss.join(", ")+")":"");
+  tt.className="kpi"+(s.tash>16?" bad":"");
+  const v=$("#ptmVerdict");
+  const all=[];if(s.manual)all.push(s.manual+(s.manual===1?" criterio marcado":" criterios marcados"));if(s.auto.length)all.push("por índices: "+s.auto.join(", "));
+  if(all.length){v.className="callout red";v.innerHTML="<b>Cumple criterios para activar el protocolo</b> ("+all.join("; ")+"). Llame al Banco de Sangre y cumplimente la hoja de extrema urgencia."}
+  else{v.className="callout";v.innerHTML="Ningún criterio marcado. "+(s.abcS===2?"El score ABC es 2: el PNT pide más de 2 puntos. Con 2 puntos el riesgo de transfusión masiva es del 38 %.":"")}
+}
+
+/* ---- calculadoras ---- */
+const DOSES=[
+ ["Ácido tranexámico, bolo","15 mg/kg iv, máx. 1 g",w=>nf(Math.min(15*w,1000))+" mg"],
+ ["Ácido tranexámico, perfusión","2 mg/kg/h, máx. 125 mg/h",w=>nf(Math.min(2*w,125))+" mg/h"],
+ ["Plasma fresco congelado","10–15 ml/kg si TP o TTPA ratio &gt;1,5",w=>nf(10*w)+"–"+nf(15*w)+" ml"],
+ ["Complejo protrombínico, coagulopatía refractaria","15–20 UI/kg en bolo de 5 min. Máx. total 3.000 UI",w=>nf(Math.min(15*w,3000))+"–"+nf(Math.min(20*w,3000))+" UI"],
+ ["Complejo protrombínico, anticoagulados","15–30 UI/kg (AVK con INR &gt;1,5 y anticoagulantes orales directos). Máx. 3.000 UI",w=>nf(Math.min(15*w,3000))+"–"+nf(Math.min(30*w,3000))+" UI"],
+ ["Fibrinógeno, dosis inicial","2 g iv (3 g en hemorragia obstétrica)",w=>"2 g"],
+ ["Manitol en TCE","0,25–1 g/kg iv en bolo si la PAM es adecuada",w=>nf(0.25*w,1)+"–"+nf(w,1)+" g"],
+ ["Fenitoína, carga","15 mg/kg; después 100 mg/8 h",w=>nf(15*w)+" mg"],
+ ["Gentamicina (fractura abierta grado III y amputaciones)","3–5 mg/kg/día",w=>nf(3*w)+"–"+nf(5*w)+" mg/día"],
+ ["Factor VII activado (solo si lo indica Hematología)","90 mcg/kg",w=>nf(90*w)+" mcg"],
+ ["Volemia estimada del adulto","70 ml/kg",w=>nf(70*w)+" ml"],
+ ["Transfusión masiva pediátrica","Hematíes 30 ml/kg, plasma 20 ml/kg y plaquetas 5 ml/kg",w=>nf(30*w)+" / "+nf(20*w)+" / "+nf(5*w)+" ml"]
+];
+function renderCalc(){
+  const w=num("cw")!==null?num("cw"):num("peso");
+  $("#cw").placeholder=num("peso")!==null?String(num("peso")):"";
+  $("#doseBody").innerHTML=DOSES.map(r=>"<tr><td>"+r[0]+"</td><td>"+r[1]+"</td><td class='num'>"+(w?r[2](w):"–")+"</td></tr>").join("");
+  // Parkland
+  const pw=num("pkW"),ps=num("pkS"),pf=num("pkF")||0;
+  if(pw&&ps!==null){
+    const sc=Math.min(ps,50);
+    const rows=[2,4].map(m=>{const tot=m*pw*sc,h8=Math.max(tot/2-pf,0),r2=tot/2;return "<tr><td>"+m+" ml/kg</td><td class='num'>"+nf(tot)+" ml</td><td class='num'>"+nf(h8)+" ml</td><td class='num'>"+nf(h8/8)+" ml/h</td><td class='num'>"+nf(r2)+" ml</td><td class='num'>"+nf(r2/16)+" ml/h</td></tr>"});
+    $("#pkRes").style.display="block";
+    $("#pkRes").innerHTML="<div class='tw'><table><thead><tr><th>Pauta</th><th class='num'>Total 24 h</th><th class='num'>Primeras 8 h</th><th class='num'>Ritmo</th><th class='num'>16 h siguientes</th><th class='num'>Ritmo</th></tr></thead><tbody>"+rows.join("")+"</tbody></table></div>"+(ps>50?"<p class='small muted' style='margin-top:6px'>Se ha aplicado el máximo del 50 %.</p>":"");
+  }else{$("#pkRes").style.display="block";$("#pkRes").innerHTML="<p class='small muted'>Introduzca peso y SCQT.</p>"}
+  // pediatría
+  const ea=num("pedAge");
+  if(ea!==null){
+    const pw2=2*ea+10,vol=ea<1?80:ea<=3?75:70;
+    const k=(b,s)=>"<div class='kpi'><b>"+b+"</b><span>"+s+"</span></div>";
+    $("#pedRes").innerHTML=[
+     k(nf(pw2,1)+" kg","Peso estimado (2 × edad + 10)"),
+     k(nf(70+2*ea)+" mmHg","TAS mínima (70 + 2 × edad)"),
+     k(nf(vol*pw2)+" ml","Volemia ("+vol+" ml/kg)"),
+     k(nf(20*pw2)+" ml","Cristaloide isotónico, 20 ml/kg"),
+     k(nf(10*pw2)+"–"+nf(20*pw2)+" ml","Hematíes y plasma, 10–20 ml/kg de cada"),
+     k(nf(30*pw2)+" / "+nf(20*pw2)+" / "+nf(5*pw2)+" ml","Transfusión masiva: hematíes, plasma, plaquetas"),
+     k(nf(6*pw2)+"–"+nf(8*pw2)+" ml","Volumen corriente en ventilación mecánica, 6–8 ml/kg"),
+     k(nf(pw2<10?pw2:2*pw2,1)+" mg","Succinilcolina ("+(pw2<10?"1":"2")+" mg/kg)"),
+     k(nf(0.6*pw2,1)+" mg","Rocuronio, 0,6 mg/kg"),
+     k(nf(0.1*pw2,1)+" mg","Midazolam, 0,1 mg/kg"),
+     k(nf(0.1*pw2,1)+" / "+nf(0.3*pw2,1)+" mg","Etomidato: hipovolemia 0,1 mg/kg, normovolemia 0,3 mg/kg")
+    ].join("");
+  }else $("#pedRes").innerHTML="<p class='small muted'>Introduzca la edad. Si conoce el peso real, úselo.</p>";
+  // protamina
+  const ui=num("hepUI");
+  if(ui){const mg=Math.min(ui/100,50);$("#hepRes").innerHTML="<div class='kpi'><b>"+nf(mg,1)+" mg</b><span>Sulfato de protamina ("+nf(mg/10,2)+" ml)"+(ui/100>50?". Se aplica el máximo de 50 mg (1 vial)":"")+"</span></div><div class='kpi'><b>"+nf(mg/2,1)+" mg</b><span>Si ha pasado más de una vida media de la HBPM: la mitad, en perfusión continua</span></div>"}
+  else $("#hepRes").innerHTML="<p class='small muted'>Introduzca las UI de heparina.</p>";
+}
+
+/* ---- resumen ---- */
+function checked(g){return sel(g).map(i=>plain(GROUPS[g][i]))}
+function summary(){
+  const L=[],s=S;
+  const add=(k,v)=>{if(v!==null&&v!==undefined&&v!=="")L.push(k+": "+v)};
+  L.push("CÓDIGO TRAUMA · URGENCIAS HOSPITAL DE ANTEQUERA");
+  add("Paciente",[val("nombre"),val("nuhsa")&&"NUHSA "+val("nuhsa"),val("edad")&&val("edad")+" años",val("sexo")==="H"?"hombre":val("sexo")==="M"?"mujer":"",val("peso")&&val("peso")+" kg"].filter(Boolean).join(" · "));
+  add("Lugar",val("lugar"));add("Mecanismo",val("mecan"));
+  add("Tiempos",[["traumatismo","hTrauma"],["aviso","hAviso"],["dispositivo","hDisp"],["inicio transporte","hSalida"],["llegada","ev_llegada"]].filter(x=>val(x[1])).map(x=>x[0]+" "+val(x[1])).join(" · "));
+  add("Prioridad",s.pr?("Prioridad "+s.pr+(s.act?" · Código Trauma activado":"")):"");
+  add("Criterios fisiológicos",s.fis?[s.tsr!==null&&s.tsr<12?"TSR "+s.tsr:"",s.gcs!==null&&s.gcs<=13?"Glasgow "+s.gcs:""].filter(Boolean).join(", "):"");
+  add("Criterios anatómicos",checked("anat").join("; "));add("Mecanismo lesional",checked("mec").join("; "));
+  add("Edad y comorbilidad",checked("com").join("; "));
+  add("Constantes",[s.gcs!==null&&"Glasgow "+s.gcs+(val("gE")&&val("gV")&&val("gM")?" (O"+val("gE")+" V"+val("gV")+" M"+val("gM")+")":""),s.tas!==null&&"TAS "+s.tas,s.fr!==null&&"FR "+s.fr,s.fc!==null&&"FC "+s.fc,s.sat!==null&&"SatO₂ "+s.sat+" %",s.tsr!==null&&"TSR "+s.tsr,s.is!==null&&"índice de shock "+nf(s.is,2)].filter(Boolean).join(" · "));
+  if(s.inest)L.push("Paciente inestable");if(on("vad"))L.push("Vía aérea difícil prevista");
+  const pre=[val("hIOT")&&"intubación "+val("hIOT"),val("hTorn")&&"torniquete "+val("hTorn"),val("hATB")&&"antibiótico "+val("hATB")].filter(Boolean).join(" · ");
+  add("Prehospitalaria",pre);add("Medicación prehospitalaria",val("medic"));add("Fluidoterapia prehospitalaria",val("fluid"));
+  const rl={si:"sí",no:"no",np:"no procede"};
+  const rv=k=>{const e=document.querySelector("input[name="+k+"]:checked");return e?(rl[e.value]||e.value):""};
+  add("Ácido tranexámico",rv("txa"));add("Fijación pélvica",rv("pelv"));add("Extricación",rv("extr"));
+  add("Inmovilización",checked("inmov").join(", "));add("Observaciones prehospitalarias",val("obsPre"));
+  const ab=ABC.map(a=>{const d=a.steps.filter((_,i)=>on("abc_"+a.k+"_"+i)).length;const n=val("abcn_"+a.k);return a.k+": "+d+"/"+a.steps.length+(n?" · "+n:"")}).join("\n  ");
+  L.push("Valoración primaria:\n  "+ab);
+  add("Valoración secundaria",SEC.map((x,i)=>val("sec_"+i)?x+": "+val("sec_"+i):"").filter(Boolean).join(" | "));
+  add("Alergias",val("alerg"));add("Antecedentes",val("antec"));add("Última ingesta",val("ingesta"));add("Ambiente y exposición",val("ambiente"));
+  add("Pruebas",checked("pruebas").concat(val("fast")?["ECO FAST "+(val("fast")==="pos"?"positivo":"negativo")]:[]).join(", "));
+  const tl=EVENTS.filter(e=>val(e[0])).map(e=>val(e[0])+" "+e[1]);add("Cronología",tl.join(" | "));
+  if(s.auto.length||s.manual)add("Transfusión masiva","criterios cumplidos"+(s.auto.length?" ("+s.auto.join(", ")+")":""));
+  add("Destino",val("destino"));
+  add("Médico",val("medico"));add("DUE",val("due"));
+  L.push("Resumen generado con la herramienta de apoyo; transcribir a la Hoja de Registro de Datos del Trauma Grave en DIRAYA (CIE 959.8).");
+  return L.join("\n");
+}
+
+/* ---- ejemplo y reinicio ---- */
+function setv(id,v){const e=document.getElementById(id);if(!e)return;if(e.type==="checkbox"||e.type==="radio")e.checked=!!v;else e.value=v}
+function loadExample(){
+  resetAll(true);
+  const n=nowMin();
+  setv("nombre","EJEMPLO FICTICIO");setv("nuhsa","SSAA0000000000");setv("edad",34);setv("sexo","H");setv("peso",80);
+  setv("lugar","Carretera de ejemplo, km 12");setv("mecan","Vuelco de turismo");
+  setv("hTrauma",hhmm(n-40));setv("hAviso",hhmm(n-38));setv("hDisp",hhmm(n-30));setv("hSalida",hhmm(n-15));
+  setv("ev_aviso",hhmm(n-12));setv("ev_llegada",hhmm(n-2));setv("hIOT","");
+  setv("mec_5",1);setv("anat_6",1);
+  setv("gE",3);setv("gV",4);setv("gM",5);setv("gcs",12);setv("tas",82);setv("fr",28);setv("fc",128);setv("sat",91);setv("inest",1);
+  setv("medic","Ejemplo: analgesia iv");setv("fluid","Ejemplo: cristaloides 500 ml");
+  setv("r_txa_si",1);setv("r_pelv_no",1);setv("r_extr_no",1);setv("inmov_0",1);setv("inmov_1",1);
+  setv("abc_X_0",1);setv("abc_A_0",1);setv("abc_A_1",1);setv("abc_B_0",1);setv("abc_B_1",1);setv("abc_B_2",1);
+  setv("t_medobs",1);setv("t_medurg",1);setv("t_due",1);
+  setv("tHb",8.2);setv("tBE",-7);
+  update();toast("Ejemplo ficticio cargado");
+}
+function resetAll(silent){
+  $("#caseForm").reset();
+  ["tHb","tBE","tPelv","tFem","abcPen"].forEach(id=>setv(id,""));
+  $$("[id^='ptm_'],[id^='ds_'],[id^='t_']").forEach(e=>{if(e.type==="checkbox")e.checked=false});
+  $("#sumBox").classList.remove("on");
+  if(!silent){update();window.scrollTo({top:0})}
+}
+
+/* ---- eventos ---- */
+function update(){calcCase();renderPanel();renderTimes();renderPtm();renderCalc()}
+function onChange(e){
+  const id=e.target.id||"";
+  if(id==="gE"||id==="gV"||id==="gM"){const a=num("gE"),b=num("gV"),c=num("gM");if(a&&b&&c)$("#gcs").value=a+b+c}
+  if(e.target.closest&&e.target.closest(".clark"))clark();
+  if(id==="q")filterLes();
+  update();
+}
+document.addEventListener("input",onChange);document.addEventListener("change",onChange);
+document.addEventListener("click",e=>{
+  const nowB=e.target.closest("[data-now]");
+  if(nowB){const i=$("#"+nowB.dataset.now);i.value=hhmm(nowMin());update();return}
+  const cp=e.target.closest("[data-copy]");
+  if(cp){copyText(cp.dataset.copy,"Número copiado: "+cp.dataset.copy)}
+});
+$("#miniGo").addEventListener("click",()=>$("#panel").scrollIntoView({behavior:"smooth",block:"start"}));
+$("#btnSum").addEventListener("click",()=>{$("#sumTxt").value=summary();$("#sumBox").classList.add("on");$("#sumBox").scrollIntoView({block:"nearest"})});
+$("#btnSumClose").addEventListener("click",()=>$("#sumBox").classList.remove("on"));
+$("#btnCopy").addEventListener("click",()=>{const t=$("#sumTxt");t.select();copyText(t.value,"Resumen copiado")});
+$("#btnEx").addEventListener("click",loadExample);
+let armT;
+$("#btnNew").addEventListener("click",function(){
+  if(this.dataset.armed){clearTimeout(armT);delete this.dataset.armed;this.textContent="Nuevo caso";resetAll();toast("Caso borrado");return}
+  this.dataset.armed="1";this.textContent="Pulse otra vez para borrar";
+  armT=setTimeout(()=>{delete this.dataset.armed;this.textContent="Nuevo caso"},4000);
+});
+$("#themeBtn").addEventListener("click",()=>{
+  const r=document.documentElement,cur=r.getAttribute("data-theme");
+  const dark=cur?cur==="dark":window.matchMedia("(prefers-color-scheme: dark)").matches;
+  r.setAttribute("data-theme",dark?"light":"dark");
+});
+window.addEventListener("hashchange",()=>{try{showTab(location.hash.slice(1),false)}catch(e){}});
+setInterval(()=>{if(!document.hidden){renderTimes();renderPanel()}},30000);
+
+let h0="caso";try{h0=location.hash.slice(1)||"caso"}catch(e){}
+showTab(h0,false);
+update();
+</script></body></html>
+
+
+<!-- Barra común del Portal SUH Antequera -->
+<style>
+  .suhdock{position:fixed;left:14px;bottom:14px;z-index:2147483000;display:flex;align-items:center;gap:4px;padding:5px;border-radius:999px;background:#0c2a4a;box-shadow:0 10px 30px -8px rgba(12,42,74,.55);font:600 13px/1 'Plus Jakarta Sans',system-ui,-apple-system,'Segoe UI',sans-serif;transition:opacity .2s}
+  .suhdock a{display:inline-flex;align-items:center;justify-content:center;gap:7px;height:34px;min-width:34px;padding:0 9px;border-radius:999px;color:#fff;text-decoration:none}
+  .suhdock a:hover{background:rgba(255,255,255,.14)}
+  .suhdock a.suhdock-home{background:#fff;color:#0c2a4a;padding:0 12px 0 4px}
+  .suhdock a.suhdock-home img{width:26px;height:26px;border-radius:50%;object-fit:contain;background:#fff}
+  .suhdock svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  .suhdock .suhdock-x{opacity:.6;min-width:26px;padding:0}
+  .suhdock.suhdock-min a:not(.suhdock-home){display:none}
+  .suhdock.suhdock-min a.suhdock-home span{display:none}
+  .suhdock.suhdock-min a.suhdock-home{padding:0 4px}
+  @media print{.suhdock{display:none!important}}
+</style>
+<nav class="suhdock" aria-label="Portal SUH Antequera">
+  <a class="suhdock-home" href="../index.html#herramientas" title="Volver al Portal de Supervisión SUH Antequera"><img src="../img/logo-suh.jpg" alt=""><span>Portal SUH</span></a>
+  <a href="https://www.instagram.com/suh_antequera_/" target="_blank" rel="noopener" title="Instagram @suh_antequera_"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><path d="M17.5 6.5h.01"/></svg></a>
+  <a href="https://www.facebook.com/p/Suh-Antequera-61568582212569/" target="_blank" rel="noopener" title="Facebook SUH Antequera"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+  <a href="https://x.com/saludnortemalag" target="_blank" rel="noopener" title="X @saludnortemalag" style="font-size:15px">𝕏</a>
+  <a class="suhdock-x" href="#" title="Minimizar barra" onclick="this.parentNode.classList.toggle('suhdock-min');return false;"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></a>
+</nav>
+</body></html>

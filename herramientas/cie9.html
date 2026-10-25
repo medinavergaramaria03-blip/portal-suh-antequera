@@ -1,0 +1,511 @@
+<!doctype html><html><head>
+  <meta name="robots" content="noindex, nofollow"><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>CIE-9 Urgencias Antequera</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=IBM+Plex+Sans+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout: cabecera fija con pestañas, lista de códigos en filas planas, modos de estudio a pantalla completa de contenido */
+:root{
+  --bg:#f2f5f8; --surface:#ffffff; --fg:#14212e; --muted:#566879; --line:#d5dee7;
+  --accent:#1f5a8a; --accent-fg:#ffffff; --soft:#e4edf5;
+  --alert:#b3261e; --alert-soft:#fbe9e7; --ok:#1d7a4d; --ok-soft:#e3f3ea; --warn:#9a5b00; --warn-soft:#fdf0d9;
+  --f-display:"IBM Plex Sans Condensed","Arial Narrow",system-ui,sans-serif;
+  --f-body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0d151d; --surface:#15202b; --fg:#e6edf3; --muted:#92a3b3; --line:#2a3947;
+    --accent:#6fb0e6; --accent-fg:#08202f; --soft:#1a2b3b;
+    --alert:#ff8f86; --alert-soft:#3a1d1b; --ok:#62d19b; --ok-soft:#14301f; --warn:#f0b35a; --warn-soft:#37290f;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0d151d; --surface:#15202b; --fg:#e6edf3; --muted:#92a3b3; --line:#2a3947;
+  --accent:#6fb0e6; --accent-fg:#08202f; --soft:#1a2b3b;
+  --alert:#ff8f86; --alert-soft:#3a1d1b; --ok:#62d19b; --ok-soft:#14301f; --warn:#f0b35a; --warn-soft:#37290f;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:16px;line-height:1.45;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 40px}
+.wrap{max-width:860px;margin:0 auto}
+button{font:inherit;color:inherit;cursor:pointer}
+button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:30}
+
+header.top{padding:18px 0 10px}
+.org{font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:500}
+h1{font-family:var(--f-display);font-size:clamp(1.7rem,6vw,2.3rem);line-height:1.1;margin:4px 0 2px;font-weight:700;text-wrap:balance}
+.sub{color:var(--muted);font-size:.92rem;margin:0}
+
+nav.tabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--bg);border-bottom:1px solid var(--line);
+  display:flex;gap:4px;overflow-x:auto;padding:6px 0;margin-bottom:14px;scrollbar-width:none}
+nav.tabs::-webkit-scrollbar{display:none}
+.tab{flex:0 0 auto;border:1px solid transparent;background:transparent;padding:9px 14px;border-radius:6px;font-weight:600;font-size:.95rem;color:var(--muted)}
+.tab[aria-selected="true"]{background:var(--accent);color:var(--accent-fg)}
+.tab .n{font-family:var(--f-mono);font-size:.75rem;margin-left:6px;opacity:.85}
+
+.searchbox{position:relative}
+.searchbox input{width:100%;font:inherit;font-size:1.08rem;padding:14px 44px 14px 14px;border:2px solid var(--line);border-radius:8px;background:var(--surface);color:var(--fg)}
+.searchbox input:focus{border-color:var(--accent);outline:none}
+.searchbox .clear{position:absolute;right:6px;top:50%;transform:translateY(-50%);border:0;background:transparent;font-size:1.4rem;line-height:1;padding:8px 12px;color:var(--muted)}
+.hint{font-size:.85rem;color:var(--muted);margin:8px 0 12px}
+
+.alerts{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin:0 0 14px}
+.alert-btn{display:flex;align-items:center;justify-content:space-between;gap:10px;text-align:left;border:1px solid var(--alert);background:var(--alert-soft);color:var(--fg);padding:10px 14px;border-radius:8px;min-width:0}
+.alert-btn b{font-family:var(--f-display);font-size:1.05rem;letter-spacing:.02em}
+.alert-btn span.c{font-family:var(--f-mono);font-weight:600;font-size:1.25rem;color:var(--alert)}
+
+.chips{display:flex;gap:6px;overflow-x:auto;padding-bottom:6px;margin-bottom:10px;scrollbar-width:thin}
+.chip{flex:0 0 auto;border:1px solid var(--line);background:var(--surface);padding:6px 12px;border-radius:999px;font-size:.88rem;color:var(--fg)}
+.chip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-fg)}
+
+.count{font-size:.85rem;color:var(--muted);margin:2px 0 8px}
+h2.cat{font-family:var(--f-display);font-size:1.05rem;text-transform:uppercase;letter-spacing:.07em;background:var(--accent);color:var(--accent-fg);margin:18px 0 0;padding:8px 12px;border-radius:6px 6px 0 0;display:flex;justify-content:space-between;gap:10px}
+h2.cat span{font-family:var(--f-mono);font-size:.8rem;opacity:.9}
+ul.list{list-style:none;margin:0;padding:0;border:1px solid var(--line);border-radius:0 0 6px 6px;background:var(--surface);overflow:hidden}
+ul.list.solo{border-radius:6px}
+li.row{display:grid;grid-template-columns:1fr auto auto;align-items:stretch;border-top:1px solid var(--line)}
+li.row:first-child{border-top:0}
+li.row:nth-child(even){background:color-mix(in srgb,var(--soft) 55%,var(--surface))}
+.rowmain{grid-column:1;display:grid;grid-template-columns:5.6rem minmax(0,1fr);gap:10px;align-items:center;text-align:left;border:0;background:transparent;padding:11px 8px 11px 12px;min-width:0}
+.code{font-family:var(--f-mono);font-weight:600;font-size:1.02rem;color:var(--accent);overflow-wrap:anywhere}
+.nm{min-width:0;overflow-wrap:anywhere}
+.nm small{display:block;color:var(--muted);font-size:.78rem}
+.pill{display:inline-block;font-size:.68rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:1px 7px;border-radius:999px;margin-left:6px;vertical-align:middle;background:var(--alert-soft);color:var(--alert);border:1px solid var(--alert)}
+.pill.l{background:var(--warn-soft);color:var(--warn);border-color:var(--warn)}
+.ico{border:0;background:transparent;padding:0 12px;font-size:1.25rem;color:var(--muted);min-width:44px}
+.ico[aria-pressed="true"]{color:var(--warn)}
+.detail{grid-column:1 / -1;padding:4px 14px 14px 12px;border-top:1px dashed var(--line);font-size:.92rem}
+.detail h4{margin:10px 0 6px;font-size:.78rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+.neigh{display:flex;flex-wrap:wrap;gap:6px}
+.nbtn{border:1px solid var(--line);background:var(--surface);border-radius:6px;padding:5px 9px;font-size:.84rem;text-align:left}
+.nbtn b{font-family:var(--f-mono);color:var(--accent);margin-right:6px}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.btn{border:1px solid var(--accent);background:var(--accent);color:var(--accent-fg);padding:10px 16px;border-radius:7px;font-weight:600}
+.btn.alt{background:transparent;color:var(--accent)}
+.btn.good{background:var(--ok);border-color:var(--ok);color:var(--surface)}
+.btn.bad{background:var(--alert);border-color:var(--alert);color:var(--surface)}
+.btn:disabled{opacity:.5;cursor:default}
+.empty{border:1px dashed var(--line);border-radius:8px;padding:28px 16px;text-align:center;color:var(--muted);background:var(--surface)}
+
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px}
+.controls{display:flex;flex-wrap:wrap;gap:10px;align-items:end;margin-bottom:14px}
+.controls label{display:flex;flex-direction:column;gap:4px;font-size:.78rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);min-width:0;flex:1 1 150px}
+select{font:inherit;font-size:.95rem;padding:10px;border:1px solid var(--line);border-radius:7px;background:var(--surface);color:var(--fg);min-width:0;width:100%;text-transform:none;letter-spacing:0}
+.progress{height:8px;background:var(--soft);border-radius:99px;overflow:hidden;margin:10px 0 4px}
+.progress i{display:block;height:100%;background:var(--accent);width:0;transition:width .2s}
+.meta{display:flex;justify-content:space-between;font-size:.82rem;color:var(--muted);gap:10px;flex-wrap:wrap}
+.flash{width:100%;min-height:210px;border:2px solid var(--line);border-radius:12px;background:var(--surface);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:24px 16px;text-align:center;margin:14px 0}
+.flash .lab{font-size:.75rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.flash .big{font-family:var(--f-display);font-size:clamp(1.5rem,6vw,2.1rem);font-weight:600;line-height:1.15;overflow-wrap:anywhere;text-wrap:balance}
+.flash .big.mono{font-family:var(--f-mono);font-size:clamp(2rem,9vw,3rem);color:var(--accent)}
+.flash .cat{font-size:.85rem;color:var(--muted)}
+.flash.revealed{border-color:var(--accent)}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.opts{display:grid;gap:10px;margin:14px 0}
+.opt{border:2px solid var(--line);background:var(--surface);border-radius:9px;padding:13px 14px;text-align:left;font-size:1rem;overflow-wrap:anywhere}
+.opt.mono{font-family:var(--f-mono);font-weight:600;font-size:1.1rem}
+.opt.right{border-color:var(--ok);background:var(--ok-soft)}
+.opt.wrong{border-color:var(--alert);background:var(--alert-soft)}
+.qtext{font-family:var(--f-display);font-size:clamp(1.35rem,5vw,1.8rem);font-weight:600;line-height:1.2;margin:10px 0;overflow-wrap:anywhere}
+.qtext.mono{font-family:var(--f-mono);color:var(--accent)}
+.fb{font-size:.95rem;min-height:1.4em}
+.score{font-family:var(--f-display);font-size:3rem;font-weight:700;line-height:1}
+.mini{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin:12px 0}
+.mini div{border:1px solid var(--line);border-radius:8px;padding:10px 12px;background:var(--surface)}
+.mini b{display:block;font-family:var(--f-mono);font-size:1.4rem}
+.mini span{font-size:.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+.sect-h{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:18px 0 8px;flex-wrap:wrap}
+.sect-h h3{font-family:var(--f-display);font-size:1.2rem;margin:0}
+.link{border:0;background:transparent;color:var(--accent);text-decoration:underline;padding:6px 0;font-size:.9rem}
+footer{margin-top:28px;font-size:.82rem;color:var(--muted);border-top:1px solid var(--line);padding-top:14px}
+footer p{margin:0 0 6px;max-width:68ch}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(18px + env(safe-area-inset-bottom,0px));background:var(--fg);color:var(--bg);padding:10px 16px;border-radius:8px;font-size:.9rem;z-index:40;max-width:calc(100% - 32px)}
+@media (prefers-reduced-motion:reduce){.progress i{transition:none}}
+@media (max-width:420px){.rowmain{grid-template-columns:4.6rem minmax(0,1fr);gap:8px}.row2{grid-template-columns:1fr}}
+</style>
+
+<div class="wrap">
+<header class="top">
+  <div class="org">Servicio de Urgencias · Hospital de Antequera · SAS</div>
+  <h1>Codificación CIE-9 de Urgencias</h1>
+  <p class="sub" id="sub"></p>
+</header>
+
+<nav class="tabs" role="tablist" aria-label="Secciones">
+  <button class="tab" role="tab" data-tab="buscar" aria-selected="true">Buscar</button>
+  <button class="tab" role="tab" data-tab="estudiar" aria-selected="false">Estudiar</button>
+  <button class="tab" role="tab" data-tab="test" aria-selected="false">Test</button>
+  <button class="tab" role="tab" data-tab="mios" aria-selected="false">Mis códigos<span class="n" id="nMios">0</span></button>
+</nav>
+
+<main>
+<section id="v-buscar">
+  <div class="alerts" id="alerts"></div>
+  <div class="searchbox">
+    <input id="q" type="search" inputmode="search" autocomplete="off" placeholder="Escribe un diagnóstico, síntoma o código (ej. 410, disnea, ACV)" aria-label="Buscar diagnóstico o código">
+    <button class="clear" id="qclear" aria-label="Borrar búsqueda" hidden>×</button>
+  </div>
+  <p class="hint">Funciona en los dos sentidos: escribe un diagnóstico para ver su código, o un código (o su inicio) para ver qué diagnóstico es. Sin tildes también vale.</p>
+  <div class="chips" id="chips" role="group" aria-label="Filtrar por especialidad"></div>
+  <div class="count" id="count" aria-live="polite"></div>
+  <div id="results"></div>
+</section>
+
+<section id="v-estudiar" hidden>
+  <div class="panel">
+    <div class="controls">
+      <label>Especialidad<select id="fcCat"></select></label>
+      <label>Pregunta<select id="fcDir"><option value="n2c">Diagnóstico → código</option><option value="c2n">Código → diagnóstico</option></select></label>
+      <label>Mazo<select id="fcMode"><option value="all">Todas las tarjetas</option><option value="pend">Solo las que no sé</option></select></label>
+    </div>
+    <div class="progress"><i id="fcBar"></i></div>
+    <div class="meta"><span id="fcPos"></span><span id="fcKnown"></span></div>
+    <button class="flash" id="fcCard" aria-live="polite"></button>
+    <div class="row2" id="fcBtns"></div>
+    <div class="actions"><button class="btn alt" id="fcShuffle">Mezclar</button><button class="btn alt" id="fcReset">Reiniciar progreso de esta especialidad</button></div>
+  </div>
+</section>
+
+<section id="v-test" hidden>
+  <div class="panel" id="quizBox"></div>
+</section>
+
+<section id="v-mios" hidden>
+  <div class="sect-h"><h3>Favoritos</h3><button class="link" id="clrFav">Vaciar favoritos</button></div>
+  <div id="favList"></div>
+  <div class="sect-h"><h3>A repasar (fallos del test y tarjetas)</h3><button class="link" id="clrWrong">Vaciar lista</button></div>
+  <div id="wrongList"></div>
+</section>
+</main>
+
+<footer>
+  <p>Fuente: documento «Codificación CIE-9, Unidad de Urgencias Hospitalarias» del Servicio Andaluz de Salud, Hospital de Antequera, Área Sanitaria Norte de Málaga. Los códigos están transcritos tal como figuran en el PDF, incluidos los que empiezan por letra (F, E, V) y el código SP.</p>
+  <p>Esta herramienta sirve para consultar y memorizar la codificación. No incluye protocolos clínicos ni sustituye los documentos oficiales del servicio.</p>
+</footer>
+</div>
+<div class="toast" id="toast" hidden></div>
+
+<script>
+(function(){
+"use strict";
+/* ---------- Datos (transcritos del PDF) ---------- */
+var RAW=[
+["Respiratorio",[
+["Hemoptisis","786.3"],["Síntoma aparato respiratorio","786"],["Asma","493"],["Anormalidad gases sangre arterial (Hipercapnia)","790.91"],
+["Bronquitis","466"],["Infección vías aérea superior","465"],["Rinofaringitis aguda (Catarro vías altas)","460"],["Fracaso respiratorio agudo","518.81"],
+["Cuerpo extraño en árbol respiratorio","934.8"],["Intoxicación por monóxido de carbono","986"],["Derrame pleural","511.9"],["Laringitis aguda","464.0"],
+["Disnea","786"],["Neumonía","486"],["EPOC","496"],["Neumotórax","512"],["Gripe","487"],["TEP","415.1"],
+["Otras enfermedades del aparato respiratorio","519"],["Broncoespasmo","519.11"]]],
+["Digestivo",[
+["Abdomen agudo (peritonitis)","567.9"],["Hemorragia digestiva","578"],["Ascitis","789.5"],["Hemorroides","455"],["Cirrosis hepática","571"],["Hepatitis","573.3"],
+["Colangitis","576.1"],["Hernia abdominal","553.2"],["Colecistitis","575.10"],["Ictericia","782.4"],["Cólico biliar","575.9"],
+["Insuficiencia vascular (Isquemia intestinal)","557"],["Colitis ulcerosa","556.6"],["Obstrucción intestinal","560"],["Colon irritable","564.1"],["Pancreatitis","577.0"],
+["Cuerpo extraño ap. digestivo","938"],["Toxiinfección alimentaria","005.9"],["Diarrea","787.91"],["Úlcera péptica","533"],["Dolor abdominal","789.0"],["Vómitos","787.0"],
+["Enfermedad Crohn (enteritis)","555"],["Estreñimiento","564.0"],["Gastritis aguda","535.0"],["Gastroenteritis aguda","558.9"]]],
+["Cardiocirculatorio",[
+["Angina de pecho","413"],["Disritmías cardiacas","427"],["Bradicardia sinusal y/o enf. seno","427.81"],["Derrame pericárdico","423.9"],["Dolor precordial","786.51"],["Dolor torácico","786.50"],
+["Edemas","782.3"],["Edema agudo de pulmón","518.4"],["Fibrilación auricular","427.31"],["Flebitis y tromboflebitis superficial","451.0"],["Flebitis y tromboflebitis profunda","451.1"],["Flutter auricular","427.32"],
+["Hipertensión esencial / crisis hipertensiva (HTA)","401.9"],["Hipotensión","458"],["Infarto agudo de miocardio","410"],["Insuficiencia cardiaca congestiva","428.0"],
+["Insuficiencia venosa periférica","459.81"],["Isquemia crónica en miembros","443"],["Palpitaciones","785.1"],["Parada cardiorrespiratoria","427.5"],["Pericarditis aguda","420.9"],["Shock","785.50"],
+["Taquicardia paroxística supraventricular (TPSV)","427.0"],["Úlcera por decúbito","707.0"]]],
+["Traumatología",[
+["CÓDIGO TRAUMA","959.8","alerta"],["Artritis","711"],["Artrosis","718.0"],["Contusión","924.9"],["Dolor articular","719"],["Dolor en miembros","729.5"],["Dorsalgia","724"],
+["Esguinces","848.9"],["Fractura de cadera","820"],["Fracturas","829"],["Fracturas múltiples","827"],["Herida","879"],["Herida cabeza","873"],["Herida miembro superior","884"],
+["Herida miembro inferior","894"],["Herida tórax","875"],["Herida abdomen","879.2"],["Luxaciones","718.2"],["Policontusionado","924.8"],["Lumbociáticas","724"],["Quemaduras","948"],
+["TCE sin pérdida de conocimiento","959.01"],["TCE con pérdida de conocimiento","854.06"],["Tendinitis","726.9"],["Traumatismo","959"]]],
+["Ginecología",[
+["Bulto en mama","611.72"],["Dismenorrea","625.3"],["Eclampsia","642.6"],["Mastitis","675.1"],["Hiperémesis gravídica / vómito en el embarazo","643"],
+["Metrorragia no menstrual","626"],["Mastodinia","611.71"],["Hemorragia inicio embarazo","640.9"]]],
+["Dermatología",[
+["Absceso y celulitis","682"],["Prurito","698"],["Dermatitis y eczema","692"],["Herpes zóster","053.9"],["Gangrena","785.4"],["Lipoma","214"],["Úlcera varicosa","454.0"],["Urticaria","708"]]],
+["Neuropsiquiatría",[
+["Abuso de drogas sin dependencias","989"],["Nerviosismo, ansiedad","799.21"],["Crisis de ansiedad","F06.4"],["Intoxicación enólica","F10.0"],["Brote psicótico","F23"],
+["Abstinencia alcohol","F10.3"],["Demencia senil","F03"],["Depresión","F32"],["Delirio agudo","F05.0"],["Esquizofrenia","F20"],["Etilismo agudo","305.0"],["Crisis conversiva","F06.5"],
+["Intento suicidio","E950"],["Parkinson","332"],["Ideación autolítica","V62.84"],["Ideas delirantes","F22"],["T. ansioso depresivo","F41.2"],["Trastorno bipolar","F31"],
+["Distimia","F34.1"],["Sobredosis fármacos o tóxicos","E950"],["Alzheimer","331.0"]]],
+["Neurológico",[
+["Accidente isquémico transitorio (AIT)","435"],["Hemorragia subaracnoidea","430"],["ACV isquémico","434"],["ACV hemorrágico","431"],["Alteración de la consciencia","780.0"],
+["Convulsiones","780.3"],["Cefalea","784.0"],["Coma","780.01"],["Convulsiones febriles","780.31"],["Síncope y colapso","780.2"],["Meningitis","322"],["Síndrome meníngeo","781.6"],["Vértigo y mareo","780.4"]]],
+["Infeccioso",[
+["CÓDIGO SEPSIS (septicemia)","038","alerta"],["Sepsis","995.91"],["Gripe","487"],["Fiebre","780.60"],["Varicela","052"],["Viriasis","079"]]],
+["O.R.L.",[
+["Amigdalitis aguda","463"],["Vértigo periférico","386"],["Cuerpo extraño en oído","931"],["Cuerpo extraño en garganta","933"],["Cuerpo extraño en nariz","932"],["Epistaxis","784.7"],
+["Flemón dentario","522.5"],["Laringitis y traqueítis aguda","464"],["Odontalgias","525"],["Otalgias","388.7"],["Otitis","382.9"],["Sinusitis aguda","461"]]],
+["Oftalmología",[
+["Blefaritis","373.0"],["Vértigo periférico","386"],["Conjuntivitis aguda","372.0"],["Cuerpo extraño en ojo","930.9"]]],
+["Renal",[
+["Cólico nefrítico","788.0"],["Hematuria","599.7"],["Disuria","788.1"],["Retención urinaria","788.2"],["Hidrocele","603"],["Incontinencia urinaria","788.3"],
+["Infección tracto urinario (ITU)","599.0"],["Insuficiencia renal neom","586"],["Oliguria o anuria","788.5"],["Pielonefritis aguda","590.1"]]],
+["Endocrinometabólico",[
+["Cetoacidosis diabética","250.1"],["Hiperglucemia","250"],["Deshidratación","276.51"],["Trastornos de los equilibrios osmótico, electrolítico y ácido básico","276"],["Hipoglucemia","251.2"]]],
+["Otros",[
+["Alergia","995.3"],["Cáncer","199"],["Dolor generalizado","780.96"],["Efecto adverso medicamentos","E947.9"],["Electrocución y efectos no fatales de corriente eléctrica","994.8"],
+["Encontrado muerto / éxitus","798.9"],["Golpe de calor","992.0"],["Llanto excesivo del lactante","780.92"],["Malestar general, astenia","780.7"],["Malos tratos adultos no especificados","995.80"],
+["Malos tratos infantiles no especificados","995.50"],["Patología inadecuada en urgencias","SP"],["Paliativo (sedación o asistencia a …)","V66.7"],["Problema social","V62"]]]
+];
+/* Sinónimos de búsqueda: solo siglas y nombres alternativos del mismo diagnóstico */
+var ALIAS={"Infarto agudo de miocardio":"iam infarto ataque al corazon","ACV isquémico":"ictus","ACV hemorrágico":"ictus","Síncope y colapso":"sincope desmayo","Hipertensión esencial / crisis hipertensiva (HTA)":"hta tension alta",
+"Infección tracto urinario (ITU)":"itu infeccion orina","Hiperglucemia":"azucar alta","Hipoglucemia":"azucar baja","Parada cardiorrespiratoria":"pcr parada cardiaca","Taquicardia paroxística supraventricular (TPSV)":"tpsv",
+"Intento suicidio":"autolisis","TEP":"embolia pulmonar tromboembolismo","Neumotórax":"","Rinofaringitis aguda (Catarro vías altas)":"catarro resfriado","Vértigo y mareo":"mareo","Insuficiencia renal neom":"irc ira","Hemorragia digestiva":"hda hdb"};
+
+/* ---------- Utilidades ---------- */
+function norm(s){return String(s).normalize("NFD").replace(/[̀-ͯ]/g,"").toLowerCase()}
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+function $(s){return document.querySelector(s)}
+var mem={};
+function load(k,d){try{var v=localStorage.getItem("cie9."+k);if(v!==null)return JSON.parse(v)}catch(e){}return k in mem?mem[k]:d}
+function save(k,v){mem[k]=v;try{localStorage.setItem("cie9."+k,JSON.stringify(v))}catch(e){}}
+function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t}return a}
+function toast(m){var t=$("#toast");t.textContent=m;t.hidden=false;clearTimeout(toast.h);toast.h=setTimeout(function(){t.hidden=true},1800)}
+
+var ITEMS=[],CATS=[];
+RAW.forEach(function(c,ci){CATS.push(c[0]);c[1].forEach(function(r){
+  ITEMS.push({id:ITEMS.length,name:r[0],code:r[1],cat:ci,catName:c[0],alert:r[2]==="alerta",
+    letter:/^[A-Za-z]/.test(r[1]),key:norm(r[0]+" "+r[1]+" "+c[0]+" "+(ALIAS[r[0]]||"")),nname:norm(r[0]),ncode:norm(r[1])})})});
+var FAV=new Set(load("fav",[])),WRONG=new Set(load("wrong",[])),KNOWN=new Set(load("known",[]));
+$("#sub").textContent=ITEMS.length+" códigos en "+CATS.length+" especialidades. Busca, estudia y practica con el test.";
+
+function codeKey(it){return it.code.split(".")[0].slice(0,3)}
+function neighbors(it){return ITEMS.filter(function(o){return o.id!==it.id&&!(o.name===it.name&&o.code===it.code)&&codeKey(o)===codeKey(it)&&o.letter===it.letter})}
+function sameEntries(it){return ITEMS.filter(function(o){return o.id!==it.id&&o.name===it.name&&o.code===it.code})}
+
+/* ---------- Filas ---------- */
+function rowHTML(it,showCat){
+  var tag=it.alert?'<span class="pill">Código</span>':(it.letter?'<span class="pill l">'+(it.code==="SP"?"SP":esc(it.code.charAt(0)))+'</span>':"");
+  var f=FAV.has(it.id);
+  return '<li class="row" data-id="'+it.id+'"><button class="rowmain" data-act="toggle" aria-expanded="false"><span class="code">'+esc(it.code)+'</span><span class="nm">'+esc(it.name)+tag+(showCat?'<small>'+esc(it.catName)+'</small>':"")+'</span></button>'+
+  '<button class="ico" data-act="fav" aria-pressed="'+f+'" aria-label="'+(f?"Quitar de favoritos":"Añadir a favoritos")+'">'+(f?"★":"☆")+'</button><span></span></li>';
+}
+function detailHTML(it){
+  var nb=neighbors(it),se=sameEntries(it),h="";
+  h+='<h4>Especialidad</h4><div>'+esc(it.catName)+(se.length?' · aparece también en '+se.map(function(s){return esc(s.catName)}).join(", "):"")+'</div>';
+  if(it.letter&&it.code!=="SP")h+='<div class="hint" style="margin:6px 0 0">Código con letra, tal como figura en el PDF.</div>';
+  if(nb.length){h+='<h4>Códigos cercanos ('+esc(codeKey(it))+')</h4><div class="neigh">'+nb.map(function(n){return '<button class="nbtn" data-act="goto" data-code="'+esc(n.code)+'"><b>'+esc(n.code)+'</b>'+esc(n.name)+'</button>'}).join("")+'</div>'}
+  h+='<div class="actions"><button class="btn" data-act="copy">Copiar código</button></div>';
+  return h;
+}
+
+/* ---------- Buscar ---------- */
+var S={q:"",cat:-1};
+function score(it,toks){
+  var s=0;
+  for(var i=0;i<toks.length;i++){var t=toks[i];
+    if(it.ncode===t)s+=100;else if(it.ncode.indexOf(t)===0)s+=80;
+    else if(it.nname.indexOf(t)===0)s+=70;
+    else if((" "+it.nname).indexOf(" "+t)>=0)s+=60;
+    else if(it.key.indexOf(t)>=0)s+=30;else return -1}
+  return s;
+}
+function renderChips(){
+  var h='<button class="chip" data-cat="-1" aria-pressed="'+(S.cat===-1)+'">Todas</button>';
+  CATS.forEach(function(c,i){h+='<button class="chip" data-cat="'+i+'" aria-pressed="'+(S.cat===i)+'">'+esc(c)+'</button>'});
+  $("#chips").innerHTML=h;
+}
+function renderResults(){
+  var toks=norm(S.q).trim().split(/\s+/).filter(Boolean),list=[];
+  ITEMS.forEach(function(it){if(S.cat!==-1&&it.cat!==S.cat)return;
+    if(!toks.length){list.push({it:it,s:0});return}
+    var s=score(it,toks);if(s>=0)list.push({it:it,s:s})});
+  var out=$("#results");
+  $("#qclear").hidden=!S.q;
+  if(!list.length){$("#count").textContent="";out.innerHTML='<div class="empty">No hay ningún código para «'+esc(S.q)+'». Prueba con otra palabra, con las primeras cifras del código o quita el filtro de especialidad.</div>';return}
+  $("#count").textContent=list.length+(list.length===1?" resultado":" resultados");
+  if(toks.length){
+    list.sort(function(a,b){return b.s-a.s||a.it.id-b.it.id});
+    out.innerHTML='<ul class="list solo">'+list.map(function(x){return rowHTML(x.it,true)}).join("")+'</ul>';
+  }else{
+    var by={};list.forEach(function(x){(by[x.it.cat]=by[x.it.cat]||[]).push(x.it)});
+    out.innerHTML=Object.keys(by).map(function(ci){return '<h2 class="cat">'+esc(CATS[ci])+'<span>'+by[ci].length+'</span></h2><ul class="list">'+by[ci].map(function(it){return rowHTML(it,false)}).join("")+'</ul>'}).join("");
+  }
+}
+function renderAlerts(){
+  $("#alerts").innerHTML=ITEMS.filter(function(i){return i.alert}).map(function(i){return '<button class="alert-btn" data-act="goto" data-code="'+esc(i.code)+'"><b>'+esc(i.name)+'</b><span class="c">'+esc(i.code)+'</span></button>'}).join("");
+}
+function setQuery(v){S.q=v;S.cat=-1;$("#q").value=v;renderChips();renderResults()}
+
+/* ---------- Tarjetas ---------- */
+var F={deck:[],i:0,rev:false};
+function fillCatSelect(sel){sel.innerHTML='<option value="-1">Todas las especialidades</option>'+CATS.map(function(c,i){return '<option value="'+i+'">'+esc(c)+'</option>'}).join("")}
+function buildDeck(keep){
+  var cat=+$("#fcCat").value,mode=$("#fcMode").value;
+  var d=ITEMS.filter(function(it){return (cat===-1||it.cat===cat)&&(mode==="all"||!KNOWN.has(it.id))}).map(function(i){return i.id});
+  F.deck=shuffle(d);if(!keep){F.i=0;F.rev=false}renderCard();
+}
+function renderCard(){
+  var cat=+$("#fcCat").value;
+  var pool=ITEMS.filter(function(it){return cat===-1||it.cat===cat});
+  var known=pool.filter(function(it){return KNOWN.has(it.id)}).length;
+  $("#fcKnown").textContent=known+" de "+pool.length+" aprendidas";
+  var card=$("#fcCard"),btns=$("#fcBtns");
+  if(!F.deck.length){card.className="flash";card.innerHTML='<div class="big">Mazo vacío</div><div class="cat">Has marcado todas como sabidas. Cambia «Mazo» a «Todas las tarjetas» para repasar.</div>';btns.innerHTML="";$("#fcPos").textContent="";$("#fcBar").style.width="100%";return}
+  if(F.i>=F.deck.length){card.className="flash";card.innerHTML='<div class="big">Mazo terminado</div><div class="cat">Pulsa «Mezclar» para otra vuelta o elige «Solo las que no sé».</div>';btns.innerHTML="";$("#fcPos").textContent=F.deck.length+" de "+F.deck.length;$("#fcBar").style.width="100%";return}
+  var it=ITEMS[F.deck[F.i]],dir=$("#fcDir").value;
+  var qMono=dir==="c2n";
+  var front='<div class="lab">'+(qMono?"¿Qué diagnóstico es?":"¿Qué código tiene?")+'</div><div class="big'+(qMono?" mono":"")+'">'+esc(qMono?it.code:it.name)+'</div>';
+  var back=F.rev?'<div class="lab">Respuesta</div><div class="big'+(qMono?"":" mono")+'">'+esc(qMono?it.name:it.code)+'</div><div class="cat">'+esc(it.catName)+'</div>':'<div class="cat">Toca la tarjeta para ver la respuesta</div>';
+  card.className="flash"+(F.rev?" revealed":"");card.innerHTML=front+back;
+  btns.innerHTML=F.rev?'<button class="btn bad" data-fc="no">Repasar</button><button class="btn good" data-fc="yes">Lo sé</button>':'<button class="btn alt" data-fc="flip" style="grid-column:1/-1">Mostrar respuesta</button>';
+  $("#fcPos").textContent=(F.i+1)+" de "+F.deck.length;
+  $("#fcBar").style.width=(F.i/F.deck.length*100)+"%";
+}
+
+/* ---------- Test ---------- */
+var Q={st:"setup",qs:[],i:0,ok:0,streak:0,best:0,done:false,wrong:[],dir:"c2n",cat:-1,n:10};
+function renderQuiz(){
+  var b=$("#quizBox");
+  if(Q.st==="setup"){
+    b.innerHTML='<div class="controls"><label>Especialidad<select id="qzCat"></select></label><label>Tipo de pregunta<select id="qzDir"><option value="c2n">Código → diagnóstico</option><option value="n2c">Diagnóstico → código</option><option value="mix">Mezcladas</option></select></label><label>Preguntas<select id="qzN"><option>10</option><option>20</option><option>30</option></select></label></div><button class="btn" data-qz="start" style="width:100%">Empezar test</button><p class="hint">Los fallos se guardan en «Mis códigos» para repasarlos después.</p>';
+    fillCatSelect($("#qzCat"));$("#qzCat").value=String(Q.cat);$("#qzDir").value=Q.dir;$("#qzN").value=String(Q.n);return;
+  }
+  if(Q.st==="end"){
+    var pct=Math.round(Q.ok/Q.qs.length*100);
+    b.innerHTML='<div class="lab" style="font-size:.78rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)">Resultado</div><div class="score">'+Q.ok+' / '+Q.qs.length+'</div><div class="mini"><div><b>'+pct+'%</b><span>Aciertos</span></div><div><b>'+Q.best+'</b><span>Mejor racha</span></div><div><b>'+Q.wrong.length+'</b><span>Fallos</span></div></div>'+
+    (Q.wrong.length?'<div class="sect-h"><h3>Para repasar</h3></div><ul class="list solo">'+Q.wrong.map(function(id){return rowHTML(ITEMS[id],true)}).join("")+'</ul>':'<p>Sin fallos. Buen repaso.</p>')+
+    '<div class="actions"><button class="btn" data-qz="again">Repetir test</button><button class="btn alt" data-qz="setup">Cambiar ajustes</button></div>';return;
+  }
+  var q=Q.qs[Q.i],it=ITEMS[q.id],mono=q.dir==="c2n";
+  var h='<div class="progress"><i style="width:'+(Q.i/Q.qs.length*100)+'%"></i></div><div class="meta"><span>Pregunta '+(Q.i+1)+' de '+Q.qs.length+'</span><span>Aciertos '+Q.ok+' · Racha '+Q.streak+'</span></div>';
+  h+='<div class="qtext'+(mono?" mono":"")+'">'+esc(mono?it.code:it.name)+'</div><div class="hint" style="margin:0">'+(mono?"¿Qué diagnóstico corresponde a este código?":"¿Qué código corresponde a este diagnóstico?")+'</div><div class="opts">';
+  q.opts.forEach(function(o,k){var cls="opt"+(mono?"":" mono");
+    if(q.ans!==undefined){if(o.right)cls+=" right";else if(k===q.ans)cls+=" wrong"}
+    h+='<button class="'+cls+'" data-qz="opt" data-k="'+k+'"'+(q.ans!==undefined?" disabled":"")+'>'+esc(o.t)+'</button>'});
+  h+='</div><div class="fb" aria-live="polite">';
+  if(q.ans!==undefined){h+=q.opts[q.ans].right?'<b style="color:var(--ok)">Correcto.</b> ':'<b style="color:var(--alert)">Incorrecto.</b> Respuesta: '+esc(mono?it.name:it.code)+'. ';h+='<span style="color:var(--muted)">'+esc(it.catName)+'</span>'}
+  h+='</div>';
+  if(q.ans!==undefined)h+='<div class="actions"><button class="btn" data-qz="next">'+(Q.i+1>=Q.qs.length?"Ver resultado":"Siguiente")+'</button></div>';
+  b.innerHTML=h;
+}
+function makeQ(id,dir){
+  var it=ITEMS[id],mono=dir==="c2n";
+  var val=function(x){return mono?x.name:x.code};
+  var seen={};seen[val(it)]=1;
+  var same=shuffle(ITEMS.filter(function(o){return o.cat===it.cat}));
+  var others=shuffle(ITEMS);
+  var opts=[{t:val(it),right:true}];
+  var pools=[same,others];
+  for(var p=0;p<pools.length&&opts.length<4;p++){
+    for(var k=0;k<pools[p].length&&opts.length<4;k++){var v=val(pools[p][k]);if(!seen[v]){seen[v]=1;opts.push({t:v,right:false})}}
+  }
+  return {id:id,dir:dir,opts:shuffle(opts)};
+}
+function startQuiz(){
+  Q.cat=+$("#qzCat").value;Q.dir=$("#qzDir").value;Q.n=+$("#qzN").value;
+  var pool=ITEMS.filter(function(it){return Q.cat===-1||it.cat===Q.cat}).map(function(i){return i.id});
+  var ids=shuffle(pool).slice(0,Math.min(Q.n,pool.length));
+  Q.qs=ids.map(function(id){return makeQ(id,Q.dir==="mix"?(Math.random()<.5?"c2n":"n2c"):Q.dir)});
+  Q.i=0;Q.ok=0;Q.streak=0;Q.best=0;Q.wrong=[];Q.st="play";renderQuiz();
+}
+function answer(k){
+  var q=Q.qs[Q.i];if(q.ans!==undefined)return;q.ans=k;
+  if(q.opts[k].right){Q.ok++;Q.streak++;if(Q.streak>Q.best)Q.best=Q.streak}
+  else{Q.streak=0;Q.wrong.push(q.id);WRONG.add(q.id);save("wrong",Array.from(WRONG));updateBadge()}
+  renderQuiz();
+}
+
+/* ---------- Mis códigos ---------- */
+function renderMine(){
+  var f=ITEMS.filter(function(i){return FAV.has(i.id)}),w=ITEMS.filter(function(i){return WRONG.has(i.id)});
+  $("#favList").innerHTML=f.length?'<ul class="list solo">'+f.map(function(i){return rowHTML(i,true)}).join("")+'</ul>':'<div class="empty">Aún no tienes favoritos. Pulsa la estrella de cualquier código para guardarlo aquí.</div>';
+  $("#wrongList").innerHTML=w.length?'<ul class="list solo">'+w.map(function(i){return rowHTML(i,true)}).join("")+'</ul><div class="actions"><button class="btn alt" data-act="drop-wrong">Quitar de la lista los que ya sé</button></div>':'<div class="empty">Sin fallos guardados. Los códigos que falles en el test aparecerán aquí.</div>';
+}
+function updateBadge(){$("#nMios").textContent=FAV.size+WRONG.size}
+
+/* ---------- Eventos ---------- */
+function show(tab){
+  ["buscar","estudiar","test","mios"].forEach(function(t){$("#v-"+t).hidden=t!==tab});
+  document.querySelectorAll(".tab").forEach(function(b){b.setAttribute("aria-selected",b.dataset.tab===tab?"true":"false")});
+  if(tab==="mios")renderMine();
+  if(tab==="estudiar")buildDeck(true);
+  window.scrollTo(0,0);
+}
+document.querySelector("nav.tabs").addEventListener("click",function(e){var b=e.target.closest(".tab");if(b)show(b.dataset.tab)});
+$("#q").addEventListener("input",function(e){S.q=e.target.value;renderResults()});
+$("#qclear").addEventListener("click",function(){setQuery("");$("#q").focus()});
+$("#chips").addEventListener("click",function(e){var b=e.target.closest(".chip");if(!b)return;S.cat=+b.dataset.cat;renderChips();renderResults()});
+
+function copy(text){
+  var done=function(){toast("Código "+text+" copiado")};
+  var fb=function(){try{var t=document.createElement("textarea");t.value=text;t.style.position="fixed";t.style.opacity="0";document.body.appendChild(t);t.select();document.execCommand("copy");document.body.removeChild(t);done()}catch(x){toast("Código: "+text)}};
+  try{navigator.clipboard.writeText(text).then(done,fb)}catch(x){fb()}
+}
+document.addEventListener("click",function(e){
+  var a=e.target.closest("[data-act]");
+  if(a){
+    var act=a.dataset.act,row=a.closest(".row"),id=row?+row.dataset.id:-1;
+    if(act==="toggle"){
+      var d=row.querySelector(".detail");
+      if(d){d.remove();a.setAttribute("aria-expanded","false")}
+      else{var div=document.createElement("div");div.className="detail";div.innerHTML=detailHTML(ITEMS[id]);row.appendChild(div);a.setAttribute("aria-expanded","true")}
+    }else if(act==="fav"){
+      if(FAV.has(id))FAV.delete(id);else FAV.add(id);
+      save("fav",Array.from(FAV));updateBadge();
+      document.querySelectorAll('.row[data-id="'+id+'"] [data-act="fav"]').forEach(function(b){var f=FAV.has(id);b.setAttribute("aria-pressed",f);b.textContent=f?"★":"☆";b.setAttribute("aria-label",f?"Quitar de favoritos":"Añadir a favoritos")});
+      if(!$("#v-mios").hidden)renderMine();
+    }else if(act==="copy"){copy(ITEMS[id].code)}
+    else if(act==="goto"){show("buscar");setQuery(a.dataset.code);var r=$("#results .row");if(r)r.scrollIntoView({block:"center"})}
+    else if(act==="drop-wrong"){WRONG.clear();save("wrong",[]);updateBadge();renderMine()}
+    return;
+  }
+  var z=e.target.closest("[data-qz]");
+  if(z){var k=z.dataset.qz;
+    if(k==="start")startQuiz();
+    else if(k==="opt")answer(+z.dataset.k);
+    else if(k==="next"){if(Q.i+1>=Q.qs.length)Q.st="end";else Q.i++;renderQuiz()}
+    else if(k==="again")startQuiz2();
+    else if(k==="setup"){Q.st="setup";renderQuiz()}
+    return;
+  }
+  var fc=e.target.closest("[data-fc]");
+  if(fc){var m=fc.dataset.fc;
+    if(m==="flip"){F.rev=true;renderCard()}
+    else{var id2=F.deck[F.i];if(m==="yes")KNOWN.add(id2);else{KNOWN.delete(id2);WRONG.add(id2);save("wrong",Array.from(WRONG));updateBadge()}
+      save("known",Array.from(KNOWN));F.i++;F.rev=false;renderCard()}
+  }
+});
+function startQuiz2(){
+  var pool=ITEMS.filter(function(it){return Q.cat===-1||it.cat===Q.cat}).map(function(i){return i.id});
+  var ids=shuffle(pool).slice(0,Math.min(Q.n,pool.length));
+  Q.qs=ids.map(function(id){return makeQ(id,Q.dir==="mix"?(Math.random()<.5?"c2n":"n2c"):Q.dir)});
+  Q.i=0;Q.ok=0;Q.streak=0;Q.best=0;Q.wrong=[];Q.st="play";renderQuiz();
+}
+$("#fcCard").addEventListener("click",function(){if(F.deck.length&&F.i<F.deck.length&&!F.rev){F.rev=true;renderCard()}});
+["fcCat","fcDir","fcMode"].forEach(function(id){$("#"+id).addEventListener("change",function(){buildDeck(false)})});
+$("#fcShuffle").addEventListener("click",function(){buildDeck(false)});
+$("#fcReset").addEventListener("click",function(){var cat=+$("#fcCat").value;ITEMS.forEach(function(it){if(cat===-1||it.cat===cat)KNOWN.delete(it.id)});save("known",Array.from(KNOWN));buildDeck(false);toast("Progreso reiniciado")});
+function armClear(btn,fn,label){var armed=false;btn.addEventListener("click",function(){if(!armed){armed=true;btn.textContent="¿Seguro? Pulsa otra vez";setTimeout(function(){armed=false;btn.textContent=label},3000)}else{armed=false;btn.textContent=label;fn()}})}
+armClear($("#clrFav"),function(){FAV.clear();save("fav",[]);updateBadge();renderMine();renderResults()},"Vaciar favoritos");
+armClear($("#clrWrong"),function(){WRONG.clear();save("wrong",[]);updateBadge();renderMine()},"Vaciar lista");
+
+/* ---------- Arranque ---------- */
+fillCatSelect($("#fcCat"));
+renderAlerts();renderChips();renderResults();renderQuiz();updateBadge();
+})();
+</script>
+
+
+<!-- Barra común del Portal SUH Antequera -->
+<style>
+  .suhdock{position:fixed;left:14px;bottom:14px;z-index:2147483000;display:flex;align-items:center;gap:4px;padding:5px;border-radius:999px;background:#0c2a4a;box-shadow:0 10px 30px -8px rgba(12,42,74,.55);font:600 13px/1 'Plus Jakarta Sans',system-ui,-apple-system,'Segoe UI',sans-serif;transition:opacity .2s}
+  .suhdock a{display:inline-flex;align-items:center;justify-content:center;gap:7px;height:34px;min-width:34px;padding:0 9px;border-radius:999px;color:#fff;text-decoration:none}
+  .suhdock a:hover{background:rgba(255,255,255,.14)}
+  .suhdock a.suhdock-home{background:#fff;color:#0c2a4a;padding:0 12px 0 4px}
+  .suhdock a.suhdock-home img{width:26px;height:26px;border-radius:50%;object-fit:contain;background:#fff}
+  .suhdock svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  .suhdock .suhdock-x{opacity:.6;min-width:26px;padding:0}
+  .suhdock.suhdock-min a:not(.suhdock-home){display:none}
+  .suhdock.suhdock-min a.suhdock-home span{display:none}
+  .suhdock.suhdock-min a.suhdock-home{padding:0 4px}
+  @media print{.suhdock{display:none!important}}
+</style>
+<nav class="suhdock" aria-label="Portal SUH Antequera">
+  <a class="suhdock-home" href="../index.html#herramientas" title="Volver al Portal de Supervisión SUH Antequera"><img src="../img/logo-suh.jpg" alt=""><span>Portal SUH</span></a>
+  <a href="https://www.instagram.com/suh_antequera_/" target="_blank" rel="noopener" title="Instagram @suh_antequera_"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><path d="M17.5 6.5h.01"/></svg></a>
+  <a href="https://www.facebook.com/p/Suh-Antequera-61568582212569/" target="_blank" rel="noopener" title="Facebook SUH Antequera"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+  <a href="https://x.com/saludnortemalag" target="_blank" rel="noopener" title="X @saludnortemalag" style="font-size:15px">𝕏</a>
+  <a class="suhdock-x" href="#" title="Minimizar barra" onclick="this.parentNode.classList.toggle('suhdock-min');return false;"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></a>
+</nav>
+</body></html>

@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta name="robots" content="noindex, nofollow">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manejo de Heridas · AGSNM 2026</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --gd:#1A6B3C;--gm:#2A8A50;--gl:#E6F4EC;
+  --bl:#1A4E8C;--bll:#E8F0FB;
+  --am:#D97B1A;--al:#FFF3E0;
+  --rd:#C0392B;--rl:#FDECEA;
+  --bg:#F0F4F8;--wh:#FFFFFF;
+  --tx:#1C2833;--tm:#4A5568;--mu:#718096;
+  --br:#D1D9E0;--sh:0 2px 8px rgba(0,0,0,.08);
+  --rad:10px;--rsm:6px
+}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--tx);font-size:14px;line-height:1.5;min-height:100vh}
+.hdr{background:linear-gradient(135deg,#1A6B3C 0%,#0F4D2C 100%);color:#fff;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:60px;box-shadow:0 2px 10px rgba(0,0,0,.18);flex-shrink:0}
+.hdr-logo{display:flex;align-items:center;gap:12px}
+.logo-mk{width:36px;height:36px;background:#fff;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:900;color:var(--gd);font-size:18px}
+.hdr h1{font-size:16px;font-weight:700}.hdr h1 span{display:block;font-size:11px;font-weight:400;opacity:.8}
+.hdr-badge{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);padding:4px 10px;border-radius:20px;font-size:11px;white-space:nowrap}
+.tabs-nav{background:var(--wh);border-bottom:1px solid var(--br);display:flex;overflow-x:auto;scrollbar-width:none;flex-shrink:0}
+.tabs-nav::-webkit-scrollbar{display:none}
+.tab-btn{flex-shrink:0;padding:14px 20px;border:none;background:none;cursor:pointer;font-size:13px;font-weight:500;color:var(--mu);border-bottom:3px solid transparent;transition:all .2s;white-space:nowrap;display:flex;align-items:center;gap:7px;font-family:inherit}
+.tab-btn:hover{color:var(--gd);background:var(--gl)}
+.tab-btn.active{color:var(--gd);border-bottom-color:var(--gd);font-weight:600}
+.main{max-width:980px;margin:0 auto;padding:24px 16px 60px}
+.tp{display:none}.tp.active{display:block}
+.card{background:var(--wh);border-radius:var(--rad);box-shadow:var(--sh);border:1px solid var(--br);overflow:hidden;margin-bottom:16px}
+.ch{padding:14px 20px;border-bottom:1px solid var(--br);display:flex;align-items:center;gap:10px}
+.ch h2{font-size:15px;font-weight:700}
+.cb{padding:20px}
+.fg{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px}
+.fg .full{grid-column:1/-1}
+.fgrp{display:flex;flex-direction:column;gap:5px}
+.fgrp label{font-size:12px;font-weight:600;color:var(--tm)}
+.fgrp input,.fgrp select,.fgrp textarea{width:100%;padding:8px 12px;border:1px solid var(--br);border-radius:var(--rsm);font-size:13px;color:var(--tx);background:var(--wh);font-family:inherit;transition:border-color .2s}
+.fgrp input:focus,.fgrp select:focus,.fgrp textarea:focus{outline:none;border-color:var(--gm);box-shadow:0 0 0 3px rgba(42,138,80,.1)}
+.fgrp textarea{resize:vertical;min-height:70px}
+.dim-row{display:flex;gap:12px;align-items:flex-end}
+.dim-row .fgrp{flex:1}
+.dim-u{font-size:11px;color:var(--mu);padding-bottom:9px}
+.calc-area{background:var(--gl);border:1px solid rgba(42,138,80,.2);border-radius:var(--rsm);padding:8px 12px;font-size:13px;color:var(--gd);font-weight:600}
+.btn{display:inline-flex;align-items:center;gap:7px;padding:9px 18px;border-radius:var(--rsm);border:none;cursor:pointer;font-size:13px;font-weight:600;font-family:inherit;transition:all .15s}
+.btn-p{background:var(--gd);color:#fff}.btn-p:hover{background:var(--gm)}
+.btn-s{background:var(--bg);color:var(--tm);border:1px solid var(--br)}.btn-s:hover{background:var(--br)}
+.btn-lg{padding:12px 24px;font-size:15px}
+.divider{height:1px;background:var(--br);margin:20px 0}
+.hidden{display:none!important}
+/* TIMERS */
+.t-steps{display:flex;border-radius:var(--rad);overflow:hidden;margin-bottom:20px;box-shadow:var(--sh)}
+.tsb{flex:1;padding:12px 6px;border:none;cursor:pointer;font-size:12px;font-weight:700;text-align:center;border-right:1px solid rgba(255,255,255,.2);transition:opacity .2s;position:relative;color:#fff}
+.tsb:last-child{border-right:none}
+.tsb .sl{display:block;font-size:22px;font-weight:900;line-height:1;margin-bottom:3px}
+.tsb .sn{display:block;font-size:9px;font-weight:600;letter-spacing:.5px;text-transform:uppercase}
+.tsb.T{background:#E07B20}.tsb.I{background:#C0392B}.tsb.M{background:#1A4E8C}
+.tsb.E{background:#7D3C98}.tsb.R{background:#1A6B3C}.tsb.S{background:#1A8C7A}
+.tsb.off{opacity:.38}
+.tsb.done::after{content:'✓';position:absolute;top:4px;right:5px;font-size:10px;background:rgba(255,255,255,.3);border-radius:50%;width:15px;height:15px;display:inline-flex;align-items:center;justify-content:center;line-height:15px}
+.t-pane{display:none}.t-pane.active{display:block}
+.t-title{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.t-letter{width:38px;height:38px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:900;color:#fff;flex-shrink:0}
+.t-desc{font-size:12px;color:var(--mu);margin-bottom:14px;padding:9px 12px;background:var(--bg);border-radius:var(--rsm);border-left:3px solid var(--br);line-height:1.5}
+.opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:10px;margin-top:10px}
+.opt{border:2px solid var(--br);border-radius:var(--rad);padding:14px 12px;cursor:pointer;transition:all .2s;text-align:center;background:var(--wh)}
+.opt:hover{border-color:var(--gm);background:var(--gl);transform:translateY(-1px)}
+.opt.sel{border-color:var(--gd);background:var(--gl);box-shadow:0 0 0 3px rgba(26,107,60,.12)}
+.opt .oi{font-size:28px;display:block;margin-bottom:8px}
+.opt .ot{font-size:12px;font-weight:700;color:var(--tx);margin-bottom:4px}
+.opt .od{font-size:11px;color:var(--mu);line-height:1.4}
+.opt.sel .ot{color:var(--gd)}
+.opt.c0{border-color:#27AE60}.opt.c0.sel{border-color:#27AE60;background:#E8F8EF}
+.opt.c1{border-color:var(--am)}.opt.c1.sel{border-color:var(--am);background:var(--al)}
+.opt.c2{border-color:var(--rd)}.opt.c2.sel{border-color:var(--rd);background:var(--rl)}
+.opt.c3{border-color:#7B1A1A;background:#FFF5F5}.opt.c3.sel{border-color:#7B1A1A;background:var(--rl)}
+.chk-opts{margin-top:10px;display:flex;flex-direction:column;gap:8px}
+.chk-opt{display:flex;align-items:flex-start;gap:10px;padding:10px 14px;border:1px solid var(--br);border-radius:var(--rsm);cursor:pointer;transition:background .15s}
+.chk-opt:hover{background:var(--bg)}
+.chk-opt input[type=checkbox]{width:16px;height:16px;margin-top:2px;flex-shrink:0;accent-color:var(--gd)}
+.chk-opt strong{display:block;font-size:12px;color:var(--tx)}
+.chk-opt span{font-size:11px;color:var(--mu)}
+.step-nav{display:flex;justify-content:space-between;align-items:center;margin-top:18px;padding-top:14px;border-top:1px solid var(--br)}
+.step-ctr{font-size:12px;color:var(--mu)}
+/* Recommendations */
+.rec-sec{margin-bottom:18px}
+.rec-ttl{font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;margin-bottom:8px;padding:6px 10px;border-radius:var(--rsm);display:flex;align-items:center;gap:8px}
+.rec-ttl.gr{background:var(--gl);color:var(--gd)}
+.rec-ttl.bl{background:var(--bll);color:var(--bl)}
+.rec-ttl.am{background:var(--al);color:var(--am)}
+.pc{border:1px solid var(--br);border-radius:var(--rsm);padding:12px 14px;display:flex;gap:12px;background:var(--wh);cursor:pointer;transition:all .2s}
+.pc:hover{border-color:var(--gm)}
+.pc.sel{border-color:var(--gd);background:var(--gl)}
+.pc-radio{width:18px;height:18px;border:2px solid var(--br);border-radius:50%;flex-shrink:0;margin-top:2px;transition:all .2s;display:flex;align-items:center;justify-content:center}
+.pc.sel .pc-radio{border-color:var(--gd);background:var(--gd)}
+.pc.sel .pc-radio::after{content:'';width:6px;height:6px;border-radius:50%;background:#fff}
+.pc-info{flex:1;min-width:0}
+.pc-name{font-size:13px;font-weight:700;color:var(--tx);margin-bottom:2px}
+.pc-marca{font-size:11px;color:var(--mu);margin-bottom:4px}
+.pc-desc{font-size:11px;color:var(--tm);line-height:1.4}
+.pc-meta{display:flex;gap:6px;margin-top:5px;flex-wrap:wrap;align-items:center}
+.gc{font-size:10px;font-family:monospace;background:var(--bg);padding:2px 6px;border-radius:3px;color:var(--mu);border:1px solid var(--br)}
+.pr{font-size:10px;font-weight:600;color:var(--gd)}
+.abox{padding:12px 14px;border-radius:var(--rsm);display:flex;gap:10px;margin-bottom:12px;font-size:13px;align-items:flex-start}
+.abox.dg{background:var(--rl);border:1px solid rgba(192,57,43,.25);color:var(--rd)}
+.abox.wn{background:var(--al);border:1px solid rgba(217,123,26,.25);color:var(--am)}
+.abox.if{background:var(--bll);border:1px solid rgba(26,78,140,.2);color:var(--bl)}
+.abox.ok{background:var(--gl);border:1px solid rgba(26,107,60,.2);color:var(--gd)}
+.ai{font-size:18px;flex-shrink:0}
+/* Report */
+.rbox{background:var(--wh);border:1px solid var(--br);border-radius:var(--rad);padding:24px;font-family:'Courier New',monospace;font-size:12px;line-height:1.7;white-space:pre-wrap;color:var(--tx);margin-bottom:16px;max-height:560px;overflow-y:auto}
+/* Quiz */
+.qprog{background:var(--br);border-radius:20px;height:6px;margin-bottom:20px;overflow:hidden}
+.qpbar{height:100%;background:var(--gd);border-radius:20px;transition:width .4s}
+.q-num{font-size:12px;color:var(--mu);font-weight:600;margin-bottom:8px}
+.q-txt{font-size:15px;font-weight:700;color:var(--tx);margin-bottom:16px;line-height:1.5}
+.q-opts{display:flex;flex-direction:column;gap:10px}
+.q-opt{border:2px solid var(--br);border-radius:var(--rad);padding:12px 16px;cursor:pointer;font-size:13px;font-weight:500;display:flex;align-items:flex-start;gap:10px;transition:all .2s;font-family:inherit;background:var(--wh);text-align:left;width:100%}
+.q-opt:hover:not(.dis){border-color:var(--gm);background:var(--gl)}
+.q-opt .ql{width:22px;height:22px;border-radius:50%;background:var(--bg);border:1px solid var(--br);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;color:var(--mu)}
+.q-opt.cor{border-color:#27AE60;background:#E8F8EF}
+.q-opt.cor .ql{background:#27AE60;color:#fff;border-color:#27AE60}
+.q-opt.err{border-color:var(--rd);background:var(--rl)}
+.q-opt.err .ql{background:var(--rd);color:#fff;border-color:var(--rd)}
+.q-opt.dis{cursor:not-allowed}
+.q-fb{margin-top:14px;padding:12px 16px;border-radius:var(--rsm);font-size:13px;line-height:1.5;display:none}
+.q-fb.show{display:block}
+.q-fb.cor{background:#E8F8EF;border:1px solid rgba(39,174,96,.3);color:#1A6B3C}
+.q-fb.err{background:var(--rl);border:1px solid rgba(192,57,43,.3);color:var(--rd)}
+.sc-circle{width:100px;height:100px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-direction:column;margin:0 auto 16px;border:5px solid}
+.sc-ex{border-color:#27AE60;background:#E8F8EF;color:#1A6B3C}
+.sc-ok{border-color:var(--am);background:var(--al);color:var(--am)}
+.sc-ng{border-color:var(--rd);background:var(--rl);color:var(--rd)}
+.sc-num{font-size:28px;font-weight:900;line-height:1}
+.rv-i{padding:12px 14px;border-radius:var(--rsm);margin-bottom:8px;border-left:4px solid;font-size:12px}
+.rv-ok{border-color:#27AE60;background:#E8F8EF}
+.rv-ng{border-color:var(--rd);background:var(--rl)}
+.rv-q{font-weight:700;color:var(--tx);margin-bottom:4px}
+.rv-x{color:var(--tm);margin-top:4px}
+@media(max-width:640px){.fg{grid-template-columns:1fr}.opts{grid-template-columns:1fr 1fr}.tsb .sn{display:none}}
+</style>
+</head>
+<body>
+
+<header class="hdr">
+  <div class="hdr-logo">
+    <div class="logo-mk">H</div>
+    <h1>Manejo de Heridas · AGSNM <span>Área Sanitaria Norte de Málaga · Comisión Heridas 2025-2026</span></h1>
+  </div>
+  <div class="hdr-badge">Catálogo AGSNM 2026</div>
+</header>
+
+<nav class="tabs-nav">
+  <button class="tab-btn active" onclick="showTab('ev')">🔍 Evaluación de la Herida</button>
+  <button class="tab-btn" onclick="showTab('mj')">🧬 Manejo Local (TIMERS)</button>
+  <button class="tab-btn" onclick="showTab('in')">📋 Informe de Cura</button>
+  <button class="tab-btn" onclick="showTab('fo')">🎓 Formación</button>
+</nav>
+
+<div class="main">
+
+<!-- ========== TAB 1: EVALUACIÓN ========== -->
+<div id="tab-ev" class="tp active">
+
+  <div class="card">
+    <div class="ch"><span>👤</span><h2>Datos del Paciente y Profesional</h2></div>
+    <div class="cb">
+      <div class="fg">
+        <div class="fgrp"><label>Nombre del paciente</label><input type="text" id="p-nom" placeholder="Apellidos, Nombre" oninput="upSt()"></div>
+        <div class="fgrp"><label>NHC / NUHSA</label><input type="text" id="p-nhc" placeholder="Número de historia" oninput="upSt()"></div>
+        <div class="fgrp"><label>Fecha de cura</label><input type="date" id="p-fec" oninput="upSt()"></div>
+        <div class="fgrp"><label>Profesional responsable</label><input type="text" id="p-pro" placeholder="Nombre del enfermero/a" oninput="upSt()"></div>
+        <div class="fgrp"><label>Centro / UGC</label>
+          <select id="p-ugc" onchange="upSt()">
+            <option value="">Seleccionar centro...</option>
+            <option>UGC Antequera-Centro</option><option>UGC Antequera-Estación</option>
+            <option>UGC Archidona</option><option>UGC Campillos</option><option>UGC Mollina</option>
+            <option>Hospital Comarcal AGSNM</option><option>Unidad de Residencias AGSNM</option><option>Otro</option>
+          </select>
+        </div>
+        <div class="fgrp"><label>Nº Visita / Cura</label><input type="text" id="p-vis" placeholder="Ej: 1ª visita, Semana 3…" oninput="upSt()"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span>🗺️</span><h2>Localización y Tipo de Herida</h2></div>
+    <div class="cb">
+      <div class="fg">
+        <div class="fgrp"><label>Localización anatómica</label>
+          <select id="h-loc" onchange="upSt()">
+            <option value="">Seleccionar...</option>
+            <optgroup label="Extremidades inferiores">
+              <option>Pierna derecha (tercio inferior)</option><option>Pierna izquierda (tercio inferior)</option>
+              <option>Tobillo derecho</option><option>Tobillo izquierdo</option>
+              <option>Pie derecho</option><option>Pie izquierdo</option>
+              <option>Talón derecho</option><option>Talón izquierdo</option>
+            </optgroup>
+            <optgroup label="Prominencias óseas">
+              <option>Sacro</option><option>Trocánter mayor derecho</option><option>Trocánter mayor izquierdo</option>
+              <option>Isquion derecho</option><option>Isquion izquierdo</option>
+              <option>Maléolo externo derecho</option><option>Maléolo externo izquierdo</option>
+            </optgroup>
+            <optgroup label="Tronco / Cabeza">
+              <option>Zona occipital</option><option>Zona abdominal</option><option>Zona dorsal</option><option>Periné</option>
+            </optgroup>
+            <option>Otra localización</option>
+          </select>
+        </div>
+        <div class="fgrp"><label>Especificar localización</label><input type="text" id="h-loce" placeholder="Descripción adicional si es necesario…" oninput="upSt()"></div>
+        <div class="fgrp"><label>Tipo de herida</label>
+          <select id="h-tip" onchange="upSt()">
+            <option value="">Seleccionar...</option>
+            <option>Úlcera por presión (UPP)</option><option>Úlcera venosa</option>
+            <option>Úlcera arterial</option><option>Úlcera mixta (venosa-arterial)</option>
+            <option>Úlcera neuropática / pie diabético</option><option>Herida quirúrgica / dehiscencia</option>
+            <option>Herida traumática</option><option>Quemadura</option>
+            <option>Úlcera tumoral</option><option>Dermatoporosis</option>
+            <option>Otra herida crónica</option><option>Otra herida aguda</option>
+          </select>
+        </div>
+        <div class="fgrp"><label>Tiempo de evolución</label><input type="text" id="h-evo" placeholder="Ej: 3 semanas, 2 meses…" oninput="upSt()"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><span>📐</span><h2>Medidas de la Herida</h2></div>
+    <div class="cb">
+      <div class="dim-row">
+        <div class="fgrp"><label>Longitud (cm)</label><input type="number" id="h-lon" min="0" step="0.1" placeholder="0,0" oninput="calcA()"></div>
+        <div class="dim-u">×</div>
+        <div class="fgrp"><label>Anchura (cm)</label><input type="number" id="h-anc" min="0" step="0.1" placeholder="0,0" oninput="calcA()"></div>
+        <div class="dim-u">=</div>
+        <div class="fgrp"><label>Área aproximada</label><div class="calc-area" id="calc-a">— cm²</div></div>
+      </div>
+      <div class="divider"></div>
+      <div class="fg">
+        <div class="fgrp"><label>Profundidad (cm)</label><input type="number" id="h-pro" min="0" step="0.1" placeholder="0,0" oninput="upSt()"></div>
+        <div class="fgrp"><label>¿Trayectos / cavitación?</label>
+          <select id="h-tray" onchange="upSt()"><option value="no">No</option><option value="si">Sí</option></select>
+        </div>
+        <div class="fgrp"><label>Descripción del trayecto</label><input type="text" id="h-trayd" placeholder="Dirección, profundidad…" oninput="upSt()"></div>
+        <div class="fgrp"><label>Categoría / Estadio UPP</label>
+          <select id="h-cat" onchange="upSt()">
+            <option value="">No aplica</option>
+            <option>Categoría I</option><option>Categoría II</option>
+            <option>Categoría III</option><option>Categoría IV</option><option>No clasificable</option>
+          </select>
+        </div>
+        <div class="fgrp full"><label>Observaciones / descripción clínica</label>
+          <textarea id="h-obs" placeholder="Descripción adicional, contexto clínico, características especiales…" oninput="upSt()"></textarea>
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div style="display:flex;justify-content:flex-end">
+        <button class="btn btn-p" onclick="showTab('mj')">Continuar a Manejo Local →</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ========== TAB 2: MANEJO LOCAL (TIMERS) ========== -->
+<div id="tab-mj" class="tp">
+
+  <div class="card">
+    <div class="ch"><span>🧬</span><h2>Evaluación TIMERS · Manejo Local de la Herida</h2></div>
+    <div class="cb">
+      <div class="abox if"><span class="ai">ℹ️</span><div>La escala <strong>TIMERS</strong> identifica las barreras a la cicatrización. Complete cada dimensión para obtener recomendaciones de productos del <strong>Catálogo AGSNM 2026</strong>.</div></div>
+
+      <div class="t-steps">
+        <button class="tsb T" id="tsb0" onclick="goStep(0)"><span class="sl">T</span><span class="sn">Tejido</span></button>
+        <button class="tsb I off" id="tsb1" onclick="goStep(1)"><span class="sl">I</span><span class="sn">Infección</span></button>
+        <button class="tsb M off" id="tsb2" onclick="goStep(2)"><span class="sl">M</span><span class="sn">Humedad</span></button>
+        <button class="tsb E off" id="tsb3" onclick="goStep(3)"><span class="sl">E</span><span class="sn">Bordes</span></button>
+        <button class="tsb R off" id="tsb4" onclick="goStep(4)"><span class="sl">R</span><span class="sn">Reparación</span></button>
+        <button class="tsb S off" id="tsb5" onclick="goStep(5)"><span class="sl">S</span><span class="sn">Social</span></button>
+      </div>
+
+      <!-- T -->
+      <div class="t-pane active" id="ts0">
+        <div class="t-title"><div class="t-letter" style="background:#E07B20">T</div><div><div style="font-size:15px;font-weight:700">Tejido (Tissue)</div><div style="font-size:12px;color:var(--mu)">Tipo de tejido predominante en el lecho de la herida</div></div></div>
+        <div class="t-desc">Evalúe el tejido presente en el lecho. La presencia de tejido no viable (necrosis, esfacelos) indica necesidad de desbridamiento previo a la cicatrización.</div>
+        <div class="opts">
+          <div class="opt" onclick="selT('T','necrosis_seca',this)"><span class="oi">⬛</span><div class="ot">Necrosis seca</div><div class="od">Escara negra/marrón, tejido mumificado, dura al tacto</div></div>
+          <div class="opt" onclick="selT('T','esfacelos',this)"><span class="oi">🟡</span><div class="ot">Esfacelos / Necrosis húmeda</div><div class="od">Tejido amarillo, gris o verde, fibrinoso, adherido</div></div>
+          <div class="opt" onclick="selT('T','mixto',this)"><span class="oi">🟤</span><div class="ot">Tejido mixto</div><div class="od">Coexistencia de necrosis, esfacelos y/o granulación</div></div>
+          <div class="opt" onclick="selT('T','granulacion',this)"><span class="oi">🔴</span><div class="ot">Granulación</div><div class="od">Tejido rojo brillante, granular, bien vascularizado</div></div>
+          <div class="opt" onclick="selT('T','epitelizacion',this)"><span class="oi">🩷</span><div class="ot">Epitelización</div><div class="od">Tejido rosa pálido, avance de epitelio desde los bordes</div></div>
+        </div>
+        <div class="step-nav"><div class="step-ctr">Paso 1 de 6</div><button class="btn btn-p" onclick="nxStep()">Siguiente: Infección →</button></div>
+      </div>
+
+      <!-- I -->
+      <div class="t-pane" id="ts1">
+        <div class="t-title"><div class="t-letter" style="background:#C0392B">I</div><div><div style="font-size:15px;font-weight:700">Infección / Inflamación</div><div style="font-size:12px;color:var(--mu)">Carga bacteriana y signos inflamatorios locales o sistémicos</div></div></div>
+        <div class="t-desc">Valore los signos clínicos de infección. El biofilm es frecuente en heridas crónicas estancadas y puede no presentar signos clásicos de infección.</div>
+        <div class="opts" style="grid-template-columns:1fr 1fr">
+          <div class="opt c0" onclick="selT('I','sin_infeccion',this)"><span class="oi">✅</span><div class="ot">Sin signos de infección</div><div class="od">Herida limpia, sin eritema, sin exudado purulento, sin olor</div></div>
+          <div class="opt c1" onclick="selT('I','biofilm',this)"><span class="oi">🦠</span><div class="ot">Biofilm sospechado</div><div class="od">Estancamiento &gt;4 sem, exudado viscoso persistente, olor leve, recidivas infecciosas</div></div>
+          <div class="opt c2" onclick="selT('I','infeccion_local',this)"><span class="oi">🔥</span><div class="ot">Infección local</div><div class="od">Calor, eritema &gt;2cm, dolor aumentado, exudado purulento, olor intenso, edema</div></div>
+          <div class="opt c3" onclick="selT('I','infeccion_sistemica',this)"><span class="oi">⚠️</span><div class="ot">Infección sistémica</div><div class="od">Fiebre, malestar, leucocitosis, linfangitis, celulitis extensa → DERIVAR URGENTE</div></div>
+        </div>
+        <div class="step-nav"><button class="btn btn-s" onclick="pvStep()">← Anterior</button><div class="step-ctr">Paso 2 de 6</div><button class="btn btn-p" onclick="nxStep()">Siguiente: Humedad →</button></div>
+      </div>
+
+      <!-- M -->
+      <div class="t-pane" id="ts2">
+        <div class="t-title"><div class="t-letter" style="background:#1A4E8C">M</div><div><div style="font-size:15px;font-weight:700">Humedad / Exudado (Moisture)</div><div style="font-size:12px;color:var(--mu)">Nivel de exudado y equilibrio de humedad del lecho</div></div></div>
+        <div class="t-desc">El equilibrio de humedad es fundamental para la cicatrización. Tanto la herida seca como el exceso de exudado dificultan la reparación tisular.</div>
+        <div class="opts" style="grid-template-columns:1fr 1fr">
+          <div class="opt" onclick="selT('M','seco',this)"><span class="oi">🏜️</span><div class="ot">Seco / Sin exudado</div><div class="od">Herida seca, riesgo de adherencia, necesita aporte de humedad</div></div>
+          <div class="opt" onclick="selT('M','escaso',this)"><span class="oi">💧</span><div class="ot">Exudado escaso</div><div class="od">Pequeña cantidad de exudado seroso o serosanguinolento</div></div>
+          <div class="opt" onclick="selT('M','moderado',this)"><span class="oi">💦</span><div class="ot">Exudado moderado</div><div class="od">Satura apósito convencional antes de 72h</div></div>
+          <div class="opt" onclick="selT('M','alto',this)"><span class="oi">🌊</span><div class="ot">Exudado abundante</div><div class="od">Copioso, riesgo de maceración perilesional, saturación rápida</div></div>
+        </div>
+        <div class="step-nav"><button class="btn btn-s" onclick="pvStep()">← Anterior</button><div class="step-ctr">Paso 3 de 6</div><button class="btn btn-p" onclick="nxStep()">Siguiente: Bordes →</button></div>
+      </div>
+
+      <!-- E -->
+      <div class="t-pane" id="ts3">
+        <div class="t-title"><div class="t-letter" style="background:#7D3C98">E</div><div><div style="font-size:15px;font-weight:700">Bordes / Piel Perilesional (Edge)</div><div style="font-size:12px;color:var(--mu)">Estado de los bordes y piel que rodea la herida</div></div></div>
+        <div class="t-desc">Los bordes y la piel perilesional informan sobre la progresión de la cicatrización y posibles complicaciones que requieren tratamiento específico.</div>
+        <div class="opts">
+          <div class="opt" onclick="selT('E','activos',this)"><span class="oi">✨</span><div class="ot">Bordes activos</div><div class="od">Epitelización avanzando, bordes bien definidos y adheridos</div></div>
+          <div class="opt" onclick="selT('E','estancados',this)"><span class="oi">🛑</span><div class="ot">Bordes estancados</div><div class="od">Sin avance epitelial, bordes engrosados, herida cronificada</div></div>
+          <div class="opt" onclick="selT('E','maceracion',this)"><span class="oi">💦</span><div class="ot">Maceración perilesional</div><div class="od">Piel blanquecina o macerada por exceso de humedad/exudado</div></div>
+          <div class="opt" onclick="selT('E','dermatitis',this)"><span class="oi">🔴</span><div class="ot">Dermatitis perilesional</div><div class="od">Eritema, prurito, descamación por exudado o alergia</div></div>
+          <div class="opt" onclick="selT('E','hiperqueratosis',this)"><span class="oi">🧱</span><div class="ot">Hiperqueratosis / Callosidad</div><div class="od">Bordes callosos que impiden la epitelización</div></div>
+        </div>
+        <div class="step-nav"><button class="btn btn-s" onclick="pvStep()">← Anterior</button><div class="step-ctr">Paso 4 de 6</div><button class="btn btn-p" onclick="nxStep()">Siguiente: Reparación →</button></div>
+      </div>
+
+      <!-- R -->
+      <div class="t-pane" id="ts4">
+        <div class="t-title"><div class="t-letter" style="background:#1A6B3C">R</div><div><div style="font-size:15px;font-weight:700">Reparación / Regeneración</div><div style="font-size:12px;color:var(--mu)">Evolución global del proceso de cicatrización</div></div></div>
+        <div class="t-desc">Evalúe la progresión de la herida. Sin reducción del área en un 20-30% en 4 semanas con tratamiento correcto, la herida se considera estancada.</div>
+        <div class="opts" style="grid-template-columns:1fr 1fr 1fr">
+          <div class="opt" onclick="selT('R','progresando',this)"><span class="oi">📈</span><div class="ot">Progresando</div><div class="od">Reducción visible de tamaño o mejora en las últimas 4 semanas</div></div>
+          <div class="opt" onclick="selT('R','estancada',this)"><span class="oi">⏸️</span><div class="ot">Estancada</div><div class="od">Sin mejoría apreciable en 4+ semanas con tratamiento adecuado</div></div>
+          <div class="opt" onclick="selT('R','empeorando',this)"><span class="oi">📉</span><div class="ot">Empeorando</div><div class="od">Aumento de tamaño, profundidad o deterioro clínico</div></div>
+        </div>
+        <div class="step-nav"><button class="btn btn-s" onclick="pvStep()">← Anterior</button><div class="step-ctr">Paso 5 de 6</div><button class="btn btn-p" onclick="nxStep()">Siguiente: Social →</button></div>
+      </div>
+
+      <!-- S -->
+      <div class="t-pane" id="ts5">
+        <div class="t-title"><div class="t-letter" style="background:#1A8C7A">S</div><div><div style="font-size:15px;font-weight:700">Social / Factores Sistémicos</div><div style="font-size:12px;color:var(--mu)">Factores del paciente que condicionan la cicatrización</div></div></div>
+        <div class="t-desc">Identifique los factores sistémicos y sociosanitarios que pueden estar dificultando la cicatrización. Seleccione todos los que apliquen.</div>
+        <div class="chk-opts">
+          <label class="chk-opt"><input type="checkbox" value="desnutricion" onchange="upSoc()"><div><strong>🍽️ Desnutrición / Hipoproteinemia</strong><span>Estado nutricional deficiente, pérdida de peso, albúmina baja</span></div></label>
+          <label class="chk-opt"><input type="checkbox" value="diabetes" onchange="upSoc()"><div><strong>🩸 Diabetes mal controlada</strong><span>HbA1c elevada, glucemias frecuentemente por encima del objetivo</span></div></label>
+          <label class="chk-opt"><input type="checkbox" value="isquemia" onchange="upSoc()"><div><strong>🫀 Isquemia / Enfermedad arterial periférica</strong><span>ITB &lt; 0.8, pulsos periféricos disminuidos o ausentes</span></div></label>
+          <label class="chk-opt"><input type="checkbox" value="inmovilidad" onchange="upSoc()"><div><strong>🛏️ Inmovilidad</strong><span>Encamado, dependencia para movilización, riesgo de nuevas úlceras</span></div></label>
+          <label class="chk-opt"><input type="checkbox" value="corticoides" onchange="upSoc()"><div><strong>💊 Inmunosupresión / Corticoterapia</strong><span>Tratamiento crónico con corticoides, inmunosupresores o quimioterapia</span></div></label>
+          <label class="chk-opt"><input type="checkbox" value="baja_adherencia" onchange="upSoc()"><div><strong>⚠️ Baja adherencia al tratamiento</strong><span>El paciente no realiza cambios de apósito correctamente o rechaza el tratamiento</span></div></label>
+          <label class="chk-opt"><input type="checkbox" value="soporte_limitado" onchange="upSoc()"><div><strong>👨‍👩‍👧 Soporte familiar / social limitado</strong><span>Paciente solo, sin cuidador capacitado, barreras de acceso al centro</span></div></label>
+        </div>
+        <div class="step-nav"><button class="btn btn-s" onclick="pvStep()">← Anterior</button><div class="step-ctr">Paso 6 de 6</div><button class="btn btn-p" style="background:#E07B20" onclick="genRec()">🎯 Generar Recomendaciones</button></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="rec-panel" class="hidden"></div>
+
+  <div id="sel-card" class="card hidden">
+    <div class="ch" style="background:var(--gl)"><span>✅</span><h2 style="color:var(--gd)">Protocolo de Cura Seleccionado</h2></div>
+    <div class="cb" id="sel-sum"></div>
+    <div class="cb" style="padding-top:0;display:flex;gap:10px;flex-wrap:wrap">
+      <button class="btn btn-p" onclick="showTab('in')">📋 Generar Informe de Cura</button>
+      <button class="btn btn-s" onclick="resetMj()">🔄 Reiniciar evaluación</button>
+    </div>
+  </div>
+
+</div>
+
+<!-- ========== TAB 3: INFORME ========== -->
+<div id="tab-in" class="tp">
+  <div class="card">
+    <div class="ch"><span>📋</span><h2>Informe de la Cura</h2></div>
+    <div class="cb">
+      <div class="abox if" style="margin-bottom:16px"><span class="ai">💡</span><div>El informe se genera automáticamente con los datos introducidos. Puede editarlo antes de copiar. Use <strong>Copiar al portapapeles</strong> para pegarlo en el sistema de documentación clínica.</div></div>
+      <div class="fg" style="margin-bottom:16px">
+        <div class="fgrp"><label>Próxima revisión</label><input type="date" id="prox-rev"></div>
+        <div class="fgrp"><label>Frecuencia de cambio</label><input type="text" id="frec-cam" placeholder="Ej: Cada 48h, cada 3-4 días…"></div>
+        <div class="fgrp full"><label>Observaciones / Plan de cuidados adicional</label><textarea id="obs-inf" placeholder="Instrucciones adicionales, coordinación, derivaciones, plan de seguimiento…"></textarea></div>
+      </div>
+      <button class="btn btn-s" onclick="buildRep()" style="margin-bottom:16px">🔄 Actualizar informe</button>
+      <div id="rep-out" class="rbox"></div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <button class="btn btn-p" onclick="copyRep()">📋 Copiar al portapapeles</button>
+        <button class="btn btn-s" onclick="printRep()">🖨️ Imprimir</button>
+      </div>
+      <div id="copy-ok" class="hidden" style="margin-top:10px"><div class="abox ok"><span class="ai">✅</span>¡Informe copiado al portapapeles correctamente!</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== TAB 4: FORMACIÓN ========== -->
+<div id="tab-fo" class="tp">
+
+  <div id="q-start">
+    <div class="card">
+      <div class="ch" style="background:linear-gradient(135deg,var(--gd),#0F4D2C);border:none"><span style="color:#fff">🎓</span><h2 style="color:#fff">Test de Formación · Manejo de Heridas AGSNM 2026</h2></div>
+      <div class="cb" style="text-align:center;padding:40px 24px">
+        <div style="font-size:52px;margin-bottom:16px">🩹</div>
+        <h3 style="font-size:20px;font-weight:700;margin-bottom:8px">Evaluación de competencias clínicas</h3>
+        <p style="color:var(--mu);max-width:480px;margin:0 auto 24px;font-size:14px;line-height:1.6">Evalúa el conocimiento sobre manejo de heridas según el <strong>Catálogo AGSNM 2026</strong> y la escala <strong>TIMERS</strong>. 15 preguntas con retroalimentación inmediata en cada respuesta.</p>
+        <div style="display:flex;gap:16px;justify-content:center;margin-bottom:28px;flex-wrap:wrap">
+          <div style="text-align:center;padding:12px 20px;background:var(--bg);border-radius:var(--rad)"><div style="font-size:24px;font-weight:700;color:var(--gd)">15</div><div style="font-size:11px;color:var(--mu)">Preguntas</div></div>
+          <div style="text-align:center;padding:12px 20px;background:var(--bg);border-radius:var(--rad)"><div style="font-size:24px;font-weight:700;color:var(--bl)">∞</div><div style="font-size:11px;color:var(--mu)">Sin tiempo límite</div></div>
+          <div style="text-align:center;padding:12px 20px;background:var(--bg);border-radius:var(--rad)"><div style="font-size:22px;font-weight:700;color:var(--am)">💬</div><div style="font-size:11px;color:var(--mu)">Feedback inmediato</div></div>
+        </div>
+        <button class="btn btn-p btn-lg" onclick="startQ()">Comenzar Test 🚀</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="q-main" class="hidden">
+    <div class="card">
+      <div class="ch"><span>🎓</span><h2>Test de Formación</h2><span style="margin-left:auto;font-size:12px;color:var(--mu)" id="q-hdr">1/15</span></div>
+      <div class="cb">
+        <div class="qprog"><div class="qpbar" id="q-bar" style="width:0%"></div></div>
+        <div class="q-num" id="q-num">Pregunta 1 de 15</div>
+        <div class="q-txt" id="q-txt"></div>
+        <div class="q-opts" id="q-opts"></div>
+        <div class="q-fb" id="q-fb"></div>
+        <div style="margin-top:20px;display:flex;justify-content:flex-end" id="q-nxt-w" class="hidden">
+          <button class="btn btn-p" onclick="nxtQ()">Siguiente pregunta →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="q-res" class="hidden">
+    <div class="card">
+      <div class="ch"><span>🏆</span><h2>Resultados del Test</h2></div>
+      <div class="cb">
+        <div style="text-align:center;padding:20px 0 30px">
+          <div class="sc-circle" id="sc-circle"><span class="sc-num" id="sc-num">0</span><span style="font-size:11px;font-weight:600">/ 15</span></div>
+          <div style="font-size:18px;font-weight:700;margin-bottom:8px" id="sc-ttl"></div>
+          <div style="font-size:14px;color:var(--mu);margin-bottom:24px" id="sc-sub"></div>
+          <button class="btn btn-p btn-lg" onclick="restartQ()">Repetir Test 🔄</button>
+        </div>
+        <div id="q-rev" style="text-align:left"></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</div><!-- /main -->
+
+<script>
+/* ===== STATE ===== */
+const ST={
+  p:{nom:'',nhc:'',fec:'',pro:'',ugc:'',vis:''},
+  h:{loc:'',loce:'',tip:'',evo:'',lon:'',anc:'',area:'',dep:'',tray:'no',trayd:'',cat:'',obs:''},
+  T:{T:null,I:null,M:null,E:null,R:null,S:[]},
+  sel:{lim:null,des:null,pri:null,sec:null,bar:null,fij:null},
+  curStep:0
+};
+const SL={
+  T:{necrosis_seca:'Necrosis seca (escara negra/marrón)',esfacelos:'Esfacelos/Necrosis húmeda (amarillo-gris)',mixto:'Tejido mixto (necrosis + granulación)',granulacion:'Tejido de granulación (rojo brillante)',epitelizacion:'Tejido epitelial (rosa pálido, cerrando)'},
+  I:{sin_infeccion:'Sin signos de infección',biofilm:'Biofilm sospechado (estancamiento, olor)',infeccion_local:'Infección local confirmada',infeccion_sistemica:'Infección sistémica (derivar)'},
+  M:{seco:'Seco / Sin exudado',escaso:'Exudado escaso',moderado:'Exudado moderado',alto:'Exudado abundante'},
+  E:{activos:'Bordes activos, epitelizando',estancados:'Bordes estancados/cronificados',maceracion:'Maceración perilesional',dermatitis:'Dermatitis perilesional',hiperqueratosis:'Hiperqueratosis/Callosidad en bordes'},
+  R:{progresando:'Progresando (>20% reducción en 4 sem)',estancada:'Estancada (sin mejoría en 4+ sem)',empeorando:'Empeorando (aumento de tamaño o deterioro)'}
+};
+
+/* ===== CATALOG ===== */
+const CAT={
+  lim:[
+    {id:'prontosan',n:'Prontosan Solución (polihexanida + undecilglicol)',m:'Prontosan 350ml',gc:'B41691',p:'10,70€',i:'1ª elección ante biofilm o infección. Dejar actuar 15-20 min antes del apósito. Irrigar a presión moderada.'},
+    {id:'sf',n:'Suero Fisiológico SF Braun',m:'SF Braun 250ml',gc:'D61235',p:'',i:'Limpieza de heridas sin complicación infecciosa. Alternativa al Prontosan.'},
+    {id:'clh',n:'Clorhexidina acuosa (Vesismin Health)',m:'Vesismin 50ml',gc:'FARMACIA',p:'',i:'Antiséptico biocida para antisepsia de piel perilesional.'},
+    {id:'pov',n:'Povidona yodada (Curadona)',m:'Curadona 500ml',gc:'FARMACIA',p:'',i:'Antiséptico. No combinar con colagenasa ni con plata.'}
+  ],
+  des:[
+    {id:'colagenasa',n:'Ácido hialuronato + Colagenasa (RYM Colagenasa)',m:'RYM Colagenasa 30g',gc:'F34403',p:'6,64€',i:'Desbridamiento enzimático de esfacelos (necrosis húmeda). C/48H. No combinar con yodados ni hexamidina.'},
+    {id:'hidrogel_v',n:'Apósito de Hidrogel (Varihesive)',m:'Varihesive 10×15g',gc:'E64932',p:'2,39€',i:'Desbridamiento autolítico de necrosis seca. Humedece la escara para facilitar su eliminación.'},
+    {id:'hidrogel_i',n:'Hidrogel en Malla (Intrasite Conformable)',m:'Intrasite Conformable 10×20 10U',gc:'E67655',p:'1,98€',i:'Desbridamiento autolítico. Heridas necróticas y esfaceladas. Alternativa a Varihesive.'},
+    {id:'cureta',n:'Cureta (Desbridamiento cortante)',m:'Cureta Nº3/5/7',gc:'F56053/54/55',p:'',i:'Desbridamiento cortante mecánico. Requiere habilidad técnica.'},
+    {id:'rym_cic',n:'Ácido Hialurónico Humectante (RYM Cicatrizante)',m:'RYM Cicatrizante 25g',gc:'F02768',p:'6,65€',i:'Humectante. Favorece ambiente húmedo en heridas con granulación o fase final de cicatrización.'}
+  ],
+  ant:[
+    {id:'sorbact',n:'Cutimed Sorbact DACC (Gasa hidrofóbica)',m:'Cutimed Sorbact DACC 7×9 / Con hidrogel',gc:'E82044 / E82104',p:'2,75€ / 4,62€',i:'Captación bacteriana por hidrofobicidad SIN liberar antisépticos. Control de biofilm. Se puede cortar.'},
+    {id:'iodosorb',n:'Cadexomero Yodado (Iodosorb lámina)',m:'Iodosorb lámina 4×6 7U',gc:'D66569',p:'7,65€',i:'Control de biofilm en heridas con exudado. Hasta 2-3 días. Cambiar cuando se decolora.'},
+    {id:'acticoat',n:'Plata Nanocristalina (Acticoat Flex)',m:'Acticoat Flex 10×10 / 10×20',gc:'E65162 / E67262',p:'10,18€ / 15,48€',i:'Liberación sostenida de plata nanocristalina. Eficacia antimicrobiana amplia. Hasta 3 días.'},
+    {id:'actisorb',n:'Plata + Carbón Activado (Actisorb +25)',m:'Actisorb +25 10,5×19',gc:'F98662',p:'6,40€',i:'Infección con mal olor. Carbón absorbe toxinas, plata controla bacterias. Hasta 3 días.'},
+    {id:'urgotul_ag',n:'Malla de Plata (Urgotul Ag)',m:'Urgotul Ag 15×20 10U',gc:'F72959',p:'6,55€',i:'Infección con tejido desvitalizado (esfacelos). Malla no adherente con plata. Se puede cortar.'},
+    {id:'aquacel_ag',n:'Hidrofibra con Plata (Aquacel Ag Extra)',m:'AQUACEL Ag Extra 15×15 / Cinta 2×45',gc:'E64663 / E64846',p:'5,28€ / 2,86€',i:'Control bacteriano y biofilm en heridas con exudado moderado/alto. Cinta para heridas cavitadas. Hasta 7 días.'}
+  ],
+  mod:[
+    {id:'urg_bor',n:'Modulador Metaloproteasas con Bordes (Urgostar Plus Border)',m:'Urgostar Plus Border 8×8/10×10/13×13',gc:'E83759 / E83760',p:'5,39€ - 8,77€',i:'Heridas complejas con esfacelos y exudado leve-moderado. Reduce metaloproteinasas. 3-7 días.'},
+    {id:'urg_pad',n:'Modulador Metaloproteasas PAD (Urgostar Plus PAD)',m:'Urgostar Plus PAD 10×10',gc:'F99377',p:'8,21€',i:'Fibras poliacrilato que reducen metaloproteinasas. Desbridamiento electrostático. 3-7 días.'},
+    {id:'urg_con',n:'Modulador Malla (Urgostar Contact)',m:'Urgostar Contact 10×10',gc:'E69682',p:'13,19€',i:'Activa epitelización en heridas cronificadas estancadas. Control de metaloproteasas en fase inflamatoria. 3-7 días.'}
+  ],
+  abs:[
+    {id:'aquacel_e',n:'Hidrofibra Hidrocoloide (Aquacel Extra / Biatain Fiber)',m:'Aquacel Extra 10×10/15×15',gc:'E64651 / E64650',p:'4,34€ / 5,39€',i:'Exudado moderado/alto SIN infección activa. No combinar con hidrogeles ni colagenasa. No usar en heridas secas.'},
+    {id:'biat_alg',n:'Alginato Cálcico con Plata (Biatain Alginato Ag)',m:'Biatain Alginato Ag 15×15',gc:'E65326',p:'2,11€',i:'Altamente absorbente, acción antimicrobiana con plata. Hasta 7 días. Se puede cortar.'},
+    {id:'algesite',n:'Alginato Cálcico sin Plata (Algesite M)',m:'Algesite M 15×20',gc:'F99810',p:'3,19€',i:'Altamente absorbente. Sin infección activa. No usar en heridas secas. Combinar con espuma.'},
+    {id:'urgoclean',n:'Fibras Poliacrilato con Plata (Urgoclean Ag)',m:'Urgoclean Ag 15×15',gc:'E99808',p:'6,25€',i:'Infección con tejido desvitalizado. Combinar con espuma secundaria. Hasta 7 días.'},
+    {id:'convamax',n:'Superabsorbente (Convamax)',m:'Convamax 10×10/15×15/10×20',gc:'F76781/F76782/F76783',p:'1,69€-3,19€',i:'Multicapa celulosa + poliacrilato. Alta absorción y retención. Sin adhesivo. Hasta 7 días.'}
+  ],
+  int:[
+    {id:'urgofit',n:'Malla Lípido Coloide (Urgofit)',m:'Urgofit 10×12 10U',gc:'E64983',p:'',i:'Malla adaptable, humectante, no adherente. Ideal en granulación. 7-14 días.'},
+    {id:'mepitel',n:'Malla Silicona Atraumática (Mepitel)',m:'Mepitel 10×18 3U',gc:'E64940',p:'3,30€',i:'Silicona atraumática como capa de contacto. Permite cambio sin trauma perilesional.'}
+  ],
+  esp:[
+    {id:'biat_sil',n:'Espuma Silicona con Bordes (Biatain Silicona)',m:'Biatain Silicona 7,5×7,5/10×10/12,5×12,5',gc:'E85770/E85769/E85758',p:'2,03€-2,72€',i:'Heridas profundas (hasta 2cm), piel frágil, exudado moderado/alto. Adhesivo de silicona. 3-7 días.'},
+    {id:'biat_sac',n:'Espuma Sacra (Biatain Sacro)',m:'Biatain Sacro 25×25',gc:'F22509',p:'2,00€',i:'Espuma zona sacra. Exudado moderado. Hasta 7 días.'},
+    {id:'allev_sac',n:'Espuma Sacra con Bordes (Allevyn Sacro)',m:'Allevyn Sacro 17×17/13,5×13,5',gc:'E64943/F98098',p:'3,52€-4,49€',i:'Exudado moderado/alto. Granulación. Prevención de úlceras por presión en sacro.'},
+    {id:'allev_oval',n:'Espuma Oval Gentle (Allevyn Oval Gentle)',m:'Allevyn Oval Gentle 8,6×7,7',gc:'F89398',p:'1,65€',i:'Exudado escaso. Adhesivo de silicona.'},
+    {id:'allev_adh',n:'Espuma Trilaminar Adhesiva (Allevyn Adhesivo)',m:'Allevyn Adhesivo 17,5×17,5',gc:'E67828',p:'3,05€-5,50€',i:'Exudado moderado/alto. Trilaminar microperforado adhesivo. 3-7 días.'},
+    {id:'mep_lite',n:'Espuma Silicona DERMATOPOROSIS (Mepitel Lite/UP)',m:'Mepitel Lite 15×15 / Mepitel UP 20×20',gc:'E64488/F17959',p:'7,09€/12,65€',i:'Exudado bajo. Dermatoporosis y radiodermitis. No mezclar con cremas, enzimáticos ni hidrogeles.'},
+    {id:'allev_heel',n:'Talonera No Adhesiva (Allevyn Heel)',m:'Allevyn Heel 10,5×13,5',gc:'E67980',p:'3,62€',i:'Prevención presión/cizalla en talón. Exudado medio/bajo.'}
+  ],
+  hid:[
+    {id:'comfeel',n:'Hidrocoloide Transparente (Comfeel Plus Transparent)',m:'Comfeel 10×10/15×15',gc:'E65251/E65056',p:'0,33€/0,63€',i:'Ambiente húmedo. Etapas finales de cicatrización o necrosis seca (apósito secundario). 3-7 días.'},
+    {id:'varihes_hc',n:'Hidrocoloide + Espuma (Varihesive)',m:'Varihesive HC 10×10',gc:'E70730',p:'0,44€',i:'Hidrocoloide interno + espuma poliuretano exterior. Retiene humedad. 3-7 días.'}
+  ],
+  bar:[
+    {id:'amniolina',n:'Pomada Óxido de Zinc (Amniolina)',m:'Amniolina 50g',gc:'FARMACIA',p:'2,20€',i:'Protege bordes y piel perilesional frente al exudado y la humedad.'},
+    {id:'cutimed_ae',n:'Líquido Barrera (Cutimed Aerosol)',m:'Cutimed Aerosol 50ml',gc:'D66658',p:'5,26€',i:'Protege piel perilesional frente al exudado, la incontinencia y la fricción.'},
+    {id:'mepentol',n:'AGHO Mepentol',m:'Mepentol 100ml',gc:'D48280',p:'',i:'Prevención y protección de úlceras por presión cat. I/II. Ácidos grasos hiperoxigenados.'},
+    {id:'lexema',n:'Pomada Metilprednisolona (Lexema)',m:'Lexema 60g',gc:'FARMACIA',p:'',i:'Corticosteroide tópico. Reduce inflamación en dermatitis perilesional.'}
+  ],
+  pol:[
+    {id:'opsite',n:'Film Transparente Adhesivo (Opsite)',m:'Opsite 5×7/10×12,5',gc:'E64751/E64750',p:'0,09€',i:'Película impermeable transparente. Apósito secundario oclusivo. Permite monitorizar.'},
+    {id:'fixomull',n:'Film Poliuretano Fijación (Fixomull Transparent)',m:'Fixomull Transparent 10cm',gc:'E34292',p:'',i:'Film poliuretano para fijación de apósito secundario.'}
+  ]
+};
+
+/* ===== SELECTED ===== */
+const SPRODS={lim:null,des:null,pri:null,sec:null,bar:null,fij:null};
+
+/* ===== TABS ===== */
+function showTab(n){
+  document.querySelectorAll('.tp').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-'+n).classList.add('active');
+  const m={ev:0,mj:1,in:2,fo:3};
+  document.querySelectorAll('.tab-btn')[m[n]]?.classList.add('active');
+  if(n==='in')buildRep();
+}
+
+/* ===== STATE UPDATE ===== */
+function upSt(){
+  const g=id=>document.getElementById(id)?.value||'';
+  ST.p={nom:g('p-nom'),nhc:g('p-nhc'),fec:g('p-fec'),pro:g('p-pro'),ugc:g('p-ugc'),vis:g('p-vis')};
+  ST.h.loc=g('h-loc');ST.h.loce=g('h-loce');ST.h.tip=g('h-tip');ST.h.evo=g('h-evo');
+  ST.h.dep=g('h-pro');ST.h.tray=g('h-tray');ST.h.trayd=g('h-trayd');
+  ST.h.cat=g('h-cat');ST.h.obs=g('h-obs');
+}
+function calcA(){
+  const l=parseFloat(document.getElementById('h-lon')?.value)||0;
+  const a=parseFloat(document.getElementById('h-anc')?.value)||0;
+  const ar=(l*a).toFixed(1);
+  document.getElementById('calc-a').textContent=l&&a?ar+' cm²':'— cm²';
+  ST.h.lon=l;ST.h.anc=a;ST.h.area=l&&a?ar:'';
+}
+
+/* ===== TIMERS ===== */
+function goStep(n){
+  ST.curStep=n;
+  document.querySelectorAll('.t-pane').forEach((p,i)=>p.classList.toggle('active',i===n));
+  document.querySelectorAll('.tsb').forEach((b,i)=>b.classList.toggle('off',i!==n));
+}
+function nxStep(){if(ST.curStep<5)goStep(ST.curStep+1)}
+function pvStep(){if(ST.curStep>0)goStep(ST.curStep-1)}
+function selT(dim,val,el){
+  ST.T[dim]=val;
+  el.closest('.opts').querySelectorAll('.opt').forEach(c=>c.classList.remove('sel'));
+  el.classList.add('sel');
+  const idx=['T','I','M','E','R'].indexOf(dim);
+  if(idx>=0)document.getElementById('tsb'+idx)?.classList.add('done');
+}
+function upSoc(){
+  ST.T.S=[...document.querySelectorAll('.chk-opts input:checked')].map(c=>c.value);
+  document.getElementById('tsb5')?.classList.add('done');
+}
+
+/* ===== RECOMMENDATIONS ENGINE ===== */
+function pCard(type,p){
+  return`<div class="pc" onclick="sProd('${type}','${p.id}',this)">
+    <div class="pc-radio"></div>
+    <div class="pc-info">
+      <div class="pc-name">${p.n}</div>
+      <div class="pc-marca">${p.m}</div>
+      <div class="pc-desc">${p.i}</div>
+      <div class="pc-meta"><span class="gc">GC: ${p.gc}</span>${p.p?`<span class="pr">💶 ${p.p}/ud</span>`:''}</div>
+    </div>
+  </div>`;
+}
+function pSec(ttl,cls,prods,type){
+  if(!prods||!prods.length)return'';
+  return`<div class="rec-sec"><div class="rec-ttl ${cls}">${ttl}</div><div style="display:flex;flex-direction:column;gap:8px">${prods.map(p=>pCard(type,p)).join('')}</div></div>`;
+}
+
+function genRec(){
+  upSt();upSoc();
+  const {T,I,M,E,R,S}=ST.T;
+  const R2={al:[],lim:[],des:[],pri:[],sec:[],bar:[],fij:[],frec:'',not:[]};
+
+  if(I==='infeccion_sistemica')R2.al.push({t:'INFECCIÓN SISTÉMICA',m:'Derivar inmediatamente a médico. Valorar antibioterapia sistémica e ingreso. No demorar derivación.',c:'dg'});
+  if(R==='empeorando')R2.al.push({t:'HERIDA EN DETERIORO',m:'Revisar diagnóstico etiológico y tratamiento sistémico. Considerar derivación a unidad especializada.',c:'dg'});
+  if(S.includes('isquemia'))R2.al.push({t:'ISQUEMIA SIGNIFICATIVA',m:'Terapia compresiva CONTRAINDICADA (ITB<0.8). Derivar urgente a cirugía vascular.',c:'dg'});
+
+  // LIMPIEZA
+  R2.lim.push(CAT.lim[0]);
+  if(I==='sin_infeccion'||I===null)R2.lim.push(CAT.lim[1]);
+  if(I==='biofilm'||I==='infeccion_local'||I==='infeccion_sistemica')
+    R2.not.push('Prontosan: dejar actuar 15-20 min antes de aplicar apósito. Irrigar herida a presión moderada.');
+
+  // DESBRIDANTE
+  if(T==='necrosis_seca'){
+    R2.des.push(CAT.des[1]);R2.des.push(CAT.des[2]);
+    R2.not.push('Necrosis seca: desbridamiento AUTOLÍTICO con hidrogel. Cubrir con apósito oclusivo para retener la humedad y ablandar la escara.');
+  }else if(T==='esfacelos'&&I!=='infeccion_local'&&I!=='infeccion_sistemica'){
+    R2.des.push(CAT.des[0]);R2.des.push(CAT.des[3]);
+    R2.not.push('Desbridamiento ENZIMÁTICO c/48H. No combinar colagenasa con antisépticos yodados, hexamidina ni plata.');
+  }else if(T==='mixto'){
+    R2.des.push(CAT.des[0]);R2.des.push(CAT.des[1]);
+    R2.not.push('Tejido mixto: abordar primero el componente infeccioso si existe. Combinar estrategias según zona.');
+  }else if(T==='granulacion'||T==='epitelizacion'){
+    R2.des.push(CAT.des[4]);
+    R2.not.push('Tejido viable: NO desbridar. Proteger el tejido y mantener ambiente húmedo.');
+  }
+
+  // APÓSITO PRIMARIO
+  if(I==='infeccion_local'||I==='infeccion_sistemica'){
+    if(M==='alto'){R2.pri.push(CAT.ant[5]);}
+    else if(T==='esfacelos'||T==='mixto'){R2.pri.push(CAT.ant[4]);R2.pri.push(CAT.ant[2]);}
+    else{R2.pri.push(CAT.ant[2]);if(M==='moderado'||M==='alto')R2.pri.push(CAT.ant[3]);}
+    R2.frec='Diaria o cada 48-72h según respuesta clínica. Reevaluar a las 72h.';
+  }else if(I==='biofilm'){
+    R2.pri.push(CAT.ant[0]);
+    if(M==='moderado'||M==='alto')R2.pri.push(CAT.ant[1]);
+    R2.frec='Cada 2-3 días. Reevaluar en 2 semanas.';
+  }else{
+    if(T==='granulacion'){R2.pri.push(CAT.int[0]);R2.pri.push(CAT.int[1]);}
+    else if(T==='epitelizacion'){R2.pri.push(CAT.hid[0]);}
+    if(R==='estancada'){
+      if(T==='esfacelos'||T==='mixto')R2.pri.push(CAT.mod[0]);
+      else if(T==='granulacion')R2.pri.push(CAT.mod[2]);
+      else R2.pri.push(CAT.mod[1]);
+      R2.not.push('Herida ESTANCADA: moduladores de metaloproteasas (3-7 días). Revisar factores sistémicos. Derivar si no mejora en 4-6 semanas.');
+      if(!R2.frec)R2.frec='Cada 3-7 días (modulador de metaloproteasas).';
+    }
+  }
+
+  // APÓSITO SECUNDARIO (según M)
+  if(M==='seco'){
+    R2.sec.push(CAT.hid[0]);R2.sec.push(CAT.pol[0]);
+    R2.not.push('Herida SECA: apósito oclusivo para retener humedad. Valorar si hay necrosis subyacente.');
+  }else if(M==='escaso'){
+    R2.sec.push(CAT.esp[3]);R2.sec.push(CAT.hid[0]);
+    if(!R2.frec)R2.frec='Cada 5-7 días.';
+  }else if(M==='moderado'){
+    R2.sec.push(CAT.esp[0]);R2.sec.push(CAT.esp[4]);
+    if(!R2.frec)R2.frec='Cada 3-5 días o según saturación.';
+  }else if(M==='alto'){
+    R2.sec.push(CAT.abs[4]);R2.sec.push(CAT.esp[4]);
+    if(I==='sin_infeccion')R2.sec.push(CAT.abs[0]);
+    R2.not.push('Exudado ABUNDANTE: vigilar maceración. Aplicar barrera cutánea perilesional antes del apósito.');
+    if(!R2.frec)R2.frec='Cada 2-3 días o antes si está saturado.';
+  }
+
+  // BARRERA
+  if(E==='maceracion'||M==='alto'){
+    R2.bar.push(CAT.bar[0]);R2.bar.push(CAT.bar[1]);
+    R2.not.push('Aplicar producto barrera en piel perilesional ANTES de colocar el apósito.');
+  }else if(E==='dermatitis'){
+    R2.bar.push(CAT.bar[3]);R2.bar.push(CAT.bar[1]);
+    R2.not.push('Dermatitis perilesional: corticoide tópico (Lexema) + barrera cutánea. Valorar causa alérgica.');
+  }
+  if(S.includes('inmovilidad')){
+    R2.bar.push(CAT.bar[2]);
+    R2.not.push('Inmovilidad: AGHO (Mepentol D48280) en prominencias óseas. Plan de cambios posturales cada 2-3h.');
+  }
+  if(E==='hiperqueratosis')R2.not.push('Hiperqueratosis en bordes: desbridamiento de bordes callosos con cureta. El tejido calloso impide la epitelización.');
+  if(S.includes('desnutricion'))R2.not.push('Desnutrición: valorar suplementación proteica e hipercalórica. Derivar a dietista.');
+  if(S.includes('diabetes'))R2.not.push('Diabetes: coordinación médica para optimizar control glucémico (HbA1c objetivo <7,5%).');
+  if(S.includes('baja_adherencia'))R2.not.push('Baja adherencia: educar paciente/cuidador. Simplificar pauta. Valorar teleasistencia de enfermería.');
+  if(S.includes('soporte_limitado'))R2.not.push('Soporte social limitado: coordinar con trabajo social. Valorar ayuda a domicilio.');
+
+  // FIJACIÓN
+  R2.fij.push(CAT.pol[1]);R2.fij.push(CAT.pol[0]);
+
+  if(!R2.frec)R2.frec='Cada 3-7 días según tipo de apósito seleccionado.';
+
+  window._RECS=R2;
+  renderRec(R2);
+}
+
+function renderRec(R){
+  const panel=document.getElementById('rec-panel');
+  panel.classList.remove('hidden');
+  const TC={T:'#E07B20',I:'#C0392B',M:'#1A4E8C',E:'#7D3C98',R:'#1A6B3C'};
+  let badges='<div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px">';
+  ['T','I','M','E','R'].forEach(k=>{
+    const v=ST.T[k];
+    if(v)badges+=`<span style="padding:4px 10px;border-radius:20px;font-size:11px;font-weight:700;background:${TC[k]}18;color:${TC[k]};border:1px solid ${TC[k]}40"><strong>${k}:</strong> ${SL[k]?.[v]||v}</span>`;
+  });
+  if(ST.T.S.length)badges+=`<span style="padding:4px 10px;border-radius:20px;font-size:11px;font-weight:700;background:#1A8C7A18;color:#1A8C7A;border:1px solid #1A8C7A40"><strong>S:</strong> ${ST.T.S.join(', ')}</span>`;
+  badges+='</div>';
+
+  let alHtml='';
+  R.al.forEach(a=>alHtml+=`<div class="abox ${a.c}" style="margin-bottom:10px"><span class="ai">⚠️</span><div><strong>${a.t}: </strong>${a.m}</div></div>`);
+
+  const frecHtml=`<div style="background:var(--gl);border-radius:var(--rsm);padding:12px 16px;margin-bottom:16px;display:flex;align-items:center;gap:10px"><span style="font-size:20px">⏱️</span><div><strong style="color:var(--gd);font-size:13px">Frecuencia de cambio recomendada:</strong><br><span style="font-size:13px">${R.frec}</span></div></div>`;
+
+  let notHtml='';
+  if(R.not.length){
+    notHtml=`<div style="border:1px solid var(--br);border-radius:var(--rsm);padding:14px"><div style="font-size:12px;font-weight:700;color:var(--tm);margin-bottom:8px;letter-spacing:.5px">📝 NOTAS CLÍNICAS</div>`;
+    R.not.forEach(n=>notHtml+=`<div style="padding:6px 0;border-bottom:1px solid var(--bg);font-size:12px;color:var(--tm);display:flex;gap:8px"><span>•</span><span>${n}</span></div>`);
+    notHtml+='</div>';
+  }
+
+  panel.innerHTML=`<div class="card"><div class="ch" style="background:linear-gradient(135deg,var(--gd),#0F4D2C);border:none"><span style="color:#fff">🎯</span><h2 style="color:#fff">Recomendaciones TIMERS — Catálogo AGSNM 2026</h2></div><div class="cb">${badges}${alHtml}${pSec('🧼 Limpieza','gr',R.lim,'lim')}${pSec('⚗️ Desbridante (si precisa)','gr',R.des,'des')}${pSec('🩹 Apósito Primario (capa de contacto)','gr',R.pri,'pri')}${pSec('🔵 Apósito Secundario (absorción / protección)','bl',R.sec,'sec')}${pSec('🛡️ Producto Barrera / Piel Perilesional','am',R.bar,'bar')}${pSec('📎 Fijación','bl',R.fij,'fij')}${frecHtml}${notHtml}</div></div>`;
+  setTimeout(()=>panel.scrollIntoView({behavior:'smooth',block:'start'}),80);
+}
+
+function sProd(type,id,el){
+  let prod=null;
+  for(const cat of Object.values(CAT)){const f=cat.find(p=>p.id===id);if(f){prod=f;break;}}
+  el.closest('[style*="flex-direction"]').querySelectorAll('.pc').forEach(c=>c.classList.remove('sel'));
+  el.classList.add('sel');
+  SPRODS[type]=prod;ST.sel[type]=prod;
+  updSel();
+}
+function updSel(){
+  const card=document.getElementById('sel-card'),sum=document.getElementById('sel-sum');
+  const any=Object.values(SPRODS).some(v=>v);
+  if(!any){card.classList.add('hidden');return;}
+  card.classList.remove('hidden');
+  const lbl={lim:'🧼 Limpieza',des:'⚗️ Desbridante',pri:'🩹 Apósito primario',sec:'🔵 Apósito secundario',bar:'🛡️ Barrera cutánea',fij:'📎 Fijación'};
+  let h='<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:10px">';
+  Object.entries(SPRODS).forEach(([k,p])=>{
+    if(!p)return;
+    h+=`<div style="border:1px solid var(--br);border-radius:var(--rsm);padding:10px 12px"><div style="font-size:11px;font-weight:700;color:var(--mu);margin-bottom:4px">${lbl[k]}</div><div style="font-size:13px;font-weight:600">${p.n}</div><span class="gc" style="margin-top:4px;display:inline-block">GC: ${p.gc}</span></div>`;
+  });
+  h+='</div>';
+  sum.innerHTML=h;
+}
+function resetMj(){
+  ST.T={T:null,I:null,M:null,E:null,R:null,S:[]};
+  Object.keys(SPRODS).forEach(k=>SPRODS[k]=null);
+  Object.keys(ST.sel).forEach(k=>ST.sel[k]=null);
+  document.getElementById('rec-panel').classList.add('hidden');
+  document.getElementById('sel-card').classList.add('hidden');
+  document.querySelectorAll('.opt').forEach(c=>c.classList.remove('sel'));
+  document.querySelectorAll('.chk-opts input').forEach(c=>c.checked=false);
+  document.querySelectorAll('.tsb').forEach(b=>b.classList.remove('done'));
+  goStep(0);
+}
+
+/* ===== REPORT ===== */
+function buildRep(){
+  upSt();
+  const p=ST.p,h=ST.h,T=ST.T,s=ST.sel;
+  const fec=p.fec?new Date(p.fec+'T00:00').toLocaleDateString('es-ES'):new Date().toLocaleDateString('es-ES');
+  const prx=document.getElementById('prox-rev')?.value;
+  const frec=document.getElementById('frec-cam')?.value||(window._RECS?.frec||'Según protocolo');
+  const obs=document.getElementById('obs-inf')?.value||'';
+  const rl='─'.repeat(55),rl2='═'.repeat(55);
+  const sn=o=>o?o.n+' [GC:'+o.gc+']':'—';
+  const sv=(k)=>SL[k]?.[T[k]]||(T[k]||'No valorado');
+  const txt=
+`${rl2}
+  INFORME DE CURA DE HERIDA
+  ÁREA SANITARIA NORTE DE MÁLAGA (AGSNM)
+  Comisión Heridas 2025-2026
+${rl2}
+
+DATOS DEL PACIENTE
+${rl}
+Nombre:             ${p.nom||'No especificado'}
+NHC / NUHSA:        ${p.nhc||'No especificado'}
+Fecha de cura:      ${fec}
+Nº Visita / Cura:   ${p.vis||'No especificado'}
+Profesional:        ${p.pro||'No especificado'}
+Centro / UGC:       ${p.ugc||'No especificado'}
+
+DESCRIPCIÓN DE LA HERIDA
+${rl}
+Localización:       ${h.loc||'No especificada'}${h.loce?' – '+h.loce:''}
+Tipo de herida:     ${h.tip||'No especificado'}
+Tiempo evolución:   ${h.evo||'No especificado'}${h.cat?'\nCategoría/Estadio:  '+h.cat:''}
+
+MEDIDAS
+${rl}
+Longitud:           ${h.lon?h.lon+' cm':'—'}
+Anchura:            ${h.anc?h.anc+' cm':'—'}
+Profundidad:        ${h.dep?h.dep+' cm':'—'}
+Área (L×A):         ${h.area?h.area+' cm²':'—'}${h.tray==='si'?'\nTrayectos:          Sí – '+(h.trayd||'No descritos'):''}
+${h.obs?'\nDESCRIPCIÓN CLÍNICA\n'+rl+'\n'+h.obs+'\n':''}
+VALORACIÓN TIMERS
+${rl}
+T - Tejido:         ${sv('T')}
+I - Infección:      ${sv('I')}
+M - Humedad:        ${sv('M')}
+E - Bordes:         ${sv('E')}
+R - Reparación:     ${sv('R')}
+S - Social:         ${T.S?.length?T.S.join(', '):'Sin factores identificados'}
+
+MANEJO LOCAL APLICADO
+${rl}
+Limpieza:           ${sn(s.lim)}
+Desbridante:        ${sn(s.des)}
+Apóst. primario:    ${sn(s.pri)}
+Apóst. secundario:  ${sn(s.sec)}
+Barrera cutánea:    ${sn(s.bar)}
+Fijación:           ${sn(s.fij)}
+
+PAUTAS
+${rl}
+Frecuencia:         ${frec}
+Próxima revisión:   ${prx?new Date(prx+'T00:00').toLocaleDateString('es-ES'):'Según protocolo'}
+${obs?'\nOBSERVACIONES / PLAN DE CUIDADOS\n'+rl+'\n'+obs+'\n':''}
+${rl2}
+Generado: ${new Date().toLocaleString('es-ES')}
+App Manejo de Heridas AGSNM 2026 · Comisión Heridas
+${rl2}`;
+  document.getElementById('rep-out').textContent=txt;
+  window._REP=txt;
+}
+
+async function copyRep(){
+  if(!window._REP)buildRep();
+  try{await navigator.clipboard.writeText(window._REP);}
+  catch{
+    const el=document.getElementById('rep-out');
+    const r=document.createRange();r.selectNode(el);
+    window.getSelection().removeAllRanges();window.getSelection().addRange(r);
+    document.execCommand('copy');window.getSelection().removeAllRanges();
+  }
+  const ok=document.getElementById('copy-ok');
+  ok.classList.remove('hidden');setTimeout(()=>ok.classList.add('hidden'),3000);
+}
+function printRep(){
+  if(!window._REP)buildRep();
+  const w=window.open('','_blank');
+  w.document.write(`<!DOCTYPE html><html><head><title>Informe Cura AGSNM</title><style>body{font-family:'Courier New',monospace;font-size:12px;padding:30px}pre{white-space:pre-wrap}@media print{body{padding:10px}}</style></head><body><pre>${window._REP}</pre><script>window.onload=function(){window.print();window.close()}<\/script></body></html>`);
+  w.document.close();
+}
+
+/* ===== QUIZ ===== */
+const QUIZ=[
+  {q:'¿Cuál es la solución de limpieza de primera elección para heridas con sospecha de biofilm según el catálogo AGSNM 2026?',o:['Suero Fisiológico SF Braun (D61235)','Prontosan Solución (B41691) — polihexanida y undecilglicol','Povidona yodada (Curadona 500ml)','Clorhexidina acuosa (Vesismin Health)'],c:1,e:'Prontosan Solución (B41691) contiene polihexanida y undecilglicol, siendo la primera elección ante biofilm o infección. El suero fisiológico se reserva para heridas sin complicación infecciosa.'},
+  {q:'¿Qué significa la letra "T" en la escala TIMERS?',o:['Temperatura perilesional de la herida','Tipo de tejido en el lecho de la herida','Tiempo de evolución de la herida','Técnica de desbridamiento elegida'],c:1,e:'La T en TIMERS corresponde a Tissue (Tejido): evalúa el tejido predominante en el lecho (necrosis seca, esfacelos, granulación, epitelización). Es el primer determinante del plan de desbridamiento.'},
+  {q:'El RYM Colagenasa (Ácido hialuronato + colagenasa, F34403) está indicado principalmente para:',o:['Desbridamiento autolítico de necrosis seca (escara negra)','Desbridamiento enzimático de esfacelos (necrosis húmeda), cambio c/48H','Control de la infección bacteriana activa local','Protección de la piel perilesional frente al exudado'],c:1,e:'RYM Colagenasa realiza desbridamiento enzimático de tejido necrótico húmedo (esfacelos). Se cambia c/48H. No combinar con yodados ni hexamidina, ya que inactivan la enzima.'},
+  {q:'¿Cuál de los siguientes apósitos NO debe combinarse con hidrogeles ni pomadas enzimáticas?',o:['Varihesive Hidrogel (E64932)','Aquacel Extra / Biatain Fiber — Hidrofibra (E64651)','Comfeel Plus Transparent — Hidrocoloide (E65251)','Urgofit — Lípido coloide (E64983)'],c:1,e:'Las hidrofibras (Aquacel Extra, Biatain Fiber) NO deben combinarse con hidrogeles ni colagenasa: el exceso de humedad altera su estructura de fibra y reduce la absorción. Tampoco en heridas secas.'},
+  {q:'Para una herida cronificada (sin progresión en 4 semanas), sin infección activa, con tejido de granulación en fase inflamatoria: ¿qué apósito es el más indicado?',o:['Apósito superabsorbente (Convamax F76781)','Apósito modulador de metaloproteasas malla (Urgostar Contact E69682)','Plata nanocristalina (Acticoat Flex E65162)','Hidrogel (Varihesive E64932)'],c:1,e:'Urgostar Contact (E69682) activa la epitelización en heridas cronificadas estancadas en fase inflamatoria, controlando las metaloproteinasas que impiden la cicatrización. Cambio cada 3-7 días.'},
+  {q:'¿Cuántos días como máximo puede mantenerse el apósito de plata nanocristalina Acticoat Flex?',o:['1 día','3 días','7 días','14 días'],c:1,e:'Acticoat Flex puede mantenerse hasta 3 días gracias a la liberación sostenida de plata nanocristalina, que mantiene su acción antimicrobiana de forma continua durante este período.'},
+  {q:'¿En qué situación clínica están indicados Mepitel Lite y Mepitel UP (E64488/F17959)?',o:['Heridas con exudado abundante e infección activa','Dermatoporosis y radiodermitis con exudado bajo','Úlceras necróticas que requieren desbridamiento enzimático','Heridas cavitadas profundas con alto exudado'],c:1,e:'Mepitel Lite/UP son apósitos de silicona indicados para dermatoporosis (piel frágil del anciano) y radiodermitis, con exudado bajo. No mezclar con cremas, enzimáticos ni hidrogeles.'},
+  {q:'¿Qué producto barrera protege la piel perilesional frente al exudado, la incontinencia y la fricción simultáneamente?',o:['Amniolina — pomada óxido de zinc (FARMACIA)','Cutimed Aerosol (D66658) — líquido barrera cutáneo','Mepentol AGHO (D48280)','Lexema — pomada de metilprednisolona (FARMACIA)'],c:1,e:'Cutimed Aerosol (D66658) protege la piel perilesional frente al exudado, la incontinencia Y la fricción. Amniolina protege frente a humedad/exudado pero no está específicamente indicada para incontinencia y fricción.'},
+  {q:'Un paciente con úlcera venosa presenta un ITB de 0,55. ¿Cuál es la actitud correcta respecto a la terapia compresiva?',o:['Aplicar vendaje compresivo de alta compresión (40 mmHg) sin restricciones','La compresión está contraindicada; derivar urgente a valoración vascular','Compresión ligera (20 mmHg) es segura sin valoración adicional','El ITB no influye en la decisión de terapia compresiva'],c:1,e:'Un ITB <0,6 indica enfermedad arterial periférica significativa: terapia compresiva CONTRAINDICADA por riesgo de isquemia. Derivar a cirugía vascular. Con ITB 0,6-0,8 puede valorarse compresión reducida bajo supervisión.'},
+  {q:'¿Qué apósito actúa captando bacterias por hidrofobicidad SIN liberar antisépticos al lecho de la herida?',o:['Iodosorb lámina — cadexomero yodado (D66569)','Urgotul Ag — malla de plata (F72959)','Cutimed Sorbact DACC (E82044 / E82104)','Actisorb +25 — plata con carbón activado (F98662)'],c:2,e:'Cutimed Sorbact DACC actúa por hidrofobicidad: las bacterias se adhieren irreversiblemente a su superficie al retirar el apósito, sin liberar ningún agente antimicrobiano al lecho. Evita resistencias y es muy bien tolerado.'},
+  {q:'¿Cuál es la indicación principal de los apósitos Urgostar Plus Border, PAD y Contact?',o:['Heridas agudas con alto exudado e infección activa confirmada','Heridas cronificadas/estancadas en fase inflamatoria sin infección activa','Quemaduras superficiales de segundo grado','Heridas quirúrgicas de cierre primario reciente'],c:1,e:'Los Urgostar (E83759, F99377, E69682) están indicados en heridas cronificadas en fase inflamatoria estancada. Reducen el exceso de metaloproteinasas que impiden la cicatrización. NO con infección activa. Cambio 3-7 días.'},
+  {q:'¿Para qué está indicado el formato CINTA de Aquacel Ag Extra (E64846, 2×45 cm)?',o:['Heridas superficiales con escaso exudado','Heridas cavitadas o con trayectos (para rellenar cavidades)','Protección de la piel perilesional íntegra','Desbridamiento enzimático de esfacelos'],c:1,e:'El formato cinta (E64846, 2×45 cm) está diseñado para rellenar heridas cavitadas o con trayectos. Su formato estrecho permite introducirlo en cavidades manteniendo el control bacteriano (plata) y la alta absorción.'},
+  {q:'¿Qué significa la letra "M" en la escala TIMERS?',o:['Microbiología — resultado del cultivo del exudado','Humedad (Moisture) — nivel de exudado y gestión de humedad del lecho','Medicación sistémica que toma el paciente','Movilidad del paciente como factor de riesgo'],c:1,e:'La M en TIMERS corresponde a Moisture (Humedad): evalúa el nivel de exudado (seco, escaso, moderado, abundante) y la gestión del equilibrio de humedad del lecho. Determina el apósito secundario.'},
+  {q:'¿Cuál de estas afirmaciones sobre el Biatain Alginato Ag (E65326) es CORRECTA?',o:['No debe usarse en heridas con exudado abundante','Es un alginato cálcico altamente absorbente con plata, válido hasta 7 días y cortable','Está contraindicado en heridas con signos de infección','Debe combinarse con hidrogeles para activar la plata'],c:1,e:'Biatain Alginato Ag (E65326) es un alginato cálcico con plata (antimicrobiano), altamente absorbente, que puede mantenerse hasta 7 días y cortarse. Indicado en heridas con exudado moderado-alto, especialmente con infección.'},
+  {q:'¿Cuál es el objetivo principal de la escala TIMERS en el manejo de heridas crónicas?',o:['Calcular el tiempo estimado de cicatrización de la herida','Proporcionar un marco estructurado que identifica las barreras a la cicatrización y guía el tratamiento local','Clasificar la gravedad de la herida para decidir el ingreso hospitalario','Determinar qué tipo de desbridamiento quirúrgico es necesario'],c:1,e:'TIMERS (Tissue, Infection, Moisture, Edge, Repair, Social) identifica las barreras específicas a la cicatrización en cada herida, orientando las decisiones terapéuticas a cada problema concreto. No es una escala de gravedad ni de tiempo.'}
+];
+
+let QS={cur:0,score:0,ans:[],answered:false};
+
+function startQ(){
+  QS={cur:0,score:0,ans:[],answered:false};
+  document.getElementById('q-start').classList.add('hidden');
+  document.getElementById('q-res').classList.add('hidden');
+  document.getElementById('q-main').classList.remove('hidden');
+  renderQ();
+}
+function renderQ(){
+  QS.answered=false;
+  const q=QUIZ[QS.cur],tot=QUIZ.length;
+  document.getElementById('q-bar').style.width=(QS.cur/tot*100)+'%';
+  document.getElementById('q-num').textContent=`Pregunta ${QS.cur+1} de ${tot}`;
+  document.getElementById('q-hdr').textContent=`${QS.cur+1}/${tot}`;
+  document.getElementById('q-txt').textContent=q.q;
+  const L=['A','B','C','D'];
+  document.getElementById('q-opts').innerHTML=q.o.map((o,i)=>
+    `<button class="q-opt" onclick="ansQ(${i})"><span class="ql">${L[i]}</span><span>${o}</span></button>`
+  ).join('');
+  const fb=document.getElementById('q-fb');
+  fb.className='q-fb';fb.innerHTML='';
+  document.getElementById('q-nxt-w').classList.add('hidden');
+}
+function ansQ(idx){
+  if(QS.answered)return;
+  QS.answered=true;
+  const q=QUIZ[QS.cur],cor=idx===q.c;
+  if(cor)QS.score++;
+  QS.ans.push({qi:QS.cur,ua:idx,cor});
+  document.querySelectorAll('.q-opt').forEach((b,i)=>{
+    b.classList.add('dis');b.onclick=null;
+    if(i===q.c)b.classList.add('cor');
+    if(i===idx&&!cor)b.classList.add('err');
+  });
+  const fb=document.getElementById('q-fb');
+  fb.className='q-fb show '+(cor?'cor':'err');
+  fb.innerHTML=`<strong>${cor?'✅ ¡Correcto!':'❌ Incorrecto'}</strong> — ${q.e}`;
+  document.getElementById('q-nxt-w').classList.remove('hidden');
+}
+function nxtQ(){
+  QS.cur++;
+  if(QS.cur>=QUIZ.length)showRes();else renderQ();
+}
+function showRes(){
+  document.getElementById('q-main').classList.add('hidden');
+  document.getElementById('q-res').classList.remove('hidden');
+  const {score,ans}=QS,tot=QUIZ.length,pct=Math.round(score/tot*100);
+  document.getElementById('sc-num').textContent=score;
+  const cir=document.getElementById('sc-circle');
+  if(pct>=80){cir.className='sc-circle sc-ex';document.getElementById('sc-ttl').textContent='¡Excelente resultado!';document.getElementById('sc-sub').textContent=`${pct}% correcto. Demuestras un sólido conocimiento del manejo de heridas AGSNM.`;}
+  else if(pct>=60){cir.className='sc-circle sc-ok';document.getElementById('sc-ttl').textContent='Buen resultado';document.getElementById('sc-sub').textContent=`${pct}% correcto. Repasa los errores para reforzar los conceptos clave.`;}
+  else{cir.className='sc-circle sc-ng';document.getElementById('sc-ttl').textContent='Necesitas repasar';document.getElementById('sc-sub').textContent=`${pct}% correcto. Revisa el catálogo AGSNM 2026 y la escala TIMERS.`;}
+  let rv='<h3 style="font-size:14px;font-weight:700;margin-bottom:12px">Revisión detallada de respuestas</h3>';
+  ans.forEach((a,i)=>{
+    const q=QUIZ[a.qi];
+    if(a.cor){rv+=`<div class="rv-i rv-ok"><div class="rv-q">✅ Pregunta ${i+1}: ${q.q.substring(0,90)}…</div></div>`;}
+    else{rv+=`<div class="rv-i rv-ng"><div class="rv-q">❌ Pregunta ${i+1}: ${q.q}</div><div style="margin:5px 0;font-size:11px"><strong>Tu respuesta:</strong> ${q.o[a.ua]}</div><div style="margin:5px 0;font-size:11px"><strong>Respuesta correcta:</strong> ${q.o[q.c]}</div><div class="rv-x">${q.e}</div></div>`;}
+  });
+  document.getElementById('q-rev').innerHTML=rv;
+}
+function restartQ(){document.getElementById('q-res').classList.add('hidden');startQ();}
+
+/* ===== INIT ===== */
+document.addEventListener('DOMContentLoaded',()=>{
+  document.getElementById('p-fec').value=new Date().toISOString().split('T')[0];
+  upSt();buildRep();
+});
+</script>
+
+<!-- Barra común del Portal SUH Antequera -->
+<style>
+  .suhdock{position:fixed;left:14px;bottom:14px;z-index:2147483000;display:flex;align-items:center;gap:4px;padding:5px;border-radius:999px;background:#0c2a4a;box-shadow:0 10px 30px -8px rgba(12,42,74,.55);font:600 13px/1 'Plus Jakarta Sans',system-ui,-apple-system,'Segoe UI',sans-serif;transition:opacity .2s}
+  .suhdock a{display:inline-flex;align-items:center;justify-content:center;gap:7px;height:34px;min-width:34px;padding:0 9px;border-radius:999px;color:#fff;text-decoration:none}
+  .suhdock a:hover{background:rgba(255,255,255,.14)}
+  .suhdock a.suhdock-home{background:#fff;color:#0c2a4a;padding:0 12px 0 4px}
+  .suhdock a.suhdock-home img{width:26px;height:26px;border-radius:50%;object-fit:contain;background:#fff}
+  .suhdock svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  .suhdock .suhdock-x{opacity:.6;min-width:26px;padding:0}
+  .suhdock.suhdock-min a:not(.suhdock-home){display:none}
+  .suhdock.suhdock-min a.suhdock-home span{display:none}
+  .suhdock.suhdock-min a.suhdock-home{padding:0 4px}
+  @media print{.suhdock{display:none!important}}
+</style>
+<nav class="suhdock" aria-label="Portal SUH Antequera">
+  <a class="suhdock-home" href="../index.html#herramientas" title="Volver al Portal de Supervisión SUH Antequera"><img src="../img/logo-suh.jpg" alt=""><span>Portal SUH</span></a>
+  <a href="https://www.instagram.com/suh_antequera_/" target="_blank" rel="noopener" title="Instagram @suh_antequera_"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><path d="M17.5 6.5h.01"/></svg></a>
+  <a href="https://www.facebook.com/p/Suh-Antequera-61568582212569/" target="_blank" rel="noopener" title="Facebook SUH Antequera"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+  <a href="https://x.com/saludnortemalag" target="_blank" rel="noopener" title="X @saludnortemalag" style="font-size:15px">𝕏</a>
+  <a class="suhdock-x" href="#" title="Minimizar barra" onclick="this.parentNode.classList.toggle('suhdock-min');return false;"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></a>
+</nav>
+</body>
+</html>

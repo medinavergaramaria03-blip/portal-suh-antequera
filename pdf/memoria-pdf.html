@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta name="robots" content="noindex, nofollow">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Memoria de Supervisión de Enfermería 2026 · Urgencias Antequera</title>
+  <!-- Tipografías incluidas en local para que el PDF se genere igual sin conexión -->
+  <link href="../assets/fonts/fonts-embebidas.css" rel="stylesheet">
+  <style>
+    :root { --suh: #1e5b9c; --suh-700: #164879; --suh-900: #0c2a4a; --suh-950: #061527; --suh-400: #4f8fd1; --suh-200: #a9cdf3; --suh-100: #e7f0fa; --suh-50: #f3f8fd;
+      --junta: #007a33; --junta-50: #e8f5ed; --snm: #e07b24; --snm-50: #fdf1e6; --red: #c62828; --red-50: #fdecec; --gold: #c99a2e;
+      --ink: #0f1d2e; --ink-2: #33475b; --ink-3: #5c6f82; --line: #dce5ee; }
+    @page { size: A4; margin: 0; }
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    body { font-family: 'Plus Jakarta Sans', system-ui, sans-serif; color: var(--ink); background: #8a97a6; font-size: 9.6pt; line-height: 1.5; }
+    .serif { font-family: 'Fraunces', Georgia, serif; font-weight: 800; letter-spacing: -.015em; }
+    svg.i { width: 1.1em; height: 1.1em; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
+    img { display: block; max-width: 100%; }
+
+    .page { width: 210mm; height: 297mm; margin: 10mm auto; background: #fff; position: relative; overflow: hidden; padding: 24mm 17mm 20mm; display: flex; flex-direction: column; box-shadow: 0 10px 40px rgba(0,0,0,.25); }
+    @media print { body { background: #fff; } .page { margin: 0; box-shadow: none; page-break-after: always; break-after: page; } }
+
+    /* Cabecera y pie */
+    .ph { position: absolute; top: 8mm; left: 17mm; right: 17mm; display: flex; justify-content: space-between; align-items: center; padding-bottom: 3mm; border-bottom: 1px solid var(--line); }
+    .ph .lg { display: flex; align-items: center; gap: 3mm; }
+    .ph .lg img { object-fit: contain; }
+    .ph span { font-size: 7.5pt; color: var(--ink-3); font-weight: 600; letter-spacing: .02em; }
+    .pf { position: absolute; bottom: 8mm; left: 17mm; right: 17mm; display: flex; justify-content: space-between; font-size: 7.5pt; color: var(--ink-3); border-top: 1px solid var(--line); padding-top: 2.5mm; }
+    .pf b { color: var(--suh); }
+
+    /* Títulos */
+    .kick { font-size: 8pt; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; color: var(--suh); display: flex; align-items: center; gap: 3mm; }
+    .kick::before { content: ""; width: 10mm; height: 2px; background: var(--suh); }
+    h1.t { font-size: 25pt; line-height: 1.08; margin: 2.5mm 0 4mm; }
+    h1.t em { font-style: italic; color: var(--suh); }
+    h2.s { font-size: 12pt; font-weight: 800; margin: 5mm 0 2mm; color: var(--suh-900); display: flex; align-items: center; gap: 2mm; }
+    h2.s svg { color: var(--suh); }
+    p { color: var(--ink-2); margin-bottom: 2.4mm; text-align: justify; hyphens: auto; }
+    .lead { font-size: 11pt; line-height: 1.55; color: var(--ink-2); }
+    ul.l { list-style: none; display: flex; flex-direction: column; gap: 1.6mm; margin: 1mm 0 3mm; }
+    ul.l li { display: flex; gap: 2.4mm; color: var(--ink-2); }
+    ul.l li svg { color: var(--junta); margin-top: .6mm; }
+    .tag { display: inline-block; font-size: 7pt; font-weight: 800; padding: .6mm 1.8mm; border-radius: 1.4mm; background: var(--junta-50); color: var(--junta); white-space: nowrap; }
+    .box { border: 1px solid var(--line); border-radius: 3mm; padding: 4mm 4.5mm; background: #fafcfe; }
+    .g2 { display: grid; grid-template-columns: 1fr 1fr; gap: 4mm; }
+    .g3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3.5mm; }
+    .g4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 3mm; }
+    table.t { width: 100%; border-collapse: collapse; font-size: 8.2pt; }
+    table.t th { text-align: left; font-size: 6.8pt; letter-spacing: .08em; text-transform: uppercase; color: #fff; background: var(--suh-900); padding: 2mm 2.4mm; }
+    table.t th:first-child { border-top-left-radius: 2mm; } table.t th:last-child { border-top-right-radius: 2mm; }
+    table.t td { padding: 1.8mm 2.4mm; border-bottom: 1px solid var(--line); vertical-align: top; color: var(--ink-2); }
+    table.t tr:nth-child(even) td { background: #f7fafd; }
+    table.t td b { color: var(--ink); }
+    .grow { flex: 1; }
+
+    /* Portada */
+    .cover { padding: 0; color: #fff; background: var(--suh-950); }
+    .cover .bg { position: absolute; inset: 0; }
+    .cover .bg img { width: 100%; height: 100%; object-fit: cover; }
+    .cover .bg::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(6,21,39,.35) 0%, rgba(6,21,39,.55) 40%, rgba(6,21,39,.97) 78%), linear-gradient(90deg, rgba(6,21,39,.6), transparent 70%); }
+    .cover .in { position: relative; z-index: 1; height: 100%; padding: 16mm 17mm 18mm; display: flex; flex-direction: column; }
+    .cover .logos { display: inline-flex; align-items: center; gap: 5mm; background: #fff; padding: 3mm 5mm; border-radius: 3.5mm; align-self: flex-start; }
+    .cover .logos img { object-fit: contain; }
+    .cover .acsa { display: inline-flex; align-items: center; gap: 2.5mm; align-self: flex-start; padding: 1.4mm 3.5mm 1.4mm 1.4mm; border-radius: 99px; background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.3); font-size: 9pt; font-weight: 700; }
+    .cover .acsa b { background: #fff; color: var(--junta); padding: .8mm 3mm; border-radius: 99px; font-size: 8pt; letter-spacing: .06em; }
+    .cover h1 { font-size: 40pt; line-height: 1.02; margin: 6mm 0 4mm; }
+    .cover h1 em { font-style: italic; color: var(--suh-200); }
+    .cover .sub { font-size: 13pt; color: rgba(255,255,255,.85); }
+    .cover .who { display: flex; align-items: center; gap: 4mm; margin-top: 10mm; padding-top: 6mm; border-top: 1px solid rgba(255,255,255,.25); }
+    .avatar { width: 15mm; height: 15mm; border-radius: 50%; background: linear-gradient(135deg, var(--suh-400), var(--suh-900)); border: 2px solid rgba(255,255,255,.7); display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 13pt; color: #fff; flex-shrink: 0; }
+    .cover .who b { font-size: 14pt; display: block; } .cover .who span { font-size: 9.5pt; color: rgba(255,255,255,.8); }
+    .cover .trib { margin-top: 6mm; font-size: 9pt; letter-spacing: .14em; text-transform: uppercase; color: var(--suh-200); font-weight: 800; }
+
+    /* Índice */
+    .toc { display: flex; flex-direction: column; }
+    .toc div { display: grid; grid-template-columns: 12mm 1fr 10mm; align-items: baseline; padding: 2.2mm 0; border-bottom: 1px dashed var(--line); font-size: 10.5pt; }
+    .toc div span:first-child { font: 800 11pt 'Fraunces', serif; color: var(--suh); }
+    .toc div span:last-child { text-align: right; font-weight: 700; color: var(--ink-3); }
+    .ficha { display: grid; grid-template-columns: 34mm 1fr; gap: 1.6mm 4mm; font-size: 9pt; }
+    .ficha dt { color: var(--ink-3); font-weight: 700; } .ficha dd { color: var(--ink); font-weight: 600; }
+
+    /* Cifras */
+    .kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 3mm; }
+    .kpi { border-radius: 3mm; padding: 4mm; background: var(--suh-900); color: #fff; }
+    .kpi b { display: block; font: 800 22pt 'Fraunces', serif; line-height: 1; }
+    .kpi span { font-size: 7.8pt; color: rgba(255,255,255,.8); font-weight: 600; }
+    .claves { display: grid; grid-template-columns: 1fr 1fr; gap: 3mm; }
+    .clave { display: flex; gap: 3mm; padding: 3.5mm; border-radius: 3mm; border: 1px solid var(--line); border-left: 1.2mm solid var(--c, var(--suh)); }
+    .clave .ic { width: 9mm; height: 9mm; border-radius: 2.4mm; background: var(--c, var(--suh)); color: #fff; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .clave b { display: block; font-size: 9.5pt; margin-bottom: .6mm; }
+    .clave p { font-size: 8.3pt; margin: 0; text-align: left; }
+
+    /* Carta */
+    .quote { position: relative; padding: 6mm 7mm; border-radius: 4mm; background: linear-gradient(135deg, var(--suh-50), #fff); border: 1px solid var(--line); }
+    .quote p { font-size: 10pt; line-height: 1.62; }
+    .sign { display: flex; align-items: center; gap: 3mm; margin-top: 4mm; }
+    .sign b { display: block; font-size: 10.5pt; } .sign span { font-size: 8pt; color: var(--ink-3); }
+    .mvv > div { padding: 4mm; border-radius: 3mm; background: var(--suh-50); border: 1px solid var(--line); }
+    .mvv b { display: flex; gap: 2mm; align-items: center; color: var(--suh); font-size: 10pt; margin-bottom: 1.5mm; }
+    .mvv p { font-size: 8.5pt; margin: 0; text-align: left; }
+    .vals { display: flex; flex-wrap: wrap; gap: 1.5mm; }
+    .vals span { font-size: 7.6pt; font-weight: 700; padding: .8mm 2.4mm; border-radius: 99px; background: var(--suh-100); color: var(--suh); }
+
+    /* Fotos */
+    .areas { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3.5mm; }
+    .area { border-radius: 3mm; overflow: hidden; border: 1px solid var(--line); background: #fff; }
+    .area .ph2 { height: 36mm; position: relative; }
+    .area .ph2 img { width: 100%; height: 100%; object-fit: cover; }
+    .area .ph2 span { position: absolute; right: 2mm; top: 2mm; font-size: 6.8pt; font-weight: 800; background: rgba(6,21,39,.75); color: #fff; padding: .6mm 2mm; border-radius: 1.5mm; }
+    .area div.tx { padding: 2.5mm 3mm 3mm; }
+    .area b { font-size: 9pt; display: block; } .area p { font-size: 7.6pt; margin: .6mm 0 0; text-align: left; line-height: 1.4; }
+
+    /* Triaje */
+    .set { display: flex; flex-direction: column; gap: 2.2mm; }
+    .set-row { display: grid; grid-template-columns: 58mm 1fr 18mm; gap: 3mm; align-items: center; font-size: 8.6pt; }
+    .set-row b { font-weight: 800; } .set-row small { display: block; font-size: 7.2pt; color: var(--ink-3); font-weight: 600; }
+    .bar { height: 4.5mm; background: #eef3f8; border-radius: 99px; overflow: hidden; }
+    .bar i { display: block; height: 100%; border-radius: 99px; }
+    .set-row > span { text-align: right; font-weight: 800; }
+    .circs { display: flex; flex-wrap: wrap; gap: 1.6mm; }
+    .circs span { font-size: 7.8pt; font-weight: 700; padding: 1mm 2.6mm; border-radius: 1.6mm; border: 1px solid var(--line); background: #f7fafd; }
+    .tl { display: flex; align-items: center; margin: 3mm 0; }
+    .tl .pt { width: 22mm; text-align: center; font-size: 7.5pt; font-weight: 800; flex-shrink: 0; }
+    .tl .pt i { display: block; width: 4mm; height: 4mm; border-radius: 50%; background: var(--suh-900); margin: 0 auto 1mm; }
+    .tl .sg { flex: 1; height: 11mm; border-radius: 2.5mm; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #fff; margin-bottom: 4mm; }
+    .tl .sg b { font-size: 10pt; letter-spacing: .1em; } .tl .sg small { font-size: 7pt; opacity: .95; }
+
+    /* Flujo */
+    .flow { display: grid; grid-template-columns: 1fr 5mm 1fr 5mm 1fr 5mm 1fr; align-items: stretch; }
+    .flow .st { border-radius: 3mm; padding: 3.5mm; background: var(--suh-50); border: 1px solid var(--line); }
+    .flow .st.hi { background: var(--junta-50); border-color: rgba(0,122,51,.35); }
+    .flow .st b { display: block; font: 800 15pt 'Fraunces', serif; color: var(--c, var(--suh)); line-height: 1; }
+    .flow .st h4 { font-size: 9pt; margin: 1.5mm 0 1mm; } .flow .st p { font-size: 7.6pt; margin: 0; text-align: left; line-height: 1.4; }
+    .flow .ar { display: flex; align-items: center; justify-content: center; color: var(--suh-400); font-weight: 800; }
+
+    /* ACSA */
+    .seal { display: flex; gap: 6mm; align-items: center; padding: 6mm; border-radius: 4mm; color: #fff; background: linear-gradient(135deg, #04381b, var(--junta)); }
+    .medal { width: 30mm; height: 30mm; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; background: conic-gradient(#fff6c9, #e9c55a, #fff6c9, #c99a2e, #fff6c9); }
+    .medal > div { width: 24mm; height: 24mm; border-radius: 50%; background: #04381b; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+    .medal b { font-size: 7pt; letter-spacing: .2em; } .medal span { font: 800 11pt 'Fraunces', serif; color: #f5d36b; }
+    .seal h3 { font-size: 17pt; line-height: 1.1; } .seal p { color: rgba(255,255,255,.88); margin: 2mm 0 0; font-size: 9pt; }
+    .lv { display: grid; grid-template-columns: 24mm 1fr 1fr 1fr; gap: 3mm; align-items: center; padding: 2.6mm 3mm; border-radius: 2.5mm; border: 1px solid var(--line); font-size: 8pt; }
+    .lv.cur { border-color: var(--junta); background: var(--junta-50); }
+    .lv h5 { font-size: 10pt; } .lv h5 small { font-size: 6.5pt; background: var(--junta); color: #fff; padding: .4mm 1.4mm; border-radius: 1mm; margin-left: 1mm; vertical-align: 1px; }
+    .lv div span { font-size: 7pt; color: var(--ink-3); font-weight: 700; }
+    .lv i { display: block; height: 2.4mm; border-radius: 99px; background: #e9eef4; margin-top: .8mm; overflow: hidden; }
+    .lv i u { display: block; height: 100%; border-radius: 99px; text-decoration: none; }
+    .g-ob { color: var(--red); font-weight: 800; }
+
+    /* DAFO */
+    .dafo { display: grid; grid-template-columns: 1fr 1fr; gap: 3.5mm; }
+    .dq { border-radius: 3.5mm; padding: 4mm 4.5mm; border: 1px solid var(--line); border-top: 1.4mm solid var(--c); background: #fff; position: relative; overflow: hidden; }
+    .dq::after { content: attr(data-l); position: absolute; right: 3mm; top: -3mm; font: 800 34mm/1 'Fraunces', serif; color: var(--c); opacity: .07; }
+    .dq h4 { font-size: 12pt; color: var(--c); margin-bottom: 2mm; }
+    .dq ul { list-style: none; display: flex; flex-direction: column; gap: 1.8mm; position: relative; }
+    .dq li { font-size: 8pt; color: var(--ink-2); line-height: 1.42; padding-left: 3mm; position: relative; }
+    .dq li::before { content: ""; position: absolute; left: 0; top: 1.6mm; width: 1.4mm; height: 1.4mm; border-radius: 50%; background: var(--c); }
+    .dq li b { color: var(--ink); }
+    .dq li .pr { font-size: 6.4pt; font-weight: 800; background: var(--c); color: #fff; padding: .3mm 1.4mm; border-radius: 1mm; margin-left: 1mm; }
+    .came { display: grid; grid-template-columns: repeat(4, 1fr); gap: 3mm; }
+    .came > div { padding: 3.5mm; border-radius: 3mm; border: 1px solid var(--line); border-top: 1.2mm solid var(--c); }
+    .came small { font-size: 6.8pt; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--c); }
+    .came b { display: block; font-size: 9pt; margin: 1mm 0; } .came p { font-size: 7.6pt; margin: 0; text-align: left; line-height: 1.4; }
+
+    /* Plan */
+    .objs { display: grid; grid-template-columns: 1fr 1fr; gap: 3.5mm; }
+    .obj { padding: 4mm; border-radius: 3mm; border: 1px solid var(--line); background: #fafcfe; }
+    .obj.hi { background: var(--snm-50); border-color: rgba(224,123,36,.4); }
+    .obj h4 { display: flex; gap: 2.5mm; align-items: center; font-size: 10pt; margin-bottom: 2mm; }
+    .obj h4 span { width: 7mm; height: 7mm; border-radius: 2mm; background: var(--suh); color: #fff; font: 800 10pt 'Fraunces', serif; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .obj.hi h4 span { background: var(--snm); }
+    .obj ul { list-style: none; font-size: 8pt; color: var(--ink-2); display: flex; flex-direction: column; gap: 1mm; margin-bottom: 2mm; }
+    .obj li::before { content: "→ "; color: var(--suh); font-weight: 800; }
+
+    /* Capturas */
+    .shot { border-radius: 3mm; overflow: hidden; border: 1px solid var(--line); box-shadow: 0 3mm 8mm -4mm rgba(12,42,74,.35); }
+    .shot img { width: 100%; }
+    .cap { font-size: 7.4pt; color: var(--ink-3); margin-top: 1.4mm; font-weight: 600; }
+    .web-map { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2.5mm; }
+    .web-map div { padding: 3mm; border-radius: 2.5mm; background: var(--suh-50); border: 1px solid var(--line); }
+    .web-map b { display: flex; gap: 1.6mm; align-items: center; font-size: 8.6pt; color: var(--suh-900); }
+    .web-map b svg { color: var(--suh); }
+    .web-map p { font-size: 7.3pt; margin: 1mm 0 0; text-align: left; line-height: 1.38; }
+    .guion { font-size: 7.6pt; }
+    .guion td:first-child { font-weight: 800; color: var(--suh); width: 8mm; }
+    .guion td:nth-child(3) { white-space: nowrap; text-align: right; font-weight: 700; }
+
+    /* Página final */
+    .final { background: linear-gradient(160deg, var(--suh-900), var(--suh-950)); color: #fff; padding: 0; }
+    .final .in { position: relative; z-index: 1; height: 100%; padding: 18mm 17mm; display: flex; flex-direction: column; align-items: center; text-align: center; }
+    .final::before { content: ""; position: absolute; right: -40mm; top: -40mm; width: 140mm; height: 140mm; border-radius: 50%; border: 22mm solid rgba(255,255,255,.04); }
+    .final .logos { display: inline-flex; align-items: center; gap: 5mm; background: #fff; padding: 3mm 5mm; border-radius: 3.5mm; }
+    .final .logos img { object-fit: contain; }
+    .final h2 { font-size: 26pt; margin: 9mm 0 2mm; line-height: 1.1; }
+    .final h2 em { font-style: italic; color: var(--suh-200); }
+    .final .sub { font-size: 10.5pt; color: rgba(255,255,255,.82); max-width: 150mm; }
+    .qr-main { margin-top: 9mm; background: #fff; border-radius: 5mm; padding: 6mm; box-shadow: 0 6mm 20mm -6mm rgba(0,0,0,.6); }
+    .qr-main .qr svg { width: 62mm; height: 62mm; display: block; }
+    .qr-main b { display: block; color: var(--suh-900); font-size: 10.5pt; margin-top: 3mm; }
+    .qr-main code { display: block; color: var(--suh); font: 700 8.6pt ui-monospace, Consolas, monospace; margin-top: 1mm; word-break: break-all; max-width: 62mm; }
+    .qr-row { display: flex; gap: 6mm; margin-top: 8mm; justify-content: center; }
+    .qr-sm { background: #fff; border-radius: 3.5mm; padding: 3.5mm; width: 46mm; }
+    .qr-sm .qr svg { width: 39mm; height: 39mm; display: block; }
+    .qr-sm b { display: block; color: var(--suh-900); font-size: 8.6pt; margin-top: 2mm; }
+    .qr-sm span { display: block; color: var(--ink-3); font-size: 7pt; }
+    .final .foot { margin-top: auto; font-size: 8.5pt; color: rgba(255,255,255,.75); }
+    .final .foot b { color: #fff; font-size: 11pt; display: block; margin-bottom: 1mm; }
+  </style>
+</head>
+<body>
+<main id="doc"></main>
+
+<script src="../assets/icons.js"></script>
+<script src="../assets/data.js"></script>
+<script src="../assets/qrcode.min.js"></script>
+<script>
+  /* ================================================================
+     CONFIGURACIÓN DEL CÓDIGO QR
+     Cuando el portal esté publicado, escribe aquí su dirección
+     (o pásala como ?web=https://... al generar el PDF).
+     ================================================================ */
+  const WEB_URL = new URLSearchParams(location.search).get('web') || '';
+
+  const D = window.SUH, I = window.svgIcon;
+  const IMG = '../img/', CAP = 'capturas/';
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const qr = (url, ec) => { const q = qrcode(0, ec || 'M'); q.addData(url); q.make(); return q.createSvgTag({ cellSize: 4, margin: 2, scalable: true }); };
+
+  const header = () => `<div class="ph"><div class="lg"><img src="${IMG}logo-suh.jpg" style="height:9mm" alt=""><img src="${IMG}logo-snm.jpg" style="height:4.4mm" alt=""><img src="${IMG}logo-junta.jpg" style="height:8mm" alt=""></div><span>Memoria de Supervisión de Enfermería 2026 · Servicio de Urgencias · Hospital de Antequera</span></div>`;
+  const footer = () => `<div class="pf"><span>Manuel Isaías Medina Pérez · Supervisor de Enfermería</span><span>Página <b class="pn"></b></span></div>`;
+  const page = (html, cls) => `<section class="page ${cls || ''}">${cls && /cover|final/.test(cls) ? '' : header()}${html}${cls && /cover|final/.test(cls) ? '' : footer()}</section>`;
+  const head = (kick, title) => `<div class="kick">${kick}</div><h1 class="t serif">${title}</h1>`;
+  const li = arr => `<ul class="l">${arr.map(x => `<li>${I('check')}<span>${x}</span></li>`).join('')}</ul>`;
+
+  const pages = [];
+
+  /* 1 · PORTADA */
+  pages.push(page(`
+    <div class="bg"><img src="${IMG}fotos/full/entrada-urgencias-01.jpg" alt=""></div>
+    <div class="in">
+      <div class="logos"><img src="${IMG}logo-suh.jpg" style="height:17mm" alt="SUH"><img src="${IMG}logo-snm.jpg" style="height:8mm" alt="Salud Norte Málaga"><img src="${IMG}logo-junta.jpg" style="height:15mm" alt="Junta de Andalucía"></div>
+      <div class="grow"></div>
+      <span class="acsa"><b>ACSA</b> Unidad certificada · Nivel Óptimo</span>
+      <h1 class="serif">Memoria de Supervisión de Enfermería <em>2026</em></h1>
+      <p class="sub" style="color:rgba(255,255,255,.85); text-align:left;">Servicio de Urgencias · Hospital de Antequera<br>Área de Gestión Sanitaria Norte de Málaga · Servicio Andaluz de Salud</p>
+      <div class="who"><div class="avatar">MI</div><div><b>Manuel Isaías Medina Pérez</b><span>Supervisor de Enfermería del Servicio de Urgencias Hospitalarias</span></div></div>
+      <div class="trib">Documento para la presentación ante el tribunal</div>
+    </div>`, 'cover'));
+
+  /* 2 · ÍNDICE */
+  const TOC = [['01', 'Resumen ejecutivo'], ['02', 'Carta del supervisor · Misión, visión y valores'], ['03', 'La unidad y sus espacios'], ['04', 'Triaje, circuitos, TECLA y TICLA'], ['05', 'Gestión de personas y gobernanza'], ['06', 'Gestión por procesos'], ['07', 'Cuidados de enfermería y seguridad del paciente'], ['08', 'Calidad: certificación ACSA nivel Óptimo'], ['09', 'Mapa de estándares y evidencias ACSA'], ['10', 'Análisis DAFO'], ['11', 'Estrategias CAME e indicadores'], ['12', 'Plan de acción 2027'], ['13', 'Transformación digital: herramientas del servicio'], ['14', 'El portal web del proyecto'], ['15', 'Presentación ante el tribunal'], ['16', 'Acceso al proyecto · Código QR']];
+  pages.push(page(`
+    ${head('Contenido', 'Índice')}
+    <div class="toc">${TOC.map(t => `<div><span>${t[0]}</span><span>${t[1]}</span><span data-toc="${t[0]}"></span></div>`).join('')}</div>
+    <div class="grow"></div>
+    <div class="box"><h2 class="s" style="margin-top:0">${I('file')} Ficha del documento</h2>
+      <dl class="ficha">
+        <dt>Título</dt><dd>Memoria de Supervisión de Enfermería 2026</dd>
+        <dt>Unidad</dt><dd>Servicio de Urgencias Hospitalarias · Hospital de Antequera</dd>
+        <dt>Área</dt><dd>Área de Gestión Sanitaria Norte de Málaga · Servicio Andaluz de Salud</dd>
+        <dt>Autor</dt><dd>Manuel Isaías Medina Pérez, Supervisor de Enfermería</dd>
+        <dt>Destinatario</dt><dd>Tribunal de evaluación de la memoria</dd>
+        <dt>Marco de calidad</dt><dd>Manual de Estándares de Unidades de Gestión Sanitaria ME 5 1_08 (ACSA) · Certificación nivel Óptimo</dd>
+        <dt>Fecha</dt><dd>Octubre de 2026</dd>
+      </dl></div>`));
+
+  /* 3 · RESUMEN EJECUTIVO */
+  const CLAVES = [
+    ['award', '#007a33', 'Calidad acreditada', 'Certificación ACSA nivel Óptimo: 100 % del grupo I (incluidos los obligatorios) y más del 40 % del grupo II. Visita reciente de evaluadores con muy buena experiencia.'],
+    ['users', '#7b3fb4', 'Gobernanza y clima laboral', 'Tras la auditoría de prevención de riesgos laborales, reuniones de gobernanza con el equipo para decidir medidas y mejorar el clima.'],
+    ['gauge', '#1e5b9c', 'Auditorías de cuidados', 'Auditorías de dolor (ES 5 04.06_01) y del registro de continuidad de cuidados (ES 5 03.11_02 · 03.12_02).'],
+    ['clock', '#e07b24', 'Área de mejora: TECLA y TICLA', 'Reducir la espera hasta la clasificación (meta propuesta ≤ 10 min) y la duración del triaje (≤ 5 min).'],
+    ['layers', '#0b6f7a', 'Ecosistema digital propio', '20 herramientas interactivas basadas en los PNT del área: triaje, códigos, críticos, cuidados y educación.'],
+    ['heart', '#c62828', 'Humanización y ciudadanía', 'Paciente frágil con cuidador, atención en intimidad a víctimas de violencia, educación sanitaria y redes sociales.']
+  ];
+  pages.push(page(`
+    ${head('01 · Resumen ejecutivo', 'El proyecto <em>en una página</em>')}
+    <p class="lead">El Servicio de Urgencias del Hospital de Antequera combina una calidad acreditada por la Agencia de Calidad Sanitaria de Andalucía con un modelo de supervisión centrado en las personas, los procesos y la seguridad. Esta memoria resume el trabajo de 2026, el análisis estratégico y el plan para 2027, y se acompaña de un portal web con la presentación del proyecto y todas las herramientas del servicio.</p>
+    <div class="kpis" style="margin:5mm 0;">
+      <div class="kpi"><b>Óptimo</b><span>Nivel de certificación ACSA</span></div>
+      <div class="kpi"><b>20</b><span>Herramientas digitales propias</span></div>
+      <div class="kpi"><b>12</b><span>Procesos con PNT digitalizado</span></div>
+      <div class="kpi"><b>9</b><span>Áreas asistenciales documentadas</span></div>
+    </div>
+    <div class="claves">${CLAVES.map(c => `<div class="clave" style="--c:${c[1]}"><div class="ic">${I(c[0])}</div><div><b>${c[2]}</b><p>${c[3]}</p></div></div>`).join('')}</div>
+    <div class="grow"></div>
+    <div class="box" style="display:flex; gap:4mm; align-items:center;"><div style="color:var(--suh); font-size:14pt;">${I('compass')}</div><p style="margin:0; text-align:left;"><b>Hilo conductor:</b> «Cuidar a quien llega, cuidar a quien cuida». La calidad asistencial y el bienestar de los profesionales se refuerzan mutuamente.</p></div>`));
+
+  /* 4 · CARTA + MVV */
+  pages.push(page(`
+    ${head('02 · Carta del supervisor', 'Cuidar a quien llega, <em>cuidar a quien cuida</em>')}
+    <div class="quote">
+      <p>Esta memoria recoge el trabajo del equipo de enfermería del Servicio de Urgencias del Hospital de Antequera durante 2026: un año marcado por la consolidación de la <b>certificación de la Agencia de Calidad Sanitaria de Andalucía en nivel Óptimo</b> y por una visita de evaluación vivida por el equipo como una experiencia muy positiva.</p>
+      <p>Nuestro reto diario es doble: atender con rapidez y seguridad a quien llega en el peor momento, y cuidar a los profesionales que hacen posible esa atención. Por eso, tras la auditoría de prevención de riesgos laborales, hemos convertido las <b>reuniones de gobernanza</b> en un espacio estable para escuchar, decidir juntos y mejorar el clima laboral.</p>
+      <p>Hemos medido lo que importa —el dolor de nuestros pacientes y la calidad del registro de continuidad de cuidados— y hemos digitalizado nuestros protocolos en herramientas que el equipo usa a pie de cama. También sabemos dónde tenemos que mejorar: reducir la <b>TECLA</b> (lo que espera el paciente hasta que lo clasifican) y la <b>TICLA</b> (lo que dura la clasificación) será nuestra prioridad para 2027.</p>
+      <p style="margin:0;">Gracias a cada enfermera, enfermero, TCAE, celador, médico y personal de apoyo del servicio. Esta memoria es vuestra.</p>
+      <div class="sign"><div class="avatar">MI</div><div><b>Manuel Isaías Medina Pérez</b><span>Supervisor de Enfermería · Servicio de Urgencias · Hospital de Antequera</span></div></div>
+    </div>
+    <h2 class="s">${I('target')} Misión, visión y valores</h2>
+    <div class="g3 mvv">
+      <div><b>${I('target')} Misión</b><p>Prestar atención urgente de calidad, segura y humana a la población del Área Sanitaria Norte de Málaga, priorizando según la gravedad y garantizando la continuidad de cuidados al alta.</p></div>
+      <div><b>${I('compass')} Visión</b><p>Ser un servicio de urgencias de referencia por su excelencia en cuidados, su cultura de seguridad, su innovación digital y el bienestar de sus profesionales.</p></div>
+      <div><b>${I('heart')} Valores</b><div class="vals"><span>Seguridad</span><span>Humanización</span><span>Trabajo en equipo</span><span>Evidencia</span><span>Transparencia</span><span>Innovación</span><span>Respeto</span></div></div>
+    </div>`));
+
+  /* 5 · ESPACIOS */
+  const pick = { 'entrada-urgencias': 1, 'triaje': 1, 'sala-de-espera': 4, 'consultas-de-enfermeria': 3, 'consultas-medicas': 4, 'sala-de-tratamiento': 1, 'pasillo-criticos': 5, 'criticos': 11, 'observacion-grave': 4 };
+  pages.push(page(`
+    ${head('03 · La unidad', 'Nueve áreas, <em>un mismo equipo</em>')}
+    <p>El Servicio de Urgencias se organiza en áreas funcionales diferenciadas que permiten aplicar los circuitos del PNT de triaje. Las 72 fotografías del portal documentan el estado actual de las instalaciones; aquí se muestra una imagen representativa de cada área.</p>
+    <div class="areas">${D.AREAS.map(a => `<div class="area"><div class="ph2"><img src="${IMG}fotos/thumb/${a.slug}-${String(pick[a.slug]).padStart(2, '0')}.jpg" alt=""><span>${a.n} fotos</span></div><div class="tx"><b>${a.nombre}</b><p>${a.texto}</p></div></div>`).join('')}</div>`));
+
+  /* 6 · TRIAJE */
+  pages.push(page(`
+    ${head('04 · Triaje y circuitos', 'La gravedad <em>marca el orden</em>')}
+    <p>Enfermería de triaje clasifica a cada paciente con el <b>Sistema Español de Triaje (SET)</b> de cinco niveles y el programa web_e-PAT, según el PNT de triaje (versión 6, junio de 2026). Las barras representan el tiempo máximo de atención de cada prioridad.</p>
+    <div class="set">${D.SET.map(s => `<div class="set-row"><b style="color:${s.color}">${s.nombre}<small>${s.txt}</small></b><div class="bar"><i style="width:${Math.max(3, s.min / 240 * 100)}%; background:${s.color}"></i></div><span style="color:${s.color}">${s.min === 0 ? 'Inmediata' : s.min + ' min'}</span></div>`).join('')}</div>
+    <h2 class="s">${I('layers')} Seis circuitos asistenciales excluyentes</h2>
+    <div class="circs">${D.CIRCUITOS.map(c => `<span>${c}</span>`).join('')}</div>
+    <p style="margin-top:2.5mm;">Las patologías tiempo-dependientes —dolor torácico, ictus, trauma grave y sepsis— se tratan como prioridad 1 con su propio código.</p>
+    <h2 class="s">${I('clock')} Área de mejora prioritaria: TECLA y TICLA</h2>
+    <div class="tl">
+      <div class="pt"><i></i>Llegada</div>
+      <div class="sg" style="background:linear-gradient(90deg,#c46a1f,#e07b24)"><b>TECLA</b><small>espera hasta la clasificación · meta ≤ 10 min</small></div>
+      <div class="pt"><i></i>Inicio del triaje</div>
+      <div class="sg" style="background:linear-gradient(90deg,#164879,#4f8fd1)"><b>TICLA</b><small>duración del triaje · meta ≤ 5 min</small></div>
+      <div class="pt"><i style="background:var(--junta)"></i>Prioridad asignada</div>
+    </div>
+    <p>El PNT ya prevé una segunda consulta de triaje en las horas de máxima afluencia para acortar ambos tiempos. Las metas son propuestas de la supervisión basadas en las referencias habituales del SET.</p>
+    <h2 class="s">${I('shield')} Fragilidad y violencia, detectadas en triaje</h2>
+    ${li(['<b>Paciente frágil:</b> EPADI de 6 o más, seguimiento por Cuidados Paliativos o tarjeta +Cuidado. Se anota «PF» y la puntuación, pegatina amarilla, cuidador acompañante y profesionales responsables asignados.', '<b>Dependencia en Diraya-Urgencias:</b> el nombre se sombrea en blanco, verde, amarillo o rojo según dependencia y acompañamiento.', '<b>Sospecha de violencia de género:</b> Protocolo Andaluz, atención a solas en la consulta 12, prioridad entre 1 y 3 y registro CMT / ISMT.'])}`));
+
+  /* 7 · PERSONAS */
+  pages.push(page(`
+    ${head('05 · Gestión de personas', 'Nadie empieza solo, <em>todos aprendemos</em>')}
+    <div class="g2">
+      <div class="box"><h2 class="s" style="margin-top:0">${I('users')} Acogida y funciones</h2><p style="margin:0">Cada incorporación recibe el <b>Plan de Acogida PG-UAP-01 (versión 6, octubre 2025)</b> del Área, junto con el documento de funciones y responsabilidades del Hospital de Antequera y el plano de evacuación de Urgencias, convertidos en una guía de estudio interactiva. <span class="tag">ES 5 01.10_02</span> <span class="tag">ES 5 06.08_03</span></p></div>
+      <div class="box"><h2 class="s" style="margin-top:0">${I('trophy')} Formación</h2><p style="margin:0">La preparación de la acreditación se apoyó en <b>El Juego de la Acreditación</b>: 102 puntos del checklist de Calidad, los requisitos del Excel de 50 estándares y el Manual ME 5 1_08 en casos «¿cumple o no cumple?». Cada protocolo digital incluye tarjetas de repaso. <span class="tag">ES 5 01.12_04</span></p></div>
+    </div>
+    <h2 class="s">${I('shieldCheck')} Fortaleza: de la auditoría de PRL al clima laboral</h2>
+    <p>La auditoría de prevención de riesgos laborales identificó riesgos de seguridad, ergonómicos y psicosociales propios de un servicio de urgencias. La respuesta de la supervisión ha sido institucionalizar <b>reuniones de gobernanza</b> con los profesionales.</p>
+    <div class="flow">
+      <div class="st" style="--c:#e07b24"><b>1</b><h4>Auditoría PRL</h4><p>Riesgos de seguridad, ergonómicos y psicosociales.</p><p style="margin-top:1.5mm"><span class="tag">ES 5 06.06_02</span></p></div><div class="ar">›</div>
+      <div class="st"><b>2</b><h4>Reuniones de gobernanza</h4><p>El equipo analiza, prioriza y decide.</p><p style="margin-top:1.5mm"><span class="tag">ES 5 01.01_01</span></p></div><div class="ar">›</div>
+      <div class="st" style="--c:#7b3fb4"><b>3</b><h4>Medidas acordadas</h4><p>Prevención de agresiones, PNT de contención y organización del trabajo.</p></div><div class="ar">›</div>
+      <div class="st hi" style="--c:#007a33"><b>4</b><h4>Mejor clima laboral</h4><p>Medido y difundido como motor organizativo.</p><p style="margin-top:1.5mm"><span class="tag">ES 5 01.16_02</span></p></div>
+    </div>
+    <h2 class="s">${I('check')} Qué aportan las reuniones de gobernanza</h2>
+    ${li(['Analizar conjuntamente los hallazgos de la auditoría y priorizar medidas preventivas.', 'Abordar la prevención de agresiones y el manejo del paciente agitado según el PNT de contención.', 'Dar voz al equipo en la organización del trabajo, reforzando el modelo de gobierno clínico.', 'Utilizar el clima laboral como palanca de desarrollo organizativo, con medición y difusión de resultados.'])}
+    <div class="grow"></div>
+    <div class="shot"><img src="${CAP}pres-gobernanza.jpg" alt=""></div><div class="cap">Diapositiva de la presentación del proyecto: de la auditoría de PRL al clima laboral.</div>`));
+
+  /* 8 · PROCESOS */
+  const PNT = [
+    ['Triaje y asignación', 'PNT de triaje · v6 · junio 2026', 'ES 5 02.01_04'], ['Sala de Críticos', 'PNT-URG-CRIT-001 · v1.0 · 2026', 'ES 5 02.01_04'], ['Código Ictus', 'Teleictus (CATI) · ventana terapéutica', 'ES 5 02.01_04'],
+    ['Código Sepsis', 'Actualización Sepsis · 04-may-2026', 'ES 5 05.06_01'], ['Código Trauma', 'PNT 5.1 (anexos III-VI)', 'ES 5 02.01_04'], ['Dolor torácico agudo', 'SCACEST v5 · mar 2025 / SCASEST · sep 2024', 'ES 5 04.01_03'],
+    ['Urgencias gineco-obstétricas', 'PNT Área Norte · v2 · sep 2026', 'ES 5 03.16_00'], ['Dolor en Urgencias', 'PNT v1 · 15/12/2025', 'ES 5 04.06_01'], ['Fluidoterapia', 'PNT v1.0 · 3 dic 2025', 'ES 5 05.10_00'],
+    ['Paciente agitado y contención', 'PNT 2024 · PG-CAL-11', 'ES 5 05.06_01'], ['Manejo de heridas', 'Comisión de Heridas AGSNM 2025-2026', 'ES 5 04.01_03'], ['Acogida de profesionales', 'PG-UAP-01 · v6 · oct 2025', 'ES 5 01.10_02']
+  ];
+  pages.push(page(`
+    ${head('06 · Gestión por procesos', 'Protocolos vivos, <em>no en un cajón</em>')}
+    <p>Los procesos asistenciales del servicio están documentados en Procedimientos Normalizados de Trabajo (PNT) con código, versión y fecha, y se han trasladado a herramientas interactivas que facilitan su aplicación a pie de cama y su evaluación (ES 5 02.01_04, procesos asistenciales implantados).</p>
+    <table class="t"><thead><tr><th>Proceso</th><th>Documento de referencia</th><th>Estándar ACSA</th></tr></thead><tbody>${PNT.map(r => `<tr><td><b>${r[0]}</b></td><td>${r[1]}</td><td><span class="tag">${r[2]}</span></td></tr>`).join('')}</tbody></table>
+    <h2 class="s">${I('heartPulse')} Códigos tiempo-dependientes</h2>
+    <div class="g4">
+      ${[['brain', '#7b3fb4', 'Ictus', 'Ventana terapéutica, fibrinólisis, trombectomía y Teleictus.'], ['virus', '#0b6f7a', 'Sepsis', 'NEWS2 automático, foco y antibioterapia empírica.'], ['bandage', '#c62828', 'Trauma', 'Criterios de activación, TSR, Glasgow y ventana del tranexámico.'], ['heartPulse', '#e07b24', 'Infarto', 'SCACEST v5 y SCASEST: criterios ECG y reperfusión.']].map(c => `<div class="clave" style="--c:${c[1]}; flex-direction:column;"><div class="ic">${I(c[0])}</div><div><b>${c[2]}</b><p>${c[3]}</p></div></div>`).join('')}
+    </div>
+    <div class="grow"></div>
+    <div class="box"><p style="margin:0"><b>La digitalización también es control de calidad:</b> al trasladar el PNT de Críticos a formato interactivo se detectaron una fecha de aprobación anterior a la de elaboración, una dotación sin destino y varias erratas, que se han devuelto a la Unidad para su corrección (ES 5 01.05_00 · ES 5 05.01_03).</p></div>`));
+
+  /* 9 · CUIDADOS + SEGURIDAD */
+  pages.push(page(`
+    ${head('07 · Cuidados y seguridad', 'Cuidados <em>que se miden</em>')}
+    <div class="g2">
+      <div class="box">
+        <h2 class="s" style="margin-top:0">${I('gauge')} Auditorías de dolor</h2>
+        <p><span class="tag">ES 5 04.06_01 · obligatorio</span> El abordaje del dolor es un estándar obligatorio. Las auditorías comprueban sus cuatro elementos evaluables:</p>
+        ${li(['Escalas validadas (EVA, EVN…) registradas en la historia de salud.', 'Aplicación del PNT de Dolor en Urgencias (v1, 15/12/2025) con medidas farmacológicas y no farmacológicas.', 'Información verbal y escrita del tratamiento: nombre, dosis, posología, vía y duración.', 'Formación de los profesionales en el manejo del dolor.'])}
+      </div>
+      <div class="box">
+        <h2 class="s" style="margin-top:0">${I('clipboard')} Registro de continuidad de cuidados</h2>
+        <p><span class="tag">ES 5 03.11_02</span> <span class="tag">ES 5 03.12_02</span> La auditoría del informe de continuidad de cuidados verifica:</p>
+        ${li(['Asignación de enfermera y médico de referencia.', 'Plan de cuidados NANDA-NIC-NOC adaptado al proceso.', 'Transmisión de la información a Atención Primaria al alta.', 'Calidad del registro y retorno de resultados al equipo.'])}
+      </div>
+    </div>
+    <h2 class="s">${I('person')} Fragilidad, heridas y educación sanitaria</h2>
+    ${li(['<b>EPADI:</b> índice de fragilidad de 0 a 10 (edad, Pfeiffer, Barthel, Charlson, Gijón y pluripatología) que activa el circuito de paciente frágil a partir de 6.', '<b>Heridas:</b> evaluación y manejo local TIMERS con el catálogo de la Comisión de Heridas AGSNM 2025-2026.', '<b>Educación sanitaria:</b> hojas por motivo de consulta y portal de Recomendaciones de Salud con 21 guías al alta y 15 consejos de promoción, cada uno con sus fuentes (GPC, revisiones sistemáticas, OMS, Ministerio de Sanidad).'])}
+    <h2 class="s">${I('shieldCheck')} Seguridad del paciente</h2>
+    <table class="t"><thead><tr><th>Práctica segura</th><th>Cómo se aplica</th><th>Estándar</th></tr></thead><tbody>
+      <tr><td><b>Identificación inequívoca</b></td><td>NHC / NUHSA en todos los registros y fichas de apoyo.</td><td><span class="tag">ES 5 05.05_03</span></td></tr>
+      <tr><td><b>Contención como último recurso</b></td><td>Desescalada verbal primero; sujeción con ≥ 4 personas, valoración facultativa &lt; 1 h y revisión ≤ 4 h.</td><td><span class="tag">ES 5 05.06_01</span></td></tr>
+      <tr><td><b>Fluidoterapia segura</b></td><td>Herramienta de apoyo al PNT v1.0 de diciembre de 2025.</td><td><span class="tag">ES 5 05.10_00</span></td></tr>
+      <tr><td><b>Detección precoz de sepsis</b></td><td>NEWS2 calculado automáticamente en el Código Sepsis.</td><td><span class="tag">ES 5 05.06_01</span></td></tr>
+      <tr><td><b>Protección de datos</b></td><td>Las herramientas no guardan ni envían datos de pacientes.</td><td><span class="tag">ES 5 06.14_03</span></td></tr>
+    </tbody></table>`));
+
+  /* 10 · ACSA */
+  pages.push(page(`
+    ${head('08 · Calidad acreditada', 'Certificación ACSA: <em>nivel Óptimo</em>')}
+    <div class="seal"><div class="medal"><div><b>ACSA</b><span>ÓPTIMO</span></div></div><div><h3 class="serif">Unidad certificada en nivel Óptimo</h3><p>Manual de Estándares de Unidades de Gestión Sanitaria ME 5 1_08 (Agencia de Calidad Sanitaria de Andalucía, 2022). La reciente visita de los evaluadores fue una muy buena experiencia para todo el equipo y confirmó la madurez del sistema de calidad del servicio.</p></div></div>
+    <h2 class="s">${I('layers')} Estructura del manual</h2>
+    <p>76 estándares agrupados en <b>3 bloques</b> y <b>6 criterios</b>. Los estándares son dicotómicos (se cumplen o no) y se clasifican en grupo I (con obligatorios), grupo II (mayor desarrollo organizativo) y grupo III (innovación y desarrollo para la sociedad). El certificado tiene una vigencia de 5 años con fase de seguimiento.</p>
+    <div class="g3">
+      <div class="box"><b style="color:var(--suh)">Bloque 1 · Gestión de la unidad</b><p style="font-size:8pt; margin:1mm 0 0; text-align:left">Criterio 1 · Liderazgo y organización<br>Criterio 2 · Gestión por procesos asistenciales</p></div>
+      <div class="box"><b style="color:var(--suh)">Bloque 2 · Atención centrada en el paciente</b><p style="font-size:8pt; margin:1mm 0 0; text-align:left">Criterio 3 · Derechos y continuidad asistencial<br>Criterio 4 · Calidad científico-técnica</p></div>
+      <div class="box"><b style="color:var(--suh)">Bloque 3 · Seguridad</b><p style="font-size:8pt; margin:1mm 0 0; text-align:left">Criterio 5 · Seguridad del paciente<br>Criterio 6 · Soporte</p></div>
+    </div>
+    <h2 class="s">${I('award')} Niveles de certificación</h2>
+    <div style="display:flex; flex-direction:column; gap:2mm;">
+      ${D.ACSA_NIVELES.map(l => { const w = v => v === '100 %' ? 100 : v === '> 70 %' ? 72 : v === '> 40 %' ? 42 : 0; return `<div class="lv ${l.actual ? 'cur' : ''}"><h5>${l.n}${l.actual ? '<small>SUH</small>' : ''}</h5>
+        <div><span>Grupo I · ${l.g1}</span><i><u style="width:${w(l.g1)}%; background:var(--junta)"></u></i></div>
+        <div><span>Grupo II · ${l.g2}</span><i><u style="width:${w(l.g2)}%; background:var(--suh)"></u></i></div>
+        <div><span>Grupo III · ${l.g3}</span><i><u style="width:${w(l.g3)}%; background:var(--snm)"></u></i></div></div>`; }).join('')}
+    </div>
+    <div class="grow"></div>
+    <div class="shot"><img src="${CAP}pres-acsa.jpg" alt=""></div><div class="cap">Diapositiva de la presentación: certificación ACSA nivel Óptimo.</div>`));
+
+  /* 11 · MAPA ACSA */
+  const rows = []; D.ACSA.forEach(b => b.criterios.forEach(c => c.est.forEach(e => rows.push({ c: c.c.split(' · ')[0], e }))));
+  const acsaTable = list => `<table class="t" style="font-size:7.8pt;"><thead><tr><th style="width:25mm">Código</th><th style="width:17mm">Grupo</th><th>Estándar (resumen)</th><th>Evidencia del servicio</th></tr></thead><tbody>
+      ${list.map(r => `<tr><td><b style="font-family:Consolas,monospace; color:var(--suh)">${r.e[0]}</b><br><span style="font-size:6.6pt; color:var(--ink-3)">${r.c}</span></td><td class="${r.e[1].includes('oblig') ? 'g-ob' : ''}">${r.e[1]}</td><td><b>${r.e[2]}</b></td><td>${r.e[3]}</td></tr>`).join('')}
+    </tbody></table>`;
+  const cut = rows.findIndex(r => r.c.startsWith('Criterio 4'));
+  pages.push(page(`
+    ${head('09 · Mapa de evidencias', 'Estándares clave <em>y evidencias del servicio</em>')}
+    <p>Selección de estándares del Manual ME 5 1_08 especialmente relacionados con la supervisión de enfermería, con la evidencia que aporta el servicio. Los estándares obligatorios se señalan en rojo. <b>Criterios 1 a 3.</b></p>
+    ${acsaTable(rows.slice(0, cut))}`));
+  pages.push(page(`
+    ${head('09 · Mapa de evidencias (continuación)', 'Calidad científico-técnica <em>y seguridad</em>')}
+    <p><b>Criterios 4 a 6.</b> Calidad científico-técnica, seguridad del paciente y soporte.</p>
+    ${acsaTable(rows.slice(cut))}
+    <div class="grow"></div>
+    <div class="box"><p style="margin:0; text-align:left;"><b>Hacia el nivel Excelente:</b> requiere el 100 % de los grupos I y II y más del 40 % del grupo III. Estándares del grupo III a abordar: comparación de resultados con otras unidades (ES 5 01.09_03), satisfacción de clientes internos (ES 5 01.17_00), experiencia del paciente en la mejora de procesos (ES 5 02.05_00) e investigación financiada (ES 5 04.08_02).</p></div>`));
+
+  /* 12 · DAFO */
+  const dq = (k, c) => { const q = D.DAFO[k]; return `<div class="dq" data-l="${k}" style="--c:${c}"><h4>${q.titulo}</h4><ul>${q.items.map(it => `<li><b>${it.t}</b>${it.mejora ? '<span class="pr">PRIORIDAD</span>' : ''}<br>${it.d}</li>`).join('')}</ul></div>`; };
+  pages.push(page(`
+    ${head('10 · Análisis estratégico', 'Análisis DAFO · <em>interno</em>')}
+    <p>Fortalezas y debilidades del servicio. Como fortalezas destacan las reuniones de gobernanza tras la auditoría de prevención de riesgos laborales, y las auditorías de dolor y del registro de continuidad de cuidados; como área de mejora prioritaria, la TECLA y la TICLA.</p>
+    <div class="dafo" style="flex:1">${dq('F', '#007a33')}${dq('D', '#c62828')}</div>`));
+  pages.push(page(`
+    ${head('10 · Análisis estratégico (continuación)', 'Análisis DAFO · <em>externo</em>')}
+    <p>Oportunidades y amenazas del entorno sanitario del Área Norte de Málaga.</p>
+    <div class="dafo" style="flex:1">${dq('O', '#1e5b9c')}${dq('A', '#e07b24')}</div>
+    <div class="shot" style="margin-top:4mm;"><img src="${CAP}pres-dafo.jpg" alt=""></div><div class="cap">Síntesis del DAFO en la presentación del proyecto.</div>`));
+
+  /* 13 · CAME + INDICADORES */
+  const fuentes = { i1: 'Auditoría de historias', i2: 'Auditoría de registros', i3: 'web_e-PAT', i4: 'web_e-PAT', i5: 'web_e-PAT / Diraya', i6: 'web_e-PAT / Diraya', i7: 'Actas de gobernanza', i8: 'Registro de acogida', i9: 'Sistema de notificación', i10: 'Encuesta de clima' };
+  pages.push(page(`
+    ${head('11 · Estrategias e indicadores', 'De la estrategia <em>a la medida</em>')}
+    <h2 class="s" style="margin-top:0">${I('compass')} Estrategias CAME</h2>
+    <div class="came">${D.CAME.map(c => `<div style="--c:${c.color}"><small>${c.tipo} · ${c.clave}</small><b>${c.t}</b><p>${c.d}</p></div>`).join('')}</div>
+    <h2 class="s">${I('chart')} Cuadro de indicadores</h2>
+    <p>Indicadores de seguimiento del proyecto. Las metas son propuestas de la supervisión; los resultados se registran en el portal a partir de las fuentes indicadas.</p>
+    <table class="t"><thead><tr><th>Indicador</th><th>Fórmula</th><th>Meta</th><th>Fuente</th><th>Estándar</th></tr></thead><tbody>
+      ${D.INDICADORES.map(i => `<tr><td><b>${i.t}</b></td><td>${i.f}</td><td style="white-space:nowrap; font-weight:800; color:var(--suh)">${i.meta}</td><td>${fuentes[i.id] || ''}</td><td><span class="tag">${i.acsa}</span></td></tr>`).join('')}
+    </tbody></table>`));
+
+  /* 14 · PLAN 2027 */
+  pages.push(page(`
+    ${head('12 · Plan de acción 2027', 'Seis compromisos <em>para 2027</em>')}
+    <p class="lead">El plan traduce el DAFO en acciones concretas, con responsable en la supervisión, seguimiento en las reuniones de gobernanza y vinculación a los estándares ACSA.</p>
+    <div class="objs" style="margin-top:4mm;">${D.OBJETIVOS.map((o, i) => `<div class="obj ${i === 0 ? 'hi' : ''}"><h4><span>${o.n}</span>${o.t}</h4><ul>${o.acc.map(a => `<li>${a}</li>`).join('')}</ul><span class="tag">${o.acsa}</span></div>`).join('')}</div>
+    <div class="grow"></div>
+    <div class="shot"><img src="${CAP}pres-tecla.jpg" alt=""></div><div class="cap">Diapositiva de la presentación: TECLA y TICLA, área de mejora prioritaria.</div>`));
+
+  /* 15 · HERRAMIENTAS */
+  const toolTable = list => `<table class="t" style="font-size:7.9pt;"><thead><tr><th style="width:38mm">Herramienta</th><th style="width:30mm">Área</th><th style="width:34mm">Versión / referencia</th><th>Contenido</th></tr></thead><tbody>
+      ${list.map(t => `<tr><td><b>${t.t}</b></td><td style="color:${D.CATS[t.cat].color}; font-weight:700">${D.CATS[t.cat].label}</td><td>${t.v}</td><td>${t.d}</td></tr>`).join('')}
+    </tbody></table>`;
+  pages.push(page(`
+    ${head('13 · Transformación digital', 'Ecosistema digital <em>del servicio</em>')}
+    <p>El servicio dispone de 20 herramientas interactivas propias que funcionan en cualquier navegador, sin instalación ni servidor y sin guardar datos de pacientes. Todas comparten una barra de acceso al portal y a las redes sociales del servicio.</p>
+    ${toolTable(D.TOOLS.slice(0, 10))}`));
+  pages.push(page(`
+    ${head('13 · Transformación digital (continuación)', 'Protocolos, cuidados <em>y archivo</em>')}
+    ${toolTable(D.TOOLS.slice(10))}
+    <div class="grow"></div>
+    <div class="box"><p style="margin:0; text-align:left;"><b>Gobierno de las herramientas (2027):</b> responsable y fecha de revisión por herramienta, validación clínica antes del uso asistencial, retirada de versiones anteriores y corrección de las incoherencias documentales detectadas (ES 5 01.05_00).</p></div>`));
+
+  /* 16 · EL PORTAL WEB */
+  const MAP = [['home', 'Inicio', 'Portada con cifras clave, sello ACSA y acceso a la presentación.'], ['book', 'Memoria', 'Los 14 capítulos de esta memoria, imprimibles, con indicadores editables.'], ['award', 'ACSA', 'Niveles de certificación y mapa interactivo de estándares y evidencias.'], ['grid', 'DAFO', 'DAFO interactivo y editable con detalle, estándar y herramienta.'], ['layers', 'Herramientas', 'Las 20 webs con buscador, filtros y vista previa.'], ['camera', 'Instalaciones', 'Galería de 72 fotografías de 9 áreas, ampliables.'], ['instagram', 'Redes', 'Instagram @suh_antequera_, Facebook y X del área sanitaria.'], ['presentation', 'Presentación', '22 diapositivas, 15 minutos, notas del ponente y demos en directo.']];
+  pages.push(page(`
+    ${head('14 · El portal web', 'Toda la memoria, <em>en una web</em>')}
+    <p>El proyecto se acompaña de un portal web que reúne la memoria, la presentación, el análisis estratégico, la acreditación, las herramientas y las imágenes del servicio, con la identidad visual del SUH y enlaces a sus redes sociales.</p>
+    <div class="shot"><img src="${CAP}portal-inicio.jpg" alt=""></div><div class="cap">Portada del portal web del proyecto.</div>
+    <h2 class="s">${I('compass')} Secciones del portal</h2>
+    <div class="web-map">${MAP.map(m => `<div><b>${I(m[0])} ${m[1]}</b><p>${m[2]}</p></div>`).join('')}</div>
+    <div class="grow"></div>
+    <div class="g2"><div><div class="shot"><img src="${CAP}pres-servicio.jpg" alt=""></div><div class="cap">Presentación · El servicio en imágenes.</div></div><div><div class="shot"><img src="${CAP}pres-dafo.jpg" alt=""></div><div class="cap">Presentación · Análisis DAFO.</div></div></div>`));
+
+  /* 17 · GUION DE LA PRESENTACIÓN */
+  const GUION = [['Portada', 30], ['Agenda', 25], ['El servicio en imágenes', 40], ['Misión, visión y valores', 35], ['Triaje SET y circuitos', 45], ['Sala de Críticos', 35], ['Modelo de supervisión en seis pilares', 40], ['Acogida y formación', 40], ['De la auditoría de PRL al clima laboral', 50], ['Gestión por procesos', 50], ['Códigos tiempo-dependientes', 40], ['Demo en directo: Triaje', 50], ['Seguridad del paciente', 35], ['Auditorías de dolor + demo en directo', 50], ['Continuidad de cuidados', 45], ['Fragilidad, heridas y contención', 35], ['Demo en directo: Recomendaciones de Salud', 40], ['ACSA nivel Óptimo', 50], ['Análisis DAFO', 55], ['TECLA y TICLA', 45], ['Plan 2027', 45], ['Gracias', 20]];
+  let acc = 0; const fmt = s => `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`;
+  pages.push(page(`
+    ${head('15 · Exposición ante el tribunal', 'Guion de la presentación · <em>15 minutos</em>')}
+    <div class="g2" style="grid-template-columns: 1.15fr 1fr; align-items:start;">
+      <table class="t guion"><thead><tr><th>#</th><th>Diapositiva</th><th>Fin</th></tr></thead><tbody>
+        ${GUION.map((g, i) => { acc += g[1]; return `<tr><td>${i + 1}</td><td>${g[0]}</td><td>${fmt(acc)}</td></tr>`; }).join('')}
+      </tbody></table>
+      <div>
+        <div class="shot"><img src="${CAP}pres-portada.jpg" alt=""></div><div class="cap">Portada de la presentación.</div>
+        <h2 class="s">${I('keyboard')} Cómo se presenta</h2>
+        ${li(['Se abre desde el portal o con el archivo <b>presentacion.html</b>.', '<b>F</b> pantalla completa · <b>→</b> avanzar · <b>N</b> notas del ponente.', '<b>A</b> modo automático: avanza solo según el tiempo previsto (15:00).', 'Cronómetro con aviso si la exposición va con retraso.', 'Tres demostraciones en directo de las herramientas del servicio.'])}
+        <div class="box" style="margin-top:2mm;"><p style="margin:0; text-align:left;"><b>Mensaje final para el tribunal:</b> calidad acreditada, un equipo cuidado y escuchado, cuidados medidos y un plan claro para reducir la TECLA y la TICLA en 2027.</p></div>
+      </div>
+    </div>`));
+
+  /* 18 · PÁGINA FINAL CON QR */
+  const IG = D.PROYECTO.redes.instagram, FB = D.PROYECTO.redes.facebook;
+  const main = WEB_URL
+    ? { url: WEB_URL, t: 'Portal web del proyecto', s: 'Memoria, presentación, DAFO, ACSA y herramientas' }
+    : { url: IG, t: 'Instagram del servicio · @suh_antequera_', s: '' };
+  const small = WEB_URL ? [[IG, 'Instagram', '@suh_antequera_'], [FB, 'Facebook', 'SUH Antequera']] : [[FB, 'Facebook', 'SUH Antequera'], [D.PROYECTO.redes.x, 'X · Área Sanitaria', '@saludnortemalag']];
+  pages.push(page(`
+    <div class="in">
+      <div class="logos"><img src="${IMG}logo-suh.jpg" style="height:15mm" alt=""><img src="${IMG}logo-snm.jpg" style="height:7mm" alt=""><img src="${IMG}logo-junta.jpg" style="height:13mm" alt=""></div>
+      <h2 class="serif">Escanea y accede <em>al proyecto</em></h2>
+      <p class="sub">${WEB_URL ? 'El portal web reúne la memoria completa, la presentación de 15 minutos, el DAFO interactivo, el mapa ACSA, las 20 herramientas y las fotografías del servicio.' : 'El portal web del proyecto —memoria, presentación, DAFO, ACSA, herramientas y fotografías— se muestra en directo durante la exposición. Sigue al servicio en sus redes sociales.'}</p>
+      <div class="qr-main"><div class="qr">${qr(main.url, 'Q')}</div><b>${main.t}</b><code>${esc(main.url.replace(/^https?:\/\//, ''))}</code></div>
+      <div class="qr-row">${small.map(s => `<div class="qr-sm"><div class="qr">${qr(s[0])}</div><b>${s[1]}</b><span>${s[2]}</span></div>`).join('')}</div>
+      <div class="foot"><b>Manuel Isaías Medina Pérez</b>Supervisor de Enfermería · Servicio de Urgencias · Hospital de Antequera<br>Área de Gestión Sanitaria Norte de Málaga · Octubre 2026</div>
+    </div>`, 'final'));
+
+  document.getElementById('doc').innerHTML = pages.join('');
+  // Fuerza la carga de todas las variantes tipográficas antes de imprimir
+  ['400', '600', '700', '800'].forEach(w => document.fonts.load(`${w} 12px "Plus Jakarta Sans"`));
+  ['800', 'italic 600'].forEach(w => document.fonts.load(`${w} 12px "Fraunces"`));
+  const allPages = [...document.querySelectorAll('.page')];
+  allPages.forEach((p, i) => { const n = p.querySelector('.pn'); if (n) n.textContent = i + 1; });
+  // Números de página del índice: primera página cuya sección empieza por ese número
+  document.querySelectorAll('[data-toc]').forEach(el => {
+    const code = el.dataset.toc;
+    const i = code === '16' ? allPages.length - 1 : allPages.findIndex(p => (p.querySelector('.kick')?.textContent || '').startsWith(code + ' '));
+    el.textContent = i >= 0 ? i + 1 : '';
+  });
+
+  /* Aviso en consola si alguna página desborda */
+  window.addEventListener('load', () => {
+    document.querySelectorAll('.page').forEach((p, i) => { if (p.scrollHeight > p.clientHeight + 2) console.warn('Desborde en la página ' + (i + 1) + ': ' + (p.scrollHeight - p.clientHeight) + ' px'); });
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta name="robots" content="noindex, nofollow">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Supervisión de Enfermería · Urgencias Antequera</title>
+  <meta name="description" content="Proyecto y memoria de supervisión de enfermería del Servicio de Urgencias del Hospital de Antequera (Área de Gestión Sanitaria Norte de Málaga). Certificación ACSA nivel Óptimo.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,500;9..144,700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --suh: #1e5b9c; --suh-700: #164879; --suh-900: #0c2a4a; --suh-950: #071a2f; --suh-400: #4f8fd1; --suh-200: #a9cdf3; --suh-100: #e7f0fa; --suh-50: #f3f8fd;
+      --junta: #007a33; --junta-50: #e8f5ed; --snm: #e07b24; --snm-50: #fdf1e6; --danger: #c62828; --danger-50: #fdecec;
+      --ink: #0f1d2e; --ink-2: #33475b; --ink-3: #5c6f82; --line: #dce5ee; --bg: #f5f8fb; --surface: #ffffff; --surface-2: #f8fafc;
+      --r: 16px; --r-lg: 24px;
+      --sh-sm: 0 1px 2px rgba(12,42,74,.06); --sh: 0 10px 30px -14px rgba(12,42,74,.25); --sh-lg: 0 30px 60px -24px rgba(12,42,74,.4);
+      --ease: cubic-bezier(.4,0,.2,1);
+    }
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) { --suh-100: #15304f; --suh-50: #10243b; --junta-50: #0f2a1b; --snm-50: #2d1d0e; --danger-50: #2c1415;
+        --ink: #e8eef5; --ink-2: #bccad8; --ink-3: #8ea1b4; --line: #24364a; --bg: #0a1522; --surface: #102033; --surface-2: #0d1b2b; }
+    }
+    :root[data-theme="dark"] { --suh-100: #15304f; --suh-50: #10243b; --junta-50: #0f2a1b; --snm-50: #2d1d0e; --danger-50: #2c1415;
+      --ink: #e8eef5; --ink-2: #bccad8; --ink-3: #8ea1b4; --line: #24364a; --bg: #0a1522; --surface: #102033; --surface-2: #0d1b2b; }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-padding-top: 130px; }
+    body { font-family: 'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', sans-serif; background: var(--bg); color: var(--ink); line-height: 1.6; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+    img { max-width: 100%; display: block; }
+    a { color: inherit; }
+    svg.i { width: 1.15em; height: 1.15em; flex-shrink: 0; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .wrap { max-width: 1280px; margin: 0 auto; padding: 0 28px; }
+    .serif { font-family: 'Fraunces', Georgia, serif; font-weight: 700; letter-spacing: -.02em; }
+
+    /* ---------- Cabecera ---------- */
+    .top { position: sticky; top: 0; z-index: 200; background: color-mix(in srgb, var(--surface) 88%, transparent); backdrop-filter: saturate(1.4) blur(14px); border-bottom: 1px solid var(--line); }
+    .top-in { display: flex; align-items: center; justify-content: space-between; gap: 18px; height: 74px; }
+    .logos { display: flex; align-items: center; gap: 12px; background: #fff; border: 1px solid #dfe7ef; border-radius: 12px; padding: 4px 10px; flex-shrink: 0; }
+    .logos img { object-fit: contain; }
+    .logos .l-suh { height: 54px; } .logos .l-snm { height: 26px; } .logos .l-junta { height: 48px; }
+    .vsep { width: 1px; height: 34px; background: #d5dee8; }
+    .nav { display: flex; gap: 2px; overflow-x: auto; scrollbar-width: none; }
+    .nav::-webkit-scrollbar { display: none; }
+    .nav a { text-decoration: none; font-size: 14px; font-weight: 600; color: var(--ink-2); padding: 9px 13px; border-radius: 10px; white-space: nowrap; transition: .2s var(--ease); }
+    .nav a:hover { color: var(--suh); background: var(--suh-50); }
+    .nav a.on { color: #fff; background: var(--suh); }
+    .tactions { display: flex; gap: 8px; align-items: center; }
+    .ibtn { width: 40px; height: 40px; border-radius: 12px; border: 1px solid var(--line); background: var(--surface); color: var(--ink-2); display: inline-flex; align-items: center; justify-content: center; cursor: pointer; text-decoration: none; transition: .2s var(--ease); }
+    .ibtn:hover { color: var(--suh); border-color: var(--suh-400); }
+    .ibtn svg.i { width: 19px; height: 19px; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 9px; padding: 12px 20px; border-radius: 14px; font: inherit; font-weight: 700; font-size: 15px; border: 1px solid transparent; cursor: pointer; text-decoration: none; transition: .25s var(--ease); white-space: nowrap; }
+    .btn-p { background: var(--suh); color: #fff; } .btn-p:hover { background: var(--suh-700); transform: translateY(-1px); }
+    .btn-w { background: #fff; color: var(--suh-900); } .btn-w:hover { transform: translateY(-2px); box-shadow: 0 14px 30px -12px rgba(0,0,0,.45); }
+    .btn-o { background: rgba(255,255,255,.08); color: #fff; border-color: rgba(255,255,255,.4); backdrop-filter: blur(6px); } .btn-o:hover { background: rgba(255,255,255,.18); }
+    .btn-g { background: var(--surface); color: var(--ink-2); border-color: var(--line); } .btn-g:hover { color: var(--suh); border-color: var(--suh-400); }
+    .btn-sm { padding: 8px 13px; font-size: 13px; border-radius: 11px; }
+    .top .btn-p { padding: 10px 16px; font-size: 14px; border-radius: 12px; }
+
+    /* ---------- Hero ---------- */
+    .hero { position: relative; min-height: calc(100vh - 74px); display: flex; align-items: flex-end; color: #fff; overflow: hidden; isolation: isolate; }
+    .hero-bg { position: absolute; inset: 0; z-index: -2; }
+    .hero-bg img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transform: scale(1.08); transition: opacity 1.6s ease, transform 9s linear; }
+    .hero-bg img.on { opacity: 1; transform: scale(1); }
+    .hero::before { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgba(7,26,47,.25) 0%, rgba(7,26,47,.55) 45%, rgba(7,26,47,.95) 100%), linear-gradient(90deg, rgba(7,26,47,.85) 0%, rgba(7,26,47,.1) 70%); }
+    .hero-in { padding-top: 80px; padding-bottom: 56px; width: 100%; }
+    .chip-acsa { display: inline-flex; align-items: center; gap: 10px; padding: 7px 14px 7px 8px; border-radius: 999px; background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.28); backdrop-filter: blur(8px); font-size: 13.5px; font-weight: 700; }
+    .chip-acsa b { background: #fff; color: var(--junta); padding: 3px 10px; border-radius: 999px; font-size: 12px; letter-spacing: .04em; }
+    .hero h1 { font-size: clamp(38px, 6vw, 82px); line-height: 1.02; margin: 22px 0 18px; max-width: 980px; }
+    .hero h1 em { font-style: italic; color: var(--suh-200); }
+    .hero .lead { font-size: clamp(16px, 1.6vw, 20px); max-width: 720px; color: rgba(255,255,255,.88); }
+    .byline { display: flex; align-items: center; gap: 14px; margin-top: 26px; }
+    .avatar { width: 54px; height: 54px; border-radius: 50%; background: linear-gradient(135deg, var(--suh-400), var(--suh-900)); border: 2px solid rgba(255,255,255,.6); display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 18px; letter-spacing: .02em; }
+    .byline b { display: block; font-size: 17px; } .byline span { font-size: 13.5px; color: rgba(255,255,255,.75); }
+    .hero-cta { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 30px; }
+    .kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; margin-top: 48px; background: rgba(255,255,255,.18); border: 1px solid rgba(255,255,255,.18); border-radius: 20px; overflow: hidden; backdrop-filter: blur(10px); }
+    .kpi { background: rgba(7,26,47,.45); padding: 20px 22px; }
+    .kpi b { display: block; font-size: clamp(28px, 3.2vw, 42px); font-weight: 800; line-height: 1; letter-spacing: -.02em; }
+    .kpi span { font-size: 13px; color: rgba(255,255,255,.78); font-weight: 600; }
+    .scroll-hint { position: absolute; right: 28px; bottom: 30px; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.7); writing-mode: vertical-rl; display: flex; align-items: center; gap: 10px; }
+    .scroll-hint::after { content: ""; width: 1px; height: 60px; background: linear-gradient(rgba(255,255,255,.8), transparent); animation: drip 2s infinite; }
+    @keyframes drip { 0% { transform: scaleY(0); transform-origin: top; } 50% { transform: scaleY(1); transform-origin: top; } 51% { transform-origin: bottom; } 100% { transform: scaleY(0); transform-origin: bottom; } }
+
+    /* ---------- Secciones ---------- */
+    section.sec { padding: 96px 0; }
+    section.alt { background: var(--surface); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .eyebrow { display: inline-flex; align-items: center; gap: 8px; font-size: 12.5px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: var(--suh); }
+    :root[data-theme="dark"] .eyebrow { color: var(--suh-200); }
+    @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .eyebrow { color: var(--suh-200); } }
+    .h2 { font-size: clamp(30px, 4vw, 52px); line-height: 1.08; margin: 10px 0 14px; }
+    .sub { font-size: 17px; color: var(--ink-3); max-width: 760px; }
+    .head { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; margin-bottom: 40px; flex-wrap: wrap; }
+    .card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-lg); box-shadow: var(--sh-sm); }
+    .reveal { opacity: 0; transform: translateY(26px); transition: opacity .8s var(--ease), transform .8s var(--ease); }
+    .reveal.in { opacity: 1; transform: none; }
+
+    /* ---------- Presentación ---------- */
+    .pres { display: grid; grid-template-columns: 1.15fr 1fr; gap: 0; overflow: hidden; border-radius: 28px; background: var(--suh-950); color: #fff; box-shadow: var(--sh-lg); }
+    .pres-media { position: relative; min-height: 420px; overflow: hidden; }
+    .pres-media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; animation: kb 20s ease-in-out infinite alternate; }
+    @keyframes kb { from { transform: scale(1.02) translate(0,0); } to { transform: scale(1.15) translate(-2%, -2%); } }
+    .pres-media::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, transparent 40%, var(--suh-950)), linear-gradient(0deg, rgba(7,26,47,.6), transparent 50%); }
+    .pres-play { position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); z-index: 2; width: 96px; height: 96px; border-radius: 50%; background: rgba(255,255,255,.95); color: var(--suh); display: flex; align-items: center; justify-content: center; text-decoration: none; box-shadow: 0 0 0 0 rgba(255,255,255,.5); animation: pulse 2.4s infinite; }
+    .pres-play svg.i { width: 34px; height: 34px; margin-left: 6px; }
+    @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(255,255,255,.45); } 70% { box-shadow: 0 0 0 28px rgba(255,255,255,0); } 100% { box-shadow: 0 0 0 0 rgba(255,255,255,0); } }
+    .pres-body { padding: 44px 44px 40px; display: flex; flex-direction: column; gap: 18px; }
+    .pres-body h3 { font-size: 34px; line-height: 1.1; }
+    .pres-body p { color: rgba(255,255,255,.78); }
+    .pres-meta { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    .pres-meta div { background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.12); border-radius: 14px; padding: 12px; }
+    .pres-meta b { display: block; font-size: 24px; } .pres-meta span { font-size: 12px; color: rgba(255,255,255,.7); }
+    .keys { display: flex; flex-wrap: wrap; gap: 8px; font-size: 12.5px; color: rgba(255,255,255,.75); }
+    .keys kbd { font: 700 11.5px 'Plus Jakarta Sans', sans-serif; background: rgba(255,255,255,.14); border: 1px solid rgba(255,255,255,.25); border-radius: 6px; padding: 2px 7px; margin-right: 4px; }
+
+    /* ---------- Memoria ---------- */
+    .mem { display: grid; grid-template-columns: 270px minmax(0, 1fr); gap: 40px; align-items: start; }
+    .mem > * { min-width: 0; }
+    .toc { position: sticky; top: 110px; padding: 18px; }
+    .toc b { display: block; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-3); margin: 4px 8px 10px; }
+    .toc a { display: flex; gap: 10px; align-items: baseline; padding: 7px 8px; border-radius: 9px; text-decoration: none; font-size: 13.5px; color: var(--ink-2); font-weight: 600; }
+    .toc a span { font-size: 11.5px; color: var(--ink-3); min-width: 20px; font-variant-numeric: tabular-nums; }
+    .toc a:hover, .toc a.on { background: var(--suh-50); color: var(--suh); }
+    .toc .tocbtns { display: flex; flex-direction: column; gap: 8px; margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--line); }
+    .chap { padding: 40px 44px; margin-bottom: 22px; }
+    .chap-n { font-size: 13px; font-weight: 800; color: var(--suh); letter-spacing: .1em; }
+    .chap h3 { font-size: clamp(24px, 2.6vw, 34px); line-height: 1.15; margin: 6px 0 16px; }
+    .chap h4 { font-size: 17px; font-weight: 800; margin: 22px 0 8px; }
+    .chap p { color: var(--ink-2); margin-bottom: 12px; font-size: 15.5px; }
+    .chap ul.l { list-style: none; display: flex; flex-direction: column; gap: 8px; margin: 8px 0 14px; }
+    .chap ul.l li { display: flex; gap: 10px; color: var(--ink-2); font-size: 15px; }
+    .chap ul.l li svg { color: var(--junta); margin-top: 4px; }
+    .letter { position: relative; background: linear-gradient(135deg, var(--suh-50), var(--surface)); }
+    .letter .q { position: absolute; right: 36px; top: 30px; color: var(--suh-100); width: 90px; height: 90px; }
+    .letter .q svg { width: 100%; height: 100%; stroke-width: 1.3; }
+    .sign { display: flex; align-items: center; gap: 14px; margin-top: 18px; }
+    .sign .avatar { color: #fff; }
+    .sign b { display: block; } .sign span { font-size: 13px; color: var(--ink-3); }
+    .mvv { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 8px; }
+    .mvv > div { padding: 22px; border-radius: 18px; background: var(--surface-2); border: 1px solid var(--line); }
+    .mvv b { display: flex; gap: 8px; align-items: center; color: var(--suh); font-size: 15px; margin-bottom: 6px; }
+    .mvv p { font-size: 14.5px; margin: 0; }
+    .values { display: flex; flex-wrap: wrap; gap: 8px; }
+    .values span { padding: 6px 12px; border-radius: 999px; background: var(--suh-100); color: var(--suh); font-weight: 700; font-size: 13px; }
+    :root[data-theme="dark"] .values span { color: var(--suh-200); }
+    .strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 14px 0 6px; }
+    .strip button { border: 0; padding: 0; background: none; cursor: zoom-in; border-radius: 14px; overflow: hidden; aspect-ratio: 4/3; position: relative; }
+    .strip img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s var(--ease); }
+    .strip button:hover img { transform: scale(1.07); }
+    .strip span { position: absolute; left: 8px; bottom: 8px; font-size: 11.5px; font-weight: 700; color: #fff; background: rgba(7,26,47,.7); padding: 3px 8px; border-radius: 7px; }
+    .set { display: flex; flex-direction: column; gap: 8px; margin: 14px 0; }
+    .set-row { display: grid; grid-template-columns: 110px 1fr 70px; gap: 12px; align-items: center; font-size: 14px; }
+    .set-row b { font-weight: 800; }
+    .set-bar { height: 14px; border-radius: 999px; background: var(--surface-2); border: 1px solid var(--line); overflow: hidden; }
+    .set-bar i { display: block; height: 100%; border-radius: 999px; width: 0; transition: width 1.4s var(--ease); }
+    .set-row small { color: var(--ink-3); text-align: right; font-weight: 700; }
+    .circs { display: flex; flex-wrap: wrap; gap: 8px; }
+    .circs span { padding: 7px 12px; border-radius: 10px; border: 1px solid var(--line); font-size: 13px; font-weight: 600; background: var(--surface-2); }
+    table.t { width: 100%; border-collapse: collapse; font-size: 14px; margin: 10px 0; }
+    table.t th { text-align: left; font-size: 11.5px; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3); padding: 10px 12px; border-bottom: 2px solid var(--line); }
+    table.t td { padding: 11px 12px; border-bottom: 1px solid var(--line); vertical-align: top; color: var(--ink-2); }
+    table.t td a { color: var(--suh); font-weight: 700; text-decoration: none; }
+    .tag { display: inline-block; font-size: 11px; font-weight: 800; padding: 3px 8px; border-radius: 7px; background: var(--junta-50); color: var(--junta); white-space: nowrap; }
+    .tbl-wrap { overflow-x: auto; }
+    .ind input { width: 100%; min-width: 90px; font: inherit; font-size: 14px; padding: 7px 9px; border: 1.5px dashed var(--line); border-radius: 9px; background: var(--surface-2); color: var(--ink); }
+    .ind input:focus { outline: none; border-style: solid; border-color: var(--suh); }
+    .note { font-size: 13px; color: var(--ink-3); display: flex; gap: 8px; align-items: flex-start; padding: 12px 14px; border-radius: 12px; background: var(--surface-2); border: 1px solid var(--line); }
+    .obj { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 10px; }
+    .obj > div { padding: 20px; border-radius: 18px; border: 1px solid var(--line); background: var(--surface-2); }
+    .obj .n { width: 34px; height: 34px; border-radius: 10px; background: var(--suh); color: #fff; font-weight: 800; display: flex; align-items: center; justify-content: center; margin-bottom: 10px; }
+    .obj b { display: block; font-size: 15.5px; margin-bottom: 8px; }
+    .obj ul { list-style: none; font-size: 13.5px; color: var(--ink-2); display: flex; flex-direction: column; gap: 5px; }
+    .obj li::before { content: "→ "; color: var(--suh); font-weight: 800; }
+    .obj small { display: block; margin-top: 10px; }
+
+    /* ---------- ACSA ---------- */
+    .acsa-top { display: grid; grid-template-columns: 1fr 1.25fr; gap: 22px; margin-bottom: 26px; }
+    .seal { position: relative; overflow: hidden; padding: 36px; border-radius: 28px; color: #fff; background: radial-gradient(500px 300px at 100% 0%, rgba(0,160,70,.5), transparent 60%), linear-gradient(140deg, #04381b, var(--junta)); }
+    .seal .medal { width: 120px; height: 120px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: conic-gradient(from 0deg, #fff6c9, #e9c55a, #fff6c9, #c99a2e, #fff6c9); box-shadow: 0 16px 40px -12px rgba(0,0,0,.5); margin-bottom: 20px; animation: spin 18s linear infinite; }
+    .seal .medal > div { width: 96px; height: 96px; border-radius: 50%; background: #04381b; display: flex; align-items: center; justify-content: center; flex-direction: column; animation: spin 18s linear infinite reverse; }
+    .seal .medal b { font-size: 13px; letter-spacing: .14em; } .seal .medal span { font-size: 17px; font-weight: 800; color: #f5d36b; letter-spacing: .02em; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .seal h3 { font-size: 34px; line-height: 1.1; }
+    .seal p { color: rgba(255,255,255,.85); margin-top: 10px; }
+    .levels { padding: 28px; display: flex; flex-direction: column; gap: 14px; }
+    .lvl { display: grid; grid-template-columns: 120px 1fr; gap: 16px; align-items: center; padding: 14px; border-radius: 16px; border: 1px solid var(--line); transition: .3s var(--ease); }
+    .lvl.cur { border-color: var(--junta); background: var(--junta-50); box-shadow: 0 0 0 4px rgba(0,122,51,.1); }
+    .lvl h5 { font-size: 18px; font-weight: 800; display: flex; align-items: center; gap: 8px; }
+    .lvl h5 small { font-size: 10.5px; padding: 3px 7px; border-radius: 6px; background: var(--junta); color: #fff; letter-spacing: .06em; }
+    .lvl p { font-size: 13px; color: var(--ink-3); }
+    .bars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+    .bars div { font-size: 11.5px; color: var(--ink-3); font-weight: 700; }
+    .bars i { display: block; height: 10px; border-radius: 99px; background: var(--surface-2); border: 1px solid var(--line); margin-top: 4px; position: relative; overflow: hidden; }
+    .bars i::after { content: ""; position: absolute; inset: 0; width: var(--w, 0); background: var(--c, var(--suh)); border-radius: 99px; transition: width 1.3s var(--ease); }
+    .blocks { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .blk { padding: 22px; }
+    .blk h4 { font-size: 16px; font-weight: 800; margin-bottom: 12px; color: var(--suh); }
+    :root[data-theme="dark"] .blk h4 { color: var(--suh-200); }
+    .crit { border: 1px solid var(--line); border-radius: 14px; margin-bottom: 10px; overflow: hidden; }
+    .crit > button { width: 100%; text-align: left; border: 0; background: var(--surface-2); font: inherit; font-weight: 700; font-size: 14px; color: var(--ink); padding: 12px 14px; cursor: pointer; display: flex; justify-content: space-between; gap: 10px; align-items: center; }
+    .crit > button svg { transition: transform .3s; }
+    .crit.open > button svg { transform: rotate(90deg); }
+    .crit .std { display: none; padding: 6px 14px 14px; }
+    .crit.open .std { display: block; }
+    .std-i { padding: 10px 0; border-bottom: 1px dashed var(--line); font-size: 13.5px; }
+    .std-i:last-child { border-bottom: 0; }
+    .std-i code { font: 800 12px ui-monospace, Consolas, monospace; color: var(--suh); }
+    :root[data-theme="dark"] .std-i code { color: var(--suh-200); }
+    .std-i .g { font-size: 10.5px; font-weight: 800; padding: 2px 6px; border-radius: 5px; background: var(--suh-100); color: var(--suh); margin-left: 6px; }
+    .std-i .g.ob { background: var(--danger-50); color: var(--danger); }
+    .std-i b { display: block; margin: 3px 0 2px; color: var(--ink); }
+    .std-i p { color: var(--ink-3); margin: 0; font-size: 13px; }
+
+    /* ---------- DAFO ---------- */
+    .dafo-bar { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 18px; }
+    .seg { display: inline-flex; padding: 4px; border-radius: 14px; background: var(--surface); border: 1px solid var(--line); }
+    .seg button { border: 0; background: none; font: inherit; font-weight: 700; font-size: 13.5px; padding: 8px 14px; border-radius: 10px; cursor: pointer; color: var(--ink-2); }
+    .seg button.on { background: var(--suh); color: #fff; }
+    .dafo { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; position: relative; }
+    .dafo-axis { position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); z-index: 2; width: 92px; height: 92px; border-radius: 50%; background: var(--surface); border: 1px solid var(--line); box-shadow: var(--sh); display: flex; align-items: center; justify-content: center; text-align: center; font-size: 11px; font-weight: 800; color: var(--ink-3); line-height: 1.2; }
+    .q { border-radius: 24px; padding: 22px; border: 1px solid var(--line); background: var(--surface); position: relative; overflow: hidden; min-height: 300px; }
+    .q::before { content: attr(data-l); position: absolute; right: 14px; top: -24px; font: 800 150px/1 'Fraunces', serif; color: var(--qc); opacity: .08; pointer-events: none; }
+    .q-h { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+    .q-h h4 { font-size: 20px; font-weight: 800; color: var(--qc); }
+    .q-h small { display: block; font-size: 12px; color: var(--ink-3); font-weight: 600; }
+    .q-h .cnt { min-width: 34px; height: 34px; border-radius: 10px; background: var(--qc); color: #fff; font-weight: 800; display: flex; align-items: center; justify-content: center; }
+    .q ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .q li { position: relative; }
+    .q li > button { width: 100%; text-align: left; font: inherit; font-size: 14px; font-weight: 600; color: var(--ink); background: var(--surface-2); border: 1px solid var(--line); border-left: 4px solid var(--qc); border-radius: 12px; padding: 10px 40px 10px 12px; cursor: pointer; transition: .2s var(--ease); }
+    .q li > button:hover { transform: translateX(3px); box-shadow: var(--sh); }
+    .q li.hl > button { background: color-mix(in srgb, var(--qc) 12%, var(--surface)); }
+    .q li .star { font-size: 10.5px; font-weight: 800; padding: 2px 7px; border-radius: 6px; background: var(--qc); color: #fff; margin-left: 6px; vertical-align: 1px; }
+    .q li .del { position: absolute; right: 8px; top: 50%; transform: translateY(-50%); width: 26px; height: 26px; border-radius: 8px; border: 0; background: transparent; color: var(--ink-3); cursor: pointer; display: none; align-items: center; justify-content: center; }
+    .editing .q li .del { display: flex; }
+    .q .add { display: none; gap: 8px; margin-top: 10px; }
+    .editing .q .add { display: flex; }
+    .q .add input { flex: 1; font: inherit; font-size: 14px; padding: 9px 11px; border-radius: 10px; border: 1.5px solid var(--line); background: var(--surface-2); color: var(--ink); }
+    .came { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 22px; }
+    .came > div { padding: 20px; border-radius: 20px; border: 1px solid var(--line); background: var(--surface); border-top: 5px solid var(--cc); }
+    .came small { font-size: 11px; font-weight: 800; letter-spacing: .1em; color: var(--cc); text-transform: uppercase; }
+    .came b { display: block; font-size: 16px; margin: 4px 0 6px; }
+    .came p { font-size: 13.5px; color: var(--ink-3); }
+
+    /* ---------- Herramientas ---------- */
+    .filters { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin-bottom: 22px; }
+    .search { position: relative; flex: 1; min-width: 240px; }
+    .search svg.i { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--ink-3); }
+    .search input { width: 100%; padding: 12px 14px 12px 42px; font: inherit; font-size: 15px; border-radius: 14px; border: 1.5px solid var(--line); background: var(--surface); color: var(--ink); }
+    .search input:focus { outline: none; border-color: var(--suh); box-shadow: 0 0 0 4px rgba(30,91,156,.14); }
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+    .chip { padding: 8px 14px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); color: var(--ink-2); font: inherit; font-size: 13px; font-weight: 700; cursor: pointer; display: inline-flex; gap: 7px; align-items: center; }
+    .chip i { width: 8px; height: 8px; border-radius: 50%; background: var(--cc); }
+    .chip.on { background: var(--ink); color: var(--surface); border-color: var(--ink); }
+    .tools { display: grid; grid-template-columns: repeat(auto-fill, minmax(330px, 1fr)); gap: 16px; }
+    .tool { padding: 22px; display: flex; flex-direction: column; gap: 12px; position: relative; overflow: hidden; transition: .3s var(--ease); }
+    .tool:hover { transform: translateY(-4px); box-shadow: var(--sh); border-color: color-mix(in srgb, var(--cc) 50%, var(--line)); }
+    .tool::after { content: ""; position: absolute; right: -40px; top: -40px; width: 120px; height: 120px; border-radius: 50%; background: var(--cc); opacity: .07; }
+    .tool-h { display: flex; gap: 14px; align-items: center; }
+    .tool-ico { width: 48px; height: 48px; border-radius: 14px; display: flex; align-items: center; justify-content: center; color: #fff; background: var(--cc); flex-shrink: 0; box-shadow: 0 8px 18px -8px var(--cc); }
+    .tool-ico svg.i { width: 24px; height: 24px; }
+    .tool small.c { font-size: 11px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--cc); }
+    .tool h4 { font-size: 17px; font-weight: 800; line-height: 1.25; }
+    .tool p { font-size: 14px; color: var(--ink-3); flex: 1; }
+    .tool .v { font-size: 12px; font-weight: 700; color: var(--ink-2); display: flex; gap: 6px; align-items: center; }
+    .tool .acsa-tags { display: flex; gap: 5px; flex-wrap: wrap; }
+    .tool .new { position: absolute; top: 16px; right: 16px; font-size: 10.5px; font-weight: 800; padding: 3px 8px; border-radius: 6px; background: var(--snm); color: #fff; letter-spacing: .06em; z-index: 1; }
+    .tool-a { display: flex; gap: 8px; }
+    .tool-a .btn-p { flex: 1; }
+    .docs { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 22px; }
+    .doc { display: flex; gap: 14px; align-items: center; padding: 18px; text-decoration: none; }
+    .doc .ico { width: 46px; height: 54px; border-radius: 8px; background: var(--danger); color: #fff; font-size: 11px; font-weight: 800; display: flex; align-items: flex-end; justify-content: center; padding-bottom: 8px; flex-shrink: 0; }
+    .doc b { display: block; font-size: 15px; } .doc span { font-size: 13px; color: var(--ink-3); }
+
+    /* ---------- Galería ---------- */
+    .gal { columns: 4 260px; column-gap: 14px; }
+    .gal button { display: block; width: 100%; margin-bottom: 14px; border: 0; padding: 0; border-radius: 16px; overflow: hidden; cursor: zoom-in; position: relative; break-inside: avoid; background: var(--surface-2); }
+    .gal img { width: 100%; height: auto; transition: transform .7s var(--ease), filter .4s; }
+    .gal button:hover img { transform: scale(1.06); }
+    .gal button span { position: absolute; left: 10px; bottom: 10px; font-size: 12px; font-weight: 700; color: #fff; background: rgba(7,26,47,.72); padding: 4px 9px; border-radius: 8px; opacity: 0; transform: translateY(6px); transition: .3s var(--ease); }
+    .gal button:hover span { opacity: 1; transform: none; }
+    .lb { position: fixed; inset: 0; z-index: 1000; background: rgba(4,12,22,.94); display: none; align-items: center; justify-content: center; }
+    .lb.open { display: flex; }
+    .lb img { max-width: 92vw; max-height: 84vh; border-radius: 12px; box-shadow: 0 30px 80px rgba(0,0,0,.6); animation: zin .35s var(--ease); }
+    @keyframes zin { from { opacity: 0; transform: scale(.96); } to { opacity: 1; transform: none; } }
+    .lb .cap { position: absolute; bottom: 22px; left: 50%; transform: translateX(-50%); color: #fff; font-weight: 700; font-size: 14px; background: rgba(255,255,255,.1); padding: 8px 14px; border-radius: 10px; white-space: nowrap; }
+    .lb .nav-b { position: absolute; top: 50%; transform: translateY(-50%); width: 52px; height: 52px; border-radius: 50%; border: 0; background: rgba(255,255,255,.12); color: #fff; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+    .lb .nav-b:hover { background: rgba(255,255,255,.25); }
+    .lb .prev { left: 20px; } .lb .next { right: 20px; } .lb .close { top: 20px; right: 20px; transform: none; }
+
+    /* ---------- Modal de vista previa ---------- */
+    .pv { position: fixed; inset: 0; z-index: 900; background: rgba(4,12,22,.7); backdrop-filter: blur(6px); display: none; align-items: center; justify-content: center; padding: 20px; }
+    .pv.open { display: flex; }
+    .pv-win { width: min(1200px, 100%); height: min(860px, 92vh); background: var(--surface); border-radius: 22px; overflow: hidden; display: flex; flex-direction: column; box-shadow: var(--sh-lg); }
+    .pv-h { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 12px 16px; border-bottom: 1px solid var(--line); }
+    .pv-h b { font-size: 15px; }
+    .pv iframe { flex: 1; width: 100%; border: 0; background: #fff; }
+
+    /* ---------- Redes ---------- */
+    .social { display: grid; grid-template-columns: 1.2fr 1fr; gap: 22px; align-items: stretch; }
+    .ig { padding: 30px; border-radius: 28px; color: #fff; background: radial-gradient(circle at 20% 110%, #fdd36b 0%, #f58b3b 25%, #dc2743 50%, #bc1888 75%, #4f5bd5 100%); position: relative; overflow: hidden; }
+    .ig-h { display: flex; align-items: center; gap: 16px; }
+    .ig-h .ring { width: 86px; height: 86px; border-radius: 50%; padding: 4px; background: #fff; }
+    .ig-h .ring img { width: 100%; height: 100%; border-radius: 50%; object-fit: contain; background: #fff; }
+    .ig-h b { font-size: 21px; display: block; } .ig-h span { opacity: .9; font-size: 14px; }
+    .ig .hls { display: flex; gap: 14px; flex-wrap: wrap; margin: 24px 0; }
+    .ig .hls div { display: flex; flex-direction: column; align-items: center; gap: 6px; width: 74px; font-size: 11.5px; font-weight: 700; text-align: center; }
+    .ig .hls i { width: 62px; height: 62px; border-radius: 50%; border: 2px solid rgba(255,255,255,.9); background: rgba(255,255,255,.18); display: flex; align-items: center; justify-content: center; }
+    .ig .hls i svg { width: 26px; height: 26px; }
+    .soc-list { display: flex; flex-direction: column; gap: 12px; }
+    .soc-list a { display: flex; align-items: center; gap: 14px; padding: 18px; text-decoration: none; }
+    .soc-list .s-ico { width: 48px; height: 48px; border-radius: 14px; display: flex; align-items: center; justify-content: center; color: #fff; flex-shrink: 0; }
+    .soc-list b { display: block; } .soc-list span { font-size: 13px; color: var(--ink-3); }
+
+    /* ---------- Pie ---------- */
+    footer { background: var(--suh-950); color: rgba(255,255,255,.75); padding: 56px 0 30px; font-size: 14px; }
+    .f-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 36px; }
+    footer h5 { color: #fff; font-size: 12.5px; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 12px; }
+    footer ul { list-style: none; display: flex; flex-direction: column; gap: 7px; }
+    footer a { text-decoration: none; color: rgba(255,255,255,.85); } footer a:hover { color: #fff; text-decoration: underline; }
+    .f-bottom { margin-top: 36px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,.12); display: flex; justify-content: space-between; gap: 14px; flex-wrap: wrap; font-size: 12.5px; color: rgba(255,255,255,.55); }
+    .toast { position: fixed; left: 50%; bottom: 26px; transform: translateX(-50%) translateY(20px); opacity: 0; background: var(--ink); color: var(--surface); padding: 11px 18px; border-radius: 12px; font-weight: 700; font-size: 14px; z-index: 1100; transition: .3s var(--ease); pointer-events: none; }
+    .toast.show { opacity: 1; transform: translateX(-50%); }
+
+    /* ---------- Responsive ---------- */
+    @media (max-width: 1180px) {
+      .nav { display: none; }
+      .mem { grid-template-columns: 1fr; } .toc { position: static; }
+      .toc nav { display: grid; grid-template-columns: 1fr 1fr; }
+      .blocks, .came, .obj { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 860px) {
+      .pres, .acsa-top, .social, .docs, .dafo, .mvv { grid-template-columns: 1fr; }
+      .dafo-axis { display: none; }
+      .kpis { grid-template-columns: 1fr 1fr; }
+      .scroll-hint { display: none; }
+      .strip { grid-template-columns: 1fr 1fr; }
+      .blocks, .f-grid { grid-template-columns: 1fr; }
+      .logos .l-junta, .logos .vsep.v2 { display: none; }
+      .chap { padding: 28px 22px; }
+    }
+    @media (max-width: 600px) {
+      .wrap { padding: 0 16px; }
+      section.sec { padding: 64px 0; }
+      .top-in { height: 64px; }
+      .logos .l-suh { height: 44px; } .logos .l-snm { height: 18px; }
+      .top .btn-p span, .tactions .ibtn.soc { display: none; }
+      .came, .obj { grid-template-columns: 1fr; }
+      .toc nav { grid-template-columns: 1fr; }
+      .pres-body { padding: 28px 22px; } .pres-meta { grid-template-columns: 1fr 1fr 1fr; }
+      .set-row { grid-template-columns: 86px 1fr 52px; }
+      .scroll-hint { display: none; }
+      .kpi { padding: 16px; }
+    }
+
+    /* ---------- Impresión de la memoria ---------- */
+    @media print {
+      @page { size: A4; margin: 14mm; }
+      body { background: #fff; color: #000; }
+      .top, .hero, #presentacion, #acsa, #herramientas, #galeria, #redes, footer, .toc, .no-print, .suhdock, .lb, .pv, .toast { display: none !important; }
+      section.sec { padding: 0; }
+      .mem { display: block; }
+      .chap { box-shadow: none; border: 0; padding: 0 0 18px; page-break-inside: avoid; }
+      .reveal { opacity: 1 !important; transform: none !important; }
+      #dafo { padding-top: 10px; }
+      .print-cover { display: block !important; }
+    }
+    .print-cover { display: none; text-align: center; padding: 120px 0; page-break-after: always; }
+    .print-cover img { margin: 0 auto 30px; height: 120px; }
+  </style>
+</head>
+<body>
+
+  <!-- ===================== CABECERA ===================== -->
+  <header class="top">
+    <div class="wrap top-in">
+      <a class="logos" href="#inicio" aria-label="Inicio">
+        <img class="l-suh" src="img/logo-suh.jpg" alt="SUH · Servicio de Urgencias Hospital de Antequera">
+        <span class="vsep"></span>
+        <img class="l-snm" src="img/logo-snm.jpg" alt="Salud Norte Málaga">
+        <span class="vsep v2"></span>
+        <img class="l-junta" src="img/logo-junta.jpg" alt="Junta de Andalucía">
+      </a>
+      <nav class="nav" id="nav">
+        <a href="#inicio">Inicio</a>
+        <a href="#presentacion">Presentación</a>
+        <a href="#memoria">Memoria</a>
+        <a href="#acsa">ACSA</a>
+        <a href="#dafo">DAFO</a>
+        <a href="#herramientas">Herramientas</a>
+        <a href="#galeria">Instalaciones</a>
+        <a href="#redes">Redes</a>
+      </nav>
+      <div class="tactions">
+        <a class="ibtn soc" href="https://www.instagram.com/suh_antequera_/" target="_blank" rel="noopener" title="Instagram @suh_antequera_" data-i="instagram"></a>
+        <a class="ibtn soc" href="https://www.facebook.com/p/Suh-Antequera-61568582212569/" target="_blank" rel="noopener" title="Facebook SUH Antequera" data-i="facebook"></a>
+        <button class="ibtn" id="theme" title="Tema claro / oscuro"></button>
+        <a class="btn btn-p" href="presentacion.html" data-i="play"><span>Presentación</span></a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===================== HERO ===================== -->
+  <section class="hero" id="inicio">
+    <div class="hero-bg" id="hero-bg"></div>
+    <div class="wrap hero-in">
+      <span class="chip-acsa"><b>ACSA</b> Unidad certificada · Nivel Óptimo</span>
+      <h1 class="serif">Supervisión de Enfermería del <em>Servicio de Urgencias</em> del Hospital de Antequera</h1>
+      <p class="lead">Proyecto de gestión y memoria 2026: personas, procesos, seguridad, calidad acreditada y un ecosistema digital propio al servicio de los pacientes del Área Sanitaria Norte de Málaga.</p>
+      <div class="byline">
+        <div class="avatar">MI</div>
+        <div><b>Manuel Isaías Medina Pérez</b><span>Supervisor de Enfermería · Servicio de Urgencias Hospitalarias</span></div>
+      </div>
+      <div class="hero-cta">
+        <a class="btn btn-w" href="presentacion.html" data-i="play">Ver presentación · 15 min</a>
+        <a class="btn btn-o" href="#memoria" data-i="book">Leer la memoria</a>
+        <a class="btn btn-o" href="#herramientas" data-i="layers">Herramientas digitales</a>
+      </div>
+      <div class="kpis">
+        <div class="kpi"><b data-count="20">0</b><span>Herramientas digitales propias</span></div>
+        <div class="kpi"><b data-count="72">0</b><span>Imágenes de 9 áreas asistenciales</span></div>
+        <div class="kpi"><b data-count="76">0</b><span>Estándares del Manual ACSA ME 5 1_08</span></div>
+        <div class="kpi"><b data-count="5">0</b><span>Niveles de triaje (SET) con 6 circuitos</span></div>
+      </div>
+    </div>
+    <div class="scroll-hint">Desliza</div>
+  </section>
+
+  <!-- ===================== PRESENTACIÓN ===================== -->
+  <section class="sec" id="presentacion">
+    <div class="wrap">
+      <div class="pres reveal">
+        <div class="pres-media">
+          <img src="img/fotos/full/criticos-11.jpg" alt="Sala de Críticos de Urgencias">
+          <a class="pres-play" href="presentacion.html" aria-label="Iniciar la presentación" data-i="play"></a>
+        </div>
+        <div class="pres-body">
+          <span class="eyebrow" style="color:var(--suh-200)" data-i="presentation">Presentación del proyecto</span>
+          <h3 class="serif">Cuidar a quien llega, cuidar a quien cuida</h3>
+          <p>Una presentación dinámica de 15 minutos con 22 diapositivas: el servicio en imágenes, el modelo de supervisión, la acreditación ACSA, el DAFO, demostraciones en directo de las herramientas y el plan estratégico 2027.</p>
+          <div class="pres-meta">
+            <div><b>15'</b><span>Duración guiada</span></div>
+            <div><b>22</b><span>Diapositivas</span></div>
+            <div><b>3</b><span>Demos en directo</span></div>
+          </div>
+          <div class="keys"><span><kbd>→</kbd>avanzar</span><span><kbd>F</kbd>pantalla completa</span><span><kbd>N</kbd>notas</span><span><kbd>O</kbd>vista general</span><span><kbd>A</kbd>modo automático</span></div>
+          <div style="display:flex; gap:10px; flex-wrap:wrap;">
+            <a class="btn btn-w" href="presentacion.html" data-i="play">Iniciar presentación</a>
+            <a class="btn btn-o" href="presentacion.html#auto" data-i="clock">Modo automático</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== MEMORIA ===================== -->
+  <section class="sec alt" id="memoria">
+    <div class="wrap">
+      <div class="print-cover">
+        <img src="img/logo-suh.jpg" alt="">
+        <h1 class="serif" style="font-size:34px;">Memoria de Supervisión de Enfermería 2026</h1>
+        <p style="margin-top:12px;">Servicio de Urgencias · Hospital de Antequera · Área de Gestión Sanitaria Norte de Málaga</p>
+        <p style="margin-top:30px;"><b>Manuel Isaías Medina Pérez</b><br>Supervisor de Enfermería</p>
+      </div>
+      <div class="head reveal">
+        <div>
+          <span class="eyebrow" data-i="book">Memoria de supervisión 2026</span>
+          <h2 class="h2 serif">Memoria de Supervisión de Enfermería</h2>
+          <p class="sub">Documento de gestión del Servicio de Urgencias del Hospital de Antequera, alineado con el estándar ES 5 01.08_02 (memoria anual de actividades) del Manual ACSA ME 5 1_08.</p>
+        </div>
+        <button class="btn btn-g no-print" onclick="window.print()" data-i="printer">Imprimir / PDF</button>
+      </div>
+
+      <div class="mem">
+        <aside class="card toc no-print">
+          <b>Índice</b>
+          <nav id="toc">
+            <a href="#m0"><span>00</span>Carta del supervisor</a>
+            <a href="#m1"><span>01</span>Misión, visión y valores</a>
+            <a href="#m2"><span>02</span>La unidad y sus espacios</a>
+            <a href="#m3"><span>03</span>Triaje y circuitos</a>
+            <a href="#m4"><span>04</span>Gestión de personas</a>
+            <a href="#m5"><span>05</span>Gestión por procesos</a>
+            <a href="#m6"><span>06</span>Cuidados de enfermería</a>
+            <a href="#m7"><span>07</span>Seguridad del paciente</a>
+            <a href="#m8"><span>08</span>Calidad y ACSA</a>
+            <a href="#m9"><span>09</span>Transformación digital</a>
+            <a href="#m10"><span>10</span>Humanización y ciudadanía</a>
+            <a href="#m11"><span>11</span>Indicadores</a>
+            <a href="#m12"><span>12</span>Análisis DAFO</a>
+            <a href="#m13"><span>13</span>Plan de acción 2027</a>
+          </nav>
+          <div class="tocbtns">
+            <button class="btn btn-g btn-sm" onclick="window.print()" data-i="printer">Imprimir memoria</button>
+            <a class="btn btn-p btn-sm" href="presentacion.html" data-i="play">Presentación</a>
+          </div>
+        </aside>
+
+        <div>
+          <!-- 00 -->
+          <article class="card chap letter reveal" id="m0">
+            <div class="q" data-i="quote"></div>
+            <div class="chap-n">00</div>
+            <h3 class="serif">Carta del supervisor</h3>
+            <p>Esta memoria recoge el trabajo del equipo de enfermería del Servicio de Urgencias del Hospital de Antequera durante 2026: un año marcado por la consolidación de la <b>certificación de la Agencia de Calidad Sanitaria de Andalucía en nivel Óptimo</b> y por una visita de evaluación vivida por el equipo como una experiencia muy positiva.</p>
+            <p>Nuestro reto diario es doble: atender con rapidez y seguridad a quien llega en el peor momento, y cuidar a los profesionales que hacen posible esa atención. Por eso, tras la auditoría de prevención de riesgos laborales, hemos convertido las <b>reuniones de gobernanza</b> en un espacio estable para escuchar, decidir juntos y mejorar el clima laboral.</p>
+            <p>Hemos medido lo que importa —el dolor de nuestros pacientes y la calidad del registro de continuidad de cuidados— y hemos digitalizado nuestros protocolos en herramientas que el equipo usa a pie de cama. También sabemos dónde tenemos que mejorar: reducir la <b>TECLA</b> (lo que espera el paciente hasta que lo clasifican) y la <b>TICLA</b> (lo que dura la clasificación) será nuestra prioridad para 2027.</p>
+            <p>Gracias a cada enfermera, enfermero, TCAE, celador, médico y personal de apoyo del servicio. Esta memoria es vuestra.</p>
+            <div class="sign"><div class="avatar">MI</div><div><b>Manuel Isaías Medina Pérez</b><span>Supervisor de Enfermería · Servicio de Urgencias · Hospital de Antequera</span></div></div>
+          </article>
+
+          <!-- 01 -->
+          <article class="card chap reveal" id="m1">
+            <div class="chap-n">01</div>
+            <h3 class="serif">Misión, visión y valores</h3>
+            <div class="mvv">
+              <div><b data-i="target">Misión</b><p>Prestar atención urgente de calidad, segura y humana a la población del Área Sanitaria Norte de Málaga, priorizando según la gravedad y garantizando la continuidad de cuidados al alta.</p></div>
+              <div><b data-i="compass">Visión</b><p>Ser un servicio de urgencias de referencia por su excelencia en cuidados, su cultura de seguridad, su innovación digital y el bienestar de sus profesionales.</p></div>
+              <div><b data-i="heart">Valores</b><div class="values"><span>Seguridad</span><span>Humanización</span><span>Trabajo en equipo</span><span>Evidencia</span><span>Transparencia</span><span>Innovación</span><span>Respeto</span></div></div>
+            </div>
+          </article>
+
+          <!-- 02 -->
+          <article class="card chap reveal" id="m2">
+            <div class="chap-n">02</div>
+            <h3 class="serif">La unidad y sus espacios</h3>
+            <p>El Servicio de Urgencias se organiza en áreas funcionales diferenciadas que permiten aplicar los circuitos del PNT de triaje. Las imágenes de esta memoria documentan el estado actual de las instalaciones (72 fotografías de 9 áreas).</p>
+            <div id="areas-list"></div>
+          </article>
+
+          <!-- 03 -->
+          <article class="card chap reveal" id="m3">
+            <div class="chap-n">03</div>
+            <h3 class="serif">Triaje y circuitos asistenciales</h3>
+            <p>Enfermería de triaje clasifica a cada paciente con el <b>Sistema Español de Triaje (SET)</b> de cinco niveles y el programa web_e-PAT, según el PNT de triaje (versión 6, junio de 2026). Las barras muestran el tiempo máximo de atención por prioridad.</p>
+            <div class="set" id="set"></div>
+            <p>Las patologías tiempo-dependientes (dolor torácico, ictus, trauma grave y sepsis) se tratan como prioridad 1 con su propio código. Los circuitos son excluyentes entre sí:</p>
+            <div class="circs" id="circs"></div>
+            <h4>Tiempos de triaje: TECLA y TICLA</h4>
+            <div class="mvv" style="grid-template-columns: 1fr 1fr; margin-bottom:10px;">
+              <div><b data-i="clock">TECLA · tiempo de espera de clasificación</b><p>Lo que espera el paciente desde su llegada hasta que lo clasifican en triaje. Meta propuesta: ≤ 10 minutos.</p></div>
+              <div><b data-i="clock">TICLA · tiempo de clasificación</b><p>Lo que dura el triaje, desde que empieza hasta que se asigna la prioridad. Meta propuesta: ≤ 5 minutos.</p></div>
+            </div>
+            <p>Son el área de mejora prioritaria del servicio. El PNT ya prevé una segunda consulta de triaje en las horas de máxima afluencia para acortar ambos tiempos.</p>
+            <h4>Fragilidad y violencia, detectadas en triaje</h4>
+            <ul class="l">
+              <li data-i="check"><span><b>Paciente frágil:</b> EPADI de 6 o más, seguimiento por Cuidados Paliativos o tarjeta +Cuidado. Se anota «PF» y la puntuación, pegatina amarilla, cuidador acompañante y profesionales responsables asignados.</span></li>
+              <li data-i="check"><span><b>Dependencia en Diraya-Urgencias:</b> el nombre se sombrea en blanco, verde, amarillo o rojo según dependencia y acompañamiento.</span></li>
+              <li data-i="check"><span><b>Sospecha de violencia de género:</b> Protocolo Andaluz, atención a solas en la consulta 12, prioridad entre 1 y 3 y registro CMT / ISMT.</span></li>
+            </ul>
+          </article>
+
+          <!-- 04 -->
+          <article class="card chap reveal" id="m4">
+            <div class="chap-n">04</div>
+            <h3 class="serif">Gestión de personas</h3>
+            <h4>Acogida y funciones</h4>
+            <p>Cada incorporación recibe el <b>Plan de Acogida PG-UAP-01 (versión 6, octubre 2025)</b> del Área, junto con el documento de funciones y responsabilidades del Hospital de Antequera y el plano de evacuación de Urgencias, convertidos en una guía de estudio interactiva (ES 5 01.10_02 y ES 5 06.08_03).</p>
+            <h4>Formación</h4>
+            <p>La preparación de la acreditación se ha apoyado en <b>El Juego de la Acreditación</b>: 102 puntos del checklist de Calidad, los requisitos del Excel de 50 estándares y el Manual ME 5 1_08 en casos prácticos de «¿cumple o no cumple?». Cada protocolo digital incluye además tarjetas de repaso (ES 5 01.12_04).</p>
+            <h4>Gobernanza y clima laboral tras la auditoría de PRL</h4>
+            <p>La auditoría de prevención de riesgos laborales identificó riesgos de seguridad, ergonómicos y psicosociales propios de un servicio de urgencias. La respuesta de la supervisión ha sido institucionalizar <b>reuniones de gobernanza</b> con los profesionales para:</p>
+            <ul class="l">
+              <li data-i="check"><span>Analizar conjuntamente los hallazgos de la auditoría y priorizar medidas (ES 5 06.06_02).</span></li>
+              <li data-i="check"><span>Abordar la prevención de agresiones y el manejo del paciente agitado según el PNT de contención.</span></li>
+              <li data-i="check"><span>Dar voz al equipo en la organización del trabajo, reforzando el modelo de gobierno clínico (ES 5 01.01_01).</span></li>
+              <li data-i="check"><span>Utilizar el clima laboral como palanca de desarrollo organizativo (ES 5 01.16_02).</span></li>
+            </ul>
+          </article>
+
+          <!-- 05 -->
+          <article class="card chap reveal" id="m5">
+            <div class="chap-n">05</div>
+            <h3 class="serif">Gestión por procesos</h3>
+            <p>Los procesos asistenciales del servicio están documentados en Procedimientos Normalizados de Trabajo (PNT) y se han trasladado a herramientas interactivas que facilitan su aplicación y su evaluación (ES 5 02.01_04).</p>
+            <div class="tbl-wrap"><table class="t" id="pnt-table"><thead><tr><th>Proceso</th><th>Documento de referencia</th><th>Estándar</th><th>Herramienta</th></tr></thead><tbody></tbody></table></div>
+          </article>
+
+          <!-- 06 -->
+          <article class="card chap reveal" id="m6">
+            <div class="chap-n">06</div>
+            <h3 class="serif">Cuidados de enfermería</h3>
+            <h4>Auditorías de dolor · ES 5 04.06_01 (obligatorio)</h4>
+            <p>El abordaje del dolor es un estándar obligatorio del manual. Las auditorías del servicio comprueban sus cuatro elementos evaluables:</p>
+            <ul class="l">
+              <li data-i="check"><span>Uso de escalas validadas (EVA, EVN…) con registro en la historia de salud.</span></li>
+              <li data-i="check"><span>Disponibilidad y aplicación del PNT de Dolor en Urgencias (v1, 15/12/2025), con tratamientos farmacológicos y no farmacológicos.</span></li>
+              <li data-i="check"><span>Información verbal y escrita del tratamiento: nombre, dosis, posología, vía y duración.</span></li>
+              <li data-i="check"><span>Formación de los profesionales en el manejo del dolor.</span></li>
+            </ul>
+            <h4>Registro de continuidad de cuidados · ES 5 03.12_02 y ES 5 03.11_02</h4>
+            <p>La auditoría del informe de continuidad de cuidados verifica la asignación de enfermera y médico de referencia, el plan de cuidados y la transmisión de la información a Atención Primaria. La herramienta de Recomendaciones al Alta genera el texto normalizado NANDA-NIC-NOC para Diraya.</p>
+            <h4>Fragilidad, heridas y educación sanitaria</h4>
+            <ul class="l">
+              <li data-i="check"><span><b>EPADI:</b> índice de fragilidad de 0 a 10 que activa el circuito de paciente frágil.</span></li>
+              <li data-i="check"><span><b>Heridas:</b> evaluación y manejo local TIMERS con el catálogo de la Comisión de Heridas AGSNM 2025-2026.</span></li>
+              <li data-i="check"><span><b>Educación sanitaria:</b> hojas por motivo de consulta y 21 guías al alta con fuentes de evidencia (ES 5 04.01_03, 04.05_00).</span></li>
+            </ul>
+          </article>
+
+          <!-- 07 -->
+          <article class="card chap reveal" id="m7">
+            <div class="chap-n">07</div>
+            <h3 class="serif">Seguridad del paciente</h3>
+            <ul class="l">
+              <li data-i="check"><span><b>Identificación inequívoca</b> con NHC / NUHSA en todos los registros (ES 5 05.05_03).</span></li>
+              <li data-i="check"><span><b>Contención mecánica como último recurso</b>, con al menos 4 personas (preferentemente 5), valoración facultativa en menos de 1 hora y revisión de la duración prevista como mínimo cada 4 horas (PNT 2024 y PG-CAL-11).</span></li>
+              <li data-i="check"><span><b>Fluidoterapia segura</b> según el PNT v1.0 de diciembre de 2025 (ES 5 05.10_00).</span></li>
+              <li data-i="check"><span><b>Detección precoz de sepsis</b> con NEWS2 automático en el Código Sepsis.</span></li>
+              <li data-i="check"><span><b>Gestión de riesgos documentales:</b> la digitalización del PNT de Críticos permitió detectar incoherencias de fechas, dotación y erratas, que se han trasladado a la Unidad para su corrección (ES 5 05.01_03).</span></li>
+              <li data-i="check"><span><b>Protección de datos:</b> las herramientas no guardan ni envían datos de pacientes (ES 5 06.14_03).</span></li>
+            </ul>
+          </article>
+
+          <!-- 08 -->
+          <article class="card chap reveal" id="m8">
+            <div class="chap-n">08</div>
+            <h3 class="serif">Calidad y acreditación ACSA</h3>
+            <p>El servicio mantiene la <b>certificación en nivel Óptimo</b> según el Manual de Estándares de Unidades de Gestión Sanitaria ME 5 1_08 (ACSA, 2022): 76 estándares agrupados en 3 bloques y 6 criterios. El nivel Óptimo exige el 100 % de los estándares del grupo I, incluidos los obligatorios, y más del 40 % del grupo II.</p>
+            <p>La reciente visita de los evaluadores fue una muy buena experiencia para el equipo y confirmó la madurez de nuestro sistema de calidad. El mapa completo de estándares y evidencias está en la sección <a href="#acsa" style="color:var(--suh); font-weight:700;">ACSA</a>.</p>
+          </article>
+
+          <!-- 09 -->
+          <article class="card chap reveal" id="m9">
+            <div class="chap-n">09</div>
+            <h3 class="serif">Transformación digital</h3>
+            <p>El servicio dispone de <b>20 herramientas interactivas</b> propias que funcionan en cualquier navegador sin instalación ni servidor: triaje, códigos tiempo-dependientes, protocolos clínicos, cuidados, educación sanitaria y formación. Todas comparten una barra de acceso al portal y a las redes sociales del servicio.</p>
+            <p>El reto para 2027 es su gobierno: responsable y fecha de revisión por herramienta, validación clínica previa al uso asistencial y retirada de versiones anteriores (ES 5 01.05_00).</p>
+            <a class="btn btn-p btn-sm no-print" href="#herramientas" data-i="layers">Ver las herramientas</a>
+          </article>
+
+          <!-- 10 -->
+          <article class="card chap reveal" id="m10">
+            <div class="chap-n">10</div>
+            <h3 class="serif">Humanización y ciudadanía</h3>
+            <ul class="l">
+              <li data-i="check"><span>Instagram <b>@suh_antequera_</b> con destacados de Promoción de la Salud, Ciudadanía, Información, Humanización, Guía de usuario, Derechos, Deberes y Teléfonos de interés (ES 5 03.08_02).</span></li>
+              <li data-i="check"><span>Acompañamiento del cuidador principal en el paciente frágil y atención en intimidad a víctimas de violencia (ES 5 03.01_00, 03.02_03).</span></li>
+              <li data-i="check"><span>Portal de Recomendaciones de Salud con 15 consejos de promoción basados en la evidencia (ES 5 04.04_00).</span></li>
+            </ul>
+          </article>
+
+          <!-- 11 -->
+          <article class="card chap reveal" id="m11">
+            <div class="chap-n">11</div>
+            <h3 class="serif">Cuadro de indicadores</h3>
+            <div class="note no-print" data-i="edit"><span>Los resultados se rellenan directamente en la tabla con los datos del servicio y se guardan en este navegador. Las metas son propuestas de la supervisión.</span></div>
+            <div class="tbl-wrap"><table class="t ind" id="ind-table"><thead><tr><th>Indicador</th><th>Fórmula</th><th>Meta</th><th>Resultado 2026</th><th>Estándar</th></tr></thead><tbody></tbody></table></div>
+          </article>
+
+          <!-- 12 -->
+          <article class="card chap reveal" id="m12">
+            <div class="chap-n">12</div>
+            <h3 class="serif">Análisis DAFO</h3>
+            <p>El análisis estratégico completo, interactivo y con estrategias CAME, se encuentra en la sección <a href="#dafo" style="color:var(--suh); font-weight:700;">DAFO</a>. Sus conclusiones principales:</p>
+            <ul class="l">
+              <li data-i="check"><span><b>Fortalezas:</b> certificación Óptima, reuniones de gobernanza tras la auditoría de PRL, auditorías de dolor y de registro de continuidad de cuidados.</span></li>
+              <li data-i="check"><span><b>Área de mejora prioritaria:</b> TECLA (tiempo de espera hasta la clasificación) y TICLA (tiempo que dura el triaje).</span></li>
+            </ul>
+          </article>
+
+          <!-- 13 -->
+          <article class="card chap reveal" id="m13">
+            <div class="chap-n">13</div>
+            <h3 class="serif">Plan de acción 2027</h3>
+            <div class="obj" id="obj"></div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== ACSA ===================== -->
+  <section class="sec" id="acsa">
+    <div class="wrap">
+      <div class="head reveal">
+        <div>
+          <span class="eyebrow" data-i="award">Agencia de Calidad Sanitaria de Andalucía</span>
+          <h2 class="h2 serif">Certificación ACSA: nivel Óptimo</h2>
+          <p class="sub">Manual de Estándares de Unidades de Gestión Sanitaria ME 5 1_08: 76 estándares, 3 bloques y 6 criterios. Pulsa cada criterio para ver los estándares clave y la evidencia del servicio.</p>
+        </div>
+        <a class="btn btn-g" href="docs/manual-acsa-unidades-gestion-sanitaria-ME5-1_08.pdf" target="_blank" data-i="file">Manual ME 5 1_08 (PDF)</a>
+      </div>
+      <div class="acsa-top">
+        <div class="seal reveal">
+          <div class="medal"><div><b>ACSA</b><span>ÓPTIMO</span></div></div>
+          <h3 class="serif">Unidad certificada en nivel Óptimo</h3>
+          <p>100 % de los estándares del grupo I —incluidos todos los obligatorios— y más del 40 % del grupo II. La visita reciente de los evaluadores fue una muy buena experiencia para todo el equipo.</p>
+          <p style="font-size:13px; opacity:.8;">Vigencia del certificado: 5 años, con fase de seguimiento.</p>
+        </div>
+        <div class="card levels reveal" id="levels"></div>
+      </div>
+      <div class="blocks" id="blocks"></div>
+    </div>
+  </section>
+
+  <!-- ===================== DAFO ===================== -->
+  <section class="sec alt" id="dafo">
+    <div class="wrap">
+      <div class="head reveal">
+        <div>
+          <span class="eyebrow" data-i="grid">Análisis estratégico</span>
+          <h2 class="h2 serif">DAFO interactivo</h2>
+          <p class="sub">Pulsa cada elemento para ver su detalle, el estándar ACSA relacionado y la herramienta asociada. En modo edición puedes añadir o quitar elementos; los cambios se guardan en este navegador.</p>
+        </div>
+      </div>
+      <div class="dafo-bar no-print">
+        <div class="seg" id="dafo-view">
+          <button class="on" data-v="all">Todo</button>
+          <button data-v="int">Análisis interno</button>
+          <button data-v="ext">Análisis externo</button>
+        </div>
+        <div style="display:flex; gap:8px; flex-wrap:wrap;">
+          <button class="btn btn-g btn-sm" id="dafo-edit" data-i="edit">Editar DAFO</button>
+          <button class="btn btn-g btn-sm" id="dafo-reset" data-i="restart">Restaurar</button>
+        </div>
+      </div>
+      <div class="dafo" id="dafo-grid"><div class="dafo-axis">Urgencias<br>Antequera<br>2026</div></div>
+      <h3 class="serif" style="font-size:26px; margin:40px 0 4px;">Estrategias CAME</h3>
+      <p class="sub">Corregir las debilidades, Afrontar las amenazas, Mantener las fortalezas y Explotar las oportunidades.</p>
+      <div class="came" id="came"></div>
+    </div>
+  </section>
+
+  <!-- ===================== HERRAMIENTAS ===================== -->
+  <section class="sec" id="herramientas">
+    <div class="wrap">
+      <div class="head reveal">
+        <div>
+          <span class="eyebrow" data-i="layers">Ecosistema digital del servicio</span>
+          <h2 class="h2 serif">Herramientas interactivas</h2>
+          <p class="sub">Todas las webs interactivas del servicio, organizadas por áreas. Abre cada una o consúltala en vista previa sin salir del portal.</p>
+        </div>
+      </div>
+      <div class="filters no-print">
+        <div class="search"><svg class="i" viewBox="0 0 24 24" data-p="search"></svg><input id="tool-q" type="search" placeholder="Buscar herramienta, protocolo o estándar (sepsis, triaje, ES 5 04.06…)"></div>
+      </div>
+      <div class="chips no-print" id="tool-chips" style="margin-bottom:22px;"></div>
+      <div class="tools" id="tools"></div>
+      <h3 class="serif" style="font-size:24px; margin:44px 0 0;">Documentos de referencia</h3>
+      <div class="docs" id="docs"></div>
+    </div>
+  </section>
+
+  <!-- ===================== GALERÍA ===================== -->
+  <section class="sec alt" id="galeria">
+    <div class="wrap">
+      <div class="head reveal">
+        <div>
+          <span class="eyebrow" data-i="camera">Nuestras instalaciones</span>
+          <h2 class="h2 serif">El servicio en imágenes</h2>
+          <p class="sub">72 fotografías de las 9 áreas del Servicio de Urgencias. Pulsa una imagen para ampliarla y usa las flechas del teclado para navegar.</p>
+        </div>
+      </div>
+      <div class="chips no-print" id="gal-chips" style="margin-bottom:22px;"></div>
+      <div class="gal" id="gal"></div>
+    </div>
+  </section>
+
+  <!-- ===================== REDES ===================== -->
+  <section class="sec" id="redes">
+    <div class="wrap">
+      <div class="head reveal">
+        <div>
+          <span class="eyebrow" data-i="instagram">Comunicación</span>
+          <h2 class="h2 serif">Síguenos en redes sociales</h2>
+          <p class="sub">Formación, campañas de promoción de la salud e información para la ciudadanía.</p>
+        </div>
+      </div>
+      <div class="social">
+        <div class="ig reveal">
+          <div class="ig-h">
+            <div class="ring"><img src="img/logo-suh.jpg" alt="SUH Antequera"></div>
+            <div><b>@suh_antequera_</b><span>Servicio de Urgencias del Hospital de Antequera</span></div>
+          </div>
+          <div class="hls" id="ig-hls"></div>
+          <a class="btn btn-w" href="https://www.instagram.com/suh_antequera_/" target="_blank" rel="noopener" data-i="instagram">Abrir Instagram</a>
+        </div>
+        <div class="soc-list">
+          <a class="card reveal" href="https://www.instagram.com/suh_antequera_/" target="_blank" rel="noopener"><span class="s-ico" style="background:linear-gradient(45deg,#f09433,#dc2743,#bc1888);" data-i="instagram"></span><span><b>Instagram</b><span>@suh_antequera_</span></span></a>
+          <a class="card reveal" href="https://www.facebook.com/p/Suh-Antequera-61568582212569/" target="_blank" rel="noopener"><span class="s-ico" style="background:#1877f2;" data-i="facebook"></span><span><b>Facebook</b><span>SUH Antequera</span></span></a>
+          <a class="card reveal" href="https://x.com/saludnortemalag" target="_blank" rel="noopener"><span class="s-ico" style="background:#111; font-size:20px; font-weight:800;">𝕏</span><span><b>X · Área Sanitaria</b><span>@saludnortemalag</span></span></a>
+          <a class="card reveal" href="herramientas/recomendaciones-alta.html"><span class="s-ico" style="background:var(--suh);" data-i="sparkles"></span><span><b>Recomendaciones de Salud</b><span>Portal para pacientes y familias</span></span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <div class="f-grid">
+        <div>
+          <div class="logos" style="display:inline-flex; margin-bottom:16px;">
+            <img class="l-suh" src="img/logo-suh.jpg" alt="SUH Antequera" style="height:50px;">
+            <span class="vsep"></span>
+            <img src="img/logo-snm.jpg" alt="Salud Norte Málaga" style="height:24px;">
+            <span class="vsep"></span>
+            <img src="img/logo-junta.jpg" alt="Junta de Andalucía" style="height:46px;">
+          </div>
+          <p>Proyecto de Supervisión de Enfermería del Servicio de Urgencias · Hospital de Antequera · Área de Gestión Sanitaria Norte de Málaga · Servicio Andaluz de Salud.</p>
+          <p style="margin-top:8px;"><b style="color:#fff;">Manuel Isaías Medina Pérez</b> · Supervisor de Enfermería</p>
+        </div>
+        <div>
+          <h5>Proyecto</h5>
+          <ul>
+            <li><a href="presentacion.html">Presentación (15 min)</a></li>
+            <li><a href="#memoria">Memoria de supervisión</a></li>
+            <li><a href="#acsa">Acreditación ACSA</a></li>
+            <li><a href="#dafo">DAFO y estrategias</a></li>
+            <li><a href="#herramientas">Herramientas digitales</a></li>
+          </ul>
+        </div>
+        <div>
+          <h5>Redes</h5>
+          <ul>
+            <li><a href="https://www.instagram.com/suh_antequera_/" target="_blank" rel="noopener">Instagram @suh_antequera_</a></li>
+            <li><a href="https://www.facebook.com/p/Suh-Antequera-61568582212569/" target="_blank" rel="noopener">Facebook SUH Antequera</a></li>
+            <li><a href="https://x.com/saludnortemalag" target="_blank" rel="noopener">X @saludnortemalag</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="f-bottom"><span>Uso interno y divulgativo. Las herramientas clínicas no sustituyen a los documentos oficiales ni al juicio clínico.</span><span>Octubre 2026</span></div>
+    </div>
+  </footer>
+
+  <!-- Lightbox -->
+  <div class="lb" id="lb" role="dialog" aria-modal="true">
+    <button class="nav-b close" id="lb-x" aria-label="Cerrar" data-i="x"></button>
+    <button class="nav-b prev" id="lb-p" aria-label="Anterior" data-i="left"></button>
+    <img id="lb-img" alt="">
+    <button class="nav-b next" id="lb-n" aria-label="Siguiente" data-i="right"></button>
+    <div class="cap" id="lb-cap"></div>
+  </div>
+
+  <!-- Vista previa de herramienta -->
+  <div class="pv" id="pv" role="dialog" aria-modal="true">
+    <div class="pv-win">
+      <div class="pv-h"><b id="pv-t"></b><div style="display:flex; gap:8px;"><a class="btn btn-p btn-sm" id="pv-open" target="_blank" data-i="external">Abrir en pestaña</a><button class="ibtn" id="pv-x" aria-label="Cerrar" data-i="x"></button></div></div>
+      <iframe id="pv-f" title="Vista previa"></iframe>
+    </div>
+  </div>
+  <div class="toast" id="toast"></div>
+
+  <script src="assets/icons.js"></script>
+  <script src="assets/data.js"></script>
+  <script>
+    const D = window.SUH, I = window.svgIcon;
+    const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+    const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+    const store = { get(k, d) { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; } catch (e) { return d; } }, set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} } };
+    function toast(m) { const t = $('#toast'); t.textContent = m; t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 2200); }
+
+    /* Iconos declarativos */
+    function paintIcons(root) {
+      (root || document).querySelectorAll('[data-i]').forEach(el => { if (!el.dataset.done) { el.insertAdjacentHTML('afterbegin', I(el.dataset.i)); el.dataset.done = 1; } });
+      (root || document).querySelectorAll('svg[data-p]').forEach(el => { el.innerHTML = ICONS[el.dataset.p] || ''; });
+    }
+
+    /* Tema */
+    const theme = () => document.documentElement.dataset.theme || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    const saved = store.get('suh-portal-theme', null); if (saved) document.documentElement.dataset.theme = saved;
+    function paintTheme() { $('#theme').innerHTML = I(theme() === 'dark' ? 'sun' : 'moon'); }
+    $('#theme').addEventListener('click', () => { const n = theme() === 'dark' ? 'light' : 'dark'; document.documentElement.dataset.theme = n; store.set('suh-portal-theme', n); paintTheme(); });
+
+    /* Hero: pase de fotos */
+    const HERO = ['entrada-urgencias-01', 'criticos-11', 'observacion-grave-04', 'sala-de-espera-02', 'criticos-03', 'entrada-urgencias-09'];
+    $('#hero-bg').innerHTML = HERO.map((h, i) => `<img src="img/fotos/full/${h}.jpg" alt="" class="${i === 0 ? 'on' : ''}" ${i ? 'loading="lazy"' : ''}>`).join('');
+    let hi = 0; setInterval(() => { const im = $$('#hero-bg img'); im[hi].classList.remove('on'); hi = (hi + 1) % im.length; im[hi].classList.add('on'); }, 6000);
+
+    /* Contadores */
+    function countUp(el) { const end = +el.dataset.count, t0 = performance.now(), dur = 1600; const step = t => { const p = Math.min(1, (t - t0) / dur); el.textContent = Math.round(end * (1 - Math.pow(1 - p, 3))); if (p < 1) requestAnimationFrame(step); }; requestAnimationFrame(step); }
+
+    /* Memoria: áreas */
+    $('#areas-list').innerHTML = D.AREAS.map(a => {
+      const all = D.FOTOS.filter(f => f.area === a.slug), k = Math.min(4, all.length);
+      const fotos = Array.from({ length: k }, (_, j) => all[Math.round(j * (all.length - 1) / Math.max(1, k - 1))]);
+      return `<h4>${a.nombre} <span class="tag" style="margin-left:6px;">${a.n} fotos</span></h4><p>${a.texto}</p>
+        <div class="strip">${fotos.map(f => `<button data-photo="${D.FOTOS.indexOf(f)}"><img src="${f.thumb}" alt="${a.nombre}" loading="lazy"><span>${a.nombre}</span></button>`).join('')}</div>`;
+    }).join('');
+
+    /* Memoria: SET y circuitos */
+    $('#set').innerHTML = D.SET.map(s => `<div class="set-row"><b style="color:${s.color}">${s.nombre}</b><div class="set-bar" title="${s.txt}"><i data-w="${Math.max(3, s.min / 240 * 100)}" style="background:${s.color}"></i></div><small>${s.min === 0 ? 'Inmediata' : s.min + ' min'}</small></div>`).join('');
+    $('#circs').innerHTML = D.CIRCUITOS.map(c => `<span>${c}</span>`).join('');
+
+    /* Memoria: tabla de PNT */
+    const PNT = [
+      ['Triaje y asignación', 'PNT de triaje · v6 · junio 2026', 'ES 5 02.01_04', 'triaje'],
+      ['Sala de Críticos', 'PNT-URG-CRIT-001 · v1.0 · 2026', 'ES 5 02.01_04', 'sala-criticos'],
+      ['Código Ictus', 'Teleictus (CATI) · ventana terapéutica', 'ES 5 02.01_04', 'codigo-ictus'],
+      ['Código Sepsis', 'Actualización Sepsis · 04-may-2026', 'ES 5 05.06_01', 'codigo-sepsis'],
+      ['Código Trauma', 'PNT 5.1 (anexos III-VI)', 'ES 5 02.01_04', 'codigo-trauma'],
+      ['Dolor torácico agudo', 'SCACEST v5 · mar 2025 / SCASEST · sep 2024', 'ES 5 04.01_03', 'dolor-toracico'],
+      ['Urgencias gineco-obstétricas', 'PNT Área Norte · v2 · sep 2026', 'ES 5 03.16_00', 'gineco-obstetrico'],
+      ['Dolor en Urgencias', 'PNT v1 · 15/12/2025', 'ES 5 04.06_01', 'dolor-urgencias'],
+      ['Fluidoterapia', 'PNT v1.0 · 3 dic 2025', 'ES 5 05.10_00', 'fluidoterapia'],
+      ['Paciente agitado y contención', 'PNT 2024 · PG-CAL-11', 'ES 5 05.06_01', 'contencion'],
+      ['Manejo de heridas', 'Comisión de Heridas AGSNM 2025-2026', 'ES 5 04.01_03', 'heridas'],
+      ['Acogida de profesionales', 'PG-UAP-01 · v6 · oct 2025', 'ES 5 01.10_02', 'acogida']
+    ];
+    $('#pnt-table tbody').innerHTML = PNT.map(r => `<tr><td><b style="color:var(--ink)">${r[0]}</b></td><td>${r[1]}</td><td><span class="tag">${r[2]}</span></td><td><a href="herramientas/${r[3]}.html" target="_blank">Abrir →</a></td></tr>`).join('');
+
+    /* Memoria: indicadores */
+    const indVals = store.get('suh-indicadores', {});
+    $('#ind-table tbody').innerHTML = D.INDICADORES.map(i => `<tr><td><b style="color:var(--ink)">${i.t}</b></td><td>${i.f}</td><td><input data-ind="${i.id}-meta" value="${esc(indVals[i.id + '-meta'] ?? i.meta)}"></td><td><input data-ind="${i.id}" placeholder="Introducir dato" value="${esc(indVals[i.id] ?? '')}"></td><td><span class="tag">${i.acsa}</span></td></tr>`).join('');
+    $('#ind-table').addEventListener('input', e => { if (e.target.dataset.ind) { indVals[e.target.dataset.ind] = e.target.value; store.set('suh-indicadores', indVals); } });
+
+    /* Memoria: objetivos */
+    $('#obj').innerHTML = D.OBJETIVOS.map(o => `<div><div class="n">${o.n}</div><b>${o.t}</b><ul>${o.acc.map(a => `<li>${a}</li>`).join('')}</ul><small><span class="tag">${o.acsa}</span></small></div>`).join('');
+
+    /* ACSA */
+    $('#levels').innerHTML = '<b style="font-size:13px; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-3);">Niveles de certificación</b>' + D.ACSA_NIVELES.map(l => {
+      const pct = v => v === '100 %' ? '100%' : v === '> 70 %' ? '72%' : v === '> 40 %' ? '42%' : '0%';
+      return `<div class="lvl ${l.actual ? 'cur' : ''}"><div><h5>${l.n}${l.actual ? '<small>SUH</small>' : ''}</h5></div><div><p>${l.txt}</p><div class="bars">
+        <div>Grupo I · ${l.g1}<i style="--c:var(--junta)" data-w="${pct(l.g1)}"></i></div>
+        <div>Grupo II · ${l.g2}<i style="--c:var(--suh)" data-w="${pct(l.g2)}"></i></div>
+        <div>Grupo III · ${l.g3}<i style="--c:var(--snm)" data-w="${pct(l.g3)}"></i></div></div></div></div>`;
+    }).join('');
+    $('#blocks').innerHTML = D.ACSA.map((b, bi) => `<div class="card blk reveal"><h4>${b.bloque}</h4>${b.criterios.map((c, ci) => `
+      <div class="crit ${bi === 0 && ci === 0 ? 'open' : ''}"><button>${c.c}${I('right')}</button><div class="std">${c.est.map(e => `
+        <div class="std-i"><code>${e[0]}</code><span class="g ${e[1].includes('oblig') ? 'ob' : ''}">Grupo ${e[1]}</span><b>${e[2]}</b><p>${e[3]}</p></div>`).join('')}</div></div>`).join('')}</div>`).join('');
+    $('#blocks').addEventListener('click', e => { const b = e.target.closest('.crit > button'); if (b) b.parentNode.classList.toggle('open'); });
+
+    /* DAFO */
+    let dafo = store.get('suh-dafo', null) || JSON.parse(JSON.stringify(D.DAFO));
+    let dafoView = 'all', editing = false;
+    function renderDafo() {
+      const order = ['F', 'D', 'O', 'A'];
+      const show = k => dafoView === 'all' || (dafoView === 'int' ? 'FD'.includes(k) : 'OA'.includes(k));
+      $('#dafo-grid').innerHTML = '<div class="dafo-axis">Urgencias<br>Antequera<br>2026</div>' + order.filter(show).map(k => {
+        const q = dafo[k];
+        return `<div class="q" style="--qc:${q.color}" data-l="${k}"><div class="q-h"><div><h4>${q.titulo}</h4><small>${q.sub}</small></div><span class="cnt">${q.items.length}</span></div>
+          <ul>${q.items.map((it, i) => `<li class="${it.mejora ? 'hl' : ''}"><button data-k="${k}" data-n="${i}">${esc(it.t)}${it.mejora ? '<span class="star">PRIORIDAD</span>' : ''}</button><button class="del" data-del="${k}:${i}" title="Eliminar">${I('trash')}</button></li>`).join('')}</ul>
+          <div class="add"><input placeholder="Nuevo elemento…" data-add="${k}"><button class="btn btn-p btn-sm" data-addbtn="${k}">${I('plus')}</button></div></div>`;
+      }).join('');
+      $('#dafo-grid').classList.toggle('editing', editing);
+      $('#dafo-grid').style.gridTemplateColumns = dafoView === 'all' ? '' : '1fr 1fr';
+      $('.dafo-axis').style.display = dafoView === 'all' ? '' : 'none';
+    }
+    function dafoDetail(k, n) {
+      const it = dafo[k].items[n];
+      const tool = it.tool && D.TOOLS.find(t => t.id === it.tool);
+      openInfo(dafo[k].titulo, it.t, `<p style="font-size:16px; line-height:1.7; color:var(--ink-2);">${esc(it.d || 'Elemento añadido por la supervisión.')}</p>
+        ${it.acsa ? `<p style="margin-top:16px;"><span class="tag">${esc(it.acsa)}</span></p>` : ''}
+        ${tool ? `<div style="margin-top:20px; display:flex; gap:10px; flex-wrap:wrap;"><a class="btn btn-p btn-sm" href="herramientas/${tool.id}.html" target="_blank">${I('external')} Abrir: ${tool.t}</a></div>` : ''}`);
+    }
+    $('#dafo-grid').addEventListener('click', e => {
+      const b = e.target.closest('button'); if (!b) return;
+      if (b.dataset.del) { const [k, n] = b.dataset.del.split(':'); dafo[k].items.splice(+n, 1); store.set('suh-dafo', dafo); renderDafo(); return; }
+      if (b.dataset.addbtn) { const k = b.dataset.addbtn, inp = $(`[data-add="${k}"]`); if (inp.value.trim()) { dafo[k].items.push({ t: inp.value.trim() }); store.set('suh-dafo', dafo); renderDafo(); } return; }
+      if (b.dataset.k) dafoDetail(b.dataset.k, +b.dataset.n);
+    });
+    $('#dafo-grid').addEventListener('keydown', e => { if (e.key === 'Enter' && e.target.dataset.add) $(`[data-addbtn="${e.target.dataset.add}"]`).click(); });
+    $('#dafo-view').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; dafoView = b.dataset.v; $$('#dafo-view button').forEach(x => x.classList.toggle('on', x === b)); renderDafo(); });
+    $('#dafo-edit').addEventListener('click', () => { editing = !editing; $('#dafo-edit').lastChild.textContent = editing ? 'Terminar edición' : 'Editar DAFO'; renderDafo(); });
+    $('#dafo-reset').addEventListener('click', () => { dafo = JSON.parse(JSON.stringify(D.DAFO)); store.set('suh-dafo', null); renderDafo(); toast('DAFO restaurado'); });
+    $('#came').innerHTML = D.CAME.map(c => `<div style="--cc:${c.color}"><small>${c.tipo} · ${c.clave}</small><b>${c.t}</b><p>${c.d}</p></div>`).join('');
+
+    /* Panel de información reutilizando la vista previa */
+    function openInfo(kicker, title, html) {
+      $('#pv-t').innerHTML = `<span style="color:var(--ink-3); font-weight:600;">${esc(kicker)} · </span>${esc(title)}`;
+      $('#pv-f').style.display = 'none';
+      let box = $('#pv-info'); if (!box) { box = document.createElement('div'); box.id = 'pv-info'; box.style.cssText = 'padding:32px; overflow:auto; flex:1;'; $('.pv-win').appendChild(box); }
+      box.style.display = 'block'; box.innerHTML = html;
+      $('#pv-open').style.display = 'none';
+      $('.pv-win').style.height = 'auto'; $('.pv-win').style.maxWidth = '720px';
+      $('#pv').classList.add('open');
+    }
+
+    /* Herramientas */
+    let toolCat = 'all';
+    function renderToolChips() {
+      const cats = [['all', { label: 'Todas', color: 'var(--ink)' }], ...Object.entries(D.CATS)];
+      $('#tool-chips').innerHTML = cats.map(([k, c]) => `<button class="chip ${k === toolCat ? 'on' : ''}" data-c="${k}" style="--cc:${c.color}">${k !== 'all' ? '<i></i>' : ''}${c.label} <span style="opacity:.6">${k === 'all' ? D.TOOLS.length : D.TOOLS.filter(t => t.cat === k).length}</span></button>`).join('');
+    }
+    function renderTools() {
+      const q = $('#tool-q').value.trim().toLowerCase();
+      const list = D.TOOLS.filter(t => (toolCat === 'all' || t.cat === toolCat) && (!q || [t.t, t.d, t.v, ...t.acsa, D.CATS[t.cat].label].join(' ').toLowerCase().includes(q)));
+      $('#tools').innerHTML = list.length ? list.map(t => { const c = D.CATS[t.cat]; return `
+        <article class="card tool" style="--cc:${c.color}">${t.nuevo ? '<span class="new">NUEVO</span>' : ''}
+          <div class="tool-h"><div class="tool-ico">${I(t.icon)}</div><div><small class="c">${c.label}</small><h4>${t.t}</h4></div></div>
+          <p>${t.d}</p>
+          <div class="v">${I('file')} ${t.v}</div>
+          ${t.acsa.length ? `<div class="acsa-tags">${t.acsa.map(a => `<span class="tag">${a}</span>`).join('')}</div>` : ''}
+          <div class="tool-a"><a class="btn btn-p btn-sm" href="herramientas/${t.id}.html" target="_blank">${I('external')} Abrir</a><button class="btn btn-g btn-sm" data-pv="${t.id}">${I('eye')} Vista previa</button></div>
+        </article>`; }).join('') : '<p class="sub">No hay herramientas que coincidan.</p>';
+    }
+    $('#tool-chips').addEventListener('click', e => { const b = e.target.closest('.chip'); if (!b) return; toolCat = b.dataset.c; renderToolChips(); renderTools(); });
+    $('#tool-q').addEventListener('input', renderTools);
+    $('#tools').addEventListener('click', e => { const b = e.target.closest('[data-pv]'); if (!b) return; const t = D.TOOLS.find(x => x.id === b.dataset.pv); openPreview(t); });
+    function openPreview(t) {
+      $('#pv-t').textContent = t.t; $('#pv-f').style.display = ''; const info = $('#pv-info'); if (info) info.style.display = 'none';
+      $('.pv-win').style.height = ''; $('.pv-win').style.maxWidth = '';
+      $('#pv-f').src = `herramientas/${t.id}.html`; $('#pv-open').href = `herramientas/${t.id}.html`; $('#pv-open').style.display = '';
+      $('#pv').classList.add('open');
+    }
+    function closePreview() { $('#pv').classList.remove('open'); $('#pv-f').src = 'about:blank'; }
+    $('#pv-x').addEventListener('click', closePreview);
+    $('#pv').addEventListener('click', e => { if (e.target.id === 'pv') closePreview(); });
+    $('#docs').innerHTML = D.DOCS.map(d => `<a class="card doc" href="${d.href}" target="_blank"><span class="ico">PDF</span><span><b>${d.t}</b><span>${d.d}</span></span></a>`).join('');
+
+    /* Galería */
+    let galArea = 'all', galList = [], lbi = 0;
+    function renderGal() {
+      $('#gal-chips').innerHTML = [['all', 'Todas', D.FOTOS.length], ...D.AREAS.map(a => [a.slug, a.nombre, a.n])].map(([k, l, n]) => `<button class="chip ${k === galArea ? 'on' : ''}" data-a="${k}">${l} <span style="opacity:.6">${n}</span></button>`).join('');
+      galList = D.FOTOS.filter(f => galArea === 'all' || f.area === galArea);
+      $('#gal').innerHTML = galList.map((f, i) => `<button data-g="${i}"><img src="${f.thumb}" alt="${f.nombre}" loading="lazy"><span>${f.nombre}</span></button>`).join('');
+    }
+    $('#gal-chips').addEventListener('click', e => { const b = e.target.closest('.chip'); if (!b) return; galArea = b.dataset.a; renderGal(); });
+    $('#gal').addEventListener('click', e => { const b = e.target.closest('[data-g]'); if (b) openLb(galList, +b.dataset.g); });
+    document.addEventListener('click', e => { const b = e.target.closest('[data-photo]'); if (b) openLb(D.FOTOS, +b.dataset.photo); });
+    let lbList = [];
+    function openLb(list, i) { lbList = list; lbi = i; showLb(); $('#lb').classList.add('open'); }
+    function showLb() { const f = lbList[lbi]; $('#lb-img').src = f.full; $('#lb-cap').textContent = `${f.nombre} · ${lbi + 1} / ${lbList.length}`; }
+    $('#lb-x').addEventListener('click', () => $('#lb').classList.remove('open'));
+    $('#lb-p').addEventListener('click', () => { lbi = (lbi - 1 + lbList.length) % lbList.length; showLb(); });
+    $('#lb-n').addEventListener('click', () => { lbi = (lbi + 1) % lbList.length; showLb(); });
+    $('#lb').addEventListener('click', e => { if (e.target.id === 'lb') $('#lb').classList.remove('open'); });
+    document.addEventListener('keydown', e => {
+      if ($('#lb').classList.contains('open')) { if (e.key === 'ArrowRight') $('#lb-n').click(); if (e.key === 'ArrowLeft') $('#lb-p').click(); if (e.key === 'Escape') $('#lb').classList.remove('open'); }
+      else if (e.key === 'Escape') closePreview();
+    });
+
+    /* Instagram: destacados */
+    $('#ig-hls').innerHTML = [['Promoción Salud', 'sparkles'], ['Ciudadanía', 'users'], ['Información', 'file'], ['Humanización', 'heart'], ['Guía usuario', 'book'], ['Derechos', 'shieldCheck'], ['Deberes', 'clipboard'], ['Tfnos de interés', 'phone']].map(([l, i]) => `<div><i>${I(i)}</i>${l}</div>`).join('');
+
+    /* Animaciones al hacer scroll y navegación activa */
+    const io = new IntersectionObserver(es => es.forEach(e => {
+      if (!e.isIntersecting) return;
+      e.target.classList.add('in');
+      e.target.querySelectorAll('[data-w]').forEach(b => { const w = b.dataset.w; if (b.tagName === 'I' && b.parentNode.classList.contains('set-bar')) b.style.width = w + '%'; else b.style.setProperty('--w', w); });
+      e.target.querySelectorAll('[data-count]').forEach(c => { if (!c.dataset.run) { c.dataset.run = 1; countUp(c); } });
+      io.unobserve(e.target);
+    }), { threshold: .12 });
+    function observe() { $$('.reveal, .kpis, .levels, #m3').forEach(el => io.observe(el)); }
+    const spy = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { const id = e.target.id; $$('#nav a').forEach(a => a.classList.toggle('on', a.getAttribute('href') === '#' + id)); } }), { rootMargin: '-45% 0px -50% 0px' });
+    $$('section[id]').forEach(s => spy.observe(s));
+    const tocSpy = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) $$('#toc a').forEach(a => a.classList.toggle('on', a.getAttribute('href') === '#' + e.target.id)); }), { rootMargin: '-30% 0px -60% 0px' });
+    $$('.chap').forEach(c => tocSpy.observe(c));
+
+    /* Inicio */
+    renderDafo(); renderToolChips(); renderTools(); renderGal();
+    paintIcons(); paintTheme(); observe();
+    window.addEventListener('beforeprint', () => $$('.reveal').forEach(r => r.classList.add('in')));
+
+    /* Modo captura (para la memoria en PDF): todo visible, sin animaciones y en la sección pedida */
+    if (location.search.includes('captura')) {
+      document.head.insertAdjacentHTML('beforeend', '<style>*, *::before, *::after { transition: none !important; animation: none !important; } html { scroll-behavior: auto !important; } .suhdock, .scroll-hint { display: none !important; }</style>');
+      $$('.reveal').forEach(r => r.classList.add('in'));
+      $$('[data-count]').forEach(c => { c.dataset.run = 1; c.textContent = c.dataset.count; });
+      $$('[data-w]').forEach(b => { if (b.parentNode.classList.contains('set-bar')) b.style.width = b.dataset.w + '%'; else b.style.setProperty('--w', b.dataset.w); });
+      $$('#hero-bg img').forEach((im, i) => { if (i) im.remove(); else { im.classList.add('on'); im.style.transform = 'none'; } });
+      const t = location.hash && document.querySelector(location.hash);
+      if (t) window.scrollTo(0, t.getBoundingClientRect().top + window.scrollY - 74);
+    }
+  </script>
+</body>
+</html>

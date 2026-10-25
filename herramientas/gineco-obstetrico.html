@@ -1,0 +1,867 @@
+<!doctype html><html><head>
+  <meta name="robots" content="noindex, nofollow"><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>PNT Gineco-Obstétrico Antequera</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Public+Sans:wght@400;500;600;700;800&display=swap">
+<style>
+/* Concepto: herramienta clínica de consulta rápida. Cabecera verde institucional fija con pestañas,
+   contenido en una columna ancha de lectura, resultados con etiquetas de destino por color. */
+:root{
+  --bg:#F2F6F3; --surface:#FFFFFF; --surface2:#E9F1EC; --fg:#13241B; --muted:#51655A; --line:#D3DED7;
+  --green:#0B6B43; --green-ink:#074A2E; --on-green:#FFFFFF; --head-bg:#074A2E; --head-fg:#F1F8F4; --head-muted:#B7D3C4;
+  --focus:#0B6B43;
+  --red-bg:#FBE3E0; --red-fg:#8E1B13; --green-bg:#DCF0E3; --green-fg:#0A5A38;
+  --blue-bg:#DEE9F8; --blue-fg:#1B4A87; --amber-bg:#FBEBCB; --amber-fg:#7A4700; --gray-bg:#E6EBE8; --gray-fg:#4A5A51;
+  --mono:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace;
+  --sans:'Public Sans',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0E1612; --surface:#16211B; --surface2:#1D2B24; --fg:#E3EFE8; --muted:#9DB4A8; --line:#2B3C33;
+  --green:#4DC48B; --green-ink:#7FE0B0; --on-green:#07281A; --head-bg:#0A2A1C; --head-fg:#E8F5EE; --head-muted:#9CC3AF; --focus:#7FE0B0;
+  --red-bg:#4A1D19; --red-fg:#FFB4AB; --green-bg:#173D2B; --green-fg:#9BE3BE;
+  --blue-bg:#1B2F4D; --blue-fg:#A9C8F5; --amber-bg:#46330F; --amber-fg:#F5CE82; --gray-bg:#26332C; --gray-fg:#A9BDB1; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0E1612; --surface:#16211B; --surface2:#1D2B24; --fg:#E3EFE8; --muted:#9DB4A8; --line:#2B3C33;
+  --green:#4DC48B; --green-ink:#7FE0B0; --on-green:#07281A; --head-bg:#0A2A1C; --head-fg:#E8F5EE; --head-muted:#9CC3AF; --focus:#7FE0B0;
+  --red-bg:#4A1D19; --red-fg:#FFB4AB; --green-bg:#173D2B; --green-fg:#9BE3BE;
+  --blue-bg:#1B2F4D; --blue-fg:#A9C8F5; --amber-bg:#46330F; --amber-fg:#F5CE82; --gray-bg:#26332C; --gray-fg:#A9BDB1; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--sans);font-size:15px;line-height:1.55;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--head-bg)}
+h1,h2,h3,h4{margin:0;line-height:1.2;text-wrap:balance}
+p{margin:0 0 .7em}
+a{color:var(--green)}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:4px}
+.wrap{max-width:980px;margin:0 auto}
+
+/* Cabecera y pestañas */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:var(--head-bg);color:var(--head-fg);margin-left:calc(-1 * max(16px,env(safe-area-inset-left,0px)));margin-right:calc(-1 * max(16px,env(safe-area-inset-right,0px)));padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.top .wrap{padding-top:10px}
+.brand{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.brand h1{font-size:1.15rem;font-weight:800;letter-spacing:-.01em}
+.brand small{color:var(--head-muted);font-size:.78rem}
+.tabs{display:flex;gap:2px;overflow-x:auto;margin-top:8px;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{appearance:none;background:none;border:0;border-bottom:3px solid transparent;color:var(--head-muted);padding:9px 12px 8px;font-weight:600;font-size:.92rem;cursor:pointer;white-space:nowrap}
+.tab:hover{color:var(--head-fg)}
+.tab[aria-selected="true"]{color:var(--head-fg);border-bottom-color:var(--head-fg)}
+main{padding-block:18px 48px}
+.panel>*+*{margin-top:16px}
+.lead{color:var(--muted);max-width:68ch}
+.kicker{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:700}
+h2{font-size:1.35rem;font-weight:800;letter-spacing:-.01em}
+h3{font-size:1.02rem;font-weight:700}
+
+/* Superficies */
+.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px}
+.card.flat{background:var(--surface2);border-color:transparent}
+.grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr))}
+.grid.two{grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr))}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.sp{flex:1}
+.muted{color:var(--muted)}
+.small{font-size:.85rem}
+.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+
+/* Botones */
+.btn{appearance:none;border:1px solid var(--line);background:var(--surface);border-radius:8px;padding:9px 14px;font-weight:600;cursor:pointer;min-height:40px}
+.btn:hover{border-color:var(--green)}
+.btn.primary{background:var(--green);color:var(--on-green);border-color:var(--green)}
+.btn.primary:hover{filter:brightness(1.08)}
+.btn.danger{color:var(--red-fg)}
+.btn.sm{min-height:34px;padding:6px 11px;font-size:.88rem}
+.btn[disabled]{opacity:.5;cursor:not-allowed}
+
+/* Etiquetas de destino */
+.pill{display:inline-block;padding:3px 10px;border-radius:999px;font-weight:700;font-size:.85rem;line-height:1.35}
+.t-red{background:var(--red-bg);color:var(--red-fg)}
+.t-green{background:var(--green-bg);color:var(--green-fg)}
+.t-blue{background:var(--blue-bg);color:var(--blue-fg)}
+.t-amber{background:var(--amber-bg);color:var(--amber-fg)}
+.t-gray{background:var(--gray-bg);color:var(--gray-fg)}
+
+/* Triaje */
+.triage{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))}
+.triage .card{display:flex;flex-direction:column;gap:6px}
+
+/* Selector de motivo */
+.motivos{display:grid;gap:8px;grid-template-columns:repeat(auto-fit,minmax(min(100%,190px),1fr))}
+.motivo{appearance:none;text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px;cursor:pointer;display:flex;flex-direction:column;gap:3px}
+.motivo b{font-size:.98rem}
+.motivo span{color:var(--muted);font-size:.82rem;line-height:1.35}
+.motivo:hover{border-color:var(--green)}
+.motivo[aria-pressed="true"]{border-color:var(--green);background:var(--green-bg);box-shadow:inset 0 0 0 1px var(--green)}
+
+/* Flujo */
+.flow ol{margin:8px 0 0;padding-left:1.25em}
+.flow li{margin:3px 0}
+.group{border-top:1px solid var(--line);padding-top:14px;margin-top:14px}
+.outs{display:grid;gap:8px;margin-top:10px}
+.out{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px 16px;background:var(--surface2);border-radius:8px;padding:10px 12px;align-items:start}
+.out .cond{font-weight:600}
+.out .note{grid-column:1/-1;color:var(--muted);font-size:.9rem}
+@media (max-width:560px){.out{grid-template-columns:1fr}}
+.warn{background:var(--amber-bg);color:var(--amber-fg);border-radius:8px;padding:10px 12px;font-size:.9rem}
+.info{background:var(--blue-bg);color:var(--blue-fg);border-radius:8px;padding:10px 12px;font-size:.9rem}
+
+/* Formularios */
+.form{display:grid;gap:12px 14px;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr))}
+.fld{display:flex;flex-direction:column;gap:4px;min-width:0}
+.fld>label,.lbl{font-size:.82rem;font-weight:600;color:var(--muted)}
+.fld input[type=text],.fld input[type=number],.fld select,.fld textarea{width:100%;min-height:40px;padding:8px 10px;background:var(--surface);border:1px solid var(--line);border-radius:8px}
+.fld textarea{min-height:76px;resize:vertical}
+.fld.wide{grid-column:1/-1}
+.chk{display:flex;gap:9px;align-items:flex-start;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--surface);cursor:pointer;min-height:40px}
+.chk input{margin-top:3px;width:17px;height:17px;accent-color:var(--green);flex:none}
+.chk span{font-size:.92rem;line-height:1.35}
+fieldset{border:0;margin:0;padding:0;min-width:0}
+legend{padding:0;margin-bottom:10px;font-weight:700}
+.result{border:2px solid var(--line);border-radius:12px;padding:16px;background:var(--surface)}
+.result .dest{font-size:1.2rem;font-weight:800;margin:6px 0 10px}
+.result ul{margin:6px 0 0;padding-left:1.2em}
+.result li{margin:3px 0}
+.privacy{font-size:.85rem}
+
+/* Tablas */
+.scroll{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:560px;font-size:.88rem}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:var(--surface2);font-size:.78rem;letter-spacing:.03em;text-transform:uppercase;color:var(--muted)}
+tr:last-child td{border-bottom:0}
+.kv{min-width:0}
+.kv th{width:34%;text-transform:none;font-size:.88rem;letter-spacing:0;color:var(--fg)}
+
+/* Protocolo */
+.search{display:flex;gap:8px}
+.search input{flex:1;min-width:0;min-height:44px;padding:8px 12px;border:1px solid var(--line);border-radius:8px;background:var(--surface)}
+details.sec{background:var(--surface);border:1px solid var(--line);border-radius:10px}
+details.sec>summary{cursor:pointer;padding:13px 16px;font-weight:700;list-style:none;display:flex;gap:10px;align-items:center}
+details.sec>summary::-webkit-details-marker{display:none}
+details.sec>summary::after{content:"+";margin-left:auto;font-family:var(--mono);color:var(--muted)}
+details.sec[open]>summary::after{content:"−"}
+details.sec .body{padding:0 16px 14px;max-width:76ch}
+details.sec .body li{margin:3px 0}
+mark{background:var(--amber-bg);color:var(--amber-fg);border-radius:3px;padding:0 2px}
+
+/* Preguntar */
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{appearance:none;border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 12px;font-size:.86rem;cursor:pointer}
+.chip:hover{border-color:var(--green)}
+.chat{display:flex;flex-direction:column;gap:12px}
+.msg{padding:12px 14px;border-radius:10px;max-width:100%}
+.msg.u{background:var(--green);color:var(--on-green);align-self:flex-end;max-width:88%}
+.msg.a{background:var(--surface);border:1px solid var(--line)}
+.msg ul{margin:6px 0;padding-left:1.2em}
+.frag{border-left:3px solid var(--line);padding:2px 0 2px 12px;margin-top:8px}
+.frag b{font-size:.85rem}
+
+/* Estudio */
+.keys{display:grid;gap:8px;grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr))}
+.key{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+.key .n{font-family:var(--mono);font-weight:500;font-size:1.25rem;color:var(--green-ink)}
+.key .l{font-size:.8rem;color:var(--muted);line-height:1.3}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--surface)}
+.seg button{appearance:none;border:0;background:none;padding:8px 14px;font-weight:600;cursor:pointer;min-height:40px}
+.seg button[aria-pressed="true"]{background:var(--green);color:var(--on-green)}
+.flash{min-height:190px;display:flex;flex-direction:column;justify-content:center;gap:10px;cursor:pointer;text-align:left;width:100%;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:22px}
+.flash .side{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;font-weight:700;color:var(--muted)}
+.flash .txt{font-size:1.15rem;font-weight:600;line-height:1.4}
+.flash.back .txt{font-weight:500;font-size:1.05rem}
+.progress{height:8px;background:var(--surface2);border-radius:999px;overflow:hidden}
+.progress>i{display:block;height:100%;background:var(--green)}
+.opts{display:grid;gap:8px;margin-top:12px}
+.opt{appearance:none;text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:11px 13px;cursor:pointer;line-height:1.4}
+.opt:hover:not([disabled]){border-color:var(--green)}
+.opt.ok{background:var(--green-bg);border-color:var(--green);color:var(--green-fg)}
+.opt.bad{background:var(--red-bg);border-color:var(--red-fg);color:var(--red-fg)}
+.expl{margin-top:12px}
+
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(16px + env(safe-area-inset-bottom,0px));background:var(--fg);color:var(--bg);padding:10px 16px;border-radius:8px;font-weight:600;font-size:.9rem;z-index:20;max-width:calc(100% - 32px)}
+.dis{font-size:.8rem;color:var(--muted);max-width:76ch}
+@media (prefers-reduced-motion:no-preference){.panel{animation:in .18s ease-out}@keyframes in{from{opacity:.4}to{opacity:1}}}
+</style>
+
+<header class="top">
+  <div class="wrap">
+    <div class="brand">
+      <h1>Circuito urgencias gineco-obstétricas</h1>
+      <small>PNT Área Sanitaria Norte de Málaga · Versión 2 · septiembre 2026</small>
+    </div>
+    <nav class="tabs" role="tablist" aria-label="Secciones">
+      <button class="tab" role="tab" id="tab-circuito" data-tab="circuito" aria-selected="true">Circuito</button>
+      <button class="tab" role="tab" id="tab-ficha" data-tab="ficha" aria-selected="false">Ficha de paciente</button>
+      <button class="tab" role="tab" id="tab-protocolo" data-tab="protocolo" aria-selected="false">Protocolo</button>
+      <button class="tab" role="tab" id="tab-preguntar" data-tab="preguntar" aria-selected="false">Preguntar</button>
+      <button class="tab" role="tab" id="tab-estudio" data-tab="estudio" aria-selected="false">Estudio</button>
+      <button class="tab" role="tab" id="tab-documento" data-tab="documento" aria-selected="false">Documento</button>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+<!-- CIRCUITO -->
+<section class="panel" id="p-circuito" role="tabpanel" aria-labelledby="tab-circuito">
+  <div>
+    <div class="kicker">Urgencias · Hospital de Antequera</div>
+    <h2>Qué hacer según el motivo de consulta</h2>
+    <p class="lead">Elige el motivo y verás el circuito del PNT paso a paso, con el destino de cada resultado.</p>
+  </div>
+  <div class="triage">
+    <div class="card">
+      <span class="pill t-gray">1 · Triaje de enfermería</span>
+      <p class="small" style="margin:0">Toda paciente pasa por triaje. Enfermería toma constantes (TA, FC, Tª…) según proceda.</p>
+    </div>
+    <div class="card">
+      <span class="pill t-red">Prioridad 1</span>
+      <p class="small" style="margin:0">Inestabilidad clínica o signos de alarma: actuación inmediata. Atiende el <b>médico de Observación</b>.</p>
+    </div>
+    <div class="card">
+      <span class="pill t-green">Prioridades 2, 3, 4 y 5</span>
+      <p class="small" style="margin:0">Estable y sin signos de alarma: <b>circuito ginecológico</b>, médico asignado, consultas de Policlínica.</p>
+    </div>
+  </div>
+  <div class="motivos" id="motivos" role="group" aria-label="Motivo de consulta"></div>
+  <div class="card flow" id="flow"></div>
+</section>
+
+<!-- FICHA -->
+<section class="panel" id="p-ficha" role="tabpanel" aria-labelledby="tab-ficha" hidden>
+  <div>
+    <div class="kicker">Registro y exportación</div>
+    <h2>Ficha de paciente con destino según el PNT</h2>
+    <p class="lead">Rellena los datos y la ficha calcula el destino que marca el protocolo. Puedes guardarla en un historial y exportarlo.</p>
+  </div>
+  <div class="info privacy" id="privacy"><b>Protección de datos.</b> Los datos se guardan solo en este navegador, no se envían a ningún servidor. Usa un código interno o iniciales, sin nombre completo, DNI ni teléfono. Si exportas un archivo, guárdalo según la normativa de tu centro.</div>
+
+  <form class="card" id="ficha" autocomplete="off">
+    <fieldset>
+      <legend>Paciente y triaje</legend>
+      <div class="form">
+        <div class="fld"><label for="f-cod">Código o iniciales</label><input type="text" id="f-cod" maxlength="24" placeholder="Ej. MJ-0412"></div>
+        <div class="fld"><label for="f-edad">Edad (años)</label><input type="number" id="f-edad" min="0" max="110" inputmode="numeric"></div>
+        <div class="fld"><label for="f-prio">Prioridad de triaje</label>
+          <select id="f-prio"><option value="">Sin asignar</option><option value="1">1 · actuación inmediata</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select></div>
+        <div class="fld"><label for="f-ta">TA (mmHg)</label><input type="text" id="f-ta" placeholder="120/70"></div>
+        <div class="fld"><label for="f-fc">FC (lpm)</label><input type="number" id="f-fc" min="0" max="250" inputmode="numeric"></div>
+        <div class="fld"><label for="f-temp">Tª (°C)</label><input type="number" id="f-temp" min="30" max="43" step="0.1" inputmode="decimal"></div>
+        <div class="fld wide"><label class="chk"><input type="checkbox" id="f-alarma"><span>Inestabilidad hemodinámica u otros signos de alarma</span></label></div>
+      </div>
+    </fieldset>
+    <fieldset style="margin-top:18px">
+      <legend>Motivo de consulta</legend>
+      <div class="form">
+        <div class="fld wide"><label for="f-motivo">Motivo principal</label>
+          <select id="f-motivo"><option value="">Elige un motivo</option></select></div>
+
+        <div class="fld" data-g="metro"><label for="f-meno">Estado menopáusico</label>
+          <select id="f-meno"><option value="">Sin indicar</option><option value="pre">Premenopáusica</option><option value="post">Posmenopáusica</option></select></div>
+        <div class="fld" data-g="metro,dolor,amen"><label for="f-test">Test de gestación</label>
+          <select id="f-test"><option value="">Pendiente</option><option value="pos">Positivo</option><option value="neg">Negativo</option></select></div>
+        <div class="fld" data-g="metro"><label for="f-hb">Hemoglobina (g/dl)</label><input type="number" id="f-hb" min="0" max="25" step="0.1" inputmode="decimal"></div>
+        <div class="fld wide" data-g="metro"><label class="chk"><input type="checkbox" id="f-coag"><span>Analítica con hemograma y coagulación solicitada o realizada</span></label></div>
+        <div class="fld wide" data-g="metro"><label class="chk"><input type="checkbox" id="f-dolorsig"><span>Dolor abdominal significativo asociado (el dolor leve o moderado es frecuente en la metrorragia y no cuenta)</span></label></div>
+        <div class="fld wide" data-g="metro"><label class="chk"><input type="checkbox" id="f-via"><span>Vía periférica salinizada colocada</span></label></div>
+
+        <div class="fld wide" data-g="mens"><label class="chk"><input type="checkbox" id="f-spotting"><span>Spotting en usuaria de anticonceptivos hormonales</span></label></div>
+
+        <div class="fld wide" data-g="amen"><label class="chk"><input type="checkbox" id="f-otros"><span>Otro síntoma acompañante (dolor abdominal, fiebre, mal estado general…)</span></label></div>
+
+        <div class="fld wide" data-g="dolor"><label class="chk"><input type="checkbox" id="f-hc"><span>Historia clínica con anamnesis y exploración que justifica la sospecha ginecológica</span></label></div>
+        <div class="fld wide" data-g="dolor"><label class="chk"><input type="checkbox" id="f-sangre"><span>Analítica de sangre solicitada</span></label></div>
+        <div class="fld wide" data-g="dolor"><label class="chk"><input type="checkbox" id="f-orina"><span>Analítica de orina solicitada</span></label></div>
+        <div class="fld wide" data-g="dolor"><label class="chk"><input type="checkbox" id="f-anticonc"><span>Toma anticonceptivos hormonales (dato imprescindible en la anamnesis)</span></label></div>
+
+        <div class="fld wide" data-g="prur"><label class="chk"><input type="checkbox" id="f-fr"><span>Factores de riesgo asociados (sospecha de cuerpo extraño vaginal, fiebre, dolor abdominal…)</span></label></div>
+        <div class="fld" data-g="prur"><label for="f-trat">Tratamiento al alta</label>
+          <select id="f-trat"><option value="">Sin indicar</option><option value="Gynelaude óvulos, 1 óvulo cada 24 h durante 10 días">Gynelaude óvulos (10 días)</option><option value="Fluomizín comprimidos vaginales, 1 al día durante 6 días">Fluomizín comprimidos (6 días)</option><option value="Sin tratamiento">Sin tratamiento</option></select></div>
+
+        <div class="fld wide" data-g="gotro"><label class="chk"><input type="checkbox" id="f-ingreso"><span>Precisa ingreso hospitalario</span></label></div>
+      </div>
+    </fieldset>
+    <fieldset style="margin-top:18px">
+      <legend>Notas</legend>
+      <div class="form">
+        <div class="fld wide"><label for="f-obs">Observaciones</label><textarea id="f-obs" placeholder="Opcional"></textarea></div>
+        <div class="fld"><label for="f-prof">Profesional (iniciales)</label><input type="text" id="f-prof" maxlength="16"></div>
+      </div>
+    </fieldset>
+  </form>
+
+  <div class="result" id="result" aria-live="polite"></div>
+
+  <div class="row">
+    <button class="btn primary" id="b-save" type="button">Guardar en historial</button>
+    <button class="btn" id="b-copy" type="button">Copiar ficha</button>
+    <button class="btn" id="b-txt" type="button">Exportar ficha (TXT)</button>
+    <button class="btn" id="b-clear" type="button">Limpiar formulario</button>
+  </div>
+
+  <div class="card" id="hist">
+    <div class="row">
+      <h3>Historial en este navegador</h3><span class="muted small" id="hist-n"></span><span class="sp"></span>
+      <button class="btn sm" id="h-csv" type="button">Exportar CSV</button>
+      <button class="btn sm" id="h-json" type="button">Exportar JSON</button>
+      <button class="btn sm danger" id="h-del" type="button">Borrar historial</button>
+    </div>
+    <div class="scroll" style="margin-top:12px"><table id="hist-t"><thead><tr><th>Fecha</th><th>Código</th><th>Edad</th><th>Motivo</th><th>Destino</th><th></th></tr></thead><tbody></tbody></table></div>
+    <p class="small muted" style="margin:10px 0 0">El CSV usa punto y coma y se abre directamente en Excel en español.</p>
+  </div>
+</section>
+
+<!-- PROTOCOLO -->
+<section class="panel" id="p-protocolo" role="tabpanel" aria-labelledby="tab-protocolo" hidden>
+  <div>
+    <div class="kicker">Texto del PNT</div>
+    <h2>Protocolo completo</h2>
+    <p class="lead">Todas las secciones del documento, con buscador.</p>
+  </div>
+  <div class="search"><input type="search" id="q-proto" placeholder="Busca: hemoglobina, Fluomizín, PAP, gestante…" aria-label="Buscar en el protocolo"><button class="btn" id="q-proto-x" type="button">Limpiar</button></div>
+  <div id="proto-list" style="display:grid;gap:10px"></div>
+</section>
+
+<!-- PREGUNTAR -->
+<section class="panel" id="p-preguntar" role="tabpanel" aria-labelledby="tab-preguntar" hidden>
+  <div>
+    <div class="kicker">Consulta al protocolo</div>
+    <h2>Pregunta lo que necesites</h2>
+    <p class="lead">Escribe una pregunta y Claude responde solo con lo que dice el PNT. Debajo siempre aparecen los fragmentos del protocolo relacionados.</p>
+  </div>
+  <div class="chips" id="sugs"></div>
+  <form class="search" id="ask-form"><input type="text" id="q-ask" placeholder="Ej. Hb 10,5 y test negativo, ¿qué hago?" aria-label="Pregunta"><button class="btn primary" type="submit" id="ask-go">Preguntar</button></form>
+  <div class="chat" id="chat"></div>
+  <p class="dis" id="ask-note"></p>
+</section>
+
+<!-- ESTUDIO -->
+<section class="panel" id="p-estudio" role="tabpanel" aria-labelledby="tab-estudio" hidden>
+  <div>
+    <div class="kicker">Memorizar el protocolo</div>
+    <h2>Estudio</h2>
+    <p class="lead">Cifras clave, tarjetas para repasar y test con corrección. Tu progreso se guarda en este navegador.</p>
+  </div>
+  <div class="keys" id="keys"></div>
+  <div class="seg" role="group" aria-label="Modo"><button type="button" id="m-cards" aria-pressed="true">Tarjetas</button><button type="button" id="m-quiz" aria-pressed="false">Test</button></div>
+  <div id="study"></div>
+</section>
+
+<!-- DOCUMENTO -->
+<section class="panel" id="p-documento" role="tabpanel" aria-labelledby="tab-documento" hidden>
+  <div>
+    <div class="kicker">Ficha técnica del PNT</div>
+    <h2>Datos del documento</h2>
+  </div>
+  <div class="scroll"><table class="kv"><tbody id="docid"></tbody></table></div>
+  <div class="grid two" id="docblocks"></div>
+  <div class="card">
+    <h3>Indicador de evaluación</h3>
+    <div class="scroll" style="margin-top:10px"><table class="kv"><tbody id="indic"></tbody></table></div>
+  </div>
+  <div class="card">
+    <h3>Puntos del documento que conviene confirmar</h3>
+    <p class="small muted">Esta herramienta sigue el texto del PNT. Al compararlo con su propio anexo aparecen estas diferencias.</p>
+    <ul id="disc" style="margin:8px 0 0;padding-left:1.2em"></ul>
+  </div>
+  <p class="dis">Herramienta de apoyo no oficial, elaborada a partir del PNT «Circuito urgencias gineco-obstétricas», versión 2 (septiembre 2026). No sustituye el documento oficial de la intranet ni el juicio clínico. Ante cualquier duda de actuación, manejo o tratamiento, consulta al ginecólogo de guardia, como indica el propio protocolo.</p>
+</section>
+</main>
+<div class="toast" id="toast" role="status" hidden></div>
+
+<script>
+(function(){
+'use strict';
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const norm=s=>String(s).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+const store={
+  get(k,d){try{const v=localStorage.getItem(k);return v==null?d:JSON.parse(v)}catch(e){return d}},
+  set(k,v){try{localStorage.setItem(k,JSON.stringify(v));return true}catch(e){return false}}
+};
+let toastT;
+function toast(m){const t=$('#toast');t.textContent=m;t.hidden=false;clearTimeout(toastT);toastT=setTimeout(()=>t.hidden=true,2800)}
+const pill=(t,tone)=>`<span class="pill t-${tone}">${esc(t)}</span>`;
+
+/* ===== Contenido del protocolo ===== */
+const PROTO=[
+{id:'objeto',t:'Objeto',p:[
+ '<b>Objetivo general.</b> Establecer circuitos específicos y consensuados de actuación ante los motivos de consulta urgente gineco-obstétricos más prevalentes, para una actuación coordinada y uniforme de los profesionales de urgencias, de Atención Primaria y los especialistas del área.',
+ '<b>Objetivos específicos.</b>',
+ '<ul><li>Establecer circuitos consensuados por los responsables de Urgencias y Ginecología y por Dirección Médica, como herramienta de consulta y trabajo.</li><li>Evitar derivaciones desde Atención Primaria a Urgencias por motivos que se pueden derivar a consultas externas de especialista, de forma uniforme en el área. Esas citas se gestionan como PAP (primera cita desde Atención Primaria).</li><li>Difundir los circuitos con sesiones en Cuidados Críticos y Urgencias, Ginecología y Atención Primaria.</li><li>Evaluar periódicamente los circuitos para planes de mejora.</li></ul>']},
+{id:'alcance',t:'Alcance',p:[
+ '<b>Procesos.</b> Circuitos de actuación desde Atención Primaria, Urgencias extra e intrahospitalarias y especialistas en Ginecología-Obstetricia.',
+ '<b>Profesionales.</b> Facultativos de la UGC de Cuidados Críticos y Urgencias, de Ginecología y de Atención Primaria.',
+ '<b>Ámbito de aplicación.</b> UGC de Cuidados Críticos y Urgencias, Ginecología y Atención Primaria / SUAP.',
+ '<b>Destinatarios.</b> Profesionales del Área Sanitaria Norte de Málaga que atienden urgencias, tanto en Atención Primaria y dispositivos de atención urgente (SUAP) como hospitalarias.']},
+{id:'definiciones',t:'Términos y definiciones',p:[
+ '<b>Sangrado uterino normal.</b> Intervalo de 24 a 38 días y duración entre 4,5 y 8 días. En la práctica es imposible medir objetivamente la pérdida menstrual, por lo que el diagnóstico se basa en lo que cuenta la paciente y, de forma objetiva, en la hemoglobina.',
+ '<b>Sangrado uterino anormal.</b> Alteraciones de la regularidad, la cantidad o la duración, sangrado irregular no menstrual, spotting o sangrado fuera de la edad reproductiva.',
+ '<ul><li>El sangrado uterino abundante es un motivo frecuente en Atención Primaria y genera muchas derivaciones a Ginecología.</li><li>Sangrado en mujer embarazada: puede ser fisiológico por la implantación al inicio del embarazo, de origen cervical, o una amenaza de aborto o aborto.</li><li>Sangrado en mujer posmenopáusica: independientemente del hemograma, hay que valorar y descartar patología maligna.</li></ul>',
+ '<b>Amenorrea.</b> Ausencia de sangrado menstrual y de embarazo. No es una patología en sí misma, sino la manifestación clínica de un trastorno subyacente. Se clasifica en primaria o secundaria y la causa puede estar en cualquier punto del eje hipotálamo-hipófisis-ovario-endometrio.',
+ '<b>Dolor abdominal.</b> Síntoma muy inespecífico. El dolor pélvico crónico puede tener muchas causas (dismenorrea, síndrome premenstrual, endometriosis-adenomiosis, adherencias posquirúrgicas…) que se estudian en consulta de Ginecología. Las causas gineco-obstétricas más frecuentes de dolor abdominal agudo son el embarazo ectópico (test de gestación positivo), la torsión ovárica (suele acompañarse de fiebre, leucocitosis y una tumoración anexial en la ecografía), la enfermedad pélvica inflamatoria y la rotura folicular.',
+ '<b>Prurito genital.</b> Motivo frecuente de consulta. Puede ser una vulvovaginitis o deberse a atrofia genital en posmenopáusicas. Debe tomarse un cultivo de exudado vaginal (puede tomarlo la propia paciente) y, mientras llega el resultado, puede indicarse un tratamiento con óvulos para aliviar los síntomas.']},
+{id:'desarrollo',t:'Desarrollo: llegada a triaje',p:[
+ 'Enfermería evalúa siempre a la paciente a su llegada y, según el motivo y la situación clínica, toma constantes (TA, FC, Tª…). Con estabilidad hemodinámica y sin otros signos de alarma, la paciente se ubica en el <b>circuito ginecológico de urgencias</b>, se asigna a un médico concreto y se atiende según la prioridad de triaje (2, 3, 4 o 5) en las consultas de Policlínica.',
+ 'Las <b>prioridades 1</b>, de actuación inmediata por inestabilidad clínica o signos de alarma, las atiende el médico de Observación, como habitualmente.']},
+{id:'metro',t:'1. Metrorragias',p:[
+ 'Las pacientes con hemorragias vaginales inusuales, menstruales o no, sin otros motivos de consulta predominantes (sin dolor abdominal significativo; el dolor leve o moderado suele acompañar a la metrorragia) se atienden en el circuito ginecológico, con médico asignado. Tras la primera evaluación facultativa hay dos situaciones.',
+ '<b>Premenopáusicas.</b> Se solicita siempre analítica con hemograma (imprescindible) y coagulación, y test de gestación, explicando a la paciente que ambas pruebas son necesarias para valorar si precisa valoración urgente por el especialista. Se valora dejar vía periférica salinizada según los síntomas (mareos, astenia…).',
+ '<ul><li>Hemoglobina <b>&lt; 11 g/dl</b> <b>o</b> test de gestación positivo (basta una de las dos): derivar al <b>Ginecólogo de guardia</b>.</li><li>Hemoglobina <b>&gt; 11 g/dl</b> <b>y</b> test de gestación negativo: derivar a <b>consultas externas</b> para estudio ginecológico (como INTU). Al alta se puede pautar <b>ácido tranexámico 500 mg, 1 a 2 comprimidos cada 6 a 8 horas</b>, hasta que cese o disminuya el sangrado.</li></ul>',
+ '<b>Posmenopáusicas.</b> Todas se derivan al <b>Ginecólogo de guardia</b> tras ser atendidas por el médico de Urgencias, siempre con analítica previa (hemograma y coagulación) en Urgencias. Se valora dejar vía periférica salinizada según los síntomas.']},
+{id:'menstruales',t:'2. Trastornos menstruales',p:[
+ 'Si las irregularidades del ciclo son el motivo principal y no hay otros síntomas predominantes, se explica a la paciente que debe evaluarla su <b>médico de Atención Primaria</b>, que iniciará el estudio (analítica, derivación a planificación familiar…) y valorará si necesita consulta externa de Ginecología.',
+ 'Las usuarias de anticonceptivos hormonales consultan con frecuencia por spotting. En estos casos se deriva directamente a <b>Planificación Familiar</b> de su centro de salud.']},
+{id:'amenorrea',t:'3. Amenorrea',p:[
+ 'Sin otro síntoma acompañante (dolor abdominal, fiebre, mal estado general…), las pacientes con ausencia de menstruación en uno o más ciclos pasan por triaje de enfermería y las evalúa un facultativo dentro del circuito ginecológico. Se solicita siempre test de gestación.',
+ '<ul><li><b>Test positivo:</b> derivar a su centro de salud para iniciar el PAI de embarazo (consultas de Atención Primaria específicas de embarazo).</li><li><b>Test negativo:</b> derivar a su médico de Atención Primaria, que tras su primera evaluación (analítica, etc.) la deriva a consultas externas de Ginecología. La cita debe ser tipo <b>PAP</b>, es decir, derivación desde Atención Primaria, nunca desde Urgencias.</li></ul>']},
+{id:'dolor',t:'4. Dolor abdominal con orientación ginecológica',p:[
+ 'A toda paciente atendida en Urgencias por dolor abdominal en la que se sospeche una causa ginecológica se la deriva al <b>Ginecólogo de guardia</b>, pero antes Urgencias debe haber hecho una correcta historia clínica, con anamnesis y exploración que justifiquen la sospecha, y haber solicitado <b>analítica de sangre, orina y test de gestación (siempre)</b>.',
+ 'En la anamnesis es imprescindible recoger si toma <b>anticonceptivos hormonales</b>, porque en ese caso la patología ovárica es excepcional.',
+ 'Si el especialista confirma que la causa es ginecológica, es el propio Ginecólogo quien da el alta de la paciente del circuito de Urgencias, ya sea por hospitalización o por alta a domicilio.']},
+{id:'prurito',t:'Prurito genital',p:[
+ 'Es un motivo de consulta no urgente. Siempre que no se asocie a otros factores de riesgo (sospecha de cuerpo extraño vaginal, fiebre, dolor abdominal…), se entrega a la paciente un <b>escobillón</b> para el cultivo de exudado vaginal, que se cursa desde Urgencias para que recojan los resultados sus médicos de Atención Primaria.',
+ 'Se valora al alta un tratamiento con preparados comerciales, según indicación de Ginecología, hasta que la valore su centro de salud: <b>Gynelaude óvulos</b> (1 óvulo cada 24 h durante 10 días) o <b>Fluomizín comprimidos vaginales</b> (1 al día durante 6 días). Según el cultivo, su centro de salud instaura el tratamiento que proceda.']},
+{id:'gestantes',t:'5. Patología urgente en gestantes',p:[
+ 'Los motivos de consulta urgentes que no sean claramente obstétricos se atienden en el área de Urgencias, según el circuito específico de cada motivo y con los mismos protocolos (dolor abdominal, fiebre, síntomas respiratorios…). Si precisan ingreso, se consulta al Ginecólogo de guardia la indicación de hospitalización en su servicio, solo en estos casos (por ejemplo, un cólico renal persistente en una gestante que precisa ingreso).',
+ 'Los <b>sangrados vaginales en gestantes</b> se derivan siempre para valoración del <b>Obstetra de guardia</b>, sin necesidad de analítica de sangre (salvo criterio del facultativo).',
+ 'En cualquier caso, ante la duda de actuación, manejo o tratamiento en estas pacientes, se consulta al Ginecólogo de guardia.']},
+{id:'resp',t:'Responsabilidades, difusión y evaluación',p:[
+ '<b>Responsabilidades.</b> Dra. Mª Jesús Zurita Campos, directora de la UGC de Ginecología del Área Sanitaria Norte de Málaga. Dra. Mª Pilar Jiménez Zurita, jefa de sección de Cuidados Críticos y Urgencias. Dirección Médica del hospital, por consenso en la elaboración.',
+ '<b>Plan de difusión.</b> Sesiones en Urgencias hospitalarias y Ginecología para todos los facultativos, con convocatoria a los residentes de Medicina Familiar y Comunitaria. Charlas formativas a Atención Primaria sobre los circuitos. El protocolo estará en la intranet del área sanitaria, donde se adjuntarán las actualizaciones.',
+ '<b>Evaluación.</b> Auditorías anuales (indicador cualitativo, de resultado): análisis de historias clínicas de Urgencias con los motivos del protocolo, para comprobar si las derivaciones al alta a Atención Primaria o a valoración urgente por el especialista se ajustan al protocolo. Fórmula: porcentaje de adecuación por motivo de consulta. Estándar óptimo: 90 % de historias que cumplen el circuito. Fuente: consenso interdisciplinario. Responsable: Dirección Médica del área Norte de Málaga.']},
+{id:'anexo',t:'Anexo: algoritmo de actuación',p:[
+ '<ul><li><b>Metrorragias premenopáusicas:</b> hemograma, Hb &lt; 11 g/dl a GINE; Hb &gt; 11 g/dl a Amchafibrín 1 cada 8 h y MAP. Test de gestación positivo a GINE; negativo con Hb &gt; 11 a Amchafibrín 1 cada 8 h y MAP.</li><li><b>Metrorragias posmenopáusicas:</b> hemograma y derivar a GINE.</li><li><b>Trastornos menstruales:</b> derivar a MAP. El spotting de usuarias de anticonceptivos a Planificación Familiar.</li><li><b>Amenorreas:</b> test positivo al centro de salud para iniciar PAI de embarazo; negativo a MAP para primera visita en consulta de GINE.</li><li><b>Dolor abdominal con orientación ginecológica:</b> anamnesis, analítica y test de gestación (siempre). Con anticonceptivos, la patología ovárica es excepcional.</li><li><b>Prurito genital:</b> escobillón para que la paciente se haga la toma vaginal. Gynelaude óvulos CLX 1 cada 24 h 10 días o Fluomizín comprimidos vaginales 1 cada 24 h 6 días. Recoger el cultivo en su MAP.</li></ul>']},
+{id:'evid',t:'Bibliografía y niveles de evidencia',p:[
+ 'Protocolos de la Sociedad Española de Ginecología y Obstetricia (ProSEGO) sobre sangrado menstrual abundante, amenorreas y vulvovaginitis. Niveles de evidencia y grados de recomendación de SIGN: 1++, 1+, 1−, 2++, 2+, 2−, 3 (estudios no analíticos, casos y series de casos) y 4 (opinión de expertos); grados A a D. Los estudios 1− y 2− no deben usarse para elaborar recomendaciones por su alto riesgo de sesgo.']}
+];
+const plain=h=>h.replace(/<[^>]+>/g,' ').replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&amp;/g,'&').replace(/\s+/g,' ').trim();
+const PROTO_TEXT=PROTO.map(s=>'## '+s.t+'\n'+s.p.map(plain).join('\n')).join('\n\n');
+
+/* ===== Circuitos ===== */
+const MOTIVOS=[
+ {k:'metro',n:'Metrorragias',d:'Hemorragia vaginal inusual sin dolor predominante'},
+ {k:'mens',n:'Trastornos menstruales',d:'Irregularidades del ciclo, spotting con anticonceptivos'},
+ {k:'amen',n:'Amenorrea',d:'Ausencia de menstruación sin otros síntomas'},
+ {k:'dolor',n:'Dolor abdominal ginecológico',d:'Sospecha de causa ginecológica'},
+ {k:'prur',n:'Prurito genital',d:'Motivo no urgente sin factores de riesgo'},
+ {k:'gsang',n:'Sangrado en gestante',d:'Cualquier sangrado vaginal con embarazo'},
+ {k:'gotro',n:'Gestante, otro motivo',d:'Motivo urgente no claramente obstétrico'}
+];
+const FLOWS={
+ metro:{lead:'Sin dolor abdominal significativo. Primera evaluación facultativa en el circuito ginecológico y después dos situaciones.',
+  groups:[
+   {n:'Premenopáusica',steps:['Solicitar siempre analítica con hemograma (imprescindible) y coagulación, y test de gestación. Explicar a la paciente que ambas pruebas son necesarias.','Valorar vía periférica salinizada según síntomas (mareos, astenia…).'],
+    outs:[{c:'Hb < 11 g/dl o test de gestación positivo (basta una)',d:'Ginecólogo de guardia',tone:'red'},
+          {c:'Hb > 11 g/dl y test de gestación negativo',d:'Consultas externas de Ginecología',tone:'green',note:'Estudio ginecológico (como INTU). Al alta: ácido tranexámico 500 mg, 1 a 2 comprimidos cada 6 a 8 h hasta que cese o disminuya el sangrado.'}]},
+   {n:'Posmenopáusica',steps:['Atención por el médico de Urgencias.','Extraer analítica en Urgencias (hemograma y coagulación) antes de derivar.','Valorar vía periférica salinizada.'],
+    outs:[{c:'Todas, con cualquier resultado del hemograma',d:'Ginecólogo de guardia',tone:'red',note:'Hay que valorar y descartar patología maligna.'}]}],
+  warn:'El texto del PNT usa «< 11» y «> 11» y no dice qué hacer con Hb exactamente 11,0. Su anexo escribe «Amchafibrín 1 cada 8 h» y «MAP» donde el texto dice «cada 6 a 8 h» y «consultas externas». Confirma ambos puntos con el servicio.'},
+ mens:{lead:'Cuando la irregularidad del ciclo es el motivo principal y no hay otros síntomas predominantes.',
+  groups:[{n:'Circuito',steps:['Explicar a la paciente que debe evaluarla su médico de Atención Primaria.'],
+    outs:[{c:'Irregularidad del ciclo',d:'Médico de Atención Primaria',tone:'blue',note:'Inicia el estudio (analítica, planificación familiar…) y valora la derivación a consultas externas de Ginecología.'},
+          {c:'Spotting en usuaria de anticonceptivos hormonales',d:'Planificación Familiar del centro de salud',tone:'blue',note:'Derivación directa.'}]}]},
+ amen:{lead:'Sin dolor abdominal, fiebre ni mal estado general. Valoración por triaje y después por facultativo en el circuito ginecológico.',
+  groups:[{n:'Circuito',steps:['Solicitar siempre test de gestación.'],
+    outs:[{c:'Test de gestación positivo',d:'Centro de salud: PAI de embarazo',tone:'blue',note:'Consultas de Atención Primaria específicas de embarazo.'},
+          {c:'Test de gestación negativo',d:'Médico de Atención Primaria',tone:'blue',note:'Tras su evaluación (analítica…) la deriva a consultas externas de Ginecología. La cita debe ser PAP, nunca derivación desde Urgencias.'}]}]},
+ dolor:{lead:'Paciente atendida como siempre por dolor abdominal en la que se sospecha causa ginecológica.',
+  groups:[{n:'Antes de derivar',steps:['Historia clínica con anamnesis y exploración que justifiquen la sospecha.','Solicitar analítica de sangre, orina y test de gestación (siempre).','Preguntar por anticonceptivos hormonales: si los toma, la patología ovárica es excepcional.'],
+    outs:[{c:'Sospecha ginecológica con lo anterior completado',d:'Ginecólogo de guardia',tone:'red',note:'Si confirma causa ginecológica, el propio Ginecólogo da el alta del circuito, por hospitalización o a domicilio.'}]}],
+  warn:null,
+  extra:'Causas gineco-obstétricas frecuentes de dolor agudo: embarazo ectópico (test positivo), torsión ovárica (fiebre, leucocitosis, tumoración anexial en ecografía), enfermedad pélvica inflamatoria y rotura folicular.'},
+ prur:{lead:'Motivo no urgente, siempre que no haya otros factores de riesgo.',
+  groups:[{n:'Sin factores de riesgo',steps:['Entregar un escobillón para el cultivo de exudado vaginal (puede tomarlo la propia paciente).','Cursar el cultivo desde Urgencias; recogen el resultado sus médicos de Atención Primaria.','Valorar tratamiento al alta, según indicación de Ginecología.'],
+    outs:[{c:'Gynelaude óvulos',d:'1 óvulo cada 24 h, 10 días',tone:'green'},{c:'Fluomizín comprimidos vaginales',d:'1 al día, 6 días',tone:'green',note:'Hasta que la valore su centro de salud, que según el cultivo instaura el tratamiento.'}]},
+   {n:'Con factores de riesgo',steps:['Sospecha de cuerpo extraño vaginal, fiebre, dolor abdominal u otros.'],
+    outs:[{c:'No es el circuito de prurito no urgente',d:'Valoración habitual en Urgencias',tone:'amber',note:'El PNT no detalla este caso. Ante la duda, consultar al Ginecólogo de guardia.'}]}]},
+ gsang:{lead:'Cualquier sangrado vaginal en una gestante.',
+  groups:[{n:'Circuito',steps:['Derivar siempre para valoración del Obstetra de guardia.','No hace falta analítica de sangre, salvo criterio del facultativo.'],
+    outs:[{c:'Sangrado vaginal en gestante',d:'Obstetra de guardia',tone:'red',note:'Puede ser sangrado fisiológico de implantación, de origen cervical, amenaza de aborto o aborto.'}]}]},
+ gotro:{lead:'Motivos urgentes que no son claramente obstétricos: dolor abdominal, fiebre, síntomas respiratorios…',
+  groups:[{n:'Circuito',steps:['Atender en el área de Urgencias, según el circuito específico del motivo y con los mismos protocolos.'],
+    outs:[{c:'No precisa ingreso',d:'Urgencias, circuito del motivo',tone:'green'},{c:'Precisa ingreso',d:'Consultar al Ginecólogo de guardia',tone:'red',note:'Solo en estos casos se consulta la indicación de hospitalización en su servicio (p. ej. cólico renal persistente que precisa ingreso).'}]}],
+  extra:'Ante cualquier duda de actuación, manejo o tratamiento en gestantes, consultar con el Ginecólogo de guardia.'}
+};
+let curMotivo='metro';
+function renderMotivos(){
+  $('#motivos').innerHTML=MOTIVOS.map(m=>`<button type="button" class="motivo" data-k="${m.k}" aria-pressed="${m.k===curMotivo}"><b>${esc(m.n)}</b><span>${esc(m.d)}</span></button>`).join('');
+  const m=MOTIVOS.find(x=>x.k===curMotivo),f=FLOWS[curMotivo];
+  let h=`<div class="row"><h3 style="font-size:1.2rem">${esc(m.n)}</h3><span class="sp"></span><button class="btn sm primary" type="button" id="to-ficha">Abrir en la ficha</button></div><p class="muted" style="margin:6px 0 0">${esc(f.lead)}</p>`;
+  f.groups.forEach(g=>{
+    h+=`<div class="group"><h3>${esc(g.n)}</h3><ol>${g.steps.map(s=>`<li>${esc(s)}</li>`).join('')}</ol><div class="outs">`+
+    g.outs.map(o=>`<div class="out"><div class="cond">${esc(o.c)}</div><div>${pill(o.d,o.tone)}</div>${o.note?`<div class="note">${esc(o.note)}</div>`:''}</div>`).join('')+`</div></div>`;
+  });
+  if(f.extra)h+=`<div class="info" style="margin-top:14px">${esc(f.extra)}</div>`;
+  if(f.warn)h+=`<div class="warn" style="margin-top:14px"><b>Confirmar:</b> ${esc(f.warn)}</div>`;
+  $('#flow').innerHTML=h;
+}
+$('#motivos').addEventListener('click',e=>{const b=e.target.closest('.motivo');if(!b)return;curMotivo=b.dataset.k;renderMotivos()});
+$('#flow').addEventListener('click',e=>{if(e.target.id==='to-ficha'){$('#f-motivo').value=curMotivo;go('ficha');updateFicha()}});
+
+/* ===== Ficha ===== */
+$('#f-motivo').insertAdjacentHTML('beforeend',MOTIVOS.map(m=>`<option value="${m.k}">${esc(m.n)}</option>`).join(''));
+const V=id=>document.getElementById(id);
+function collect(){
+  const hbRaw=V('f-hb').value.replace(',','.');const hb=hbRaw===''||isNaN(parseFloat(hbRaw))?null:parseFloat(hbRaw);
+  return{cod:V('f-cod').value.trim(),edad:V('f-edad').value,prio:V('f-prio').value,alarma:V('f-alarma').checked,ta:V('f-ta').value.trim(),fc:V('f-fc').value,temp:V('f-temp').value,
+   motivo:V('f-motivo').value,meno:V('f-meno').value,test:V('f-test').value,hb,coag:V('f-coag').checked,dolorsig:V('f-dolorsig').checked,via:V('f-via').checked,
+   spotting:V('f-spotting').checked,otros:V('f-otros').checked,hc:V('f-hc').checked,sangre:V('f-sangre').checked,orina:V('f-orina').checked,anticonc:V('f-anticonc').checked,
+   fr:V('f-fr').checked,trat:V('f-trat').value,ingreso:V('f-ingreso').checked,obs:V('f-obs').value.trim(),prof:V('f-prof').value.trim()};
+}
+function recommend(f){
+  const R={dest:'',tone:'amber',pasos:[],avisos:[],pend:[]};
+  if(f.prio==='1'||f.alarma){R.dest='Médico de Observación';R.tone='red';R.pasos=['Prioridad 1 o signos de alarma: actuación inmediata, fuera del circuito ginecológico de Policlínica.','Atiende el médico de Observación, como en el resto de prioridades 1.'];return R}
+  const m=f.motivo;
+  if(!m){R.dest='Elige el motivo de consulta';R.tone='gray';return R}
+  R.pasos.push('Paciente estable y sin signos de alarma: circuito ginecológico, médico asignado, consultas de Policlínica (prioridades 2 a 5).');
+  if(m==='metro'){
+    if(f.dolorsig)R.avisos.push('Con dolor abdominal significativo este no es el circuito de metrorragias. Valora el circuito de dolor abdominal con orientación ginecológica.');
+    if(f.meno==='post'){
+      R.dest='Ginecólogo de guardia';R.tone='red';
+      R.pasos.push('Atiende el médico de Urgencias y extrae analítica previa (hemograma y coagulación).','Valora dejar vía periférica salinizada según síntomas.');
+      if(f.hb==null||!f.coag)R.pend.push('Registrar la analítica de hemograma y coagulación hecha en Urgencias');
+      R.avisos.push('Independientemente del hemograma, hay que valorar y descartar patología maligna.');
+    }else if(f.meno==='pre'){
+      R.pasos.push('Solicita hemograma (imprescindible), coagulación y test de gestación, y explica a la paciente por qué son necesarios.','Valora vía periférica salinizada según síntomas (mareos, astenia…).');
+      if(f.test==='pos'){R.dest='Ginecólogo de guardia';R.tone='red';R.pasos.push('Test de gestación positivo: basta esta condición para derivar.')}
+      else if(f.hb!=null&&f.hb<11){R.dest='Ginecólogo de guardia';R.tone='red';R.pasos.push('Hb < 11 g/dl: basta esta condición para derivar.')}
+      else if(f.hb!=null&&f.hb>11&&f.test==='neg'){R.dest='Consultas externas de Ginecología';R.tone='green';R.pasos.push('Estudio ginecológico en consulta externa (como INTU).','Al alta se puede pautar ácido tranexámico 500 mg, 1 a 2 comprimidos cada 6 a 8 h, hasta que cese o disminuya el sangrado.');R.avisos.push('El anexo del PNT indica «MAP» y «Amchafibrín 1 cada 8 h» para este caso. Confirma el destino y la pauta con el servicio.')}
+      else if(f.hb!=null&&f.hb===11&&f.test==='neg'){R.dest='Decisión clínica';R.tone='amber';R.avisos.push('Hb exactamente 11,0 g/dl: el PNT solo define «< 11» y «> 11». Consulta con el Ginecólogo de guardia.')}
+      else{R.dest='Pendiente de resultados';R.tone='amber';if(f.hb==null)R.pend.push('Hemoglobina (hemograma)');if(!f.coag)R.pend.push('Coagulación');if(!f.test)R.pend.push('Test de gestación')}
+    }else{R.dest='Indica el estado menopáusico';R.tone='gray'}
+  }
+  else if(m==='mens'){
+    R.pasos.push('Explica a la paciente que debe evaluarla su médico de Atención Primaria.');
+    if(f.spotting){R.dest='Planificación Familiar del centro de salud';R.tone='blue';R.pasos.push('Spotting en usuaria de anticonceptivos hormonales: derivación directa.')}
+    else{R.dest='Médico de Atención Primaria';R.tone='blue';R.pasos.push('Atención Primaria inicia el estudio (analítica, planificación familiar…) y valora la derivación a consultas externas de Ginecología.')}
+  }
+  else if(m==='amen'){
+    if(f.otros){R.dest='Fuera de este circuito';R.tone='amber';R.pasos.push('Con dolor abdominal, fiebre o mal estado general, valora según el síntoma predominante (p. ej. circuito de dolor abdominal).')}
+    else if(f.test==='pos'){R.dest='Centro de salud: PAI de embarazo';R.tone='blue';R.pasos.push('Derivar al centro de salud para iniciar el PAI de embarazo.')}
+    else if(f.test==='neg'){R.dest='Médico de Atención Primaria';R.tone='blue';R.pasos.push('Atención Primaria hace la primera evaluación (analítica…) y deriva a consultas externas de Ginecología.','La cita debe ser PAP, nunca derivación desde Urgencias.')}
+    else{R.dest='Pendiente de resultados';R.tone='amber';R.pend.push('Test de gestación (siempre)')}
+  }
+  else if(m==='dolor'){
+    R.pasos.push('Atiende el dolor abdominal como habitualmente en Urgencias.');
+    if(!f.hc)R.pend.push('Historia clínica con anamnesis y exploración que justifique la sospecha');
+    if(!f.sangre)R.pend.push('Analítica de sangre');
+    if(!f.orina)R.pend.push('Analítica de orina');
+    if(!f.test)R.pend.push('Test de gestación (siempre)');
+    if(f.anticonc)R.avisos.push('Toma anticonceptivos hormonales: la patología ovárica es excepcional.');
+    if(f.test==='pos')R.avisos.push('Test de gestación positivo: entre las causas frecuentes de dolor agudo está el embarazo ectópico.');
+    if(R.pend.length){R.dest='Completar antes de derivar';R.tone='amber'}
+    else{R.dest='Ginecólogo de guardia';R.tone='red';R.pasos.push('Si el especialista confirma causa ginecológica, él da el alta del circuito (hospitalización o domicilio).')}
+  }
+  else if(m==='prur'){
+    if(f.fr){R.dest='Fuera del circuito de prurito no urgente';R.tone='amber';R.pasos.push('Con factores de riesgo, valoración habitual en Urgencias. El PNT no detalla este caso: ante la duda, consulta al Ginecólogo de guardia.')}
+    else{R.dest='Alta con escobillón; resultado en Atención Primaria';R.tone='green';
+      R.pasos.push('Entrega un escobillón para el cultivo de exudado vaginal (puede tomarlo la propia paciente).','Cursa el cultivo desde Urgencias; recogen el resultado sus médicos de Atención Primaria.');
+      R.pasos.push(f.trat&&f.trat!=='Sin tratamiento'?'Tratamiento al alta, según indicación de Ginecología: '+f.trat+'.':'Valora tratamiento al alta con Gynelaude óvulos (10 días) o Fluomizín comprimidos (6 días), según indicación de Ginecología.')}
+  }
+  else if(m==='gsang'){R.dest='Obstetra de guardia';R.tone='red';R.pasos=['Todo sangrado vaginal en gestante se deriva siempre al Obstetra de guardia.','No hace falta analítica de sangre, salvo criterio del facultativo.']}
+  else if(m==='gotro'){
+    R.pasos=['Atiende en el área de Urgencias, según el circuito específico del motivo de consulta.'];
+    if(f.ingreso){R.dest='Consultar al Ginecólogo de guardia';R.tone='red';R.pasos.push('Si precisa ingreso, se consulta al Ginecólogo de guardia la indicación de hospitalización en su servicio.')}
+    else{R.dest='Urgencias, circuito del motivo';R.tone='green'}
+    R.avisos.push('Ante la duda de actuación, manejo o tratamiento, consulta al Ginecólogo de guardia.');
+  }
+  return R;
+}
+function updateFicha(){
+  const f=collect();
+  $$('#ficha [data-g]').forEach(el=>{el.hidden=!(f.motivo&&el.dataset.g.split(',').includes(f.motivo))});
+  const r=recommend(f);
+  let h=`<div class="kicker">Destino según el PNT</div><div class="dest">${pill(r.dest,r.tone)}</div>`;
+  if(r.pend.length)h+=`<div class="warn" style="margin-bottom:10px"><b>Falta registrar:</b> ${r.pend.map(esc).join('; ')}.</div>`;
+  if(r.pasos.length)h+=`<ul>${r.pasos.map(s=>`<li>${esc(s)}</li>`).join('')}</ul>`;
+  if(r.avisos.length)h+=`<div class="info" style="margin-top:10px">${r.avisos.map(esc).join('<br>')}</div>`;
+  const el=$('#result');el.innerHTML=h;
+  const c={red:'--red-fg',green:'--green-fg',blue:'--blue-fg',amber:'--amber-fg',gray:'--line'}[r.tone];el.style.borderColor=`var(${c})`;
+  return{f,r};
+}
+$('#ficha').addEventListener('input',updateFicha);
+$('#ficha').addEventListener('change',updateFicha);
+$('#ficha').addEventListener('submit',e=>e.preventDefault());
+const mLabel=k=>(MOTIVOS.find(m=>m.k===k)||{n:''}).n;
+const yn=b=>b?'Sí':'No';
+const tl={pos:'Positivo',neg:'Negativo','':'Pendiente'};
+function buildRecord(){
+  const{f,r}=updateFicha();
+  return{fecha:new Date().toLocaleString('es-ES',{dateStyle:'short',timeStyle:'short'}),iso:new Date().toISOString(),cod:f.cod,edad:f.edad,prioridad:f.prio,signos_alarma:yn(f.alarma),ta:f.ta,fc:f.fc,temp:f.temp,
+    motivo:mLabel(f.motivo),menopausia:f.meno==='pre'?'Premenopáusica':f.meno==='post'?'Posmenopáusica':'',hb:f.hb==null?'':String(f.hb).replace('.',','),test_gestacion:f.motivo&&['metro','amen','dolor'].includes(f.motivo)?tl[f.test]:'',
+    coagulacion:f.motivo==='metro'?yn(f.coag):'',anticonceptivos:f.motivo==='dolor'?yn(f.anticonc):'',spotting:f.motivo==='mens'?yn(f.spotting):'',factores_riesgo:f.motivo==='prur'?yn(f.fr):'',
+    tratamiento:f.motivo==='prur'?f.trat:'',destino:r.dest,pasos:r.pasos.join(' | '),observaciones:f.obs,profesional:f.prof};
+}
+function recordText(x){
+  const L=[['Fecha',x.fecha],['Código',x.cod],['Edad',x.edad],['Prioridad de triaje',x.prioridad],['Signos de alarma',x.signos_alarma],['TA',x.ta],['FC',x.fc],['Tª',x.temp],['Motivo',x.motivo],['Estado menopáusico',x.menopausia],['Hemoglobina (g/dl)',x.hb],['Test de gestación',x.test_gestacion],['Coagulación',x.coagulacion],['Anticonceptivos hormonales',x.anticonceptivos],['Spotting con anticonceptivos',x.spotting],['Factores de riesgo',x.factores_riesgo],['Tratamiento al alta',x.tratamiento],['DESTINO SEGÚN PNT',x.destino],['Pasos',x.pasos],['Observaciones',x.observaciones],['Profesional',x.profesional]];
+  return 'FICHA URGENCIAS GINECO-OBSTÉTRICAS · Hospital de Antequera\nPNT Área Sanitaria Norte de Málaga, versión 2 (septiembre 2026)\n\n'+L.filter(p=>p[1]!==''&&p[1]!=null).map(p=>p[0]+': '+p[1]).join('\n');
+}
+async function copyText(t,msg){
+  try{await navigator.clipboard.writeText(t);toast(msg||'Copiado')}
+  catch(e){const ta=document.createElement('textarea');ta.value=t;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();let ok=false;try{ok=document.execCommand('copy')}catch(_){}ta.remove();toast(ok?(msg||'Copiado'):'No se pudo copiar. Selecciona el texto manualmente.')}
+}
+async function saveFile(name,data,fallbackMsg){
+  let d=null;try{d=await window.claude?.use?.('downloads')}catch(e){}
+  if(!d){await copyText(typeof data==='string'?data:'',fallbackMsg||'La descarga no está disponible aquí. Contenido copiado al portapapeles.');return}
+  try{await d.save({filename:name,data});toast('Archivo listo: '+name)}
+  catch(e){if(e&&e.code==='declined')toast('Descarga cancelada');else{await copyText(typeof data==='string'?data:'','No se pudo guardar el archivo. Contenido copiado al portapapeles.')}}
+}
+let hist=store.get('pnt-gine-hist',[]);
+function renderHist(){
+  $('#hist-n').textContent=hist.length?hist.length+(hist.length===1?' ficha':' fichas'):'Sin fichas guardadas';
+  const tb=$('#hist-t tbody');
+  tb.innerHTML=hist.length?hist.map((x,i)=>`<tr><td class="mono">${esc(x.fecha)}</td><td>${esc(x.cod||'—')}</td><td>${esc(x.edad||'—')}</td><td>${esc(x.motivo)}</td><td>${esc(x.destino)}</td><td><button class="btn sm" type="button" data-copy="${i}">Copiar</button> <button class="btn sm" type="button" data-rm="${i}">Quitar</button></td></tr>`).join(''):`<tr><td colspan="6" class="muted">Cuando guardes una ficha aparecerá aquí.</td></tr>`;
+  $('#h-csv').disabled=$('#h-json').disabled=$('#h-del').disabled=!hist.length;
+}
+$('#b-save').onclick=()=>{const x=buildRecord();if(!x.motivo){toast('Elige un motivo de consulta antes de guardar');return}hist.unshift(x);const ok=store.set('pnt-gine-hist',hist);renderHist();toast(ok?'Ficha guardada en el historial':'Guardada solo mientras no cierres la página')};
+$('#b-copy').onclick=()=>copyText(recordText(buildRecord()),'Ficha copiada');
+$('#b-txt').onclick=()=>{const x=buildRecord();saveFile('ficha-'+(x.cod||'paciente').replace(/[^\w-]+/g,'_')+'.txt',recordText(x))};
+$('#b-clear').onclick=()=>{$('#ficha').reset();updateFicha();toast('Formulario limpio')};
+const COLS=[['fecha','Fecha'],['cod','Código'],['edad','Edad'],['prioridad','Prioridad triaje'],['signos_alarma','Signos de alarma'],['ta','TA'],['fc','FC'],['temp','Tª'],['motivo','Motivo'],['menopausia','Estado menopáusico'],['hb','Hb (g/dl)'],['test_gestacion','Test de gestación'],['coagulacion','Coagulación'],['anticonceptivos','Anticonceptivos hormonales'],['spotting','Spotting'],['factores_riesgo','Factores de riesgo'],['tratamiento','Tratamiento al alta'],['destino','Destino según PNT'],['observaciones','Observaciones'],['profesional','Profesional']];
+const csvCell=v=>{v=String(v==null?'':v);if(/^[=+\-@]/.test(v))v="'"+v;return '"'+v.replace(/"/g,'""')+'"'};
+$('#h-csv').onclick=()=>{const rows=[COLS.map(c=>csvCell(c[1])).join(';')].concat(hist.map(x=>COLS.map(c=>csvCell(x[c[0]])).join(';')));saveFile('historial-urgencias-gineco.csv','\ufeff'+rows.join('\r\n'))};
+$('#h-json').onclick=()=>saveFile('historial-urgencias-gineco.json',JSON.stringify(hist,null,2));
+let delArm=false;
+$('#h-del').onclick=function(){if(!delArm){delArm=true;this.textContent='Confirmar: borrar todo';setTimeout(()=>{delArm=false;this.textContent='Borrar historial'},4000);return}delArm=false;this.textContent='Borrar historial';hist=[];store.set('pnt-gine-hist',hist);renderHist();toast('Historial borrado')};
+$('#hist-t').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;if(b.dataset.copy!=null)copyText(recordText(hist[+b.dataset.copy]),'Ficha copiada');if(b.dataset.rm!=null){hist.splice(+b.dataset.rm,1);store.set('pnt-gine-hist',hist);renderHist()}});
+
+/* ===== Protocolo y búsqueda ===== */
+function tokens(q){return norm(q).split(/[^a-z0-9<>]+/).filter(w=>w.length>1)}
+function hl(html,ws){if(!ws.length)return html;return html.split(/(<[^>]+>)/).map(p=>p.startsWith('<')?p:p.replace(new RegExp('('+ws.map(w=>w.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')).join('|')+')','gi'),m=>`<mark>${m}</mark>`)).join('')}
+function hlSmart(html,q){ // resalta ignorando acentos
+  const ws=tokens(q);if(!ws.length)return html;
+  return html.split(/(<[^>]+>)/).map(part=>{if(part.startsWith('<'))return part;let out='',i=0;const n=norm(part);
+    const re=new RegExp(ws.map(w=>w.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')).join('|'),'g');let m;
+    // norm conserva longitud en la mayoría de casos; si no, no resalta
+    if(n.length!==part.length)return part;
+    while((m=re.exec(n))){out+=part.slice(i,m.index)+'<mark>'+part.slice(m.index,m.index+m[0].length)+'</mark>';i=m.index+m[0].length;if(m[0].length===0)re.lastIndex++}
+    return out+part.slice(i)}).join('');
+}
+function renderProto(q){
+  const ws=tokens(q||'');let n=0;
+  const html=PROTO.map(s=>{
+    const txt=norm(s.t+' '+s.p.map(plain).join(' '));
+    const hit=!ws.length||ws.every(w=>txt.includes(w));if(!hit)return '';n++;
+    return `<details class="sec" ${ws.length?'open':''}><summary>${hlSmart(esc(s.t),q)}</summary><div class="body">${s.p.map(p=>`<div style="margin-bottom:.7em">${ws.length?hlSmart(p,q):p}</div>`).join('')}</div></details>`}).join('');
+  $('#proto-list').innerHTML=html||`<div class="card muted">Ninguna sección contiene todas esas palabras. Prueba con menos términos.</div>`;
+}
+$('#q-proto').addEventListener('input',e=>renderProto(e.target.value));
+$('#q-proto-x').onclick=()=>{$('#q-proto').value='';renderProto('')};
+
+/* ===== Preguntar ===== */
+const SUGS=['Hb 10,5 y test negativo, ¿qué hago?','¿Qué se pide en una metrorragia premenopáusica?','Paciente con anticonceptivos y spotting','¿Cómo derivo una amenorrea con test negativo?','Pauta de ácido tranexámico','¿Qué tratamiento al alta en prurito genital?','Gestante con sangrado','¿Qué analítica hace falta en dolor abdominal?'];
+$('#sugs').innerHTML=SUGS.map(s=>`<button type="button" class="chip">${esc(s)}</button>`).join('');
+const STOP=new Set('de la el los las un una y o en que se por con para al del es son lo su sus mi como hay hago puedo debo cual cuales qué que cuando sobre'.split(' '));
+function localSearch(q){
+  const ws=tokens(q).filter(w=>!STOP.has(w));if(!ws.length)return[];
+  const hits=[];
+  PROTO.forEach(s=>{
+    const sentences=[];s.p.forEach(p=>plain(p).split(/(?<=[.;:])\s+/).forEach(x=>sentences.push(x)));
+    sentences.forEach(x=>{const nx=norm(x);let sc=0;ws.forEach(w=>{if(nx.includes(w))sc+=1+(w.length>5?.5:0)});const nt=norm(s.t);ws.forEach(w=>{if(nt.includes(w))sc+=.5});if(sc>0)hits.push({sc,s,x})});
+  });
+  hits.sort((a,b)=>b.sc-a.sc);
+  const seen=new Set(),out=[];for(const h of hits){const k=h.x;if(seen.has(k))continue;seen.add(k);out.push(h);if(out.length>=3)break}
+  return out;
+}
+function md(t){
+  let h=esc(t).replace(/\*\*(.+?)\*\*/g,'<b>$1</b>');
+  const lines=h.split('\n');let out='',inl=false;
+  lines.forEach(l=>{const m=l.match(/^\s*[-•*]\s+(.*)/);if(m){if(!inl){out+='<ul>';inl=true}out+='<li>'+m[1]+'</li>'}else{if(inl){out+='</ul>';inl=false}if(l.trim())out+='<p style="margin:0 0 .5em">'+l+'</p>'}});
+  if(inl)out+='</ul>';return out;
+}
+const turns=[];let asking=false;
+const PREAMBLE='Eres un asistente de consulta para médicos de Urgencias del Hospital de Antequera (Área Sanitaria Norte de Málaga). Responde SOLO con lo que dice el protocolo normalizado de trabajo (PNT) que sigue. Si la pregunta no se puede responder con el PNT, dilo claramente y recomienda consultar al ginecólogo de guardia o al documento oficial. Si el PNT es ambiguo o se contradice (por ejemplo, Hb exactamente 11 g/dl, o la diferencia entre el texto y el anexo sobre ácido tranexámico y el destino MAP o consultas externas), señálalo. Responde en español, de forma breve y práctica, con listas cortas si ayudan, e indica en qué sección del PNT se apoya la respuesta. No inventes dosis ni circuitos que no estén en el texto. No sustituyes el juicio clínico.\n\n=== PNT ===\n'+PROTO_TEXT+'\n=== FIN DEL PNT ===\n\n';
+let sampleFn;
+async function getSample(){if(sampleFn!==undefined)return sampleFn;try{sampleFn=(await window.claude?.use?.('sample'))||null}catch(e){sampleFn=null}return sampleFn}
+function renderChat(){
+  $('#chat').innerHTML=turns.map(t=>{
+    let h=`<div class="msg u">${esc(t.q)}</div><div class="msg a">`;
+    h+=t.a==null?'<span class="muted">Consultando el protocolo…</span>':(t.err?`<div class="warn">${esc(t.err)}</div>`:md(t.a));
+    if(t.frags&&t.frags.length)h+=`<div style="margin-top:10px"><div class="kicker">Fragmentos del protocolo</div>`+t.frags.map(f=>`<div class="frag"><b>${esc(f.s.t)}</b><div class="small">${hlSmart(esc(f.x),t.q)}</div></div>`).join('')+`</div>`;
+    return h+'</div>'}).join('');
+}
+async function ask(q){
+  q=q.trim();if(!q||asking)return;asking=true;$('#ask-go').disabled=true;
+  const t={q,a:null,frags:localSearch(q)};turns.push(t);renderChat();$('#q-ask').value='';
+  const sm=await getSample();
+  if(!sm){t.a='';t.err='La respuesta automática no está disponible en esta vista. Abajo tienes los fragmentos del protocolo que mejor encajan con tu pregunta.';asking=false;$('#ask-go').disabled=false;renderChat();return}
+  const prev=turns.slice(0,-1).filter(x=>x.a&&!x.err).slice(-3);
+  const msgs=[];
+  prev.forEach((x,i)=>{msgs.push({role:'user',content:(i===0?PREAMBLE+'Pregunta: ':'')+x.q});msgs.push({role:'assistant',content:x.a})});
+  msgs.push({role:'user',content:(prev.length?'':PREAMBLE+'Pregunta: ')+q});
+  try{
+    const r=await sm(msgs.length===1?msgs[0].content:msgs,{cache:false,modelTier:'quick',onText:({text})=>{t.a=text;renderChat()}});
+    t.a=r.text;
+  }catch(e){t.a='';t.err=e&&e.code==='not_granted'?'No has permitido la consulta a Claude. Abajo tienes los fragmentos del protocolo relacionados.':e&&e.code==='rate_limited'?'Demasiadas preguntas seguidas. Espera un momento y vuelve a intentarlo.':'No se pudo obtener la respuesta. Abajo tienes los fragmentos del protocolo relacionados.'}
+  asking=false;$('#ask-go').disabled=false;renderChat();
+}
+$('#ask-form').addEventListener('submit',e=>{e.preventDefault();ask($('#q-ask').value)});
+$('#sugs').addEventListener('click',e=>{const c=e.target.closest('.chip');if(c)ask(c.textContent)});
+$('#ask-note').textContent='Las respuestas son un apoyo de consulta basado en el texto del PNT y pueden contener errores. Comprueba siempre la dosis y el destino en el documento oficial.';
+
+/* ===== Estudio ===== */
+const KEYS=[['< 11 g/dl','Hb que lleva a Ginecólogo de guardia'],['500 mg','Ácido tranexámico, 1-2 comp. cada 6-8 h'],['10 días','Gynelaude óvulos, 1 cada 24 h'],['6 días','Fluomizín comp. vaginales, 1 al día'],['24-38 días','Intervalo del sangrado normal'],['4,5-8 días','Duración del sangrado normal'],['90 %','Estándar de historias que cumplen el circuito'],['P1','Prioridad 1: médico de Observación']];
+$('#keys').innerHTML=KEYS.map(k=>`<div class="key"><div class="n">${esc(k[0])}</div><div class="l">${esc(k[1])}</div></div>`).join('');
+const CARDS=[
+ ['¿Cuál es el intervalo y la duración de un sangrado uterino normal?','Intervalo de 24 a 38 días y duración de 4,5 a 8 días.'],
+ ['¿Cómo se diagnostica la pérdida menstrual abundante?','No se puede medir de forma objetiva. Se basa en lo que cuenta la paciente y, de forma objetiva, en la hemoglobina.'],
+ ['¿Quién atiende las prioridades 1 de triaje?','El médico de Observación, como habitualmente. Son las de actuación inmediata por inestabilidad clínica o signos de alarma.'],
+ ['¿Dónde y cómo se atienden las prioridades 2 a 5?','En el circuito ginecológico de urgencias, con médico asignado, en las consultas de Policlínica.'],
+ ['Metrorragia premenopáusica: ¿qué pruebas se piden?','Hemograma (imprescindible), coagulación y test de gestación. Se explica a la paciente que son necesarias y se valora vía periférica salinizada.'],
+ ['Metrorragia premenopáusica: ¿cuándo va al Ginecólogo de guardia?','Con Hb < 11 g/dl o test de gestación positivo. Basta una de las dos.'],
+ ['Metrorragia premenopáusica con Hb > 11 y test negativo: ¿qué se hace?','Consultas externas de Ginecología (como INTU). Al alta, ácido tranexámico 500 mg, 1-2 comprimidos cada 6-8 h hasta que cese o disminuya el sangrado.'],
+ ['Sangrado en mujer posmenopáusica: ¿qué se hace?','Todas van al Ginecólogo de guardia tras ser atendidas en Urgencias y con analítica previa (hemograma y coagulación). Hay que descartar patología maligna.'],
+ ['Trastornos menstruales como motivo principal: ¿adónde se derivan?','Al médico de Atención Primaria. Si es spotting en usuaria de anticonceptivos hormonales, a Planificación Familiar del centro de salud.'],
+ ['Definición de amenorrea','Ausencia de sangrado menstrual y de embarazo. Es la manifestación de un trastorno subyacente (eje hipotálamo-hipófisis-ovario-endometrio). Primaria o secundaria.'],
+ ['Amenorrea: ¿qué se hace según el test de gestación?','Positivo: centro de salud para iniciar el PAI de embarazo. Negativo: médico de Atención Primaria, que deriva a Ginecología con cita PAP.'],
+ ['¿Qué significa PAP y por qué importa?','Primera cita desde Atención Primaria. Las citas a especialista de estos motivos son PAP, nunca derivaciones desde Urgencias.'],
+ ['Dolor abdominal con orientación ginecológica: ¿qué hay que hacer antes de derivar?','Historia clínica con anamnesis y exploración que justifiquen la sospecha, y analítica de sangre, orina y test de gestación (siempre).'],
+ ['¿Por qué se pregunta por anticonceptivos hormonales en el dolor abdominal?','Porque si los toma, la patología ovárica es excepcional. Es imprescindible recogerlo en la anamnesis.'],
+ ['Causas gineco-obstétricas frecuentes de dolor abdominal agudo','Embarazo ectópico (test positivo), torsión ovárica, enfermedad pélvica inflamatoria y rotura folicular.'],
+ ['¿Cómo se presenta la torsión ovárica?','Suele haber fiebre, leucocitosis y una tumoración anexial en la ecografía.'],
+ ['Si la causa del dolor es ginecológica, ¿quién da el alta?','El propio Ginecólogo, tanto si hospitaliza como si da el alta a domicilio.'],
+ ['Prurito genital sin factores de riesgo: ¿qué se hace?','Se entrega un escobillón para cultivo de exudado vaginal (puede tomarlo la paciente), se cursa desde Urgencias y recoge el resultado su médico de Atención Primaria.'],
+ ['Tratamiento al alta en prurito genital','Gynelaude óvulos, 1 cada 24 h durante 10 días, o Fluomizín comprimidos vaginales, 1 al día durante 6 días, según indicación de Ginecología.'],
+ ['Gestante con motivo urgente no obstétrico','Se atiende en Urgencias según el circuito de ese motivo. Si precisa ingreso, se consulta al Ginecólogo de guardia la hospitalización en su servicio.'],
+ ['Gestante con sangrado vaginal','Siempre al Obstetra de guardia, sin necesidad de analítica de sangre salvo criterio del facultativo.'],
+ ['Ante la duda de actuación en una gestante','Consultar con el Ginecólogo de guardia.'],
+ ['Indicador de evaluación del PNT','Auditorías anuales de historias clínicas. Estándar óptimo: 90 % cumplen el circuito. Responsable: Dirección Médica del área Norte de Málaga.'],
+ ['Plan de difusión','Sesiones en Urgencias y Ginecología (con residentes de Medicina Familiar y Comunitaria), charlas a Atención Primaria y publicación en la intranet del área.'],
+ ['Autoría y versiones','Autoras: Dra. Mª Jesús Zurita Campos (directora UGC Ginecología) y Dra. Mª Pilar Jiménez Zurita (jefa de sección de Cuidados Críticos y Urgencias). Versión 1 del 10/09/2019; versión 2 del 21/09/2026.']
+];
+const QUIZ=[
+ ['Premenopáusica con metrorragia, Hb 9,8 g/dl y test de gestación negativo. ¿Destino?',['Ginecólogo de guardia','Consultas externas de Ginecología','Alta con ácido tranexámico','Planificación Familiar'],0,'Con Hb < 11 g/dl basta para derivar al Ginecólogo de guardia.'],
+ ['Premenopáusica con metrorragia, Hb 12,4 g/dl y test negativo. ¿Destino?',['Ginecólogo de guardia','Consultas externas de Ginecología','Médico de Observación','Obstetra de guardia'],1,'Hb > 11 y test negativo: consultas externas para estudio ginecológico, con ácido tranexámico al alta si procede.'],
+ ['Premenopáusica con metrorragia, Hb 13 g/dl y test de gestación positivo.',['Alta a domicilio','Consultas externas','Ginecólogo de guardia','Atención Primaria'],2,'Una sola condición basta: test de gestación positivo o Hb < 11.'],
+ ['Mujer posmenopáusica con sangrado vaginal. ¿Qué se hace?',['Se deriva a consultas externas si Hb > 11','Todas van al Ginecólogo de guardia tras analítica en Urgencias','Alta con ácido tranexámico','Planificación Familiar'],1,'Todas se derivan, con independencia del hemograma, para descartar patología maligna.'],
+ ['¿Quién atiende una prioridad 1 de triaje?',['Médico asignado de Policlínica','Ginecólogo de guardia','Médico de Observación','Médico de Atención Primaria'],2,'Las prioridades 1 las atiende el médico de Observación, como habitualmente.'],
+ ['Amenorrea sin otros síntomas y test de gestación positivo.',['Ginecólogo de guardia','Centro de salud para iniciar el PAI de embarazo','Consultas externas de Ginecología','Observación'],1,'Test positivo: centro de salud, consultas de Atención Primaria específicas de embarazo.'],
+ ['Amenorrea sin otros síntomas y test de gestación negativo. ¿Cómo se deriva a Ginecología?',['Desde Urgencias, cita preferente','Vía médico de Atención Primaria, cita tipo PAP','Directamente al Ginecólogo de guardia','No se deriva'],1,'La cita debe ser PAP, nunca derivación desde Urgencias.'],
+ ['Spotting en usuaria de anticonceptivos hormonales.',['Ginecólogo de guardia','Consultas externas de Ginecología','Planificación Familiar del centro de salud','Médico de Observación'],2,'Se deriva directamente a Planificación Familiar.'],
+ ['¿Qué se entrega a la paciente con prurito genital sin factores de riesgo?',['Una receta de antibiótico','Un escobillón para cultivo de exudado vaginal','Una cita en Ginecología','Nada'],1,'Puede tomarse el cultivo la propia paciente. Se cursa desde Urgencias y el resultado lo recoge su médico de Atención Primaria.'],
+ ['¿Cuántos días dura el tratamiento con Gynelaude óvulos propuesto?',['3','6','10','14'],2,'1 óvulo cada 24 h durante 10 días.'],
+ ['¿Cuántos días dura el tratamiento con Fluomizín comprimidos vaginales?',['3','6','10','14'],1,'1 comprimido al día durante 6 días.'],
+ ['En dolor abdominal con orientación ginecológica, ¿qué se solicita siempre antes de derivar?',['Solo test de gestación','Analítica de sangre, orina y test de gestación','Ecografía transvaginal','Solo hemograma'],1,'Además de historia clínica con anamnesis y exploración.'],
+ ['Si el ginecólogo confirma causa ginecológica del dolor, ¿quién da el alta del circuito?',['El médico de Urgencias','El médico de Observación','El propio Ginecólogo','Atención Primaria'],2,'Tanto si hospitaliza como si da el alta a domicilio.'],
+ ['Gestante con sangrado vaginal. ¿Qué indica el PNT?',['Analítica obligatoria y alta','Siempre al Obstetra de guardia, sin analítica salvo criterio del facultativo','Consultas externas','Atención Primaria'],1,'El sangrado vaginal en gestantes se deriva siempre al Obstetra de guardia.'],
+ ['Gestante con cólico renal persistente que precisa ingreso.',['Ingresa en Ginecología directamente','Se consulta al Ginecólogo de guardia la indicación de hospitalización en su servicio','Se deriva a Atención Primaria','Alta a domicilio'],1,'Es el ejemplo que da el PNT para el ingreso de gestantes con motivos no obstétricos.'],
+ ['¿Cuál es el intervalo normal del sangrado uterino?',['21 a 28 días','24 a 38 días','28 a 45 días','30 a 60 días'],1,'Duración entre 4,5 y 8 días.'],
+ ['¿Qué estándar óptimo fija el indicador de evaluación?',['70 %','80 %','90 %','100 %'],2,'90 % de las historias cumplen los circuitos del protocolo.'],
+ ['¿Quién es el responsable del indicador de auditorías anuales?',['Jefatura de Urgencias','Dirección de la UGC de Ginecología','Dirección Médica del área Norte de Málaga','Atención Primaria'],2,'Auditorías anuales, indicador de resultado.'],
+ ['¿Cuál NO se cita como causa frecuente de dolor abdominal agudo gineco-obstétrico?',['Embarazo ectópico','Torsión ovárica','Endometriosis-adenomiosis','Rotura folicular'],2,'La endometriosis-adenomiosis se cita entre las causas del dolor pélvico crónico, que se estudia en consulta de Ginecología.'],
+ ['¿Qué pauta de ácido tranexámico recoge el texto del PNT?',['250 mg cada 12 h','500 mg, 1-2 comprimidos cada 6-8 h','1 g cada 24 h','500 mg cada 4 h'],1,'Hasta que cese o disminuya el sangrado. El anexo escribe «1 cada 8 h», conviene confirmarlo.'],
+ ['¿En qué fecha se aprobó la versión 1 del PNT?',['1 de junio de 2019','10 de septiembre de 2019','21 de septiembre de 2026','Septiembre de 2026'],1,'La elaboración fue el 01/06/2019 y la versión 2 es del 21/09/2026.'],
+ ['En una paciente que toma anticonceptivos hormonales con dolor abdominal, la patología ovárica es…',['Muy frecuente','Excepcional','Imposible','Igual que en el resto'],1,'Por eso es imprescindible recogerlo en la anamnesis.'],
+ ['¿Qué significa PAP?',['Protocolo de actuación en pacientes','Primera cita desde Atención Primaria','Prueba analítica prioritaria','Plan asistencial permanente'],1,'Las derivaciones a consultas externas se gestionan como PAP.'],
+ ['¿A quién deben convocarse a las sesiones de difusión, además de los facultativos?',['Enfermería de triaje','Residentes de Medicina Familiar y Comunitaria','Personal administrativo','Dirección de Enfermería'],1,'Además se ofrecen charlas formativas a Atención Primaria.']
+];
+let mode='cards';
+let known=new Set(store.get('pnt-gine-known',[]));
+let cs={i:0,flip:false,onlyPend:false};
+let qs=null;
+function renderStudy(){
+  $('#m-cards').setAttribute('aria-pressed',mode==='cards');$('#m-quiz').setAttribute('aria-pressed',mode==='quiz');
+  mode==='cards'?renderCards():renderQuiz();
+}
+function deckIdx(){return CARDS.map((_,i)=>i).filter(i=>!cs.onlyPend||!known.has(i))}
+function renderCards(){
+  const d=deckIdx();const total=CARDS.length,kn=known.size;
+  let h=`<div class="row" style="margin-bottom:10px"><span class="small muted">${kn} de ${total} dominadas</span><span class="sp"></span><label class="chk" style="min-height:34px;padding:5px 10px"><input type="checkbox" id="c-pend" ${cs.onlyPend?'checked':''}><span>Solo pendientes</span></label><button class="btn sm" id="c-shuf" type="button">Barajar</button><button class="btn sm" id="c-reset" type="button">Reiniciar progreso</button></div><div class="progress" style="margin-bottom:14px"><i style="width:${Math.round(kn/total*100)}%"></i></div>`;
+  if(!d.length){h+=`<div class="card"><h3>Has dominado todas las tarjetas</h3><p class="muted" style="margin:6px 0 0">Prueba el test o reinicia el progreso para repasar de nuevo.</p></div>`;$('#study').innerHTML=h;return}
+  if(cs.i>=d.length)cs.i=0;const ci=d[cs.i],c=CARDS[ci];
+  h+=`<button type="button" class="flash ${cs.flip?'back':''}" id="flash" aria-label="Girar tarjeta"><span class="side">${cs.flip?'Respuesta':'Pregunta'} · ${cs.i+1} de ${d.length}</span><span class="txt">${esc(cs.flip?c[1]:c[0])}</span><span class="small muted">${cs.flip?'':'Toca para ver la respuesta'}</span></button>
+  <div class="row" style="margin-top:12px"><button class="btn" id="c-prev" type="button">Anterior</button><button class="btn" id="c-rev" type="button">Repasar después</button><button class="btn primary" id="c-know" type="button">${known.has(ci)?'Ya dominada · siguiente':'La sabía'}</button><button class="btn" id="c-next" type="button">Siguiente</button></div>`;
+  $('#study').innerHTML=h;cs.cur=ci;
+}
+$('#study').addEventListener('click',e=>{
+  const id=e.target.closest('[id]')?.id;if(!id)return;
+  if(mode==='cards'){
+    const d=deckIdx();
+    if(id==='flash'){cs.flip=!cs.flip;renderCards()}
+    else if(id==='c-next'){cs.i=(cs.i+1)%d.length;cs.flip=false;renderCards()}
+    else if(id==='c-prev'){cs.i=(cs.i-1+d.length)%d.length;cs.flip=false;renderCards()}
+    else if(id==='c-know'){known.add(cs.cur);store.set('pnt-gine-known',[...known]);cs.flip=false;if(cs.onlyPend){if(cs.i>=deckIdx().length)cs.i=0}else cs.i=(cs.i+1)%d.length;renderCards()}
+    else if(id==='c-rev'){known.delete(cs.cur);store.set('pnt-gine-known',[...known]);cs.flip=false;if(cs.onlyPend)cs.i=(cs.i+1)%deckIdx().length;else cs.i=(cs.i+1)%d.length;renderCards()}
+    else if(id==='c-shuf'){for(let i=CARDS.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[CARDS[i],CARDS[j]]=[CARDS[j],CARDS[i]]}known=new Set();store.set('pnt-gine-known',[]);cs.i=0;cs.flip=false;renderCards();toast('Tarjetas barajadas y progreso reiniciado')}
+    else if(id==='c-reset'){known=new Set();store.set('pnt-gine-known',[]);cs.i=0;cs.flip=false;renderCards()}
+  }else quizClick(e);
+});
+$('#study').addEventListener('change',e=>{if(e.target.id==='c-pend'){cs.onlyPend=e.target.checked;cs.i=0;cs.flip=false;renderCards()}});
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function startQuiz(n){
+  const qs0=shuffle(QUIZ.map((_,i)=>i)).slice(0,n);
+  qs={list:qs0.map(i=>{const q=QUIZ[i];const order=shuffle(q[1].map((_,k)=>k));return{i,order}}),pos:0,score:0,answered:null,wrong:[],done:false,n};
+}
+function renderQuiz(){
+  if(!qs){const best=store.get('pnt-gine-best',null);
+    $('#study').innerHTML=`<div class="card"><h3>Test de autoevaluación</h3><p class="muted" style="margin:6px 0 14px">${QUIZ.length} preguntas sobre el circuito, con corrección y explicación. ${best!=null?`Tu mejor resultado: <b>${best}</b>.`:''}</p><div class="row"><button class="btn primary" type="button" id="q-10">Ronda de 10</button><button class="btn" type="button" id="q-all">Todas las preguntas</button></div></div>`;return}
+  if(qs.done){
+    const pct=Math.round(qs.score/qs.n*100);
+    $('#study').innerHTML=`<div class="card"><div class="kicker">Resultado</div><h3 style="font-size:1.4rem;margin:4px 0 8px">${qs.score} de ${qs.n} · ${pct} %</h3>${qs.wrong.length?`<p class="muted">Repasa estas preguntas:</p><ul style="margin:6px 0 14px;padding-left:1.2em">${qs.wrong.map(w=>`<li><b>${esc(QUIZ[w][0])}</b><br><span class="small muted">${esc(QUIZ[w][1][QUIZ[w][2]])}. ${esc(QUIZ[w][3])}</span></li>`).join('')}</ul>`:'<p class="muted">Sin fallos. Buen repaso.</p>'}<div class="row"><button class="btn primary" type="button" id="q-again">Otra ronda</button><button class="btn" type="button" id="q-exit">Volver</button></div></div>`;return}
+  const it=qs.list[qs.pos],q=QUIZ[it.i];
+  let h=`<div class="row small muted" style="margin-bottom:8px"><span>Pregunta ${qs.pos+1} de ${qs.n}</span><span class="sp"></span><span>Aciertos: ${qs.score}</span></div><div class="progress" style="margin-bottom:14px"><i style="width:${Math.round(qs.pos/qs.n*100)}%"></i></div><div class="card"><h3 style="font-size:1.1rem">${esc(q[0])}</h3><div class="opts">`;
+  it.order.forEach((k,pos)=>{let cls='';if(qs.answered!=null){if(k===q[2])cls='ok';else if(k===qs.answered)cls='bad'}h+=`<button type="button" class="opt ${cls}" data-k="${k}" ${qs.answered!=null?'disabled':''}>${esc(q[1][k])}</button>`});
+  h+='</div>';
+  if(qs.answered!=null){const okk=qs.answered===q[2];h+=`<div class="expl"><span class="pill ${okk?'t-green':'t-red'}">${okk?'Correcto':'Incorrecto'}</span> <span class="small">${esc(q[3])}</span><div class="row" style="margin-top:12px"><button class="btn primary" type="button" id="q-next">${qs.pos+1===qs.n?'Ver resultado':'Siguiente'}</button></div></div>`}
+  $('#study').innerHTML=h+'</div>';
+}
+function quizClick(e){
+  const o=e.target.closest('.opt');
+  if(o&&qs&&qs.answered==null){const k=+o.dataset.k,it=qs.list[qs.pos],q=QUIZ[it.i];qs.answered=k;if(k===q[2])qs.score++;else qs.wrong.push(it.i);renderQuiz();return}
+  const id=e.target.closest('[id]')?.id;
+  if(id==='q-10'){startQuiz(10);renderQuiz()}
+  else if(id==='q-all'){startQuiz(QUIZ.length);renderQuiz()}
+  else if(id==='q-next'){if(qs.pos+1===qs.n){qs.done=true;const pct=Math.round(qs.score/qs.n*100);if(qs.n>=10){const b=store.get('pnt-gine-best',null);const lab=qs.score+'/'+qs.n+' ('+pct+' %)';if(b==null||pct>parseInt((String(b).match(/\((\d+)/)||[0,-1])[1]))store.set('pnt-gine-best',lab)}}else{qs.pos++;qs.answered=null}renderQuiz()}
+  else if(id==='q-again'){startQuiz(qs.n);renderQuiz()}
+  else if(id==='q-exit'){qs=null;renderQuiz()}
+}
+$('#m-cards').onclick=()=>{mode='cards';renderStudy()};
+$('#m-quiz').onclick=()=>{mode='quiz';renderStudy()};
+
+/* ===== Documento ===== */
+$('#docid').innerHTML=[['Tipo de documento','Operativo'],['Título','Circuito de actuación en urgencias ginecológicas'],['Documento','Protocolo normalizado de trabajo. Circuito urgencias gineco-obstétricas'],['Autoras','Dra. Mª Jesús Zurita Campos, Dra. Mª Pilar Jiménez Zurita'],['Versión inicial','1, 10 de septiembre de 2019'],['Versión actual','2, 21/09/2026. Responsables: Mª Jesús Zurita Campos, Ana Rojas Sánchez. Cambio: actualización de protocolo'],['Elaboración','UGC Ginecología y Obstetricia (Mª Jesús Zurita Campos) y UGC Cuidados Críticos y Urgencias (Mª Pilar Jiménez Zurita), 01/06/2019'],['Aprobación','Dirección Médica, Francisco Pozo Muñoz, 10/09/2019'],['Ámbito','UGC de Cuidados Críticos y Urgencias, Ginecología, Atención Primaria / SUAP'],['Licencia','Creative Commons Reconocimiento-NoComercial (BY-NC)']].map(r=>`<tr><th scope="row">${esc(r[0])}</th><td>${esc(r[1])}</td></tr>`).join('');
+$('#docblocks').innerHTML=[['Destinatarios','Profesionales del Área Sanitaria Norte de Málaga que atienden urgencias, tanto de Atención Primaria y SUAP como hospitalarias.'],['Plan de difusión','Sesiones en Urgencias y Ginecología con residentes de Medicina Familiar y Comunitaria, charlas a Atención Primaria y publicación en la intranet del área, donde se adjuntan las actualizaciones.'],['Bibliografía','Protocolos ProSEGO (Sociedad Española de Ginecología y Obstetricia) de sangrado menstrual abundante, amenorreas y vulvovaginitis.'],['Niveles de evidencia','Escala SIGN: niveles 1++ a 4 y grados de recomendación A a D. Los estudios 1− y 2− no se usan para elaborar recomendaciones.']].map(b=>`<div class="card"><h3>${esc(b[0])}</h3><p class="small" style="margin:6px 0 0">${esc(b[1])}</p></div>`).join('');
+$('#indic').innerHTML=[['Denominación','Auditorías anuales'],['Tipo','Cualitativo, de resultado'],['Descripción','Análisis de historias clínicas de Urgencias con los motivos del protocolo, para comprobar si las derivaciones al alta a Atención Primaria o a valoración urgente por el especialista se ajustan al protocolo.'],['Fórmula','Porcentaje de adecuación al protocolo de los distintos motivos de consulta'],['Estándar óptimo','90 % de las historias cumplen los circuitos del protocolo'],['Fuente','Consenso interdisciplinario'],['Responsable','Dirección Médica del área Norte de Málaga']].map(r=>`<tr><th scope="row">${esc(r[0])}</th><td>${esc(r[1])}</td></tr>`).join('');
+$('#disc').innerHTML=['Pauta del ácido tranexámico: el texto dice 500 mg, 1 a 2 comprimidos cada 6 a 8 horas. El anexo escribe «Amchafibrín 1 cada 8 h».','Destino con Hb > 11 g/dl y test negativo: el texto dice consultas externas de Ginecología (como INTU). El anexo escribe «MAP».','Hb exactamente 11,0 g/dl: el texto solo define «< 11» y «> 11», así que ese valor queda sin asignar.','Prurito genital con factores de riesgo: el texto indica que el circuito es para el caso sin factores de riesgo, pero no describe qué hacer si los hay.','El anexo cita «Gynelaude óvulos CLX». El texto solo dice «Gynelaude óvulos».'].map(x=>`<li style="margin:4px 0">${esc(x)}</li>`).join('');
+
+/* ===== Pestañas ===== */
+const TABS=['circuito','ficha','protocolo','preguntar','estudio','documento'];
+function go(t){
+  if(!TABS.includes(t))t='circuito';
+  TABS.forEach(k=>{$('#p-'+k).hidden=k!==t;$('#tab-'+k).setAttribute('aria-selected',k===t)});
+  const tb=$('#tab-'+t);tb.scrollIntoView&&tb.scrollIntoView({block:'nearest',inline:'center'});
+  window.scrollTo(0,0);
+}
+$$('.tab').forEach(b=>b.addEventListener('click',()=>go(b.dataset.tab)));
+$('.tabs').addEventListener('keydown',e=>{if(e.key!=='ArrowRight'&&e.key!=='ArrowLeft')return;const i=TABS.indexOf(document.activeElement.dataset.tab);if(i<0)return;const n=TABS[(i+(e.key==='ArrowRight'?1:-1)+TABS.length)%TABS.length];go(n);$('#tab-'+n).focus()});
+
+renderMotivos();renderProto('');renderHist();updateFicha();renderStudy();
+let h0='';try{h0=(location.hash||'').slice(1)}catch(e){}
+go(TABS.includes(h0)?h0:'circuito');
+})();
+</script>
+
+
+<!-- Barra común del Portal SUH Antequera -->
+<style>
+  .suhdock{position:fixed;left:14px;bottom:14px;z-index:2147483000;display:flex;align-items:center;gap:4px;padding:5px;border-radius:999px;background:#0c2a4a;box-shadow:0 10px 30px -8px rgba(12,42,74,.55);font:600 13px/1 'Plus Jakarta Sans',system-ui,-apple-system,'Segoe UI',sans-serif;transition:opacity .2s}
+  .suhdock a{display:inline-flex;align-items:center;justify-content:center;gap:7px;height:34px;min-width:34px;padding:0 9px;border-radius:999px;color:#fff;text-decoration:none}
+  .suhdock a:hover{background:rgba(255,255,255,.14)}
+  .suhdock a.suhdock-home{background:#fff;color:#0c2a4a;padding:0 12px 0 4px}
+  .suhdock a.suhdock-home img{width:26px;height:26px;border-radius:50%;object-fit:contain;background:#fff}
+  .suhdock svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  .suhdock .suhdock-x{opacity:.6;min-width:26px;padding:0}
+  .suhdock.suhdock-min a:not(.suhdock-home){display:none}
+  .suhdock.suhdock-min a.suhdock-home span{display:none}
+  .suhdock.suhdock-min a.suhdock-home{padding:0 4px}
+  @media print{.suhdock{display:none!important}}
+</style>
+<nav class="suhdock" aria-label="Portal SUH Antequera">
+  <a class="suhdock-home" href="../index.html#herramientas" title="Volver al Portal de Supervisión SUH Antequera"><img src="../img/logo-suh.jpg" alt=""><span>Portal SUH</span></a>
+  <a href="https://www.instagram.com/suh_antequera_/" target="_blank" rel="noopener" title="Instagram @suh_antequera_"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><path d="M17.5 6.5h.01"/></svg></a>
+  <a href="https://www.facebook.com/p/Suh-Antequera-61568582212569/" target="_blank" rel="noopener" title="Facebook SUH Antequera"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+  <a href="https://x.com/saludnortemalag" target="_blank" rel="noopener" title="X @saludnortemalag" style="font-size:15px">𝕏</a>
+  <a class="suhdock-x" href="#" title="Minimizar barra" onclick="this.parentNode.classList.toggle('suhdock-min');return false;"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></a>
+</nav>
+</body></html>

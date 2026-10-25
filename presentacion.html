@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta name="robots" content="noindex, nofollow">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Presentación · Supervisión Urgencias Antequera</title>
+  <meta name="description" content="Presentación de 15 minutos del proyecto de Supervisión de Enfermería del Servicio de Urgencias del Hospital de Antequera.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,800;1,9..144,600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --suh: #1e5b9c; --suh-700: #164879; --suh-900: #0c2a4a; --suh-950: #061527; --suh-400: #4f8fd1; --suh-200: #a9cdf3;
+      --junta: #00a046; --junta-d: #007a33; --snm: #f08a35; --red: #ef4444; --gold: #f5d36b;
+      --ink: #eaf1f8; --ink-2: #b9c8d8; --ink-3: #7e93a8; --glass: rgba(255,255,255,.06); --glass-b: rgba(255,255,255,.13);
+      --ease: cubic-bezier(.22,1,.36,1);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; background: #030b15; overflow: hidden; }
+    body { font-family: 'Plus Jakarta Sans', system-ui, sans-serif; color: var(--ink); -webkit-font-smoothing: antialiased; }
+    svg.i { width: 1em; height: 1em; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
+    .serif { font-family: 'Fraunces', Georgia, serif; font-weight: 800; letter-spacing: -.02em; }
+
+    /* Lienzo 1920×1080 escalado */
+    #viewport { position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; }
+    #stage { width: 1920px; height: 1080px; position: relative; flex-shrink: 0; transform-origin: center center; overflow: hidden; background: var(--suh-950); box-shadow: 0 0 120px rgba(0,0,0,.6); }
+
+    .slide { position: absolute; inset: 0; padding: 110px 130px 120px; opacity: 0; visibility: hidden; transition: opacity .9s var(--ease), visibility 0s .9s; display: flex; flex-direction: column; }
+    .slide.on { opacity: 1; visibility: visible; transition: opacity .9s var(--ease); z-index: 2; }
+    .slide.out { z-index: 1; }
+    .slide::before { content: ""; position: absolute; inset: 0; z-index: -2; background: radial-gradient(1100px 700px at 85% -10%, rgba(79,143,209,.35), transparent 60%), radial-gradient(900px 600px at -10% 110%, rgba(0,160,70,.12), transparent 60%), linear-gradient(160deg, #0a2340, var(--suh-950) 60%); }
+    .bg { position: absolute; inset: 0; z-index: -1; overflow: hidden; }
+    .bg img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.18); transition: transform 14s linear; }
+    .slide.on .bg img { transform: scale(1.02) translate(-1%, -1%); }
+    .bg::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(6,21,39,.96) 0%, rgba(6,21,39,.78) 45%, rgba(6,21,39,.25) 100%), linear-gradient(0deg, rgba(6,21,39,.9), transparent 45%); }
+    .bg.full::after { background: linear-gradient(0deg, rgba(6,21,39,.95) 0%, rgba(6,21,39,.35) 55%, rgba(6,21,39,.55) 100%); }
+
+    /* Animación escalonada */
+    .a { opacity: 0; transform: translateY(40px); transition: opacity .9s var(--ease), transform .9s var(--ease); transition-delay: calc(var(--d, 0) * 110ms + 250ms); }
+    .a.l { transform: translateX(-60px); } .a.r { transform: translateX(60px); } .a.z { transform: scale(.85); } .a.f { transform: none; }
+    .slide.on .a { opacity: 1; transform: none; }
+
+    /* Tipografía */
+    .kick { font-size: 22px; font-weight: 800; letter-spacing: .22em; text-transform: uppercase; color: var(--suh-200); display: flex; align-items: center; gap: 14px; }
+    .kick::before { content: ""; width: 54px; height: 3px; background: var(--suh-400); border-radius: 3px; }
+    h1.big { font-size: 112px; line-height: .98; margin-top: 26px; }
+    h2.t { font-size: 76px; line-height: 1.02; margin-top: 18px; max-width: 1500px; }
+    h2.t em, h1.big em { font-style: italic; color: var(--suh-200); }
+    .lead { font-size: 32px; line-height: 1.45; color: var(--ink-2); max-width: 1180px; margin-top: 26px; }
+    .grow { flex: 1; min-height: 0; }
+
+    /* Componentes */
+    .glass { background: var(--glass); border: 1px solid var(--glass-b); border-radius: 28px; backdrop-filter: blur(14px); }
+    .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 34px; }
+    .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+    .grid4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 26px; }
+    .card { padding: 34px; }
+    .card h3 { font-size: 34px; line-height: 1.15; margin: 14px 0 10px; font-weight: 800; }
+    .card p { font-size: 23px; line-height: 1.45; color: var(--ink-2); }
+    .ico { width: 76px; height: 76px; border-radius: 22px; display: flex; align-items: center; justify-content: center; font-size: 38px; color: #fff; background: var(--c, var(--suh)); box-shadow: 0 18px 36px -14px var(--c, var(--suh)); }
+    .tag { display: inline-flex; font-size: 17px; font-weight: 800; padding: 6px 14px; border-radius: 10px; background: rgba(0,160,70,.16); color: #7ee2a8; letter-spacing: .02em; }
+    .logos { display: inline-flex; align-items: center; gap: 22px; background: #fff; border-radius: 22px; padding: 12px 22px; }
+    .logos img { object-fit: contain; display: block; }
+    .avatar { width: 96px; height: 96px; border-radius: 50%; background: linear-gradient(135deg, var(--suh-400), var(--suh-900)); border: 3px solid rgba(255,255,255,.7); display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 34px; }
+
+    /* Portada */
+    .cover-name { display: flex; align-items: center; gap: 26px; margin-top: 54px; }
+    .cover-name b { font-size: 40px; display: block; } .cover-name span { font-size: 26px; color: var(--ink-2); }
+    .acsa-pill { display: inline-flex; align-items: center; gap: 14px; padding: 10px 22px 10px 10px; border-radius: 999px; background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.25); font-size: 22px; font-weight: 700; }
+    .acsa-pill b { background: #fff; color: var(--junta-d); padding: 6px 16px; border-radius: 999px; font-size: 18px; letter-spacing: .06em; }
+
+    /* Agenda */
+    .agenda { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 60px; }
+    .agenda div { padding: 28px 30px; border-radius: 24px; background: var(--glass); border: 1px solid var(--glass-b); display: flex; gap: 22px; align-items: center; font-size: 28px; font-weight: 700; }
+    .agenda span { font: 800 48px 'Fraunces', serif; color: var(--suh-400); min-width: 70px; }
+
+    /* Mosaico */
+    .mosaic { display: grid; grid-template-columns: repeat(6, 1fr); grid-template-rows: repeat(3, minmax(0, 1fr)); grid-auto-flow: dense; gap: 14px; margin-top: 40px; flex: 1; min-height: 0; }
+    .mosaic figure { position: relative; border-radius: 20px; overflow: hidden; min-height: 0; }
+    .mosaic img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 6s ease; }
+    .slide.on .mosaic img { transform: scale(1.1); }
+    .mosaic figcaption { position: absolute; left: 14px; bottom: 12px; font-size: 18px; font-weight: 800; background: rgba(6,21,39,.75); padding: 5px 12px; border-radius: 9px; }
+    .mosaic .w2 { grid-column: span 2; } .mosaic .h2 { grid-row: span 2; }
+
+    /* Triaje */
+    .set { display: flex; flex-direction: column; gap: 22px; margin-top: 50px; }
+    .set-row { display: grid; grid-template-columns: 560px 1fr 180px; gap: 30px; align-items: center; font-size: 28px; }
+    .set-row b { font-weight: 800; }
+    .set-bar { height: 40px; border-radius: 14px; background: rgba(255,255,255,.06); overflow: hidden; }
+    .set-bar i { display: block; height: 100%; width: 0; border-radius: 14px; transition: width 1.6s var(--ease); transition-delay: calc(var(--d) * 180ms + 500ms); display: flex; align-items: center; padding-left: 18px; font-style: normal; font-size: 18px; font-weight: 700; white-space: nowrap; overflow: hidden; }
+    .slide.on .set-bar i { width: var(--w); }
+    .set-row > small { font-size: 30px; font-weight: 800; text-align: right; }
+    .set { gap: 30px; margin-top: 64px; }
+    .set-bar { height: 48px; }
+    .circs { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 40px; }
+    .circs span { font-size: 23px; font-weight: 700; padding: 12px 22px; border-radius: 14px; background: var(--glass); border: 1px solid var(--glass-b); }
+
+    /* Pilares */
+    .pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 54px; }
+    .pillar { padding: 32px; border-radius: 26px; background: var(--glass); border: 1px solid var(--glass-b); position: relative; overflow: hidden; }
+    .pillar::after { content: ""; position: absolute; right: -50px; bottom: -50px; width: 160px; height: 160px; border-radius: 50%; background: var(--c); opacity: .18; }
+    .pillar h3 { font-size: 32px; margin: 16px 0 6px; } .pillar p { font-size: 21px; color: var(--ink-2); }
+
+    /* Flujo */
+    .flow { display: flex; align-items: stretch; gap: 0; margin-top: 60px; }
+    .flow .st { flex: 1; padding: 30px 28px; border-radius: 26px; background: var(--glass); border: 1px solid var(--glass-b); position: relative; }
+    .flow .st b { display: block; font: 800 54px 'Fraunces', serif; color: var(--c, var(--suh-400)); }
+    .flow .st h4 { font-size: 32px; margin: 10px 0 10px; } .flow .st p { font-size: 23px; line-height: 1.4; color: var(--ink-2); }
+    .flow .st { padding: 40px 34px; }
+    /* Centrar verticalmente el bloque principal bajo el título */
+    .flow, .pillars, .grid3, .grid4, .pnt, .objs, .agenda { margin-top: auto !important; margin-bottom: auto; }
+    .flow .arr { width: 64px; display: flex; align-items: center; justify-content: center; color: var(--suh-400); font-size: 40px; }
+    .flow .st.hi { background: linear-gradient(140deg, rgba(0,160,70,.3), rgba(0,160,70,.08)); border-color: rgba(0,160,70,.5); }
+
+    /* PNT */
+    .pnt { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-top: 46px; }
+    .pnt div { padding: 22px 24px; border-radius: 20px; background: var(--glass); border: 1px solid var(--glass-b); border-top: 5px solid var(--c); }
+    .pnt b { display: block; font-size: 25px; margin-bottom: 6px; } .pnt span { font-size: 18px; color: var(--ink-3); font-weight: 600; }
+
+    /* Demo */
+    .demo { display: grid; grid-template-columns: 520px 1fr; gap: 50px; flex: 1; min-height: 0; margin-top: 34px; }
+    .demo-frame { position: relative; border-radius: 26px; overflow: hidden; background: #fff; border: 1px solid var(--glass-b); box-shadow: 0 40px 80px -30px rgba(0,0,0,.8); }
+    .demo-frame .bar { height: 46px; background: #e9eef4; display: flex; align-items: center; gap: 9px; padding: 0 18px; color: #546; font-size: 16px; font-weight: 700; }
+    .demo-frame .bar i { width: 13px; height: 13px; border-radius: 50%; background: #ff5f57; } .demo-frame .bar i:nth-child(2) { background: #febc2e; } .demo-frame .bar i:nth-child(3) { background: #28c840; }
+    .demo-frame .bar span { margin-left: 14px; color: #5c6f82; }
+    .demo-frame .fw { position: absolute; top: 46px; left: 0; right: 0; bottom: 0; overflow: hidden; }
+    .demo-frame iframe { border: 0; width: 1600px; height: 1080px; transform: scale(.75); transform-origin: 0 0; background: #fff; }
+    .live { display: inline-flex; align-items: center; gap: 10px; font-size: 18px; font-weight: 800; color: #fff; background: var(--red); padding: 6px 14px; border-radius: 999px; letter-spacing: .1em; }
+    .live::before { content: ""; width: 10px; height: 10px; border-radius: 50%; background: #fff; animation: blink 1.2s infinite; }
+    @keyframes blink { 50% { opacity: .2; } }
+    .bul { list-style: none; display: flex; flex-direction: column; gap: 18px; margin-top: 30px; }
+    .bul li { display: flex; gap: 16px; font-size: 25px; line-height: 1.4; color: var(--ink-2); }
+    .bul li svg { color: #7ee2a8; font-size: 28px; margin-top: 3px; }
+    .bul li b { color: var(--ink); }
+
+    /* ACSA */
+    .medal { width: 330px; height: 330px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: conic-gradient(from 0deg, #fff6c9, #e9c55a, #fff6c9, #c99a2e, #fff6c9); box-shadow: 0 40px 90px -30px rgba(245,211,107,.6); animation: spin 22s linear infinite; }
+    .medal > div { width: 270px; height: 270px; border-radius: 50%; background: radial-gradient(circle at 30% 20%, #0b7a3c, #023d1c); display: flex; flex-direction: column; align-items: center; justify-content: center; animation: spin 22s linear infinite reverse; }
+    .medal b { font-size: 34px; letter-spacing: .3em; } .medal span { font: 800 54px 'Fraunces', serif; color: var(--gold); } .medal small { font-size: 18px; color: rgba(255,255,255,.75); letter-spacing: .1em; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .lv { display: grid; grid-template-columns: 220px 1fr; gap: 26px; align-items: center; padding: 22px 26px; border-radius: 22px; background: var(--glass); border: 1px solid var(--glass-b); }
+    .lv.cur { background: linear-gradient(140deg, rgba(0,160,70,.28), rgba(0,160,70,.06)); border-color: rgba(0,160,70,.6); box-shadow: 0 0 0 6px rgba(0,160,70,.12); }
+    .lv h4 { font-size: 34px; } .lv h4 small { font-size: 15px; background: var(--junta); color: #fff; padding: 4px 10px; border-radius: 8px; vertical-align: 6px; margin-left: 8px; letter-spacing: .08em; }
+    .gb { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; font-size: 17px; font-weight: 700; color: var(--ink-3); }
+    .gb i { display: block; height: 16px; border-radius: 99px; background: rgba(255,255,255,.08); margin-top: 8px; overflow: hidden; position: relative; }
+    .gb i::after { content: ""; position: absolute; inset: 0; width: 0; background: var(--c); border-radius: 99px; transition: width 1.4s var(--ease); transition-delay: calc(var(--d) * 150ms + 600ms); }
+    .slide.on .gb i::after { width: var(--w); }
+
+    /* DAFO */
+    .dafo { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 20px; flex: 1; min-height: 0; margin-top: 30px; position: relative; }
+    .dq { border-radius: 26px; padding: 26px 30px; background: var(--glass); border: 1px solid var(--glass-b); border-left: 8px solid var(--c); position: relative; overflow: hidden; }
+    .dq::after { content: attr(data-l); position: absolute; right: 20px; top: -30px; font: 800 200px/1 'Fraunces', serif; color: var(--c); opacity: .1; }
+    .dq h4 { font-size: 32px; color: var(--c); margin-bottom: 12px; }
+    .dq ul { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+    .dq li { font-size: 22px; color: var(--ink-2); display: flex; gap: 12px; }
+    .dq li::before { content: ""; width: 9px; height: 9px; border-radius: 50%; background: var(--c); margin-top: 12px; flex-shrink: 0; }
+    .dq li.hl { color: #fff; font-weight: 800; }
+    .dq li.hl::after { content: "PRIORIDAD"; font-size: 13px; background: var(--c); color: #fff; padding: 3px 9px; border-radius: 7px; margin-left: 4px; height: fit-content; align-self: center; letter-spacing: .08em; }
+    .dafo-c { position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); width: 140px; height: 140px; border-radius: 50%; background: #fff; color: var(--suh-900); display: flex; align-items: center; justify-content: center; text-align: center; font-weight: 800; font-size: 18px; line-height: 1.2; box-shadow: 0 20px 50px -10px rgba(0,0,0,.6); z-index: 2; }
+
+    /* Tecla y ticla */
+    .clock { width: 340px; height: 340px; border-radius: 50%; position: relative; background: conic-gradient(var(--cc, var(--snm)) 0 calc(var(--p) * 1%), rgba(255,255,255,.08) 0); display: flex; align-items: center; justify-content: center; }
+    .clock > div { width: 274px; height: 274px; border-radius: 50%; background: var(--suh-950); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+    .clock b { font: 800 112px 'Fraunces', serif; line-height: 1; } .clock b::before { content: "≤"; font-size: 54px; vertical-align: 38px; margin-right: 4px; color: var(--ink-3); }
+    .clock span { font-size: 20px; color: var(--ink-2); font-weight: 700; }
+    .tl { display: flex; align-items: center; margin: 46px 0 50px; }
+    .tl-pt { display: flex; flex-direction: column; align-items: center; gap: 10px; width: 170px; flex-shrink: 0; text-align: center; font-size: 22px; font-weight: 800; }
+    .tl-pt i { width: 30px; height: 30px; border-radius: 50%; background: #fff; box-shadow: 0 0 0 8px rgba(255,255,255,.12); }
+    .tl-pt small { font-size: 17px; color: var(--ink-3); font-weight: 600; }
+    .tl-seg { flex: 1; height: 86px; border-radius: 20px; margin-bottom: 50px; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+    .tl-seg b { font: 800 36px 'Plus Jakarta Sans', sans-serif; letter-spacing: .08em; position: relative; } .tl-seg small { font-size: 18px; font-weight: 700; position: relative; opacity: .9; }
+    .tl-seg::before { content: ""; position: absolute; inset: 0; transform: scaleX(0); transform-origin: left; transition: transform 1.6s var(--ease) .9s; }
+    .slide.on .tl-seg::before { transform: scaleX(1); }
+    .tl-seg.tecla::before { background: linear-gradient(90deg, rgba(240,138,53,.25), rgba(240,138,53,.85)); }
+    .tl-seg.ticla::before { background: linear-gradient(90deg, rgba(106,168,236,.25), rgba(106,168,236,.85)); transition-delay: 1.9s; }
+    .keys { display: flex; gap: 14px; margin-top: 10px; }
+    .keys i { font-style: normal; width: 74px; height: 74px; border-radius: 16px; background: linear-gradient(#f3f6fa, #cfd8e3); color: #1a2b3c; font-weight: 800; font-size: 34px; display: flex; align-items: center; justify-content: center; box-shadow: 0 6px 0 #8a9bb0, 0 14px 22px -8px rgba(0,0,0,.6); animation: press 2.4s infinite; animation-delay: calc(var(--k) * .2s); }
+    @keyframes press { 0%, 70%, 100% { transform: translateY(0); box-shadow: 0 6px 0 #8a9bb0, 0 14px 22px -8px rgba(0,0,0,.6); } 80% { transform: translateY(5px); box-shadow: 0 1px 0 #8a9bb0, 0 6px 10px -6px rgba(0,0,0,.6); } }
+
+    /* Objetivos */
+    .objs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 44px; }
+    .objs div { padding: 26px 28px; border-radius: 24px; background: var(--glass); border: 1px solid var(--glass-b); }
+    .objs b { display: flex; align-items: center; gap: 16px; font-size: 26px; line-height: 1.2; }
+    .objs b span { font: 800 26px 'Fraunces', serif; width: 52px; height: 52px; border-radius: 14px; background: var(--suh); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .objs p { font-size: 19px; color: var(--ink-2); margin-top: 12px; }
+    .objs div.hi { background: linear-gradient(140deg, rgba(240,138,53,.3), rgba(240,138,53,.06)); border-color: rgba(240,138,53,.6); }
+    .objs div.hi b span { background: var(--snm); }
+
+    /* Cierre */
+    .socials { display: flex; gap: 20px; margin-top: 50px; flex-wrap: wrap; }
+    .socials a { display: inline-flex; align-items: center; gap: 14px; font-size: 26px; font-weight: 800; color: #fff; text-decoration: none; padding: 18px 28px; border-radius: 20px; }
+
+    /* ---------- Interfaz (fuera del lienzo) ---------- */
+    #ui { position: fixed; left: 0; right: 0; bottom: 0; z-index: 50; display: flex; align-items: center; gap: 12px; padding: 10px 16px; background: linear-gradient(0deg, rgba(3,11,21,.92), rgba(3,11,21,0)); opacity: 0; transition: opacity .4s; }
+    body.ui #ui, #ui:hover { opacity: 1; }
+    #ui button, #ui a { height: 40px; min-width: 40px; padding: 0 12px; border-radius: 12px; border: 1px solid rgba(255,255,255,.18); background: rgba(255,255,255,.08); color: #fff; font: 700 13px 'Plus Jakarta Sans', sans-serif; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; text-decoration: none; }
+    #ui button:hover, #ui a:hover { background: rgba(255,255,255,.18); }
+    #ui button.on { background: var(--suh); border-color: var(--suh); }
+    #ui svg.i { font-size: 17px; }
+    #ui .sp { flex: 1; }
+    #count { font-weight: 800; font-size: 14px; color: #fff; min-width: 70px; text-align: center; }
+    @media (max-width: 900px) { #ui { flex-wrap: wrap; justify-content: center; } #ui .sp { display: none; } }
+    #ui button, #ui a, #count { white-space: nowrap; flex-shrink: 0; }
+    #timer { white-space: nowrap; font: 800 15px ui-monospace, Consolas, monospace; padding: 8px 12px; border-radius: 10px; background: rgba(255,255,255,.08); color: #7ee2a8; }
+    #timer.late { color: #ffb4a6; }
+    #prog { position: fixed; left: 0; top: 0; height: 4px; background: linear-gradient(90deg, var(--suh-400), var(--junta)); z-index: 60; transition: width .6s var(--ease); }
+    #plan { position: fixed; left: 0; top: 4px; height: 2px; background: rgba(255,255,255,.35); z-index: 59; transition: width 1s linear; }
+    #notes { position: fixed; right: 16px; top: 16px; width: min(480px, 92vw); max-height: 60vh; overflow: auto; z-index: 55; background: rgba(6,21,39,.94); border: 1px solid rgba(255,255,255,.18); border-radius: 18px; padding: 20px 22px; font-size: 16px; line-height: 1.6; color: var(--ink-2); display: none; backdrop-filter: blur(10px); }
+    #notes.open { display: block; }
+    #notes h5 { font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--suh-200); margin-bottom: 8px; display: flex; justify-content: space-between; }
+    #overview { position: fixed; inset: 0; z-index: 70; background: rgba(3,11,21,.97); display: none; overflow: auto; padding: 40px; }
+    #overview.open { display: block; }
+    #overview h4 { color: #fff; font-size: 20px; margin-bottom: 20px; display: flex; justify-content: space-between; }
+    #ov-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; }
+    #ov-grid button { text-align: left; padding: 16px; border-radius: 14px; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.14); color: #fff; font: 600 15px 'Plus Jakarta Sans', sans-serif; cursor: pointer; }
+    #ov-grid button:hover, #ov-grid button.cur { border-color: var(--suh-400); background: rgba(79,143,209,.2); }
+    #ov-grid small { display: block; color: var(--ink-3); font-size: 12px; margin-bottom: 6px; font-weight: 800; }
+    #help { position: fixed; left: 50%; top: 50%; transform: translate(-50%,-50%); z-index: 80; background: rgba(6,21,39,.97); border: 1px solid rgba(255,255,255,.2); border-radius: 22px; padding: 30px 34px; color: var(--ink-2); font-size: 16px; display: none; min-width: 340px; }
+    #help.open { display: block; }
+    #help h4 { color: #fff; font-size: 20px; margin-bottom: 14px; }
+    #help div { display: grid; grid-template-columns: 110px 1fr; gap: 8px 14px; }
+    #help kbd { font: 800 13px 'Plus Jakarta Sans'; background: rgba(255,255,255,.12); padding: 3px 9px; border-radius: 7px; color: #fff; justify-self: start; }
+    #start { position: fixed; inset: 0; z-index: 90; display: flex; align-items: center; justify-content: center; background: rgba(3,11,21,.55); backdrop-filter: blur(4px); }
+    #start .box { text-align: center; }
+    #start button { font: 800 18px 'Plus Jakarta Sans'; padding: 18px 30px; border-radius: 16px; border: 0; cursor: pointer; margin: 6px; }
+    #start .p { background: #fff; color: var(--suh-900); }
+    #start .s { background: rgba(255,255,255,.12); color: #fff; border: 1px solid rgba(255,255,255,.3); }
+    #start p { color: var(--ink-2); margin-top: 16px; font-size: 14px; }
+  </style>
+</head>
+<body class="ui">
+  <div id="prog"></div><div id="plan"></div>
+  <div id="viewport"><div id="stage">
+
+    <!-- 1 · PORTADA -->
+    <section class="slide" data-dur="30" data-title="Portada" data-notes="Buenos días. Soy Manuel Isaías Medina Pérez, supervisor de Enfermería del Servicio de Urgencias del Hospital de Antequera. En los próximos quince minutos os presento nuestro proyecto de supervisión: quiénes somos, cómo trabajamos, qué hemos conseguido —incluida la certificación ACSA en nivel Óptimo— y hacia dónde vamos.">
+      <div class="bg"><img src="img/fotos/full/entrada-urgencias-01.jpg" alt=""></div>
+      <div class="a" style="--d:0"><div class="logos"><img src="img/logo-suh.jpg" style="height:96px" alt="SUH"><img src="img/logo-snm.jpg" style="height:46px" alt="Salud Norte Málaga"><img src="img/logo-junta.jpg" style="height:86px" alt="Junta de Andalucía"></div></div>
+      <div class="grow"></div>
+      <div class="a" style="--d:1"><span class="acsa-pill"><b>ACSA</b> Unidad certificada · Nivel Óptimo</span></div>
+      <h1 class="big serif a" style="--d:2">Cuidar a quien llega,<br><em>cuidar a quien cuida</em></h1>
+      <p class="lead a" style="--d:3">Proyecto de Supervisión de Enfermería · Servicio de Urgencias · Hospital de Antequera</p>
+      <div class="cover-name a" style="--d:4"><div class="avatar">MI</div><div><b>Manuel Isaías Medina Pérez</b><span>Supervisor de Enfermería · Área de Gestión Sanitaria Norte de Málaga</span></div></div>
+    </section>
+
+    <!-- 2 · AGENDA -->
+    <section class="slide" data-dur="25" data-title="Agenda" data-notes="La presentación tiene seis partes: el servicio, el modelo de supervisión centrado en personas, los procesos y la seguridad, los cuidados que auditamos, la calidad acreditada con nuestro DAFO, y el plan para 2027.">
+      <div class="kick a" style="--d:0">Agenda</div>
+      <h2 class="t serif a" style="--d:1">Quince minutos, <em>seis paradas</em></h2>
+      <div class="agenda">
+        <div class="a" style="--d:2"><span>01</span>El servicio</div>
+        <div class="a" style="--d:3"><span>02</span>Personas y gobernanza</div>
+        <div class="a" style="--d:4"><span>03</span>Procesos y seguridad</div>
+        <div class="a" style="--d:5"><span>04</span>Cuidados auditados</div>
+        <div class="a" style="--d:6"><span>05</span>ACSA y DAFO</div>
+        <div class="a" style="--d:7"><span>06</span>Plan 2027</div>
+      </div>
+    </section>
+
+    <!-- 3 · MOSAICO -->
+    <section class="slide" data-dur="40" data-title="El servicio en imágenes" data-notes="Este es nuestro servicio: nueve áreas funcionales documentadas en 72 fotografías. Entrada diferenciada para transporte sanitario, triaje, sala de espera, consultas de enfermería y médicas, sala de tratamiento, el pasillo protegido de críticos, la sala de críticos con tres puestos y la observación grave monitorizada.">
+      <div class="kick a" style="--d:0">01 · El servicio</div>
+      <h2 class="t serif a" style="--d:1">Nueve áreas, <em>un mismo equipo</em></h2>
+      <div class="mosaic">
+        <figure class="w2 h2 a z" style="--d:2"><img src="img/fotos/full/entrada-urgencias-04.jpg" alt=""><figcaption>Entrada</figcaption></figure>
+        <figure class="a z" style="--d:3"><img src="img/fotos/thumb/triaje-01.jpg" alt=""><figcaption>Triaje</figcaption></figure>
+        <figure class="w2 a z" style="--d:4"><img src="img/fotos/full/criticos-12.jpg" alt=""><figcaption>Críticos</figcaption></figure>
+        <figure class="h2 a z" style="--d:5"><img src="img/fotos/full/sala-de-espera-04.jpg" alt=""><figcaption>Sala de espera</figcaption></figure>
+        <figure class="a z" style="--d:6"><img src="img/fotos/thumb/consultas-de-enfermeria-03.jpg" alt=""><figcaption>Consulta Enfermería</figcaption></figure>
+        <figure class="w2 h2 a z" style="--d:7"><img src="img/fotos/full/observacion-grave-04.jpg" alt=""><figcaption>Observación grave</figcaption></figure>
+        <figure class="a z" style="--d:8"><img src="img/fotos/thumb/consultas-medicas-04.jpg" alt=""><figcaption>Consultas</figcaption></figure>
+        <figure class="w2 a z" style="--d:9"><img src="img/fotos/full/sala-de-tratamiento-01.jpg" alt=""><figcaption>Tratamiento</figcaption></figure>
+        <figure class="a z" style="--d:10"><img src="img/fotos/thumb/pasillo-criticos-05.jpg" alt=""><figcaption>Pasillo críticos</figcaption></figure>
+      </div>
+    </section>
+
+    <!-- 4 · MISIÓN -->
+    <section class="slide" data-dur="35" data-title="Misión, visión y valores" data-notes="Nuestra misión: atención urgente de calidad, segura y humana, priorizando por gravedad y garantizando la continuidad al alta. Nuestra visión: ser referencia por cuidados, seguridad, innovación digital y bienestar del equipo. Y siete valores que guían cada decisión de la supervisión.">
+      <div class="bg"><img src="img/fotos/full/observacion-grave-08.jpg" alt=""></div>
+      <div class="kick a" style="--d:0">01 · El servicio</div>
+      <h2 class="t serif a" style="--d:1">Para qué estamos aquí</h2>
+      <div class="grid3" style="margin-top:56px;">
+        <div class="glass card a" style="--d:2"><div class="ico" style="--c:var(--suh)">${target}</div><h3>Misión</h3><p>Atención urgente de calidad, segura y humana, priorizando por gravedad y garantizando la continuidad de cuidados al alta.</p></div>
+        <div class="glass card a" style="--d:3"><div class="ico" style="--c:#0b6f7a">${compass}</div><h3>Visión</h3><p>Ser referencia por la excelencia en cuidados, la cultura de seguridad, la innovación digital y el bienestar de los profesionales.</p></div>
+        <div class="glass card a" style="--d:4"><div class="ico" style="--c:var(--junta-d)">${heart}</div><h3>Valores</h3><p>Seguridad · Humanización · Trabajo en equipo · Evidencia · Transparencia · Innovación · Respeto</p></div>
+      </div>
+    </section>
+
+    <!-- 5 · TRIAJE -->
+    <section class="slide" data-dur="45" data-title="Triaje SET" data-notes="Todo empieza en triaje. Enfermería clasifica con el Sistema Español de Triaje de cinco niveles y web_e-PAT, según nuestro PNT versión 6 de junio de 2026. Prioridad 1 inmediata, 2 en quince minutos, 3 en una hora, 4 en dos horas y 5 en cuatro. Las patologías tiempo-dependientes entran como prioridad 1, y el paciente se asigna a uno de seis circuitos excluyentes. En triaje también detectamos fragilidad, con EPADI, y sospecha de violencia de género.">
+      <div class="kick a" style="--d:0">01 · El servicio</div>
+      <h2 class="t serif a" style="--d:1">Triaje: <em>la gravedad marca el orden</em></h2>
+      <div class="set" id="set"></div>
+      <div class="circs" id="circs"></div>
+    </section>
+
+    <!-- 6 · ESPACIOS CRÍTICOS -->
+    <section class="slide" data-dur="35" data-title="Sala de Críticos" data-notes="La sala de críticos tiene tres puestos con dotación mínima definida por puesto y prioridad en el PNT-URG-CRIT-001. El puesto 3 está preparado además para la transferencia del código infarto extrahospitalario a hemodinámica. La evaluación ABCDE se repite tras cada intervención.">
+      <div class="bg full"><img src="img/fotos/full/criticos-11.jpg" alt=""></div>
+      <div class="grow"></div>
+      <div class="kick a" style="--d:0">01 · El servicio</div>
+      <h2 class="t serif a" style="--d:1">Sala de Críticos: <em>3 puestos</em>, 6 fases, ABCDE</h2>
+      <p class="lead a" style="--d:2">PNT-URG-CRIT-001 v1.0 · recepción, estabilización, monitorización y manejo inicial del paciente crítico, con dotación mínima por puesto y prioridad.</p>
+    </section>
+
+    <!-- 7 · MODELO -->
+    <section class="slide" data-dur="40" data-title="Modelo de supervisión" data-notes="Mi modelo de supervisión descansa en seis pilares: las personas, los procesos, la seguridad, los cuidados, la calidad acreditada y la transformación digital. Todos con un mismo hilo: la humanización.">
+      <div class="kick a" style="--d:0">02 · Personas y gobernanza</div>
+      <h2 class="t serif a" style="--d:1">Un modelo de supervisión <em>en seis pilares</em></h2>
+      <div class="pillars">
+        <div class="pillar a" style="--d:2; --c:#7b3fb4"><div class="ico" style="--c:#7b3fb4">${users}</div><h3>Personas</h3><p>Acogida, formación, gobernanza y clima laboral.</p></div>
+        <div class="pillar a" style="--d:3; --c:var(--suh)"><div class="ico" style="--c:var(--suh)">${layers}</div><h3>Procesos</h3><p>PNT digitalizados y circuitos definidos.</p></div>
+        <div class="pillar a" style="--d:4; --c:var(--red)"><div class="ico" style="--c:#c62828">${shieldCheck}</div><h3>Seguridad</h3><p>Prácticas seguras y gestión de riesgos.</p></div>
+        <div class="pillar a" style="--d:5; --c:var(--junta)"><div class="ico" style="--c:var(--junta-d)">${heartPulse}</div><h3>Cuidados</h3><p>Dolor, continuidad, fragilidad y heridas auditados.</p></div>
+        <div class="pillar a" style="--d:6; --c:var(--gold)"><div class="ico" style="--c:#b8860b">${award}</div><h3>Calidad</h3><p>ACSA Óptimo y mejora continua.</p></div>
+        <div class="pillar a" style="--d:7; --c:var(--snm)"><div class="ico" style="--c:#e07b24">${monitor}</div><h3>Digital</h3><p>20 herramientas propias a pie de cama.</p></div>
+      </div>
+    </section>
+
+    <!-- 8 · PERSONAS -->
+    <section class="slide" data-dur="40" data-title="Acogida y formación" data-notes="Cada incorporación recibe el Plan de Acogida PG-UAP-01, versión 6, con las funciones y responsabilidades de cada puesto y el plano de evacuación. Para preparar la acreditación creamos El Juego de la Acreditación: los 102 puntos del checklist de Calidad y los 50 estándares del Excel, en formato de casos prácticos con puntuación y ranking.">
+      <div class="bg"><img src="img/fotos/full/consultas-de-enfermeria-06.jpg" alt=""></div>
+      <div class="kick a" style="--d:0">02 · Personas y gobernanza</div>
+      <h2 class="t serif a" style="--d:1">Nadie empieza solo, <em>todos aprendemos</em></h2>
+      <div class="grid3" style="margin-top:56px; max-width:1500px;">
+        <div class="glass card a" style="--d:2"><div class="ico" style="--c:#7b3fb4">${users}</div><h3>Acogida PG-UAP-01 v6</h3><p>Manual de acogida, funciones y responsabilidades y plano de evacuación.</p><p style="margin-top:12px"><span class="tag">ES 5 01.10_02</span></p></div>
+        <div class="glass card a" style="--d:3"><div class="ico" style="--c:#b8860b">${trophy}</div><h3>Juego de la Acreditación</h3><p>102 puntos del checklist y 50 estándares en casos «¿cumple o no cumple?».</p><p style="margin-top:12px"><span class="tag">ES 5 01.12_04</span></p></div>
+        <div class="glass card a" style="--d:4"><div class="ico" style="--c:var(--suh)">${book}</div><h3>Repaso continuo</h3><p>Tarjetas de repaso y preguntas integradas en cada protocolo digital.</p><p style="margin-top:12px"><span class="tag">Formación in situ</span></p></div>
+      </div>
+    </section>
+
+    <!-- 9 · GOBERNANZA PRL -->
+    <section class="slide" data-dur="50" data-title="Gobernanza tras la auditoría PRL" data-notes="Esta es una de nuestras grandes fortalezas. La auditoría de prevención de riesgos laborales identificó riesgos de seguridad, ergonómicos y psicosociales. En lugar de quedarnos en el informe, lo llevamos a reuniones de gobernanza con el equipo: analizamos juntos, priorizamos y acordamos medidas, por ejemplo en prevención de agresiones y manejo del paciente agitado. El resultado es un mejor clima laboral, que además medimos como pide el estándar 01.16 de ACSA.">
+      <div class="kick a" style="--d:0">02 · Personas y gobernanza · Fortaleza</div>
+      <h2 class="t serif a" style="--d:1">De la auditoría de PRL <em>al clima laboral</em></h2>
+      <div class="flow">
+        <div class="st a" style="--d:2; --c:#e07b24"><b>1</b><h4>Auditoría PRL</h4><p>Riesgos de seguridad, ergonómicos y psicosociales.</p><p style="margin-top:12px"><span class="tag">ES 5 06.06_02</span></p></div>
+        <div class="arr a f" style="--d:3">${right}</div>
+        <div class="st a" style="--d:4; --c:var(--suh-400)"><b>2</b><h4>Reuniones de gobernanza</h4><p>El equipo analiza, prioriza y decide.</p><p style="margin-top:12px"><span class="tag">ES 5 01.01_01</span></p></div>
+        <div class="arr a f" style="--d:5">${right}</div>
+        <div class="st a" style="--d:6; --c:#b18cf0"><b>3</b><h4>Medidas acordadas</h4><p>Prevención de agresiones, PNT de contención, organización.</p></div>
+        <div class="arr a f" style="--d:7">${right}</div>
+        <div class="st hi a" style="--d:8; --c:#7ee2a8"><b>4</b><h4>Mejor clima laboral</h4><p>Medido y difundido como motor organizativo.</p><p style="margin-top:12px"><span class="tag">ES 5 01.16_02</span></p></div>
+      </div>
+    </section>
+
+    <!-- 10 · PROCESOS -->
+    <section class="slide" data-dur="50" data-title="Gestión por procesos" data-notes="Nuestros procesos están en PNT con código, versión y fecha. Y los hemos digitalizado: triaje, críticos, los cuatro códigos tiempo-dependientes, gineco-obstetricia, dolor, fluidoterapia, contención, heridas y acogida. Al digitalizarlos, además, detectamos incoherencias documentales que hemos devuelto a la unidad para corregir: la digitalización también es control de calidad.">
+      <div class="kick a" style="--d:0">03 · Procesos y seguridad</div>
+      <h2 class="t serif a" style="--d:1">Protocolos vivos, <em>no en un cajón</em></h2>
+      <div class="pnt" id="pnt"></div>
+    </section>
+
+    <!-- 11 · CÓDIGOS -->
+    <section class="slide" data-dur="40" data-title="Códigos tiempo-dependientes" data-notes="Los cuatro códigos tiempo-dependientes —ictus, sepsis, trauma e infarto— entran como prioridad 1. Cada herramienta calcula lo crítico: la ventana terapéutica del ictus con Teleictus, el NEWS2 en sepsis, la ventana del ácido tranexámico en trauma y los criterios ECG del SCACEST.">
+      <div class="kick a" style="--d:0">03 · Procesos y seguridad</div>
+      <h2 class="t serif a" style="--d:1">Cuando el tiempo <em>es tejido</em></h2>
+      <div class="grid4" style="margin-top:56px;">
+        <div class="glass card a" style="--d:2"><div class="ico" style="--c:#7b3fb4">${brain}</div><h3>Ictus</h3><p>Ventana terapéutica, fibrinólisis, trombectomía y Teleictus.</p></div>
+        <div class="glass card a" style="--d:3"><div class="ico" style="--c:#0b6f7a">${virus}</div><h3>Sepsis</h3><p>NEWS2 automático, foco y antibioterapia (actualización 04-may-2026).</p></div>
+        <div class="glass card a" style="--d:4"><div class="ico" style="--c:#c62828">${bandage}</div><h3>Trauma</h3><p>Criterios de activación, TSR, Glasgow y ventana del tranexámico.</p></div>
+        <div class="glass card a" style="--d:5"><div class="ico" style="--c:#e07b24">${heartPulse}</div><h3>Infarto</h3><p>SCACEST v5 y SCASEST: criterios ECG y reperfusión.</p></div>
+      </div>
+    </section>
+
+    <!-- 12 · DEMO TRIAJE -->
+    <section class="slide" data-dur="50" data-title="Demo: Triaje" data-notes="Os lo enseño en directo. Esta es la herramienta de triaje: al pulsar una prioridad vemos quién atiende, dónde y cuánto puede esperar el paciente; después, el recorrido completo, los circuitos y la detección de fragilidad y violencia. Es la misma que usa el equipo en el puesto de triaje.">
+      <div class="kick a" style="--d:0">03 · Procesos y seguridad</div>
+      <div class="demo">
+        <div>
+          <span class="live a" style="--d:1">EN DIRECTO</span>
+          <h2 class="t serif a" style="--d:2; font-size:64px;">Triaje y asignación de pacientes</h2>
+          <ul class="bul">
+            <li class="a" style="--d:3">${check}<span><b>SET de 5 niveles</b> con web_e-PAT</span></li>
+            <li class="a" style="--d:4">${check}<span><b>Recorrido</b> del paciente paso a paso</span></li>
+            <li class="a" style="--d:5">${check}<span><b>6 circuitos</b> excluyentes</span></li>
+            <li class="a" style="--d:6">${check}<span><b>Fragilidad</b> (EPADI ≥ 6) y <b>violencia</b></span></li>
+          </ul>
+        </div>
+        <div class="demo-frame a r" style="--d:3"><div class="bar"><i></i><i></i><i></i><span>herramientas/triaje.html</span></div><div class="fw"><iframe data-src="herramientas/triaje.html" title="Triaje"></iframe></div></div>
+      </div>
+    </section>
+
+    <!-- 13 · SEGURIDAD -->
+    <section class="slide" data-dur="35" data-title="Seguridad del paciente" data-notes="Seguridad: identificación inequívoca con NHC o NUHSA; contención mecánica solo como último recurso, con al menos cuatro personas, valoración médica en menos de una hora y revisión al menos cada cuatro horas; fluidoterapia segura; y protección de datos: ninguna herramienta guarda datos de pacientes.">
+      <div class="bg"><img src="img/fotos/full/observacion-grave-12.jpg" alt=""></div>
+      <div class="kick a" style="--d:0">03 · Procesos y seguridad</div>
+      <h2 class="t serif a" style="--d:1">Seguridad <em>por diseño</em></h2>
+      <ul class="bul" style="max-width:1150px; margin-top:44px;">
+        <li class="a" style="--d:2">${check}<span><b>Identificación inequívoca</b> con NHC / NUHSA · ES 5 05.05_03</span></li>
+        <li class="a" style="--d:3">${check}<span><b>Contención como último recurso:</b> ≥ 4 personas, valoración médica &lt; 1 h, revisión ≤ 4 h</span></li>
+        <li class="a" style="--d:4">${check}<span><b>Fluidoterapia segura</b> según PNT v1.0 · ES 5 05.10_00</span></li>
+        <li class="a" style="--d:5">${check}<span><b>Detección precoz de sepsis</b> con NEWS2</span></li>
+        <li class="a" style="--d:6">${check}<span><b>Protección de datos:</b> las herramientas no guardan datos de pacientes · ES 5 06.14_03</span></li>
+      </ul>
+    </section>
+
+    <!-- 14 · DOLOR + DEMO -->
+    <section class="slide" data-dur="50" data-title="Auditorías de dolor" data-notes="Segunda gran fortaleza: las auditorías de dolor. El abordaje del dolor es un estándar obligatorio de ACSA, el 04.06, con cuatro elementos: escalas validadas registradas, protocolo con tratamiento farmacológico y no farmacológico, información escrita del tratamiento y formación. Auditamos los cuatro. Y aquí veis en directo nuestra herramienta del PNT de Dolor.">
+      <div class="kick a" style="--d:0">04 · Cuidados auditados · Fortaleza</div>
+      <div class="demo">
+        <div>
+          <span class="tag a" style="--d:1; font-size:20px;">ES 5 04.06_01 · obligatorio</span>
+          <h2 class="t serif a" style="--d:2; font-size:64px;">Auditorías de dolor</h2>
+          <ul class="bul">
+            <li class="a" style="--d:3">${check}<span><b>Escalas validadas</b> (EVA, EVN) registradas</span></li>
+            <li class="a" style="--d:4">${check}<span><b>PNT de Dolor v1</b> · 15/12/2025</span></li>
+            <li class="a" style="--d:5">${check}<span><b>Información escrita</b>: fármaco, dosis, vía y duración</span></li>
+            <li class="a" style="--d:6">${check}<span><b>Formación</b> del equipo en manejo del dolor</span></li>
+          </ul>
+        </div>
+        <div class="demo-frame a r" style="--d:3"><div class="bar"><i></i><i></i><i></i><span>herramientas/dolor-urgencias.html</span></div><div class="fw"><iframe data-src="herramientas/dolor-urgencias.html" title="Dolor en Urgencias"></iframe></div></div>
+      </div>
+    </section>
+
+    <!-- 15 · CONTINUIDAD -->
+    <section class="slide" data-dur="45" data-title="Continuidad de cuidados" data-notes="Tercera fortaleza: el registro de continuidad de cuidados. Asignamos enfermera y médico de referencia, planificamos los cuidados y transmitimos la información a Atención Primaria. Auditamos la calidad de ese registro, como piden los estándares obligatorios 03.11 y 03.12. Y generamos el texto normalizado NANDA-NIC-NOC para Diraya desde la herramienta de recomendaciones al alta.">
+      <div class="kick a" style="--d:0">04 · Cuidados auditados · Fortaleza</div>
+      <h2 class="t serif a" style="--d:1">Continuidad de cuidados: <em>el alta no es el final</em></h2>
+      <div class="flow">
+        <div class="st a" style="--d:2"><b>1</b><h4>Referentes</h4><p>Enfermera y médico responsables asignados.</p></div>
+        <div class="arr a f" style="--d:3">${right}</div>
+        <div class="st a" style="--d:4"><b>2</b><h4>Plan de cuidados</h4><p>NANDA-NIC-NOC adaptado al proceso.</p></div>
+        <div class="arr a f" style="--d:5">${right}</div>
+        <div class="st a" style="--d:6"><b>3</b><h4>Informe al alta</h4><p>Registro en Diraya y hoja para el paciente.</p></div>
+        <div class="arr a f" style="--d:7">${right}</div>
+        <div class="st hi a" style="--d:8; --c:#7ee2a8"><b>4</b><h4>Auditoría</h4><p>Calidad del registro y retorno al equipo.</p><p style="margin-top:12px"><span class="tag">ES 5 03.11 · 03.12</span></p></div>
+      </div>
+    </section>
+
+    <!-- 16 · FRAGILIDAD -->
+    <section class="slide" data-dur="35" data-title="Fragilidad, heridas y contención" data-notes="Otros cuidados que hemos estructurado: la fragilidad con la calculadora EPADI, que activa el circuito de paciente frágil a partir de 6; el manejo de heridas con el modelo TIMERS de la Comisión de Heridas del área; y el paciente agitado, siempre desde la desescalada.">
+      <div class="bg"><img src="img/fotos/full/sala-de-tratamiento-02.jpg" alt=""></div>
+      <div class="kick a" style="--d:0">04 · Cuidados auditados</div>
+      <h2 class="t serif a" style="--d:1">Cuidados <em>que se notan</em></h2>
+      <div class="grid3" style="margin-top:56px; max-width:1500px;">
+        <div class="glass card a" style="--d:2"><div class="ico" style="--c:var(--junta-d)">${person}</div><h3>Fragilidad · EPADI</h3><p>Índice 0-10. Con 6 o más: circuito de paciente frágil y cuidador acompañante.</p></div>
+        <div class="glass card a" style="--d:3"><div class="ico" style="--c:#0b6f7a">${bandage}</div><h3>Heridas · TIMERS</h3><p>Evaluación, manejo local y catálogo de la Comisión de Heridas AGSNM.</p></div>
+        <div class="glass card a" style="--d:4"><div class="ico" style="--c:#c62828">${shield}</div><h3>Paciente agitado</h3><p>De la desescalada verbal a la sujeción solo como último recurso.</p></div>
+      </div>
+    </section>
+
+    <!-- 17 · DEMO RECOMENDACIONES -->
+    <section class="slide" data-dur="40" data-title="Demo: Recomendaciones de salud" data-notes="Educación sanitaria y ciudadanía. Este es el nuevo portal de Recomendaciones de Salud: 21 guías al alta y 15 consejos de promoción, cada uno con su evidencia —guías clínicas, revisiones Cochrane, OMS—. Imprime la hoja A4 para el paciente con nuestros logos y conecta con nuestro Instagram, @suh_antequera_.">
+      <div class="kick a" style="--d:0">04 · Cuidados · Educación sanitaria</div>
+      <div class="demo">
+        <div>
+          <span class="live a" style="--d:1">EN DIRECTO</span>
+          <h2 class="t serif a" style="--d:2; font-size:64px;">Recomendaciones de Salud</h2>
+          <ul class="bul">
+            <li class="a" style="--d:3">${check}<span><b>21 guías al alta</b> con fuentes</span></li>
+            <li class="a" style="--d:4">${check}<span><b>15 consejos</b> de promoción de la salud</span></li>
+            <li class="a" style="--d:5">${check}<span><b>Hoja A4</b> y registro para Diraya</span></li>
+            <li class="a" style="--d:6">${instagram}<span>Conectado con <b>@suh_antequera_</b></span></li>
+          </ul>
+        </div>
+        <div class="demo-frame a r" style="--d:3"><div class="bar"><i></i><i></i><i></i><span>herramientas/recomendaciones-alta.html</span></div><div class="fw"><iframe data-src="herramientas/recomendaciones-alta.html" title="Recomendaciones de Salud"></iframe></div></div>
+      </div>
+    </section>
+
+    <!-- 18 · ACSA -->
+    <section class="slide" data-dur="50" data-title="ACSA nivel Óptimo" data-notes="Todo esto se refleja en la acreditación. Estamos certificados por la Agencia de Calidad Sanitaria de Andalucía en nivel Óptimo, con el manual ME 5 1_08: setenta y seis estándares en tres bloques y seis criterios. Óptimo significa el cien por cien del grupo uno, incluidos todos los obligatorios, y más del cuarenta por ciento del grupo dos. La reciente visita de los evaluadores fue una experiencia muy buena para todo el equipo.">
+      <div class="kick a" style="--d:0">05 · ACSA y DAFO</div>
+      <div style="display:grid; grid-template-columns: 420px 1fr; gap:80px; align-items:center; margin-top:40px; flex:1;">
+        <div class="a z" style="--d:1; display:flex; justify-content:center;"><div class="medal"><div><b>ACSA</b><span>ÓPTIMO</span><small>ME 5 1_08</small></div></div></div>
+        <div>
+          <h2 class="t serif a" style="--d:2; margin-top:0;">Certificados en <em>nivel Óptimo</em></h2>
+          <p class="lead a" style="--d:3; font-size:27px;">76 estándares · 3 bloques · 6 criterios. Visita reciente de evaluadores con muy buena experiencia.</p>
+          <div style="display:flex; flex-direction:column; gap:16px; margin-top:34px;">
+            <div class="lv a" style="--d:4"><h4>Avanzado</h4><div class="gb"><div>Grupo I · &gt; 70 %<i style="--c:var(--junta); --w:72%; --d:1"></i></div><div>Grupo II<i style="--c:var(--suh-400); --w:0%; --d:1"></i></div><div>Grupo III<i style="--c:var(--snm); --w:0%; --d:1"></i></div></div></div>
+            <div class="lv cur a" style="--d:5"><h4>Óptimo<small>SUH</small></h4><div class="gb"><div>Grupo I · 100 %<i style="--c:var(--junta); --w:100%; --d:2"></i></div><div>Grupo II · &gt; 40 %<i style="--c:var(--suh-400); --w:42%; --d:3"></i></div><div>Grupo III<i style="--c:var(--snm); --w:0%; --d:3"></i></div></div></div>
+            <div class="lv a" style="--d:6"><h4>Excelente</h4><div class="gb"><div>Grupo I · 100 %<i style="--c:var(--junta); --w:100%; --d:4"></i></div><div>Grupo II · 100 %<i style="--c:var(--suh-400); --w:100%; --d:5"></i></div><div>Grupo III · &gt; 40 %<i style="--c:var(--snm); --w:42%; --d:6"></i></div></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 19 · DAFO -->
+    <section class="slide" data-dur="55" data-title="DAFO" data-notes="Nuestro DAFO. Fortalezas: la certificación Óptima, las reuniones de gobernanza tras la auditoría de riesgos laborales, las auditorías de dolor y las del registro de continuidad de cuidados. Debilidad prioritaria: la TECLA y la TICLA, es decir, el tiempo de espera hasta la clasificación y lo que dura el triaje. Oportunidades: el camino al nivel Excelente, la humanización y la coordinación con Primaria. Amenazas: presión asistencial, riesgos psicosociales, rotación y fragilidad creciente.">
+      <div class="kick a" style="--d:0">05 · ACSA y DAFO</div>
+      <h2 class="t serif a" style="--d:1; font-size:62px;">Análisis DAFO</h2>
+      <div class="dafo" id="dafo"></div>
+    </section>
+
+    <!-- 20 · TECLA Y TICLA -->
+    <section class="slide" data-dur="45" data-title="TECLA y TICLA" data-notes="Y aquí está nuestra principal área de mejora: la TECLA y la TICLA. La TECLA es el tiempo de espera de clasificación, lo que espera el paciente desde que llega hasta que lo clasificamos en triaje. La TICLA es el tiempo de clasificación, lo que dura el propio triaje. Mientras un paciente no está clasificado, no sabemos si es una prioridad 1. Para 2027 nos comprometemos a medir ambos tiempos por franja horaria desde web_e-PAT, a activar la segunda consulta de triaje según la demanda, como ya prevé el PNT, a entrenar al equipo en el SET y a auditarlos cada trimestre, con metas propuestas de diez minutos para la TECLA y cinco para la TICLA.">
+      <div class="kick a" style="--d:0">05 · Área de mejora prioritaria</div>
+      <h2 class="t serif a" style="--d:1; font-size:88px;"><em>TECLA</em> y <em>TICLA</em>: cada minuto sin clasificar cuenta</h2>
+      <div class="tl a" style="--d:2">
+        <div class="tl-pt"><i></i><span>Llegada<br><small>admisión</small></span></div>
+        <div class="tl-seg tecla"><b>TECLA</b><small>espera hasta la clasificación</small></div>
+        <div class="tl-pt"><i></i><span>Inicio<br><small>del triaje</small></span></div>
+        <div class="tl-seg ticla"><b>TICLA</b><small>duración del triaje</small></div>
+        <div class="tl-pt"><i style="background:#7ee2a8"></i><span>Prioridad<br><small>asignada (SET)</small></span></div>
+      </div>
+      <div style="display:grid; grid-template-columns: 1fr 760px; gap:70px; align-items:center; flex:1;">
+        <ul class="bul" style="margin-top:0;">
+          <li class="a" style="--d:3">${check}<span>Medir <b>TECLA y TICLA basales</b> por franja horaria desde web_e-PAT</span></li>
+          <li class="a" style="--d:4">${check}<span>Activar la <b>segunda consulta de triaje</b> según la demanda, como prevé el PNT</span></li>
+          <li class="a" style="--d:5">${check}<span><b>Formación</b> y entrenamiento del equipo de triaje en el SET</span></li>
+          <li class="a" style="--d:6">${check}<span><b>Auditoría trimestral</b> de tiempos y retorno al equipo</span></li>
+        </ul>
+        <div class="a z" style="--d:4; display:flex; justify-content:center; gap:50px;">
+          <div class="clock" data-target="10" data-max="15" style="--p:0; --cc:var(--snm)"><div><b>0</b><span>min · meta TECLA</span></div></div>
+          <div class="clock" data-target="5" data-max="15" style="--p:0; --cc:#6aa8ec"><div><b>0</b><span>min · meta TICLA</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 21 · PLAN 2027 -->
+    <section class="slide" data-dur="45" data-title="Plan 2027" data-notes="El plan de acción 2027 tiene seis objetivos: reducir la TECLA y la TICLA en triaje, consolidar gobernanza y clima, mantener las auditorías de dolor y continuidad, gobernar nuestras herramientas digitales, reforzar la humanización y la educación sanitaria, y avanzar hacia el nivel Excelente de ACSA.">
+      <div class="kick a" style="--d:0">06 · Plan 2027</div>
+      <h2 class="t serif a" style="--d:1">Seis compromisos <em>para 2027</em></h2>
+      <div class="objs" id="objs"></div>
+    </section>
+
+    <!-- 22 · CIERRE -->
+    <section class="slide" data-dur="20" data-title="Gracias" data-notes="Gracias. Todo lo que habéis visto está en el portal del proyecto: la memoria, el DAFO interactivo, las herramientas y las fotografías del servicio. Y nos encontraréis en Instagram como @suh_antequera_. Quedo a vuestra disposición para cualquier pregunta.">
+      <div class="bg full"><img src="img/fotos/full/entrada-urgencias-09.jpg" alt=""></div>
+      <div class="grow"></div>
+      <div class="a" style="--d:0"><div class="logos"><img src="img/logo-suh.jpg" style="height:80px" alt=""><img src="img/logo-snm.jpg" style="height:38px" alt=""><img src="img/logo-junta.jpg" style="height:72px" alt=""></div></div>
+      <h1 class="big serif a" style="--d:1">Gracias.</h1>
+      <p class="lead a" style="--d:2">Manuel Isaías Medina Pérez · Supervisor de Enfermería · Servicio de Urgencias · Hospital de Antequera</p>
+      <div class="socials a" style="--d:3">
+        <a href="https://www.instagram.com/suh_antequera_/" target="_blank" rel="noopener" style="background:linear-gradient(45deg,#f09433,#dc2743,#bc1888)">${instagram} @suh_antequera_</a>
+        <a href="https://www.facebook.com/p/Suh-Antequera-61568582212569/" target="_blank" rel="noopener" style="background:#1877f2">${facebook} SUH Antequera</a>
+        <a href="index.html" style="background:rgba(255,255,255,.14); border:1px solid rgba(255,255,255,.3)">${home} Portal del proyecto</a>
+      </div>
+    </section>
+
+  </div></div>
+
+  <!-- Interfaz -->
+  <div id="ui">
+    <a href="index.html" title="Volver al portal"><span data-i="home"></span>Portal</a>
+    <button id="b-prev" title="Anterior (←)"><span data-i="left"></span></button>
+    <span id="count">1 / 22</span>
+    <button id="b-next" title="Siguiente (→)"><span data-i="right"></span></button>
+    <span id="timer" title="Tiempo transcurrido / previsto">00:00 / 15:00</span>
+    <div class="sp"></div>
+    <button id="b-auto" title="Modo automático (A)"><span data-i="play"></span>Auto</button>
+    <button id="b-notes" title="Notas del ponente (N)"><span data-i="notes"></span>Notas</button>
+    <button id="b-ov" title="Vista general (O)"><span data-i="grid"></span></button>
+    <button id="b-reset" title="Reiniciar cronómetro (R)"><span data-i="restart"></span></button>
+    <button id="b-help" title="Atajos (?)"><span data-i="keyboard"></span></button>
+    <button id="b-fs" title="Pantalla completa (F)"><span data-i="maximize"></span></button>
+  </div>
+  <div id="notes"><h5><span id="n-title">Notas</span><span id="n-time"></span></h5><div id="n-body"></div></div>
+  <div id="overview"><h4><span>Vista general · 22 diapositivas · 15 minutos</span><span style="font-size:14px; color:var(--ink-3)">Esc para cerrar</span></h4><div id="ov-grid"></div></div>
+  <div id="help"><h4>Atajos de teclado</h4><div>
+    <kbd>→ Espacio</kbd><span>Siguiente</span><kbd>←</kbd><span>Anterior</span><kbd>F</kbd><span>Pantalla completa</span><kbd>N</kbd><span>Notas del ponente</span>
+    <kbd>O</kbd><span>Vista general</span><kbd>A</kbd><span>Modo automático (15 min)</span><kbd>R</kbd><span>Reiniciar cronómetro</span><kbd>Inicio / Fin</kbd><span>Primera / última</span><kbd>?</kbd><span>Esta ayuda</span></div></div>
+  <div id="start"><div class="box">
+    <button class="p" id="go-man">▶ Presentar</button><button class="s" id="go-auto">Modo automático · 15 min</button>
+    <p>Usa las flechas para avanzar · F pantalla completa · N notas del ponente</p>
+  </div></div>
+
+  <script src="assets/icons.js"></script>
+  <script src="assets/data.js"></script>
+  <script>
+    const D = window.SUH, I = n => window.svgIcon(n);
+    const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+
+    /* Sustituir marcadores ${icono} del HTML por SVG */
+    const stage = $('#stage');
+    stage.innerHTML = stage.innerHTML.replace(/\$\{(\w+)\}/g, (m, n) => ICONS[n] ? I(n) : m);
+    $$('[data-i]').forEach(el => el.innerHTML = I(el.dataset.i) + el.innerHTML);
+
+    /* Contenido generado desde los datos compartidos */
+    $('#set').innerHTML = D.SET.map((s, i) => `<div class="set-row a" style="--d:${i + 2}"><b style="color:${s.color}">${s.nombre}<small style="display:block; font-size:18px; font-weight:600; color:var(--ink-3); margin-top:2px;">${s.txt}</small></b><div class="set-bar"><i style="--w:${Math.max(4, s.min / 240 * 100)}%; --d:${i}; background:${s.color}"></i></div><small style="color:${s.color}">${s.min === 0 ? 'Inmediata' : s.min + ' min'}</small></div>`).join('');
+    $('#circs').innerHTML = D.CIRCUITOS.map((c, i) => `<span class="a" style="--d:${i + 8}">${c}</span>`).join('');
+    const PNT = [['Triaje', 'v6 · jun 2026', '#1e5b9c'], ['Sala de Críticos', 'PNT-URG-CRIT-001', '#0b6f7a'], ['Código Ictus', 'Teleictus', '#c62828'], ['Código Sepsis', 'may 2026', '#c62828'], ['Código Trauma', 'PNT 5.1', '#c62828'], ['Dolor torácico', 'SCACEST v5', '#c62828'], ['Gineco-obstétrico', 'v2 · sep 2026', '#0b6f7a'], ['Dolor en Urgencias', 'v1 · dic 2025', '#00a046'], ['Fluidoterapia', 'v1.0 · dic 2025', '#0b6f7a'], ['Contención', 'PNT 2024', '#0b6f7a'], ['Heridas', 'AGSNM 2025-26', '#00a046'], ['Acogida', 'PG-UAP-01 v6', '#7b3fb4']];
+    $('#pnt').innerHTML = PNT.map((p, i) => `<div class="a z" style="--d:${i + 2}; --c:${p[2]}"><b>${p[0]}</b><span>${p[1]}</span></div>`).join('');
+    const dq = (k, l) => { const q = D.DAFO[k]; const it = q.items.slice(0, k === 'F' ? 5 : 4); return `<div class="dq a z" data-l="${k}" style="--d:${l}; --c:${q.color === '#1e5b9c' ? '#6aa8ec' : q.color === '#007a33' ? '#00c060' : q.color === '#c62828' ? '#ff6b6b' : '#ffa45c'}"><h4>${q.titulo}</h4><ul>${it.map(x => `<li class="${x.mejora ? 'hl' : ''}">${x.t}</li>`).join('')}</ul></div>`; };
+    $('#dafo').innerHTML = dq('F', 2) + dq('D', 3) + dq('O', 4) + dq('A', 5);
+    $('#objs').innerHTML = D.OBJETIVOS.map((o, i) => `<div class="a ${i === 0 ? 'hi' : ''}" style="--d:${i + 2}"><b><span>${o.n}</span>${o.t}</b><p>${o.acc.slice(0, 2).join(' · ')}</p></div>`).join('');
+
+    /* Escalado del lienzo */
+    function fit() { const s = Math.min(innerWidth / 1920, innerHeight / 1080); stage.style.transform = `scale(${s})`; }
+    addEventListener('resize', fit); fit();
+
+    /* Navegación */
+    const slides = $$('.slide'), N = slides.length;
+    const durs = slides.map(s => +s.dataset.dur), total = durs.reduce((a, b) => a + b, 0);
+    const cum = durs.map((d, i) => durs.slice(0, i).reduce((a, b) => a + b, 0));
+    let cur = -1, t0 = null, auto = false, autoTimer = null, clockAnim = null;
+    const fmt = s => `${String(Math.floor(s / 60)).padStart(2, '0')}:${String(Math.floor(s % 60)).padStart(2, '0')}`;
+
+    function go(i) {
+      i = Math.max(0, Math.min(N - 1, i)); if (i === cur) return;
+      const prev = slides[cur];
+      if (prev) { prev.classList.remove('on'); prev.classList.add('out'); setTimeout(() => prev.classList.remove('out'), 900); }
+      cur = i; const s = slides[i];
+      // Reiniciar animaciones al entrar
+      s.querySelectorAll('.a').forEach(a => { a.style.transition = 'none'; });
+      void s.offsetWidth;
+      s.querySelectorAll('.a').forEach(a => { a.style.transition = ''; });
+      s.classList.add('on');
+      s.querySelectorAll('iframe[data-src]').forEach(f => { if (!f.src || f.src === 'about:blank') f.src = f.dataset.src; });
+      $('#count').textContent = `${i + 1} / ${N}`;
+      $('#prog').style.width = ((i + 1) / N * 100) + '%';
+      $('#n-title').textContent = `${i + 1}. ${s.dataset.title}`;
+      $('#n-time').textContent = `${s.dataset.dur} s · objetivo ${fmt(cum[i] + durs[i])}`;
+      $('#n-body').textContent = s.dataset.notes || '';
+      $$('#ov-grid button').forEach((b, k) => b.classList.toggle('cur', k === i));
+      if (s.querySelector('.clock')) animateClock(s);
+      try { history.replaceState(null, '', '#' + (i + 1) + (auto ? '-auto' : '')); } catch (e) {}
+      if (auto) scheduleAuto();
+    }
+    function animateClock(s) {
+      cancelAnimationFrame(clockAnim); const clocks = [...s.querySelectorAll('.clock')], tS = performance.now();
+      const step = t => {
+        const p = Math.min(1, (t - tS - 1200) / 1800), e = p < 0 ? 0 : 1 - Math.pow(1 - p, 3);
+        clocks.forEach(c => { const tgt = +c.dataset.target, max = +c.dataset.max; c.querySelector('b').textContent = Math.round(tgt * e); c.style.setProperty('--p', (tgt * e / max * 100).toFixed(1)); });
+        if (p < 1) clockAnim = requestAnimationFrame(step);
+      };
+      clockAnim = requestAnimationFrame(step);
+    }
+    const next = () => go(cur + 1), prev = () => go(cur - 1);
+
+    /* Cronómetro */
+    function startClock() { if (!t0) t0 = Date.now(); }
+    setInterval(() => {
+      if (!t0) return; const el = (Date.now() - t0) / 1000;
+      $('#timer').textContent = `${fmt(el)} / ${fmt(total)}`;
+      $('#timer').classList.toggle('late', el > cum[cur] + durs[cur] + 5);
+      $('#plan').style.width = Math.min(100, el / total * 100) + '%';
+    }, 250);
+
+    /* Modo automático */
+    function scheduleAuto() { clearTimeout(autoTimer); if (!auto) return; if (cur < N - 1) autoTimer = setTimeout(next, durs[cur] * 1000); }
+    function setAuto(v) { auto = v; $('#b-auto').classList.toggle('on', v); $('#b-auto').lastChild.textContent = v ? 'Auto activo' : 'Auto'; startClock(); scheduleAuto(); }
+
+    /* Vista general */
+    $('#ov-grid').innerHTML = slides.map((s, i) => `<button data-go="${i}"><small>${String(i + 1).padStart(2, '0')} · ${s.dataset.dur} s</small>${s.dataset.title}</button>`).join('');
+    $('#ov-grid').addEventListener('click', e => { const b = e.target.closest('[data-go]'); if (b) { go(+b.dataset.go); $('#overview').classList.remove('open'); } });
+
+    /* Controles */
+    function fs() { if (!document.fullscreenElement) document.documentElement.requestFullscreen?.(); else document.exitFullscreen?.(); }
+    $('#b-next').onclick = next; $('#b-prev').onclick = prev;
+    $('#b-auto').onclick = () => setAuto(!auto);
+    $('#b-notes').onclick = () => { $('#notes').classList.toggle('open'); $('#b-notes').classList.toggle('on'); };
+    $('#b-ov').onclick = () => $('#overview').classList.toggle('open');
+    $('#b-reset').onclick = () => { t0 = Date.now(); };
+    $('#b-help').onclick = () => $('#help').classList.toggle('open');
+    $('#b-fs').onclick = fs;
+    function begin(a) { $('#start').remove(); startClock(); if (a) setAuto(true); }
+    $('#go-man').onclick = () => begin(false);
+    $('#go-auto').onclick = () => begin(true);
+
+    document.addEventListener('keydown', e => {
+      if ($('#start')) { if (e.key === 'Enter' || e.key === ' ' || e.key === 'ArrowRight') { e.preventDefault(); begin(false); } return; }
+      const k = e.key.toLowerCase();
+      if (['arrowright', 'pagedown', ' ', 'enter'].includes(k)) { e.preventDefault(); next(); }
+      else if (['arrowleft', 'pageup', 'backspace'].includes(k)) { e.preventDefault(); prev(); }
+      else if (k === 'home') go(0); else if (k === 'end') go(N - 1);
+      else if (k === 'f') fs(); else if (k === 'n') $('#b-notes').click(); else if (k === 'o') $('#b-ov').click();
+      else if (k === 'a') setAuto(!auto); else if (k === 'r') t0 = Date.now(); else if (k === '?' || k === 'h') $('#b-help').click();
+      else if (k === 'escape') { $('#overview').classList.remove('open'); $('#help').classList.remove('open'); }
+    });
+    stage.addEventListener('click', e => { if (e.target.closest('a, iframe, .demo-frame')) return; if ($('#start')) return; (e.clientX > innerWidth / 3 ? next : prev)(); });
+    let tx = null; addEventListener('touchstart', e => tx = e.touches[0].clientX, { passive: true });
+    addEventListener('touchend', e => { if (tx === null) return; const dx = e.changedTouches[0].clientX - tx; if (Math.abs(dx) > 50) (dx < 0 ? next : prev)(); tx = null; });
+    let uiT; addEventListener('mousemove', () => { document.body.classList.add('ui'); clearTimeout(uiT); uiT = setTimeout(() => document.body.classList.remove('ui'), 2500); });
+
+    /* Inicio (admite #N y #auto) */
+    const h = location.hash.slice(1);
+    go(Math.max(0, (parseInt(h, 10) || 1) - 1));
+    if (h.includes('auto')) { $('#go-auto').focus(); }
+    if (location.search.includes('captura')) {
+      // Modo captura (para la memoria en PDF): sin interfaz y con las animaciones ya terminadas
+      $('#start')?.remove(); $('#ui').remove(); $('#prog').remove(); $('#plan').remove();
+      document.head.insertAdjacentHTML('beforeend', '<style>*, *::before, *::after { transition: none !important; animation: none !important; }</style>');
+      slides[cur].querySelectorAll('.clock').forEach(c => { cancelAnimationFrame(clockAnim); c.querySelector('b').textContent = c.dataset.target; c.style.setProperty('--p', c.dataset.target / c.dataset.max * 100); });
+    }
+  </script>
+</body>
+</html>

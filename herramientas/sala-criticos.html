@@ -1,0 +1,986 @@
+<!doctype html><html><head>
+  <meta name="robots" content="noindex, nofollow"><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>PNT Sala de Críticos</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: cabecera fija con pestañas; una vista a la vez; bandas lima como las del PNT original. */
+:root{
+  --bg:#F3F6F2; --surface:#FFFFFF; --surface-2:#EAF0EA; --ink:#13201A; --muted:#4F6256; --line:#D3DDD4;
+  --accent:#13722B; --accent-fill:#1B8A35; --on-accent:#FFFFFF; --lime:#62D93D; --lime-ink:#0D2A12;
+  --p1:#B3261E; --p1-bg:#FBE9E7; --p2:#A24A06; --p2-bg:#FDF0DF; --focus:#1456D9; --warn-bg:#FFF6D6; --warn-ink:#5C4500;
+  --font-display:'Archivo','Arial Narrow',Arial,sans-serif;
+  --font-body:'IBM Plex Sans','Segoe UI',Roboto,Arial,sans-serif;
+  --font-mono:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0E1510; --surface:#16211A; --surface-2:#1D2B22; --ink:#E6EFE8; --muted:#9CB0A2; --line:#2B3C31;
+    --accent:#6FE04A; --accent-fill:#6FE04A; --on-accent:#0A1D0E; --p1:#FF8A80; --p1-bg:#3A1B19; --p2:#FFB74D; --p2-bg:#3A2A12;
+    --focus:#8AB4FF; --warn-bg:#3A3210; --warn-ink:#F3DE8A; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0E1510; --surface:#16211A; --surface-2:#1D2B22; --ink:#E6EFE8; --muted:#9CB0A2; --line:#2B3C31;
+  --accent:#6FE04A; --accent-fill:#6FE04A; --on-accent:#0A1D0E; --p1:#FF8A80; --p1-bg:#3A1B19; --p2:#FFB74D; --p2-bg:#3A2A12;
+  --focus:#8AB4FF; --warn-bg:#3A3210; --warn-ink:#F3DE8A; color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--font-body);font-size:15px;line-height:1.55;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 48px}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--surface)}
+h1,h2,h3,h4{font-family:var(--font-display);line-height:1.15;margin:0;text-wrap:balance}
+p{margin:0 0 .7em}
+ul{margin:.2em 0 .8em;padding-left:1.15em}
+li{margin:.15em 0}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+.wrap{max-width:980px;margin:0 auto}
+/* header */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--surface);border-bottom:1px solid var(--line);
+  margin-inline:calc(-1*max(16px,env(safe-area-inset-left,0px))) calc(-1*max(16px,env(safe-area-inset-right,0px)));
+  padding-inline:max(16px,env(safe-area-inset-left,0px)) max(16px,env(safe-area-inset-right,0px))}
+.top::after{content:"";display:block;height:4px;background:var(--lime);margin-inline:calc(-1*max(16px,env(safe-area-inset-left,0px))) calc(-1*max(16px,env(safe-area-inset-right,0px)))}
+.brand{display:flex;align-items:baseline;gap:10px 14px;flex-wrap:wrap;padding:10px 0 4px}
+.brand b{font-family:var(--font-display);font-weight:800;font-size:19px;letter-spacing:-.01em}
+.brand span{font-size:12.5px;color:var(--muted)}
+.brand code{font-family:var(--font-mono);font-size:11.5px;background:var(--surface-2);padding:2px 7px;border-radius:4px;color:var(--muted)}
+.tabs{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;padding-bottom:0}
+.tabs::-webkit-scrollbar{display:none}
+.tabs a{white-space:nowrap;text-decoration:none;color:var(--muted);font-weight:500;font-size:14px;padding:9px 12px;border-bottom:3px solid transparent;margin-bottom:-1px}
+.tabs a:hover{color:var(--ink)}
+.tabs a[aria-current="page"]{color:var(--ink);border-bottom-color:var(--accent);font-weight:600}
+main{padding-top:22px}
+/* common */
+.band{display:inline-block;background:var(--lime);color:var(--lime-ink);font-family:var(--font-display);font-weight:700;font-size:12px;letter-spacing:.07em;text-transform:uppercase;padding:3px 10px;border-radius:3px}
+.h-sec{display:flex;align-items:center;gap:10px;margin:28px 0 12px;flex-wrap:wrap}
+.h-sec h2{font-size:21px;font-weight:800}
+.lead{color:var(--muted);max-width:68ch}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:16px}
+.grid{display:grid;gap:12px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+.btn{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--surface);border-radius:6px;padding:8px 13px;cursor:pointer;font-weight:500;font-size:14px;min-height:38px}
+.btn:hover{border-color:var(--accent)}
+.btn.pri{background:var(--accent-fill);border-color:var(--accent-fill);color:var(--on-accent);font-weight:600}
+.btn.pri:hover{filter:brightness(1.07)}
+.btn.danger{color:var(--p1)}
+.btn[disabled]{opacity:.55;cursor:not-allowed}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.chip{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:5px 12px;font-size:13.5px;cursor:pointer}
+.chip:hover{border-color:var(--accent)}
+.chip[aria-pressed="true"]{background:var(--accent-fill);border-color:var(--accent-fill);color:var(--on-accent);font-weight:600}
+.pill{display:inline-block;font-size:12px;font-weight:600;padding:2px 9px;border-radius:999px;font-family:var(--font-display);letter-spacing:.02em}
+.pill.p1{background:var(--p1-bg);color:var(--p1)} .pill.p2{background:var(--p2-bg);color:var(--p2)}
+.note{background:var(--warn-bg);color:var(--warn-ink);border-radius:8px;padding:12px 14px;font-size:14px}
+.note ul{margin-bottom:0}
+.mono{font-family:var(--font-mono)}
+.small{font-size:13px;color:var(--muted)}
+label.f{display:flex;flex-direction:column;gap:4px;font-size:13px;color:var(--muted);font-weight:500;min-width:0}
+input[type=text],input[type=number],input[type=datetime-local],input[type=time],input[type=date],select,textarea{
+  width:100%;background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:8px 10px;color:var(--ink);font-size:15px;min-width:0}
+textarea{min-height:68px;resize:vertical}
+.chk{display:flex;gap:9px;align-items:flex-start;padding:5px 0;cursor:pointer;font-size:14.5px}
+.chk input{width:18px;height:18px;margin-top:2px;flex:none;accent-color:var(--accent-fill)}
+/* hero + facts */
+.hero h1{font-size:clamp(30px,6vw,46px);font-weight:800;letter-spacing:-.02em;margin:12px 0 10px}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:8px;overflow:hidden;margin-top:18px}
+.facts div{background:var(--surface);padding:10px 13px;min-width:0}
+.facts dt{font-size:11.5px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);font-weight:600}
+.facts dd{margin:2px 0 0;font-weight:500;overflow-wrap:anywhere}
+.facts{margin-bottom:0}
+/* phases */
+.phases{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;margin:14px 0 6px}
+.ph{text-align:left;border:1px solid var(--line);background:var(--surface);border-radius:8px;padding:10px 12px;cursor:pointer;display:flex;flex-direction:column;gap:2px}
+.ph:hover{border-color:var(--accent)}
+.ph small{font-family:var(--font-mono);color:var(--accent);font-size:11.5px}
+.ph b{font-family:var(--font-display);font-size:14.5px}
+/* accordion */
+details.pr{background:var(--surface);border:1px solid var(--line);border-radius:8px;margin:8px 0}
+details.pr summary{cursor:pointer;padding:12px 14px;display:flex;gap:10px;align-items:center;justify-content:space-between;font-weight:600;list-style:none}
+details.pr summary::-webkit-details-marker{display:none}
+details.pr summary::after{content:"+";font-family:var(--font-mono);color:var(--accent);font-size:18px;flex:none}
+details.pr[open] summary::after{content:"–"}
+details.pr summary span.t{flex:1;min-width:0}
+details.pr summary .pg{font-family:var(--font-mono);font-weight:400;font-size:12px;color:var(--muted);flex:none}
+details.pr .body{padding:2px 16px 12px;border-top:1px solid var(--line);padding-top:12px}
+.body h4{font-size:15px;margin:12px 0 4px}
+.body h4:first-child{margin-top:0}
+.body table,.tbl{width:100%;border-collapse:collapse;font-size:14px}
+.tw{overflow-x:auto}
+.body td,.body th,.tbl td,.tbl th{border:1px solid var(--line);padding:6px 9px;text-align:left;vertical-align:top}
+.body th,.tbl th{background:var(--surface-2);font-weight:600}
+/* puestos */
+.pos{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.role{border:1px solid var(--line);border-radius:8px;padding:12px;background:var(--surface)}
+.role h4{font-size:13px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin-bottom:6px}
+.role .n{font-family:var(--font-display);font-size:30px;font-weight:800;line-height:1}
+.role ul{list-style:none;padding:0;margin:6px 0 0}
+.role li{padding:3px 0;border-top:1px dashed var(--line);font-size:14px}
+.rec{border-left:6px solid var(--accent-fill);background:var(--surface);border-radius:0 8px 8px 0;padding:14px 16px;border-top:1px solid var(--line);border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
+.rec b.big{font-family:var(--font-display);font-size:26px;font-weight:800}
+/* assistant */
+.ask{display:flex;gap:8px;flex-wrap:wrap}
+.ask input{flex:1 1 260px;min-width:0;font-size:16px}
+.res{margin-top:12px;display:grid;gap:10px}
+.res .card h3{font-size:16px;display:flex;gap:8px;justify-content:space-between;align-items:baseline;flex-wrap:wrap}
+.res blockquote{margin:6px 0;padding:6px 12px;border-left:3px solid var(--lime);background:var(--surface-2);border-radius:0 6px 6px 0;font-size:14.5px}
+.ai{white-space:pre-wrap;font-size:15px}
+/* flashcards */
+.fc{perspective:900px}
+.fc-card{min-height:230px;border:1px solid var(--line);border-radius:12px;background:var(--surface);padding:22px;display:flex;flex-direction:column;justify-content:center;gap:10px;cursor:pointer;text-align:left;width:100%}
+.fc-card .tag{font-family:var(--font-mono);font-size:12px;color:var(--accent)}
+.fc-card .q{font-family:var(--font-display);font-size:clamp(20px,4vw,26px);font-weight:700}
+.fc-card .a{font-size:16.5px;white-space:pre-line;border-top:2px solid var(--lime);padding-top:10px}
+.bar{height:8px;background:var(--surface-2);border-radius:99px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--accent-fill);transition:width .25s}
+/* form */
+.fs{border:1px solid var(--line);border-radius:8px;background:var(--surface);padding:14px 16px;margin:0 0 12px;min-width:0}
+.fs legend{padding:0;margin-bottom:8px}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.cols.w2{grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.uci-g{margin-bottom:8px}
+.uci-g h4{font-size:14px;margin:8px 0 2px}
+.alert{border-radius:8px;padding:10px 14px;font-weight:600;background:var(--surface-2)}
+.alert.on{background:var(--p1-bg);color:var(--p1)}
+.actions{position:sticky;bottom:0;background:var(--bg);padding:10px 0;border-top:1px solid var(--line);z-index:5;padding-bottom:max(10px,env(safe-area-inset-bottom,0px))}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--surface);flex-wrap:wrap}
+.seg button{border:0;background:transparent;padding:9px 14px;cursor:pointer;font-weight:500;font-size:14px}
+.seg button[aria-pressed="true"]{background:var(--accent-fill);color:var(--on-accent);font-weight:600}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:max(18px,env(safe-area-inset-bottom,0px));background:var(--ink);color:var(--bg);padding:9px 16px;border-radius:8px;font-size:14px;z-index:40;max-width:90vw}
+.toast[hidden]{display:none}
+footer{margin-top:36px;font-size:12.5px;color:var(--muted);border-top:1px solid var(--line);padding-top:14px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+@media (max-width:520px){.tabs a{padding:9px 10px}.fs{padding:12px}}
+</style>
+
+<header class="top">
+  <div class="wrap">
+    <div class="brand"><b>Sala de Críticos</b><span>Urgencias · Hospital de Antequera · Área Sanitaria Norte de Málaga</span><code>PNT-URG-CRIT-001 · v1.0</code></div>
+    <nav class="tabs" aria-label="Secciones">
+      <a id="t-protocolo" href="#protocolo" data-v="protocolo">Protocolo</a>
+      <a id="t-puestos" href="#puestos" data-v="puestos">Puestos y dotación</a>
+      <a id="t-asistente" href="#asistente" data-v="asistente">Preguntar</a>
+      <a id="t-repaso" href="#repaso" data-v="repaso">Repaso</a>
+      <a id="t-paciente" href="#paciente" data-v="paciente">Ficha de paciente</a>
+      <a id="t-sala" href="#sala" data-v="sala">Revisión de sala</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+<!-- PROTOCOLO -->
+<section id="v-protocolo">
+  <div class="hero">
+    <span class="band">Procedimiento operativo</span>
+    <h1>Actuación en la sala de críticos del Servicio de Urgencias Hospitalarias</h1>
+    <p class="lead">Protocolo Normalizado de Trabajo para la recepción, estabilización, monitorización y manejo inicial de pacientes críticos. Texto completo del PNT, organizado por fases.</p>
+    <dl class="facts">
+      <div><dt>Código</dt><dd class="mono">PNT-URG-CRIT-001</dd></div>
+      <div><dt>Versión</dt><dd>1.0</dd></div>
+      <div><dt>Elaboración</dt><dd>Servicio de Urgencias Hospitalarias, 23 de junio de 2026</dd></div>
+      <div><dt>Aprobación</dt><dd>Consejo de Dirección / Unidad Clínica, 2 de junio de 2026</dd></div>
+      <div><dt>Ámbito</dt><dd>Servicio de Urgencias Hospitalarias, Área Sanitaria Norte de Málaga</dd></div>
+      <div><dt>Destinatarios</dt><dd>Profesionales del Servicio de Urgencias Hospitalarias ASNM</dd></div>
+    </dl>
+  </div>
+
+  <div class="h-sec"><span class="band">Secuencia</span><h2>Las seis fases de la actuación</h2></div>
+  <div class="phases" id="phases"></div>
+
+  <div class="row" style="margin:14px 0 4px">
+    <button class="btn" id="expand-all" type="button">Abrir todo</button>
+    <button class="btn" id="collapse-all" type="button">Cerrar todo</button>
+  </div>
+  <div id="proto-list"></div>
+
+  <div class="h-sec"><span class="band">Revisión</span><h2>Observaciones sobre el documento original</h2></div>
+  <div class="note">
+    <p>Al pasar el PDF a esta web se encontraron estos puntos. Conviene aclararlos con la Unidad antes de dar la versión por definitiva.</p>
+    <ul>
+      <li>La fecha de aprobación (2 de junio de 2026) es anterior a la de elaboración (23 de junio de 2026).</li>
+      <li>El Puesto 3 se define como puesto para transferencia de código infarto extrahospitalario (sección 3 y Fase 1) y también como puesto para Prioridad 1 o 2 si los puestos 1 y 2 están ocupados.</li>
+      <li>En la dotación del Puesto 3 para Prioridad 1, el segundo enfermero aparece sin destino ("1 enfermero -").</li>
+      <li>Erratas probables: "Bombas de percusión" (¿perfusión?), "Jeringas precargabas", "BILIOGRAFÍA". En la lista de material se ha escrito "Bombas de perfusión".</li>
+    </ul>
+  </div>
+</section>
+
+<!-- PUESTOS -->
+<section id="v-puestos" hidden>
+  <div class="h-sec" style="margin-top:0"><span class="band">Fase 1</span><h2>Puestos de críticos y dotación mínima</h2></div>
+  <p class="lead">La dotación mínima depende del puesto y de la prioridad del paciente. El PNT indica que el número de responsables puede modificarse según la evolución clínica.</p>
+
+  <div class="card" style="margin:14px 0">
+    <div class="row" style="gap:18px">
+      <div><div class="small" style="margin-bottom:4px">Puesto</div>
+        <div class="row" id="pos-sel">
+          <button class="chip" data-p="1" aria-pressed="true" type="button">Puesto 1</button>
+          <button class="chip" data-p="2" aria-pressed="false" type="button">Puesto 2</button>
+          <button class="chip" data-p="3" aria-pressed="false" type="button">Puesto 3</button></div></div>
+      <div><div class="small" style="margin-bottom:4px">Prioridad</div>
+        <div class="row" id="pri-sel">
+          <button class="chip" data-r="P1" aria-pressed="true" type="button">Prioridad 1</button>
+          <button class="chip" data-r="P2" aria-pressed="false" type="button">Prioridad 2</button></div></div>
+    </div>
+    <div id="pos-desc" style="margin-top:12px"></div>
+  </div>
+  <div id="pos-team" class="pos"></div>
+  <p class="small" id="pos-total" style="margin-top:8px"></p>
+
+  <div class="h-sec"><span class="band">Orientación</span><h2>¿A qué puesto va este paciente?</h2></div>
+  <div class="card">
+    <p class="small">Aplica los criterios del PNT. Es una ayuda para ordenar la decisión; la asignación la hace el médico responsable.</p>
+    <div class="cols w2">
+      <label class="chk"><input type="checkbox" id="w-ped"> Paciente en edad pediátrica</label>
+      <label class="chk"><input type="checkbox" id="w-sca"> Código infarto (SCACEST) desde SUAP o DCCU, para transferir a hemodinámica</label>
+      <label class="chk"><input type="checkbox" id="w-o1"> Puesto 1 ocupado</label>
+      <label class="chk"><input type="checkbox" id="w-o2"> Puesto 2 ocupado</label>
+    </div>
+    <div class="rec" id="w-out" style="margin-top:10px"></div>
+  </div>
+</section>
+
+<!-- ASISTENTE -->
+<section id="v-asistente" hidden>
+  <div class="h-sec" style="margin-top:0"><span class="band">Consulta</span><h2>Pregunta al protocolo</h2></div>
+  <p class="lead">Escribe una duda y se muestran los apartados del PNT que la responden, con su página. Si está disponible, también puedes pedir a Claude una respuesta redactada solo a partir del texto del protocolo.</p>
+  <form class="ask" id="ask-form" style="margin-top:12px">
+    <input type="text" id="ask-q" placeholder="Ej.: ¿cuándo pido valoración a UCI?" autocomplete="off" aria-label="Pregunta sobre el protocolo">
+    <button class="btn pri" type="submit">Buscar en el PNT</button>
+    <button class="btn" type="button" id="ask-ai" hidden>Preguntar a Claude</button>
+  </form>
+  <div class="row" id="ask-chips" style="margin-top:10px"></div>
+  <div id="ai-box" class="card" style="margin-top:12px" hidden>
+    <div class="row" style="justify-content:space-between"><b>Respuesta de Claude</b><button class="btn" type="button" id="ai-stop" hidden>Detener</button></div>
+    <div class="ai" id="ai-out" style="margin-top:6px"></div>
+    <p class="small" style="margin:8px 0 0">Redactada solo con el texto del PNT. No se envían datos de pacientes. Contrasta siempre con el protocolo.</p>
+  </div>
+  <div class="res" id="ask-res"></div>
+</section>
+
+<!-- REPASO -->
+<section id="v-repaso" hidden>
+  <div class="h-sec" style="margin-top:0"><span class="band">Memoriza</span><h2>Tarjetas de repaso</h2></div>
+  <p class="lead">Lee la pregunta, piensa la respuesta y gira la tarjeta. Marca "Ya lo sé" para sacarla del repaso. El progreso se guarda en este navegador.</p>
+  <div class="row" id="fc-groups" style="margin:12px 0"></div>
+  <div class="row" style="margin-bottom:12px">
+    <label class="chk" style="padding:0"><input type="checkbox" id="fc-pend" checked> Solo las que no sé</label>
+    <button class="btn" type="button" id="fc-shuf">Barajar</button>
+    <button class="btn" type="button" id="fc-reset">Empezar de cero</button>
+  </div>
+  <div class="bar" aria-hidden="true"><i id="fc-bar" style="width:0"></i></div>
+  <p class="small" id="fc-count" style="margin:6px 0 12px"></p>
+  <div class="fc"><button class="fc-card" id="fc-card" type="button" aria-live="polite"></button></div>
+  <div class="row" style="margin-top:12px">
+    <button class="btn" type="button" id="fc-prev">Anterior</button>
+    <button class="btn" type="button" id="fc-flip">Girar</button>
+    <button class="btn" type="button" id="fc-again">Repasar de nuevo</button>
+    <button class="btn pri" type="button" id="fc-know">Ya lo sé</button>
+    <button class="btn" type="button" id="fc-next">Siguiente</button>
+  </div>
+</section>
+
+<!-- PACIENTE -->
+<section id="v-paciente" hidden>
+  <div class="h-sec" style="margin-top:0"><span class="band">Registro de apoyo</span><h2>Ficha de paciente en sala de críticos</h2></div>
+  <div class="note" style="margin-bottom:12px">
+    Los datos que escribes aquí viven solo en esta página, no se guardan ni se envían a ningún sitio y se pierden al cerrarla o recargarla. Exporta lo que necesites. La ficha no sustituye a la historia clínica: prescripciones y registros se hacen en DIRAYA urgencias.
+  </div>
+
+  <form id="ficha" autocomplete="off" onsubmit="return false">
+  <fieldset class="fs"><legend><span class="band">1 · Llegada</span></legend>
+    <div class="cols">
+      <label class="f">Fecha y hora de llegada<input type="datetime-local" id="f-llegada" data-f="llegada"></label>
+      <label class="f">Procedencia<select data-f="procedencia"><option>Triaje</option><option>SUAP</option><option>DCCU</option><option>Otra</option></select></label>
+      <label class="f">Prioridad<select data-f="prioridad" id="f-prio"><option value="">Sin indicar</option><option value="P1">Prioridad 1</option><option value="P2">Prioridad 2</option></select></label>
+      <label class="f">Puesto asignado<select data-f="puesto" id="f-puesto"><option value="">Sin indicar</option><option value="1">Puesto 1</option><option value="2">Puesto 2</option><option value="3">Puesto 3</option></select></label>
+    </div>
+    <div class="row" style="margin-top:8px"><button class="btn" type="button" id="f-sug">Usar la orientación de "Puestos"</button><span class="small" id="f-sug-t"></span></div>
+    <p class="small" style="margin:10px 0 2px">Criterios de entrada en sala de críticos</p>
+    <div class="cols w2" id="f-crit"></div>
+  </fieldset>
+
+  <fieldset class="fs"><legend><span class="band">2 · Paciente</span></legend>
+    <div class="cols">
+      <label class="f">Nombre y apellidos (opcional)<input type="text" data-f="nombre"></label>
+      <label class="f">NHC / identificación<input type="text" data-f="nhc"></label>
+      <label class="f">Edad<input type="number" min="0" max="120" data-f="edad"></label>
+      <label class="f">Sexo<select data-f="sexo"><option value="">No consta</option><option>Mujer</option><option>Hombre</option><option>Otro</option></select></label>
+    </div>
+  </fieldset>
+
+  <fieldset class="fs"><legend><span class="band">3 · Constantes</span></legend>
+    <div class="cols">
+      <label class="f">TA sistólica (mmHg)<input type="number" data-f="tas"></label>
+      <label class="f">TA diastólica (mmHg)<input type="number" data-f="tad"></label>
+      <label class="f">FC (lpm)<input type="number" data-f="fc"></label>
+      <label class="f">FR (rpm)<input type="number" data-f="fr"></label>
+      <label class="f">SatO₂ (%)<input type="number" data-f="sat"></label>
+      <label class="f">Temperatura (°C)<input type="number" step="0.1" data-f="temp"></label>
+      <label class="f">Glucemia (mg/dl)<input type="number" data-f="gluc"></label>
+      <label class="f">Glasgow (3–15)<input type="number" min="3" max="15" id="f-gcs" data-f="gcs"></label>
+    </div>
+    <p class="small" id="f-gcs-t" style="margin:8px 0 0"></p>
+  </fieldset>
+
+  <fieldset class="fs"><legend><span class="band">4 · Evaluación primaria ABCDE</span></legend>
+    <p class="small">Sistemática ABCDE del AMLS. Se repite tras cada intervención terapéutica, ante cualquier cambio clínico y en la reevaluación periódica.</p>
+    <div class="cols w2">
+      <label class="f">A · Vía aérea<textarea data-f="abc_a"></textarea></label>
+      <label class="f">B · Respiración<textarea data-f="abc_b"></textarea></label>
+      <label class="f">C · Circulación<textarea data-f="abc_c"></textarea></label>
+      <label class="f">D · Estado neurológico<textarea data-f="abc_d"></textarea></label>
+      <label class="f">E · Control ambiental / exposición<textarea data-f="abc_e"></textarea></label>
+    </div>
+    <div class="row" style="margin-top:8px"><button class="btn" type="button" id="f-reeval">Anotar reevaluación ABCDE ahora</button><span class="small" id="f-reeval-t"></span></div>
+  </fieldset>
+
+  <fieldset class="fs"><legend><span class="band">5 · Estabilización y tratamiento</span></legend>
+    <label class="f">Diagnóstico sindrómico y prioridad terapéutica<textarea data-f="dx"></textarea></label>
+    <p class="small" style="margin:10px 0 2px">Códigos asistenciales activados por el médico responsable</p>
+    <div class="cols" id="f-cod"></div>
+    <div class="cols w2" style="margin-top:8px">
+      <label class="f">Tratamiento y sueroterapia (prescribir en DIRAYA urgencias)<textarea data-f="tto"></textarea></label>
+      <label class="f">Procedimientos de enfermería y constantes (registrar en DIRAYA)<textarea data-f="proc"></textarea></label>
+    </div>
+  </fieldset>
+
+  <fieldset class="fs"><legend><span class="band">6 · Equipo asignado</span></legend>
+    <div class="cols">
+      <label class="f">Médico responsable<input type="text" data-f="eq_med"></label>
+      <label class="f">Médico de apoyo<input type="text" data-f="eq_apoyo"></label>
+      <label class="f">Enfermería<input type="text" data-f="eq_enf"></label>
+      <label class="f">TCAE<input type="text" data-f="eq_tcae"></label>
+      <label class="f">Celador<input type="text" data-f="eq_cel"></label>
+    </div>
+  </fieldset>
+
+  <fieldset class="fs"><legend><span class="band">7 · Interconsulta a Medicina Intensiva</span></legend>
+    <p class="small">La solicitud la realiza el médico responsable. Se pide valoración si hay uno o más criterios.</p>
+    <div id="f-uci"></div>
+    <div class="alert" id="f-uci-a" style="margin:8px 0">Ningún criterio marcado.</div>
+    <div class="cols"><label class="f">Hora de solicitud a UCI<input type="time" data-f="uci_hora"></label></div>
+  </fieldset>
+
+  <fieldset class="fs"><legend><span class="band">8 · Destino</span></legend>
+    <div class="cols" id="f-dest"></div>
+    <div class="cols w2" style="margin-top:8px">
+      <label class="f">Centro o detalle del destino<input type="text" data-f="dest_det"></label>
+      <label class="f">Hora de salida de la sala<input type="time" data-f="salida"></label>
+    </div>
+    <label class="f" style="margin-top:8px">Observaciones<textarea data-f="notas"></textarea></label>
+  </fieldset>
+  </form>
+
+  <div class="actions">
+    <div class="row">
+      <button class="btn pri" type="button" id="x-copy">Copiar resumen</button>
+      <button class="btn" type="button" id="x-txt" hidden>Descargar .txt</button>
+      <button class="btn" type="button" id="x-json" hidden>Descargar .json</button>
+      <button class="btn" type="button" id="x-add">Añadir a la lista de la guardia</button>
+      <button class="btn danger" type="button" id="x-clear">Limpiar ficha</button>
+    </div>
+  </div>
+
+  <div class="h-sec"><span class="band">Guardia</span><h2>Lista de pacientes de esta sesión</h2></div>
+  <p class="small">Solo en memoria de esta página. Exporta antes de cerrar.</p>
+  <div class="tw card" style="padding:0;margin:8px 0">
+    <table class="tbl" id="list-tbl"><thead><tr><th>Llegada</th><th>Identificación</th><th>Edad</th><th>Prio.</th><th>Puesto</th><th>Códigos</th><th>UCI</th><th>Destino</th><th></th></tr></thead><tbody id="list-body"></tbody></table>
+  </div>
+  <div class="row">
+    <button class="btn pri" type="button" id="l-copy">Copiar tabla (CSV)</button>
+    <button class="btn" type="button" id="l-csv" hidden>Descargar .csv</button>
+  </div>
+</section>
+
+<!-- SALA -->
+<section id="v-sala" hidden>
+  <div class="h-sec" style="margin-top:0"><span class="band">Sección 7 y anexo 2</span><h2>Revisión de sala y briefing</h2></div>
+  <div class="seg" id="sala-seg" role="group" aria-label="Tipo de revisión">
+    <button type="button" data-s="diaria" aria-pressed="true">Revisión diaria</button>
+    <button type="button" data-s="mensual" aria-pressed="false">Caducidades (mensual)</button>
+    <button type="button" data-s="briefing" aria-pressed="false">Briefing de turno</button>
+  </div>
+  <p class="small" id="sala-who" style="margin:10px 0"></p>
+  <div class="card" style="margin-bottom:12px">
+    <div class="cols">
+      <label class="f">Fecha<input type="date" id="s-fecha"></label>
+      <label class="f">Hora<input type="time" id="s-hora"></label>
+      <label class="f">Profesional responsable<input type="text" id="s-prof"></label>
+    </div>
+  </div>
+  <div class="row" style="margin-bottom:8px"><b id="s-prog"></b></div>
+  <div class="bar" aria-hidden="true"><i id="s-bar" style="width:0"></i></div>
+  <div id="sala-body" class="grid g2" style="margin-top:12px"></div>
+  <div class="card" style="margin-top:12px">
+    <div class="cols w2">
+      <label class="f" id="s-inc-l">Incidencias detectadas<textarea id="s-inc"></textarea></label>
+      <label class="f" id="s-med-l">Medidas correctoras realizadas<textarea id="s-med"></textarea></label>
+    </div>
+    <p class="small" id="s-inc-note" style="margin:8px 0 0">Cualquier incidencia que comprometa la operatividad del área se comunica de forma inmediata al responsable asistencial del turno.</p>
+  </div>
+  <div class="row" style="margin-top:12px">
+    <button class="btn pri" type="button" id="s-copy">Copiar registro</button>
+    <button class="btn" type="button" id="s-txt" hidden>Descargar .txt</button>
+    <button class="btn" type="button" id="s-reset">Desmarcar todo</button>
+  </div>
+</section>
+
+<footer>
+  Resumen interactivo del PNT-URG-CRIT-001 v1.0 (Servicio de Urgencias Hospitalarias, ASNM). Texto de referencia: el PDF del protocolo. Es una herramienta de consulta y apoyo, no un documento oficial ni un registro clínico.
+</footer>
+</main>
+<div class="toast" id="toast" hidden role="status"></div>
+
+<script>
+(function(){
+"use strict";
+const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>Array.from(r.querySelectorAll(s));
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+/* ============ DATOS DEL PROTOCOLO ============ */
+const UCI=[
+ {t:'1. Necesidad de soporte avanzado de vía aérea o ventilación',i:['Intubación orotraqueal realizada o prevista','Necesidad de ventilación mecánica invasiva','Fracaso de ventilación no invasiva','Insuficiencia respiratoria grave refractaria a tratamiento inicial','Hipoxemia persistente pese a oxigenoterapia de alto flujo','Hipercapnia con deterioro clínico progresivo']},
+ {t:'2. Inestabilidad hemodinámica o shock',i:['Shock séptico, cardiogénico, obstructivo o hipovolémico','Hipotensión persistente pese a resucitación inicial con fluidos','Necesidad de perfusión continua de vasopresores o inotrópicos','Hipoperfusión mantenida']},
+ {t:'3. Deterioro neurológico grave',i:['Glasgow ≤ 8','Disminución progresiva del nivel de conciencia','Estatus epiléptico','Sospecha de hipertensión intracraneal','Necesidad de monitorización neurológica intensiva','Paciente neurocrítico con riesgo de deterioro inmediato']},
+ {t:'4. Arritmias o patología cardiovascular inestable',i:['Taquiarritmias con inestabilidad hemodinámica','Bradicardias sintomáticas refractarias','Síndrome coronario agudo complicado','Shock cardiogénico','Parada cardiorrespiratoria','Postparada recuperada (ROSC)']},
+ {t:'5. Pacientes con alta probabilidad de deterioro precoz',i:['Sin fallo orgánico establecido, pero el juicio clínico estima alta probabilidad de empeoramiento en las siguientes horas']},
+ {t:'6. Dudas sobre…',i:['Techo terapéutico','Limitación de esfuerzo terapéutico','Idoneidad de ingreso en cuidados críticos','Estrategia de soporte avanzado']}
+];
+const ENTRADA=['Prioridad 1 o 2','Inestabilidad hemodinámica','GCS < 13','Necesidad de soporte ventilatorio','Riesgo de deterioro inmediato'];
+const CODIGOS=['Código Ictus','Código Infarto','Código Sepsis','Código Trauma'];
+const DESTINOS=['Observación','UCI','Quirófano','Traslado a otro centro','Exitus'];
+const ABCDE=['A · Vía aérea','B · Respiración','C · Circulación','D · Estado neurológico','E · Control ambiental / exposición'];
+
+/* Dotación mínima: [rol, descripción] por puesto y prioridad */
+const DOT={
+ '1':{P1:[['Médico adjunto','1 responsable'],['Médico adjunto','1 de apoyo'],['Enfermería','1 enfermero · T2'],['Enfermería','1 enfermero · sillones'],['TCAE','1 · críticos'],['Celador','1']],
+      P2:[['Médico adjunto','1 responsable'],['Enfermería','1 enfermero · T2'],['TCAE','1 · críticos']]},
+ '2':{P1:[['Médico adjunto','1 responsable'],['Médico adjunto','1 de apoyo'],['Enfermería','1 enfermero · C1'],['Enfermería','1 enfermero · C2'],['TCAE','1 · sillones'],['Celador','1']],
+      P2:[['Médico adjunto','1 responsable'],['Enfermería','1 enfermero · C1'],['TCAE','1 · tratamiento']]},
+ '3':{P1:[['Médico adjunto','1 responsable'],['Médico adjunto','1 de apoyo'],['Enfermería','1 enfermero · tratamiento'],['Enfermería','1 enfermero · sin destino indicado en el PNT'],['TCAE','1 · sala de espera'],['Celador','1']],
+      P2:[['Médico adjunto','1 responsable'],['Enfermería','1 enfermero · C2'],['TCAE','1 · tratamiento']]}
+};
+const PDESC={
+ '1':'Primera camilla de la sala de críticos. Destinado a pacientes de Prioridad 1 o 2.',
+ '2':'Segunda camilla de la sala de críticos. Específico para paciente en edad pediátrica. También para Prioridad 1 o 2 si el puesto 1 está ocupado.',
+ '3':'Ubicado en el área del circuito de riesgo biológico. Específico para la transferencia de pacientes para coronariografía urgente desde la atención extrahospitalaria. Según la Fase 1, también para Prioridad 1 o 2 si los puestos 1 y 2 están ocupados.'
+};
+function dotHtml(){
+  let h='<p>La dotación mínima asistencial varía por puesto y prioridad. El número de responsables asignados podrá modificarse en función de la evolución de la situación clínica.</p>';
+  ['1','2','3'].forEach(p=>{
+    h+='<h4>Puesto de Críticos '+p+'</h4><p class="small">'+esc(PDESC[p])+'</p><div class="tw"><table><tr><th>Prioridad 1</th><th>Prioridad 2</th></tr><tr>';
+    ['P1','P2'].forEach(r=>{h+='<td><ul>'+DOT[p][r].map(x=>'<li>'+esc(x[1])+' ('+esc(x[0].toLowerCase())+')</li>').join('')+'</ul></td>'});
+    h+='</tr></table></div>';
+  });
+  h+='<p>En el Puesto 3 se recepcionará a los pacientes identificados desde la atención extrahospitalaria como Código Infarto (SCACEST) para su transferencia desde SUAP o DCCU y el traslado emergente a la sala de hemodinámica por DCCU 2.</p>';
+  return h;
+}
+const uciHtml='<p>La solicitud será realizada por el médico responsable de la sala de críticos. Se solicitará valoración por Medicina Intensiva en presencia de uno o más de los siguientes criterios:</p>'+
+  UCI.map(g=>'<h4>'+esc(g.t)+'</h4><ul>'+g.i.map(x=>'<li>'+esc(x)+'</li>').join('')+'</ul>').join('');
+
+const PROTO=[
+ {id:'ident',grp:'Documento',title:'Datos de identificación',page:'2',html:'<table><tr><th>Tipo de documento</th><td>Operativo</td></tr><tr><th>Título</th><td>Protocolo Normalizado de Trabajo de Actuación en la Sala de Críticos</td></tr><tr><th>Código</th><td>PNT-URG-CRIT-001</td></tr><tr><th>Versión</th><td>1.0</td></tr><tr><th>Elaboración</th><td>Servicio de Urgencias Hospitalarias, 23 de junio de 2026</td></tr><tr><th>Aprobación</th><td>Consejo de Dirección / Unidad Clínica, 2 de junio de 2026</td></tr><tr><th>Ámbito de aplicación</th><td>Servicio de Urgencias Hospitalarias, Área Sanitaria Norte de Málaga</td></tr><tr><th>Destinatarios</th><td>Profesionales del Servicio de Urgencias Hospitalarias ASNM</td></tr></table>'},
+ {id:'intro',grp:'1 a 4 · Marco',title:'1. Introducción',page:'3',html:'<p>La sala de críticos del Servicio de Urgencias constituye un área asistencial de alta complejidad destinada a la atención inicial, estabilización y monitorización de pacientes con patología tiempo-dependiente o con compromiso real o potencial de funciones vitales.</p><p>La atención al paciente crítico exige una actuación inmediata, coordinada y altamente protocolizada, en la que la rapidez en la identificación de problemas vitales y el inicio precoz de medidas terapéuticas condicionan de manera significativa el pronóstico y la morbimortalidad.</p><p>La creciente complejidad de los procesos asistenciales en Urgencias, así como la necesidad de garantizar una atención homogénea, segura y basada en la evidencia científica, hacen imprescindible disponer de procedimientos normalizados que definan de manera clara la secuencia de actuación, los roles profesionales y los recursos necesarios para el manejo del paciente crítico.</p><p>El presente Protocolo establece un marco estructurado para la actuación en la sala de críticos, definiendo criterios de activación, circuitos asistenciales, responsabilidades y procedimientos de valoración, estabilización y reevaluación continua. Su finalidad es optimizar la calidad asistencial, favorecer el trabajo en equipo y mejorar la seguridad clínica, promoviendo una atención eficiente y centrada en el paciente.</p>'},
+ {id:'obj',grp:'1 a 4 · Marco',title:'2. Objetivos',page:'3',html:'<h4>Generales</h4><p>Establecer un procedimiento estandarizado para la recepción, estabilización, monitorización y manejo inicial de pacientes críticos atendidos en la sala de críticos del Servicio de Urgencias Hospitalarias, garantizando una asistencia rápida, segura, coordinada y basada en la evidencia científica.</p><h4>Específicos</h4><ul><li>Disminuir los tiempos de atención.</li><li>Priorizar los problemas vitales.</li><li>Mejorar la coordinación del equipo.</li><li>Reducir eventos adversos.</li><li>Facilitar la continuidad asistencial.</li></ul>'},
+ {id:'def',grp:'1 a 4 · Marco',title:'3. Definiciones',page:'4',html:'<h4>Paciente crítico</h4><p>Paciente con alteración real o potencial de funciones vitales que requieren monitorización continua y actuación inmediata. Serán candidatos a atención en sala de críticos aquellos pacientes clasificados como Prioridad 1 (atención inmediata) y Prioridad 2 (atención urgente).</p><h4>Sala de críticos</h4><p>Área asistencial destinada a la atención de pacientes inestables o con riesgo vital. Hay 3 puestos disponibles para la atención del paciente crítico:</p><ul><li><b>Puesto de Críticos 1</b>: en sala de críticos, la primera camilla.</li><li><b>Puesto de Críticos 2</b>: en sala de críticos, la segunda camilla. Específico para paciente en edad pediátrica.</li><li><b>Puesto de Críticos 3</b>: en el área de circuito de riesgo biológico. Específico para transferencia de pacientes para coronariografía urgente desde la atención extrahospitalaria.</li></ul><h4>Estabilización inicial</h4><p>Intervenciones dirigidas a asegurar la vía aérea, respiración, circulación, estado neurológico y control ambiental/exposición.</p>'},
+ {id:'alc',grp:'1 a 4 · Marco',title:'4. Alcance',page:'4',html:'<p>Este protocolo es de aplicación a los siguientes profesionales:</p><ul><li>Médicos adjuntos de Urgencias Hospitalarias.</li><li>Residentes del área (MIR, EIR).</li><li>Enfermería.</li><li>TCAE.</li><li>Celadores.</li><li>Equipos de apoyo: UCI, Radiología, Cirugía, Traumatología.</li></ul>'},
+ {id:'r-med',grp:'5 · Responsabilidades',title:'Médico responsable de críticos',page:'5',html:'<ul><li>Liderar la asistencia.</li><li>Priorizar diagnóstico diferencial.</li><li>Solicitar pruebas.</li><li>Activar códigos asistenciales: Código Ictus, Código Infarto, Código Sepsis, Código Trauma.</li><li>Coordinar derivaciones.</li></ul>'},
+ {id:'r-enf',grp:'5 · Responsabilidades',title:'Enfermería',page:'5',html:'<ul><li>Canalización de accesos venosos.</li><li>Medicación.</li><li>Extracción de analítica.</li><li>Sondaje vesical/nasogástrico.</li></ul>'},
+ {id:'r-tcae',grp:'5 · Responsabilidades',title:'TCAE',page:'5',html:'<ul><li>Monitorización.</li><li>Toma de constantes.</li><li>Realización de EKG.</li><li>Preparación del material.</li><li>Apoyo logístico.</li><li>Reposición.</li></ul>'},
+ {id:'r-cel',grp:'5 · Responsabilidades',title:'Celador',page:'5',html:'<ul><li>Movilización.</li><li>Traslados.</li><li>Apoyo en procedimientos.</li></ul>'},
+ {id:'f1a',grp:'6 · Desarrollo del procedimiento',phase:1,title:'Fase 1 · Activación: criterios y acciones',page:'6',html:'<h4>Criterios de entrada en sala de críticos</h4><ul><li>Prioridad 1 y 2.</li><li>Inestabilidad hemodinámica.</li><li>GCS &lt; 13.</li><li>Necesidad de soporte ventilatorio.</li><li>Riesgo de deterioro inmediato.</li></ul><h4>Acciones</h4><ul><li>Aviso al equipo. Prioridad 2: busca de P2. Prioridad 1: busca de Observación y timbre de críticos.</li><li>Preparación del box.</li><li>Asignación de roles.</li></ul>'},
+ {id:'f1b',grp:'6 · Desarrollo del procedimiento',phase:1,title:'Fase 1 · Puestos y dotación mínima asistencial',page:'6–7',html:dotHtml()},
+ {id:'f2',grp:'6 · Desarrollo del procedimiento',phase:2,title:'Fase 2 · Recepción del paciente',page:'7–8',html:'<h4>Paciente traído por SUAP/DCCU</h4><ul><li>Transferencia realizada por médico y enfermero del equipo de extrahospitalaria al médico y enfermero del equipo de emergencias en sala de críticos.</li><li>Se aportará informe médico escrito, en formato físico o digital (DIRAYA).</li></ul><h4>Paciente derivado desde triaje</h4><p>El enfermero de triaje comunicará al médico responsable de la sala de críticos la información recabada en sala de triaje.</p>'},
+ {id:'f3',grp:'6 · Desarrollo del procedimiento',phase:3,title:'Fase 3 · Evaluación primaria',page:'8',html:'<p>Una vez realizada la recepción del paciente en la sala de críticos, se llevará a cabo una evaluación primaria estructurada siguiendo la sistemática <b>ABCDE</b> del AMLS (Advanced Medical Life Support), con el objetivo de identificar y tratar de forma inmediata aquellas alteraciones que comprometan la vida del paciente.</p><p>La valoración se realizará de forma secuencial, sistemática y priorizada, abordando en primer lugar los problemas con mayor riesgo vital.</p><p>La sistemática ABCDE deberá repetirse tras cada intervención terapéutica, ante cualquier cambio clínico o durante la reevaluación periódica del paciente.</p>'},
+ {id:'f4',grp:'6 · Desarrollo del procedimiento',phase:4,title:'Fase 4 · Estabilización y tratamiento dirigido',page:'8',html:'<p>Tras la evaluación primaria se establecerá un diagnóstico sindrómico, con priorización terapéutica y un tratamiento específico.</p><p>Las prescripciones de fármacos administrados en la sala de críticos, así como de sueroterapia, se realizarán en DIRAYA urgencias por el médico responsable.</p><p>Se registrarán también por parte de enfermería los procedimientos realizados y las constantes registradas a lo largo de la atención.</p>'},
+ {id:'f5',grp:'6 · Desarrollo del procedimiento',phase:5,title:'Fase 5 · Valoración conjunta con Medicina Intensiva',page:'8',html:'<p>La interconsulta con el Servicio de Medicina Intensiva deberá realizarse de forma precoz en aquellos pacientes atendidos en la sala de críticos que presenten fracaso orgánico establecido, riesgo elevado de deterioro clínico o necesidad actual o previsible de soporte avanzado no asumible fuera de una unidad de cuidados intensivos.</p><p>El objetivo de la valoración conjunta entre Urgencias y UCI es optimizar la toma de decisiones, favorecer la continuidad asistencial y reducir retrasos en el acceso a cuidados críticos.</p><p>La solicitud de valoración por UCI podrá realizarse en cualquier momento del proceso asistencial, incluso durante la evaluación primaria, cuando la gravedad clínica así lo requiera.</p>'},
+ {id:'f5c',grp:'6 · Desarrollo del procedimiento',phase:5,title:'Fase 5 · Indicaciones generales de interconsulta a UCI',page:'9–10',html:uciHtml},
+ {id:'f6',grp:'6 · Desarrollo del procedimiento',phase:6,title:'Fase 6 · Destino del paciente',page:'10',html:'<ul>'+DESTINOS.map(d=>'<li>'+d+'.</li>').join('')+'</ul>'},
+ {id:'m1',grp:'7 · Control, revisión y mantenimiento del material',title:'Objetivo y revisión diaria',page:'10–11',html:'<p>Con el objetivo de garantizar la disponibilidad, operatividad y seguridad del material sanitario empleado en la sala de críticos, se establecerá un programa sistemático de revisión del equipamiento, fungibles, medicación y dispositivos de soporte vital. Todo el material deberá mantenerse en condiciones óptimas de uso, correctamente almacenado, identificado y accesible de forma inmediata ante cualquier situación de emergencia.</p><p>Las revisiones incluirán el control del estado general del material, su correcto funcionamiento, la reposición de consumibles y la verificación de fechas de caducidad.</p><h4>1. Revisión diaria del material y equipamiento</h4><p>Se realizará una revisión diaria del material de la sala de críticos al inicio de cada jornada o turno asistencial, con el fin de asegurar la disponibilidad inmediata de los recursos necesarios para la atención al paciente crítico. La revisión diaria será realizada de forma conjunta por TCAE críticos y enfermero T2.</p>'},
+ {id:'m2',grp:'7 · Control, revisión y mantenimiento del material',title:'Elementos a revisar diariamente',page:'11',html:'<div id="daily-list"></div>'},
+ {id:'m3',grp:'7 · Control, revisión y mantenimiento del material',title:'Registro de la revisión diaria',page:'11',html:'<p>Toda revisión diaria deberá quedar registrada en la hoja o checklist de control de sala, dejando constancia de:</p><ul><li>Fecha.</li><li>Hora.</li><li>Profesional responsable.</li><li>Incidencias detectadas.</li><li>Medidas correctoras realizadas.</li></ul><p>Cualquier incidencia que comprometa la operatividad del área deberá comunicarse de forma inmediata al responsable asistencial del turno.</p>'},
+ {id:'m4',grp:'7 · Control, revisión y mantenimiento del material',title:'2. Revisión mensual de caducidades',page:'11–12',html:'<p>Se realizará una revisión sistemática mensual de las fechas de caducidad del material fungible, medicación y dispositivos sanitarios almacenados en la sala de críticos. La revisión será responsabilidad de personal de Enfermería y TCAE asignado para ello.</p><div id="monthly-list"></div><h4>Actuaciones ante material caducado o próximo a caducar</h4><ul><li>Retirarse de forma inmediata.</li><li>Desecharse o devolverse según normativa del centro.</li><li>Sustituirse por material vigente.</li></ul>'},
+ {id:'m5',grp:'7 · Control, revisión y mantenimiento del material',title:'3. Reposición de material tras uso asistencial',page:'12',html:'<p>Tras la utilización de material durante la atención a un paciente crítico, deberá realizarse reposición inmediata o en el menor tiempo posible. Serán responsables de dicha reposición los TCAE de críticos.</p><p>La reposición deberá completarse antes de considerar nuevamente operativo el puesto asistencial.</p>'},
+ {id:'m6',grp:'7 · Control, revisión y mantenimiento del material',title:'4. Notificación de incidencias',page:'12',html:'<p>Cualquier fallo técnico, mal funcionamiento, deterioro del material o ausencia de recursos críticos deberá notificarse de forma inmediata al responsable del turno y registrarse conforme al procedimiento interno del servicio.</p>'},
+ {id:'a1',grp:'Anexos',title:'Anexo 1 · Control del número de profesionales en el box',page:'13',html:'<p>Durante la atención al paciente crítico deberá limitarse el número de profesionales presentes dentro del box al mínimo necesario para garantizar una asistencia segura, eficaz y coordinada.</p><p>La presencia excesiva de personal en el área asistencial puede generar:</p><ul><li>Interferencias en procedimientos.</li><li>Dificultades de comunicación.</li><li>Incremento del ruido ambiental.</li><li>Pérdida de liderazgo y coordinación.</li><li>Riesgo de errores asistenciales.</li></ul><p>El acceso al box de críticos quedará restringido a los profesionales directamente implicados en la asistencia en cada momento. De forma general, permanecerán dentro del box únicamente:</p><ul><li>Médico responsable / líder del caso.</li><li>Médico de apoyo (si procede).</li><li>Personal de enfermería asignado.</li><li>TCAE asignado.</li><li>Profesionales requeridos para procedimientos específicos.</li></ul><p>El resto del personal permanecerá disponible fuera del box hasta ser requerido. El médico responsable o líder del equipo podrá regular en todo momento la entrada y salida de profesionales según necesidades asistenciales.</p>'},
+ {id:'a2',grp:'Anexos',title:'Anexo 2 · Briefing al inicio del turno',page:'14',html:'<p>Con el objetivo de mejorar la coordinación, optimizar la comunicación y reforzar la seguridad del paciente, se establecerá la realización sistemática de briefing y debriefing en el área de críticos.</p><p>Al comienzo de cada turno asistencial se realizará un briefing breve con participación de médicos, enfermería, TCAE y celador. Tendrá una duración aproximada de 3–5 minutos y permitirá:</p><ul><li>Confirmar composición del equipo.</li><li>Asignar roles asistenciales.</li><li>Revisar distribución de responsabilidades.</li><li>Detectar incidencias de material o recursos.</li><li>Comentar situaciones especiales del turno.</li></ul><p>Entre los roles a definir podrán incluirse: líder clínico, responsable de vía aérea, responsable de medicación, responsable de monitorización y registro, y apoyo logístico.</p><p>La asignación clara de funciones antes de una situación crítica favorece una respuesta más rápida y reduce errores relacionados con la comunicación.</p>'},
+ {id:'a3',grp:'Anexos',title:'Anexo 2 · Debriefing tras la asistencia de pacientes críticos',page:'15',html:'<p>Tras la atención de un paciente crítico, especialmente en situaciones complejas, paradas cardiorrespiratorias o eventos adversos, se recomienda realizar un debriefing estructurado con el equipo participante.</p><p>Su finalidad es:</p><ul><li>Analizar la actuación realizada.</li><li>Identificar fortalezas del equipo.</li><li>Detectar errores o dificultades.</li><li>Revisar aspectos organizativos.</li><li>Establecer oportunidades de mejora.</li></ul><p>El análisis deberá realizarse en un entorno de respeto, seguridad psicológica y aprendizaje compartido, orientado a la mejora continua y no a la culpabilización individual. Se recomienda abordar al menos tres preguntas:</p><ul><li>¿Qué ha funcionado bien?</li><li>¿Qué podría haberse hecho mejor?</li><li>¿Qué acciones podemos implementar para mejorar en futuras situaciones?</li></ul><p>La información obtenida podrá emplearse para actualizar procedimientos, reforzar formación y optimizar la dinámica de trabajo del equipo.</p>'},
+ {id:'bib',grp:'Bibliografía',title:'Bibliografía',page:'16',html:'<ol><li>National Association of Emergency Medical Technicians. Advanced Medical Life Support (AMLS): An Assessment-Based Approach. 4th ed. Burlington: Jones &amp; Bartlett Learning; 2023.</li><li>Sociedad Española de Medicina de Urgencias y Emergencias. Recomendaciones y protocolos de atención al paciente crítico en los Servicios de Urgencias Hospitalarios. Madrid: SEMES.</li><li>Sociedad Española de Medicina Intensiva, Crítica y Unidades Coronarias. Documentos de consenso para la atención del paciente crítico y criterios de ingreso en cuidados intensivos. Madrid: SEMICYUC.</li><li>Society of Critical Care Medicine. Guidelines for ICU Admission, Discharge, and Triage. Critical Care Medicine.</li><li>World Health Organization. Patient Safety: Communication during Patient Hand-Overs. Geneva: WHO.</li></ol>'}
+];
+const PHASES=[[1,'Activación'],[2,'Recepción'],[3,'Evaluación primaria'],[4,'Estabilización y tratamiento'],[5,'Valoración con UCI'],[6,'Destino']];
+
+/* Listas de revisión de sala */
+const DAILY=[
+ ['Equipos de monitorización y soporte',['Monitores multiparamétricos','Pulsioxímetros','Tensiómetros','Termómetros']],
+ ['Equipos de soporte vital',['Monitor desfibrilador','Marcapasos transcutáneo','Aspirador de secreciones','Tomas de oxígeno y vacío','Balón autoinflable']],
+ ['Material de vía aérea',['Laringoscopio','Palas y baterías','Tubos endotraqueales','Guías y fijadores','Mascarillas laríngeas','Cánulas oro/nasofaríngeas']],
+ ['Material de accesos y procedimientos',['Vías periféricas','Vía intraósea','Vía central','Bombas de perfusión','Sistemas de infusión']],
+ ['Medicación',['Cantidades','Temperaturas','Temperatura de neveras']],
+ ['Carro de paradas',['Precinto correcto','Orden interno','Reposición de material utilizado']]
+];
+const MONTHLY=[
+ ['Medicación de urgencias',['Fármacos del carro de paradas','Sedantes','Analgésicos','Vasopresores','Antiarrítmicos','Medicación de rescate','Sueros']],
+ ['Material estéril y fungible',['Suturas','Catéteres','Sistemas de perfusión','Material para curas','Kits de procedimientos invasivos']],
+ ['Dispositivos específicos',['Electrodos','Parches de desfibrilación','Jeringas precargadas','Material de un solo uso']]
+];
+const BRIEF=[
+ ['Participan: médicos, enfermería, TCAE y celador (3–5 minutos)',['Confirmar composición del equipo','Asignar roles asistenciales','Revisar distribución de responsabilidades','Detectar incidencias de material o recursos','Comentar situaciones especiales del turno']]
+];
+const BROLES=['Líder clínico','Responsable de vía aérea','Responsable de medicación','Responsable de monitorización y registro','Apoyo logístico'];
+const groupList=(G)=>G.map(g=>'<h4>'+esc(g[0])+'</h4><ul>'+g[1].map(x=>'<li>'+esc(x)+'</li>').join('')+'</ul>').join('');
+PROTO.find(p=>p.id==='m2').html=groupList(DAILY);
+PROTO.find(p=>p.id==='m4').html=PROTO.find(p=>p.id==='m4').html.replace('<div id="monthly-list"></div>',groupList(MONTHLY));
+
+/* Tarjetas de repaso: [grupo, pregunta, respuesta] */
+const CARDS=[
+ ['Puestos','¿Quiénes son candidatos a la sala de críticos?','Pacientes clasificados como Prioridad 1 (atención inmediata) y Prioridad 2 (atención urgente).'],
+ ['Puestos','¿Cuántos puestos de críticos hay y dónde están?','Tres.\nPuesto 1: primera camilla de la sala.\nPuesto 2: segunda camilla, específico pediátrico.\nPuesto 3: área del circuito de riesgo biológico.'],
+ ['Puestos','¿Para qué se usa el Puesto 1?','Pacientes catalogados como Prioridad 1 o 2.'],
+ ['Puestos','¿Para qué se usa el Puesto 2?','Pacientes críticos pediátricos, o Prioridad 1 o 2 si el puesto 1 está ocupado.'],
+ ['Puestos','¿Para qué se usa el Puesto 3?','Transferencia de pacientes para coronariografía urgente desde la atención extrahospitalaria (Código Infarto SCACEST desde SUAP o DCCU, traslado emergente a hemodinámica por DCCU 2). Según la Fase 1, también Prioridad 1 o 2 si los puestos 1 y 2 están ocupados.'],
+ ['Puestos','Dotación mínima, Puesto 1, Prioridad 1','Médico adjunto responsable y médico adjunto de apoyo; enfermero T2 y enfermero sillones; TCAE críticos; celador.'],
+ ['Puestos','Dotación mínima, Puesto 1, Prioridad 2','Médico adjunto responsable; enfermero T2; TCAE críticos.'],
+ ['Puestos','Dotación mínima, Puesto 2, Prioridad 1','Médico adjunto responsable y de apoyo; enfermero C1 y enfermero C2; TCAE sillones; celador.'],
+ ['Puestos','Dotación mínima, Puesto 2, Prioridad 2','Médico adjunto responsable; enfermero C1; TCAE tratamiento.'],
+ ['Puestos','Dotación mínima, Puesto 3, Prioridad 1','Médico adjunto responsable y de apoyo; enfermero tratamiento y un segundo enfermero (sin destino indicado en el PNT); TCAE sala de espera; celador.'],
+ ['Puestos','Dotación mínima, Puesto 3, Prioridad 2','Médico adjunto responsable; enfermero C2; TCAE tratamiento.'],
+ ['Activación','¿Cuáles son los criterios de entrada en sala de críticos?','Prioridad 1 y 2; inestabilidad hemodinámica; GCS < 13; necesidad de soporte ventilatorio; riesgo de deterioro inmediato.'],
+ ['Activación','¿Cómo se avisa al equipo?','Prioridad 2: busca de P2.\nPrioridad 1: busca de Observación y timbre de críticos.'],
+ ['Activación','¿Qué acciones siguen al criterio de entrada?','Aviso al equipo, preparación del box y asignación de roles.'],
+ ['Recepción','¿Cómo es la transferencia de un paciente traído por SUAP/DCCU?','Del médico y enfermero de extrahospitalaria al médico y enfermero del equipo de emergencias en sala de críticos, con informe médico escrito en físico o digital (DIRAYA).'],
+ ['Recepción','¿Y si el paciente viene derivado desde triaje?','El enfermero de triaje comunica al médico responsable de la sala de críticos la información recabada en triaje.'],
+ ['Evaluación','¿Qué sistemática sigue la evaluación primaria?','ABCDE del AMLS (Advanced Medical Life Support), secuencial, sistemática y priorizada.'],
+ ['Evaluación','¿Cuándo se repite el ABCDE?','Tras cada intervención terapéutica, ante cualquier cambio clínico y en la reevaluación periódica.'],
+ ['Evaluación','¿Qué es la estabilización inicial?','Intervenciones para asegurar vía aérea, respiración, circulación, estado neurológico y control ambiental/exposición.'],
+ ['Evaluación','¿Dónde se prescriben fármacos y sueroterapia, y quién lo hace?','En DIRAYA urgencias, por el médico responsable.'],
+ ['Evaluación','¿Qué registra enfermería durante la atención?','Los procedimientos realizados y las constantes registradas a lo largo de la atención.'],
+ ['UCI','¿Quién solicita la valoración por Medicina Intensiva?','El médico responsable de la sala de críticos.'],
+ ['UCI','¿Cuándo debe hacerse la interconsulta a UCI?','De forma precoz: fracaso orgánico establecido, riesgo elevado de deterioro clínico o necesidad actual o previsible de soporte avanzado no asumible fuera de UCI. Puede pedirse en cualquier momento, incluso durante la evaluación primaria.'],
+ ['UCI','Criterios UCI: vía aérea y ventilación','Intubación realizada o prevista; ventilación mecánica invasiva; fracaso de VNI; insuficiencia respiratoria grave refractaria; hipoxemia persistente pese a oxigenoterapia de alto flujo; hipercapnia con deterioro progresivo.'],
+ ['UCI','Criterios UCI: hemodinámica o shock','Shock séptico, cardiogénico, obstructivo o hipovolémico; hipotensión persistente pese a fluidos; perfusión continua de vasopresores o inotrópicos; hipoperfusión mantenida.'],
+ ['UCI','Criterios UCI: deterioro neurológico grave','Glasgow ≤ 8; disminución progresiva de conciencia; estatus epiléptico; sospecha de hipertensión intracraneal; necesidad de monitorización neurológica intensiva; neurocrítico con riesgo de deterioro inmediato.'],
+ ['UCI','Criterios UCI: arritmias y patología cardiovascular inestable','Taquiarritmias con inestabilidad; bradicardias sintomáticas refractarias; síndrome coronario agudo complicado; shock cardiogénico; parada cardiorrespiratoria; postparada recuperada (ROSC).'],
+ ['UCI','¿Cuándo se considera UCI aunque no haya fallo orgánico?','Cuando el juicio clínico estima alta probabilidad de empeoramiento en las siguientes horas.'],
+ ['UCI','¿Sobre qué dudas también puede pedirse interconsulta a UCI?','Techo terapéutico, limitación de esfuerzo terapéutico, idoneidad de ingreso en cuidados críticos y estrategia de soporte avanzado.'],
+ ['UCI','¿Qué destinos tiene el paciente de la sala de críticos?','Observación, UCI, quirófano, traslado a otro centro o exitus.'],
+ ['Roles','Responsabilidades del médico responsable','Liderar la asistencia, priorizar diagnóstico diferencial, solicitar pruebas, activar códigos asistenciales y coordinar derivaciones.'],
+ ['Roles','Códigos que activa el médico responsable','Código Ictus, Código Infarto, Código Sepsis y Código Trauma.'],
+ ['Roles','Responsabilidades de enfermería','Canalización de accesos venosos, medicación, extracción de analítica y sondaje vesical/nasogástrico.'],
+ ['Roles','Responsabilidades del TCAE','Monitorización, toma de constantes, EKG, preparación del material, apoyo logístico y reposición.'],
+ ['Roles','Responsabilidades del celador','Movilización, traslados y apoyo en procedimientos.'],
+ ['Roles','¿Quién permanece dentro del box?','Médico responsable/líder, médico de apoyo si procede, enfermería asignada, TCAE asignado y profesionales requeridos para procedimientos específicos. El resto espera fuera; el líder regula entradas y salidas.'],
+ ['Material','¿Quién y cuándo revisa el material a diario?','Al inicio de cada jornada o turno, conjuntamente el TCAE de críticos y el enfermero T2.'],
+ ['Material','¿Qué debe constar en el registro de la revisión diaria?','Fecha, hora, profesional responsable, incidencias detectadas y medidas correctoras realizadas.'],
+ ['Material','¿Cada cuánto y quién revisa las caducidades?','Cada mes, el personal de Enfermería y TCAE asignado para ello.'],
+ ['Material','¿Qué se hace con el material caducado?','Retirarlo de forma inmediata, desecharlo o devolverlo según normativa del centro y sustituirlo por material vigente.'],
+ ['Material','¿Quién repone el material tras usarlo y cuándo?','El TCAE de críticos, de inmediato o en el menor tiempo posible. El puesto no vuelve a considerarse operativo hasta completar la reposición.'],
+ ['Material','¿Qué hacer ante un fallo técnico o falta de recursos críticos?','Notificarlo de forma inmediata al responsable del turno y registrarlo según el procedimiento interno del servicio.'],
+ ['Equipo','¿Cuánto dura el briefing y qué permite?','3–5 minutos al inicio de cada turno: confirmar equipo, asignar roles, revisar responsabilidades, detectar incidencias de material y comentar situaciones especiales.'],
+ ['Equipo','Roles que pueden definirse en el briefing','Líder clínico, responsable de vía aérea, responsable de medicación, responsable de monitorización y registro, apoyo logístico.'],
+ ['Equipo','¿Cuándo se recomienda el debriefing y qué preguntas aborda?','Tras atender a un paciente crítico, sobre todo en casos complejos, paradas o eventos adversos. Al menos: ¿qué ha funcionado bien?, ¿qué podría haberse hecho mejor?, ¿qué acciones podemos implementar?'],
+ ['Documento','¿Código y versión del documento?','PNT-URG-CRIT-001, versión 1.0.'],
+ ['Documento','Objetivos específicos del PNT','Disminuir los tiempos de atención, priorizar los problemas vitales, mejorar la coordinación del equipo, reducir eventos adversos y facilitar la continuidad asistencial.']
+];
+
+/* ============ UTILIDADES ============ */
+let toastT;
+function toast(msg){const t=$('#toast');t.textContent=msg;t.hidden=false;clearTimeout(toastT);toastT=setTimeout(()=>{t.hidden=true},2600)}
+async function copyText(text,okMsg){
+  try{await navigator.clipboard.writeText(text);toast(okMsg||'Copiado')}
+  catch(e){
+    const ta=document.createElement('textarea');ta.value=text;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();
+    let ok=false;try{ok=document.execCommand('copy')}catch(_){}
+    ta.remove();toast(ok?(okMsg||'Copiado'):'No se pudo copiar. Selecciona el texto manualmente.');
+  }
+}
+let DL=null,SAMPLE=null;
+async function saveFile(filename,data){
+  if(!DL)return;
+  try{const r=await DL.save({filename,data});toast(r.status==='saved'?'Archivo guardado':'Archivo enviado')}
+  catch(e){if(e&&e.code==='declined')return;toast('No se pudo guardar el archivo en esta vista. Usa Copiar.')}
+}
+const pad=n=>String(n).padStart(2,'0');
+const nowLocal=()=>{const d=new Date();return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate())+'T'+pad(d.getHours())+':'+pad(d.getMinutes())};
+const todayStr=()=>nowLocal().slice(0,10), timeStr=()=>nowLocal().slice(11);
+const hhmm=()=>timeStr();
+
+/* ============ NAVEGACIÓN ============ */
+const VIEWS=['protocolo','puestos','asistente','repaso','paciente','sala'];
+function show(v,noScroll){
+  if(!VIEWS.includes(v))v='protocolo';
+  VIEWS.forEach(x=>{$('#v-'+x).hidden=x!==v;$('#t-'+x).setAttribute('aria-current',x===v?'page':'false')});
+  if(!noScroll)window.scrollTo(0,0);
+  try{history.replaceState(null,'','#'+v)}catch(e){}
+}
+$$('.tabs a').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();show(a.dataset.v)}));
+window.addEventListener('hashchange',()=>show(location.hash.slice(1),true));
+
+/* ============ PROTOCOLO ============ */
+(function(){
+  const ph=$('#phases');
+  PHASES.forEach(([n,t])=>{
+    const b=document.createElement('button');b.type='button';b.className='ph';b.innerHTML='<small>FASE '+n+'</small><b>'+esc(t)+'</b>';
+    b.addEventListener('click',()=>{
+      $$('#proto-list details').forEach(d=>d.open=false);
+      const ids=PROTO.filter(p=>p.phase===n).map(p=>p.id);
+      ids.forEach(id=>{$('#d-'+id).open=true});
+      $('#d-'+ids[0]).scrollIntoView({behavior:'smooth',block:'start'});
+    });
+    ph.appendChild(b);
+  });
+  const list=$('#proto-list');let last='';
+  PROTO.forEach(p=>{
+    if(p.grp!==last){last=p.grp;const h=document.createElement('div');h.className='h-sec';h.innerHTML='<span class="band">'+esc(p.grp)+'</span>';list.appendChild(h)}
+    const d=document.createElement('details');d.className='pr';d.id='d-'+p.id;
+    d.innerHTML='<summary><span class="t">'+esc(p.title)+'</span><span class="pg">p. '+esc(p.page)+'</span></summary><div class="body">'+p.html+'</div>';
+    list.appendChild(d);
+  });
+  $('#expand-all').addEventListener('click',()=>$$('#proto-list details').forEach(d=>d.open=true));
+  $('#collapse-all').addEventListener('click',()=>$$('#proto-list details').forEach(d=>d.open=false));
+})();
+
+/* ============ PUESTOS ============ */
+const wiz={ped:false,sca:false,o1:false,o2:false};
+function suggestPuesto(){
+  if(wiz.sca)return {p:'3',why:'Código infarto extrahospitalario (SCACEST): se recepciona en el Puesto 3 para transferirlo desde SUAP o DCCU y trasladarlo de forma emergente a hemodinámica por DCCU 2.'};
+  if(wiz.ped)return {p:'2',why:'El Puesto 2 es específico para pacientes en edad pediátrica.'};
+  if(!wiz.o1)return {p:'1',why:'El Puesto 1 está libre y se destina a Prioridad 1 o 2.'};
+  if(!wiz.o2)return {p:'2',why:'El Puesto 1 está ocupado: el Puesto 2 admite Prioridad 1 o 2.'};
+  return {p:'3',why:'Los puestos 1 y 2 están ocupados: el Puesto 3 admite Prioridad 1 o 2.'};
+}
+let selP='1',selR='P1';
+function renderPos(){
+  $$('#pos-sel .chip').forEach(c=>c.setAttribute('aria-pressed',c.dataset.p===selP));
+  $$('#pri-sel .chip').forEach(c=>c.setAttribute('aria-pressed',c.dataset.r===selR));
+  $('#pos-desc').innerHTML='<b>Puesto de Críticos '+selP+'.</b> '+esc(PDESC[selP]);
+  const team=DOT[selP][selR];const groups={};
+  team.forEach(([r,d])=>{(groups[r]=groups[r]||[]).push(d)});
+  $('#pos-team').innerHTML=Object.keys(groups).map(r=>'<div class="role"><h4>'+esc(r)+'</h4><div class="n">'+groups[r].length+'</div><ul>'+groups[r].map(d=>'<li>'+esc(d)+'</li>').join('')+'</ul></div>').join('');
+  $('#pos-total').textContent='Total mínimo: '+team.length+' profesionales. El número puede modificarse según la evolución clínica.';
+}
+$$('#pos-sel .chip').forEach(c=>c.addEventListener('click',()=>{selP=c.dataset.p;renderPos()}));
+$$('#pri-sel .chip').forEach(c=>c.addEventListener('click',()=>{selR=c.dataset.r;renderPos()}));
+function renderWiz(){
+  const s=suggestPuesto();
+  $('#w-out').innerHTML='<div class="small">Puesto orientativo</div><b class="big">Puesto '+s.p+'</b><p style="margin:4px 0 8px">'+esc(s.why)+'</p><button class="btn" type="button" id="w-go">Ver dotación del Puesto '+s.p+'</button>';
+  $('#w-go').addEventListener('click',()=>{selP=s.p;renderPos();window.scrollTo({top:0,behavior:'smooth'})});
+  updateSug();
+}
+[['w-ped','ped'],['w-sca','sca'],['w-o1','o1'],['w-o2','o2']].forEach(([id,k])=>$('#'+id).addEventListener('change',e=>{wiz[k]=e.target.checked;renderWiz()}));
+renderPos();
+
+/* ============ ASISTENTE ============ */
+const STOP=new Set('el la los las de del y o u a en un una unos unas que se por con para al lo es son si no como cual cuales cuando donde quien quienes cuanto cuantos hay debe deben puede pueden ser esta este estos estas mi su sus hacer hago pido necesita necesito sobre entre tras desde hasta le les me te hay pone poner va van'.split(' '));
+const SYN={uci:['intensiva','intensivos','medicina','interconsulta'],intensivos:['uci'],intubar:['intubacion','orotraqueal'],intubacion:['orotraqueal'],glasgow:['gcs'],gcs:['glasgow'],
+ infarto:['scacest','coronariografia','hemodinamica','codigo'],ictus:['codigo'],sepsis:['codigo'],trauma:['codigo'],pediatrico:['pediatrica','edad','puesto'],pediatrica:['pediatrico','edad'],nino:['pediatrica','pediatrico','edad'],ninos:['pediatrica','pediatrico','edad'],
+ caducidad:['caducado','caducidades','caducar'],caducado:['caducidades','caducidad'],caduca:['caducidades'],revision:['revisar','checklist','diaria'],revisar:['revision','diaria','checklist'],material:['fungible','equipamiento'],
+ turno:['jornada'],registro:['checklist','registrar'],registrar:['registro'],shock:['hemodinamica','hipotension'],parada:['pcr','cardiorrespiratoria','rosc'],pcr:['parada','cardiorrespiratoria'],
+ suap:['extrahospitalaria','dccu'],dccu:['extrahospitalaria','suap'],ambulancia:['extrahospitalaria','suap','dccu'],dotacion:['minima','asistencial'],personal:['dotacion','profesionales'],equipo:['dotacion','roles'],
+ destino:['alta','observacion','quirofano','exitus'],ingreso:['destino','uci'],enfermera:['enfermeria'],enfermero:['enfermeria'],medico:['adjunto','responsable'],
+ diraya:['prescripciones','registro'],prescribir:['prescripciones','diraya'],farmaco:['prescripciones','medicacion'],droga:['medicacion','vasopresores'],
+ abcde:['evaluacion','primaria','amls'],valoracion:['evaluacion'],box:['profesionales','acceso'],ruido:['box','profesionales'],reponer:['reposicion'],caduco:['caducidades'],
+ critico:['criticos','sala'],criticos:['sala'],inestable:['inestabilidad','hemodinamica'],oxigeno:['hipoxemia','ventilacion'],respiratorio:['ventilacion','respiratoria']};
+const norm=s=>s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[^a-z0-9]+/g,' ').trim();
+const stem=w=>w.length>4?w.replace(/(ciones|cion|es|s)$/,''):w;
+const tokens=s=>norm(s).split(' ').filter(w=>w&&!STOP.has(w));
+const tpl=document.createElement('template');
+const IDX=PROTO.map(p=>{
+  tpl.innerHTML=p.html;
+  const blocks=Array.from(tpl.content.querySelectorAll('p,li,td,th')).map(e=>e.textContent.replace(/\s+/g,' ').trim()).filter(Boolean);
+  const body=new Map();tokens(p.title+' '+blocks.join(' ')).forEach(w=>{const k=stem(w);body.set(k,(body.get(k)||0)+1)});
+  const title=new Set(tokens(p.title).map(stem));
+  return {p,blocks,body,title,stems:blocks.map(b=>new Set(tokens(b).map(stem)))};
+});
+function search(q){
+  const terms=new Map();
+  tokens(q).forEach(w=>{terms.set(stem(w),1);(SYN[w]||[]).forEach(s=>{const k=stem(norm(s));if(!terms.has(k))terms.set(k,.5)})});
+  if(!terms.size)return[];
+  return IDX.map(x=>{
+    let s=0;terms.forEach((wt,t)=>{s+=wt*((x.title.has(t)?3:0)+Math.min(x.body.get(t)||0,3))});
+    return {x,s};
+  }).filter(r=>r.s>0).sort((a,b)=>b.s-a.s).slice(0,4).map(r=>{
+    const sc=r.x.stems.map((st,i)=>{let o=0;terms.forEach((wt,t)=>{if(st.has(t))o+=wt});return {i,o}}).filter(b=>b.o>0).sort((a,b)=>b.o-a.o).slice(0,3).sort((a,b)=>a.i-b.i);
+    return {p:r.x.p,quotes:(sc.length?sc.map(b=>r.x.blocks[b.i]):[r.x.blocks[0]])};
+  });
+}
+function renderRes(q){
+  const out=$('#ask-res');out.innerHTML='';
+  if(!q.trim()){return}
+  const res=search(q);
+  if(!res.length){out.innerHTML='<div class="card">No encuentro ese tema en el protocolo. Prueba con otras palabras (por ejemplo "UCI", "dotación", "caducidad", "briefing").</div>';return}
+  res.forEach(r=>{
+    const c=document.createElement('div');c.className='card';
+    c.innerHTML='<h3><span>'+esc(r.p.title)+'</span><span class="small mono">'+esc(r.p.grp)+' · p. '+esc(r.p.page)+'</span></h3>'+r.quotes.map(t=>'<blockquote>'+esc(t)+'</blockquote>').join('')+'<button class="btn" type="button">Ver apartado completo</button>';
+    c.querySelector('button').addEventListener('click',()=>{show('protocolo');const d=$('#d-'+r.p.id);d.open=true;setTimeout(()=>d.scrollIntoView({behavior:'smooth',block:'start'}),50)});
+    out.appendChild(c);
+  });
+}
+$('#ask-form').addEventListener('submit',e=>{e.preventDefault();$('#ai-box').hidden=true;renderRes($('#ask-q').value)});
+['¿Cuándo pido valoración a UCI?','¿Qué dotación necesita una Prioridad 1?','¿Dónde va un paciente pediátrico?','¿Quién revisa el material cada día?','¿Qué hago con el material caducado?','¿Cuáles son los criterios de entrada?','¿Cómo es el briefing?','¿Qué códigos puede activar el médico?'].forEach(t=>{
+  const b=document.createElement('button');b.type='button';b.className='chip';b.textContent=t;
+  b.addEventListener('click',()=>{$('#ask-q').value=t;$('#ai-box').hidden=true;renderRes(t)});$('#ask-chips').appendChild(b);
+});
+const FULLTEXT=IDX.map(x=>'## '+x.p.title+' ('+x.p.grp+', p. '+x.p.page+')\n'+x.blocks.join('\n')).join('\n\n');
+let ctl=null;
+$('#ask-ai').addEventListener('click',async()=>{
+  const q=$('#ask-q').value.trim();if(!q){toast('Escribe primero tu pregunta');return}
+  renderRes(q);
+  const box=$('#ai-box'),out=$('#ai-out'),stop=$('#ai-stop');
+  box.hidden=false;out.textContent='Pensando…';stop.hidden=false;ctl=new AbortController();
+  const prompt='Eres un asistente que responde dudas sobre un protocolo hospitalario. Responde en español claro y sin jerga innecesaria, SOLO con la información del texto del protocolo que sigue. Cita entre paréntesis el apartado y la página (por ejemplo: Fase 5, p. 8). Si el protocolo no dice lo que se pregunta, dilo con claridad y no inventes. No añadas recomendaciones clínicas que no estén en el texto. Sé breve: máximo 150 palabras.\n\n=== PROTOCOLO PNT-URG-CRIT-001 v1.0 ===\n'+FULLTEXT+'\n\n=== PREGUNTA ===\n'+q;
+  try{
+    await SAMPLE(prompt,{signal:ctl.signal,modelTier:'default',onText:({text})=>{out.textContent=text}});
+  }catch(e){
+    if(e&&e.code==='cancelled'){out.textContent=e.text||'Detenido.'}
+    else{out.textContent=(e&&e.text)||'';const m={not_granted:'No has permitido que esta página use Claude.',rate_limited:'Demasiadas consultas seguidas. Espera un momento y vuelve a intentarlo.',session_expired:'Tu sesión ha caducado. Vuelve a iniciar sesión.'}[e&&e.code]||'No se pudo obtener la respuesta. Las coincidencias del protocolo de abajo siguen disponibles.';
+      out.textContent=(out.textContent?out.textContent+'\n\n':'')+m}
+  }finally{stop.hidden=true;ctl=null}
+});
+$('#ai-stop').addEventListener('click',()=>{if(ctl)ctl.abort()});
+
+/* ============ REPASO ============ */
+const KEY='pnt-crit-known-v1';
+let known=new Set();
+try{known=new Set(JSON.parse(localStorage.getItem(KEY)||'[]'))}catch(e){}
+const saveKnown=()=>{try{localStorage.setItem(KEY,JSON.stringify([...known]))}catch(e){}};
+const FG=['Todas',...Array.from(new Set(CARDS.map(c=>c[0])))];
+let fcG='Todas',fcI=0,fcFlip=false,order=CARDS.map((_,i)=>i);
+FG.forEach(g=>{const b=document.createElement('button');b.type='button';b.className='chip';b.textContent=g;b.dataset.g=g;
+  b.addEventListener('click',()=>{fcG=g;fcI=0;fcFlip=false;renderFc()});$('#fc-groups').appendChild(b)});
+function deck(){return order.filter(i=>(fcG==='Todas'||CARDS[i][0]===fcG)&&(!$('#fc-pend').checked||!known.has(i)))}
+function renderFc(){
+  $$('#fc-groups .chip').forEach(c=>c.setAttribute('aria-pressed',c.dataset.g===fcG));
+  const d=deck(),all=CARDS.filter(c=>fcG==='Todas'||c[0]===fcG).length,kn=CARDS.map((c,i)=>i).filter(i=>(fcG==='Todas'||CARDS[i][0]===fcG)&&known.has(i)).length;
+  $('#fc-bar').style.width=(all?kn/all*100:0)+'%';
+  const card=$('#fc-card');
+  if(!d.length){card.innerHTML='<div class="q">Has repasado todas las tarjetas de este grupo.</div><div class="a">Quita la marca de "Solo las que no sé" para volver a verlas, o pulsa "Empezar de cero".</div>';$('#fc-count').textContent=kn+' de '+all+' dominadas';return}
+  if(fcI>=d.length)fcI=0;if(fcI<0)fcI=d.length-1;
+  const c=CARDS[d[fcI]];
+  card.innerHTML='<div class="tag">'+esc(c[0])+(known.has(d[fcI])?' · dominada':'')+'</div><div class="q">'+esc(c[1])+'</div>'+(fcFlip?'<div class="a">'+esc(c[2])+'</div>':'<div class="small">Toca para ver la respuesta</div>');
+  $('#fc-count').textContent='Tarjeta '+(fcI+1)+' de '+d.length+' · '+kn+' de '+all+' dominadas';
+}
+const flip=()=>{fcFlip=!fcFlip;renderFc()};
+$('#fc-card').addEventListener('click',flip);$('#fc-flip').addEventListener('click',flip);
+$('#fc-next').addEventListener('click',()=>{fcI++;fcFlip=false;renderFc()});
+$('#fc-prev').addEventListener('click',()=>{fcI--;fcFlip=false;renderFc()});
+$('#fc-know').addEventListener('click',()=>{const d=deck();if(!d.length)return;known.add(d[fcI]);saveKnown();fcFlip=false;if(!$('#fc-pend').checked)fcI++;renderFc()});
+$('#fc-again').addEventListener('click',()=>{const d=deck();if(!d.length)return;known.delete(d[fcI]);saveKnown();fcI++;fcFlip=false;renderFc()});
+$('#fc-pend').addEventListener('change',()=>{fcI=0;fcFlip=false;renderFc()});
+$('#fc-shuf').addEventListener('click',()=>{for(let i=order.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[order[i],order[j]]=[order[j],order[i]]}fcI=0;fcFlip=false;renderFc()});
+$('#fc-reset').addEventListener('click',()=>{known.clear();saveKnown();order=CARDS.map((_,i)=>i);fcI=0;fcFlip=false;renderFc();toast('Progreso reiniciado')});
+renderFc();
+
+/* ============ FICHA DE PACIENTE ============ */
+function chkGroup(el,group,items){el.innerHTML=items.map(x=>'<label class="chk"><input type="checkbox" data-c="'+group+'" value="'+esc(x)+'"> <span>'+esc(x)+'</span></label>').join('')}
+chkGroup($('#f-crit'),'entrada',ENTRADA);
+chkGroup($('#f-cod'),'codigos',CODIGOS);
+$('#f-uci').innerHTML=UCI.map(g=>'<div class="uci-g"><h4>'+esc(g.t)+'</h4>'+g.i.map(x=>'<label class="chk"><input type="checkbox" data-c="uci" value="'+esc(x)+'"> <span>'+esc(x)+'</span></label>').join('')+'</div>').join('');
+$('#f-dest').innerHTML=DESTINOS.map(d=>'<label class="chk"><input type="radio" name="dest" data-f="destino" value="'+esc(d)+'"> <span>'+esc(d)+'</span></label>').join('');
+let reevals=[];
+const F=()=>$('#ficha');
+function collect(){
+  const o={};
+  $$('[data-f]',F()).forEach(e=>{if(e.type==='radio'){if(e.checked)o[e.dataset.f]=e.value;else if(!(e.dataset.f in o))o[e.dataset.f]=''}else o[e.dataset.f]=e.value.trim()});
+  ['entrada','codigos','uci'].forEach(g=>{o[g]=$$('[data-c="'+g+'"]',F()).filter(e=>e.checked).map(e=>e.value)});
+  o.reevaluaciones=reevals.slice();
+  return o;
+}
+function fill(o){
+  $$('[data-f]',F()).forEach(e=>{if(e.type==='radio')e.checked=(o[e.dataset.f]===e.value);else e.value=o[e.dataset.f]||''});
+  ['entrada','codigos','uci'].forEach(g=>{$$('[data-c="'+g+'"]',F()).forEach(e=>{e.checked=(o[g]||[]).includes(e.value)})});
+  reevals=(o.reevaluaciones||[]).slice();renderReeval();uciAlert();gcsHint();
+}
+function blank(){fill({llegada:nowLocal(),procedencia:'Triaje'})}
+function renderReeval(){$('#f-reeval-t').textContent=reevals.length?'Reevaluaciones anotadas: '+reevals.join(', '):'Sin reevaluaciones anotadas.'}
+function uciAlert(){
+  const n=$$('[data-c="uci"]',F()).filter(e=>e.checked).length,a=$('#f-uci-a');
+  a.classList.toggle('on',n>0);
+  a.textContent=n?n+(n===1?' criterio marcado':' criterios marcados')+'. Solicitar valoración por Medicina Intensiva (la solicitud la hace el médico responsable).':'Ningún criterio marcado.';
+}
+function gcsHint(){
+  const v=parseInt($('#f-gcs').value,10),t=$('#f-gcs-t');
+  if(isNaN(v)){t.textContent='';return}
+  if(v<=8)t.textContent='Glasgow ≤ 8: es criterio de entrada (GCS < 13) y criterio de interconsulta a UCI.';
+  else if(v<13)t.textContent='Glasgow < 13: es criterio de entrada en sala de críticos.';
+  else t.textContent='';
+}
+function tick(group,val){const e=$$('[data-c="'+group+'"]',F()).find(x=>x.value===val);if(e&&!e.checked){e.checked=true;return true}return false}
+$('#f-gcs').addEventListener('input',()=>{
+  const v=parseInt($('#f-gcs').value,10);
+  if(!isNaN(v)){if(v<13)tick('entrada','GCS < 13');if(v<=8)tick('uci','Glasgow ≤ 8')}
+  gcsHint();uciAlert();
+});
+F().addEventListener('change',e=>{if(e.target.dataset.c==='uci')uciAlert();if(e.target.id==='f-prio'&&e.target.value)tick('entrada','Prioridad 1 o 2')});
+function updateSug(){const s=suggestPuesto();const t=$('#f-sug-t');if(t)t.textContent='Orientación actual: Puesto '+s.p+'.'}
+$('#f-sug').addEventListener('click',()=>{$('#f-puesto').value=suggestPuesto().p;toast('Puesto '+suggestPuesto().p+' asignado según la orientación')});
+$('#f-reeval').addEventListener('click',()=>{reevals.push(hhmm());renderReeval();toast('Reevaluación anotada a las '+hhmm())});
+function fmtDT(s){return s?s.replace('T',' '):''}
+function lines(o){
+  const L=[];
+  L.push('FICHA DE PACIENTE · SALA DE CRÍTICOS');
+  L.push('PNT-URG-CRIT-001 v1.0 · Urgencias, Hospital de Antequera');
+  L.push('');
+  L.push('Llegada: '+fmtDT(o.llegada)+' · Procedencia: '+o.procedencia);
+  L.push('Prioridad: '+(o.prioridad||'sin indicar')+' · Puesto: '+(o.puesto||'sin indicar'));
+  L.push('Criterios de entrada: '+(o.entrada.join('; ')||'ninguno marcado'));
+  L.push('');
+  L.push('PACIENTE');
+  L.push('Nombre: '+(o.nombre||'—')+' · NHC/ID: '+(o.nhc||'—')+' · Edad: '+(o.edad||'—')+' · Sexo: '+(o.sexo||'no consta'));
+  L.push('');
+  L.push('CONSTANTES');
+  L.push('TA '+(o.tas||'—')+'/'+(o.tad||'—')+' mmHg · FC '+(o.fc||'—')+' lpm · FR '+(o.fr||'—')+' rpm · SatO2 '+(o.sat||'—')+' % · Tª '+(o.temp||'—')+' °C · Glucemia '+(o.gluc||'—')+' mg/dl · Glasgow '+(o.gcs||'—'));
+  L.push('');
+  L.push('EVALUACIÓN PRIMARIA ABCDE');
+  ['abc_a','abc_b','abc_c','abc_d','abc_e'].forEach((k,i)=>L.push(ABCDE[i]+': '+(o[k]||'—')));
+  L.push('Reevaluaciones ABCDE: '+(o.reevaluaciones.join(', ')||'ninguna anotada'));
+  L.push('');
+  L.push('ESTABILIZACIÓN Y TRATAMIENTO');
+  L.push('Diagnóstico sindrómico: '+(o.dx||'—'));
+  L.push('Códigos activados: '+(o.codigos.join(', ')||'ninguno'));
+  L.push('Tratamiento y sueroterapia: '+(o.tto||'—'));
+  L.push('Procedimientos de enfermería: '+(o.proc||'—'));
+  L.push('(Prescripción y registro oficial: DIRAYA urgencias)');
+  L.push('');
+  L.push('EQUIPO');
+  L.push('Médico responsable: '+(o.eq_med||'—')+' · Médico de apoyo: '+(o.eq_apoyo||'—')+' · Enfermería: '+(o.eq_enf||'—')+' · TCAE: '+(o.eq_tcae||'—')+' · Celador: '+(o.eq_cel||'—'));
+  L.push('');
+  L.push('INTERCONSULTA A MEDICINA INTENSIVA');
+  L.push('Criterios marcados: '+(o.uci.length?'':'ninguno'));
+  o.uci.forEach(x=>L.push('  - '+x));
+  if(o.uci_hora)L.push('Hora de solicitud: '+o.uci_hora);
+  L.push('');
+  L.push('DESTINO');
+  L.push((o.destino||'sin indicar')+(o.dest_det?' ('+o.dest_det+')':'')+(o.salida?' · salida '+o.salida:''));
+  if(o.notas){L.push('');L.push('OBSERVACIONES');L.push(o.notas)}
+  L.push('');L.push('Generado el '+fmtDT(nowLocal())+' desde la web del PNT. No sustituye a la historia clínica.');
+  return L.join('\n');
+}
+const stamp=()=>todayStr()+'_'+timeStr().replace(':','');
+const idPart=o=>(o.nhc||'paciente').replace(/[^\w-]+/g,'_');
+$('#x-copy').addEventListener('click',()=>copyText(lines(collect()),'Resumen copiado'));
+$('#x-txt').addEventListener('click',()=>{const o=collect();saveFile('ficha_criticos_'+idPart(o)+'_'+stamp()+'.txt',lines(o))});
+$('#x-json').addEventListener('click',()=>{const o=collect();saveFile('ficha_criticos_'+idPart(o)+'_'+stamp()+'.json',JSON.stringify(o,null,2))});
+let clearT=null;
+$('#x-clear').addEventListener('click',e=>{
+  const b=e.currentTarget;
+  if(clearT){clearTimeout(clearT);clearT=null;b.textContent='Limpiar ficha';blank();toast('Ficha limpia');return}
+  b.textContent='¿Seguro? Pulsa de nuevo';clearT=setTimeout(()=>{clearT=null;b.textContent='Limpiar ficha'},3500);
+});
+/* lista de guardia */
+const saved=[];
+function renderList(){
+  const tb=$('#list-body');tb.innerHTML='';
+  if(!saved.length){const tr=document.createElement('tr');const td=document.createElement('td');td.colSpan=9;td.className='small';td.textContent='Aún no hay pacientes. Completa la ficha y pulsa "Añadir a la lista de la guardia".';tr.appendChild(td);tb.appendChild(tr);return}
+  saved.forEach((o,i)=>{
+    const tr=document.createElement('tr');
+    [fmtDT(o.llegada),o.nhc||o.nombre||'—',o.edad||'—',o.prioridad||'—',o.puesto||'—',o.codigos.join(', ')||'—',o.uci.length?('Sí ('+o.uci.length+')'):'No',o.destino||'—'].forEach(v=>{const td=document.createElement('td');td.textContent=v;tr.appendChild(td)});
+    const td=document.createElement('td');td.style.whiteSpace='nowrap';
+    const e=document.createElement('button');e.type='button';e.className='btn';e.textContent='Editar';e.addEventListener('click',()=>{fill(saved[i]);saved.splice(i,1);renderList();window.scrollTo({top:0,behavior:'smooth'});toast('Ficha cargada para editar')});
+    const d=document.createElement('button');d.type='button';d.className='btn danger';d.textContent='Quitar';d.style.marginLeft='6px';d.addEventListener('click',()=>{saved.splice(i,1);renderList()});
+    td.append(e,d);tr.appendChild(td);tb.appendChild(tr);
+  });
+}
+$('#x-add').addEventListener('click',()=>{const o=collect();if(!o.nhc&&!o.nombre&&!o.edad){toast('Indica al menos NHC, nombre o edad');return}saved.push(o);renderList();blank();toast('Añadido a la lista. Ficha nueva lista.')});
+const csvEsc=v=>{v=String(v==null?'':v).replace(/\r?\n/g,' ');return /[;"]/.test(v)?'"'+v.replace(/"/g,'""')+'"':v};
+function csv(){
+  const H=['Llegada','Procedencia','Prioridad','Puesto','Nombre','NHC/ID','Edad','Sexo','TAS','TAD','FC','FR','SatO2','Temp','Glucemia','Glasgow','Criterios de entrada','ABCDE','Reevaluaciones','Diagnóstico sindrómico','Códigos activados','Tratamiento','Criterios UCI','Hora solicitud UCI','Destino','Detalle destino','Hora salida','Médico responsable','Médico de apoyo','Enfermería','TCAE','Celador','Observaciones'];
+  const rows=saved.map(o=>[fmtDT(o.llegada),o.procedencia,o.prioridad,o.puesto,o.nombre,o.nhc,o.edad,o.sexo,o.tas,o.tad,o.fc,o.fr,o.sat,o.temp,o.gluc,o.gcs,o.entrada.join(' | '),['abc_a','abc_b','abc_c','abc_d','abc_e'].map((k,i)=>ABCDE[i][0]+': '+(o[k]||'')).join(' | '),o.reevaluaciones.join(' | '),o.dx,o.codigos.join(' | '),o.tto,o.uci.join(' | '),o.uci_hora,o.destino,o.dest_det,o.salida,o.eq_med,o.eq_apoyo,o.eq_enf,o.eq_tcae,o.eq_cel,o.notas]);
+  return [H,...rows].map(r=>r.map(csvEsc).join(';')).join('\r\n');
+}
+$('#l-copy').addEventListener('click',()=>{if(!saved.length){toast('La lista está vacía');return}copyText(csv(),'Tabla copiada (separador ;)')});
+$('#l-csv').addEventListener('click',()=>{if(!saved.length){toast('La lista está vacía');return}saveFile('criticos_'+todayStr()+'.csv','﻿'+csv())});
+blank();renderList();renderReeval();uciAlert();renderWiz();
+
+/* ============ REVISIÓN DE SALA ============ */
+const SALA={
+ diaria:{groups:DAILY,who:'La revisión diaria se hace al inicio de cada jornada o turno, de forma conjunta por el TCAE de críticos y el enfermero T2.',title:'REVISIÓN DIARIA DE LA SALA DE CRÍTICOS'},
+ mensual:{groups:MONTHLY,who:'La revisión de caducidades es mensual y es responsabilidad del personal de Enfermería y TCAE asignado. Material caducado: retirarlo de inmediato, desecharlo o devolverlo según normativa del centro y sustituirlo por material vigente.',title:'REVISIÓN MENSUAL DE CADUCIDADES'},
+ briefing:{groups:BRIEF,who:'Briefing breve al inicio de cada turno (3–5 minutos) con médicos, enfermería, TCAE y celador.',title:'BRIEFING DE INICIO DE TURNO'}
+};
+const sState={diaria:{},mensual:{},briefing:{}};let cur='diaria';const roles={};
+function renderSala(){
+  const S=SALA[cur];
+  $$('#sala-seg button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.s===cur));
+  $('#sala-who').textContent=S.who;
+  const isB=cur==='briefing';
+  $('#s-inc-l').firstChild.textContent=isB?'Incidencias de material o recursos':'Incidencias detectadas';
+  $('#s-med-l').firstChild.textContent=isB?'Situaciones especiales del turno':'Medidas correctoras realizadas';
+  const body=$('#sala-body');body.innerHTML='';let total=0,done=0;
+  S.groups.forEach((g,gi)=>{
+    const c=document.createElement('div');c.className='card';
+    const h=document.createElement('div');h.className='row';h.style.justifyContent='space-between';
+    const hh=document.createElement('h4');hh.textContent=g[0];hh.style.fontSize='15px';
+    const all=document.createElement('button');all.type='button';all.className='chip';all.textContent='Marcar todo';
+    all.addEventListener('click',()=>{g[1].forEach((_,i)=>sState[cur][gi+'-'+i]=true);renderSala()});
+    h.append(hh,all);c.appendChild(h);
+    g[1].forEach((x,i)=>{
+      const k=gi+'-'+i;total++;if(sState[cur][k])done++;
+      const l=document.createElement('label');l.className='chk';
+      const cb=document.createElement('input');cb.type='checkbox';cb.checked=!!sState[cur][k];
+      cb.addEventListener('change',()=>{sState[cur][k]=cb.checked;updProg(S)});
+      const sp=document.createElement('span');sp.textContent=x;l.append(cb,sp);c.appendChild(l);
+    });
+    body.appendChild(c);
+  });
+  if(isB){
+    const c=document.createElement('div');c.className='card';c.innerHTML='<h4 style="font-size:15px;margin-bottom:8px">Asignación de roles</h4>';
+    BROLES.forEach(r=>{const l=document.createElement('label');l.className='f';l.style.marginBottom='8px';l.append(document.createTextNode(r));const i=document.createElement('input');i.type='text';i.value=roles[r]||'';i.addEventListener('input',()=>{roles[r]=i.value});l.appendChild(i);c.appendChild(l)});
+    body.appendChild(c);
+  }
+  updProg(S);
+}
+function counts(S){let t=0,d=0;S.groups.forEach((g,gi)=>g[1].forEach((_,i)=>{t++;if(sState[cur][gi+'-'+i])d++}));return [d,t]}
+function updProg(S){const [d,t]=counts(S);$('#s-prog').textContent=d+' de '+t+' puntos revisados';$('#s-bar').style.width=(t?d/t*100:0)+'%'}
+$$('#sala-seg button').forEach(b=>b.addEventListener('click',()=>{cur=b.dataset.s;renderSala()}));
+$('#s-fecha').value=todayStr();$('#s-hora').value=timeStr();
+function salaText(){
+  const S=SALA[cur];const L=[S.title+' · PNT-URG-CRIT-001','Fecha: '+$('#s-fecha').value+' · Hora: '+$('#s-hora').value+' · Profesional responsable: '+($('#s-prof').value.trim()||'—'),''];
+  const [d,t]=counts(S);L.push('Revisados: '+d+' de '+t);
+  S.groups.forEach((g,gi)=>{L.push('');L.push(g[0].toUpperCase());g[1].forEach((x,i)=>L.push((sState[cur][gi+'-'+i]?'[x] ':'[ ] ')+x))});
+  if(cur==='briefing'){L.push('');L.push('ROLES');BROLES.forEach(r=>L.push(r+': '+(roles[r]||'—')))}
+  L.push('');L.push((cur==='briefing'?'Incidencias de material o recursos: ':'Incidencias detectadas: ')+($('#s-inc').value.trim()||'ninguna'));
+  L.push((cur==='briefing'?'Situaciones especiales del turno: ':'Medidas correctoras realizadas: ')+($('#s-med').value.trim()||'—'));
+  return L.join('\n');
+}
+$('#s-copy').addEventListener('click',()=>copyText(salaText(),'Registro copiado'));
+$('#s-txt').addEventListener('click',()=>saveFile('revision_'+cur+'_'+$('#s-fecha').value+'.txt',salaText()));
+$('#s-reset').addEventListener('click',()=>{sState[cur]={};renderSala()});
+renderSala();
+
+/* ============ CAPACIDADES DEL VISOR ============ */
+show(VIEWS.includes(location.hash.slice(1))?location.hash.slice(1):'protocolo',true);
+(async()=>{
+  try{DL=await window.claude?.use?.('downloads')}catch(e){DL=null}
+  if(DL){['x-txt','x-json','l-csv','s-txt'].forEach(id=>{$('#'+id).hidden=false})}
+  try{SAMPLE=await window.claude?.use?.('sample')}catch(e){SAMPLE=null}
+  if(SAMPLE)$('#ask-ai').hidden=false;
+})();
+})();
+</script>
+
+
+<!-- Barra común del Portal SUH Antequera -->
+<style>
+  .suhdock{position:fixed;left:14px;bottom:14px;z-index:2147483000;display:flex;align-items:center;gap:4px;padding:5px;border-radius:999px;background:#0c2a4a;box-shadow:0 10px 30px -8px rgba(12,42,74,.55);font:600 13px/1 'Plus Jakarta Sans',system-ui,-apple-system,'Segoe UI',sans-serif;transition:opacity .2s}
+  .suhdock a{display:inline-flex;align-items:center;justify-content:center;gap:7px;height:34px;min-width:34px;padding:0 9px;border-radius:999px;color:#fff;text-decoration:none}
+  .suhdock a:hover{background:rgba(255,255,255,.14)}
+  .suhdock a.suhdock-home{background:#fff;color:#0c2a4a;padding:0 12px 0 4px}
+  .suhdock a.suhdock-home img{width:26px;height:26px;border-radius:50%;object-fit:contain;background:#fff}
+  .suhdock svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  .suhdock .suhdock-x{opacity:.6;min-width:26px;padding:0}
+  .suhdock.suhdock-min a:not(.suhdock-home){display:none}
+  .suhdock.suhdock-min a.suhdock-home span{display:none}
+  .suhdock.suhdock-min a.suhdock-home{padding:0 4px}
+  @media print{.suhdock{display:none!important}}
+</style>
+<nav class="suhdock" aria-label="Portal SUH Antequera">
+  <a class="suhdock-home" href="../index.html#herramientas" title="Volver al Portal de Supervisión SUH Antequera"><img src="../img/logo-suh.jpg" alt=""><span>Portal SUH</span></a>
+  <a href="https://www.instagram.com/suh_antequera_/" target="_blank" rel="noopener" title="Instagram @suh_antequera_"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><path d="M17.5 6.5h.01"/></svg></a>
+  <a href="https://www.facebook.com/p/Suh-Antequera-61568582212569/" target="_blank" rel="noopener" title="Facebook SUH Antequera"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+  <a href="https://x.com/saludnortemalag" target="_blank" rel="noopener" title="X @saludnortemalag" style="font-size:15px">𝕏</a>
+  <a class="suhdock-x" href="#" title="Minimizar barra" onclick="this.parentNode.classList.toggle('suhdock-min');return false;"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></a>
+</nav>
+</body></html>

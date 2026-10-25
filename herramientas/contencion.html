@@ -1,0 +1,841 @@
+<!doctype html><html><head>
+  <meta name="robots" content="noindex, nofollow"><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Contención Urgencias Antequera</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: barra superior fija con pestañas; contenido en una columna de lectura (máx. 1080px); tarjetas solo donde hay objeto (registro, fármacos, repaso). */
+:root{
+  --bg:#f3f6f4;
+  --surface:#ffffff;
+  --surface2:#e8efeb;
+  --fg:#16241d;
+  --muted:#53665c;
+  --line:#cfdad3;
+  --green:#00703c;      /* verde institucional SAS */
+  --green-ink:#ffffff;
+  --alert:#b85a00;      /* naranja de tiempos críticos */
+  --alert-bg:#fff1e0;
+  --bad:#b3261e;
+  --bad-bg:#fde8e6;
+  --ok:#1f7a45;
+  --ok-bg:#e3f4ea;
+  --f-display:"Bricolage Grotesque","Atkinson Hyperlegible",system-ui,sans-serif;
+  --f-body:"Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0f1713;--surface:#17221c;--surface2:#1f2e26;--fg:#e6efe9;--muted:#9bb0a4;--line:#2f4237;
+    --green:#4ec58a;--green-ink:#06210f;--alert:#ffb066;--alert-bg:#3a2810;--bad:#ff8f86;--bad-bg:#3d1b18;--ok:#6fdc9d;--ok-bg:#16301f;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0f1713;--surface:#17221c;--surface2:#1f2e26;--fg:#e6efe9;--muted:#9bb0a4;--line:#2f4237;
+  --green:#4ec58a;--green-ink:#06210f;--alert:#ffb066;--alert-bg:#3a2810;--bad:#ff8f86;--bad-bg:#3d1b18;--ok:#6fdc9d;--ok-bg:#16301f;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:16px;line-height:1.55;margin:0;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 40px}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--green)}
+.wrap{max-width:1080px;margin:0 auto}
+h1,h2,h3{font-family:var(--f-display);line-height:1.15;text-wrap:balance;margin:0}
+h2{font-size:1.65rem;font-weight:800;margin-bottom:6px}
+h3{font-size:1.1rem;font-weight:600;margin-bottom:6px}
+p{margin:0 0 .7em;max-width:68ch}
+a{color:var(--green)}
+:focus-visible{outline:3px solid var(--alert);outline-offset:2px}
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--green);color:var(--green-ink);
+  margin-left:calc(-1 * max(16px,env(safe-area-inset-left,0px)));margin-right:calc(-1 * max(16px,env(safe-area-inset-right,0px)));
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.top .wrap{display:flex;flex-direction:column;gap:2px;padding-top:10px}
+.brand{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.brand b{font-family:var(--f-display);font-size:1.2rem;font-weight:800}
+.brand span{font-size:.82rem;opacity:.9}
+nav{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;margin-top:6px}
+nav::-webkit-scrollbar{display:none}
+nav button{flex:0 0 auto;background:transparent;border:0;color:inherit;font:inherit;font-weight:700;font-size:.95rem;
+  padding:10px 14px;cursor:pointer;border-bottom:4px solid transparent;opacity:.85}
+nav button[aria-selected="true"]{border-bottom-color:var(--green-ink);opacity:1}
+nav button:hover{opacity:1}
+main{padding-top:22px}
+section.tab{display:none}
+section.tab.on{display:block}
+.lead{color:var(--muted);margin-bottom:16px}
+.keys{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin:14px 0 22px}
+.key{background:var(--alert-bg);border-left:5px solid var(--alert);padding:10px 12px;border-radius:4px}
+.key b{display:block;font-family:var(--f-mono);font-size:1.15rem;color:var(--alert);font-variant-numeric:tabular-nums}
+.key span{font-size:.88rem}
+.steps{display:flex;flex-direction:column;gap:0;margin:8px 0 20px;position:relative}
+.step{display:grid;grid-template-columns:44px minmax(0,1fr);gap:14px;padding-bottom:18px;position:relative}
+.step::before{content:"";position:absolute;left:21px;top:44px;bottom:0;width:2px;background:var(--line)}
+.step:last-child::before{display:none}
+.dot{width:44px;height:44px;border-radius:50%;background:var(--green);color:var(--green-ink);display:grid;place-items:center;font-family:var(--f-display);font-weight:800;font-size:1.2rem}
+.step .box{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 16px;min-width:0}
+.step .box ul{margin:6px 0 0;padding-left:1.15em}
+.step .box li{margin-bottom:4px}
+.tag{display:inline-block;font-family:var(--f-mono);font-size:.74rem;background:var(--surface2);color:var(--muted);padding:1px 7px;border-radius:3px;margin-left:6px;white-space:nowrap;vertical-align:middle}
+.note{background:var(--surface2);border-radius:6px;padding:10px 14px;margin:10px 0;font-size:.93rem}
+.note.warn{background:var(--alert-bg);border-left:5px solid var(--alert)}
+.note.bad{background:var(--bad-bg);border-left:5px solid var(--bad)}
+.btn{font:inherit;font-weight:700;border-radius:6px;border:2px solid var(--green);background:var(--green);color:var(--green-ink);padding:9px 16px;cursor:pointer}
+.btn.ghost{background:transparent;color:var(--green)}
+.btn.small{padding:5px 10px;font-size:.88rem}
+.btn.danger{border-color:var(--bad);color:var(--bad);background:transparent}
+.btn:disabled{opacity:.5;cursor:default}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+/* registro */
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:14px}
+fieldset{border:1px solid var(--line);border-radius:10px;background:var(--surface);padding:14px 16px 16px;margin:0 0 16px;min-width:0}
+legend{font-family:var(--f-display);font-weight:800;padding:0 8px;color:var(--green);font-size:1.05rem}
+label{display:flex;flex-direction:column;gap:3px;font-size:.88rem;font-weight:700;color:var(--muted);min-width:0}
+label.inline{flex-direction:row;align-items:flex-start;gap:9px;font-weight:400;color:var(--fg);font-size:.95rem}
+label.inline input{margin-top:4px;flex:0 0 auto;width:18px;height:18px;accent-color:var(--green)}
+input[type=text],input[type=number],input[type=datetime-local],input[type=search],select,textarea{
+  font:inherit;font-weight:400;color:var(--fg);background:var(--bg);border:1.5px solid var(--line);border-radius:6px;padding:8px 10px;width:100%;min-width:0}
+textarea{min-height:76px;resize:vertical}
+.checks{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,330px),1fr));gap:8px 18px}
+.due{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin-top:12px}
+.dueitem{border:2px solid var(--line);border-radius:8px;padding:9px 12px;background:var(--bg)}
+.dueitem b{display:block;font-family:var(--f-mono);font-variant-numeric:tabular-nums;font-size:1.05rem}
+.dueitem small{color:var(--muted)}
+.dueitem.soon{border-color:var(--alert);background:var(--alert-bg)}
+.dueitem.over{border-color:var(--bad);background:var(--bad-bg)}
+.dueitem.done{border-color:var(--ok);background:var(--ok-bg)}
+.list{display:flex;flex-direction:column;gap:8px;margin-top:10px}
+.item{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr)) auto;gap:8px;align-items:end;border:1px solid var(--line);border-radius:8px;padding:8px;background:var(--bg)}
+.exportbar{position:sticky;bottom:0;background:var(--surface);border-top:2px solid var(--green);padding:10px 0 calc(10px + env(safe-area-inset-bottom,0px));margin-top:10px;z-index:10}
+.priv{font-size:.85rem;color:var(--muted)}
+/* protocolo */
+.sec{border:1px solid var(--line);border-radius:10px;background:var(--surface);margin-bottom:10px}
+.sec summary{cursor:pointer;padding:13px 16px;font-family:var(--f-display);font-weight:600;font-size:1.05rem;display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
+.sec[open] summary{border-bottom:1px solid var(--line)}
+.sec .in{padding:12px 16px 4px}
+.sec .in ul{padding-left:1.15em;margin:4px 0 12px}
+.sec .in li{margin-bottom:4px}
+.sec .in h4{font-family:var(--f-display);margin:12px 0 4px;font-size:1rem;color:var(--green)}
+.toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+.toolbar input{flex:1 1 240px}
+/* farmacos */
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 16px}
+.chip{font:inherit;font-weight:700;font-size:.92rem;border:2px solid var(--line);background:var(--surface);color:var(--fg);border-radius:999px;padding:7px 14px;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--green);border-color:var(--green);color:var(--green-ink)}
+.drug{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin-bottom:10px}
+.drug b.n{font-family:var(--f-display);font-size:1.05rem}
+.dose{font-family:var(--f-mono);font-size:.92rem;background:var(--surface2);padding:2px 7px;border-radius:3px;display:inline-block;margin:2px 0}
+.cmp{width:100%;border-collapse:collapse;font-size:.92rem;min-width:620px}
+.cmp th,.cmp td{border:1px solid var(--line);padding:7px 9px;text-align:left;vertical-align:top}
+.cmp th{background:var(--surface2)}
+.scroll{overflow-x:auto}
+/* preguntar */
+.res{border:1px solid var(--line);background:var(--surface);border-radius:8px;padding:11px 14px;margin-bottom:8px}
+.res h3{font-size:1rem}
+.ai{white-space:pre-wrap;background:var(--surface);border:1px solid var(--line);border-left:5px solid var(--green);border-radius:8px;padding:14px 16px;margin-top:12px}
+/* repaso */
+.card3{perspective:900px;margin:12px 0}
+.fc{min-height:210px;border:2px solid var(--green);border-radius:14px;background:var(--surface);padding:22px;display:flex;flex-direction:column;justify-content:center;cursor:pointer;font-size:1.15rem}
+.fc small{color:var(--muted);font-family:var(--f-mono);margin-bottom:10px}
+.fc.back{background:var(--ok-bg);border-color:var(--ok)}
+.bar{height:8px;background:var(--surface2);border-radius:4px;overflow:hidden;margin:6px 0 14px}
+.bar i{display:block;height:100%;background:var(--green)}
+.opt{display:block;width:100%;text-align:left;font:inherit;border:2px solid var(--line);background:var(--surface);color:var(--fg);border-radius:8px;padding:11px 14px;margin-bottom:8px;cursor:pointer}
+.opt.right{border-color:var(--ok);background:var(--ok-bg)}
+.opt.wrong{border-color:var(--bad);background:var(--bad-bg)}
+.seg{display:inline-flex;border:2px solid var(--green);border-radius:8px;overflow:hidden;margin-bottom:14px}
+.seg button{font:inherit;font-weight:700;border:0;background:transparent;color:var(--green);padding:8px 16px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--green);color:var(--green-ink)}
+footer{margin-top:34px;border-top:1px solid var(--line);padding-top:14px;font-size:.85rem;color:var(--muted)}
+@media (max-width:560px){h2{font-size:1.4rem}.step{grid-template-columns:36px minmax(0,1fr);gap:10px}.dot{width:36px;height:36px}.step::before{left:17px;top:36px}}
+@media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+</style>
+
+<header class="top"><div class="wrap">
+  <div class="brand"><b>Contención · Urgencias Antequera</b><span>Área Sanitaria Norte de Málaga</span></div>
+  <nav role="tablist" aria-label="Secciones" id="nav"></nav>
+</div></header>
+
+<div class="wrap"><main>
+
+<!-- ALGORITMO -->
+<section class="tab" id="t-algoritmo">
+  <h2>Paciente agitado: de la desescalada a la sujeción</h2>
+  <p class="lead">Escalera de actuación según los dos PNT del Área Norte. La sujeción mecánica es siempre el último recurso.</p>
+  <div class="keys">
+    <div class="key"><b>≥ 4 personas</b><span>para la contención mecánica, preferentemente 5</span></div>
+    <div class="key"><b>≤ 4 h</b><span>revisión de la duración prevista, como mínimo</span></div>
+    <div class="key"><b>&lt; 1 h</b><span>primera valoración facultativa; después, mínimo cada hora</span></div>
+    <div class="key"><b>cada 8 h</b><span>control de constantes, como mínimo</span></div>
+  </div>
+  <div class="steps">
+    <div class="step"><div class="dot">0</div><div class="box"><h3>Valorar y proteger <span class="tag">PNT 2024 · p.3-4</span></h3>
+      <ul><li>Distinguir agitado de violento: el violento <i>per se</i> es un problema de orden y seguridad (personal de seguridad).</li>
+      <li>Valorar el riesgo de heteroagresividad de la forma más objetiva posible; usar escalas o entrevistas estructuradas cuando se pueda (no hay patrón de oro).</li>
+      <li>Buscar la causa en la patología de base (psiquiátrica u orgánica).</li>
+      <li>Adecuar el entorno y no intervenir en solitario, siempre que sea posible.</li></ul></div></div>
+    <div class="step"><div class="dot">1</div><div class="box"><h3>Contención verbal <span class="tag">PG-CAL-11 · p.5-7</span></h3>
+      <ul><li>Enfermero y/o facultativo. Objetivo: restablecer el autocontrol, bajar la hostilidad, fijar límites claros.</li>
+      <li>Fuera del espacio personal, del lado no dominante, con vía de salida libre y puerta abierta o semiabierta.</li>
+      <li>Escuchar sin interrumpir, tono suave, sin confrontar, sin juicios de "debería".</li>
+      <li>Si hay riesgo inminente: advertir de que la violencia no es aceptable, proponer diálogo, ofrecer tratamiento, informar de que se recurrirá a la sujeción si hace falta y mostrar presencia de personal.</li></ul></div></div>
+    <div class="step"><div class="dot">2</div><div class="box"><h3>Tranquilización con psicofármacos <span class="tag">ambos PNT</span></h3>
+      <ul><li>Decide y prescribe el facultativo. Es coadyuvante, no sustituye al abordaje verbal.</li>
+      <li>Vía oral de elección; la intramuscular es la más utilizada; posibilidad de vía intranasal.</li>
+      <li>Registrar las prescripciones en la historia clínica. Tener equipo de soporte vital a mano.</li>
+      <li>Elegir fármaco según el escenario: ver pestaña <b>Fármacos</b>.</li></ul></div></div>
+    <div class="step"><div class="dot">3</div><div class="box"><h3>Contención mecánica <span class="tag">PG-CAL-11 · p.10-12</span></h3>
+      <ul><li>Decisión del facultativo de Urgencias o psiquiatra responsable; en su defecto, psiquiatra de guardia. En extrema urgencia y sin ellos, el enfermero decide y lo comunica de inmediato al psiquiatra para que ratifique y se responsabilice.</li>
+      <li>Siempre lo más breve posible, con duración prevista escrita y revisión como mínimo cada 4 horas.</li>
+      <li>Después de sujetar: fármacos según indicación, observación permanente y reevaluar la medida si el tranquilizante hace efecto.</li></ul></div></div>
+    <div class="step"><div class="dot">4</div><div class="box"><h3>Cuidados y registro <span class="tag">PG-CAL-11 · p.12-15</span></h3>
+      <ul><li>Cerca del control de enfermería, monitorizado según proceda. Vigilar piel, circulación, respiración y conciencia.</li>
+      <li>El facultativo firma instauración, retirada y cada valoración. Registrar en la historia clínica todo lo que figura en la pestaña <b>Registro</b>.</li></ul></div></div>
+  </div>
+  <div class="note warn"><b>Antes de aplicar.</b> Esta web resume los dos PNT adjuntos (PG-CAL-11 v3, abril 2023, y Protocolo de atención al paciente agitado. Contención farmacológica v2, diciembre 2024). Ante cualquier duda prevalecen el documento oficial y el criterio del facultativo responsable. Las dosis se muestran tal como figuran en los PDF; algunas difieren entre ambos documentos (ver pestaña Fármacos).</div>
+</section>
+
+<!-- REGISTRO -->
+<section class="tab" id="t-registro">
+  <h2>Registro de contención</h2>
+  <p class="lead">Recoge los apartados que el PNT exige dejar en la historia clínica, con los plazos de control calculados. Exporta el resultado para pegarlo en la historia o guardarlo.</p>
+  <form id="rec" autocomplete="off" onsubmit="return false">
+  <fieldset><legend>Paciente y motivo</legend>
+    <div class="grid2">
+      <label>NHC / identificador<input type="text" id="nhc"></label>
+      <label>Edad<input type="number" id="edad" min="0" max="120"></label>
+      <label>Sexo<select id="sexo"><option value="">—</option><option>Mujer</option><option>Hombre</option><option>Otro / no consta</option></select></label>
+      <label>Box / ubicación<input type="text" id="box"></label>
+      <label>Criterio de indicación<select id="motivo">
+        <option value="">—</option>
+        <option>Prevención de conductas impulsivas con riesgo para el paciente, terceros o el entorno que no ceden con otras medidas</option>
+        <option>Riesgo de autolesiones o suicidio con contención emocional insuficiente y riesgo vital</option>
+        <option>Administración de medidas terapéuticas necesarias ante conductas disruptivas por estado mental alterado</option>
+        <option>Contención voluntaria (la persona la solicita)</option>
+        <option>Otro (detallar)</option></select></label>
+      <label>Sospecha etiológica<select id="etio">
+        <option value="">—</option><option>Psiquiátrica / psicótica</option><option>Intoxicación por alcohol o sedantes</option>
+        <option>Síndrome de abstinencia</option><option>Intoxicación por estimulantes (anfetaminas, cocaína, fenciclidina)</option>
+        <option>Orgánica / otra</option><option>No filiada</option></select></label>
+    </div>
+    <label style="margin-top:12px">Descripción del episodio y motivo detallado<textarea id="desc"></textarea></label>
+    <div class="checks" style="margin-top:12px">
+      <label class="inline"><input type="checkbox" id="m_verbal">Contención verbal intentada</label>
+      <label class="inline"><input type="checkbox" id="m_farm">Contención farmacológica administrada</label>
+      <label class="inline"><input type="checkbox" id="voluntaria">Contención voluntaria: contemplada en el plan terapéutico</label>
+    </div>
+    <label style="margin-top:12px">Medidas previas adoptadas<textarea id="previas"></textarea></label>
+  </fieldset>
+
+  <fieldset><legend>Indicación y equipo</legend>
+    <div class="grid2">
+      <label>Profesional que indica la medida<select id="indica">
+        <option value="">—</option><option>Facultativo de Urgencias</option><option>Psiquiatra responsable del caso</option><option>Psiquiatra de guardia</option>
+        <option>Enfermero (extrema urgencia, pendiente de ratificar)</option></select></label>
+      <label>Nombre del profesional<input type="text" id="indicaNom"></label>
+      <label>Hora de ratificación por psiquiatra (si indicó enfermería)<input type="datetime-local" id="ratif"></label>
+      <label>Enfermero que dirige la contención<input type="text" id="director"></label>
+      <label>Nº de profesionales participantes<input type="number" id="nprof" min="0" max="20"></label>
+      <label>Tipo de contención mecánica<select id="tipo">
+        <option value="">—</option><option>Sujeción completa (tronco y 4 extremidades)</option><option>Sujeción parcial en cama (cinturón y 2 extremidades; uso excepcional)</option><option>Sujeción parcial en silla</option></select></label>
+    </div>
+    <label style="margin-top:12px">Material utilizado (tipo y homologación)<input type="text" id="material"></label>
+  </fieldset>
+
+  <fieldset><legend>Tiempos y controles</legend>
+    <div class="grid2">
+      <label>Hora de inicio<input type="datetime-local" id="inicio"></label>
+      <label>Duración prevista (horas)<input type="number" id="durprev" min="0" step="0.5" placeholder="p. ej. 2"></label>
+      <label>Hora de finalización<input type="datetime-local" id="fin"></label>
+      <label>Quién decide la finalización<input type="text" id="finNom" placeholder="Facultativo responsable"></label>
+    </div>
+    <div class="due" id="due"></div>
+    <h3 style="margin-top:16px">Controles realizados</h3>
+    <div class="list" id="ctrlList"></div>
+    <div class="row" style="margin-top:10px"><button class="btn ghost small" id="addCtrl" type="button">+ Añadir control</button>
+    <span class="priv">Valoración facultativa, constantes, piel y puntos de sujeción, ingesta y eliminación.</span></div>
+  </fieldset>
+
+  <fieldset><legend>Fármacos administrados</legend>
+    <div class="list" id="drugList"></div>
+    <div class="row" style="margin-top:10px"><button class="btn ghost small" id="addDrug" type="button">+ Añadir fármaco</button></div>
+  </fieldset>
+
+  <fieldset><legend>Comprobaciones antes de sujetar</legend>
+    <div class="checks" id="pre"></div>
+  </fieldset>
+
+  <fieldset><legend>Información y consentimiento</legend>
+    <div class="grid2">
+      <label>Consentimiento informado del paciente o familia<select id="cons"><option value="">—</option><option>Sí, paciente</option><option>Sí, familia</option><option>No es posible (capacidad reducida)</option><option>Rechazado</option></select></label>
+    </div>
+    <div class="checks" style="margin-top:12px">
+      <label class="inline"><input type="checkbox" id="info">Información sobre procedimiento, propósito y duración dada y registrada (paciente y familiares)</label>
+    </div>
+    <label style="margin-top:12px">Observaciones: piel, estado general, complicaciones<textarea id="obs"></textarea></label>
+  </fieldset>
+
+  <div class="exportbar"><div class="wrap">
+    <div class="row">
+      <button class="btn" type="button" id="bCopy">Copiar informe</button>
+      <button class="btn ghost" type="button" data-dl="txt">TXT</button>
+      <button class="btn ghost" type="button" data-dl="csv">CSV</button>
+      <button class="btn ghost" type="button" data-dl="json">JSON</button>
+      <button class="btn ghost" type="button" data-dl="html">Informe imprimible</button>
+      <button class="btn danger" type="button" id="bNew">Nuevo registro</button>
+    </div>
+    <p class="priv" id="expMsg" style="margin:6px 0 0">Los datos se guardan solo en este navegador mientras trabajas y no se envían a ningún servidor. Los archivos exportados contienen datos del paciente: guárdalos según la política de protección de datos del centro.</p>
+  </div></div>
+  </form>
+</section>
+
+<!-- PROTOCOLO -->
+<section class="tab" id="t-protocolo">
+  <h2>Protocolo completo</h2>
+  <p class="lead">Contenido de ambos PNT organizado por temas. Cada bloque indica documento y página.</p>
+  <div class="toolbar"><input type="search" id="pfilter" placeholder="Filtrar el protocolo (p. ej. piel, celador, haloperidol)" aria-label="Filtrar protocolo">
+    <button class="btn ghost small" id="openAll" type="button">Abrir todo</button><button class="btn ghost small" id="closeAll" type="button">Cerrar todo</button></div>
+  <div id="protoList"></div>
+</section>
+
+<!-- FARMACOS -->
+<section class="tab" id="t-farmacos">
+  <h2>Contención farmacológica por escenario</h2>
+  <p class="lead">Elige la situación clínica. Cada pauta indica el PNT del que procede.</p>
+  <div class="note bad"><b>Dosis tal como figuran en los PDF.</b> Los dos documentos no coinciden en todo (tabla inferior). Confirma presentación, dosis y vía con el facultativo responsable y la prescripción vigente.</div>
+  <div class="chips" id="scen"></div>
+  <div id="scenOut"></div>
+  <h3 style="margin-top:26px">Diferencias entre el PNT de 2023 y el de 2024</h3>
+  <div class="scroll"><table class="cmp" id="cmp"></table></div>
+</section>
+
+<!-- PREGUNTAR -->
+<section class="tab" id="t-preguntar">
+  <h2>Preguntar al protocolo</h2>
+  <p class="lead">Busca en el texto de los dos PNT o pide a Claude que responda usando solo ese contenido.</p>
+  <div class="toolbar"><input type="search" id="q" placeholder="¿Cada cuánto se revisa la contención? ¿Qué se da en abstinencia?" aria-label="Pregunta">
+    <button class="btn" id="bSearch" type="button">Buscar</button><button class="btn ghost" id="bAsk" type="button">Preguntar a Claude</button></div>
+  <p class="priv">No escribas datos identificativos del paciente en la pregunta.</p>
+  <div id="askOut"></div>
+  <div id="searchOut"></div>
+</section>
+
+<!-- REPASO -->
+<section class="tab" id="t-repaso">
+  <h2>Repaso y test</h2>
+  <p class="lead">Tarjetas para memorizar los puntos clave y test con corrección razonada. Tu progreso se guarda en este navegador.</p>
+  <div class="seg"><button id="modeCards" aria-pressed="true">Tarjetas</button><button id="modeQuiz" aria-pressed="false">Test</button></div>
+  <div id="repOut"></div>
+</section>
+
+<footer>Fuentes: Procedimiento de contención mecánica PG-CAL-11, versión 3 (abril 2023), y Protocolo de atención al paciente agitado en urgencias. Contención farmacológica, versión 2 (diciembre 2024), Área Sanitaria Norte de Málaga, SAS. Herramienta de consulta no oficial: no sustituye al documento vigente ni al juicio clínico.</footer>
+</main></div>
+
+<script>
+"use strict";
+/* ============ DATOS DEL PROTOCOLO ============ */
+const M="PG-CAL-11 (2023)", F="PNT agitado (2024)";
+const KB=[
+{id:"objeto",t:"Objeto y objetivos",tags:"objetivo seguridad",src:[[M,"p.3"],[F,"p.4"]],b:[
+ "Garantizar la seguridad de los pacientes y de quienes se relacionan con ellos: atención libre de daños evitables, detectarlos cuando ocurren y mitigar sus consecuencias.",
+ "El equipo terapéutico orienta sus intervenciones a proteger a la persona agitada y a quienes la rodean, y a procurar un ambiente sin riesgos, tranquilo y terapéutico.",
+ "Objetivos específicos: establecer los criterios de adecuación y los tiempos de duración de la contención mecánica, y protocolizar la actuación ante crisis de agitación psicomotriz.",
+ "El PNT de 2024 añade: abordaje adecuado y eficaz de las conductas de agitación, agresividad o violencia, protegiendo al paciente, a otros usuarios y al personal."]},
+{id:"alcance",t:"Alcance y ámbito",tags:"alcance profesionales ambito",src:[[M,"p.3-4"],[F,"p.4"]],b:[
+ "PG-CAL-11: Proceso Asistencial Integrado Trastorno Mental Grave. Profesionales sanitarios y no sanitarios de la UGC Salud Mental y de Urgencias del Hospital: FEA Psiquiatría, FEA Psicología, facultativos de Urgencias, Enfermería, Auxiliar de Clínica, Celadores y Seguridad.",
+ "Ámbitos de aplicación: atención urgente hospitalaria y ambulatoria.",
+ "PNT 2024: facultativos y enfermeros de la UGC de Urgencias Hospitalarias, y facultativos y auxiliares de la UGC de Enfermedades Cardiorrespiratorias. Se aplica en cualquier localización donde se asista a un paciente agitado, adecuando el entorno."]},
+{id:"legal",t:"Marco legal",tags:"ley constitucion consentimiento derechos informacion",src:[[M,"p.3-4"]],b:[
+ "Constitución Española, art. 17.1: derecho a la libertad y seguridad.",
+ "Ley 1/2000 de Enjuiciamiento Civil, art. 763: internamiento no voluntario por razón de trastorno psíquico.",
+ "Ley 41/2002 de autonomía del paciente: artículos 4, 5, 7, 8 y 9 (información, documentación clínica).",
+ "Resolución 261/2002 de la Dirección-Gerencia del SAS sobre atención de urgencias, traslados e ingresos de pacientes psiquiátricos.",
+ "Las consideraciones legales de un tratamiento farmacológico en un paciente agresivo son las mismas que en otras intervenciones no consentidas, cuando su capacidad de decisión está reducida por su estado psicopatológico.",
+ "El facultativo responsable garantiza el derecho a la información (Ley 41/2002, art. 4)."]},
+{id:"indicacion",t:"Criterios de indicación de la contención",tags:"indicacion criterios voluntaria ultimo recurso",src:[[M,"p.4"]],b:[
+ "Prevención de conductas intencionadas o impulsivas que puedan dañar al propio paciente, a terceros o, de forma importante, a elementos del entorno, y que no ceden con otras medidas terapéuticas.",
+ "Riesgo de autolesiones y suicidio, tras haberse mostrado insuficiente la contención emocional con otras medidas y ante riesgo vital de la persona y su entorno.",
+ "Administración de medidas terapéuticas necesarias ante conductas disruptivas o inadecuadas derivadas del estado mental alterado, con riesgo para la persona o terceros.",
+ "De forma excepcional, cuando la propia persona pide ser contenida para evitar conductas auto o heteroagresivas (contención voluntaria).",
+ "Contención voluntaria: la indicación debe estar prevista en el plan terapéutico, se aplica solo por indicación facultativa y se registra en la historia clínica: medidas previas adoptadas, tiempo indicado y evolución durante la contención. Su retirada es solo por indicación facultativa, para evaluar el episodio con la persona en el contexto de su plan terapéutico.",
+ "En todas las situaciones se agotan antes otras estrategias de manejo. La contención física es el último recurso, el menor tiempo posible y con las garantías y controles del protocolo."]},
+{id:"verbal",t:"Contención verbal: objetivos y seguridad",tags:"verbal desescalada comunicacion seguridad espacio puerta",src:[[M,"p.5-7"]],b:[
+ "Evita que el paciente pase a la acción. La realiza enfermero y/o facultativo. Útil cuando la pérdida de control no es total.",
+ "Objetivos: lograr una alianza que permita una evaluación diagnóstica de presunción; negociar soluciones terapéuticas; disminuir hostilidad y agresividad y prevenir ataques; informar del carácter transitorio de la crisis y potenciar el autocontrol.",
+ "<h4>Pautas de seguridad</h4>",
+ "Informarse antes sobre antecedentes y situación clínica.",
+ "Colocarse fuera del espacio personal (algo más lejos del alcance de sus brazos) y del lado no dominante del paciente (el lado donde no lleva reloj).",
+ "Asegurar una vía de salida accesible. Si se puede, hablar en un despacho con intimidad pero con la puerta abierta o semiabierta y el profesional cerca de ella. Sin obstáculos; una mesa interpuesta aumenta la seguridad.",
+ "Evitar que el paciente se interponga entre el profesional y la puerta. No intervenir en solitario siempre que sea posible.",
+ "<h4>Pautas no verbales</h4>",
+ "Gestos ni amenazantes ni defensivos; evitar gestos bruscos. Actitud abierta y tranquila. No mirar de forma fija y continuada, pero mantener al paciente en el campo visual. Misma altura (sentados) si es posible.",
+ "<h4>Pautas ambientales</h4>",
+ "Un espacio adecuado mitiga la conducta violenta. Se intenta respetar la privacidad, pero es prioritario salvaguardar la seguridad de los profesionales.",
+ "<h4>Directrices de comunicación</h4>",
+ "Escuchar con calma sin interrumpir; tono suave, relajado y seguro; no elevar la voz; responder sin la misma hostilidad.",
+ "Ser flexible, con los límites de la institución y del personal bien claros. Reservarse los juicios sobre lo que el paciente \"debería\" hacer. No buscar confrontación de ideas sino alianzas sencillas que tranquilicen y refuercen su sentido de la realidad; ofrecer salidas airosas y ayuda."]},
+{id:"verbal2",t:"Riesgo de violencia inminente y precauciones",tags:"violencia inminente precauciones medicacion nunca",src:[[M,"p.6-7"]],b:[
+ "Ante riesgo de violencia inminente: advertir de que la violencia no es aceptable; proponer resolver cualquier problema por el diálogo; ofrecer tratamiento farmacológico que ayude a ver las cosas más relajadamente; informar de que se recurrirá a la sujeción mecánica si la ocasión lo requiere; hacer una exhibición de fuerza (que el paciente vea personal sanitario e incluso vigilantes dispuestos a la sujeción).",
+ "<h4>Lo que nunca se debe hacer</h4>",
+ "Rechazar la irritación. Negarse a escuchar. Avergonzar a la persona por su mal comportamiento.",
+ "Continuar la negociación habiendo comprobado que no se poseen las habilidades necesarias o que el paciente rechaza al profesional.",
+ "Ofrecer medicación \"para que esté más tranquilo\": provoca más hostilidad. Se aconseja ofrecerla \"para ayudar a ver las cosas más relajadas\", \"para no pasar este momento tan desagradable sin apoyo\", \"para lograr que dialogue con suficiente bienestar\" o \"para disminuir el nivel de tensión y que pueda encontrarse psicológicamente mejor\"."]},
+{id:"farm",t:"Tranquilización con psicofármacos: principios",tags:"farmacologica tranquilizacion rapida via oral intramuscular intranasal registro complicaciones",src:[[M,"p.7-10"],[F,"p.5"]],b:[
+ "El responsable es el facultativo. Medida coadyuvante, no sustituto del abordaje verbal (si el paciente se siente no escuchado, el fármaco pierde eficacia).",
+ "Se usa cuando la desescalada verbal y las medidas conductuales (reducir estímulos, restricción de movimientos, aislamiento estimular y relacional preventivo) no han sido suficientes.",
+ "Suele ser necesaria en la mayoría de agitaciones, orgánicas o psiquiátricas; la contención mecánica generalmente precisa sedación farmacológica.",
+ "Tranquilización rápida: calmar o sedar ligeramente para reducir el riesgo, sin llegar a sedación completa con pérdida de conciencia (complicaciones importantes).",
+ "Vías: oral de elección; intramuscular la más utilizada; posibilidad de vía intranasal. La vía intravenosa tiene más riesgos cardiorrespiratorios. Pautas de una a cuatro dosis a intervalos de 30 a 60 minutos (PG-CAL-11).",
+ "Registrar las prescripciones en la historia clínica. Si el paciente está con contención mecánica, observación permanente y reevaluar la interrupción si el tranquilizante hace efecto.",
+ "Complicaciones más frecuentes: pérdida de conciencia, fallo de vía respiratoria, parada cardiorrespiratoria; también por interacción con tóxicos o enfermedades subyacentes.",
+ "Es una medida puntual y temporal. Prever efectos y complicaciones, tener acceso a un equipo médico de urgencia y soporte vital adecuado (carro de paradas, medicación de urgencias, tomas de oxígeno)."]},
+{id:"cm",t:"Contención mecánica: decisión y procedimiento (17 puntos)",tags:"contencion mecanica procedimiento decision sujecion completa parcial pasos",src:[[M,"p.10-12"]],b:[
+ "Medida excepcional, último recurso cuando otras estrategias han fallado. La decisión es del facultativo de Urgencias/psiquiatra responsable o, en su defecto, del psiquiatra de guardia. En extrema urgencia y sin ambos, decide el enfermero y lo comunica inmediatamente al psiquiatra para que ratifique y se responsabilice. Siempre queda por escrito en la historia clínica.",
+ "1. Al menos 4 personas, preferentemente 5, sin importar la categoría profesional; valorar más si hace falta.",
+ "2. Lo más breve posible. La duración prevista se especifica siempre y se revisa como mínimo cada 4 horas.",
+ "3. Instrumentos homologados y en buenas condiciones, en número suficiente para la unidad.",
+ "4. Identificar riesgos del ambiente y modificarlo para minimizarlos.",
+ "5. Si la situación lo permite, trasladar a la persona sin reducción a la habitación: dejar tiempo para que colabore voluntariamente; acompañarla si lo desea y su estado lo permite; sujetar por las axilas con una mano empujando hacia arriba y por las muñecas con la otra tirando hacia abajo; con firmeza sin extremarla; con profesionalidad y respeto.",
+ "6. Si existe, habitación videovigilada.",
+ "7. Habitación vacía.",
+ "8. Cama preparada con la sujeción de cintura colocada y la cama frenada.",
+ "9. El personal retira de sus bolsillos todo utensilio que pueda usarse para agredir.",
+ "10. Se designa a un miembro del personal de cuidados que dirige la contención.",
+ "11. Esa persona es la única que mantiene la comunicación verbal con el paciente, para evitar comentarios contradictorios, y le explica en cada momento lo que se hace.",
+ "12. Explica a la persona y a su familiar, si está acompañada, el procedimiento, propósito y duración en términos comprensibles, con el máximo respeto. El facultativo garantiza el derecho a la información (Ley 41/2002, art. 4).",
+ "13. Cada miembro del equipo se dirige a una extremidad preestablecida; la quinta persona, si la hay, a la cabeza para evitar autolesión o lesión al personal.",
+ "14. Decúbito supino en cama o sentado en silla; sujeción completa o parcial, siempre con la máxima seguridad.",
+ "15. Comprobar y revisar cada punto de sujeción: firme y seguro, sin dañar la piel ni impedir la circulación.",
+ "16. Administración de fármacos según las recomendaciones.",
+ "17. Asegurar que no lleve objetos con los que pueda dañarse (encendedores, cadenas, bolígrafos, collares, etc.).",
+ "<h4>Sujeción completa</h4>",
+ "Inmoviliza tronco y las cuatro extremidades. Primero el cinturón abdominal y después las cuatro extremidades en diagonal. Al terminar se eleva la cabecera de la cama para facilitar la respiración y minimizar el riesgo de aspiración.",
+ "<h4>Sujeción parcial</h4>",
+ "En cama: primero el cinturón abdominal y después dos extremidades en diagonal; al terminar se levanta la cabecera. Riesgo de colgamientos y caídas: uso excepcional. También puede hacerse en silla."]},
+{id:"cuidados",t:"Plan de cuidados durante la contención",tags:"cuidados vigilancia constantes piel complicaciones ulceras isquemia broncoaspiracion monitorizacion turno",src:[[M,"p.12-13"],[F,"p.7"]],b:[
+ "Ambiente confortable. Todo paciente con contención está cerca del control de enfermería, preferentemente monitorizado según proceda.",
+ "El facultativo valora al paciente lo antes posible tras la contención y siempre antes de una hora. El personal responsable le explica que se encargará de sus cuidados y que le estará atendiendo y observando.",
+ "Vigilancia alta. Como mínimo una vez por turno, el personal de cuidados valora y registra: respiración, estado psicomotor y nivel de conciencia; estado de las partes sujetas (necesidad de rotar la sujeción) y de la piel (intacta o alterada: hematomas, abrasiones, inflamación, dolor); alteración de la percepción; alteración del contenido y curso del pensamiento; comunicación; actitud ante la sujeción.",
+ "Se monitorizan los signos vitales (situación de alto riesgo: agitación, sedación e inmovilización). La frecuencia depende de la situación clínica, pero debería ser al menos cada 8 horas.",
+ "El facultativo valora a la persona inmovilizada como mínimo cada hora.",
+ "Controlar ingesta y eliminación en cada turno. Vigilar necesidades de hidratación y alimentación, eliminación, movilidad, higiene, seguridad y comunicación. Anotar cuidados y observaciones y cumplimentar los registros.",
+ "Complicaciones potenciales a vigilar: úlceras por presión, isquemia periférica, compresión nerviosa, luxaciones y fracturas, tromboembolismos, broncoaspiración, insuficiencia respiratoria.",
+ "<h4>Control de constantes y otros parámetros (PNT 2024)</h4>",
+ "Vigilar frecuencia cardiaca, tensión arterial y temperatura (los neurolépticos pueden afectar a la termorregulación). Vigilar nivel de conciencia (agitado, sedado, consciente, orientado): la sedación puede causar aspiraciones y lesiones. Vigilar perfusión y presión de las sujeciones. Valorar el uso de heparinas.",
+ "<h4>Oxigenación (PNT 2024)</h4>",
+ "Elevar la parte anterior de la camilla, vigilar secreciones y valorar aporte de oxígeno."]},
+{id:"roles",t:"Responsabilidades por categoría",tags:"roles responsabilidades facultativo enfermero auxiliar celador seguridad segundo triaje",src:[[M,"p.13-15"]],b:[
+ "<h4>Facultativo referente</h4>",
+ "Indica la medida o autoriza (o no) la instaurada por el enfermero en urgencia. Firma la instauración y la retirada, y cada valoración mientras dure. Garantiza el derecho a la información del paciente y allegados. Decide la finalización. Prescribe los fármacos.",
+ "<h4>Enfermero referente</h4>",
+ "Dirige la contención y coordina su ejecución. En ausencia del facultativo y en extrema urgencia la indica y procura que se autorice y firme cuanto antes. Responsable del instrumental y de los cuidados y controles posteriores.",
+ "<h4>Enfermero de segundo triaje</h4>",
+ "Colabora en la administración de la medicación indicada tras la contención inicial, canalizando vía periférica si hace falta. Si el paciente está en observación, colabora el enfermero de observación no referente.",
+ "<h4>Auxiliar de enfermería</h4>",
+ "Coopera en la ejecución y retirada de la contención, participa en cuidados, control y observación, y custodia y mantiene el instrumental.",
+ "<h4>Celador</h4>",
+ "Colabora en la instauración y en el transporte del paciente y del instrumental. El enfermero director elige a los 3 celadores que participan. Con 6 celadores en turno, 2 permanecen en admisión de urgencias y 1 en el área polivalente; con 5, uno en admisión y otro en polivalente; con 4, el restante permanece en admisión.",
+ "<h4>Personal de seguridad</h4>",
+ "A petición del enfermero director, participa con auxiliar y celadores. Su función es apoyar con su presencia física y, solo en situaciones muy excepcionales, intervenir físicamente.",
+ "Si no hace falta tanto personal, el enfermero director indica cuántos necesita, los elige entre auxiliares, celadores y seguridad, y distribuye funciones."]},
+{id:"vigilancia",t:"Vigilancia sin fijación mecánica",tags:"vigilancia PIU consulta cero",src:[[M,"p.15"]],b:[
+ "A veces, sin fijación mecánica, hay que vigilar por la probabilidad de que cambie el nivel de agitación en las horas siguientes. La necesidad la indica y escribe el facultativo referente.",
+ "El paciente se sitúa en el PIU o, en su defecto, en la consulta cero, acompañado por un familiar o referente que lo tranquilice. Si no está acompañado, permanece en la sala de tratamiento con facilidad de movimiento.",
+ "El enfermero referente establece el equipo de contención por si hiciera falta y designa al celador que vigila a cierta distancia, avisando al equipo si es necesario."]},
+{id:"registro",t:"Registro en la historia clínica",tags:"registro historia clinica consentimiento hora fin",src:[[M,"p.15"]],b:[
+ "Tipo de contención: verbal; farmacológica (fármacos de elección y vía); mecánica (material utilizado).",
+ "Motivo.",
+ "Profesional que ha indicado o determinado la medida.",
+ "Hora de inicio y duración estimada.",
+ "Monitorización de constantes y seguimiento periódicos según estado del paciente y como mínimo una vez por turno por Enfermería.",
+ "Consentimiento informado del paciente o familia.",
+ "Registro de la información a paciente y familiares.",
+ "Hora de finalización."]},
+{id:"agitado",t:"Qué es la agitación y valoración inicial",tags:"agitacion psicomotriz violento riesgo heteroagresividad escalas",src:[[F,"p.3-4"]],b:[
+ "La agitación psicomotriz es un síndrome de los trastornos de conducta que puede aparecer en cualquier cuadro psiquiátrico y en algunos trastornos médicos: aumento significativo o inadecuado de la actividad motora, con alteraciones emocionales.",
+ "Inicio a menudo imprevisto; la causa se busca en la patología de base. Llevada al extremo, puede dar lugar a agresiones verbales o físicas con riesgo de autoagresión y heteroagresión.",
+ "No debe confundirse con el paciente violento <i>per se</i>, que genera un problema de orden y seguridad que atiende el personal de seguridad (la frontera a veces es difícil).",
+ "La valoración del riesgo de conducta violenta debe ser lo más objetiva posible; usar escalas o entrevistas estructuradas cuando se pueda, sin olvidar que no existe patrón de oro.",
+ "La violencia de enfermos mentales fuera del hospital es escasa, salvo en descompensación; un pequeño grupo de pacientes es responsable de un porcentaje elevado de episodios agresivos."]},
+{id:"evalua",t:"Evaluación, difusión y revisión del documento",tags:"indicador evaluacion difusion version autor",src:[[M,"p.2,15-16"],[F,"p.2"]],b:[
+ "Indicador: registro de contenciones mecánicas. Tipo cuantitativo, de resultado. Fórmula: número de horas/paciente de contención mecánica. Fuentes: registro y auditoría. Responsable: Dirección Médica. Estándar óptimo indicado en el documento: \"0 año\".",
+ "Plan de difusión: sesión informativa y formativa e Intranet hospitalaria.",
+ "PG-CAL-11: versión 1 el 10/10/2016 (autora Lourdes Domínguez Sánchez); v2 17/04/2019 (actualización de cuidados); v3 07/06/2023 (criterios de registro y seguridad de contenciones, responsable Andrés Fontalba).",
+ "PNT de contención farmacológica: autores Carlos Manuel Del Olmo Rivas, Esmeralda Olmo Romero (UCG Salud Mental) y Miguel Nogués Herrero (UCG Urgencias Hospitalarias). Fecha 2 de diciembre de 2024."]}
+];
+
+/* escenarios farmacológicos: cada línea [texto, fuente] */
+const SC=[
+{id:"mod",t:"Moderado, acepta oral",d:"Crisis de ansiedad o situacional, sin síntomas psicóticos ni consumo de alcohol.",items:[
+ {n:"Benzodiacepina oral",l:[["Lorazepam 1 o 2 mg (repetible cada 30 min hasta tranquilizar)",M+" p.8"],["Diazepam 5 a 10 mg (vida larga, inicio rápido)",M+" p.8"],["Lorazepam ½ o 1 comprimido de 5 mg, según clínica",F+" p.5"],["Clorazepato ½ o 1 comprimido de 50 mg, según clínica",F+" p.5"]]}],
+ notes:["Si no acepta vía oral, la absorción intramuscular de benzodiacepinas es irregular."]},
+{id:"int",t:"Más intensidad, acepta oral",d:"Mayor intensidad clínica o antecedentes/clínica psicótica con vía oral posible.",items:[
+ {n:"Olanzapina oral",l:[["5 mg si no hay uso previo de antipsicóticos, hasta 10 o 20 mg; repetible, preferentemente bucodispersable",F+" p.5"]]},
+ {n:"Haloperidol oral",l:[["50 a 70 gotas",F+" p.5"],["5 mg (50 gotas), repetida a los 30 min si hace falta; se puede añadir lorazepam 1 o 2 mg",M+" p.9"]]},
+ {n:"Risperidona oral",l:[["Dosis inicial 2 mg. Máximo 9 mg al día; por encima de 10 mg/día no es más eficaz y aumenta los síntomas extrapiramidales",M+" p.9"]]}],
+ notes:["Haloperidol: no usar en delirium tremens, abstinencia a benzodiacepinas ni agitación de origen comicial (baja el umbral convulsivo)."]},
+{id:"nooral",t:"No acepta vía oral",d:"Vía intramuscular (la más utilizada) según intensidad.",items:[
+ {n:"Aripiprazol IM",l:[["9,75 mg; otra dosis tras 2 h; máximo diario 30 mg (tres inyecciones separadas entre sí 6 horas, según el texto)",F+" p.6"]]},
+ {n:"Olanzapina IM",l:[["10 mg. Mayor poder sedativo y riesgo de hipotensión: vigilancia. Otra dosis a las 2 h; no superar 20 mg/día en total (oral e IM)",F+" p.6"],["Inicial 10 mg; se puede dar menos (5 o 7,5 mg); segunda inyección de 5-10 mg a las 2 h; máximo 20 mg/día y no más de tres inyecciones en 24 h",M+" p.9"]]},
+ {n:"Haloperidol IM (en solitario)",l:[["5 a 10 mg repetidos cada 30 min hasta sedación; máximo 100 mg al día en adulto",M+" p.9"]]},
+ {n:"Combinaciones de antipsicóticos típicos, según intensidad",l:[["1 ampolla de haloperidol + 1 ampolla de diazepam 10 mg (o clorazepato dipotásico 50), IM",F+" p.6"],["1 ampolla de haloperidol + 1 ampolla de levomepromazina 25 mg, IM",F+" p.6"],["Haloperidol + diazepam 10 mg (o clorazepato 50) + levomepromazina 25 mg, IM",F+" p.6"],["1 ampolla de haloperidol IM + 1 ampolla de diazepam 10 mg intravenoso",F+" p.6"],["Si no hay sedación, repetir el haloperidol a los 45 minutos",F+" p.6"]]},
+ {n:"Zuclopentixol acufase",l:[["50 a 150 mg (1-3 ml) IM, recomendado 100 mg en dosis única. Útil ante riesgo de agresividad persistente (niveles plasmáticos 2-3 días). Efectos extrapiramidales",M+" p.9"]]},
+ {n:"Clorpromazina",l:[["25 o 50 mg; no repetir antes de 4-5 h. Sedación más rápida, más efectos anticolinérgicos (hipotensión, arritmias, confusión)",M+" p.9"]]},
+ {n:"Ziprasidona IM",l:[["10 mg a demanda hasta máximo 40 mg/día; dosis de 10 mg cada 2 h; algunos pacientes requieren 20 mg inicial y 10 mg a las 4 h. No estudiada más de 3 días consecutivos",M+" p.10"]]}],
+ notes:["Evitar levomepromazina en pacientes añosos (alto riesgo de hipotensión).","Evitar la combinación de antipsicóticos de primera elección.","Pacientes sedados con midazolam pueden despertar más agitados."]},
+{id:"alc",t:"Intoxicación por alcohol o sedantes",d:"Antecedente de consumo y alteración de la conducta.",items:[
+ {n:"Neurolépticos de alta potencia a dosis bajas",l:[["Haloperidol 5 mg: 50 gotas por vía oral o 1 ampolla IM, repetible a los 45 min según evolución",M+" p.8 · "+F+" p.7"]]}]},
+{id:"abst",t:"Síndrome de abstinencia",d:"Incluye delirium tremens, abstinencia a benzodiacepinas u opiáceos.",items:[
+ {n:"Benzodiacepinas (elección)",l:[["Diazepam 10 mg cada 6 h",M+" p.8 · "+F+" p.7"],["o clorazepato 50 mg cada 6 h",M+" p.8 · "+F+" p.7"],["o lorazepam 2 mg cada 6 h",M+" p.8 · "+F+" p.7"]]},
+ {n:"Alternativa",l:[["Clometiazol 576 mg (3 cápsulas) cada 6 h",M+" p.8 · "+F+" p.7"]]}],
+ notes:["En general no son aconsejables los neurolépticos, sobre todo el haloperidol, por bajar el umbral convulsivo (delirium tremens, abstinencia a benzodiacepinas, agitación con fondo comicial)."]},
+{id:"est",t:"Intoxicación por estimulantes",d:"Anfetaminas, cocaína o fenciclidina.",items:[
+ {n:"Benzodiacepinas",l:[["De elección; se puede añadir haloperidol 5 a 10 mg si aparecen síntomas psicóticos",M+" p.8-9 · "+F+" p.6"]]}],
+ notes:["En intoxicación por fenciclidina, precaución con el haloperidol: puede empeorar la agitación."]},
+{id:"efec",t:"Efectos adversos y consideraciones",d:"Antídotos y avisos de los dos documentos.",items:[
+ {n:"Extrapiramidalismo",l:[["Distonía aguda: biperideno 2,5-5 mg IM",M+" p.9"],["Biperideno oral/IM en caso de extrapiramidalismo",F+" p.6"],["Acatisia: benzodiacepinas",M+" p.9 · "+F+" p.6"]]},
+ {n:"Benzodiacepinas",l:[["Evitarlas en general; indicadas en acatisia",F+" p.6"],["Absorción errática por vía IM; monitorizar si se usa vía IV (riesgo de sedación excesiva)",F+" p.6"],["De elección en delirium tremens, abstinencia a benzodiacepinas u opiáceos, cuadros comiciales e intoxicación por estimulantes",F+" p.6"]]}]}
+];
+
+const CMP=[
+["Haloperidol oral","50 gotas (5 mg), repetible a los 30 min","50 a 70 gotas"],
+["Haloperidol IM","5-10 mg cada 30 min hasta sedación","1 ampolla, repetible a los 45 min"],
+["Máximo diario de haloperidol","100 mg al día (adulto)","5 ampollas"],
+["Benzodiacepina oral en agitación moderada","Lorazepam 1-2 mg o diazepam 5-10 mg","Lorazepam o clorazepato (½-1 comprimido de 5 mg y de 50 mg)"],
+["Benzodiacepinas en general","Primera elección en moderada, abstinencia y estimulantes","\"Evitarlas en general\"; de elección en abstinencia, comiciales y estimulantes"],
+["Aripiprazol IM","No aparece","9,75 mg, máximo 30 mg/día"],
+["Levomepromazina","No aparece","Combinada con haloperidol; evitar en añosos"],
+["Zuclopentixol, clorpromazina, ziprasidona, risperidona","Descritos con dosis","No aparecen"],
+["Olanzapina IM","10 mg; 2ª dosis 5-10 mg a las 2 h; máx. 20 mg/día y 3 inyecciones","10 mg; otra dosis a las 2 h; máx. 20 mg/día total"]
+];
+
+const CARDS=[
+["¿Cada cuánto se revisa la duración prevista de la contención mecánica?","Como mínimo cada 4 horas. La duración prevista se especifica siempre.","cm"],
+["¿Cuántas personas se necesitan para contener mecánicamente?","Al menos 4, preferentemente 5, sin importar la categoría profesional.","cm"],
+["¿En cuánto tiempo debe valorar el facultativo al paciente tras la contención?","Lo antes posible y siempre antes de una hora. Después, como mínimo cada hora.","cuidados"],
+["¿Cada cuánto se monitorizan las constantes?","Según situación clínica, pero al menos cada 8 horas. Enfermería registra el seguimiento como mínimo una vez por turno.","cuidados"],
+["¿Quién decide aplicar la contención mecánica?","El facultativo de Urgencias/psiquiatra responsable; en su defecto, el psiquiatra de guardia. En extrema urgencia y sin ambos, el enfermero, que avisa de inmediato al psiquiatra para que ratifique.","cm"],
+["¿Quién decide la finalización de la medida?","El facultativo referente.","roles"],
+["¿Qué orden se sigue en la sujeción completa?","Cinturón abdominal, luego las cuatro extremidades en diagonal. Al final se eleva la cabecera de la cama.","cm"],
+["¿Por qué la sujeción parcial en cama es de uso excepcional?","Por el riesgo de colgamientos y caídas.","cm"],
+["¿Quién habla con el paciente durante la contención?","Solo la persona que dirige la contención, para evitar comentarios contradictorios. Explica en cada momento lo que se hace.","cm"],
+["¿Dónde se coloca el profesional en la contención verbal?","Fuera del espacio personal, del lado no dominante del paciente, con vía de salida libre y sin que el paciente quede entre él y la puerta.","verbal"],
+["¿Cómo se ofrece la medicación a un paciente hostil?","\"Para ayudar a ver las cosas más relajadas\", no \"para que esté más tranquilo\", que aumenta la hostilidad.","verbal2"],
+["¿Qué se hace ante riesgo de violencia inminente?","Advertir que la violencia no es aceptable, proponer diálogo, ofrecer tratamiento, informar de que se recurrirá a la sujeción y mostrar presencia de personal.","verbal2"],
+["Haloperidol: ¿cuándo NO usarlo?","Delirium tremens, abstinencia a benzodiacepinas y agitación de origen comicial (baja el umbral convulsivo).","farm"],
+["¿Qué se elige en un síndrome de abstinencia?","Benzodiacepinas: diazepam 10 mg, clorazepato 50 mg o lorazepam 2 mg cada 6 h. Alternativa: clometiazol 576 mg cada 6 h.","farm"],
+["¿Y en intoxicación por estimulantes?","Benzodiacepinas; haloperidol 5-10 mg si hay síntomas psicóticos. Con fenciclidina, cuidado con el haloperidol.","farm"],
+["Olanzapina IM: dosis y límite","10 mg; otra dosis a las 2 h; no superar 20 mg/día en total (oral e IM). Mayor sedación e hipotensión.","farm"],
+["¿Qué fármaco evitar en ancianos?","Levomepromazina, por alto riesgo de hipotensión.","farm"],
+["¿Qué riesgo tiene el paciente sedado con midazolam?","Puede despertar más agitado.","farm"],
+["Complicaciones potenciales de la sujeción","Úlceras por presión, isquemia periférica, compresión nerviosa, luxaciones y fracturas, tromboembolismos, broncoaspiración e insuficiencia respiratoria.","cuidados"],
+["¿Qué responsabilidades tiene el enfermero referente?","Dirige y coordina la contención, es responsable del instrumental y de los cuidados y controles posteriores.","roles"],
+["¿Qué hace el personal de seguridad?","Apoya con su presencia física y solo en situaciones muy excepcionales interviene físicamente, a petición del enfermero director.","roles"],
+["¿Dónde se vigila a un paciente sin fijación mecánica?","En el PIU o en la consulta cero, acompañado por un familiar o referente; si no, en la sala de tratamiento.","vigilancia"],
+["Requisitos de la contención voluntaria","Prevista en el plan terapéutico, solo por indicación facultativa, y registrada: medidas previas, tiempo indicado y evolución.","indicacion"],
+["¿Qué indica el indicador del PNT?","Registro de contenciones mecánicas: número de horas/paciente de contención mecánica. Responsable: Dirección Médica.","evalua"],
+["¿Qué se hace con los objetos del personal y del paciente?","El personal vacía sus bolsillos de utensilios que puedan servir para agredir; al paciente se le retiran encendedores, cadenas, bolígrafos, collares, etc.","cm"]
+];
+
+const QZ=[
+["¿Cada cuánto se revisa, como mínimo, la duración prevista de la contención mecánica?",["Cada 2 horas","Cada 4 horas","Cada 8 horas","Una vez por turno"],1,"La duración se especifica siempre y se revisa como mínimo cada 4 horas (PG-CAL-11, p.11)."],
+["¿Cuántos profesionales son el mínimo para la contención mecánica?",["2","3","4","6"],2,"Mínimo 4, preferentemente 5 (PG-CAL-11, p.10)."],
+["Tras la contención, el facultativo debe valorar al paciente...",["En 4 horas","Lo antes posible y siempre antes de 1 hora","Al final del turno","Solo si hay complicaciones"],1,"Lo antes posible y siempre antes de una hora (PG-CAL-11, p.12). Luego, como mínimo cada hora."],
+["En extrema urgencia y sin facultativo, la decisión de contener la toma...",["El celador","El vigilante de seguridad","El enfermero, comunicándolo al psiquiatra para que ratifique","Nadie: se espera al facultativo"],2,"El enfermero decide y lo comunica inmediatamente al psiquiatra, que ratifica y se responsabiliza (p.10)."],
+["En la sujeción completa, ¿qué se coloca primero?",["Las muñecas","Los tobillos","El cinturón abdominal","La cabecera elevada"],2,"Primero el cinturón abdominal, luego las cuatro extremidades en diagonal; al final se eleva la cabecera (p.12)."],
+["¿En cuál de estas situaciones se evita el haloperidol?",["Psicosis aguda","Delirium tremens","Intoxicación por alcohol con alteración de conducta, a dosis bajas","Antecedentes psicóticos"],1,"Baja el umbral convulsivo: no usar en delirium tremens, abstinencia a benzodiacepinas o agitación comicial (PNT 2024, p.6)."],
+["Fármaco de elección en síndrome de abstinencia:",["Haloperidol","Olanzapina IM","Benzodiacepinas","Zuclopentixol"],2,"Benzodiacepinas (diazepam, clorazepato o lorazepam cada 6 h); alternativa clometiazol (p.8 y p.7 del PNT 2024)."],
+["¿Cómo se aconseja ofrecer la medicación a un paciente hostil?",["\"Para que esté más tranquilo\"","\"Para ayudar a ver las cosas más relajadas\"","\"Porque si no le sujetaremos\" como única frase","Sin informarle"],1,"Decir \"para que esté más tranquilo\" suele provocar más hostilidad (p.7)."],
+["En la contención verbal, el profesional se coloca...",["Dentro del espacio personal, de frente","Fuera del espacio personal, del lado no dominante, con salida libre","Entre el paciente y la puerta","Detrás del paciente"],1,"Algo más lejos del alcance de sus brazos, lado no dominante y vía de salida accesible (p.5)."],
+["Máximo diario de olanzapina (todas las presentaciones):",["10 mg","20 mg","40 mg","100 mg"],1,"No superar 20 mg/día en total, con no más de tres inyecciones en 24 h (p.9 y PNT 2024 p.6)."],
+["Fármaco que se evita en pacientes añosos por hipotensión:",["Lorazepam","Levomepromazina","Aripiprazol","Diazepam"],1,"Evitar levomepromazina en añosos (PNT 2024, p.7)."],
+["¿Quién es responsable del instrumental de contención y de los cuidados posteriores?",["El celador","El facultativo","El enfermero referente","El auxiliar"],2,"El enfermero referente, que además dirige la contención (p.14)."],
+["¿Cuál NO figura entre las complicaciones potenciales de la sujeción en el PNT?",["Úlceras por presión","Isquemia periférica","Hipoglucemia","Broncoaspiración"],2,"Figuran úlceras, isquemia, compresión nerviosa, luxaciones y fracturas, tromboembolismos, broncoaspiración e insuficiencia respiratoria (p.13)."],
+["Un paciente agitado sin fijación mecánica y con riesgo de empeorar se vigila en...",["Su domicilio","El PIU o, en su defecto, la consulta cero","El pasillo","El calabozo"],1,"PIU o consulta cero, acompañado por familiar o referente (p.15)."],
+["Frecuencia mínima de control de constantes en el paciente sujeto:",["Cada hora","Cada 4 horas","Al menos cada 8 horas","Solo al ingreso"],2,"Dependerá de la clínica, pero debería hacerse al menos cada 8 horas (p.13)."],
+["En la contención voluntaria, ¿qué es imprescindible?",["Orden del vigilante","Estar prevista en el plan terapéutico e indicada por el facultativo","Autorización judicial","Que no se registre"],1,"Prevista en el plan terapéutico, solo por indicación facultativa y registrada (p.4)."]
+];
+
+/* ============ UTILIDADES ============ */
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const norm=s=>String(s).toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"");
+const store={get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+const pad=n=>String(n).padStart(2,"0");
+const fmtDT=v=>{if(!v)return"—";const d=new Date(v);return isNaN(d)?"—":`${pad(d.getDate())}/${pad(d.getMonth()+1)}/${d.getFullYear()} ${pad(d.getHours())}:${pad(d.getMinutes())}`};
+const nowLocal=()=>{const d=new Date();d.setSeconds(0,0);return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`};
+
+/* ============ PESTAÑAS ============ */
+const TABS=[["algoritmo","Algoritmo"],["registro","Registro"],["protocolo","Protocolo"],["farmacos","Fármacos"],["preguntar","Preguntar"],["repaso","Repaso"]];
+function go(id){
+  if(!TABS.some(t=>t[0]===id))id="algoritmo";
+  TABS.forEach(([k])=>{$("#t-"+k).classList.toggle("on",k===id);const b=$("#tb-"+k);b.setAttribute("aria-selected",k===id)});
+  try{history.replaceState(null,"","#"+id)}catch(e){}
+  window.scrollTo(0,0);
+}
+$("#nav").innerHTML=TABS.map(([k,l])=>`<button role="tab" id="tb-${k}" aria-selected="false">${l}</button>`).join("");
+TABS.forEach(([k])=>$("#tb-"+k).addEventListener("click",()=>go(k)));
+
+/* ============ PROTOCOLO ============ */
+function renderProto(filter){
+  const f=norm(filter||"").trim();
+  const html=KB.filter(k=>!f||norm(k.t+" "+k.tags+" "+k.b.join(" ")).includes(f)).map(k=>{
+    const body=k.b.map(x=>x.startsWith("<h4>")?x:null);
+    let out="",open=false;
+    k.b.forEach(x=>{
+      if(x.startsWith("<h4>")){if(open){out+="</ul>";open=false}out+=x}
+      else{if(!open){out+="<ul>";open=true}out+=`<li>${esc(x).replace(/&lt;i&gt;(.*?)&lt;\/i&gt;/g,"<i>$1</i>")}</li>`}
+    });
+    if(open)out+="</ul>";
+    return `<details class="sec" data-id="${k.id}"${f?" open":""}><summary>${esc(k.t)}${k.src.map(s=>`<span class="tag">${esc(s[0])} ${esc(s[1])}</span>`).join("")}</summary><div class="in">${out}</div></details>`;
+  }).join("");
+  $("#protoList").innerHTML=html||`<p class="lead">Sin resultados para esa búsqueda.</p>`;
+}
+$("#pfilter").addEventListener("input",e=>renderProto(e.target.value));
+$("#openAll").onclick=()=>$$("#protoList details").forEach(d=>d.open=true);
+$("#closeAll").onclick=()=>$$("#protoList details").forEach(d=>d.open=false);
+
+/* ============ FÁRMACOS ============ */
+let curSc=SC[0].id;
+function renderSc(){
+  $("#scen").innerHTML=SC.map(s=>`<button class="chip" aria-pressed="${s.id===curSc}" data-s="${s.id}">${esc(s.t)}</button>`).join("");
+  $$("#scen .chip").forEach(b=>b.onclick=()=>{curSc=b.dataset.s;renderSc()});
+  const s=SC.find(x=>x.id===curSc);
+  $("#scenOut").innerHTML=`<p class="lead">${esc(s.d)}</p>`+s.items.map(i=>`<div class="drug"><b class="n">${esc(i.n)}</b>${i.l.map(([t,src])=>`<div style="margin-top:6px"><span class="dose">${esc(t)}</span> <span class="tag">${esc(src)}</span></div>`).join("")}</div>`).join("")+(s.notes||[]).map(n=>`<div class="note warn">${esc(n)}</div>`).join("");
+}
+$("#cmp").innerHTML=`<thead><tr><th>Tema</th><th>${esc(M)}</th><th>${esc(F)}</th></tr></thead><tbody>${CMP.map(r=>`<tr>${r.map(c=>`<td>${esc(c)}</td>`).join("")}</tr>`).join("")}</tbody>`;
+
+/* ============ REGISTRO ============ */
+const PRE=["Equipo de 4 personas como mínimo (preferentemente 5)","Duración prevista especificada (revisión como mínimo cada 4 h)","Instrumentos homologados y en buen estado","Riesgos del ambiente identificados y minimizados","Habitación vacía (videovigilada si existe)","Cama preparada: sujeción de cintura colocada y cama frenada","Personal con los bolsillos vacíos de utensilios peligrosos","Enfermero director de la contención designado","Un único interlocutor verbal con el paciente","Procedimiento explicado a paciente y familiar","Cada miembro asignado a una extremidad (5ª persona a la cabeza)","Puntos de sujeción revisados: sin dañar piel ni circulación","Cabecera de la cama elevada al terminar","Paciente sin objetos con los que pueda dañarse","Fármacos prescritos y administrados según indicación","Facultativo avisado para valoración en menos de 1 hora"];
+const TXT_IDS=["nhc","edad","sexo","box","motivo","etio","desc","previas","indica","indicaNom","ratif","director","nprof","tipo","material","inicio","durprev","fin","finNom","cons","obs"];
+const CK_IDS=["m_verbal","m_farm","voluntaria","info"];
+let state={ctrl:[],drug:[],pre:[]};
+function collect(){
+  const d={};TXT_IDS.forEach(i=>d[i]=$("#"+i).value);CK_IDS.forEach(i=>d[i]=$("#"+i).checked);
+  d.ctrl=state.ctrl;d.drug=state.drug;d.pre=state.pre;return d;
+}
+function save(){store.set("cont_rec_v1",collect())}
+function load(d){
+  TXT_IDS.forEach(i=>$("#"+i).value=d[i]||"");CK_IDS.forEach(i=>$("#"+i).checked=!!d[i]);
+  state.ctrl=d.ctrl||[];state.drug=d.drug||[];state.pre=d.pre||[];
+  renderCtrl();renderDrug();renderPre();renderDue();
+}
+function renderPre(){
+  $("#pre").innerHTML=PRE.map((t,i)=>`<label class="inline"><input type="checkbox" data-i="${i}" ${state.pre[i]?"checked":""}>${esc(t)}</label>`).join("");
+  $$("#pre input").forEach(c=>c.onchange=()=>{state.pre[+c.dataset.i]=c.checked;save()});
+}
+const CT=["Valoración facultativa","Constantes (FC, TA, T, conciencia)","Piel y puntos de sujeción","Ingesta y eliminación","Revisión de duración prevista","Otro"];
+function renderCtrl(){
+  $("#ctrlList").innerHTML=state.ctrl.map((c,i)=>`<div class="item"><label>Hora<input type="datetime-local" data-k="t" data-i="${i}" value="${esc(c.t)}"></label><label>Tipo<select data-k="k" data-i="${i}">${CT.map(x=>`<option${x===c.k?" selected":""}>${esc(x)}</option>`).join("")}</select></label><label>Nota<input type="text" data-k="n" data-i="${i}" value="${esc(c.n)}"></label><button class="btn danger small" type="button" data-rm="${i}" aria-label="Quitar control">Quitar</button></div>`).join("")||`<span class="priv">Aún no hay controles registrados.</span>`;
+  $$("#ctrlList [data-k]").forEach(e=>e.oninput=e.onchange=()=>{state.ctrl[+e.dataset.i][e.dataset.k]=e.value;save();renderDue()});
+  $$("#ctrlList [data-rm]").forEach(b=>b.onclick=()=>{state.ctrl.splice(+b.dataset.rm,1);save();renderCtrl();renderDue()});
+}
+function renderDrug(){
+  $("#drugList").innerHTML=state.drug.map((c,i)=>`<div class="item"><label>Fármaco<input type="text" data-k="f" data-i="${i}" value="${esc(c.f)}"></label><label>Dosis<input type="text" data-k="d" data-i="${i}" value="${esc(c.d)}"></label><label>Vía<select data-k="v" data-i="${i}">${["Oral","IM","IV","Intranasal","Otra"].map(x=>`<option${x===c.v?" selected":""}>${x}</option>`).join("")}</select></label><label>Hora<input type="datetime-local" data-k="t" data-i="${i}" value="${esc(c.t)}"></label><button class="btn danger small" type="button" data-rm="${i}" aria-label="Quitar fármaco">Quitar</button></div>`).join("")||`<span class="priv">Aún no hay fármacos registrados.</span>`;
+  $$("#drugList [data-k]").forEach(e=>e.oninput=e.onchange=()=>{state.drug[+e.dataset.i][e.dataset.k]=e.value;save()});
+  $$("#drugList [data-rm]").forEach(b=>b.onclick=()=>{state.drug.splice(+b.dataset.rm,1);save();renderDrug()});
+}
+$("#addCtrl").onclick=()=>{state.ctrl.push({t:nowLocal(),k:CT[0],n:""});save();renderCtrl();renderDue()};
+$("#addDrug").onclick=()=>{state.drug.push({f:"",d:"",v:"Oral",t:nowLocal()});save();renderDrug()};
+
+/* plazos calculados */
+function renderDue(){
+  const ini=$("#inicio").value;const el=$("#due");
+  if(!ini){el.innerHTML=`<div class="dueitem"><small>Introduce la hora de inicio para calcular los plazos de valoración y revisión.</small></div>`;return}
+  const t0=new Date(ini).getTime(),now=Date.now(),H=3600e3;
+  const ended=!!$("#fin").value;
+  const ctr=ctrls=>state.ctrl.filter(c=>c.t&&ctrls.includes(c.k)).map(c=>new Date(c.t).getTime()).sort((a,b)=>a-b);
+  const fac=ctr(["Valoración facultativa"]),vit=ctr(["Constantes (FC, TA, T, conciencia)"]),rev=ctr(["Revisión de duración prevista"]);
+  const items=[];
+  const mk=(label,rule,due,doneAt)=>{
+    let cls="",txt;
+    if(doneAt!=null){cls="done";txt=`Hecho ${fmtDT(doneAt)}`}
+    else if(ended){cls="";txt="Contención finalizada"}
+    else{const m=Math.round((due-now)/60000);
+      if(m<0){cls="over";txt=`Vencido hace ${Math.floor(-m/60)} h ${-m%60} min`}
+      else{cls=m<=30?"soon":"";txt=`En ${Math.floor(m/60)} h ${m%60} min`}}
+    items.push(`<div class="dueitem ${cls}"><small>${label}</small><b>${fmtDT(due)}</b><small>${txt} · ${rule}</small></div>`);
+  };
+  const f1=fac.find(x=>x>=t0);
+  mk("Primera valoración facultativa","antes de 1 h",t0+1*H,f1??null);
+  const lastF=fac.length?Math.max(...fac,t0):t0;
+  if(f1!=null)mk("Siguiente valoración facultativa","mínimo cada hora",lastF+1*H,null);
+  const lastR=rev.length?Math.max(...rev,t0):t0;
+  mk("Revisión de la duración prevista","como mínimo cada 4 h",lastR+4*H,null);
+  const lastV=vit.length?Math.max(...vit,t0):t0;
+  mk("Control de constantes","al menos cada 8 h",lastV+8*H,null);
+  const dp=parseFloat($("#durprev").value);
+  if(dp>0)items.push(`<div class="dueitem"><small>Fin previsto</small><b>${fmtDT(t0+dp*H)}</b><small>duración prevista ${dp} h</small></div>`);
+  el.innerHTML=items.join("");
+}
+
+/* exportar */
+function lines(d){
+  const L=[];const add=(k,v)=>{if(v!==""&&v!=null&&v!==false)L.push([k,v===true?"Sí":v])};
+  add("Fecha de generación",fmtDT(nowLocal()));
+  add("NHC / identificador",d.nhc);add("Edad",d.edad);add("Sexo",d.sexo);add("Box / ubicación",d.box);
+  add("Criterio de indicación",d.motivo);add("Sospecha etiológica",d.etio);add("Descripción del episodio",d.desc);
+  add("Contención verbal intentada",d.m_verbal);add("Contención farmacológica administrada",d.m_farm);add("Contención voluntaria prevista en plan terapéutico",d.voluntaria);
+  add("Medidas previas adoptadas",d.previas);
+  add("Profesional que indica",d.indica);add("Nombre del profesional",d.indicaNom);add("Ratificación por psiquiatra",d.ratif?fmtDT(d.ratif):"");
+  add("Enfermero director",d.director);add("Nº de profesionales",d.nprof);add("Tipo de contención mecánica",d.tipo);add("Material utilizado",d.material);
+  add("Hora de inicio",d.inicio?fmtDT(d.inicio):"");add("Duración prevista (h)",d.durprev);add("Hora de finalización",d.fin?fmtDT(d.fin):"");add("Finalización decidida por",d.finNom);
+  d.drug.filter(x=>x.f).forEach((x,i)=>add(`Fármaco ${i+1}`,`${x.f} ${x.d} ${x.v}${x.t?" · "+fmtDT(x.t):""}`.trim()));
+  d.ctrl.forEach((x,i)=>add(`Control ${i+1}`,`${fmtDT(x.t)} · ${x.k}${x.n?" · "+x.n:""}`));
+  add("Consentimiento informado",d.cons);add("Información a paciente y familiares registrada",d.info);
+  add("Comprobaciones previas realizadas",PRE.filter((_,i)=>d.pre[i]).length+" de "+PRE.length);
+  add("Observaciones",d.obs);
+  return L;
+}
+const asTXT=d=>"REGISTRO DE CONTENCIÓN · Urgencias Hospital de Antequera\nBasado en PG-CAL-11 v3 (2023) y PNT agitado v2 (2024)\n\n"+lines(d).map(([k,v])=>`${k}: ${v}`).join("\n")+"\n";
+const asCSV=d=>"﻿campo;valor\n"+lines(d).map(([k,v])=>`"${k.replace(/"/g,'""')}";"${String(v).replace(/"/g,'""').replace(/\n/g," ")}"`).join("\n")+"\n";
+const asJSON=d=>JSON.stringify({documento:"Registro de contención · Urgencias Antequera",referencias:["PG-CAL-11 v3 (abril 2023)","PNT agitado, contención farmacológica v2 (dic 2024)"],comprobaciones:PRE.map((t,i)=>({item:t,hecho:!!d.pre[i]})),...d},null,2);
+const asHTML=d=>`<!doctype html><html lang="es"><head><meta charset="utf-8"><title>Registro de contención</title><style>body{font-family:Arial,sans-serif;max-width:780px;margin:24px auto;padding:0 16px;color:#111}h1{font-size:20px;color:#00703c;border-bottom:3px solid #00703c;padding-bottom:6px}table{width:100%;border-collapse:collapse}td{border:1px solid #bbb;padding:6px 8px;vertical-align:top;font-size:14px}td:first-child{width:36%;background:#eef4f0;font-weight:bold}small{color:#555}@media print{body{margin:0}}</style></head><body><h1>Registro de contención · Urgencias Hospital de Antequera</h1><table>${lines(d).map(([k,v])=>`<tr><td>${esc(k)}</td><td>${esc(v).replace(/\n/g,"<br>")}</td></tr>`).join("")}</table><h3>Comprobaciones previas</h3><table>${PRE.map((t,i)=>`<tr><td style="width:60px">${d.pre[i]?"Sí":"No"}</td><td style="background:none;font-weight:normal">${esc(t)}</td></tr>`).join("")}</table><p><small>Basado en PG-CAL-11 v3 (abril 2023) y PNT de contención farmacológica v2 (diciembre 2024), Área Sanitaria Norte de Málaga. Contiene datos del paciente.</small></p></body></html>`;
+let DL=null;
+function msg(t){$("#expMsg").textContent=t}
+async function doDl(kind){
+  const d=collect();const stamp=new Date().toISOString().slice(0,10);
+  const map={txt:[asTXT,"txt"],csv:[asCSV,"csv"],json:[asJSON,"json"],html:[asHTML,"html"]};
+  const [fn,ext]=map[kind];
+  if(!DL){msg("La descarga no está disponible en esta vista. Usa «Copiar informe».");return}
+  try{await DL.save({filename:`registro-contencion-${stamp}.${ext}`,data:fn(d)});msg("Archivo enviado. Guárdalo según la política de protección de datos del centro.")}
+  catch(e){msg(e&&e.code==="declined"?"Descarga cancelada.":"No se pudo guardar el archivo. Usa «Copiar informe».")}
+}
+$$("[data-dl]").forEach(b=>b.onclick=()=>doDl(b.dataset.dl));
+$("#bCopy").onclick=async()=>{
+  const t=asTXT(collect());
+  try{await navigator.clipboard.writeText(t);msg("Informe copiado. Pégalo en la historia clínica.")}
+  catch(e){const ta=document.createElement("textarea");ta.value=t;ta.style.cssText="position:fixed;opacity:0";document.body.appendChild(ta);ta.select();let ok=false;try{ok=document.execCommand("copy")}catch(_){}ta.remove();msg(ok?"Informe copiado. Pégalo en la historia clínica.":"No se pudo copiar automáticamente.")}
+};
+let armed=false;
+$("#bNew").onclick=()=>{
+  if(!armed){armed=true;$("#bNew").textContent="Confirmar: borrar todo";setTimeout(()=>{armed=false;$("#bNew").textContent="Nuevo registro"},4000);return}
+  armed=false;$("#bNew").textContent="Nuevo registro";load({});save();msg("Registro vacío.");
+};
+TXT_IDS.concat(CK_IDS).forEach(i=>{const e=$("#"+i);e.addEventListener("input",()=>{save();renderDue()});e.addEventListener("change",()=>{save();renderDue()})});
+
+/* ============ PREGUNTAR ============ */
+const STOP=new Set("de la el los las un una y o en que se por con para al del es a su sus como mas pero si no lo le les me mi cuando cual cuales cada hay debe deben".split(" "));
+function search(q){
+  const w=norm(q).split(/[^a-z0-9ñ]+/).filter(x=>x.length>2&&!STOP.has(x));
+  if(!w.length)return[];
+  const out=[];
+  KB.forEach(k=>k.b.filter(x=>!x.startsWith("<h4>")).forEach(line=>{
+    const n=norm(line),nt=norm(k.t+" "+k.tags);let s=0;
+    w.forEach(t=>{if(n.includes(t))s+=2;if(nt.includes(t))s+=1});
+    if(s>0)out.push({s,k,line});
+  }));
+  SC.forEach(sc=>sc.items.forEach(i=>i.l.forEach(([t,src])=>{
+    const n=norm(sc.t+" "+i.n+" "+t);let s=0;w.forEach(x=>{if(n.includes(x))s+=2});
+    if(s>0)out.push({s:s+0.5,k:{t:"Fármacos · "+sc.t,src:[[src,""]]},line:i.n+": "+t});
+  })));
+  return out.sort((a,b)=>b.s-a.s).slice(0,8);
+}
+function showSearch(){
+  const q=$("#q").value.trim();if(!q)return;
+  const r=search(q);
+  $("#searchOut").innerHTML=r.length?`<h3 style="margin:18px 0 8px">Pasajes del protocolo</h3>`+r.map(x=>`<div class="res"><h3>${esc(x.k.t)} ${x.k.src.map(s=>`<span class="tag">${esc((s[0]+" "+s[1]).trim())}</span>`).join("")}</h3><p style="margin:4px 0 0">${esc(x.line)}</p></div>`).join(""):`<p class="lead" style="margin-top:16px">No hay pasajes que coincidan. Prueba con otras palabras o pregunta a Claude.</p>`;
+}
+$("#bSearch").onclick=showSearch;
+$("#q").addEventListener("keydown",e=>{if(e.key==="Enter")showSearch()});
+let SAMPLE=null,aborter=null;
+function ctxText(){
+  let t="DOCUMENTO A: "+M+"; DOCUMENTO B: "+F+"\n\n";
+  KB.forEach(k=>{t+="## "+k.t+" ["+k.src.map(s=>s.join(" ")).join("; ")+"]\n"+k.b.map(x=>x.replace(/<[^>]+>/g,"")).join("\n")+"\n\n"});
+  t+="## Pautas farmacológicas por escenario\n";
+  SC.forEach(s=>{t+="### "+s.t+" ("+s.d+")\n";s.items.forEach(i=>{t+=i.n+": "+i.l.map(l=>l[0]+" ["+l[1]+"]").join(" | ")+"\n"});(s.notes||[]).forEach(n=>t+="Aviso: "+n+"\n")});
+  t+="\n## Diferencias entre documentos\n"+CMP.map(r=>r[0]+": A="+r[1]+" / B="+r[2]).join("\n");
+  return t;
+}
+$("#bAsk").onclick=async()=>{
+  const q=$("#q").value.trim();if(!q)return;
+  showSearch();
+  const out=$("#askOut");
+  if(!SAMPLE){out.innerHTML=`<div class="note">La pregunta a Claude no está disponible en esta vista. Se muestran los pasajes encontrados.</div>`;return}
+  if(aborter)aborter.abort();aborter=new AbortController();
+  out.innerHTML=`<div class="ai">Consultando el protocolo…</div>`;
+  const prompt=`Eres un asistente de consulta del protocolo de contención del servicio de Urgencias del Hospital de Antequera. Responde en español claro, para personal sanitario, usando EXCLUSIVAMENTE el texto del protocolo que sigue. Indica siempre de qué documento y página procede cada dato. Si los dos documentos difieren, dilo. Si la respuesta no está en el texto, di que no figura en los PNT y no inventes ni completes con conocimiento externo. Máximo 150 palabras, sin introducciones. Recuerda en una frase final que debe confirmarse con el documento oficial si se trata de dosis.\n\n=== PROTOCOLO ===\n${ctxText()}\n=== FIN ===\n\nPregunta: ${q}`;
+  try{
+    const r=await SAMPLE(prompt,{signal:aborter.signal,cache:false,modelTier:"quick",onText:({text})=>{out.innerHTML=`<div class="ai">${esc(text)}</div>`}});
+    out.innerHTML=`<div class="ai">${esc(r.text)}</div><p class="priv">Respuesta generada por Claude a partir del texto de los PNT. Verifica en el documento oficial.</p>`;
+  }catch(e){
+    if(e&&e.code==="not_granted")out.innerHTML=`<div class="note">Sin permiso para consultar a Claude. Se muestran los pasajes del protocolo.</div>`;
+    else if(e&&e.code==="rate_limited")out.innerHTML=`<div class="note warn">Demasiadas consultas seguidas. Espera un momento.</div>`;
+    else out.innerHTML=`<div class="note warn">No se pudo obtener respuesta. Se muestran los pasajes del protocolo.</div>`;
+  }
+};
+
+/* ============ REPASO ============ */
+let mode="cards";
+let prog=store.get("cont_prog_v1",{known:[]});
+let ci=0,flipped=false;
+function renderCards(){
+  const pending=CARDS.map((_,i)=>i).filter(i=>!prog.known.includes(i));
+  const out=$("#repOut");
+  if(!pending.length){out.innerHTML=`<div class="note">Has marcado las ${CARDS.length} tarjetas como sabidas.</div><button class="btn" id="rst">Empezar de nuevo</button>`;$("#rst").onclick=()=>{prog.known=[];store.set("cont_prog_v1",prog);ci=0;renderCards()};return}
+  if(ci>=pending.length)ci=0;
+  const idx=pending[ci],c=CARDS[idx];
+  out.innerHTML=`<div class="priv">${prog.known.length} de ${CARDS.length} sabidas · tarjeta ${ci+1} de ${pending.length} pendientes</div><div class="bar"><i style="width:${prog.known.length/CARDS.length*100}%"></i></div>
+  <div class="card3"><div class="fc${flipped?" back":""}" id="fc" tabindex="0" role="button" aria-label="Girar tarjeta"><small>${flipped?"RESPUESTA":"PREGUNTA"} · toca para girar</small><div>${esc(flipped?c[1]:c[0])}</div></div></div>
+  <div class="row"><button class="btn ghost" id="cPrev">Anterior</button><button class="btn" id="cKnow">Lo sé</button><button class="btn ghost" id="cNext">Repasar luego</button></div>`;
+  const flip=()=>{flipped=!flipped;renderCards()};
+  $("#fc").onclick=flip;$("#fc").onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();flip()}};
+  $("#cKnow").onclick=()=>{prog.known.push(idx);store.set("cont_prog_v1",prog);flipped=false;renderCards()};
+  $("#cNext").onclick=()=>{ci=(ci+1)%pending.length;flipped=false;renderCards()};
+  $("#cPrev").onclick=()=>{ci=(ci-1+pending.length)%pending.length;flipped=false;renderCards()};
+}
+let qz={order:[],i:0,score:0,done:false,picked:null};
+function newQuiz(){qz={order:QZ.map((_,i)=>i).sort(()=>Math.random()-.5),i:0,score:0,done:false,picked:null};renderQuiz()}
+function renderQuiz(){
+  const out=$("#repOut");
+  if(qz.done){
+    const best=Math.max(store.get("cont_best_v1",0),qz.score);store.set("cont_best_v1",best);
+    out.innerHTML=`<div class="drug"><h3>Resultado: ${qz.score} de ${QZ.length}</h3><p>Mejor resultado en este navegador: ${best} de ${QZ.length}.</p></div><button class="btn" id="again">Repetir test</button>`;$("#again").onclick=newQuiz;return;
+  }
+  const q=QZ[qz.order[qz.i]];
+  out.innerHTML=`<div class="priv">Pregunta ${qz.i+1} de ${QZ.length} · aciertos ${qz.score}</div><div class="bar"><i style="width:${qz.i/QZ.length*100}%"></i></div><h3 style="margin:10px 0">${esc(q[0])}</h3>`+
+   q[1].map((o,i)=>{let c="opt";if(qz.picked!=null){if(i===q[2])c+=" right";else if(i===qz.picked)c+=" wrong"}return `<button class="${c}" data-o="${i}" ${qz.picked!=null?"disabled":""}>${esc(o)}</button>`}).join("")+
+   (qz.picked!=null?`<div class="note ${qz.picked===q[2]?"":"warn"}"><b>${qz.picked===q[2]?"Correcto.":"No es esa."}</b> ${esc(q[3])}</div><button class="btn" id="nx">${qz.i+1<QZ.length?"Siguiente":"Ver resultado"}</button>`:"");
+  $$("#repOut [data-o]").forEach(b=>b.onclick=()=>{qz.picked=+b.dataset.o;if(qz.picked===q[2])qz.score++;renderQuiz()});
+  const nx=$("#nx");if(nx)nx.onclick=()=>{qz.picked=null;qz.i++;if(qz.i>=QZ.length)qz.done=true;renderQuiz()};
+}
+function setMode(m){mode=m;$("#modeCards").setAttribute("aria-pressed",m==="cards");$("#modeQuiz").setAttribute("aria-pressed",m==="quiz");m==="cards"?renderCards():newQuiz()}
+$("#modeCards").onclick=()=>setMode("cards");$("#modeQuiz").onclick=()=>setMode("quiz");
+
+/* ============ ARRANQUE ============ */
+renderProto("");renderSc();renderPre();renderCtrl();renderDrug();
+load(store.get("cont_rec_v1",{}));
+renderCards();
+go((location.hash||"#algoritmo").slice(1));
+window.addEventListener("hashchange",()=>go(location.hash.slice(1)));
+setInterval(renderDue,30000);
+(async()=>{
+  try{DL=await (window.claude?.use?.("downloads"))}catch(e){DL=null}
+  try{SAMPLE=await (window.claude?.use?.("sample"))}catch(e){SAMPLE=null}
+  if(!DL)$$("[data-dl]").forEach(b=>b.hidden=true);
+})();
+</script>
+
+
+<!-- Barra común del Portal SUH Antequera -->
+<style>
+  .suhdock{position:fixed;left:14px;bottom:14px;z-index:2147483000;display:flex;align-items:center;gap:4px;padding:5px;border-radius:999px;background:#0c2a4a;box-shadow:0 10px 30px -8px rgba(12,42,74,.55);font:600 13px/1 'Plus Jakarta Sans',system-ui,-apple-system,'Segoe UI',sans-serif;transition:opacity .2s}
+  .suhdock a{display:inline-flex;align-items:center;justify-content:center;gap:7px;height:34px;min-width:34px;padding:0 9px;border-radius:999px;color:#fff;text-decoration:none}
+  .suhdock a:hover{background:rgba(255,255,255,.14)}
+  .suhdock a.suhdock-home{background:#fff;color:#0c2a4a;padding:0 12px 0 4px}
+  .suhdock a.suhdock-home img{width:26px;height:26px;border-radius:50%;object-fit:contain;background:#fff}
+  .suhdock svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  .suhdock .suhdock-x{opacity:.6;min-width:26px;padding:0}
+  .suhdock.suhdock-min a:not(.suhdock-home){display:none}
+  .suhdock.suhdock-min a.suhdock-home span{display:none}
+  .suhdock.suhdock-min a.suhdock-home{padding:0 4px}
+  @media print{.suhdock{display:none!important}}
+</style>
+<nav class="suhdock" aria-label="Portal SUH Antequera">
+  <a class="suhdock-home" href="../index.html#herramientas" title="Volver al Portal de Supervisión SUH Antequera"><img src="../img/logo-suh.jpg" alt=""><span>Portal SUH</span></a>
+  <a href="https://www.instagram.com/suh_antequera_/" target="_blank" rel="noopener" title="Instagram @suh_antequera_"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><path d="M17.5 6.5h.01"/></svg></a>
+  <a href="https://www.facebook.com/p/Suh-Antequera-61568582212569/" target="_blank" rel="noopener" title="Facebook SUH Antequera"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+  <a href="https://x.com/saludnortemalag" target="_blank" rel="noopener" title="X @saludnortemalag" style="font-size:15px">𝕏</a>
+  <a class="suhdock-x" href="#" title="Minimizar barra" onclick="this.parentNode.classList.toggle('suhdock-min');return false;"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></a>
+</nav>
+</body></html>

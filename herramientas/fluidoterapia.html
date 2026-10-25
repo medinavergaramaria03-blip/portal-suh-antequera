@@ -1,0 +1,703 @@
+<!doctype html><html><head>
+  <meta name="robots" content="noindex, nofollow"><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Fluidoterapia SUH Antequera</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: cabecera fija con pestañas; contenido en columna de lectura con rejillas de tarjetas. Verde institucional del PNT sobre neutros verdosos. */
+:root{
+  --bg:#f3f6f4; --surface:#ffffff; --surface2:#e8efeb; --fg:#14231c; --muted:#4d6057; --line:#d0dbd4;
+  --accent:#0a6a3a; --accent-ink:#ffffff; --accent-soft:#dcefe3;
+  --warn:#7d4a00; --warn-bg:#fff0d2; --crit:#a3202a; --crit-bg:#fde6e6; --info:#1a5a8c; --info-bg:#e1edf9;
+  --font-body:'Atkinson Hyperlegible','Segoe UI',system-ui,-apple-system,sans-serif;
+  --font-mono:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0d1511; --surface:#15201a; --surface2:#1d2b23; --fg:#e5eee8; --muted:#9bafa3; --line:#2b3b32;
+    --accent:#4cc383; --accent-ink:#06150d; --accent-soft:#173324;
+    --warn:#efb54d; --warn-bg:#382a0c; --crit:#ff9090; --crit-bg:#3d1819; --info:#82bbec; --info-bg:#13283c;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0d1511; --surface:#15201a; --surface2:#1d2b23; --fg:#e5eee8; --muted:#9bafa3; --line:#2b3b32;
+  --accent:#4cc383; --accent-ink:#06150d; --accent-soft:#173324;
+  --warn:#efb54d; --warn-bg:#382a0c; --crit:#ff9090; --crit-bg:#3d1819; --info:#82bbec; --info-bg:#13283c;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--font-body);font-size:16px;line-height:1.5;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 40px}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--surface)}
+.wrap{max-width:1080px;margin:0 auto}
+header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--surface);border-bottom:1px solid var(--line);
+  margin-left:calc(-1*max(16px,env(safe-area-inset-left,0px)));margin-right:calc(-1*max(16px,env(safe-area-inset-right,0px)));
+  padding:10px max(16px,env(safe-area-inset-right,0px)) 0 max(16px,env(safe-area-inset-left,0px))}
+.brand{display:flex;align-items:center;gap:12px;max-width:1080px;margin:0 auto}
+.brand svg{flex:none;width:30px;height:30px}
+.brand h1{font-size:19px;line-height:1.2;margin:0}
+.brand p{margin:0;font-size:13px;color:var(--muted)}
+.tabs{display:flex;gap:2px;overflow-x:auto;max-width:1080px;margin:8px auto 0;scrollbar-width:thin}
+.tabs button{flex:none;font:inherit;font-size:15px;padding:9px 13px;border:0;border-bottom:3px solid transparent;background:none;color:var(--muted);cursor:pointer;white-space:nowrap}
+.tabs button:hover{color:var(--fg)}
+.tabs button[aria-selected="true"]{color:var(--accent);border-bottom-color:var(--accent);font-weight:700}
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,summary:focus-visible,a:focus-visible{outline:3px solid var(--info);outline-offset:2px}
+main{padding-top:22px}
+h2{font-size:24px;line-height:1.25;margin:0 0 6px;text-wrap:balance}
+h3{font-size:18px;margin:0 0 8px;text-wrap:balance}
+h4{font-size:14px;margin:0 0 6px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+p{margin:0 0 10px}
+.lead{color:var(--muted);max-width:68ch;margin-bottom:18px}
+.muted{color:var(--muted)}
+.small{font-size:14px}
+.mono,.num{font-family:var(--font-mono);font-variant-numeric:tabular-nums}
+.stack{display:flex;flex-direction:column;gap:14px}
+.grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr))}
+.grid.w2{grid-template-columns:repeat(auto-fit,minmax(min(100%,440px),1fr))}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:16px;min-width:0}
+.card.soft{background:var(--accent-soft);border-color:transparent}
+.flag{padding:10px 12px;border-radius:6px;font-size:15px;border-left:4px solid var(--info);background:var(--info-bg)}
+.flag.crit{border-color:var(--crit);background:var(--crit-bg)}
+.flag.warn{border-color:var(--warn);background:var(--warn-bg)}
+.flag.ok{border-color:var(--accent);background:var(--accent-soft)}
+.flags{display:flex;flex-direction:column;gap:8px}
+.pill{display:inline-block;font-size:12px;font-weight:700;padding:2px 8px;border-radius:99px;background:var(--surface2);color:var(--fg);letter-spacing:.02em;white-space:nowrap}
+.pill.iso{background:var(--accent-soft);color:var(--accent)}
+.pill.hiper{background:var(--warn-bg);color:var(--warn)}
+.pill.hipo{background:var(--info-bg);color:var(--info)}
+.btn{font:inherit;font-size:15px;padding:9px 14px;border-radius:6px;border:1px solid var(--accent);background:var(--accent);color:var(--accent-ink);cursor:pointer}
+.btn.ghost{background:transparent;color:var(--accent)}
+.btn.danger{border-color:var(--crit);color:var(--crit);background:transparent}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.btn.sm{padding:5px 10px;font-size:14px}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.chip{font:inherit;font-size:14px;padding:5px 11px;border-radius:99px;border:1px solid var(--line);background:var(--surface);color:var(--fg);cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+label.f{display:flex;flex-direction:column;gap:3px;font-size:14px;color:var(--muted);min-width:0}
+label.f input,label.f select,label.f textarea,.in{font:inherit;font-size:16px;color:var(--fg);background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:8px 10px;width:100%;min-width:0}
+label.f .u{font-size:12px;color:var(--muted)}
+.fields{display:grid;gap:10px;grid-template-columns:repeat(auto-fill,minmax(130px,1fr))}
+.fields.wide{grid-template-columns:repeat(auto-fill,minmax(220px,1fr))}
+.chk{display:flex;align-items:center;gap:8px;font-size:15px;color:var(--fg)}
+.chk input{width:18px;height:18px;accent-color:var(--accent)}
+.rows{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 14px;margin:0 0 8px}
+.rows dt{color:var(--muted);font-size:15px}
+.rows dd{margin:0;text-align:right;font-family:var(--font-mono);font-variant-numeric:tabular-nums;font-size:15px}
+.note{font-size:14px;color:var(--muted);margin:6px 0 0}
+.tblwrap{overflow-x:auto;max-width:100%}
+table{border-collapse:collapse;width:100%;font-size:15px}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:13px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
+details.fl{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:0}
+details.fl>summary{cursor:pointer;padding:12px 14px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;list-style:none}
+details.fl>summary::-webkit-details-marker{display:none}
+details.fl>summary::before{content:"▸";color:var(--accent);width:1em}
+details.fl[open]>summary::before{content:"▾"}
+details.fl .body{padding:2px 14px 14px;display:grid;gap:8px}
+.kv b{display:block;font-size:13px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);font-weight:700}
+ul.tight{margin:4px 0 0;padding-left:20px}
+ul.tight li{margin:2px 0}
+.big{font-size:20px;font-weight:700;line-height:1.3}
+.search{display:flex;gap:8px;margin-bottom:12px}
+.search input{flex:1}
+.hit{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:12px 14px}
+.hit .sec{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);font-weight:700}
+.chat{display:flex;flex-direction:column;gap:10px;margin-bottom:12px}
+.msg{padding:10px 12px;border-radius:8px;white-space:pre-wrap;overflow-wrap:anywhere;max-width:100%}
+.msg.u{background:var(--accent-soft);align-self:flex-end;max-width:90%}
+.msg.a{background:var(--surface);border:1px solid var(--line)}
+.flash{min-height:260px;display:flex;flex-direction:column;justify-content:space-between;gap:16px}
+.flash .q{font-size:21px;line-height:1.35}
+.flash .a{font-size:17px;padding:12px;border-radius:6px;background:var(--accent-soft)}
+.bar{height:8px;background:var(--surface2);border-radius:99px;overflow:hidden}
+.bar>i{display:block;height:100%;background:var(--accent)}
+.trail{font-size:13px;color:var(--muted)}
+.alg-opts{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+pre.report{font-family:var(--font-mono);font-size:13px;white-space:pre-wrap;overflow-wrap:anywhere;background:var(--surface2);border-radius:6px;padding:12px;max-height:340px;overflow:auto;margin:0}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(16px + env(safe-area-inset-bottom,0px));background:var(--fg);color:var(--bg);padding:9px 16px;border-radius:99px;font-size:15px;z-index:40;max-width:90vw}
+.disc{font-size:13px;color:var(--muted);border-top:1px solid var(--line);margin-top:28px;padding-top:12px}
+@media (prefers-reduced-motion:no-preference){.card,details.fl{transition:border-color .15s}}
+@media (max-width:520px){h2{font-size:21px}.rows{grid-template-columns:1fr}.rows dd{text-align:left}}
+</style>
+
+<div class="wrap">
+<header class="top">
+  <div class="brand">
+    <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3c4.8 6.2 9 10.6 9 15.6A9 9 0 0 1 7 18.6C7 13.6 11.200 9.200 16 3Z" fill="var(--accent)"/><path d="M12 19.500a4.600 4.600 0 0 0 4.200 4.100" stroke="var(--accent-ink)" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+    <div><h1>Fluidoterapia en Urgencias</h1><p>SUH Hospital Comarcal de Antequera · PNT v1.0, diciembre 2025</p></div>
+  </div>
+  <nav class="tabs" id="tabs" role="tablist" aria-label="Secciones"></nav>
+</header>
+<main id="main"></main>
+<p class="disc">Herramienta de apoyo construida a partir del PNT «Uso de la fluidoterapia en Urgencias» (Área Sanitaria Norte de Málaga, v1.0, 3 de diciembre de 2025, autora Carmen Gómez Pérez). No sustituye al documento oficial ni al juicio clínico: la indicación y la prescripción corresponden al facultativo responsable. Las fichas se guardan solo en este navegador.</p>
+</div>
+<div class="toast" id="toast" hidden></div>
+
+<script>
+/* ============ utilidades ============ */
+const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const fm=s=>esc(s).replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>');
+const fmt=(n,d=0)=>n==null||!isFinite(n)?'—':n.toLocaleString('es-ES',{maximumFractionDigits:d,minimumFractionDigits:0});
+const norm=s=>String(s).normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase();
+const useCap=n=>{try{return window.claude&&window.claude.use?window.claude.use(n):Promise.resolve(null)}catch(e){return Promise.resolve(null)}};
+const store={get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+let toastT;function toast(t){const el=$('#toast');el.textContent=t;el.hidden=false;clearTimeout(toastT);toastT=setTimeout(()=>el.hidden=true,2600)}
+const rows=a=>'<dl class="rows">'+a.map(r=>'<dt>'+fm(r[0])+'</dt><dd>'+esc(r[1])+'</dd>').join('')+'</dl>';
+const note=t=>'<p class="note">'+fm(t)+'</p>';
+const flagH=(l,t)=>'<div class="flag '+l+'">'+fm(t)+'</div>';
+const ton=t=>t?'<span class="pill '+({'Isotónica':'iso','Hipertónica':'hiper','Hipotónica':'hipo'}[t]||'')+'">'+esc(t)+'</span>':'';
+
+/* ============ base de conocimiento del PNT ============ */
+const PATOL=[
+ {n:1,name:'Shock séptico',fluid:'Cristaloide balanceado (Ringer Lactato)',why:'Menor incidencia de insuficiencia renal aguda y menor mortalidad a 30 y 90 días frente al suero fisiológico (SMART).',ev:'IB'},
+ {n:2,name:'Sepsis no complicada',fluid:'Cristaloide balanceado',why:'Reducción de eventos adversos renales mayores en pacientes no críticos (SALT-ED).',ev:'IB'},
+ {n:3,name:'Traumatismo craneoencefálico grave (TCE)',fluid:'Suero salino 0,9%',why:'Evita la hipotonicidad relativa del Ringer Lactato y el posible aumento de presión intracraneal.',ev:'IIIB'},
+ {n:4,name:'Hemorragia activa',fluid:'Cristaloide balanceado mientras se prepara la transfusión',why:'Evitar expansión excesiva antes de la hemostasia (resucitación controlada).',ev:'IIB'},
+ {n:5,name:'Pancreatitis aguda',fluid:'Ringer Lactato',why:'Menor respuesta inflamatoria sistémica y mejor control metabólico.',ev:'IIA'},
+ {n:6,name:'Cetoacidosis diabética',fluid:'Iniciar con SSF; transición precoz a Ringer Lactato según K⁺ y pH',why:'Evitar cargas de cloruro excesivas si hay acidosis.',ev:'IIIB'},
+ {n:7,name:'Coma hiperosmolar / hipernatremia',fluid:'Glucosado 5% o salino hipotónico 0,45%',why:'Aporte de agua libre para corregir la hipernatremia.',ev:'IIB'},
+ {n:8,name:'Hiponatremia sintomática grave',fluid:'Salino hipertónico 3% bajo monitorización estricta',why:'Corrección controlada del sodio con vigilancia estrecha.',ev:'IB'},
+ {n:9,name:'Insuficiencia renal aguda o riesgo de LRA',fluid:'Cristaloides balanceados; evitar SSF 0,9% en bolos sucesivos',why:'El exceso de cloro puede deteriorar la función renal.',ev:'IB'},
+ {n:10,name:'Riesgo de sobrecarga o cardiopatía',fluid:'Usar fluidos con precaución y monitorización estrecha',why:'Evitar el mantenimiento innecesario.',ev:'IIB'}
+];
+const CASOS=[
+ {t:'Dieta absoluta',items:['Aporte hídrico: 30–35 ml/kg/día (2.000–3.000 ml/día de agua).','Glucosa: 100–150 g/día para minimizar el catabolismo proteico y prevenir la cetosis.','Sodio: 1–3 mEq/kg/día (50–150 mEq/día). Potasio: 1 mEq/kg/día (40–60 mEq/día).','Habitual: 2.000–3.000 ml de S. fisiológico alternado con S. glucosalino al 5% (50% de cada tipo) en 24 horas.']},
+ {t:'Shock hipovolémico',items:['Evitar soluciones hipotónicas (aumentan el volumen extravascular).','Administrar sangre si Hto <30%.','Iniciar perfusión con cristaloides (S. fisiológico 0,9% o Ringer Lactato): 500 ml en 15–20 min.','Valorar respuesta hemodinámica (TA, FC, PVC): mejoría con aumento de PVC <3 mmHg, continuar; sin mejoría y aumento de PVC >5 mmHg, suspender la perfusión; sin respuesta a cristaloides, iniciar coloides (albúmina).','Utilizar vasoactivos si se precisa (noradrenalina, dopamina, dobutamina).']},
+ {t:'Hemorragia digestiva alta',items:['Leve (sin criterios de gravedad): Ringer Lactato o S. fisiológico 0,9%; concentrados de hematíes si Hto <30%.','Grave (criterios de gravedad, atención al ABCDE y signos de perfusión): cristaloides + coloides; concentrado de hematíes si Hto <30%; transfusión de plaquetas si <50.000.']},
+ {t:'Gastroenteritis aguda',items:['Tener en cuenta los requerimientos diarios más las pérdidas estimadas.','Opción 1: S. glucosalino (2.000–3.000 ml) + 40 mEq de ClK + pérdidas estimadas.','Opción 2: S. fisiológico 0,9% (1.500 ml) + S. glucosado 5% (1.500 ml) + 20 mEq/L de ClK + pérdidas estimadas.']},
+ {t:'Cetoacidosis diabética (pauta)',items:['De elección: S. fisiológico 0,9%.','Cuando la glucemia sea <300 mg/dL: S. glucosado 5% (mantener la perfusión de insulina i.v.).','Si osmolaridad >340 mOsm/L o Na >145 mEq/L: S. salino hipotónico 0,45%.','Shock o hipotensión: coloides a 50–100 ml/kg: 1.000 ml (primeros 30 min) + 1.000 ml (siguiente hora) + 500 ml/h (siguientes 4 h) + 250 ml/h (siguientes 8 h); total hasta 8 L.','Potasio: si K <3,3 mEq/L, corrección precoz antes de iniciar la insulina; si K >5,3 mEq/L, no añadir suplementación hasta que baje de 5,3.']},
+ {t:'Coma hiperosmolar',items:['Na >145 mEq/L con normotensión: S. salino hipotónico 0,45%.','Na <145 mEq/L con hipotensión: S. fisiológico 0,9%.','Glucemia <250 mg/dL: S. glucosado 5% o glucosalino.','Evitar coloides (aumentan la viscosidad sanguínea); solo en caso de shock.','Ritmo 150–200 ml/kg (unos 10 L/24 h): 1.000 ml/h (primeras 2 h) + 500 ml/h (siguientes 10 h) + 250 ml/h (siguientes 12 h).']},
+ {t:'Hiponatremia',items:['Lo más importante es tratar la causa que la provoca.','Moderada (Na 115–125 mEq/L): restricción de líquidos totales a 500–1.000 ml/día (S. fisiológico).','Severa (Na <115 mEq/L): salino hipertónico. Con insuficiencia cardiaca: añadir diuréticos del asa (furosemida) e inotrópicos. Con depleción de volumen: salino isotónico hasta VEC normal.','Ritmo lento: la mitad de los mEq calculados en 12 h y el resto en 24–36 h.']},
+ {t:'Hipernatremia',items:['Déficit de agua = 0,6 × peso (kg) × [1 − (Na deseado / Na actual)].','De elección: agua libre oral o S. glucosado 5% intravenoso.','Con depleción de volumen: salino hipotónico o isotónico. Con expansión de volumen: diuréticos i.v., o diálisis si hay insuficiencia renal severa.','Ritmo lento para evitar edema cerebral: la mitad del déficit en las primeras 12–24 h y el resto en 24–36 h.']}
+];
+const FLUIDOS=[
+ {n:'Glucosado 5%',g:'Glucosadas',ton:'Isotónica',comp:'50 g/L de glucosa (200 kcal/L)',note:'35 g para un paciente de 70 kg: 700 ml/h. Actúa como agua libre; no sirve para expandir volumen.',ind:'Mantenimiento energético, hiperpotasemia, hipernatremia.',con:'Hiponatremia, mantenimiento hídrico, hipopotasemia, hiperlactacidemia, hiperglucemia, accidente cerebrovascular agudo.'},
+ {n:'Glucosado 10%',g:'Glucosadas',ton:'Hipertónica',comp:'100 g/L (400 kcal/L)',note:'35 g para 70 kg: 350 ml/h. En diabéticos: 1 UI de insulina rápida por cada 4 g de glucosa.',ind:'Aporte calórico.',con:'Como los glucosados.'},
+ {n:'Glucosado 20%',g:'Glucosadas',ton:'Hipertónica',comp:'200 g/L (800 kcal/L)',note:'35 g para 70 kg: 175 ml/h. En diabéticos: 1 UI de insulina rápida por cada 4 g de glucosa.',ind:'Aporte calórico.',con:'Como los glucosados.'},
+ {n:'Glucosado 40%',g:'Glucosadas',ton:'Hipertónica',comp:'400 g/L (1.600 kcal/L)',note:'35 g para 70 kg: 90 ml/h. Útil en hiperpotasemia junto con 1 UI de insulina rápida por cada 4 g de glucosa en diabéticos.',ind:'Hiperpotasemia (con insulina).',con:'Como los glucosados.'},
+ {n:'Fisiológico 0,9% (SSF)',g:'Salinas',ton:'Isotónica',comp:'9 g de ClNa (154 mEq/L de Na⁺ y Cl⁻)',note:'Tras reponer 1 L, solo el 20–30% permanece en el espacio vascular a las 2 h; hacen falta 3–4 veces el volumen perdido. Hasta 150–300 ml/h; mínimo 500 ml en dieta absoluta. Su administración incontrolada puede generar acidosis hiperclorémica. De elección en hiperpotasemia grave.',ind:'Mantenimiento hídrico, hipovolemia, hiponatremia, alcalosis metabólica, hipopotasemia, accidente cerebrovascular agudo.',con:'Acidosis metabólica hiperclorémica, insuficiencia renal, sobrecarga hídrica, hipernatremia, HTA, cirrosis hepática.'},
+ {n:'Salina al 2%',g:'Salinas',ton:'Hipertónica',comp:'20 g de ClNa (342 mEq de Na y Cl)',note:'Indicación fundamental: hiponatremia verdadera. Para reponer hipovolemia, máximo 3 L. Nunca superar 100 ml/h.',ind:'Patología intracraneal, insuficiencia cardiaca con furosemida, hiponatremia aguda.',con:'Hipernatremia, insuficiencia renal, cirrosis hepática.'},
+ {n:'Salina al 3% y 7,5%',g:'Salinas',ton:'Hipertónica',comp:'Se parte de fisiológico y se añade ClNa al 20%',note:'El 7,5% expande 6–7 veces el volumen administrado, mejora la contractilidad cardiaca, vasodilata la coronaria, aumenta el filtrado glomerular y reduce la PIC. Dosis: 4 ml/kg en bolo i.v. único en 2–5 minutos. Efecto corto (<1 h) y efectos adversos importantes.',ind:'Patología intracraneal, insuficiencia cardiaca con furosemida, hiponatremia aguda.',con:'Hipernatremia, insuficiencia renal, cirrosis hepática.'},
+ {n:'Hipotónica 0,45%',g:'Salinas',ton:'Hipotónica',comp:'4,5 g/L de ClNa (75 mEq de Na y Cl)',note:'Tratamiento inicial de hipernatremia grave y descompensación hiperglucémica hiperosmolar no cetósica. No sobrepasar 1.000 ml/h ni 2.000 ml/día. No expande volumen.',ind:'Mantenimiento hídrico, hipernatremia hipopotasémica, postoperatorio.',con:'Sobrecarga hídrica. Contraindicada en normonatremia.'},
+ {n:'Glucosalino',g:'Mixtas',ton:'Hipotónica',comp:'33 g de glucosa y 3 g de ClNa (51,3 mEq de Na⁺ y Cl⁻); 132 kcal/L',note:'Indicado en mantenimiento y descompensación hiperosmolar no cetósica.',ind:'Mantenimiento energético, hiperpotasemia, hipernatremia, postoperatorio.',con:'Sobrecarga hídrica, hiperglucemia, hiponatremia (pediatría).'},
+ {n:'Glucosalina 1/5',g:'Mixtas',ton:'Isotónica',comp:'50 g de glucosa y 1,8 g de ClNa; 200 kcal/L',note:'Uso pediátrico.',ind:'Uso pediátrico.',con:'—'},
+ {n:'Ringer',g:'Polielectrolíticas',ton:'Isotónica',comp:'8,5 g/L de ClNa (157 mEq de Cl⁻, 147 mEq de Na⁺), K⁺ 4 mEq, Ca²⁺ 6 mEq',note:'Indicado fundamentalmente en la reposición del déficit del espacio extracelular.',ind:'Reposición del déficit extracelular.',con:'—'},
+ {n:'Ringer Lactato (RL)',g:'Polielectrolíticas',ton:'Isotónica',comp:'Na⁺ 130, Cl⁻ 109, lactato 28, K⁺ 4, Ca²⁺ 3 mEq/L',note:'Efecto sobre el volumen similar al salino. Principal indicación: deshidratación extracelular con acidosis metabólica. Puede dificultar la interpretación del ácido láctico en el shock. Menor riesgo de acidosis y de efectos renales adversos.',ind:'Cirugía, traumatismo, cetoacidosis diabética, grandes quemaduras, pancreatitis aguda.',con:'Alcalosis metabólica severa, acidosis láctica, hiperpotasemia severa, riesgo de edema cerebral, co-administración con citrato, bicarbonato o ceftriaxona, insuficiencia hepática.'},
+ {n:'Plasma-Lyte®',g:'Polielectrolíticas',ton:'Isotónica',comp:'Solución balanceada con acetato y gluconato como tampones, sin Ca²⁺',note:'Más fisiológica, bien tolerada y neutra en pH.',ind:'Cetoacidosis diabética, acidosis láctica, hipernatremia hipopotasémica, pancreatitis aguda.',con:'Hiperpotasemia, insuficiencia renal, bloqueo cardiaco, alcalosis metabólica o respiratoria, hipoclorhidria.'},
+ {n:'Bicarbonato 1M',g:'Correctoras de pH',ton:'Hipertónica',comp:'1.000 mEq de bicarbonato por litro',note:'Dosis diaria: 0,5–3 mEq/kg (35–210 ml para un paciente de 70 kg).',ind:'Acidosis metabólica láctica y cetósica.',con:'—'},
+ {n:'Bicarbonato 1/6M',g:'Correctoras de pH',ton:'Hipertónica',comp:'14 g de bicarbonato sódico por litro (166 mEq)',note:'Dosis diaria: 0,5–3 mEq/kg (210–1.260 ml/día para 70 kg). Mismas indicaciones que el 1M.',ind:'Acidosis metabólica láctica y cetósica.',con:'—'},
+ {n:'Albúmina 20%',g:'Coloides',ton:'',comp:'Coloide natural derivado de la sangre',note:'Estudio ALBIOS: menor mortalidad a 90 días en shock séptico. Contras: baja calidad de la evidencia, coste elevado, riesgo potencial de transmisión de microorganismos; mayor mortalidad en TCE. No debe considerarse de uso rutinario.',ind:'Hipovolemia y grandes quemaduras (tras cristaloides); PBE, paracentesis evacuadora, síndrome hepatorrenal, shock séptico con alto requerimiento de ClNa.',con:'Fallo cardiaco severo, anemia severa, administración simultánea de sangre.'},
+ {n:'Coloides sintéticos',g:'Coloides',ton:'',comp:'Gelatinas, dextranos y almidones',note:'Uso limitado en Urgencias por riesgos y mayor coste. Los almidones (hidroxietil-almidón) están en desuso por nefrotoxicidad. Pueden causar reacciones anafilactoides y coagulopatía dilucional.',ind:'Hipovolemia hemorrágica (tras infusión de cristaloides).',con:'Anafilaxia, prurito.'}
+];
+const DIAG=[
+ {k:'',l:'Sin especificar'},
+ {k:'shock_septico',l:'Shock séptico',fluid:'Cristaloide balanceado (Ringer Lactato)',avoid:'',ref:'§G.1, nivel IB'},
+ {k:'sepsis',l:'Sepsis no complicada',fluid:'Cristaloide balanceado',avoid:'',ref:'§G.2, nivel IB'},
+ {k:'tce',l:'TCE grave',fluid:'Suero salino 0,9%',avoid:'Ringer Lactato (hipotonicidad relativa, posible aumento de PIC)',ref:'§G.3, nivel IIIB'},
+ {k:'hemorragia',l:'Hemorragia activa',fluid:'Cristaloide balanceado mientras se prepara la transfusión',avoid:'Expansión excesiva antes de la hemostasia',ref:'§G.4, nivel IIB'},
+ {k:'pancreatitis',l:'Pancreatitis aguda',fluid:'Ringer Lactato',avoid:'',ref:'§G.5, nivel IIA'},
+ {k:'cad',l:'Cetoacidosis diabética',fluid:'SSF al inicio; transición precoz a Ringer Lactato según K⁺ y pH',avoid:'Cargas de cloruro excesivas si hay acidosis',ref:'§G.6, nivel IIIB'},
+ {k:'hiperosm',l:'Coma hiperosmolar / hipernatremia',fluid:'Glucosado 5% o salino hipotónico 0,45%',avoid:'Coloides (viscosidad), salvo shock',ref:'§G.7, nivel IIB'},
+ {k:'hipona',l:'Hiponatremia sintomática grave',fluid:'Salino hipertónico 3% con monitorización estricta',avoid:'Corrección rápida: mitad de los mEq en 12 h, resto en 24–36 h',ref:'§G.8, nivel IB'},
+ {k:'ira',l:'Insuficiencia renal aguda / riesgo de LRA',fluid:'Cristaloides balanceados',avoid:'SSF 0,9% en bolos sucesivos',ref:'§G.9, nivel IB'},
+ {k:'cardio',l:'Riesgo de sobrecarga / cardiopatía',fluid:'Fluidos con precaución y monitorización estrecha',avoid:'Mantenimiento innecesario',ref:'§G.10, nivel IIB'},
+ {k:'shock_hipovol',l:'Shock hipovolémico',fluid:'Cristaloides (SSF 0,9% o Ringer Lactato) 500 ml en 15–20 min',avoid:'Soluciones hipotónicas',ref:'Casos específicos'},
+ {k:'hda',l:'Hemorragia digestiva alta',fluid:'Leve: Ringer Lactato o SSF. Grave: cristaloides + coloides',avoid:'',ref:'Casos específicos'},
+ {k:'gea',l:'Gastroenteritis aguda',fluid:'Glucosalino + 40 mEq ClK, o SSF 1.500 ml + glucosado 5% 1.500 ml + ClK',avoid:'',ref:'Casos específicos'},
+ {k:'dieta',l:'Dieta absoluta (mantenimiento)',fluid:'SSF alternado con glucosalino 5% (50/50), 2.000–3.000 ml en 24 h',avoid:'Glucosado 5% aislado o hipotonicidad excesiva',ref:'Casos específicos / §K'},
+ {k:'otro',l:'Otro',fluid:'Individualizar según estado hemodinámico, función renal, electrolitos y comorbilidades (§G)',avoid:'',ref:'§G'}
+];
+const KB=[];const add=(sec,title,text,tags='')=>KB.push({sec,title,text,tags});
+add('Datos del documento','Identificación del PNT','Documento operativo «Uso de la fluidoterapia en Urgencias», Área Sanitaria Norte de Málaga. Versión 1.0, 3 de diciembre de 2025. Autora: Carmen Gómez Pérez, médico SCCU. Revisión cada 3 años o antes si cambia la evidencia o las guías. Anexo: tríptico imprimible aparte (SUH, Hospital Comarcal de Antequera).','autor versión fecha tríptico');
+add('Datos del documento','Ámbito de aplicación y destinatarios','Servicio de Urgencias y Emergencias Hospitalarias, Servicios de Urgencias de Atención Primaria (SUAP) y Dispositivos de Cuidados Críticos y Urgencias (DCCU) del Área Sanitaria Norte de Málaga. Destinatarios: profesionales del área. Aplica en urgencias hospitalarias y extrahospitalarias (UVI móvil, puntos de atención urgente) siempre que la fluidoterapia forme parte del tratamiento.','ámbito SUAP DCCU destinatarios alcance');
+add('§2 Objeto','Objetivo general y específicos','Establecer un procedimiento estandarizado para usar la fluidoterapia i.v. de forma segura, eficaz y basada en la evidencia: optimizar la reanimación hemodinámica, manejar desequilibrios hidroelectrolíticos, prevenir complicaciones y usar los recursos de forma racional. Específicos: guiar la selección del fluido, priorizar soluciones balanceadas frente al SSF 0,9% cuando esté indicado, minimizar acidosis hiperclorémica, sobrecarga y disfunción renal, fijar criterios de monitorización, estandarizar la actuación ante hipovolemia, sepsis, deshidratación y shock, y ajustar la prescripción a la indicación clínica.','objetivo');
+add('§3 Alcance','Profesionales y funciones','Médicos de urgencias: valoración, indicación, elección de tipo y volumen, supervisión. MIR: evaluación y ejecución bajo supervisión. Enfermería: preparación, administración y monitorización, registro de constantes, balances y complicaciones. TCAE: seguimiento y apoyo con dispositivos de perfusión. Coordinación o jefatura: implantación, formación y evaluación de calidad.','médicos enfermería TCAE MIR responsabilidades');
+add('§4 Definiciones','Términos clave','Fluidoterapia: administración i.v. de soluciones para mantener o restaurar equilibrio hidroelectrolítico, volumen intravascular y pH. Cristaloides: sales y/o azúcares que atraviesan las membranas capilares y se distribuyen en el espacio extracelular. Soluciones balanceadas: composición iónica parecida al plasma (poco cloro, lactato o acetato); menor riesgo de acidosis hiperclorémica. Coloides: moléculas grandes que permanecen en el espacio intravascular. Acidosis hiperclorémica: aumento del cloro sérico tras grandes volúmenes de SSF 0,9%, que reduce el bicarbonato. Balance hídrico: líquidos administrados menos eliminados. Perfusión guiada por objetivos (GPO): fluidoterapia basada en parámetros clínicos y hemodinámicos.','definiciones coloides cristaloides balanceadas GPO abreviaturas');
+add('§5.A-B','Indicaciones generales','Hipovolemia (pérdidas digestivas, hemorrágicas, renales, cutáneas o tercer espacio); shock séptico y distributivo; alteraciones metabólicas (cetoacidosis, hiperosmolaridad, hiponatremia, hipercalcemia); deshidratación moderada-grave sin hidratación oral posible; quemaduras extensas; cirugía o procedimientos con riesgo de inestabilidad; mantenimiento en ayuno prolongado; reposición de electrolitos o corrección ácido-base; dilución de fármacos. No administrar por inercia: debe haber una finalidad terapéutica concreta y monitorización estrecha.','indicaciones');
+add('§5.B','Ejemplos reales de indicación','Causas vasculares: hemorragias agudas (digestivas, politraumas). Gastrointestinales: diarrea, vómitos, fístulas, aspiración por SNG. Renales: pérdidas de solutos (diuréticos, glucosuria, cetonuria) o de agua (intoxicación alcohólica, diabetes insípida, IRA poliúrica). Cutáneas: grandes quemados, diaforesis profunda, hipertermia. Tercer espacio: pancreatitis, peritonitis, sepsis, obstrucción intestinal, rabdomiólisis, EAP no cardiogénico. Capacidad vascular: shock séptico, lesiones medulares, disfunción autonómica, vasodilatadores.','ejemplos causas pérdidas');
+add('§5.B Tabla 1','Necesidades diarias (tabla 1)','Peso 0–10 kg: 100 ml/kg. 11–20 kg: 1.000 ml + 50 ml por cada kg por encima de 10. Más de 20 kg: 1.500 ml + 20 ml por cada kg por encima de 20 (hasta la edad adulta). Adulto: 30–35 ml/kg. Sodio 40–80 mEq/día; potasio 40–60 mEq/día; calorías 150–500 g de glucosa (600–2.000 kcal).','tabla necesidades pediátrico peso');
+add('§5.D','Las 5R de NICE (CG174)','1 Resucitación: restaurar volumen y perfusión en hipovolemia grave o shock; cristaloide isotónico; 500 ml en bolo, repetible hasta 3 veces más cada 15 min; si 4 bolos de 500 ml en 1 h sin mejoría, valorar vasoactivos e ingreso en UCI. 2 Reposición: pérdidas activas, pasivas o previsibles; fluido según el tipo de pérdida; monitorizar iones, diuresis y balance. 3 Mantenimiento rutinario: aporte diario en quien no puede comer ni beber y no tiene pérdidas excesivas. 4 Redistribución: edemas, sepsis, hipoalbuminemia, SIRS; valoración individualizada, posible combinación de cristaloides, diuréticos o albúmina. 5 Reevaluación: valoración continua tras cada bolo o cambio de pauta.','5R NICE resucitación reposición mantenimiento redistribución reevaluación bolo');
+add('§5.D.3','Mantenimiento: cifras orientativas (sección D)','Agua 30–35 ml/kg/día; sodio 1–2 mEq/kg/día; potasio 0,5–1 mEq/kg/día; glucosa para prevenir cetosis 150–500 g/día (600–2.000 kcal). Evitar mantenimiento excesivo en pacientes con comorbilidades.','mantenimiento agua sodio potasio glucosa');
+add('§5.J','Mantenimiento: cifras NICE 2024 (sección J)','Adulto estándar (50–100 kg): agua 25–30 ml/kg/día; sodio 1 mmol/kg/día; potasio 1 mmol/kg/día; glucosa 50–100 g/día para evitar cetosis. Ejemplo de 70 kg: unos 2.000 ml/día, Na y K unos 70 mEq/día, 2 L de glucosado 5% = 100 g. En pacientes con comorbilidades (IC, IR, EPOC, hepatopatía) reducir el aporte a 20–25 ml/kg/día y vigilar el balance. Nota: el documento da 30–35 ml/kg/día en la sección D y 25–30 en la J.','mantenimiento NICE 2024 comorbilidades');
+add('§5.J','Reposición de pérdidas y cálculo práctico','Vómitos: Na 60, K 10, Cl 90 mEq/L; SSF ± KCl. Diarrea: Na 30–50, K 30–40, HCO3 30; Ringer Lactato ± KCl. Drenaje biliar: Na 145, Cl 105, HCO3 50; Ringer Lactato o suero mixto. Pérdidas urinarias osmóticas: solución mixta con control de Na y osmolaridad. Volumen: digestivas 500–1.000 ml por episodio o lo medido en drenajes; cutáneas (quemaduras, fiebre) añadir 10–15% de los requerimientos basales; hemorragia: expansión inicial 3:1 (cristaloide:sangre) hasta controlar la hemostasia. Ejemplo (70 kg, diarrea moderada y ayuno): mantenimiento 1.750–2.100 ml + reposición 1.000 ml = unos 3.000 ml/día en 3–4 perfusiones.','reposición pérdidas vómitos diarrea cálculo 3:1');
+add('§5.E','Distribución de los fluidos','Agua corporal total ~60% del peso (50–60% mujeres, 60–70% hombres): intracelular 40%, extracelular 20% (intravascular 5%, intersticial 15%). En 70 kg: ~42 L (28 L intracelular, 10,5 L intersticial, 3,5 L intravascular). Los cristaloides se reparten entre intravascular (25%) e intersticial (75%): 1.000 ml de Ringer Lactato dejan ~250 ml en el espacio vascular. Por eso en hipovolemia o shock hay que dar más volumen que el déficit intravascular estimado. El glucosado 5% actúa como agua libre y no expande volumen. Los coloides permanecen más tiempo en el espacio vascular.','agua corporal compartimentos distribución intravascular');
+add('Tríptico y presentación','Volumen que queda en el vaso 1 h después de 1.000 ml','Glucosado 5%: 83 ml. Salino 0,45%: 167 ml. Salino 0,9%: 250 ml. Albúmina: 900 ml (adaptado de Frost et al. y del Boletín de Información Terapéutica de Navarra).','intravascular retención hora albúmina');
+add('Presentación','Tercer espacio','Espacio anormal donde se acumulan líquidos que no circulan ni sirven para mantener la presión arterial ni la hidratación efectiva. Puede acumularse en peritoneo (ascitis), pulmones (edema pulmonar o derrame pleural), intestino (distensión y edema) y tejidos blandos (edema generalizado).','tercer espacio ascitis edema');
+add('§5.F','Monitorización de la fluidoterapia','Tras cada bolo y periódicamente con balance hídrico en fluidoterapia basal. Clínica: FC, TA, FR, SatO2, turgencia y relleno capilar, nivel de conciencia, signos de congestión (edemas, crepitantes, ingurgitación yugular). Diuresis objetivo >0,5 ml/kg/h (ideal >1 ml/kg/h en críticos); balance cada 6–8 h; oliguria (<0,5 ml/kg/h) o anuria obliga a reevaluar de inmediato. Analítica: creatinina, urea, filtrado glomerular, Na, K, Cl, Mg, gasometría, Hb/Hto, lactato. Avanzada: PVC (normal 6–12 cmH2O, limitada como único parámetro); POCUS con vena cava inferior colapsable >50% (hipovolemia), líneas B pulmonares (sobrecarga) y ecocardioscopia. Revisar la pauta al menos una vez al día (cada 4–6 h en críticos): ¿sigue siendo necesaria?, ¿ha respondido?, ¿hay sobrecarga o mala perfusión?','monitorización diuresis balance PVC ecografía VCI lactato');
+add('§5.I','Fluidoterapia guiada por objetivos','Objetivos: FC <100 lpm; TAM ≥65 mmHg; diuresis ≥0,5 ml/kg/h; normalización de la conciencia; descenso del lactato >10%/h; relleno capilar <2 s. Evaluación dinámica: elevación pasiva de piernas (simula un bolo de 300 ml; si mejora TA o gasto cardiaco, es respondedor); variación de presión de pulso o VCI por ecografía (colapsable >50% sugiere hipovolemia; dilatada y no colapsable, riesgo de sobrecarga). Principios: bolos fraccionados de 250–500 ml de cristaloides isotónicos; reevaluar tras cada uno; suspender si no hay mejora o hay sobrecarga; priorizar balanceados en críticos salvo contraindicación.','GPO objetivos TAM PLR elevación piernas lactato');
+add('§5.G','Recomendaciones por patología: método y niveles de evidencia','La elección del fluido se individualiza según estado hemodinámico, función renal, electrolitos y comorbilidades (estudios SMART, SALT-ED, guías ESICM y NICE). Aclaración del documento: los niveles de evidencia (IA, IIA, IIIB…) no vienen de los estudios primarios sino de cómo los valoran guías oficiales (ESICM, Surviving Sepsis Campaign, NICE, Cochrane) con metodología GRADE u otros sistemas. Los niveles de evidencia y grados de recomendación del anexo siguen la escala SIGN (1++ a 4; grados A–D).','evidencia SIGN GRADE SMART SALT-ED');
+add('Presentación','Recomendaciones ESICM 2024 (resumen)','Albúmina o cristaloides: en crítico general, usar cristaloides (evidencia moderada); en sepsis, cristaloides (moderada); en insuficiencia respiratoria aguda y en sangrado o riesgo de sangrado, cristaloides (muy baja); en TCE, solución salina isotónica (muy baja); en cirrosis, albúmina (muy baja). Balanceados o salina isotónica: crítico general y sepsis, balanceados (baja); TCE, salina isotónica (muy baja); lesión renal, balanceados (muy baja). Hipertónicos de pequeño volumen o isotónicos: isotónicos (muy baja). Fuente: Arabi YM et al., Intensive Care Med 2024;50(6):813-31.','ESICM albúmina cristaloides guía');
+add('Presentación','Fase de reanimación del enfermo crítico: SSF, Ringer Lactato, albúmina','SSF 0,9%: tradicionalmente el más usado; el cloro puede causar acidosis hiperclorémica; de primera elección si se vigila esa acidosis; si aparece, usar balanceadas; de elección en hiperpotasemia grave; no hay ensayos que comparen cristaloides entre sí, solo estudios retrospectivos. Ringer Lactato: expansión similar al salino; no causa acidosis hiperclorémica; la lactacidemia suele desaparecer en 24 h; desaconsejado en TCE por riesgo de HTIC; menos fracaso renal y menos terapia de reemplazo renal (SMART y SALT-ED, NEJM 2018); asociado a menor mortalidad en shock séptico; sin datos significativos en politrauma grave, TCE grave, HSA o deshidratación; recomendado si hipercloremia tras mucho salino; evitar en hiperpotasemia grave por su potasio. Albúmina 20%: ver Fluidos.','crítico reanimación SMART SALT-ED ALBIOS');
+add('§5.H','Complicaciones','La fluidoterapia es un fármaco más: indicación, dosis, seguimiento y reevaluación. Sobrecarga de volumen (edemas, ingurgitación yugular, disnea, crepitantes, ganancia de peso). Acidosis metabólica hiperclorémica por SSF (descenso del bicarbonato, acidosis sin anión gap, puede deteriorar la función renal). Alteraciones electrolíticas: hiponatremia por hipotónicas o glucosado como mantenimiento, hipernatremia por pérdida de agua libre no corregida, hipopotasemia por fluidoterapia prolongada sin K, hiperpotasemia en insuficiencia renal o con soluciones con potasio. Reacciones a coloides: anafilactoides, coagulopatía dilucional, nefrotoxicidad (HES). Mecánicas: extravasación con necrosis (hipertónicos o vesicantes por vía periférica), flebitis o infección del catéter, errores de prescripción.','complicaciones sobrecarga acidosis extravasación flebitis');
+add('§5.K','Recomendaciones prácticas','Considerar la fluidoterapia como un medicamento. Identificar el objetivo clínico antes de pautar. Elegir fluido según contexto: shock séptico, cristaloide balanceado; TCE, SSF 0,9%; mantenimiento, evitar glucosado 5% aislado o hipotonicidad excesiva. Pedir analítica y controlar el balance diario si recibe fluidos más de 24 h. Evitar el uso prolongado de SSF 0,9%. No administrar fluidos por inercia: revisar cada turno. Usar GPO en pacientes inestables. Recoger signos precoces de sobrecarga y suspender. Además: la solución perfectamente fisiológica no existe; los fármacos diluidos y los alimentos también aportan volumen; cuidado con insuficiencia renal, hepática y cardiaca; evitar correcciones hidroelectrolíticas excesivamente agresivas en alteraciones crónicas; vigilar diuresis, TA, FC, SatO2, iones y signos clínicos.','recomendaciones buenas prácticas');
+add('§6 Registros','Qué debe constar en la historia clínica','Indicación clínica y objetivo terapéutico (resucitación, mantenimiento, reposición…); tipo de fluido, composición y justificación si no es balanceado; volumen total, ritmo y número de bolos; monitorización asociada (constantes, diuresis, balance, analítica); reevaluaciones tras bolos o cambios de pauta; incidencias o complicaciones. Debe figurar en el parte de evolución médica, en los informes de enfermería y, si procede, en el consentimiento informado para tratamientos especiales.','registros historia clínica documentación');
+add('§7 Responsabilidades','Responsabilidades','Facultativos de Urgencias: prescripción, reevaluación y seguimiento; indicar objetivo, tipo y volumen en la historia. MIR: aplicar el procedimiento bajo supervisión del adjunto. Enfermería: preparación, administración y vigilancia; registrar la infusión, detectar sobrecarga, extravasación o reacciones y comunicar incidencias. Responsable médico de área o jefe de servicio: validar y actualizar el PNT, difundirlo y formar al personal.','responsabilidades');
+add('§8 Difusión','Plan de difusión','Sesión clínica general; documento digital en intranet o carpeta compartida; inclusión en el manual operativo del servicio; sesiones formativas para nuevos MIR al inicio de la rotación; actualizaciones periódicas (anuales o ante cambios); materiales de apoyo (chuletas, algoritmos, infografías) en zonas visibles; coordinación con Medicina Interna, Cuidados Intensivos y Anestesia, y con la Comisión de Farmacia o la Unidad de Calidad.','difusión formación');
+add('§9 Evaluación','Indicador de calidad','Prescripción adecuada de fluidoterapia en urgencias. Indicador cuantitativo de proceso: porcentaje de historias con indicación, tipo de fluido, volumen y objetivo clínico explícito. Fórmula: (prescripciones completas / total de fluidoterapias revisadas) × 100. Estándar óptimo ≥90%. Fuente: auditoría interna aleatoria de historias. Responsable: coordinador médico del Servicio de Urgencias. Revisión del PNT cada 3 años; actualización por el responsable médico con la Unidad de Calidad y la Comisión de Protocolos.','indicador evaluación auditoría estándar 90');
+add('§10 Bibliografía','Fuentes principales','Semler 2018 (SMART, NEJM) y Self 2018 (SALT-ED, NEJM); guía NICE CG174 (2013, actualizada 2017); guía ESICM sobre fluidos en crítico (Arabi 2024); Marik 2020 (sobrecarga y de-resucitación); Reyne 2023 (respuesta a fluidos); BIT Navarra 2016; manuales del Hospital 12 de Octubre y Virgen del Rocío; Jiménez Murillo, Medicina de urgencias y emergencias (7ª ed., 2023).','bibliografía referencias');
+PATOL.forEach(p=>add('§5.G.'+p.n,p.name,'Fluido de elección: '+p.fluid+'. '+p.why+' Nivel de evidencia: '+p.ev+'.','fluido elección patología'));
+CASOS.forEach(c=>add('Casos específicos',c.t,c.items.join(' '),'caso específico pauta'));
+FLUIDOS.forEach(f=>add('Fluidos: '+f.g,f.n,[f.ton,f.comp,f.note,'Indicaciones: '+f.ind,'Contraindicaciones: '+f.con].filter(Boolean).join('. '),'fluido composición indicaciones contraindicaciones'));
+add('NICE','Indicadores de necesidad de resucitación (algoritmo NICE)','PAS <100 mmHg, FC >90 lpm, relleno capilar >2 s o extremidades frías, FR >20 rpm, NEWS ≥5; la elevación pasiva de piernas a 45° con mejora sugiere respuesta a fluidos. Resucitación: bolo de 500 ml de cristaloide (Na 130–154 mmol/L) en menos de 15 minutos; reevaluar con ABCDE; si se han dado más de 2.000 ml o hay signos de shock, pedir ayuda experta. Si no precisa resucitación: valorar necesidades, ¿pueden cubrirse por vía oral o enteral?, ¿hay problemas complejos? Mantenimiento NICE: 25–30 ml/kg/día de agua, 1 mmol/kg/día de Na, K y Cl, 50–100 g/día de glucosa. Si el mantenimiento supera 3 días, preferible nutrición enteral o por sonda. No añadir potasio a las bolsas por vía i.v. (peligroso).','algoritmo NICE ABCDE NEWS');
+const PROTOCOL_TEXT=KB.map(e=>'['+e.sec+'] '+e.title+': '+e.text).join('\n');
+
+/* ============ tarjetas de repaso ============ */
+const CARDS=[
+['Principios','¿Cuáles son las 5R de NICE?','Resucitación, mantenimiento Rutinario, Reposición, Redistribución y Reevaluación.'],
+['Principios','¿Fluido y volumen inicial en la resucitación?','Cristaloide isotónico (fisiológico o balanceado), 500 ml en bolo, repetible hasta 3 veces más cada 15 minutos.'],
+['Principios','Cuatro bolos de 500 ml en 1 hora sin mejoría hemodinámica: ¿qué hacer?','Valorar vasoactivos e ingreso en UCI.'],
+['Principios','Indicadores NICE de posible necesidad de resucitación','PAS <100 mmHg, FC >90, relleno capilar >2 s o extremidades frías, FR >20, NEWS ≥5. La elevación pasiva de piernas con mejora sugiere respuesta a fluidos.'],
+['Principios','¿Con qué volumen total acumulado hay que pedir ayuda experta según el algoritmo NICE?','Más de 2.000 ml administrados (o signos de shock).'],
+['Principios','¿Qué es el tercer espacio?','Espacio anormal donde se acumula líquido que no circula ni sirve para mantener la presión arterial: ascitis, edema pulmonar o derrame pleural, edema intestinal, edema generalizado.'],
+['Principios','Distribución del agua corporal en un adulto de 70 kg','~42 L (60%): intracelular 28 L, intersticial 10,5 L, intravascular 3,5 L.'],
+['Principios','¿Qué porcentaje de un cristaloide queda en el espacio vascular?','Un 25% (1.000 ml de Ringer Lactato dejan ~250 ml).'],
+['Principios','Volumen que queda en el vaso 1 h después de 1.000 ml','Glucosado 5%: 83 ml. Salino 0,45%: 167 ml. Salino 0,9%: 250 ml. Albúmina: 900 ml.'],
+['Patologías','Fluido en shock séptico y por qué','Cristaloide balanceado (Ringer Lactato): menos IRA y menor mortalidad a 30 y 90 días (SMART). Nivel IB.'],
+['Patologías','Fluido en sepsis no complicada','Cristaloide balanceado; menos eventos renales mayores (SALT-ED). Nivel IB.'],
+['Patologías','Fluido en TCE grave','Suero salino 0,9%. Evitar Ringer Lactato por hipotonicidad relativa y posible aumento de PIC. Nivel IIIB.'],
+['Patologías','Fluido en hemorragia activa','Cristaloide balanceado mientras se prepara la transfusión, evitando expansión excesiva antes de la hemostasia. Nivel IIB.'],
+['Patologías','Fluido en pancreatitis aguda','Ringer Lactato. Nivel IIA.'],
+['Patologías','Fluido en insuficiencia renal aguda o riesgo de LRA','Cristaloides balanceados; evitar SSF 0,9% en bolos sucesivos. Nivel IB.'],
+['Patologías','Hiponatremia sintomática grave','Salino hipertónico 3% con monitorización estricta. Nivel IB.'],
+['Patologías','Cetoacidosis diabética: fluidos de elección','SSF 0,9% al inicio, con transición precoz a Ringer Lactato según K y pH. Con glucemia <300 mg/dL, glucosado 5% manteniendo la insulina.'],
+['Patologías','CAD: reglas del potasio','K <3,3 mEq/L: corrección precoz antes de la insulina. K >5,3 mEq/L: no añadir potasio hasta que baje de 5,3.'],
+['Patologías','Coma hiperosmolar: ritmo de infusión','150–200 ml/kg (~10 L/24 h): 1.000 ml/h 2 h, 500 ml/h 10 h, 250 ml/h 12 h.'],
+['Patologías','Shock hipovolémico: pasos','Evitar hipotónicas; sangre si Hto <30%; cristaloides 500 ml en 15–20 min; valorar respuesta (TA, FC, PVC); coloides si no responde; vasoactivos si precisa.'],
+['Patologías','Hemorragia digestiva alta: leve y grave','Leve: Ringer Lactato o SSF, hematíes si Hto <30%. Grave: cristaloides + coloides, hematíes si Hto <30%, plaquetas si <50.000.'],
+['Patologías','Hiponatremia moderada y severa','Moderada (Na 115–125): restricción a 500–1.000 ml/día de SSF. Severa (<115): salino hipertónico, ritmo lento (mitad de los mEq en 12 h, resto en 24–36 h).'],
+['Patologías','Hipernatremia: fluido y ritmo','Agua libre oral o glucosado 5% i.v.; la mitad del déficit en 12–24 h y el resto en 24–36 h para evitar edema cerebral.'],
+['Fluidos','¿Composición del SSF 0,9% y su riesgo?','154 mEq/L de Na y Cl. Acidosis hiperclorémica con grandes volúmenes.'],
+['Fluidos','¿Composición del Ringer Lactato?','Na 130, Cl 109, lactato 28, K 4, Ca 3 mEq/L.'],
+['Fluidos','Contraindicaciones del Ringer Lactato','Alcalosis metabólica severa, acidosis láctica, hiperpotasemia severa, riesgo de edema cerebral, co-administración con citrato, bicarbonato o ceftriaxona, insuficiencia hepática.'],
+['Fluidos','¿Qué es Plasma-Lyte y cuándo no usarlo?','Solución balanceada con acetato y gluconato, sin calcio. Contraindicada en hiperpotasemia, insuficiencia renal, bloqueo cardiaco, alcalosis metabólica o respiratoria e hipoclorhidria.'],
+['Fluidos','Salino hipertónico 7,5%: dosis y características','4 ml/kg en bolo i.v. único en 2–5 min; expande 6–7 veces lo administrado; efecto corto (<1 h) y efectos adversos importantes.'],
+['Fluidos','Salino 2%: límites','Indicación fundamental: hiponatremia verdadera. Máximo 3 L si se usa para hipovolemia; nunca más de 100 ml/h.'],
+['Fluidos','Salino hipotónico 0,45%','Hipernatremia grave y descompensación hiperosmolar no cetósica. Máximo 1.000 ml/h y 2.000 ml/día. Contraindicado en normonatremia.'],
+['Fluidos','Bicarbonato 1M: dosis diaria','0,5–3 mEq/kg (35–210 ml para 70 kg). Indicado en acidosis metabólica láctica y cetósica.'],
+['Fluidos','Albúmina 20%: indicaciones','PBE, paracentesis evacuadora, síndrome hepatorrenal, shock séptico con alto requerimiento de ClNa. No es de uso rutinario (ALBIOS).'],
+['Fluidos','Coloides sintéticos: riesgos','Reacciones anafilactoides, coagulopatía dilucional y nefrotoxicidad (almidones, en desuso).'],
+['Cálculos','Dosis máxima de glucosa y ejemplo','0,5 g/kg/h: 35 g/h en 70 kg. Equivale a 700 ml/h de G5%, 350 de G10%, 175 de G20% y 90 de G40%.'],
+['Cálculos','Insulina con soluciones glucosadas en diabéticos','1 UI de insulina rápida por cada 4 g de glucosa.'],
+['Cálculos','Fórmula del déficit de agua en hipernatremia','0,6 × peso (kg) × [1 − (Na deseado / Na actual)].'],
+['Cálculos','Mantenimiento: cifras de NICE 2024 del PNT','Agua 25–30 ml/kg/día, Na 1 mmol/kg/día, K 1 mmol/kg/día, glucosa 50–100 g/día. Con IC, IR, EPOC o hepatopatía, 20–25 ml/kg/día.'],
+['Cálculos','Estimación de pérdidas','Digestivas: 500–1.000 ml por episodio. Cutáneas (fiebre, quemaduras): +10–15% de los requerimientos basales. Hemorragia: expansión 3:1 (cristaloide:sangre).'],
+['Cálculos','Necesidades pediátricas (tabla 1)','0–10 kg: 100 ml/kg. 11–20 kg: 1.000 ml + 50 ml/kg por encima de 10. >20 kg: 1.500 ml + 20 ml/kg por encima de 20.'],
+['Monitorización','Diuresis objetivo','>0,5 ml/kg/h (ideal >1 ml/kg/h en críticos). Oliguria o anuria: reevaluación inmediata.'],
+['Monitorización','Objetivos de la fluidoterapia guiada','FC <100, TAM ≥65, diuresis ≥0,5 ml/kg/h, conciencia normal, lactato que baja >10%/h, relleno capilar <2 s.'],
+['Monitorización','Elevación pasiva de piernas','Simula un bolo de 300 ml; si mejora TA o gasto cardiaco, el paciente aún responde a fluidos.'],
+['Monitorización','Vena cava inferior por ecografía','Colapsable >50%: hipovolemia. Dilatada y no colapsable: riesgo de sobrecarga.'],
+['Monitorización','Frecuencia de balance y revisión de la pauta','Balance cada 6–8 h. Revisar la pauta al menos 1 vez al día (cada 4–6 h en críticos).'],
+['Monitorización','Valores normales de PVC','6–12 cmH2O (limitada como único parámetro).'],
+['Monitorización','Complicaciones de la fluidoterapia','Sobrecarga de volumen, acidosis hiperclorémica, alteraciones electrolíticas, reacciones a coloides y complicaciones mecánicas (extravasación, flebitis, errores de prescripción).'],
+['Documentación','¿Qué debe registrarse en la historia clínica?','Indicación y objetivo, tipo de fluido y justificación si no es balanceado, volumen, ritmo y bolos, monitorización, reevaluaciones e incidencias.'],
+['Documentación','Indicador de calidad del PNT','% de historias con indicación, tipo, volumen y objetivo clínico. Estándar ≥90%. Auditoría aleatoria; responsable: coordinador médico.'],
+['Documentación','¿Cada cuánto se revisa el PNT?','Cada 3 años, o antes si hay cambios relevantes en la evidencia o las guías.'],
+['Documentación','Ámbito de aplicación del PNT','SUH, SUAP y DCCU del Área Sanitaria Norte de Málaga.']
+];
+const TOPICS=['Todos',...new Set(CARDS.map(c=>c[0]))];
+
+/* ============ pestañas ============ */
+const TABS=[['inicio','Inicio'],['paciente','Paciente'],['calculadoras','Calculadoras'],['patologias','Patologías'],['fluidos','Fluidos'],['seguimiento','Seguimiento'],['preguntar','Preguntar'],['repasar','Repasar'],['exportar','Exportar']];
+const main=$('#main');
+main.innerHTML=TABS.map(t=>'<section id="p-'+t[0]+'" role="tabpanel" hidden></section>').join('');
+$('#tabs').innerHTML=TABS.map(t=>'<button role="tab" id="t-'+t[0]+'" data-tab="'+t[0]+'" aria-selected="false">'+t[1]+'</button>').join('');
+const built={};
+function show(id){
+  if(!TABS.some(t=>t[0]===id))id='inicio';
+  TABS.forEach(t=>{$('#p-'+t[0]).hidden=t[0]!==id;$('#t-'+t[0]).setAttribute('aria-selected',String(t[0]===id))});
+  if(!built[id]){built[id]=true;BUILD[id]()}
+  if(id==='paciente')refreshResult();
+  if(id==='exportar')refreshExport();
+  window.scrollTo({top:0});
+  $('#t-'+id).scrollIntoView({block:'nearest',inline:'center'});
+}
+document.addEventListener('click',e=>{const b=e.target.closest('[data-tab]');if(b)show(b.dataset.tab);const g=e.target.closest('[data-go]');if(g)show(g.dataset.go)});
+
+/* ============ algoritmo guiado ============ */
+const ALG={
+ start:{t:'¿Está el paciente hipovolémico o en shock?',d:'Valoración ABCDE. Indicadores de posible necesidad de resucitación (NICE): PAS <100 mmHg, FC >90 lpm, relleno capilar >2 s o extremidades frías, FR >20 rpm, NEWS ≥5. Si la elevación pasiva de piernas mejora la TA, sugiere respuesta a fluidos.',o:[['Sí, necesita resucitación','res'],['No','nec']]},
+ res:{t:'Resucitación',d:'Identificar la causa del déficit. Dar **500 ml de cristaloide isotónico** (SSF o balanceado) en bolo, en menos de 15 minutos. Reevaluar con ABCDE tras cada bolo.',o:[['Sigue necesitando resucitación','mas'],['Ya no la necesita','shock']]},
+ mas:{t:'¿Se han administrado más de 2.000 ml?',d:'Cuenta el volumen acumulado de bolos.',o:[['Sí','crit'],['No','otro']]},
+ otro:{t:'Otro bolo de 250–500 ml',d:'Administrar otro bolo de cristaloide y volver a reevaluar. Si con 4 bolos de 500 ml en 1 hora no hay mejoría hemodinámica, valorar vasoactivos e ingreso en UCI.',o:[['Reevaluar al paciente','res']]},
+ shock:{t:'¿Continúa con signos de shock?',d:'Tras la reevaluación.',o:[['Sí','crit'],['No','nec']]},
+ crit:{t:'Valorar paciente crítico',d:'Pedir ayuda experta y valorar interconsulta a UCI y uso de vasoactivos.',end:'crit'},
+ nec:{t:'¿Pueden cubrirse todas las necesidades de fluidos y electrolitos por vía oral o enteral?',d:'Evaluar las necesidades con anamnesis, exploración, monitorización y pruebas complementarias.',o:[['Sí','ent'],['No','comp']]},
+ ent:{t:'Nutrición e hidratación enteral',d:'Asegurar que se cubren las necesidades de nutrición y líquidos. Si el mantenimiento supera 3 días, es preferible la vía enteral (NICE).',end:'ok'},
+ comp:{t:'¿Tiene necesidad de fluidoterapia compleja?',d:'Déficits o excesos existentes, pérdidas anormales en curso, o alteración de la distribución de líquidos.',o:[['No','mant'],['Sí','prob']]},
+ mant:{t:'Sueroterapia de mantenimiento',d:'Usar la pauta de mantenimiento (ver Calculadoras y Paciente). Reevaluar y suspender cuando ya no sea necesaria.',end:'ok',go:'calculadoras'},
+ prob:{t:'¿Cuál es el problema?',d:'Elegir el grupo que mejor lo describe.',o:[['Redistribución','red'],['Pérdidas anormales actuales','per'],['Exceso o déficit de fluidos o electrolitos','exc']]},
+ red:{t:'Redistribución',d:'Edemas, sepsis grave, hipo o hipernatremia, insuficiencia cardiaca, renal o hepática, malnutrición y síndrome de renutrición. Requiere valoración individualizada, posible combinación de cristaloides, diuréticos o albúmina, y monitorización estricta del balance y de los signos de sobrecarga.',end:'ok'},
+ per:{t:'Pérdidas actuales anormales',d:'Digestivas (vómitos, diarrea, ostomías), hemorragias activas, insensibles (sudoración, fiebre, fístula yeyunal) y urinarias (poliuria). Elegir el fluido según el tipo de pérdida, sumar la reposición al mantenimiento y monitorizar iones, diuresis y balance.',end:'ok',go:'calculadoras'},
+ exc:{t:'Exceso o déficit de fluidos y electrolitos',d:'Deshidratación, sobrecarga de fluidos, hipo o hiperpotasemia. Estimar el déficit o el exceso, ajustar fluidos y electrolitos a la situación y reajustar según la monitorización analítica y clínica.',end:'ok'}
+};
+let algPath=['start'];
+function renderAlg(){
+  const box=$('#alg');if(!box)return;
+  const id=algPath[algPath.length-1],n=ALG[id];
+  let h='<div class="trail">'+algPath.map(i=>esc(ALG[i].t.replace(/^¿|\?$/g,'').slice(0,34))).join(' › ')+'</div>';
+  h+='<h3 style="margin-top:8px">'+esc(n.t)+'</h3><p>'+fm(n.d)+'</p>';
+  if(n.end){h+=flagH(n.end==='crit'?'crit':'ok',n.end==='crit'?'Fin del algoritmo: paciente crítico.':'Fin del algoritmo. Reevaluar con regularidad.');
+    h+='<div class="alg-opts">'+(n.go?'<button class="btn ghost" data-go="'+n.go+'">Abrir calculadoras</button>':'')+'<button class="btn" data-alg="reset">Empezar de nuevo</button></div>'}
+  else h+='<div class="alg-opts">'+n.o.map(o=>'<button class="btn ghost" data-alg="'+o[1]+'">'+esc(o[0])+'</button>').join('')+'</div>';
+  if(algPath.length>1&&!n.end)h+='<div class="alg-opts"><button class="chip" data-alg="back">← Paso anterior</button></div>';
+  box.innerHTML=h;
+}
+document.addEventListener('click',e=>{const b=e.target.closest('[data-alg]');if(!b)return;const a=b.dataset.alg;
+  if(a==='reset')algPath=['start'];else if(a==='back')algPath.pop();else algPath.push(a);renderAlg()});
+
+/* ============ cálculos comunes ============ */
+const N=(v)=>{const x=parseFloat(String(v??'').replace(',','.'));return isFinite(x)?x:null};
+function volumes(w,o){
+  const lo=o.comorb?20:25,hi=o.comorb?25:35,mL=w*lo,mH=w*hi,mid=(mL+mH)/2;
+  let rL=(o.eps||0)*500,rH=(o.eps||0)*1000;
+  if(o.fiebre){rL+=mid*.10;rH+=mid*.15}
+  return {lo,hi,mL,mH,rL,rH,hem:(o.hem||0)*3,tL:mL+rL,tH:mH+rH};
+}
+function volHTML(w,o){
+  const v=volumes(w,o);
+  const L=[['Mantenimiento ('+v.lo+'–'+v.hi+' ml/kg/día)',fmt(v.mL)+'–'+fmt(v.mH)+' ml/día'],['Ritmo de mantenimiento',fmt(v.mL/24,0)+'–'+fmt(v.mH/24,0)+' ml/h'],['Sodio (1–2 mEq/kg/día)',fmt(w,0)+'–'+fmt(w*2,0)+' mEq/día'],['Potasio (0,5–1 mEq/kg/día)',fmt(w*.5,0)+'–'+fmt(w,0)+' mEq/día'],['Glucosa para evitar cetosis',' 50–100 g/día']];
+  if(o.eps||o.fiebre)L.push(['Reposición estimada de pérdidas',fmt(v.rL)+'–'+fmt(v.rH)+' ml/día'],['Total diario (3–4 perfusiones)',fmt(v.tL)+'–'+fmt(v.tH)+' ml/día']);
+  if(o.hem)L.push(['Cristaloide para hemorragia (3:1)','~'+fmt(v.hem)+' ml hasta controlar la hemostasia']);
+  return rows(L)+note('Rangos del PNT: agua 25–35 ml/kg/día (25–30 NICE 2024 en §J; 30–35 en §D), 20–25 si hay IC, IR, EPOC o hepatopatía. Sodio y potasio según §D. Glucosa 50–100 g/día (§J; la §D cita 150–500 g/día).');
+}
+const CALCS=[
+ {id:'hiperna',t:'Déficit de agua en hipernatremia',src:'PNT §D, casos específicos',f:[['peso','Peso','kg',70],['nac','Na actual','mEq/L',160],['nad','Na deseado','mEq/L',145]],
+  run:v=>{if(!(v.peso>0&&v.nac>0&&v.nad>0))return '';if(v.nad>=v.nac)return flagH('warn','El Na deseado debe ser menor que el actual.');
+   const d=.6*v.peso*(1-v.nad/v.nac),h=d/2;return rows([['Déficit de agua',fmt(d,2)+' L'],['Primera mitad, en 12–24 h',fmt(h,2)+' L ('+fmt(h*1000/24,0)+'–'+fmt(h*1000/12,0)+' ml/h)'],['Segunda mitad, en 24–36 h',fmt(h,2)+' L ('+fmt(h*1000/36,0)+'–'+fmt(h*1000/24,0)+' ml/h)']])+note('De elección: agua libre oral o glucosado 5% i.v. Con depleción de volumen: salino hipotónico o isotónico. Ritmo lento para evitar edema cerebral.')}},
+ {id:'gluc',t:'Aporte de glucosa y insulina',src:'PNT §C, soluciones glucosadas',f:[['peso','Peso','kg',70],['sol','Solución','',  'g5',['g5:Glucosado 5%','g10:Glucosado 10%','g20:Glucosado 20%','g40:Glucosado 40%']],['diab','Paciente diabético','',false,'chk']],
+  run:v=>{if(!(v.peso>0))return '';const gh=.5*v.peso,c={g5:50,g10:100,g20:200,g40:400}[v.sol];const L=[['Máximo recomendado (0,5 g/kg/h)',fmt(gh,1)+' g/h'],['Ritmo máximo de la solución',fmt(gh/c*1000,0)+' ml/h']];if(v.diab)L.push(['Insulina rápida (1 UI por 4 g)',fmt(gh/4,1)+' UI/h']);return rows(L)+note('Para 70 kg: 35 g/h = 700 ml/h de G5%, 350 de G10%, 175 de G20% y 90 de G40%. La relación de insulina vale para diabéticos con G10%, G20% y, en hiperpotasemia, G40%.')}},
+ {id:'bic',t:'Bicarbonato',src:'PNT §C, soluciones correctoras de pH',f:[['peso','Peso','kg',70],['dosis','Dosis','mEq/kg',1]],
+  run:v=>{if(!(v.peso>0&&v.dosis>0))return '';const m=v.peso*v.dosis;return (v.dosis<.5||v.dosis>3?flagH('warn','El PNT indica 0,5–3 mEq/kg/día.'):'')+rows([['Bicarbonato total',fmt(m,0)+' mEq'],['Bicarbonato 1M (1 mEq/ml)',fmt(m,0)+' ml'],['Bicarbonato 1/6M (166 mEq/L)',fmt(m/.166,0)+' ml']])+note('Soluciones hipertónicas, indicadas en acidosis metabólica láctica y cetósica. Rango diario del PNT: 35–210 ml de 1M o 210–1.260 ml de 1/6M para 70 kg.')}},
+ {id:'ped',t:'Necesidades hídricas pediátricas',src:'PNT §B, tabla 1',f:[['peso','Peso','kg',15]],
+  run:v=>{const w=v.peso;if(!(w>0))return '';const d=w<=10?100*w:w<=20?1000+50*(w-10):1500+20*(w-20);return rows([['Líquido diario',fmt(d,0)+' ml/día'],['Ritmo',fmt(d/24,0)+' ml/h']])+note('0–10 kg: 100 ml/kg. 11–20 kg: 1.000 ml + 50 ml/kg por encima de 10. Más de 20 kg: 1.500 ml + 20 ml/kg por encima de 20, hasta llegar a la edad adulta.')}},
+ {id:'rep',t:'Mantenimiento y reposición de pérdidas',src:'PNT §J',f:[['peso','Peso','kg',70],['eps','Episodios digestivos','n',2],['fiebre','Fiebre o quemaduras','',false,'chk'],['hem','Pérdida hemática estimada','ml',0],['comorb','IC, IR, EPOC o hepatopatía','',false,'chk']],
+  run:v=>v.peso>0?volHTML(v.peso,{eps:v.eps,fiebre:v.fiebre,hem:v.hem,comorb:v.comorb}):''},
+ {id:'dist',t:'¿Cuánto queda en el vaso?',src:'Tríptico y presentación',f:[['vol','Volumen infundido','ml',1000],['fl','Fluido','','sal',['glu:Glucosado 5%','s045:Salino 0,45%','sal:Cristaloide isotónico (SSF 0,9%)','alb:Albúmina']]],
+  run:v=>{if(!(v.vol>0))return '';const p={glu:.083,s045:.167,sal:.25,alb:.9}[v.fl];return rows([['En el espacio intravascular a la hora',fmt(v.vol*p,0)+' ml ('+fmt(p*100,1)+'%)'],['Resto: intersticio y células',fmt(v.vol*(1-p),0)+' ml']])+note('Cifras del tríptico para 1.000 ml en 1 hora. El PNT indica que de un cristaloide isotónico queda un 25% (20–30% en SSF a las 2 h).')}},
+ {id:'acu',t:'Agua corporal total',src:'PNT §E',f:[['peso','Peso','kg',70]],
+  run:v=>v.peso>0?rows([['Agua corporal total (60%)',fmt(v.peso*.6,1)+' L'],['Intracelular (40% del peso)',fmt(v.peso*.4,1)+' L'],['Intersticial (15%)',fmt(v.peso*.15,1)+' L'],['Intravascular (5%)',fmt(v.peso*.05,1)+' L']])+note('Adulto sano: 50–60% en mujeres y 60–70% en hombres; se usa un 60% de referencia.'):''},
+ {id:'diu',t:'Diuresis',src:'PNT §F',f:[['peso','Peso','kg',70],['ml','Diuresis','ml',250],['h','Tiempo','h',4]],
+  run:v=>{if(!(v.peso>0&&v.ml>=0&&v.h>0))return '';const r=v.ml/v.h/v.peso;return rows([['Diuresis',fmt(r,2)+' ml/kg/h'],['Objetivo mínimo (0,5 ml/kg/h)',fmt(.5*v.peso,0)+' ml/h'],['Objetivo en críticos (1 ml/kg/h)',fmt(v.peso,0)+' ml/h']])+(r<.5?flagH('crit','Oliguria (<0,5 ml/kg/h): reevaluar de inmediato.'):r<1?flagH('ok','Cumple el mínimo. En críticos el ideal es >1 ml/kg/h.'):flagH('ok','Diuresis adecuada.'))}},
+ {id:'tam',t:'Tensión arterial media',src:'PNT §I',f:[['tas','TA sistólica','mmHg',110],['tad','TA diastólica','mmHg',60]],
+  run:v=>{if(!(v.tas>0&&v.tad>0))return '';const m=(v.tas+2*v.tad)/3;return rows([['TAM',fmt(m,0)+' mmHg']])+(m<65?flagH('crit','Por debajo del objetivo (TAM ≥65 mmHg).'):flagH('ok','Cumple el objetivo de TAM ≥65 mmHg.'))}}
+];
+function calcInputs(c){return c.f.map(f=>{const [id,l,u,d,x]=f;const key='c-'+c.id+'-'+id;
+  if(x==='chk')return '<label class="chk"><input type="checkbox" id="'+key+'" data-c="'+c.id+'" data-k="'+id+'"'+(d?' checked':'')+'> '+esc(l)+'</label>';
+  if(Array.isArray(x))return '<label class="f">'+esc(l)+'<select id="'+key+'" data-c="'+c.id+'" data-k="'+id+'">'+x.map(o=>{const [k,t]=o.split(':');return '<option value="'+k+'"'+(k===d?' selected':'')+'>'+esc(t)+'</option>'}).join('')+'</select></label>';
+  return '<label class="f">'+esc(l)+(u?' <span class="u">('+esc(u)+')</span>':'')+'<input id="'+key+'" type="number" inputmode="decimal" step="any" value="'+d+'" data-c="'+c.id+'" data-k="'+id+'"></label>'}).join('')}
+function runCalc(id){const c=CALCS.find(x=>x.id===id),v={};$$('[data-c="'+id+'"]').forEach(el=>{v[el.dataset.k]=el.type==='checkbox'?el.checked:(el.tagName==='SELECT'?el.value:N(el.value))});
+  $('#out-'+id).innerHTML=c.run(v)||'<p class="note">Introduce los datos.</p>'}
+
+/* ============ ficha del paciente ============ */
+const FIELDS={};
+function inp(id,l,u,type,extra){return '<label class="f">'+esc(l)+(u?' <span class="u">('+esc(u)+')</span>':'')+'<input id="f-'+id+'" data-f="'+id+'" type="'+(type||'number')+'" '+(type==='text'?'':'inputmode="decimal" step="any" ')+(extra||'')+'></label>'}
+function sel(id,l,opts){return '<label class="f">'+esc(l)+'<select id="f-'+id+'" data-f="'+id+'">'+opts.map(o=>'<option value="'+esc(o[0])+'">'+esc(o[1])+'</option>').join('')+'</select></label>'}
+function chk(id,l){return '<label class="chk"><input type="checkbox" id="f-'+id+'" data-f="'+id+'"> '+esc(l)+'</label>'}
+function formHTML(){return `
+<div class="card stack"><h3>Datos generales</h3>
+ <div class="fields">${inp('ref','Código del caso','','text','placeholder="p. ej. A-0231" maxlength="30" autocomplete="off"')}${inp('edad','Edad','años')}${sel('sexo','Sexo',[['','—'],['M','Mujer'],['H','Hombre']])}${inp('peso','Peso','kg')}</div>
+ <div class="fields wide">${sel('diag','Situación clínica',DIAG.map(d=>[d.k,d.l]))}${sel('obj','Objetivo de la fluidoterapia',[['','—'],['Resucitación','Resucitación'],['Mantenimiento','Mantenimiento'],['Reposición','Reposición'],['Redistribución','Redistribución']])}${inp('objclin','Objetivo clínico concreto','','text','placeholder="p. ej. TAM ≥65, diuresis ≥0,5 ml/kg/h" maxlength="120"')}</div>
+ <p class="note">No escribas nombre, DNI ni número de historia: usa un código propio.</p></div>
+<div class="card stack"><h3>Constantes</h3>
+ <div class="fields">${inp('tas','TA sistólica','mmHg')}${inp('tad','TA diastólica','mmHg')}${inp('fc','FC','lpm')}${inp('fr','FR','rpm')}${inp('sat','SatO₂','%')}${sel('relleno','Relleno capilar',[['','—'],['<2','<2 s'],['>2','>2 s o frío']])}${inp('diu','Diuresis','ml')}${inp('diuh','en las últimas','h','number','placeholder="1"')}</div></div>
+<div class="card stack"><h3>Analítica</h3>
+ <div class="fields">${inp('na','Na⁺','mEq/L')}${inp('k','K⁺','mEq/L')}${inp('cl','Cl⁻','mEq/L')}${inp('lac','Lactato','mmol/L')}${inp('glu','Glucemia','mg/dL')}${inp('ph','pH','')}${inp('hco3','HCO₃⁻','mEq/L')}${inp('crea','Creatinina','mg/dL')}${inp('hto','Hto','%')}</div></div>
+<div class="card stack"><h3>Comorbilidades</h3>
+ <div class="row" style="gap:16px">${chk('c_ic','Insuficiencia cardiaca')}${chk('c_ir','Insuficiencia renal')}${chk('c_epoc','EPOC')}${chk('c_hep','Hepatopatía o cirrosis')}${chk('c_dm','Diabetes')}${chk('c_tce','TCE o patología intracraneal')}</div></div>
+<div class="card stack"><h3>Fluidoterapia administrada y pérdidas</h3>
+ <div class="fields wide">${sel('fluido','Fluido principal',[['','—'],['ssf','SSF 0,9%'],['rl','Ringer Lactato'],['pl','Plasma-Lyte'],['g5','Glucosado 5%'],['gs','Glucosalino'],['s045','Salino 0,45%'],['s3','Salino hipertónico'],['bic','Bicarbonato'],['alb','Albúmina'],['col','Otros coloides']])}${inp('bolos','Bolos recibidos','n')}${inp('vtot','Volumen total administrado','ml')}${inp('ritmo','Ritmo actual','ml/h')}</div>
+ <div class="fields">${inp('eps','Episodios de vómito o diarrea','n')}${inp('hem','Pérdida hemática estimada','ml')}</div>
+ <div class="row" style="gap:16px">${chk('fiebre','Fiebre o quemaduras')}${chk('reeval','Reevaluación realizada tras el bolo o cambio de pauta')}</div>
+ <div class="fields wide">${inp('incid','Incidencias o complicaciones','','text','maxlength="160"')}${inp('notas','Notas','','text','maxlength="240"')}</div></div>`}
+function readForm(){const o={};$$('[data-f]').forEach(el=>{o[el.dataset.f]=el.type==='checkbox'?el.checked:el.value});return o}
+function writeForm(o){$$('[data-f]').forEach(el=>{const v=o&&o[el.dataset.f];if(el.type==='checkbox')el.checked=!!v;else el.value=v==null?'':v})}
+const LABELS={ref:'Código',edad:'Edad (años)',sexo:'Sexo',peso:'Peso (kg)',diag:'Situación clínica',obj:'Objetivo',objclin:'Objetivo clínico',tas:'TAS (mmHg)',tad:'TAD (mmHg)',fc:'FC (lpm)',fr:'FR (rpm)',sat:'SatO2 (%)',relleno:'Relleno capilar',diu:'Diuresis (ml)',diuh:'Horas de diuresis',na:'Na (mEq/L)',k:'K (mEq/L)',cl:'Cl (mEq/L)',lac:'Lactato (mmol/L)',glu:'Glucemia (mg/dL)',ph:'pH',hco3:'HCO3 (mEq/L)',crea:'Creatinina (mg/dL)',hto:'Hto (%)',c_ic:'Insuf. cardiaca',c_ir:'Insuf. renal',c_epoc:'EPOC',c_hep:'Hepatopatía',c_dm:'Diabetes',c_tce:'TCE',fluido:'Fluido',bolos:'Bolos (n)',vtot:'Volumen total (ml)',ritmo:'Ritmo (ml/h)',eps:'Episodios GI',hem:'Pérdida hemática (ml)',fiebre:'Fiebre o quemaduras',reeval:'Reevaluación hecha',incid:'Incidencias',notas:'Notas'};
+const FL={ssf:'SSF 0,9%',rl:'Ringer Lactato',pl:'Plasma-Lyte',g5:'Glucosado 5%',gs:'Glucosalino',s045:'Salino 0,45%',s3:'Salino hipertónico',bic:'Bicarbonato',alb:'Albúmina',col:'Otros coloides'};
+function analyze(p){
+  const g=k=>N(p[k]),w=g('peso'),sbp=g('tas'),dbp=g('tad'),hr=g('fc'),rr=g('fr'),na=g('na'),k=g('k'),lac=g('lac'),glu=g('glu'),hto=g('hto'),bol=g('bolos'),vt=g('vtot'),uo=g('diu'),uh=g('diuh')||1,cl=g('cl');
+  const flags=[],F=(l,t)=>flags.push({l,t});
+  const tam=sbp!=null&&dbp!=null?(sbp+2*dbp)/3:null;
+  const ind=[];if(sbp!=null&&sbp<100)ind.push('PAS <100');if(hr!=null&&hr>90)ind.push('FC >90');if(rr!=null&&rr>20)ind.push('FR >20');if(p.relleno==='>2')ind.push('relleno capilar >2 s');
+  if(ind.length)F(ind.length>=2?'crit':'warn','Indicadores NICE de posible necesidad de resucitación: '+ind.join(', ')+'. Valorar hipovolemia o shock con ABCDE; bolo de 500 ml de cristaloide isotónico en <15 min y reevaluar.');
+  if(tam!=null)F(tam<65?'crit':'ok','TAM '+fmt(tam,0)+' mmHg. '+(tam<65?'Por debajo del objetivo (≥65).':'Cumple el objetivo (≥65).'));
+  let dml=null;if(uo!=null&&w){dml=uo/uh/w;F(dml<.5?'crit':'ok','Diuresis '+fmt(dml,2)+' ml/kg/h. '+(dml<.5?'Oliguria: reevaluación inmediata.':'Objetivo >0,5 (ideal >1 en críticos).'))}
+  if(na!=null){if(na<115)F('crit','Na '+fmt(na)+' mEq/L: hiponatremia severa. Salino hipertónico con ritmo lento (mitad de los mEq en 12 h, resto en 24–36 h).');else if(na<=125)F('warn','Na '+fmt(na)+' mEq/L: hiponatremia moderada. Restricción de líquidos totales a 500–1.000 ml/día y tratar la causa.');else if(na>145)F('warn','Na '+fmt(na)+' mEq/L: hipernatremia. Agua libre o glucosado 5%; corregir lento (mitad del déficit en 12–24 h).')}
+  if(p.diag==='cad'&&k!=null){if(k<3.3)F('crit','K '+fmt(k,1)+' mEq/L en cetoacidosis: corrección precoz de potasio antes de iniciar la insulina.');else if(k>5.3)F('warn','K '+fmt(k,1)+' mEq/L en cetoacidosis: no añadir potasio hasta que baje de 5,3.')}
+  if(p.diag==='cad'&&glu!=null&&glu<300)F('info','Glucemia <300 mg/dL en cetoacidosis: pasar a glucosado 5% manteniendo la perfusión de insulina i.v.');
+  if(p.diag==='hiperosm'){if(glu!=null&&glu<250)F('info','Glucemia <250 mg/dL en coma hiperosmolar: glucosado 5% o glucosalino.');if(na!=null&&sbp!=null){if(na>145&&sbp>=100)F('info','Na >145 con normotensión: salino hipotónico 0,45%.');if(na<145&&sbp<100)F('info','Na <145 con hipotensión: SSF 0,9%.')}}
+  if(lac!=null&&lac>2)F('warn','Lactato '+fmt(lac,1)+' mmol/L elevado (umbral orientativo >2; el PNT no fija cifra). Objetivo: descenso >10%/h.'+(p.fluido==='rl'?' El Ringer Lactato puede dificultar su interpretación.':''));
+  if(hto!=null&&hto<30&&['hda','shock_hipovol','hemorragia'].includes(p.diag))F('warn','Hto <30%: el PNT indica concentrado de hematíes.');
+  if(bol!=null&&bol>=4)F('crit','4 o más bolos: si no hay mejoría hemodinámica, valorar vasoactivos e ingreso en UCI.');
+  if(vt!=null&&vt>2000&&p.obj==='Resucitación')F('crit','Más de 2.000 ml acumulados en resucitación: pedir ayuda experta y valorar UCI (algoritmo NICE).');
+  if(p.c_ic||p.c_ir||p.c_epoc||p.c_hep)F('warn','Comorbilidad (IC, IR, EPOC o hepatopatía): reducir el aporte de mantenimiento a 20–25 ml/kg/día y vigilar el balance y los signos de sobrecarga.');
+  const tce=p.diag==='tce'||p.c_tce;
+  if(tce&&p.fluido==='rl')F('crit','TCE o patología intracraneal con Ringer Lactato: el PNT lo desaconseja (riesgo de HTIC). Elegir SSF 0,9%.');
+  if((p.diag==='ira'||p.c_ir)&&p.fluido==='ssf'&&(bol||0)>1)F('warn','Riesgo renal con SSF en bolos sucesivos: el PNT recomienda cristaloides balanceados.');
+  if(p.fluido==='ssf'&&(vt||0)>=2000)F('warn','Volumen alto de SSF: vigilar acidosis hiperclorémica (cloro, bicarbonato, pH).'+(cl!=null?' Cl actual '+fmt(cl)+' mEq/L.':''));
+  if((p.fluido==='g5'||p.fluido==='gs')&&na!=null&&na<135)F('crit','Glucosado en hiponatremia: contraindicado en el PNT (glucosado 5%).');
+  if((p.fluido==='rl'||p.fluido==='pl')&&k!=null&&k>5.3)F('warn','Potasio alto con '+FL[p.fluido]+': contraindicado en hiperpotasemia severa. El SSF es de elección en hiperpotasemia grave.');
+  if((p.fluido==='g5'||p.fluido==='gs')&&glu!=null&&glu>250)F('warn','Hiperglucemia con glucosado: contraindicado salvo la pauta específica de coma hiperosmolar.');
+  if(p.fluido&&!['rl','pl'].includes(p.fluido)&&['shock_septico','sepsis'].includes(p.diag))F('info','El PNT justifica el cristaloide balanceado en sepsis; documentar el motivo si se usa una solución no balanceada.');
+  return {w,tam,dml,flags,d:DIAG.find(x=>x.k===p.diag)};
+}
+function registro(p){const hasMon=['tas','fc','diu'].every(k=>String(p[k]||'').trim()!=='');
+  const items=[['Indicación y objetivo terapéutico',!!p.obj],['Tipo de fluido',!!p.fluido],['Volumen, ritmo y bolos',String(p.vtot||'').trim()!==''||String(p.ritmo||'').trim()!==''],['Objetivo clínico documentado',String(p.objclin||'').trim()!==''],['Monitorización (TA, FC, diuresis)',hasMon],['Reevaluación tras bolo o cambio',!!p.reeval]];
+  const comp=items[0][1]&&items[1][1]&&items[2][1]&&items[3][1];return {items,comp}}
+function resultHTML(p){
+  const a=analyze(p),r=registro(p);let h='';
+  if(a.d&&a.d.fluid)h+='<div class="card soft"><h4>Fluido recomendado por el PNT</h4><p class="big">'+esc(a.d.fluid)+'</p>'+(a.d.avoid?'<p><b>Evitar:</b> '+esc(a.d.avoid)+'</p>':'')+'<p class="note">'+esc(a.d.ref)+'</p></div>';
+  if(a.flags.length)h+='<div class="card"><h4>Alertas y comprobaciones</h4><div class="flags">'+a.flags.map(f=>flagH(f.l,f.t)).join('')+'</div></div>';
+  if(a.w>0){h+='<div class="card"><h4>Volúmenes orientativos</h4>'+volHTML(a.w,{eps:N(p.eps),fiebre:p.fiebre,hem:N(p.hem),comorb:p.c_ic||p.c_ir||p.c_epoc||p.c_hep})+
+    rows([['Bolo de resucitación','500 ml en <15 min (250–500 ml si se fracciona)'],['Diuresis mínima (0,5 ml/kg/h)',fmt(.5*a.w,0)+' ml/h'],['Diuresis en críticos (1 ml/kg/h)',fmt(a.w,0)+' ml/h']])+'</div>'}
+  else h+='<div class="card"><p class="muted">Introduce el peso para ver los volúmenes orientativos.</p></div>';
+  h+='<div class="card"><h4>Registro mínimo del PNT (§6)</h4><div class="flags">'+r.items.map(i=>'<div class="flag '+(i[1]?'ok':'warn')+'">'+(i[1]?'Hecho: ':'Falta: ')+esc(i[0])+'</div>').join('')+'</div>'+note(r.comp?'Prescripción completa según el indicador del PNT (indicación, tipo, volumen y objetivo clínico).':'Prescripción incompleta según el indicador del PNT: faltan indicación, tipo, volumen u objetivo clínico.')+'</div>';
+  return h;
+}
+function refreshResult(){const el=$('#result');if(el)el.innerHTML=resultHTML(readForm())}
+function saveDraft(){store.set('flu.draft',readForm())}
+
+/* ============ exportación ============ */
+function reportText(p){
+  const a=analyze(p),r=registro(p),L=[];
+  L.push('INFORME DE FLUIDOTERAPIA - SUH Hospital Comarcal de Antequera','Según PNT «Uso de la fluidoterapia en Urgencias» v1.0 (dic. 2025)','Generado: '+new Date().toLocaleString('es-ES'),'');
+  const g=(k,u)=>String(p[k]||'').trim()?(p[k]+(u?' '+u:'')):'—';
+  L.push('Código del caso: '+g('ref'),'Edad: '+g('edad','años')+' | Sexo: '+({M:'Mujer',H:'Hombre'}[p.sexo]||'—')+' | Peso: '+g('peso','kg'),'Situación clínica: '+(a.d&&a.d.k?a.d.l:'—'),'Objetivo: '+g('obj')+' | Objetivo clínico: '+g('objclin'),'');
+  L.push('CONSTANTES','TA: '+g('tas')+'/'+g('tad')+' mmHg'+(a.tam!=null?' (TAM '+fmt(a.tam,0)+')':'')+' | FC: '+g('fc','lpm')+' | FR: '+g('fr','rpm')+' | SatO2: '+g('sat','%')+' | Relleno capilar: '+(p.relleno?p.relleno+' s':'—'),'Diuresis: '+g('diu','ml')+' en '+(p.diuh||1)+' h'+(a.dml!=null?' ('+fmt(a.dml,2)+' ml/kg/h)':''),'');
+  L.push('ANALÍTICA','Na '+g('na')+' | K '+g('k')+' | Cl '+g('cl')+' | Lactato '+g('lac')+' | Glucemia '+g('glu')+' | pH '+g('ph')+' | HCO3 '+g('hco3')+' | Creatinina '+g('crea')+' | Hto '+g('hto'),'');
+  const co=['c_ic:Insuficiencia cardiaca','c_ir:Insuficiencia renal','c_epoc:EPOC','c_hep:Hepatopatía','c_dm:Diabetes','c_tce:TCE'].filter(x=>p[x.split(':')[0]]).map(x=>x.split(':')[1]);
+  L.push('Comorbilidades: '+(co.join(', ')||'ninguna marcada'),'');
+  L.push('FLUIDOTERAPIA','Fluido: '+(FL[p.fluido]||'—')+' | Bolos: '+g('bolos')+' | Volumen total: '+g('vtot','ml')+' | Ritmo: '+g('ritmo','ml/h'),'Reevaluación realizada: '+(p.reeval?'sí':'no'),'Incidencias: '+g('incid'),'Notas: '+g('notas'),'');
+  if(a.d&&a.d.fluid)L.push('RECOMENDACIÓN DEL PNT','Fluido: '+a.d.fluid+(a.d.avoid?' | Evitar: '+a.d.avoid:'')+' ('+a.d.ref+')','');
+  if(a.w>0){const v=volumes(a.w,{eps:N(p.eps),fiebre:p.fiebre,hem:N(p.hem),comorb:p.c_ic||p.c_ir||p.c_epoc||p.c_hep});L.push('VOLÚMENES ORIENTATIVOS','Mantenimiento: '+fmt(v.mL)+'-'+fmt(v.mH)+' ml/día ('+fmt(v.mL/24)+'-'+fmt(v.mH/24)+' ml/h)','Reposición estimada: '+fmt(v.rL)+'-'+fmt(v.rH)+' ml/día | Total: '+fmt(v.tL)+'-'+fmt(v.tH)+' ml/día','Diuresis mínima: '+fmt(.5*a.w)+' ml/h','')}
+  if(a.flags.length){L.push('ALERTAS');a.flags.forEach(f=>L.push('- '+f.t.replace(/\*\*/g,'')));L.push('')}
+  L.push('REGISTRO PNT (§6)');r.items.forEach(i=>L.push((i[1]?'[x] ':'[ ] ')+i[0]));L.push('Prescripción completa: '+(r.comp?'sí':'no'),'','Herramienta de apoyo; la prescripción es responsabilidad del facultativo.');
+  return L.join('\n');
+}
+const csvCell=v=>{const s=String(v??'');return /[;"\n]/.test(s)?'"'+s.replace(/"/g,'""')+'"':s};
+function csvOf(list){const keys=Object.keys(LABELS);return '﻿'+['Fecha guardado',...keys.map(k=>LABELS[k])].map(csvCell).join(';')+'\n'+list.map(x=>[x.ts,...keys.map(k=>typeof x.data[k]==='boolean'?(x.data[k]?'sí':'no'):x.data[k])].map(csvCell).join(';')).join('\n')}
+function jsonOf(list){return JSON.stringify({origen:'Fluidoterapia SUH Antequera (PNT v1.0, dic. 2025)',generado:new Date().toISOString(),fichas:list},null,2)}
+let dlCap=null;
+async function saveFile(filename,data){
+  if(!dlCap){toast('La descarga no está disponible aquí. Usa Copiar.');return}
+  try{await dlCap.save({filename,data});toast('Archivo preparado')}
+  catch(e){if(e&&e.code==='declined')return;if(e&&e.code==='rate_limited'){toast('Espera un momento y repite');return}toast('No se pudo descargar. Usa Copiar.')}
+}
+async function copyText(t,box){try{await navigator.clipboard.writeText(t);toast('Copiado')}catch(e){if(box){box.focus();box.select&&box.select();const r=document.createRange();r.selectNodeContents(box);const s=getSelection();s.removeAllRanges();s.addRange(r)}toast('Selecciona y copia el texto')}}
+const stamp=()=>new Date().toISOString().slice(0,16).replace(/[:T]/g,'-');
+function curEntry(){return {id:'cur',ts:new Date().toLocaleString('es-ES'),data:readForm()}}
+function savedList(){return store.get('flu.fichas',[])}
+let delArm=null;
+function refreshExport(){
+  if(!$('#rep'))return;
+  const p=readForm();$('#rep').textContent=reportText(p);
+  const L=savedList();
+  $('#saved').innerHTML=L.length?'<div class="tblwrap"><table><thead><tr><th>Código</th><th>Guardada</th><th>Situación</th><th></th></tr></thead><tbody>'+L.map(x=>'<tr><td class="mono">'+esc(x.data.ref||'(sin código)')+'</td><td>'+esc(x.ts)+'</td><td>'+esc((DIAG.find(d=>d.k===x.data.diag)||{}).l||'—')+'</td><td><div class="row"><button class="btn ghost sm" data-load="'+x.id+'">Abrir</button><button class="btn danger sm" data-del="'+x.id+'">'+(delArm===x.id?'Confirmar borrado':'Borrar')+'</button></div></td></tr>').join('')+'</tbody></table></div>':'<p class="muted">Todavía no hay fichas guardadas. Rellena la ficha en Paciente y pulsa Guardar ficha.</p>';
+  $('#savedN').textContent=L.length;
+  $$('.needs-saved').forEach(b=>b.disabled=!L.length);
+}
+function saveFicha(){const d=readForm();const L=savedList();const e={id:'f'+Date.now().toString(36),ts:new Date().toLocaleString('es-ES'),data:d};
+  const i=d.ref?L.findIndex(x=>x.data.ref===d.ref):-1;if(i>=0){e.id=L[i].id;L[i]=e}else L.unshift(e);
+  store.set('flu.fichas',L.slice(0,300));toast(i>=0?'Ficha actualizada':'Ficha guardada')}
+
+/* ============ pestañas: contenido ============ */
+const BUILD={};
+BUILD.inicio=()=>{
+  $('#p-inicio').innerHTML=`
+  <h2>Protocolo de fluidoterapia del SUH de Antequera</h2>
+  <p class="lead">El PNT completo en un solo sitio: algoritmo paso a paso, ficha de paciente con alertas, calculadoras, guía por patología, repaso para aprender el protocolo y exportación de datos.</p>
+  <div class="grid">
+   <div class="card"><h4>Documento</h4>${rows([['Versión','1.0 · 3 dic. 2025'],['Autora','Carmen Gómez Pérez'],['Ámbito','SUH, SUAP y DCCU del ASNM'],['Revisión','cada 3 años']])}</div>
+   <div class="card"><h4>Qué quieres hacer</h4><div class="stack" style="gap:8px">
+     <button class="btn" data-go="paciente">Abrir ficha de paciente</button>
+     <button class="btn ghost" data-go="preguntar">Preguntar al protocolo</button>
+     <button class="btn ghost" data-go="repasar">Repasar con tarjetas</button></div></div>
+  </div>
+  <h3 style="margin-top:24px">Las 5R de NICE</h3>
+  <div class="grid">
+   ${[['Resucitación','Hipovolemia grave o shock. Cristaloide isotónico, 500 ml en bolo, hasta 3 bolos más cada 15 min.'],['Mantenimiento','Quien no puede comer ni beber y no tiene pérdidas excesivas. Evitar excesos si hay comorbilidad.'],['Reposición','Pérdidas activas, pasivas o previsibles. Fluido según el tipo de pérdida.'],['Redistribución','Edemas, sepsis, hipoalbuminemia, SIRS. Valoración individualizada.'],['Reevaluación','Tras cada bolo o cambio de pauta. Revisar a diario, cada 4–6 h en críticos.']].map((r,i)=>'<div class="card"><h4>'+(i+1)+' · '+r[0]+'</h4><p style="margin:0">'+esc(r[1])+'</p></div>').join('')}
+  </div>
+  <h3 style="margin-top:24px">Algoritmo guiado</h3>
+  <div class="card" id="alg"></div>
+  <h3 style="margin-top:24px">Reglas prácticas</h3>
+  <div class="card"><ul class="tight">
+   <li>La fluidoterapia es un medicamento: indicación, dosis, tipo, duración y reevaluación.</li>
+   <li>Shock séptico: cristaloide balanceado. TCE: SSF 0,9%.</li>
+   <li>Mantenimiento: evitar glucosado 5% aislado.</li>
+   <li>Analítica y balance diario si recibe fluidos más de 24 h.</li>
+   <li>Evitar el uso prolongado de SSF 0,9%.</li>
+   <li>No administrar fluidos por inercia: revisar cada turno.</li>
+   <li>Fluidoterapia guiada por objetivos en inestables: reevaluar tras cada bolo.</li>
+   <li>Signos precoces de sobrecarga (disnea, edemas, congestión): suspender.</li></ul></div>`;
+  renderAlg();
+};
+BUILD.paciente=()=>{
+  $('#p-paciente').innerHTML=`<h2>Ficha de paciente</h2>
+  <p class="lead">Rellena lo que tengas. El resultado se actualiza al escribir y compara los datos con el PNT. Se guarda un borrador solo en este navegador.</p>
+  <div class="row" style="margin-bottom:14px"><button class="btn" id="saveF">Guardar ficha</button><button class="btn ghost" id="newF">Nueva ficha</button><button class="btn ghost" id="exF">Cargar caso de ejemplo</button><button class="btn ghost" data-go="exportar">Exportar</button></div>
+  <div class="grid w2"><div class="stack" id="form">${formHTML()}</div><div class="stack" id="result" aria-live="polite"></div></div>`;
+  writeForm(store.get('flu.draft',{}));
+  $('#form').addEventListener('input',()=>{saveDraft();refreshResult()});
+  $('#saveF').onclick=()=>{saveFicha();refreshExport()};
+  let arm=false;$('#newF').onclick=()=>{if(!arm){arm=true;$('#newF').textContent='Confirmar: borrar datos actuales';setTimeout(()=>{arm=false;$('#newF').textContent='Nueva ficha'},3500);return}arm=false;$('#newF').textContent='Nueva ficha';writeForm({});saveDraft();refreshResult()};
+  $('#exF').onclick=()=>{writeForm({ref:'EJEMPLO',edad:'68',sexo:'H',peso:'70',diag:'shock_septico',obj:'Resucitación',objclin:'TAM ≥65, diuresis ≥0,5 ml/kg/h',tas:'88',tad:'50',fc:'118',fr:'24',sat:'93',relleno:'>2',diu:'15',diuh:'1',na:'138',k:'4.1',cl:'104',lac:'4.2',glu:'160',fluido:'ssf',bolos:'2',vtot:'1000',c_dm:true});saveDraft();refreshResult();toast('Caso de ejemplo cargado: no son datos reales')};
+  refreshResult();
+};
+BUILD.calculadoras=()=>{
+  $('#p-calculadoras').innerHTML=`<h2>Calculadoras</h2><p class="lead">Fórmulas y rangos del PNT. Los valores iniciales son ejemplos.</p>
+  <div class="row" style="margin-bottom:14px"><button class="btn ghost" id="useF">Usar peso y Na de la ficha</button><span class="muted small" id="useFmsg"></span></div>
+  <div class="grid w2">${CALCS.map(c=>'<div class="card stack"><div><h3 style="margin:0">'+esc(c.t)+'</h3><span class="muted small">'+esc(c.src)+'</span></div><div class="fields">'+calcInputs(c)+'</div><div id="out-'+c.id+'"></div></div>').join('')}</div>`;
+  CALCS.forEach(c=>runCalc(c.id));
+  $('#p-calculadoras').addEventListener('input',e=>{const id=e.target.dataset.c;if(id)runCalc(id)});
+  $('#useF').onclick=()=>{const p=readForm();const w=N(p.peso),na=N(p.na);if(!w){$('#useFmsg').textContent='La ficha no tiene peso.';return}
+    $$('[data-k="peso"]').forEach(el=>el.value=w);if(na)$('#c-hiperna-nac').value=na;if(p.c_ic||p.c_ir||p.c_epoc||p.c_hep)$('#c-rep-comorb').checked=true;
+    CALCS.forEach(c=>runCalc(c.id));$('#useFmsg').textContent='Aplicado: '+fmt(w)+' kg'+(na?' y Na '+fmt(na):'')+'.'};
+};
+BUILD.patologias=()=>{
+  $('#p-patologias').innerHTML=`<h2>Qué fluido para cada situación</h2><p class="lead">Recomendaciones de la sección G del PNT con su nivel de evidencia, y las pautas de los casos específicos.</p>
+  <div class="search"><input class="in" id="pq" type="search" placeholder="Buscar: TCE, cetoacidosis, sodio…" aria-label="Buscar patología"></div>
+  <div class="grid" id="plist"></div>
+  <h3 style="margin-top:24px">Casos específicos</h3><div class="stack" id="clist"></div>
+  <div class="card" style="margin-top:20px"><h4>Niveles de evidencia</h4><p class="small" style="margin:0">Los niveles (IA, IIA, IIIB…) no proceden de los estudios primarios sino de cómo los valoran guías oficiales (ESICM, Surviving Sepsis Campaign, NICE, Cochrane). El anexo del PNT usa la escala SIGN: niveles 1++ a 4 y grados de recomendación A a D.</p></div>`;
+  const draw=()=>{const q=norm($('#pq').value);
+    $('#plist').innerHTML=PATOL.filter(p=>norm(p.name+p.fluid+p.why).includes(q)).map(p=>'<div class="card"><div class="row" style="justify-content:space-between"><h3 style="margin:0">'+esc(p.name)+'</h3><span class="pill">Evidencia '+p.ev+'</span></div><p class="big" style="margin:8px 0">'+esc(p.fluid)+'</p><p class="muted" style="margin:0">'+esc(p.why)+'</p></div>').join('')||'<p class="muted">Sin resultados.</p>';
+    $('#clist').innerHTML=CASOS.filter(c=>norm(c.t+c.items.join(' ')).includes(q)).map(c=>'<details class="fl"'+(q?' open':'')+'><summary><b>'+esc(c.t)+'</b></summary><div class="body"><ul class="tight">'+c.items.map(i=>'<li>'+esc(i)+'</li>').join('')+'</ul></div></details>').join('')};
+  $('#pq').oninput=draw;draw();
+};
+BUILD.fluidos=()=>{
+  const groups=['Todos',...new Set(FLUIDOS.map(f=>f.g))];let gsel='Todos';
+  $('#p-fluidos').innerHTML=`<h2>Fluidos disponibles</h2><p class="lead">Composición, indicaciones y contraindicaciones de cada solución, según el PNT.</p>
+  <div class="search"><input class="in" id="fq" type="search" placeholder="Buscar fluido, indicación o contraindicación…" aria-label="Buscar fluido"></div>
+  <div class="row" id="fchips" style="margin-bottom:12px">${groups.map(g=>'<button class="chip" data-g="'+esc(g)+'" aria-pressed="'+(g===gsel)+'">'+esc(g)+'</button>').join('')}</div>
+  <div class="stack" id="flist"></div>`;
+  const draw=()=>{const q=norm($('#fq').value);
+    $('#flist').innerHTML=FLUIDOS.filter(f=>(gsel==='Todos'||f.g===gsel)&&norm([f.n,f.comp,f.note,f.ind,f.con].join(' ')).includes(q)).map(f=>'<details class="fl"'+(q?' open':'')+'><summary><b>'+esc(f.n)+'</b> '+ton(f.ton)+'<span class="muted small">'+esc(f.comp)+'</span></summary><div class="body"><div class="kv"><b>Notas</b>'+esc(f.note)+'</div><div class="kv"><b>Indicaciones</b>'+esc(f.ind)+'</div><div class="kv"><b>Contraindicaciones</b>'+esc(f.con)+'</div></div></details>').join('')||'<p class="muted">Sin resultados.</p>'};
+  $('#fq').oninput=draw;$('#fchips').onclick=e=>{const b=e.target.closest('[data-g]');if(!b)return;gsel=b.dataset.g;$$('#fchips .chip').forEach(c=>c.setAttribute('aria-pressed',String(c.dataset.g===gsel)));draw()};draw();
+};
+BUILD.seguimiento=()=>{
+  $('#p-seguimiento').innerHTML=`<h2>Seguimiento y seguridad</h2><p class="lead">Qué vigilar, cuándo reevaluar y qué puede salir mal.</p>
+  <div class="grid">
+   <div class="card"><h4>Objetivos guiados por objetivos</h4><ul class="tight"><li>FC &lt;100 lpm</li><li>TAM ≥65 mmHg</li><li>Diuresis ≥0,5 ml/kg/h</li><li>Conciencia normal</li><li>Lactato que baja &gt;10%/h</li><li>Relleno capilar &lt;2 s</li></ul></div>
+   <div class="card"><h4>Diuresis y balance</h4><ul class="tight"><li>Objetivo &gt;0,5 ml/kg/h; ideal &gt;1 en críticos</li><li>Balance cada 6–8 h</li><li>Oliguria o anuria: reevaluar de inmediato</li></ul></div>
+   <div class="card"><h4>Analítica</h4><ul class="tight"><li>Creatinina, urea, filtrado glomerular</li><li>Na, K, Cl, Mg</li><li>Gasometría y lactato</li><li>Hb y Hto</li></ul></div>
+   <div class="card"><h4>Si está disponible</h4><ul class="tight"><li>PVC normal 6–12 cmH₂O (limitada sola)</li><li>VCI colapsable &gt;50%: hipovolemia</li><li>Líneas B pulmonares: sobrecarga</li><li>Elevación pasiva de piernas: simula 300 ml</li></ul></div>
+  </div>
+  <h3 style="margin-top:24px">Revisar la pauta</h3>
+  <div class="card soft"><p style="margin:0">Al menos una vez al día, y cada 4–6 h en críticos: ¿sigue siendo necesaria esta fluidoterapia? ¿Ha respondido el paciente? ¿Hay signos de sobrecarga o mala perfusión?</p></div>
+  <h3 style="margin-top:24px">Complicaciones</h3>
+  <div class="stack">${[['Sobrecarga de volumen','Edemas, ingurgitación yugular, disnea, crepitantes, ganancia de peso. Más riesgo en insuficiencia cardiaca, renal o sepsis.'],['Acidosis metabólica hiperclorémica','Por SSF 0,9% (154 mEq/L de cloro). Baja el bicarbonato y puede deteriorar la función renal. Las balanceadas reducen el riesgo.'],['Alteraciones electrolíticas','Hiponatremia con hipotónicas o glucosado como mantenimiento; hipernatremia por agua libre no corregida; hipopotasemia sin reposición de K; hiperpotasemia en insuficiencia renal o con soluciones con potasio.'],['Reacciones a coloides','Anafilactoides, coagulopatía dilucional y nefrotoxicidad (almidones).'],['Complicaciones mecánicas','Extravasación con necrosis (hipertónicos o vesicantes por vía periférica), flebitis o infección del catéter, errores de prescripción.']].map(c=>'<details class="fl"><summary><b>'+esc(c[0])+'</b></summary><div class="body">'+esc(c[1])+'</div></details>').join('')}</div>
+  <h3 style="margin-top:24px">Qué registrar</h3>
+  <div class="card"><ul class="tight"><li>Indicación y objetivo terapéutico</li><li>Tipo de fluido y justificación si no es balanceado</li><li>Volumen total, ritmo y número de bolos</li><li>Monitorización: constantes, diuresis, balance, analítica</li><li>Reevaluaciones tras bolos o cambios de pauta</li><li>Incidencias o complicaciones</li></ul>
+  <p class="note">Indicador del PNT: porcentaje de historias con indicación, tipo, volumen y objetivo clínico. Estándar ≥90%, por auditoría aleatoria.</p></div>`;
+};
+let chat=[],askCtl=null,smp=null;
+const RULES='Eres el asistente del Procedimiento Normalizado de Trabajo (PNT) «Uso de la fluidoterapia en Urgencias» del Servicio de Urgencias Hospitalarias del Hospital Comarcal de Antequera (Área Sanitaria Norte de Málaga), versión 1.0, diciembre 2025. Responde en español, con claridad y brevedad, usando SOLO el texto del protocolo que figura más abajo. Indica la sección entre paréntesis, por ejemplo (§G.1). Si el protocolo no cubre la pregunta, dilo y no inventes dosis ni pautas. Si el protocolo da cifras distintas en dos secciones, menciona ambas. En los cálculos, muestra la fórmula del protocolo y el resultado. Recuerda, solo cuando sea relevante, que es apoyo y que la prescripción corresponde al facultativo. Usa texto plano, sin tablas ni negritas, y listas con guiones si hacen falta.\n\n=== PROTOCOLO ===\n'+PROTOCOL_TEXT+'\n=== FIN DEL PROTOCOLO ===';
+BUILD.preguntar=()=>{
+  const sugs=['¿Qué fluido uso en shock séptico?','¿Qué hago si hay 4 bolos sin mejoría?','¿Cuál es la diuresis objetivo?','¿Cómo corrijo una hipernatremia?','Contraindicaciones del Ringer Lactato','¿Qué debo registrar en la historia?'];
+  $('#p-preguntar').innerHTML=`<h2>Preguntar al protocolo</h2><p class="lead">Busca en el texto del PNT al instante o pregunta en lenguaje natural.</p>
+  <div class="card stack"><h3 style="margin:0">Buscar en el PNT</h3>
+   <div class="search" style="margin:0"><input class="in" id="kq" type="search" placeholder="Escribe una palabra clave…" aria-label="Buscar en el protocolo"></div>
+   <div class="row">${sugs.map(s=>'<button class="chip" data-s="'+esc(s)+'">'+esc(s)+'</button>').join('')}</div>
+   <div class="stack" id="khits"></div></div>
+  <div class="card stack" id="askbox" style="margin-top:14px" hidden><h3 style="margin:0">Preguntar con IA</h3>
+   <p class="small muted" style="margin:0">Claude responde solo con el texto del PNT y cita la sección. Usa tu cuenta de Claude. Comprueba siempre la respuesta en el documento.</p>
+   <div class="chat" id="chat" aria-live="polite"></div>
+   <label class="f">Tu pregunta<textarea id="aq" rows="3" placeholder="Por ejemplo: paciente de 80 kg con diarrea y fiebre, ¿cuánto líquido al día?"></textarea></label>
+   <label class="chk"><input type="checkbox" id="withF"> Incluir los datos de la ficha actual (sin código ni notas)</label>
+   <div class="row"><button class="btn" id="askB">Preguntar</button><button class="btn ghost" id="stopB" hidden>Parar</button><button class="btn ghost" id="clrB">Nueva conversación</button></div>
+   <p class="note" id="askNote"></p></div>`;
+  const KEYS=KB.map(e=>({e,n:norm(e.sec+' '+e.title+' '+e.text+' '+e.tags)}));
+  const search=()=>{const q=norm($('#kq').value).split(/\s+/).filter(t=>t.length>1);const box=$('#khits');
+    if(!q.length){box.innerHTML='<p class="muted small">Escribe para buscar o pulsa una pregunta de ejemplo.</p>';return}
+    const sc=KEYS.map(k=>({e:k.e,s:q.reduce((a,t)=>a+(norm(k.e.title).includes(t)?3:0)+(k.n.includes(t)?1:0),0)})).filter(x=>x.s>0).sort((a,b)=>b.s-a.s).slice(0,6);
+    box.innerHTML=sc.length?sc.map(x=>'<div class="hit"><div class="sec">'+esc(x.e.sec)+'</div><b>'+esc(x.e.title)+'</b><div class="small" style="margin-top:4px">'+esc(x.e.text)+'</div></div>').join(''):'<p class="muted">Nada encontrado. Prueba con otra palabra o pregunta con IA.</p>'};
+  $('#kq').oninput=search;search();
+  $('#p-preguntar').addEventListener('click',e=>{const b=e.target.closest('[data-s]');if(!b)return;$('#kq').value=b.dataset.s.replace(/[¿?]/g,'');search();if(smp)$('#aq').value=b.dataset.s});
+  useCap('sample').then(s=>{if(!s)return;smp=s;$('#askbox').hidden=false}).catch(()=>{});
+  const draw=()=>{$('#chat').innerHTML=chat.map(m=>'<div class="msg '+(m.role==='user'?'u':'a')+'">'+esc(m.content)+'</div>').join('')};
+  const fail=c=>({not_granted:'No has permitido usar Claude en esta página.',sampling_disabled:'Claude no está disponible para tu cuenta.',rate_limited:'Demasiadas consultas seguidas. Espera un momento.',session_expired:'Vuelve a iniciar sesión.',refused:'Claude no ha podido responder a esto.',empty_completion:'No hubo respuesta. Reformula la pregunta.',prompt_too_large:'La conversación es demasiado larga. Empieza otra.'}[c]||'No se pudo obtener la respuesta. Inténtalo de nuevo.');
+  $('#askB').onclick=async()=>{
+    const q=$('#aq').value.trim();if(!q||!smp)return;let content=q;
+    if($('#withF').checked){const p=readForm();delete p.ref;delete p.notas;delete p.incid;const used={};Object.keys(p).forEach(k=>{if(p[k]!==''&&p[k]!==false)used[LABELS[k]||k]=p[k]});content+='\n\nDatos de la ficha actual (sin identificar): '+JSON.stringify(used)}
+    chat.push({role:'user',content});chat.push({role:'assistant',content:'Pensando…'});draw();$('#aq').value='';
+    askCtl=new AbortController();$('#askB').disabled=true;$('#stopB').hidden=false;$('#askNote').textContent='';
+    const turns=chat.slice(0,-1).slice(-8);const idx=chat.length-1;
+    try{const r=await smp([{role:'user',content:RULES},...turns],{cache:false,signal:askCtl.signal,onText:({text})=>{chat[idx].content=text;draw()}});chat[idx].content=r.text;if(r.truncated)$('#askNote').textContent='La respuesta se cortó. Pide una parte más concreta.'}
+    catch(e){if(e&&e.text)chat[idx].content=e.text;else chat.splice(idx,1);if(!e||e.code!=='cancelled')$('#askNote').textContent=fail(e&&e.code)}
+    finally{$('#askB').disabled=false;$('#stopB').hidden=true;draw()}
+  };
+  $('#stopB').onclick=()=>askCtl&&askCtl.abort();
+  $('#clrB').onclick=()=>{chat=[];draw();$('#askNote').textContent=''};
+};
+let cardState=store.get('flu.cards',{}),cardTopic='Todos',cardCur=null,cardShown=false;
+function nextCard(){const pool=CARDS.map((c,i)=>({c,i})).filter(x=>(cardTopic==='Todos'||x.c[0]===cardTopic)&&(cardState[x.i]||0)<3);
+  if(!pool.length){cardCur=null;return}const min=Math.min(...pool.map(x=>cardState[x.i]||0));const low=pool.filter(x=>(cardState[x.i]||0)===min&&x.i!==cardCur);const src=low.length?low:pool;cardCur=src[Math.floor(Math.random()*src.length)].i}
+function drawCards(){
+  const inT=CARDS.map((c,i)=>i).filter(i=>cardTopic==='Todos'||CARDS[i][0]===cardTopic),done=inT.filter(i=>(cardState[i]||0)>=3).length;
+  let h='<div class="row" style="margin-bottom:10px" id="tchips">'+TOPICS.map(t=>'<button class="chip" data-t="'+esc(t)+'" aria-pressed="'+(t===cardTopic)+'">'+esc(t)+'</button>').join('')+'</div>';
+  h+='<div class="row" style="justify-content:space-between;margin-bottom:6px"><span class="small muted">Dominadas '+done+' de '+inT.length+'</span><button class="btn ghost sm" id="resetC">Reiniciar progreso</button></div><div class="bar" role="progressbar" aria-valuenow="'+done+'" aria-valuemin="0" aria-valuemax="'+inT.length+'" style="margin-bottom:14px"><i style="width:'+(inT.length?done/inT.length*100:0)+'%"></i></div>';
+  if(cardCur==null)h+='<div class="card soft"><h3>Tema completado</h3><p style="margin:0">Has dominado todas las tarjetas de este tema. Cambia de tema o reinicia el progreso para repasar de nuevo.</p></div>';
+  else{const c=CARDS[cardCur];h+='<div class="card flash"><div><span class="pill">'+esc(c[0])+'</span><p class="q" style="margin-top:12px">'+esc(c[1])+'</p>'+(cardShown?'<div class="a">'+esc(c[2])+'</div>':'')+'</div><div class="row">'+(cardShown?'<button class="btn danger" data-r="0">No la sabía</button><button class="btn ghost" data-r="1">Dudosa</button><button class="btn" data-r="2">La sabía</button>':'<button class="btn" id="showA">Mostrar respuesta</button>')+'</div></div>'}
+  $('#cardbox').innerHTML=h;
+}
+BUILD.repasar=()=>{
+  $('#p-repasar').innerHTML='<h2>Repasar el protocolo</h2><p class="lead">Tarjetas de pregunta y respuesta. Las que fallas vuelven antes; las que aciertas tres veces quedan dominadas. El progreso se guarda en este navegador.</p><div id="cardbox"></div>';
+  nextCard();drawCards();
+  $('#cardbox').addEventListener('click',e=>{
+    const t=e.target.closest('[data-t]');if(t){cardTopic=t.dataset.t;cardShown=false;nextCard();drawCards();return}
+    if(e.target.id==='showA'){cardShown=true;drawCards();return}
+    if(e.target.id==='resetC'){cardState={};store.set('flu.cards',cardState);cardShown=false;nextCard();drawCards();return}
+    const r=e.target.closest('[data-r]');if(r&&cardCur!=null){const v=+r.dataset.r,cur=cardState[cardCur]||0;cardState[cardCur]=v===0?0:v===1?Math.max(cur,1):Math.min(3,cur+1);store.set('flu.cards',cardState);cardShown=false;nextCard();drawCards()}
+  });
+};
+BUILD.exportar=()=>{
+  $('#p-exportar').innerHTML=`<h2>Exportar datos</h2><p class="lead">Informe de la ficha actual y archivo con todas las fichas guardadas. Los archivos salen de este navegador: trátalos según la política de protección de datos del centro.</p>
+  <div class="grid w2">
+   <div class="card stack"><h3 style="margin:0">Ficha actual</h3>
+    <pre class="report" id="rep" tabindex="0"></pre>
+    <div class="row"><button class="btn dl" id="dTxt">Descargar informe (.txt)</button><button class="btn ghost dl" id="dJ1">Datos (.json)</button><button class="btn ghost dl" id="dC1">Datos (.csv)</button><button class="btn ghost" id="cpR">Copiar informe</button></div></div>
+   <div class="card stack"><h3 style="margin:0">Fichas guardadas (<span id="savedN">0</span>)</h3>
+    <div id="saved"></div>
+    <div class="row"><button class="btn dl needs-saved" id="dCa">Todas en CSV</button><button class="btn ghost dl needs-saved" id="dJa">Todas en JSON</button></div>
+    <p class="note">El CSV usa punto y coma y abre bien en Excel en español. Para guardar la ficha actual, pulsa Guardar ficha en Paciente.</p></div></div>`;
+  useCap('downloads').then(d=>{dlCap=d;if(!d)$$('.dl').forEach(b=>b.hidden=true)}).catch(()=>{});
+  $('#dTxt').onclick=()=>saveFile('fluidoterapia-'+stamp()+'.txt',reportText(readForm()));
+  $('#dJ1').onclick=()=>saveFile('ficha-fluidoterapia-'+stamp()+'.json',jsonOf([curEntry()]));
+  $('#dC1').onclick=()=>saveFile('ficha-fluidoterapia-'+stamp()+'.csv',csvOf([curEntry()]));
+  $('#cpR').onclick=()=>copyText($('#rep').textContent,$('#rep'));
+  $('#dCa').onclick=()=>saveFile('fichas-fluidoterapia-'+stamp()+'.csv',csvOf(savedList()));
+  $('#dJa').onclick=()=>saveFile('fichas-fluidoterapia-'+stamp()+'.json',jsonOf(savedList()));
+  $('#saved').addEventListener('click',e=>{
+    const l=e.target.closest('[data-load]');if(l){const x=savedList().find(y=>y.id===l.dataset.load);if(x){writeForm(x.data);saveDraft();toast('Ficha abierta en Paciente');show('paciente')}return}
+    const d=e.target.closest('[data-del]');if(d){const id=d.dataset.del;if(delArm!==id){delArm=id;refreshExport();setTimeout(()=>{if(delArm===id){delArm=null;if(!$('#p-exportar').hidden)refreshExport()}},3500);return}
+      delArm=null;store.set('flu.fichas',savedList().filter(y=>y.id!==id));refreshExport();toast('Ficha borrada')}
+  });
+  refreshExport();
+};
+const h0=(location.hash||'').replace('#','');show(TABS.some(t=>t[0]===h0)?h0:'inicio');
+</script>
+
+
+<!-- Barra común del Portal SUH Antequera -->
+<style>
+  .suhdock{position:fixed;left:14px;bottom:14px;z-index:2147483000;display:flex;align-items:center;gap:4px;padding:5px;border-radius:999px;background:#0c2a4a;box-shadow:0 10px 30px -8px rgba(12,42,74,.55);font:600 13px/1 'Plus Jakarta Sans',system-ui,-apple-system,'Segoe UI',sans-serif;transition:opacity .2s}
+  .suhdock a{display:inline-flex;align-items:center;justify-content:center;gap:7px;height:34px;min-width:34px;padding:0 9px;border-radius:999px;color:#fff;text-decoration:none}
+  .suhdock a:hover{background:rgba(255,255,255,.14)}
+  .suhdock a.suhdock-home{background:#fff;color:#0c2a4a;padding:0 12px 0 4px}
+  .suhdock a.suhdock-home img{width:26px;height:26px;border-radius:50%;object-fit:contain;background:#fff}
+  .suhdock svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  .suhdock .suhdock-x{opacity:.6;min-width:26px;padding:0}
+  .suhdock.suhdock-min a:not(.suhdock-home){display:none}
+  .suhdock.suhdock-min a.suhdock-home span{display:none}
+  .suhdock.suhdock-min a.suhdock-home{padding:0 4px}
+  @media print{.suhdock{display:none!important}}
+</style>
+<nav class="suhdock" aria-label="Portal SUH Antequera">
+  <a class="suhdock-home" href="../index.html#herramientas" title="Volver al Portal de Supervisión SUH Antequera"><img src="../img/logo-suh.jpg" alt=""><span>Portal SUH</span></a>
+  <a href="https://www.instagram.com/suh_antequera_/" target="_blank" rel="noopener" title="Instagram @suh_antequera_"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><path d="M17.5 6.5h.01"/></svg></a>
+  <a href="https://www.facebook.com/p/Suh-Antequera-61568582212569/" target="_blank" rel="noopener" title="Facebook SUH Antequera"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+  <a href="https://x.com/saludnortemalag" target="_blank" rel="noopener" title="X @saludnortemalag" style="font-size:15px">𝕏</a>
+  <a class="suhdock-x" href="#" title="Minimizar barra" onclick="this.parentNode.classList.toggle('suhdock-min');return false;"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></a>
+</nav>
+</body></html>

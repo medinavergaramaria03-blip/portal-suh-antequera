@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta name="robots" content="noindex, nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Triaje y asignación de pacientes · Urgencias Hospital de Antequera</title>
+<style>
+:root{
+  --green:#00753A;
+  --green-dark:#005A2C;
+  --green-mid:#3E9A63;
+  --green-tint:#E8F2EC;
+  --green-wash:#F5F9F6;
+  --ink:#1C2A22;
+  --muted:#55645B;
+  --line:#D3DFD7;
+  --paper:#FFFFFF;
+  --p1:#C62828; --p2:#F08A1C; --p3:#F5D547; --p4:#8CC63F; --p5:#1F6FB5;
+  --radius:6px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:4.5rem}
+body{margin:0;font:16px/1.55 "Segoe UI","Helvetica Neue",Arial,sans-serif;color:var(--ink);background:var(--paper);-webkit-text-size-adjust:100%}
+h1,h2,h3,h4{line-height:1.2;margin:0 0 .5rem;color:var(--green-dark)}
+h1{font-size:clamp(1.9rem,5.4vw,3.1rem);font-weight:800;letter-spacing:-.02em}
+h2{font-size:clamp(1.45rem,3.6vw,2rem);font-weight:750;letter-spacing:-.01em}
+h3{font-size:1.1rem;font-weight:700}
+p{margin:0 0 .9rem;max-width:68ch}
+ul,ol{margin:0 0 1rem;padding-left:1.25rem}
+li{margin-bottom:.3rem}
+a{color:var(--green-dark)}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:3px solid #0B5FFF;outline-offset:2px;border-radius:3px}
+.wrap{max-width:62rem;margin:0 auto;padding:0 1rem}
+.small{font-size:.875rem;color:var(--muted)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* Cabecera */
+.top{background:var(--green);color:#fff}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding-top:.85rem;padding-bottom:.85rem;flex-wrap:wrap}
+.brand{font-weight:700;font-size:1rem;line-height:1.25}
+.brand span{display:block;font-weight:400;font-size:.85rem;opacity:.9}
+.ver{font-size:.8rem;background:rgba(255,255,255,.16);padding:.3rem .65rem;border-radius:999px;white-space:nowrap}
+nav.menu{position:sticky;top:0;z-index:20;background:#fff;border-bottom:1px solid var(--line)}
+nav.menu .wrap{display:flex;gap:.25rem;overflow-x:auto;scrollbar-width:none;padding-top:.35rem;padding-bottom:.35rem}
+nav.menu a{flex:0 0 auto;text-decoration:none;color:var(--ink);font-size:.92rem;font-weight:600;padding:.5rem .8rem;border-radius:var(--radius)}
+nav.menu a:hover{background:var(--green-tint);color:var(--green-dark)}
+nav.menu a.on{background:var(--green);color:#fff}
+
+/* Secciones */
+section{padding:3rem 0}
+section:nth-of-type(even){background:var(--green-wash)}
+.lead{font-size:1.08rem;color:var(--muted);max-width:62ch;margin-bottom:1.5rem}
+
+/* Héroe */
+#prioridades{padding-top:2.5rem}
+.hero-sub{font-size:1.1rem;color:var(--muted);margin:.4rem 0 1.5rem;max-width:60ch}
+.ladder{display:grid;gap:.4rem;margin:1.25rem 0 .5rem}
+.ladder button{display:grid;grid-template-columns:7.5rem 1fr;align-items:center;gap:.75rem;width:100%;text-align:left;background:#fff;border:1px solid var(--line);border-left:5px solid var(--c);border-radius:var(--radius);padding:.55rem .75rem}
+.ladder button:hover{background:var(--green-wash)}
+.ladder button[aria-pressed="true"]{background:var(--green-tint);border-color:var(--green);border-left-color:var(--c);box-shadow:0 0 0 1px var(--green)}
+.ladder .lab{font-weight:700;line-height:1.2}
+.ladder .lab small{display:block;font-weight:400;color:var(--muted);font-size:.8rem}
+.ladder .track{display:flex;align-items:center;gap:.6rem;min-width:0}
+.ladder .bar{height:1.6rem;border-radius:3px;background:var(--c);width:var(--w);min-width:.55rem;flex:0 0 auto;transition:width .25s}
+.ladder .time{font-weight:700;white-space:nowrap}
+.scale{font-size:.8rem;color:var(--muted);margin:0 0 1.25rem}
+.panel{background:#fff;border:1px solid var(--line);border-top:6px solid var(--c,var(--green));border-radius:var(--radius);padding:1.25rem}
+.panel h3{font-size:1.35rem;margin-bottom:.25rem}
+.panel dl{display:grid;grid-template-columns:1fr;gap:.75rem 1.5rem;margin:1rem 0 0}
+@media(min-width:700px){.panel dl{grid-template-columns:1fr 1fr}}
+.panel dt{font-weight:700;font-size:.85rem;color:var(--green-dark)}
+.panel dd{margin:0}
+.callout{background:var(--green-tint);border-left:4px solid var(--green);padding:.75rem 1rem;border-radius:0 var(--radius) var(--radius) 0;margin:1rem 0 0;max-width:none}
+.callout.warn{background:#FFF4E5;border-left-color:var(--p2)}
+.callout.alert{background:#FDECEC;border-left-color:var(--p1)}
+
+/* Recorrido */
+.stepper{display:flex;gap:.4rem;overflow-x:auto;padding-bottom:.4rem;margin-bottom:1rem;scrollbar-width:thin}
+.stepper button{flex:0 0 auto;display:flex;align-items:center;gap:.5rem;background:#fff;border:1px solid var(--line);border-radius:999px;padding:.4rem .9rem .4rem .4rem;font-weight:600;font-size:.92rem}
+.stepper .num{display:inline-grid;place-items:center;width:1.7rem;height:1.7rem;border-radius:50%;background:var(--green-tint);color:var(--green-dark);font-weight:700;font-size:.85rem}
+.stepper button[aria-selected="true"]{background:var(--green);color:#fff;border-color:var(--green)}
+.stepper button[aria-selected="true"] .num{background:#fff;color:var(--green-dark)}
+.step-body{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:1.25rem}
+.step-nav{display:flex;justify-content:space-between;gap:.5rem;margin-top:1rem}
+.btn{background:var(--green);color:#fff;border:0;border-radius:var(--radius);padding:.6rem 1.1rem;font-weight:600}
+.btn:hover{background:var(--green-dark)}
+.btn.ghost{background:#fff;color:var(--green-dark);border:1px solid var(--green)}
+.btn.ghost:hover{background:var(--green-tint)}
+.btn[disabled]{opacity:.4;cursor:not-allowed}
+
+/* Formularios */
+.tool{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:1.25rem;margin-bottom:1.5rem}
+.tool h3{margin-bottom:.75rem}
+fieldset{border:0;margin:0 0 1rem;padding:0}
+legend{font-weight:700;font-size:.92rem;margin-bottom:.4rem;padding:0}
+.seg{display:flex;flex-wrap:wrap;gap:.4rem}
+.seg label{position:relative}
+.seg input{position:absolute;opacity:0;inset:0;cursor:pointer}
+.seg span{display:block;border:1px solid var(--line);background:#fff;border-radius:var(--radius);padding:.5rem .85rem;font-size:.95rem;min-width:2.6rem;text-align:center}
+.seg input:checked+span{background:var(--green);border-color:var(--green);color:#fff;font-weight:600}
+.seg input:focus-visible+span{outline:3px solid #0B5FFF;outline-offset:2px}
+.grid2{display:grid;grid-template-columns:1fr;gap:0 1.5rem}
+@media(min-width:700px){.grid2{grid-template-columns:1fr 1fr}}
+.field{display:flex;flex-direction:column;gap:.25rem;margin-bottom:.9rem}
+.field label{font-weight:600;font-size:.92rem}
+.field input,.field select{font:inherit;padding:.5rem .6rem;border:1px solid #9DB0A4;border-radius:var(--radius);background:#fff;width:100%}
+.result{border-radius:var(--radius);padding:1rem 1.1rem;background:var(--green-tint);border:1px solid var(--green-mid)}
+.result strong.big{display:block;font-size:1.25rem;color:var(--green-dark);margin-bottom:.25rem}
+.result ul{margin:.5rem 0 0}
+.result.alert{background:#FDECEC;border-color:var(--p1)}
+.result.alert strong.big{color:#8E1B1B}
+.result.warn{background:#FFF4E5;border-color:var(--p2)}
+.result.warn strong.big{color:#8A4B00}
+
+/* Tarjetas de circuito */
+.cards{display:grid;grid-template-columns:1fr;gap:.9rem}
+@media(min-width:640px){.cards{grid-template-columns:1fr 1fr}}
+@media(min-width:960px){.cards{grid-template-columns:1fr 1fr 1fr}}
+.card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:1rem 1.1rem}
+.card h3{margin-bottom:.4rem}
+.card p{font-size:.95rem;margin-bottom:.5rem}
+.card .who{font-size:.88rem;color:var(--muted);margin:0}
+.chips{display:flex;flex-wrap:wrap;gap:.3rem;margin-bottom:.5rem}
+.chip{font-size:.78rem;font-weight:700;padding:.15rem .5rem;border-radius:999px;color:var(--ink)}
+.chip.p1{background:var(--p1);color:#fff}.chip.p2{background:var(--p2)}.chip.p3{background:var(--p3)}.chip.p4{background:var(--p4)}.chip.p5{background:var(--p5);color:#fff}
+
+/* Pestañas */
+.tabs{display:flex;gap:.3rem;overflow-x:auto;border-bottom:2px solid var(--line);margin-bottom:1.25rem}
+.tabs button{flex:0 0 auto;background:none;border:0;border-bottom:4px solid transparent;margin-bottom:-2px;padding:.65rem 1rem;font-weight:700;color:var(--muted)}
+.tabs button[aria-selected="true"]{color:var(--green-dark);border-bottom-color:var(--green)}
+table{border-collapse:collapse;width:100%;font-size:.93rem;background:#fff}
+th,td{border:1px solid var(--line);padding:.55rem .7rem;text-align:left;vertical-align:top}
+th{background:var(--green);color:#fff;font-weight:600}
+.tscroll{overflow-x:auto;margin-bottom:1rem}
+
+/* Observación */
+.search{width:100%;max-width:26rem;font:inherit;padding:.6rem .8rem;border:1px solid #9DB0A4;border-radius:var(--radius);margin:0 0 1rem}
+.crit-group{margin-bottom:1rem}
+.crit-group h4{font-size:.95rem;background:var(--green-tint);padding:.4rem .7rem;border-radius:var(--radius);margin-bottom:.4rem}
+.crit-group ul{margin-bottom:0}
+mark{background:#FFE99A;padding:0 .1rem}
+.empty{color:var(--muted);font-style:italic}
+
+/* Otros */
+.swatches{display:grid;gap:.5rem;margin:.5rem 0 1rem}
+.swatch{display:flex;align-items:center;gap:.6rem}
+.swatch i{width:1.6rem;height:1.6rem;border-radius:4px;border:1px solid #9DB0A4;flex:0 0 auto}
+details{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:.15rem 1rem;margin-bottom:.5rem}
+summary{cursor:pointer;font-weight:700;padding:.6rem 0;color:var(--green-dark)}
+details[open] summary{border-bottom:1px solid var(--line);margin-bottom:.6rem}
+dl.gl{margin:0}
+dl.gl dt{font-weight:700;color:var(--green-dark);margin-top:.7rem}
+dl.gl dd{margin:0}
+.cols2{display:grid;grid-template-columns:1fr;gap:1.5rem}
+@media(min-width:800px){.cols2{grid-template-columns:1fr 1fr}}
+footer{background:var(--green-dark);color:#E8F2EC;padding:2rem 0;font-size:.9rem}
+footer p{max-width:75ch}
+@media(max-width:520px){.ladder button{grid-template-columns:5.6rem 1fr}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.ladder .bar{transition:none}}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <div class="brand">Servicio Andaluz de Salud<span>Área Sanitaria Norte de Málaga · Hospital de Antequera</span></div>
+    <div class="ver">PNT de triaje · versión 6 · junio 2026</div>
+  </div>
+</header>
+
+<nav class="menu" aria-label="Secciones">
+  <div class="wrap">
+    <a href="#prioridades">Prioridades</a>
+    <a href="#recorrido">Recorrido</a>
+    <a href="#circuitos">Circuitos</a>
+    <a href="#codigos">Códigos</a>
+    <a href="#fragilidad">Fragilidad y violencia</a>
+    <a href="#observacion">Observación</a>
+    <a href="#unidad">La unidad</a>
+    <a href="#identificacion">Identificación</a>
+    <a href="#glosario">Glosario</a>
+  </div>
+</nav>
+
+<main>
+
+<!-- PRIORIDADES -->
+<section id="prioridades">
+  <div class="wrap">
+    <h1>Triaje y asignación de pacientes</h1>
+    <p class="hero-sub">Unidad de Urgencias Hospitalarias del Hospital de Antequera. Se clasifica con el Sistema Español de Triaje (SET), de 5 niveles, y el programa de ayuda web_e-PAT.</p>
+    <p class="small" style="margin-bottom:.25rem"><strong>Pulsa una prioridad</strong> para ver quién atiende al paciente, dónde y cuánto tiempo puede esperar.</p>
+    <div class="ladder" id="ladder" role="group" aria-label="Niveles de prioridad"></div>
+    <p class="scale">Las barras están a escala del tiempo máximo de atención (de 0 a 240 minutos).</p>
+    <div class="panel" id="prPanel" aria-live="polite"></div>
+    <p class="small" style="margin-top:1rem">Las prioridades 1 y 2 se cumplen siempre. Las 3, 4 y 5 se cumplen en un porcentaje muy alto, pero de forma excepcional puede no ocurrir por la demanda asistencial. El paciente puede ser reevaluado y reasignado en cualquier momento si cambia su prioridad.</p>
+  </div>
+</section>
+
+<!-- RECORRIDO -->
+<section id="recorrido">
+  <div class="wrap">
+    <h2>El recorrido del paciente</h2>
+    <p class="lead">Desde que llega hasta que se va. Usa los botones o los pasos para ver qué ocurre en cada punto.</p>
+    <div class="stepper" id="stepper" role="tablist" aria-label="Pasos del recorrido"></div>
+    <div class="step-body" id="stepBody" role="tabpanel" aria-live="polite"></div>
+    <div class="step-nav">
+      <button class="btn ghost" id="prevStep">Paso anterior</button>
+      <button class="btn" id="nextStep">Paso siguiente</button>
+    </div>
+  </div>
+</section>
+
+<!-- CIRCUITOS -->
+<section id="circuitos">
+  <div class="wrap">
+    <h2>¿A qué circuito va el paciente?</h2>
+    <p class="lead">Un circuito es un espacio físico con recursos y profesionales para un grupo concreto de pacientes. Son excluyentes entre sí, aunque si el paciente evoluciona puede cambiar de circuito y de profesional.</p>
+
+    <div class="tool">
+      <h3>Comprobar el circuito según el PNT</h3>
+      <div class="grid2">
+        <fieldset><legend>Prioridad asignada en triaje</legend>
+          <div class="seg" id="segPr"></div></fieldset>
+        <fieldset id="fsMon" hidden><legend>¿Necesita monitorización inmediata?</legend>
+          <div class="seg" id="segMon"></div></fieldset>
+        <fieldset><legend>Edad</legend>
+          <div class="seg" id="segAge"></div></fieldset>
+        <fieldset><legend>Motivo de consulta</legend>
+          <div class="seg" id="segMot"></div></fieldset>
+      </div>
+      <div class="result" id="circResult" aria-live="polite"></div>
+      <p class="small" style="margin:.75rem 0 0">Es una ayuda para conocer el protocolo. La prioridad la asigna siempre enfermería de triaje con el SET (web_e-PAT).</p>
+    </div>
+
+    <div class="cards" id="circCards"></div>
+  </div>
+</section>
+
+<!-- CÓDIGOS -->
+<section id="codigos">
+  <div class="wrap">
+    <h2>Patologías tiempo-dependientes</h2>
+    <p class="lead">Dolor torácico, ictus, trauma grave y sepsis se tratan como prioridad 1. Cada código tiene su propia ruta.</p>
+    <div class="tabs" id="codeTabs" role="tablist" aria-label="Códigos"></div>
+    <div id="codePanels"></div>
+  </div>
+</section>
+
+<!-- FRAGILIDAD -->
+<section id="fragilidad">
+  <div class="wrap">
+    <h2>Fragilidad y violencia</h2>
+    <p class="lead">Además de la gravedad, en triaje se identifican dos situaciones que cambian cómo se atiende al paciente.</p>
+    <div class="cols2">
+      <div class="tool">
+        <h3>Paciente frágil</h3>
+        <p>Se identifica en triaje y se atiende según el PNT de paciente frágil.</p>
+        <ol>
+          <li><strong>Detectar.</strong> EPADI de 6 o más (nivel alto, de 6 a 10), paciente en seguimiento por la Unidad de Cuidados Paliativos o familiar con la tarjeta +cuidado.</li>
+          <li><strong>Anotar.</strong> En motivo de consulta se escribe PF, el número de la escala EPADI y el motivo. Por ejemplo, <em>PF8</em> seguido del motivo de consulta.</li>
+          <li><strong>Señalar.</strong> Se coloca una pegatina amarilla y se asigna la prioridad que corresponda por su situación clínica.</li>
+        </ol>
+        <h4>Qué se hace después</h4>
+        <ul>
+          <li>Informar del tiempo aproximado de estancia.</li>
+          <li>Identificar al cuidador principal y permitir que acompañe al paciente.</li>
+          <li>Asignar enfermero y médico responsables.</li>
+          <li>Favorecer el descanso del cuidador y hacerle partícipe del plan de cuidados.</li>
+          <li>Entregarle el díptico informativo de la unidad.</li>
+          <li>Si cumple criterios de observación, pasa a una cama cuando haya más de una cama libre en observación.</li>
+        </ul>
+        <h4>Colores en Diraya-Urgencias</h4>
+        <p class="small">El nombre del paciente se sombrea según su dependencia y si está acompañado.</p>
+        <div class="swatches">
+          <div class="swatch"><i style="background:#fff"></i>Independiente, acompañado: blanco</div>
+          <div class="swatch"><i style="background:#2FA84F"></i>Independiente, solo: verde</div>
+          <div class="swatch"><i style="background:#FFEB3B"></i>Dependiente, acompañado: amarillo</div>
+          <div class="swatch"><i style="background:#E53935"></i>Dependiente, solo: rojo</div>
+        </div>
+      </div>
+
+      <div class="tool">
+        <h3>Sospecha de maltrato y violencia de género</h3>
+        <p>Se sigue el Protocolo Andaluz de Violencia de Género. Enfermería de triaje es el primer contacto.</p>
+        <ol>
+          <li>Recepción y primera asistencia asegurando la confidencialidad.</li>
+          <li>Si hay sospecha, se facilita el acceso a consulta con la mujer a solas y se le pregunta por la causa de su malestar o de sus lesiones.</li>
+          <li>Se asigna prioridad 1, 2 o 3 según la urgencia clínica, sin pasar de 3.</li>
+          <li>Se registra en la historia clínica con las siglas <strong>CMT</strong> (confirmación de maltrato) o <strong>ISMT</strong> (indicador de sospecha de maltrato).</li>
+          <li>La paciente se atiende en la consulta 12, para mayor intimidad.</li>
+        </ol>
+        <div class="callout"><strong>Menores:</strong> el maltrato de menores se remite a Pediatría, con su PNT específico del Área Sanitaria Norte de Málaga.</div>
+        <div class="callout"><strong>Agresión sexual o sumisión química:</strong> tras la valoración en consulta de policlínica, pasa a la sala de Urgencias Ginecológicas y se actúa según el procedimiento específico del área.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OBSERVACIÓN -->
+<section id="observacion">
+  <div class="wrap">
+    <h2>Criterios de ingreso en observación</h2>
+    <p class="lead">Observación leve (sillones) y observación grave (camas). Busca una patología o un síntoma.</p>
+    <div class="tabs" id="obsTabs" role="tablist" aria-label="Tipo de observación"></div>
+    <label class="sr" for="obsSearch">Buscar criterio</label>
+    <input class="search" id="obsSearch" type="search" placeholder="Buscar: asma, hipoglucemia, ictus…">
+    <div id="obsList" aria-live="polite"></div>
+    <p class="small" id="obsFoot"></p>
+  </div>
+</section>
+
+<!-- UNIDAD -->
+<section id="unidad">
+  <div class="wrap">
+    <h2>La unidad: espacios y equipo</h2>
+    <p class="lead">Qué hay en Urgencias y quién hace qué.</p>
+    <div class="cols2">
+      <div>
+        <h3>Espacios</h3>
+        <div id="spaces"></div>
+      </div>
+      <div>
+        <h3>Profesionales</h3>
+        <div id="staff"></div>
+        <details>
+          <summary>Consulta de relevo</summary>
+          <p>Un facultativo asignado cada día se hace responsable del relevo del turno de noche y continúa la actividad sin interrupción. Es responsable de las prioridades 2 que surjan y reparte los pacientes que llegan durante la sesión clínica de la unidad, en la que se relevan los pacientes de observación (sillones y camas) y de tratamientos.</p>
+          <p>Al terminar la sesión, los facultativos se hacen cargo por igual de los relevos generados, empezando por quien menos carga tenga. Si una policlínica se satura, las prioridades con más demora se reparten entre las unidades con menos carga.</p>
+        </details>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- IDENTIFICACIÓN -->
+<section id="identificacion">
+  <div class="wrap">
+    <h2>Identificación segura del paciente</h2>
+    <p class="lead">Se sigue el protocolo de identificación inequívoca del Área Sanitaria Norte de Málaga.</p>
+    <div class="cards">
+      <div class="card"><h3>En admisión</h3><p>El personal administrativo comprueba la documentación (tarjeta sanitaria NUHSA, DNI, NIE o pasaporte), toma los datos personales y emite la pulsera. Lleva un código con el que se llamará al paciente durante toda su estancia.</p></div>
+      <div class="card"><h3>En triaje</h3><p>La enfermera verifica la identidad preguntando nombre y apellidos y fecha de nacimiento, y coloca la pulsera.</p></div>
+      <div class="card"><h3>Alergias</h3><p>Si hay alguna alergia, se marca con un distintivo rojo en el recuadro de la pulsera. Indica al profesional que debe consultar la historia clínica. Si se manipula, queda constancia.</p></div>
+    </div>
+    <p class="small" style="margin-top:1rem">El primer profesional en contacto con el paciente es quien lo identifica, sea cual sea su categoría o zona de actuación.</p>
+  </div>
+</section>
+
+<!-- GLOSARIO -->
+<section id="glosario">
+  <div class="wrap">
+    <h2>Glosario</h2>
+    <dl class="gl" id="gloss"></dl>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>Basado en el Procedimiento Normalizado de Trabajo «Triaje y asignación. Unidad de Urgencias Hospitalaria. Área Sanitaria Norte de Málaga», versión 6, junio 2026.</p>
+    <p>Herramienta de consulta y formación. No sustituye al juicio clínico ni a la clasificación con el SET (web_e-PAT). Las calculadoras son una ayuda orientativa. Ante cualquier duda, prevalece el documento original.</p>
+    <p>† Cifra reproducida tal como figura en el PNT; pendiente de confirmar la unidad.</p>
+  </div>
+</footer>
+
+<script>
+const $=(s,r=document)=>r.querySelector(s);
+const $$=(s,r=document)=>[...r.querySelectorAll(s)];
+const esc=s=>s.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+
+/* ---------- Prioridades ---------- */
+const PR=[
+ {n:1,name:'Resucitación',time:'Inmediata',min:0,c:'var(--p1)',
+  means:'Parada o situación crítica con riesgo vital inmediato.',
+  circuit:'Críticos',
+  who:'Médicos de Observación (sillones y camas) y la enfermería designada.',
+  where:'Sala de críticos y RCP: 2 puestos, ampliable a 3.',
+  note:'Dolor torácico, ictus, trauma grave y sepsis se activan como prioridad 1. En el esquema de triaje se avisa tocando el timbre.',kind:'alert'},
+ {n:2,name:'Emergencia',time:'15 min',min:15,c:'var(--p2)',
+  means:'Riesgo vital cuyo desenlace depende del tiempo. Alto riesgo, con inestabilidad fisiológica y/o dolor severo.',
+  circuit:'Críticos si necesita monitorización inmediata. Si no, Polivalente.',
+  who:'Médico de Prioridades 2 en críticos. Si no necesita monitorización, médicos de policlínica.',
+  where:'Sala de críticos o consulta de policlínica. El traslado sigue el protocolo de transferencia de pacientes.',
+  note:'El médico de Prioridades 2 se encarga hasta las 22 h. Después, y en noches y fines de semana, los P2 que necesiten monitorización inmediata los atiende el médico de Observación.',kind:'warn'},
+ {n:3,name:'Urgencia',time:'60 min',min:60,c:'var(--p3)',
+  means:'Riesgo vital potencial. Suele necesitar varias exploraciones diagnósticas, con el paciente estable fisiológicamente.',
+  circuit:'Polivalente, pediátrico, gineco-obstétrico o traumatológico.',
+  who:'Médico de policlínica, o de pediatría si procede.',
+  where:'Consultas de policlínica.',
+  note:'Tras la valoración puede darse el alta en acto único, o pedir pruebas y tratamiento. En ese caso el paciente espera en la sala de espera hasta que enfermería o radiología lo llamen.'},
+ {n:4,name:'Menos urgente',time:'120 min',min:120,c:'var(--p4)',
+  means:'Situaciones potencialmente serias y de complejidad significativa. Son el estándar de la urgencia hospitalaria y muy frecuentes en atención primaria.',
+  circuit:'Atención básica, salvo que sea traumatológico o gineco-obstétrico.',
+  who:'Médico de la consulta de atención básica (CAD).',
+  where:'Consulta de atención básica.',
+  note:'Es un circuito de acto único: el médico solo dispone de tiras reactivas y, eventualmente, radiología simple. Si necesita analítica de sangre, el paciente cambia de ubicación.'},
+ {n:5,name:'No urgente',time:'240 min',min:240,c:'var(--p5)',
+  means:'Problemas clínico-administrativos o clínicos de baja complejidad, con poco consumo de recursos. Pueden esperar hasta 4 horas sin riesgo.',
+  circuit:'Atención básica, salvo que sea traumatológico o gineco-obstétrico.',
+  who:'Médico de la consulta de atención básica (CAD).',
+  where:'Consulta de atención básica.',
+  note:'Igual que la prioridad 4: acto único, con tiras reactivas y radiología simple.'}
+];
+const ladder=$('#ladder');
+PR.forEach(p=>{
+  const b=document.createElement('button');
+  b.type='button';
+  b.style.setProperty('--c',p.c);
+  b.style.setProperty('--w',(p.min/240*70)+'%');
+  b.dataset.n=p.n;
+  b.innerHTML=`<span class="lab">Prioridad ${p.n}<small>${p.name}</small></span><span class="track"><span class="bar"></span><span class="time">${p.time}</span></span>`;
+  b.addEventListener('click',()=>showPr(p.n));
+  ladder.appendChild(b);
+});
+function showPr(n){
+  const p=PR[n-1];
+  $$('#ladder button').forEach(b=>b.setAttribute('aria-pressed',String(+b.dataset.n===n)));
+  const el=$('#prPanel');
+  el.style.setProperty('--c',p.c);
+  el.innerHTML=`<h3>Prioridad ${p.n} · ${p.name}</h3>
+   <p><strong>${p.n===1?'Atención inmediata':'Tiempo de atención: '+p.time}</strong></p>
+   <p>${p.means}</p>
+   <dl>
+    <div><dt>Circuito</dt><dd>${p.circuit}</dd></div>
+    <div><dt>Quién atiende</dt><dd>${p.who}</dd></div>
+    <div><dt>Dónde</dt><dd>${p.where}</dd></div>
+   </dl>
+   <p class="callout ${p.kind||''}">${p.note}</p>`;
+}
+showPr(1);
+
+/* ---------- Recorrido ---------- */
+const STEPS=[
+ {t:'Admisión',h:'Admisión de Urgencias',b:`<p>Es el primer contacto. El personal administrativo toma los datos personales y entrega una pulsera con los datos y un código identificativo. Con ese código se llamará al paciente desde los distintos puntos de atención.</p><p>Después se le envía a la sala de espera previa al triaje.</p>`},
+ {t:'Espera previa',h:'Sala de espera previa al triaje',b:`<p>El paciente espera hasta que lo llama el enfermero de la consulta de triaje. En esta sala hay carteles que explican cómo se clasifica y se admite a los pacientes.</p>`},
+ {t:'Triaje',h:'Consulta de enfermería de triaje',b:`<p>Enfermería verifica la identidad (nombre y apellidos y fecha de nacimiento), coloca la pulsera y, según el problema de salud, asigna un código de prioridad con el SET y su programa web_e-PAT.</p>
+   <ul><li>Detecta pacientes frágiles y posibles casos de violencia.</li><li>Asigna el circuito y activa los códigos tiempo-dependientes.</li><li>Puede iniciar pruebas: test de gestación, sedimento de orina o electrocardiograma.</li><li>Hay dos consultas de triaje. La segunda funciona en las horas de máxima afluencia para acortar el tiempo de espera de clasificación (TECLA) y el de clasificación (TICLA).</li></ul>
+   <p>Un celador acompaña a los pacientes y lleva las etiquetas identificativas a las consultas.</p>`},
+ {t:'Sala de espera',h:'Sala de espera de pacientes',b:`<p>Tras el triaje, el paciente permanece en la sala que el enfermero considere oportuna, normalmente la sala de espera, atento al sistema de comunicación interna que le llamará a la consulta del médico asignado.</p>
+   <p>Una TCAE con ordenador conectado a Diraya-Urgencias y al turno SAS informa a los pacientes de su proceso, prioriza y vigila la espera para evitar eventos adversos. Un celador acompaña a los pacientes a donde se les llame.</p>`},
+ {t:'Médico',h:'Atención médica',b:`<p>Según la prioridad y el circuito: críticos, policlínica o consulta de atención básica. Los pacientes de prioridades 3, 4 y 5 se valoran en las consultas médicas.</p>
+   <p>Desde allí, el paciente puede recibir el alta en acto único o el médico puede pedir pruebas y tratamiento. Entonces espera de nuevo en la sala de espera y le llama enfermería o radiología para completar el estudio.</p>`},
+ {t:'Pruebas',h:'Enfermería y sala de tratamientos',b:`<p>En la consulta de enfermería se hacen extracciones de sangre, vías venosas, electrocardiogramas, test de antígenos y taponamientos nasales. También hay sala de curas y sala de yesos.</p>
+   <p>Si necesita tratamiento intravenoso, pasa a la sala de tratamientos (12 puestos). Si no, espera los resultados en la sala de espera. Al terminar el tratamiento vuelve a la sala de espera, donde se le llama por su código para comunicarle los resultados y ver su evolución.</p>
+   <p class="small">Los pacientes que no pueden esperar en la sala, como psiquiátricos sin acompañante que no precisan observación inmediata o los derivados en camilla por servicios extrahospitalarios, esperan inicialmente en tratamientos.</p>`},
+ {t:'Destino',h:'Alta, observación o ingreso',b:`<p>El paciente puede irse a domicilio, ser valorado por un especialista, pasar a observación leve (sillones) o grave (camas), ingresar en planta o ir a UCI.</p>
+   <p>La observación puede alcanzarse directamente desde críticos o desde la sala de tratamientos. Los criterios de ingreso están más abajo.</p>
+   <div class="callout">En cualquier momento un paciente puede ser retirado y reasignado de triaje si cambia su prioridad.</div>`}
+];
+let stepI=0;
+const stepper=$('#stepper');
+STEPS.forEach((s,i)=>{
+  const b=document.createElement('button');
+  b.type='button';b.setAttribute('role','tab');
+  b.innerHTML=`<span class="num">${i+1}</span>${s.t}`;
+  b.addEventListener('click',()=>showStep(i));
+  stepper.appendChild(b);
+});
+function showStep(i){
+  stepI=i;
+  $$('#stepper button').forEach((b,k)=>b.setAttribute('aria-selected',String(k===i)));
+  $('#stepBody').innerHTML=`<h3>${STEPS[i].h}</h3>${STEPS[i].b}`;
+  $('#prevStep').disabled=i===0;
+  $('#nextStep').disabled=i===STEPS.length-1;
+  $$('#stepper button')[i].scrollIntoView({block:'nearest',inline:'center'});
+}
+$('#prevStep').onclick=()=>showStep(stepI-1);
+$('#nextStep').onclick=()=>showStep(stepI+1);
+showStep(0);
+
+/* ---------- Circuitos ---------- */
+function seg(id,name,opts,def,cb){
+  const box=$(id);
+  box.innerHTML=opts.map(([v,l])=>`<label><input type="radio" name="${name}" value="${v}" ${v==def?'checked':''}><span>${l}</span></label>`).join('');
+  box.addEventListener('change',cb);
+}
+seg('#segPr','pr',[[1,'1'],[2,'2'],[3,'3'],[4,'4'],[5,'5']],3,calcCirc);
+seg('#segMon','mon',[['no','No'],['si','Sí']],'no',calcCirc);
+seg('#segAge','age',[['ad','14 años o más'],['ped','Menos de 14 años']],'ad',calcCirc);
+seg('#segMot','mot',[['gen','Otro motivo'],['tra','Traumatológico'],['gin','Ginecológico o embarazo']],'gen',calcCirc);
+const val=n=>$(`input[name="${n}"]:checked`).value;
+function calcCirc(){
+  const p=+val('pr'),mon=val('mon')==='si',age=val('age'),mot=val('mot');
+  $('#fsMon').hidden=p!==2;
+  let r={},notes=[];
+  const med=(p)=> p<=3?'Médico de policlínica':'Médico de atención básica (CAD)';
+  const plc=(p)=> p<=3?'Consultas de policlínica':'Consulta de atención básica';
+  if(p===1){
+    r={c:'Críticos',d:'Médicos de Observación (sillones y camas)',w:'Sala de críticos y RCP'};
+    notes.push('Los pacientes de prioridad 1 no van a los circuitos traumatológico, pediátrico ni gineco-obstétrico.');
+  }else if(p===2&&mon){
+    r={c:'Críticos',d:'Médico de Prioridades 2',w:'Sala de críticos'};
+    notes.push('A partir de las 22 h y en fines de semana lo atiende el médico de Observación.');
+  }else if(mot==='tra'){
+    r={c:'Traumatológico',d:med(p),w:plc(p)};
+    notes.push('Incluye pacientes de prioridad 2 a 5. No incluye traumatismos craneales, abdominales ni torácicos.');
+  }else if(age==='ped'){
+    r={c:'Pediátrico',d:'Pediatría o médico de policlínica, si procede',w:'Consultas de pediatría o policlínica'};
+    if(p>=4)notes.push('El PNT no detalla la consulta concreta para prioridades 4 y 5 pediátricas.');
+    notes.push('Circuito para menores de 14 años (prioridades 2 a 5). Si el problema es traumatológico, va al circuito traumatológico.');
+  }else if(mot==='gin'){
+    r={c:'Obstétrico-ginecológico',d:med(p),w:plc(p)};
+    notes.push('Si la gestante consulta por un traumatismo, va al circuito traumatológico. Si consulta por dolor, cefalea u otros síntomas, va a Críticos, Polivalente o Atención básica según su prioridad.');
+  }else if(p<=3){
+    r={c:'Polivalente',d:'Médico de policlínica',w:'Consultas de policlínica'};
+    notes.push('Incluye pacientes que necesitan pruebas complementarias más allá de la atención básica, y los P2 que no requieren monitorización inmediata.');
+  }else{
+    r={c:'Atención básica',d:'Médico de atención básica (CAD)',w:'Consulta de atención básica'};
+    notes.push('Acto único: solo tiras reactivas y, eventualmente, radiología simple. Si necesita extracción de sangre, cambia de ubicación (Polivalente).');
+  }
+  notes.push('Los circuitos son excluyentes, pero la evolución del paciente puede llevarlo a otro circuito y a otro profesional.');
+  const cls=p===1?'alert':p===2?'warn':'';
+  const box=$('#circResult');
+  box.className='result '+cls;
+  box.innerHTML=`<strong class="big">Circuito ${r.c}</strong><div><strong>Atiende:</strong> ${r.d}</div><div><strong>Dónde:</strong> ${r.w}</div><ul>${notes.map(n=>`<li>${n}</li>`).join('')}</ul>`;
+}
+calcCirc();
+
+const CIRC=[
+ {n:'Críticos',chips:['p1','p2'],t:'Pacientes de prioridad 1 y los de prioridad 2 que necesitan monitorización inicial.',w:'Los P1, los médicos de Observación. Los P2, el médico de Prioridades 2 hasta las 22 h.'},
+ {n:'Atención básica',chips:['p4','p5'],t:'Consultas de acto único que no necesitan exploraciones complementarias. Prioridades 4 y 5 que no sean traumatológicas ni gineco-obstétricas.',w:'Solo tiras reactivas y, eventualmente, radiología simple. Se puede administrar medicación intravenosa o intramuscular. Si hace falta sangre, cambia de ubicación.'},
+ {n:'Polivalente',chips:['p2','p3'],t:'Pacientes que necesitan más pruebas que las de atención básica, sin ser traumatológicos, gineco-obstétricos ni pediátricos. Incluye P2 sin monitorización inmediata.',w:'Médicos de policlínica.'},
+ {n:'Traumatológico',chips:['p2','p3','p4','p5'],t:'Pacientes de cualquier prioridad (2 a 5) con un problema propio de Traumatología. No incluye P1 ni traumatismos craneales, abdominales o torácicos.',w:'Sala de traumatología y radioscopia.'},
+ {n:'Pediátrico',chips:['p2','p3','p4','p5'],t:'Menores de 14 años (no inclusive) con prioridades 2 a 5. Se excluyen los que entran en el circuito traumatológico.',w:'Consultas de pediatría o policlínica.'},
+ {n:'Obstétrico-ginecológico',chips:['p2','p3','p4','p5'],t:'Usuarias cuyo motivo de consulta es ginecológico o relacionado con el embarazo. No incluye P1.',w:'Gestante con traumatismo: circuito traumatológico. Gestante con dolor, cefalea, etc.: Críticos, Polivalente o Atención básica.'}
+];
+$('#circCards').innerHTML=CIRC.map(c=>`<div class="card"><h3>${c.n}</h3><div class="chips">${c.chips.map(k=>`<span class="chip ${k}">P${k[1]}</span>`).join('')}</div><p>${c.t}</p><p class="who">${c.w}</p></div>`).join('');
+
+/* ---------- Pestañas genéricas ---------- */
+function tabs(barId,items,onSel){
+  const bar=$(barId);
+  bar.innerHTML='';
+  items.forEach((it,i)=>{
+    const b=document.createElement('button');
+    b.type='button';b.setAttribute('role','tab');b.textContent=it;
+    b.onclick=()=>{ $$('button',bar).forEach((x,k)=>x.setAttribute('aria-selected',String(k===i))); onSel(i); };
+    bar.appendChild(b);
+  });
+  $$('button',bar)[0].click();
+}
+
+/* ---------- Códigos ---------- */
+const codePanels=$('#codePanels');
+codePanels.innerHTML=`
+<div data-code="0">
+  <div class="tool">
+    <h3>Código dolor torácico</h3>
+    <ol>
+      <li>Tomar constantes.</li>
+      <li>Medir el dolor con la escala EVA.</li>
+      <li>Hacer un electrocardiograma de 12 derivaciones en menos de 5 minutos.</li>
+      <li>Interpretarlo en menos de 10 minutos.</li>
+    </ol>
+  </div>
+  <div class="tool">
+    <h3>Sala de triaje 1 o área de críticos</h3>
+    <p class="small">Resumen del esquema del PNT. Todos los pacientes se valoran con constantes.</p>
+    <div class="tscroll"><table>
+      <tr><th>Situación</th><th>Se queda en sala de triaje 1</th><th>Pasa al área de críticos (P2)</th></tr>
+      <tr><td><strong>Dolor torácico</strong></td>
+        <td>Con TA, FC y saturación normales.<br><strong>P3:</strong> dolor de más de 24 h o sin dolor actual, características atípicas y sin antecedentes coronarios.<br><strong>P2:</strong> dolor agudo de menos de 24 h, típico y con antecedentes coronarios.</td>
+        <td>Hipotensión (TAS &lt; 100). Disnea: taquipnea, saturación &lt; 90 % sin antecedentes o &lt; 85 % con antecedentes. Cambios eléctricos: elevación del ST u otros.</td></tr>
+      <tr><td><strong>Palpitaciones</strong></td>
+        <td><strong>P3:</strong> FC &lt; 110 lpm, sin dolor torácico y sin inestabilidad.</td>
+        <td>FC &gt; 110 lpm.</td></tr>
+      <tr><td><strong>Disnea</strong></td>
+        <td><strong>P3:</strong> saturación &gt; 85 % con antecedentes o &gt; 90 % sin antecedentes, TA &gt; 100, sin alteración del nivel de conciencia y eupneico en reposo.</td>
+        <td>Saturación &lt; 85 % con antecedentes o &lt; 90 % sin antecedentes, TA &lt; 100, bajo nivel de conciencia, taquipnea con uso de musculatura accesoria.</td></tr>
+      <tr><td><strong>Clínica neurológica</strong></td>
+        <td>De más de 24 horas de evolución.</td>
+        <td>De menos de 24 horas de evolución.</td></tr>
+    </table></div>
+    <div class="callout alert"><strong>Prioridad 1: tocar el timbre.</strong> Código trauma, código ictus, código sepsis y SCACEST.</div>
+  </div>
+</div>
+
+<div data-code="1" hidden>
+  <div class="tool">
+    <h3>Triaje código ictus</h3>
+    <div class="grid2">
+      <fieldset><legend>Tiempo desde el inicio de los síntomas</legend><div class="seg" id="segIT"></div></fieldset>
+      <fieldset><legend>Paciente independiente (Rankin &lt; 3)</legend><div class="seg" id="segIR"></div></fieldset>
+      <fieldset><legend>Síntomas incapacitantes (Cincinnati, 1 de 3)</legend><div class="seg" id="segIC"></div></fieldset>
+      <fieldset id="fsG" hidden><legend>Escala GADSS (la pasa el médico de Prioridades 2)</legend><div class="seg" id="segIG"></div></fieldset>
+    </div>
+    <div class="result" id="ictusRes" aria-live="polite"></div>
+    <p class="small" style="margin:.75rem 0 0">En el código ictus no influye la edad del paciente.</p>
+  </div>
+</div>
+
+<div data-code="2" hidden>
+  <div class="tool">
+    <h3>Código trauma grave</h3>
+    <p>Trauma Score Revisado (TSR): se suma la puntuación de GCS, TAS y FR. Con un total inferior a 12, la supervivencia es inferior al 90 %.</p>
+    <div class="grid2">
+      <div class="field"><label for="tGcs">Escala de Glasgow (3 a 15)</label><input id="tGcs" type="number" min="3" max="15" inputmode="numeric"></div>
+      <div class="field"><label for="tTas">TAS (mmHg)</label><input id="tTas" type="number" min="0" inputmode="numeric"></div>
+      <div class="field"><label for="tFr">FR (rpm)</label><input id="tFr" type="number" min="0" inputmode="numeric"></div>
+    </div>
+    <div class="result" id="traumaRes" aria-live="polite">Introduce los tres valores.</div>
+    <details style="margin-top:1rem"><summary>Tabla del TSR</summary>
+      <div class="tscroll"><table>
+        <tr><th>GCS</th><th>TAS (mmHg)</th><th>FR (rpm)</th><th>Puntos</th></tr>
+        <tr><td>13-15</td><td>&gt; 89</td><td>10-29</td><td>4</td></tr>
+        <tr><td>9-12</td><td>76-89</td><td>&gt; 29</td><td>3</td></tr>
+        <tr><td>6-8</td><td>50-75</td><td>6-9</td><td>2</td></tr>
+        <tr><td>4-5</td><td>1-49</td><td>1-5</td><td>1</td></tr>
+        <tr><td>3</td><td>0</td><td>0</td><td>0</td></tr>
+      </table></div>
+    </details>
+  </div>
+</div>
+
+<div data-code="3" hidden>
+  <div class="tool">
+    <h3>Código sepsis</h3>
+    <p><strong>Definición conceptual.</strong> Disfunción orgánica grave, con amenaza para la vida, debida a una respuesta anómala del individuo a la infección.</p>
+    <p><strong>Definición operativa del PNT.</strong> Aumento de dos o más puntos en la escala NEWS2 (7 o más puntos) en un paciente con Rankin &lt; 3.</p>
+    <h3 style="margin-top:1.25rem">Calculadora NEWS2</h3>
+    <div class="grid2">
+      <div class="field"><label for="nRr">Frecuencia respiratoria (rpm)</label><input id="nRr" type="number" min="0" inputmode="numeric"></div>
+      <div class="field"><label for="nSp">Saturación de O₂ (%)</label><input id="nSp" type="number" min="0" max="100" inputmode="numeric"></div>
+      <div class="field"><label for="nSc">Escala de saturación</label><select id="nSc"><option value="1">Escala 1</option><option value="2">Escala 2</option></select></div>
+      <div class="field"><label for="nOx">Aire u oxígeno</label><select id="nOx"><option value="air">Aire ambiente</option><option value="oxy">Oxígeno suplementario</option></select></div>
+      <div class="field"><label for="nSb">Tensión arterial sistólica (mmHg)</label><input id="nSb" type="number" min="0" inputmode="numeric"></div>
+      <div class="field"><label for="nPu">Pulso (lpm)</label><input id="nPu" type="number" min="0" inputmode="numeric"></div>
+      <div class="field"><label for="nCo">Nivel de conciencia</label><select id="nCo"><option value="a">Alerta</option><option value="c">Confusión, respuesta a voz o dolor, o sin respuesta</option></select></div>
+      <div class="field"><label for="nTe">Temperatura (°C)</label><input id="nTe" type="number" step="0.1" inputmode="decimal"></div>
+    </div>
+    <div class="result" id="newsRes" aria-live="polite">Completa los valores numéricos.</div>
+    <details style="margin-top:1rem"><summary>Tabla NEWS2 del PNT</summary>
+      <div class="tscroll"><table>
+        <tr><th>Parámetro</th><th>3</th><th>2</th><th>1</th><th>0</th><th>1</th><th>2</th><th>3</th></tr>
+        <tr><td>FR (rpm)</td><td>≤ 8</td><td></td><td>9-11</td><td>12-20</td><td></td><td>21-24</td><td>≥ 25</td></tr>
+        <tr><td>SpO₂ escala 1 (%)</td><td>≤ 91</td><td>92-93</td><td>94-95</td><td>≥ 96</td><td></td><td></td><td></td></tr>
+        <tr><td>SpO₂ escala 2 (%)</td><td>≤ 83</td><td>84-85</td><td>86-87</td><td>88-92 o ≥ 93 con aire</td><td>93-94 con O₂</td><td>95-96 con O₂</td><td>≥ 97 con O₂</td></tr>
+        <tr><td>Aire u oxígeno</td><td></td><td>Oxígeno</td><td></td><td>Aire</td><td></td><td></td><td></td></tr>
+        <tr><td>TAS (mmHg)</td><td>≤ 90</td><td>91-100</td><td>101-110</td><td>111-219</td><td></td><td></td><td>≥ 220</td></tr>
+        <tr><td>Pulso (lpm)</td><td>≤ 40</td><td></td><td>41-50</td><td>51-90</td><td>91-110</td><td>111-130</td><td>≥ 131</td></tr>
+        <tr><td>Conciencia</td><td></td><td></td><td></td><td>Alerta</td><td></td><td></td><td>CVPU</td></tr>
+        <tr><td>Temperatura (°C)</td><td>≤ 35,0</td><td></td><td>35,1-36,0</td><td>36,1-38,0</td><td>38,1-39,0</td><td>≥ 39,1</td><td></td></tr>
+      </table></div>
+    </details>
+  </div>
+</div>`;
+
+tabs('#codeTabs',['Dolor torácico','Ictus','Trauma grave','Sepsis'],i=>{
+  $$('#codePanels > div').forEach(d=>d.hidden=+d.dataset.code!==i);
+});
+
+/* Ictus */
+seg('#segIT','it',[['lt6','Menos de 6 h (incluye ictus del despertar)'],['mid','De 6 a 16 h'],['gt16','Más de 16 h']],'lt6',calcIctus);
+seg('#segIR','ir',[['si','Sí'],['no','No']],'si',calcIctus);
+seg('#segIC','ic',[['si','Sí'],['no','No']],'si',calcIctus);
+seg('#segIG','ig',[['pen','Pendiente'],['ge4','4 o más'],['lt4','Menos de 4']],'pen',calcIctus);
+function calcIctus(){
+  const t=val('it'),r=val('ir')==='si',c=val('ic')==='si',g=val('ig');
+  $('#fsG').hidden=t!=='mid';
+  let cls='',h='',b='';
+  if(t==='gt16'){h='Prioridad según triaje SET';b='En ictus de más de 16 horas se adjudica la prioridad según la estabilidad clínica y el nivel de conciencia.';}
+  else if(!r||!c){h='No cumple los criterios de activación';b='El esquema exige paciente independiente (Rankin &lt; 3) y síntomas incapacitantes. La prioridad se asigna según triaje SET.';}
+  else if(t==='lt6'){cls='alert';h='Prioridad 1 · Críticos · se activa código ictus';b='Equipo ictus: equipo de críticos de Urgencias, intensivista y radiólogo.';}
+  else if(g==='ge4'){cls='alert';h='Activar código ictus y avisar al equipo ictus';b='Prioridad 2 en críticos. Con GADSS de 4 o más y Rankin &lt; 3 se activa el código.';}
+  else if(g==='lt4'){cls='warn';h='Prioridad 2 · Críticos · no se activa el código';b='La activación requiere GADSS de 4 o más y Rankin &lt; 3.';}
+  else{cls='warn';h='Prioridad 2 · Críticos · no se activa aún el código';b='El médico de Prioridades 2 pasa la escala GADSS. Si es de 4 o más y Rankin &lt; 3, se activa el código ictus y se avisa al equipo.';}
+  const box=$('#ictusRes');box.className='result '+cls;
+  box.innerHTML=`<strong class="big">${h}</strong><div>${b}</div>`;
+}
+calcIctus();
+
+/* Trauma */
+function calcTrauma(){
+  const g=parseFloat($('#tGcs').value),s=parseFloat($('#tTas').value),f=parseFloat($('#tFr').value);
+  const box=$('#traumaRes');
+  if([g,s,f].some(isNaN)){box.className='result';box.textContent='Introduce los tres valores.';return;}
+  const pg=g>=13?4:g>=9?3:g>=6?2:g>=4?1:0;
+  const ps=s>89?4:s>=76?3:s>=50?2:s>=1?1:0;
+  const pf=f>29?3:f>=10?4:f>=6?2:f>=1?1:0;
+  const tot=pg+ps+pf;
+  if(tot<12||g<14){
+    box.className='result alert';
+    box.innerHTML=`<strong class="big">TSR ${tot} · Prioridad 1 · Críticos</strong><div>TSR inferior a 12 y/o Glasgow inferior a 14.</div>`;
+  }else{
+    box.className='result warn';
+    box.innerHTML=`<strong class="big">TSR ${tot} · nueva toma de constantes</strong><div>Con TSR de 12 y Glasgow de 14-15, se repiten GCS, TA, FC, FR y saturación. Si siguen así, se clasifica según la lesión:</div>
+    <ul><li><strong>Prioridad 2 · Críticos:</strong> TCE con Glasgow inferior a 15, traumatismo torácico o abdominal, extremidades con signos de fractura o luxación o fractura abierta, heridas lacerantes profundas con afectación tendinosa.</li>
+    <li><strong>Prioridad 3 · Polivalente · policlínica:</strong> TCE con Glasgow 15, traumatismo de extremidades sin signos de fractura o luxación, policontusiones y heridas superficiales leves.</li></ul>`;
+  }
+}
+['tGcs','tTas','tFr'].forEach(id=>$('#'+id).addEventListener('input',calcTrauma));
+
+/* NEWS2 */
+function calcNews(){
+  const v=id=>parseFloat($('#'+id).value);
+  const rr=v('nRr'),sp=v('nSp'),sb=v('nSb'),pu=v('nPu'),te=v('nTe');
+  const box=$('#newsRes');
+  if([rr,sp,sb,pu,te].some(isNaN)){box.className='result';box.textContent='Completa los valores numéricos.';return;}
+  const oxy=$('#nOx').value==='oxy',sc=$('#nSc').value;
+  const sRr=rr<=8?3:rr<=11?1:rr<=20?0:rr<=24?2:3;
+  let sSp;
+  if(sc==='1'){sSp=sp<=91?3:sp<=93?2:sp<=95?1:0;}
+  else{sSp=sp<=83?3:sp<=85?2:sp<=87?1:sp<93?0:!oxy?0:sp<95?1:sp<97?2:3;}
+  const sOx=oxy?2:0;
+  const sSb=sb<=90?3:sb<=100?2:sb<=110?1:sb<=219?0:3;
+  const sPu=pu<=40?3:pu<=50?1:pu<=90?0:pu<=110?1:pu<=130?2:3;
+  const sCo=$('#nCo').value==='c'?3:0;
+  const sTe=te<=35?3:te<=36?1:te<=38?0:te<=39?1:2;
+  const tot=sRr+sSp+sOx+sSb+sPu+sCo+sTe;
+  const hit=tot>=7;
+  box.className='result '+(hit?'alert':'');
+  box.innerHTML=`<strong class="big">NEWS2 = ${tot}</strong><div>${hit?'Alcanza el umbral de 7 o más puntos del PNT. Comprueba que el paciente tenga Rankin &lt; 3 y activa el código sepsis según el procedimiento.':'No alcanza el umbral de 7 puntos que cita el PNT.'}</div>`;
+}
+['nRr','nSp','nSc','nOx','nSb','nPu','nCo','nTe'].forEach(id=>$('#'+id).addEventListener('input',calcNews));
+
+/* ---------- Observación ---------- */
+const OBS={
+ leve:[
+  ['Patología cardiovascular',[
+   'Dolor torácico típico sin control de síntomas en consultas, en paciente sin cambios eléctricos ni enzimáticos.',
+   'SCASEST con cambios electrocardiográficos, siempre que estén asintomáticos.',
+   'Fibrilación auricular crónica con respuesta ventricular rápida.',
+   'Taquicardias paroxísticas supraventriculares recurrentes, en pacientes por lo demás sanos.',
+   'Insuficiencia cardiaca congestiva crónica descompensada.',
+   'Urgencias hipertensivas con TAS mayor de 200 mmHg o TAD mayor de 120 mmHg, asintomáticas o con síntomas leves tras 2 horas de tratamiento en consultas.']],
+  ['Patología infecciosa',[
+   'Infección de cualquier origen sin criterios de sepsis grave que requiera tratamiento intravenoso, fluidoterapia o control de constantes y diuresis antes del ingreso en planta o el alta.']],
+  ['Patología respiratoria',[
+   'Crisis asmática sin criterios de gravedad que no mejora tras 1 hora de tratamiento en consultas (tres aerosoles consecutivos cada 20 minutos y corticoides IV), o siempre que haya insuficiencia respiratoria (saturación inferior a su habitual sin oxígeno y FR aumentada).',
+   'Bronconeumopatía crónica reagudizada que no mejora tras 1 hora en sala de tratamientos con la misma pauta, o siempre que haya insuficiencia respiratoria.']],
+  ['Patología endocrino-metabólica',[
+   'Hipoglucemia en pacientes con tratamiento con ADO, sin trastorno del nivel de conciencia, hasta un máximo de 12 horas.',
+   'Hiperglucemia no complicada y no controlada tras tratamiento en consultas (glucemia capilar igual o mayor a 3,5 †).']],
+  ['Patología nefrourológica',[
+   'Hematuria macroscópica franca con coágulos, o que suponga RAO, que necesite sonda de 3 luces para lavados vesicales.',
+   'Cólico nefrítico sin mejoría tras analgesia en consultas en un plazo de 5 horas.']],
+  ['Patología digestiva',[
+   'Gastroenteritis aguda con intolerancia a la rehidratación oral por vómitos persistentes pese a antiemético correcto, y/o deshidratación leve con afectación del estado general.',
+   'Dolor abdominal que no mejora tras pruebas complementarias y analgesia en policlínica.',
+   'Rectorragia franca activa sin repercusión hemodinámica.',
+   'Pancreatitis aguda sin signos de fallo orgánico ni síndrome de respuesta inflamatoria sistémica, hasta el ingreso en planta.',
+   'Oclusión intestinal sin grave afectación del estado general ni de las constantes vitales.']],
+  ['Patología hematológica',[
+   'Anemias crónicas que precisan transfusión y no entrañan riesgo potencial por la patología de base.']],
+  ['Patología neurológica',[
+   'ACV cuya situación clínica no requiere ingreso en observación de camas.',
+   'Crisis epiléptica sin estatus epiléptico ni crisis desde su ingreso en Urgencias.',
+   'ACV con nivel de conciencia conservado cuya situación clínica hace imposible su permanencia en el área de polivalentes.',
+   'Cefalea que no mejora tras medicación en policlínica en un plazo de 5 horas.',
+   'Vértigo que no responde a tratamiento convencional tras 2 horas.']],
+  ['Intoxicaciones',[
+   'Intoxicación por monóxido de carbono.',
+   'Intoxicación por benzodiacepinas de vida media corta o intermedia, con respuesta adecuada al flumazenilo en consultas y necesidad de perfusión del antídoto, salvo sospecha de intoxicación añadida por antidepresivos tricíclicos o antecedentes de epilepsia.']],
+  ['Patología psiquiátrica',[
+   'Agitación psicomotriz que necesita sedación profunda y la consiguiente monitorización.',
+   'Gestos autolíticos de cualquier índole.']]
+ ],
+ grave:[
+  ['Criterios generales',[
+   'Patología grave o de alto riesgo en la que la situación clínica requiere de modo imprescindible la cama para su atención inmediata.',
+   'Pacientes con dudas diagnósticas cuya situación requiere de forma imprescindible una cama.',
+   'Situación clínica que hace presuponer éxitus a corto plazo mientras se gestiona el ingreso en planta.',
+   'Tras 12 horas en observación de sillones, en paciente no ingresado que no esté pendiente de valoración de ingreso ni se prevea alta a corto plazo.']],
+  ['Neurológica',[
+   'Coma de cualquier etiología.',
+   'Estados confusionales moderados o severos de causa no psiquiátrica.',
+   'Crisis comiciales repetitivas o estado epiléptico.',
+   'Hemorragia cerebral.',
+   'Ictus con importante afectación motora, alteración del nivel de conciencia o en clara progresión.']],
+  ['Respiratoria y cardiovascular',[
+   'Insuficiencia respiratoria con necesidad de tratamiento con BiPAP.',
+   'Insuficiencia cardiaca con EAP o necesidad de tratamiento con BiPAP.',
+   'Síndrome coronario agudo con elevación del ST desestimado por UCI, SCASEST con cambios en el ECG si están sintomáticos, o SCASEST con cambios enzimáticos compatibles.',
+   'Disección o rotura aórtica.',
+   'Insuficiencia circulatoria arterial aguda, o crónica agudizada, con grave afectación del estado general.',
+   'Shock de cualquier etiología.',
+   'Arritmias, malignas o no, con deterioro hemodinámico.',
+   'Neumotórax de importante cuantía o con insuficiencia respiratoria asociada.',
+   'Fracturas costales múltiples (3 o más).']],
+  ['Digestiva y renal',[
+   'Hemorragia digestiva alta confirmada.',
+   'Hemorragia digestiva baja con afectación hemodinámica o analítica importante.',
+   'Peritonitis, obstrucción intestinal o dolor abdominal con grave afectación del estado general o de las constantes vitales.',
+   'Pancreatitis aguda con criterios de gravedad.',
+   'Insuficiencia renal aguda severa, o crónica agudizada, con deterioro del estado general o alteraciones electrolíticas potencialmente graves.']],
+  ['Infecciosa',[
+   'Infecciones graves, por el tipo de órgano afectado o por presencia de sepsis grave.']]
+ ]
+};
+let obsKey='leve';
+function renderObs(){
+  const q=$('#obsSearch').value.trim().toLowerCase();
+  const hl=t=>{
+    if(!q)return esc(t);
+    const i=t.toLowerCase().indexOf(q);
+    if(i<0)return esc(t);
+    return esc(t.slice(0,i))+'<mark>'+esc(t.slice(i,i+q.length))+'</mark>'+esc(t.slice(i+q.length));
+  };
+  let out='',count=0;
+  OBS[obsKey].forEach(([g,items])=>{
+    const f=items.filter(t=>!q||t.toLowerCase().includes(q)||g.toLowerCase().includes(q));
+    if(!f.length)return;
+    count+=f.length;
+    out+=`<div class="crit-group"><h4>${esc(g)}</h4><ul>${f.map(t=>`<li>${hl(t)}</li>`).join('')}</ul></div>`;
+  });
+  $('#obsList').innerHTML=out||'<p class="empty">Ningún criterio coincide con la búsqueda.</p>';
+  $('#obsFoot').innerHTML=obsKey==='leve'?'Observación leve: sillones monitorizados (9 puestos).':'Observación grave: camas monitorizadas (6 camas, con un box de aislamiento si hace falta).';
+}
+tabs('#obsTabs',['Observación leve','Observación grave'],i=>{obsKey=i?'grave':'leve';renderObs();});
+$('#obsSearch').addEventListener('input',renderObs);
+
+/* ---------- Unidad ---------- */
+const SPACES=[
+ ['Atención al ciudadano','2 puestos de administrativos, 1 puesto de celadores, 1 de seguridad, el despacho del responsable de admisión y 1 consulta de información al ciudadano (PIU).'],
+ ['Salas de espera','Sala previa al triaje, sala de adultos, sala de pediatría y sala de familiares.'],
+ ['Triaje','Dos consultas de triaje. Una de ellas funciona en las horas de máxima afluencia y en periodos de alta frecuentación.'],
+ ['Consultas médicas','Consulta de atención básica, consultas de policlínica, consulta multiusos (que puede usar el médico de Prioridades 2), sala de traumatología y radioscopia, y consultas de especialidades.'],
+ ['Enfermería','Sala de técnicas de enfermería, y sala de curas y yesos. Hay una TCAE que realiza tareas complementarias.'],
+ ['Críticos','Sala de críticos y RCP con 2 puestos, ampliable a 3 en el antiguo circuito de riesgo biológico.'],
+ ['Observación','Sillones: 9 puestos monitorizados. Camas: 6 camas monitorizadas, con un box de aislamiento si hace falta. Además, una sala intermedia.'],
+ ['Sala de tratamientos','12 puestos, con enfermería y TCAE para la vigilancia y el cumplimiento del tratamiento.'],
+ ['Especialidades con consulta urgente','Oftalmología, Otorrinolaringología, Salud Mental, Obstetricia-Ginecología y Pediatría. No están físicamente en Urgencias.']
+];
+$('#spaces').innerHTML=SPACES.map(([t,d])=>`<details><summary>${t}</summary><p>${d}</p></details>`).join('');
+const STAFF=[
+ ['Médico de atención básica','Atiende prioridades 4 y 5 de los circuitos de atención básica, polivalente, traumatológico y gineco-obstétrico.'],
+ ['Médico de policlínica','Atiende las prioridades 3 de los circuitos de atención básica, polivalente, traumatológico, pediátrico y gineco-obstétrico.'],
+ ['Médico de Prioridades 2','Atiende en críticos a los pacientes P2 que necesitan monitorización inmediata.'],
+ ['Médico de observación (sillones y camas)','Atiende a los pacientes ubicados en su área. En turnos de noche y fines de semana atiende también a los P2 que requieren monitorización inmediata. Atiende a los P1.'],
+ ['Enfermería','Enfermeros en triaje, en consulta de enfermería, en sala de tratamiento y en observación (sillones y camas). Aplicar el triaje SET es una función fundamental de enfermería.'],
+ ['TCAE','Cubren la sala de espera de pacientes, la consulta de enfermería y críticos, la sala de tratamiento y la observación (sillones y camas). En turno de mañana, de lunes a viernes, una TCAE es responsable del almacén de la unidad.'],
+ ['Celadores','Admisión de Urgencias (recepción de pacientes), policlínica (uno atiende la observación, otro está en la sala de espera y otro en el pasillo; acompañan a las consultas externas del hospital) y consulta de triaje (acompañan y llevan las etiquetas).'],
+ ['Responsables del procedimiento','Dirección de la Unidad de Urgencias, supervisor de la unidad y cada profesional en su categoría. Todos deben conocer el procedimiento y actuar de forma unificada.']
+];
+$('#staff').innerHTML=STAFF.map(([t,d])=>`<details><summary>${t}</summary><p>${d}</p></details>`).join('');
+
+/* ---------- Glosario ---------- */
+const GL=[
+ ['SET','Sistema Español de Triaje. Clasificación de 5 niveles de prioridad, con tiempos máximos de atención.'],
+ ['MAT','Modelo Andorrano de Triaje, en el que se basa el SET.'],
+ ['web_e-PAT','Programa informático de ayuda a la decisión clínica en el triaje. Deja registro de la clasificación y de los tiempos.'],
+ ['PNT','Procedimiento normalizado de trabajo.'],
+ ['PAUE','Plan Andaluz de Urgencias y Emergencias.'],
+ ['TECLA','Tiempo de espera de clasificación: lo que espera el paciente hasta que lo clasifican.'],
+ ['TICLA','Tiempo de clasificación: lo que dura la clasificación.'],
+ ['TCAE','Técnico en Cuidados Auxiliares de Enfermería.'],
+ ['CAD','Consulta de atención básica.'],
+ ['PIU','Consulta de información al ciudadano.'],
+ ['Diraya-Urgencias','Aplicación de historia clínica electrónica de Urgencias del SAS.'],
+ ['EPADI','Escala que usa enfermería de triaje para detectar al paciente frágil. Nivel alto: de 6 a 10.'],
+ ['PF','Paciente frágil. Se escribe seguido del número de la escala EPADI y del motivo de consulta.'],
+ ['CMT / ISMT','Confirmación de maltrato / Indicador de sospecha de maltrato.'],
+ ['Rankin','Escala de dependencia. Rankin inferior a 3 se corresponde con paciente independiente.'],
+ ['Cincinnati','Escala de síntomas de ictus. Basta 1 de 3 síntomas incapacitantes.'],
+ ['GADSS','Escala que pasa el médico de Prioridades 2 en ictus de 6 a 16 horas.'],
+ ['NEWS2','Escala de alerta temprana basada en constantes vitales.'],
+ ['TSR / GCS','Trauma Score Revisado / Escala de coma de Glasgow.'],
+ ['EVA','Escala visual analógica del dolor.'],
+ ['ADO','Antidiabéticos orales.'],
+ ['RAO','Retención aguda de orina.']
+];
+$('#gloss').innerHTML=GL.map(([t,d])=>`<dt>${t}</dt><dd>${d}</dd>`).join('');
+
+/* ---------- Menú activo ---------- */
+const links=$$('nav.menu a');
+const io=new IntersectionObserver(es=>{
+  es.forEach(e=>{
+    if(e.isIntersecting){
+      links.forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+e.target.id));
+    }
+  });
+},{rootMargin:'-30% 0px -60% 0px'});
+$$('main section').forEach(s=>io.observe(s));
+</script>
+
+<!-- Barra común del Portal SUH Antequera -->
+<style>
+  .suhdock{position:fixed;left:14px;bottom:14px;z-index:2147483000;display:flex;align-items:center;gap:4px;padding:5px;border-radius:999px;background:#0c2a4a;box-shadow:0 10px 30px -8px rgba(12,42,74,.55);font:600 13px/1 'Plus Jakarta Sans',system-ui,-apple-system,'Segoe UI',sans-serif;transition:opacity .2s}
+  .suhdock a{display:inline-flex;align-items:center;justify-content:center;gap:7px;height:34px;min-width:34px;padding:0 9px;border-radius:999px;color:#fff;text-decoration:none}
+  .suhdock a:hover{background:rgba(255,255,255,.14)}
+  .suhdock a.suhdock-home{background:#fff;color:#0c2a4a;padding:0 12px 0 4px}
+  .suhdock a.suhdock-home img{width:26px;height:26px;border-radius:50%;object-fit:contain;background:#fff}
+  .suhdock svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  .suhdock .suhdock-x{opacity:.6;min-width:26px;padding:0}
+  .suhdock.suhdock-min a:not(.suhdock-home){display:none}
+  .suhdock.suhdock-min a.suhdock-home span{display:none}
+  .suhdock.suhdock-min a.suhdock-home{padding:0 4px}
+  @media print{.suhdock{display:none!important}}
+</style>
+<nav class="suhdock" aria-label="Portal SUH Antequera">
+  <a class="suhdock-home" href="../index.html#herramientas" title="Volver al Portal de Supervisión SUH Antequera"><img src="../img/logo-suh.jpg" alt=""><span>Portal SUH</span></a>
+  <a href="https://www.instagram.com/suh_antequera_/" target="_blank" rel="noopener" title="Instagram @suh_antequera_"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><path d="M17.5 6.5h.01"/></svg></a>
+  <a href="https://www.facebook.com/p/Suh-Antequera-61568582212569/" target="_blank" rel="noopener" title="Facebook SUH Antequera"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+  <a href="https://x.com/saludnortemalag" target="_blank" rel="noopener" title="X @saludnortemalag" style="font-size:15px">𝕏</a>
+  <a class="suhdock-x" href="#" title="Minimizar barra" onclick="this.parentNode.classList.toggle('suhdock-min');return false;"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></a>
+</nav>
+</body>
+</html>

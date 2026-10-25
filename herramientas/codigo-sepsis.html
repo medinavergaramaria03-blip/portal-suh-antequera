@@ -1,0 +1,1130 @@
+<!doctype html><html><head>
+  <meta name="robots" content="noindex, nofollow"><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Código Sepsis Antequera</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Concepto: hoja de cabecera clínica. Banda superior de estado, pestañas de trabajo,
+   formulario a la izquierda y panel de resultado fijo a la derecha. Rojo solo para alerta. */
+:root{
+  --bg:#EEF2F1; --surface:#FFFFFF; --surface2:#F5F8F7; --ink:#12201E; --muted:#51635F; --line:#D3DDDA;
+  --accent:#0A6B66; --accent-ink:#FFFFFF; --accent-soft:#DCEFEC;
+  --red:#B42318; --red-soft:#FCE9E7; --amber:#9A5B00; --amber-soft:#FFF1D6; --green:#1E7A45; --green-soft:#DDF3E5;
+  --focus:#0A6B66; --shadow:0 1px 2px rgba(18,32,30,.06),0 4px 14px rgba(18,32,30,.05);
+  --f-display:'Bricolage Grotesque','Segoe UI',system-ui,sans-serif;
+  --f-body:'IBM Plex Sans','Segoe UI',system-ui,sans-serif;
+  --f-mono:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0E1615; --surface:#152220; --surface2:#1A2B29; --ink:#E6EFED; --muted:#9BAEAA; --line:#2B3E3B;
+    --accent:#4FC7BD; --accent-ink:#06211F; --accent-soft:#17403C;
+    --red:#FF8A7E; --red-soft:#3C1B18; --amber:#F2B65A; --amber-soft:#3A2B0E; --green:#6FD79A; --green-soft:#143525;
+    --focus:#4FC7BD; --shadow:0 1px 2px rgba(0,0,0,.4),0 4px 14px rgba(0,0,0,.3); color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0E1615; --surface:#152220; --surface2:#1A2B29; --ink:#E6EFED; --muted:#9BAEAA; --line:#2B3E3B;
+  --accent:#4FC7BD; --accent-ink:#06211F; --accent-soft:#17403C;
+  --red:#FF8A7E; --red-soft:#3C1B18; --amber:#F2B65A; --amber-soft:#3A2B0E; --green:#6FD79A; --green-soft:#143525;
+  --focus:#4FC7BD; --shadow:0 1px 2px rgba(0,0,0,.4),0 4px 14px rgba(0,0,0,.3); color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.5;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 48px}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--surface)}
+h1,h2,h3,h4{font-family:var(--f-display);line-height:1.2;margin:0;text-wrap:balance}
+p{margin:0 0 .6em}
+a{color:var(--accent)}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:4px}
+.wrap{max-width:1200px;margin:0 auto}
+.mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+
+/* Cabecera y pestañas */
+.top{background:var(--surface);margin-inline:calc(-1 * max(16px,env(safe-area-inset-left,0px)));padding-inline:max(16px,env(safe-area-inset-left,0px));border-bottom:1px solid var(--line);
+  position:sticky;top:env(safe-area-inset-top,0px);z-index:20}
+.top-row{display:flex;align-items:center;gap:12px 20px;flex-wrap:wrap;padding-block:10px 0}
+.brand{display:flex;flex-direction:column;min-width:0;flex:1 1 260px}
+.brand h1{font-size:20px;letter-spacing:-.01em}
+.brand span{font-size:12.5px;color:var(--muted)}
+.chip-live{display:flex;align-items:center;gap:10px;border:1px solid var(--line);border-radius:999px;padding:5px 14px 5px 6px;background:var(--surface2);font-size:13px;white-space:nowrap}
+.chip-live b{display:inline-grid;place-items:center;min-width:30px;height:30px;border-radius:999px;background:var(--muted);color:var(--surface);font-family:var(--f-mono);font-size:15px}
+.chip-live[data-l="alto"] b{background:var(--red);color:var(--surface)}
+.chip-live[data-l="mod"] b{background:var(--amber);color:var(--surface)}
+.chip-live[data-l="bajo"] b{background:var(--green);color:var(--surface)}
+.theme-btn{border:1px solid var(--line);background:var(--surface2);border-radius:8px;padding:6px 10px;cursor:pointer;font-size:13px}
+.tabs{display:flex;gap:2px;overflow-x:auto;margin-top:8px;scrollbar-width:thin}
+.tab{appearance:none;border:0;background:none;padding:10px 14px;font-weight:500;color:var(--muted);cursor:pointer;border-bottom:3px solid transparent;white-space:nowrap;font-size:14.5px}
+.tab:hover{color:var(--ink)}
+.tab[aria-selected="true"]{color:var(--accent);border-bottom-color:var(--accent)}
+.view{padding-top:20px}
+.view[hidden]{display:none!important}
+
+/* Bloques */
+.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px;box-shadow:var(--shadow)}
+.card + .card{margin-top:14px}
+.card h2{font-size:17px;margin-bottom:12px}
+.card h3{font-size:15px;margin-bottom:8px}
+.sub{color:var(--muted);font-size:13px}
+.grid{display:grid;gap:12px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(min(100%,130px),1fr))}
+.layout{display:grid;gap:18px;grid-template-columns:minmax(0,1fr)}
+.col{display:flex;flex-direction:column;gap:14px;min-width:0}
+.col>.card+.card{margin-top:0}
+@media(min-width:1000px){
+  .layout{grid-template-columns:minmax(0,1fr) 380px;align-items:start}
+  .aside{position:sticky;top:calc(env(safe-area-inset-top,0px) + 118px)}
+}
+@media(max-width:999px){.aside{order:-1}}
+
+label.f{display:flex;flex-direction:column;gap:4px;font-size:12.5px;font-weight:500;color:var(--muted);min-width:0}
+label.f .u{font-weight:400;color:var(--muted);opacity:.85}
+input[type=text],input[type=number],input[type=search],input[type=datetime-local],select,textarea{
+  width:100%;min-width:0;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:7px;padding:8px 10px;font-size:15px}
+input[type=number]{font-family:var(--f-mono)}
+textarea{resize:vertical;font-family:var(--f-mono);font-size:12.5px;line-height:1.45}
+.chk{display:flex;gap:9px;align-items:flex-start;font-size:14px;padding:6px 0;cursor:pointer}
+.chk input{width:18px;height:18px;margin-top:2px;accent-color:var(--accent);flex:none}
+.chk small{display:block;color:var(--muted);font-size:12px}
+.chks{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));column-gap:16px}
+.btn{appearance:none;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:8px;padding:8px 14px;cursor:pointer;font-weight:500;font-size:14px}
+.btn:hover{border-color:var(--accent)}
+.btn.pri{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.btn.dng{color:var(--red);border-color:var(--red)}
+.btn[disabled]{opacity:.45;cursor:not-allowed}
+.btns{display:flex;flex-wrap:wrap;gap:8px}
+.legend{font-size:12px;color:var(--muted)}
+.sec-h{display:flex;align-items:baseline;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+.sec-h h2{margin:0}
+.pill{display:inline-block;border-radius:999px;padding:2px 10px;font-size:12px;font-weight:600;background:var(--surface2);border:1px solid var(--line);color:var(--muted)}
+.pill.red{background:var(--red-soft);color:var(--red);border-color:transparent}
+.pill.amber{background:var(--amber-soft);color:var(--amber);border-color:transparent}
+.pill.green{background:var(--green-soft);color:var(--green);border-color:transparent}
+.pill.teal{background:var(--accent-soft);color:var(--accent);border-color:transparent}
+
+/* Panel de resultado */
+.res-head{display:flex;gap:14px;align-items:center}
+.score{flex:none;width:84px;height:84px;border-radius:14px;display:grid;place-items:center;background:var(--surface2);border:2px solid var(--line);font-family:var(--f-mono);font-size:38px;font-weight:500}
+.score small{display:block;font-size:10.5px;font-family:var(--f-body);color:var(--muted);text-align:center;margin-top:-6px;letter-spacing:.06em;text-transform:uppercase}
+.score[data-l="alto"]{background:var(--red-soft);border-color:var(--red);color:var(--red)}
+.score[data-l="mod"]{background:var(--amber-soft);border-color:var(--amber);color:var(--amber)}
+.score[data-l="bajo"]{background:var(--green-soft);border-color:var(--green);color:var(--green)}
+.score[data-l="muybajo"]{background:var(--green-soft);border-color:var(--green);color:var(--green)}
+.res-txt{min-width:0}
+.res-txt strong{display:block;font-family:var(--f-display);font-size:17px;line-height:1.25}
+.verdict{margin-top:14px;border-radius:9px;padding:12px 14px;border:1px solid var(--line);background:var(--surface2);font-size:14px}
+.verdict b{display:block;font-family:var(--f-display);font-size:16px;margin-bottom:3px}
+.verdict.act{background:var(--red-soft);border-color:var(--red);color:var(--ink)}
+.verdict.act b{color:var(--red)}
+.verdict.warn{background:var(--amber-soft);border-color:var(--amber)}
+.verdict.warn b{color:var(--amber)}
+.verdict.ok{background:var(--green-soft);border-color:var(--green)}
+.verdict.ok b{color:var(--green)}
+.verdict.excl{background:var(--surface2)}
+.rows{display:flex;flex-direction:column;margin-top:12px}
+.rows .r{display:flex;justify-content:space-between;gap:10px;padding:6px 0;border-top:1px solid var(--line);font-size:13.5px}
+.rows .r:first-child{border-top:0}
+.rows .r span:first-child{color:var(--muted)}
+.rows .r b{font-family:var(--f-mono);font-weight:500;text-align:right}
+.pt{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:6px;font-family:var(--f-mono);font-size:12px;background:var(--surface2);border:1px solid var(--line);margin-left:6px}
+.pt.p1{background:var(--amber-soft);border-color:transparent;color:var(--amber)}
+.pt.p2{background:var(--amber-soft);border-color:var(--amber);color:var(--amber)}
+.pt.p3{background:var(--red-soft);border-color:var(--red);color:var(--red)}
+.flag{margin-top:10px;font-size:13px;color:var(--red);font-weight:500}
+details.dd>summary{cursor:pointer;font-weight:600;font-size:13.5px;padding:8px 0;list-style:none;display:flex;justify-content:space-between;align-items:center}
+details.dd>summary::-webkit-details-marker{display:none}
+details.dd>summary::after{content:"+";font-family:var(--f-mono);color:var(--muted)}
+details.dd[open]>summary::after{content:"–"}
+
+/* Hora 0 */
+.h0{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:12px}
+.clock{font-family:var(--f-mono);font-size:30px;letter-spacing:.02em}
+.bundle{display:flex;flex-direction:column}
+.b-item{display:grid;grid-template-columns:auto 1fr auto;gap:4px 12px;align-items:start;padding:11px 0;border-top:1px solid var(--line)}
+.b-item:first-child{border-top:0}
+.b-item input[type=checkbox]{width:20px;height:20px;accent-color:var(--accent);margin-top:2px}
+.b-item .t{font-weight:500;font-size:14.5px}
+.b-item .d{grid-column:2;font-size:12.8px;color:var(--muted)}
+.b-item .ts{font-family:var(--f-mono);font-size:12.5px;color:var(--muted);text-align:right;white-space:nowrap}
+.b-item .ts.late{color:var(--red);font-weight:500}
+.b-item.done .t{color:var(--muted);text-decoration:line-through;text-decoration-color:var(--line)}
+.calc{display:grid;gap:8px;grid-template-columns:repeat(auto-fit,minmax(min(100%,160px),1fr));margin-top:10px}
+.calc div{background:var(--surface2);border:1px solid var(--line);border-radius:8px;padding:9px 11px}
+.calc small{display:block;color:var(--muted);font-size:12px}
+.calc b{font-family:var(--f-mono);font-weight:500;font-size:15px}
+
+/* Protocolo */
+.acc{display:flex;flex-direction:column;gap:10px}
+.acc details{background:var(--surface);border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.acc details>summary{cursor:pointer;padding:14px 16px;font-family:var(--f-display);font-weight:600;font-size:17px;list-style:none;display:flex;gap:10px;justify-content:space-between;align-items:center}
+.acc details>summary::-webkit-details-marker{display:none}
+.acc details>summary::after{content:"+";font-family:var(--f-mono);color:var(--muted);font-size:20px}
+.acc details[open]>summary::after{content:"–"}
+.acc .body{padding:2px 16px 16px;max-width:100%}
+.acc .body h4{font-size:14px;margin:14px 0 6px;color:var(--accent);text-transform:uppercase;letter-spacing:.05em;font-family:var(--f-body);font-weight:600}
+.acc ul,.kb ul{margin:0 0 .6em;padding-left:20px}
+.acc li{margin:3px 0}
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:8px;margin:8px 0}
+table{border-collapse:collapse;width:100%;font-size:13.5px;min-width:480px}
+th,td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{background:var(--surface2);font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);font-weight:600}
+tr:last-child td{border-bottom:0}
+.call{border-left:4px solid var(--accent);background:var(--accent-soft);padding:10px 14px;border-radius:0 8px 8px 0;margin:10px 0;font-size:14px}
+.call.warn{border-color:var(--amber);background:var(--amber-soft)}
+.call.red{border-color:var(--red);background:var(--red-soft)}
+.toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:14px}
+.toolbar input{flex:1 1 240px}
+
+/* Antibióticos */
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+.chipb{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 14px;cursor:pointer;font-size:13.5px;font-weight:500}
+.chipb[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.abx{display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(min(100%,340px),1fr))}
+.abx .card{margin:0}
+.reg{border-top:1px dashed var(--line);padding:9px 0}
+.reg:first-of-type{border-top:0}
+.reg .lab{font-size:12px;font-weight:600;color:var(--accent);text-transform:uppercase;letter-spacing:.05em;margin-bottom:2px}
+.reg .ln{font-size:14px}
+.reg .plus{display:block;color:var(--muted);font-family:var(--f-mono);font-size:12px;margin:1px 0}
+.foot{font-size:12.5px;color:var(--muted);margin-top:8px}
+
+/* Preguntar */
+.q-box{display:flex;gap:10px;flex-wrap:wrap}
+.q-box input{flex:1 1 280px;font-size:16px;padding:11px 12px}
+.sugg{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+.ans{display:flex;flex-direction:column;gap:12px;margin-top:14px}
+.ans .card{margin:0}
+.ans .qq{font-family:var(--f-display);font-weight:600;font-size:16.5px;margin-bottom:6px}
+.ans .aa{font-size:14.5px}
+.ans .aa ul{margin:4px 0 0;padding-left:20px}
+.ans .src{margin-top:8px;font-size:12px;color:var(--muted)}
+.empty{color:var(--muted);padding:18px;border:1px dashed var(--line);border-radius:10px;text-align:center}
+
+/* Repasar */
+.keys{display:grid;gap:10px;grid-template-columns:repeat(auto-fill,minmax(min(100%,170px),1fr))}
+.key{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px}
+.key b{display:block;font-family:var(--f-mono);font-weight:500;font-size:20px;color:var(--accent);line-height:1.2}
+.key span{font-size:12.8px;color:var(--muted)}
+.quiz-q{font-family:var(--f-display);font-size:18px;font-weight:600;margin:6px 0 12px}
+.opt{display:block;width:100%;text-align:left;margin:0 0 8px;padding:11px 14px;border:1px solid var(--line);background:var(--surface);border-radius:9px;cursor:pointer;font-size:14.5px}
+.opt:hover:not([disabled]){border-color:var(--accent)}
+.opt.ok{background:var(--green-soft);border-color:var(--green)}
+.opt.ko{background:var(--red-soft);border-color:var(--red)}
+.opt[disabled]{cursor:default}
+.explain{margin-top:10px;font-size:14px}
+.prog{height:6px;background:var(--surface2);border-radius:999px;overflow:hidden;margin-bottom:6px}
+.prog i{display:block;height:100%;background:var(--accent);width:0}
+
+.disc{margin-top:26px;font-size:12.5px;color:var(--muted);border-top:1px solid var(--line);padding-top:14px;max-width:900px}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(20px + env(safe-area-inset-bottom,0px));background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:9px;font-size:14px;z-index:40;box-shadow:var(--shadow);max-width:92vw}
+@media(prefers-reduced-motion:no-preference){.prog i{transition:width .25s ease}}
+@media(max-width:560px){.brand span{display:none}.top-row{padding-block:8px 0}.score{width:70px;height:70px;font-size:32px}.brand h1{font-size:18px}.card{padding:14px}}
+</style>
+<div class="wrap">
+<header class="top">
+  <div class="top-row">
+    <div class="brand">
+      <h1>Código Sepsis · Urgencias Antequera</h1>
+      <span>Basado en «Actualización Sepsis. Código Sepsis», Dra. M. Rizo Hoyos, 04-may-2026</span>
+    </div>
+    <div class="chip-live" id="liveChip" data-l="none" aria-live="polite"><b id="liveScore">–</b><span id="liveTxt">Sin constantes</span></div>
+    <button class="theme-btn" id="themeBtn" type="button" aria-label="Cambiar tema claro u oscuro">Tema</button>
+  </div>
+  <nav class="tabs" role="tablist" aria-label="Secciones">
+    <button class="tab" role="tab" id="tab-paciente" data-view="paciente" aria-selected="true">Paciente</button>
+    <button class="tab" role="tab" id="tab-protocolo" data-view="protocolo" aria-selected="false">Protocolo</button>
+    <button class="tab" role="tab" id="tab-antibioticos" data-view="antibioticos" aria-selected="false">Antibióticos</button>
+    <button class="tab" role="tab" id="tab-preguntar" data-view="preguntar" aria-selected="false">Preguntar</button>
+    <button class="tab" role="tab" id="tab-repasar" data-view="repasar" aria-selected="false">Repasar</button>
+  </nav>
+</header>
+
+<!-- ============ PACIENTE ============ -->
+<section class="view" id="view-paciente" role="tabpanel" aria-labelledby="tab-paciente">
+ <div class="layout">
+  <div class="col">
+
+   <div class="card">
+    <div class="sec-h"><h2>Datos del paciente</h2><span class="legend">Usa NHC o iniciales. Nada se guarda en el servidor ni en el navegador.</span></div>
+    <div class="grid g2">
+      <label class="f">NHC / identificador<input type="text" id="pId" autocomplete="off" placeholder="p. ej. 1234567"></label>
+      <label class="f"><span>Edad <span class="u">años</span></span><input type="number" id="pAge" inputmode="numeric" min="0" max="120"></label>
+      <label class="f">Sexo<select id="pSex"><option value="">—</option><option>Mujer</option><option>Hombre</option></select></label>
+      <label class="f"><span>Peso <span class="u">kg</span></span><input type="number" id="pWeight" inputmode="decimal" min="1" max="300"></label>
+      <label class="f"><span>Rankin previo <span class="u">0–6</span></span>
+        <select id="pRankin"><option value="">—</option><option>0</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option></select></label>
+      <label class="f">Foco sospechado
+        <select id="pFocus"><option value="">Sin definir</option><option>Respiratorio</option><option>Urinario</option><option>Intraabdominal</option><option>Piel y partes blandas</option><option>Dispositivo / catéter</option><option>Otro / desconocido</option></select></label>
+    </div>
+    <div class="chks" style="margin-top:10px">
+      <label class="chk"><input type="checkbox" id="pInfect"><span>Impresión clínica de infección<small>Anamnesis dirigida y factores de riesgo. Va más allá de la fiebre.</small></span></label>
+      <label class="chk"><input type="checkbox" id="pTerminal"><span>Enfermedad terminal o pronóstico vital limitado<small>Criterio de exclusión del Código Sepsis.</small></span></label>
+    </div>
+    <details class="dd" style="margin-top:6px"><summary>Factores de riesgo que aumentan la sospecha</summary>
+      <div class="chks" id="rfBox"></div>
+    </details>
+   </div>
+
+   <div class="card">
+    <div class="sec-h"><h2>Constantes</h2><span class="legend">Calcula NEWS2 al instante</span></div>
+    <div class="grid g3">
+      <label class="f"><span>FR <span class="u">rpm</span></span><input type="number" id="vRR" inputmode="numeric" min="0" max="80"></label>
+      <label class="f"><span>SpO₂ <span class="u">%</span></span><input type="number" id="vSpO2" inputmode="numeric" min="50" max="100"></label>
+      <label class="f"><span>TAS <span class="u">mmHg</span></span><input type="number" id="vSBP" inputmode="numeric" min="30" max="300"></label>
+      <label class="f"><span>TAD <span class="u">mmHg</span></span><input type="number" id="vDBP" inputmode="numeric" min="10" max="200"></label>
+      <label class="f"><span>FC <span class="u">lpm</span></span><input type="number" id="vHR" inputmode="numeric" min="10" max="250"></label>
+      <label class="f"><span>Tª <span class="u">°C</span></span><input type="number" id="vTemp" inputmode="decimal" step="0.1" min="25" max="44"></label>
+      <label class="f">Nivel de conciencia
+        <select id="vCons"><option value="A">Alerta</option><option value="C">Confusión nueva</option><option value="V">Responde a voz</option><option value="P">Responde a dolor</option><option value="U">Sin respuesta</option></select></label>
+      <label class="f"><span>Glasgow <span class="u">3–15</span></span><input type="number" id="vGCS" inputmode="numeric" min="3" max="15" placeholder="15"></label>
+      <label class="f"><span>Glucemia <span class="u">mg/dL</span></span><input type="number" id="vGlu" inputmode="numeric" min="10" max="900"></label>
+      <label class="f"><span>Diuresis <span class="u">mL/kg/h</span></span><input type="number" id="vUrine" inputmode="decimal" step="0.1" min="0" max="10"></label>
+    </div>
+    <div class="chks" style="margin-top:8px">
+      <label class="chk"><input type="checkbox" id="vO2"><span>Oxígeno suplementario</span></label>
+      <label class="chk"><input type="checkbox" id="vCOPD"><span>Escala 2 de SpO₂ (EPOC o hipercapnia)<small>Objetivo 88–92 %</small></span></label>
+    </div>
+   </div>
+
+   <div class="card">
+    <div class="sec-h"><h2>Analítica y gasometría</h2><span class="legend">Opcional. Ajusta el aviso de gravedad.</span></div>
+    <div class="grid g3">
+      <label class="f"><span>Lactato <span class="u">mmol/L</span></span><input type="number" id="lLact" inputmode="decimal" step="0.1" min="0" max="30"></label>
+      <label class="f"><span>Leucocitos <span class="u">/mm³</span></span><input type="number" id="lWBC" inputmode="numeric" min="0"></label>
+      <label class="f"><span>Procalcitonina <span class="u">ng/mL</span></span><input type="number" id="lPCT" inputmode="decimal" step="0.1" min="0"></label>
+      <label class="f"><span>PCR <span class="u">mg/L</span></span><input type="number" id="lCRP" inputmode="decimal" min="0"></label>
+      <label class="f"><span>Creatinina <span class="u">mg/dL</span></span><input type="number" id="lCr" inputmode="decimal" step="0.1" min="0"></label>
+      <label class="f"><span>Creatinina basal <span class="u">mg/dL</span></span><input type="number" id="lCrB" inputmode="decimal" step="0.1" min="0"></label>
+      <label class="f"><span>Bilirrubina <span class="u">mg/dL</span></span><input type="number" id="lBili" inputmode="decimal" step="0.1" min="0"></label>
+      <label class="f"><span>Plaquetas <span class="u">/mm³</span></span><input type="number" id="lPlt" inputmode="numeric" min="0"></label>
+      <label class="f"><span>Hemoglobina <span class="u">g/dL</span></span><input type="number" id="lHb" inputmode="decimal" step="0.1" min="0"></label>
+      <label class="f"><span>EtCO₂ <span class="u">mmHg</span></span><input type="number" id="lEt" inputmode="decimal" step="0.1" min="0"></label>
+    </div>
+    <div class="chks" style="margin-top:8px">
+      <label class="chk"><input type="checkbox" id="cSOFA"><span>SOFA ≥ 2 calculado aparte</span></label>
+      <label class="chk"><input type="checkbox" id="cHypo"><span>Hipotensión persistente tras fluidoterapia inicial</span></label>
+      <label class="chk"><input type="checkbox" id="cVaso"><span>Necesita vasopresores para mantener PAM ≥ 65</span></label>
+    </div>
+   </div>
+
+   <div class="card" id="bundleCard">
+    <div class="sec-h"><h2>Hora 0 y paquete de la primera hora</h2><span class="legend">Marca cada acción cuando se haga; se guarda la hora.</span></div>
+    <div class="h0">
+      <button class="btn pri" id="h0Btn" type="button">Marcar Hora 0 ahora</button>
+      <button class="btn" id="h0Clear" type="button" hidden>Quitar Hora 0</button>
+      <div><div class="clock" id="clock">--:--:--</div><div class="legend" id="clockSub">Aún sin Hora 0</div></div>
+    </div>
+    <div class="bundle" id="bundle"></div>
+    <h3 style="margin-top:16px">Calculadora por peso</h3>
+    <div class="calc" id="calc"></div>
+    <p class="foot">Volumen y dosis tal como figuran en la presentación. Reevalúa tras cada bolo y confirma pautas con la guía local.</p>
+   </div>
+
+   <div class="card">
+    <div class="sec-h"><h2>Exportar datos del paciente</h2><span class="legend" id="exNote"></span></div>
+    <div class="btns">
+      <button class="btn pri" id="exCsv" type="button">Guardar CSV</button>
+      <button class="btn" id="exJson" type="button">Guardar JSON</button>
+      <button class="btn" id="exTxt" type="button">Guardar informe .txt</button>
+      <button class="btn" id="exCopy" type="button">Copiar informe</button>
+    </div>
+    <label class="f" style="margin-top:12px">Notas clínicas (se incluyen en la exportación)<textarea id="pNotes" rows="3" placeholder="Evolución, destino, UCI, observaciones…"></textarea></label>
+    <label class="f" style="margin-top:12px">Vista previa del informe<textarea id="exPrev" rows="12" readonly></textarea></label>
+    <div style="margin-top:12px"><button class="btn dng" id="newBtn" type="button">Nuevo paciente</button> <span id="newConfirm" hidden><span class="sub">¿Borrar todos los datos de esta pantalla?</span> <button class="btn dng" id="newYes" type="button">Sí, borrar</button> <button class="btn" id="newNo" type="button">Cancelar</button></span></div>
+   </div>
+  </div>
+
+  <aside class="aside col" aria-label="Resultado en directo">
+   <div class="card">
+    <div class="res-head">
+      <div class="score" id="bigScore" data-l="none"><div><span id="bigNum">–</span><small>NEWS2</small></div></div>
+      <div class="res-txt"><strong id="riskTxt">Introduce las constantes</strong><span class="sub" id="riskSub">Puntuación de alerta temprana</span></div>
+    </div>
+    <div class="flag" id="flag3" hidden></div>
+    <div class="verdict" id="verdict"><b>Código Sepsis</b>Marca la impresión clínica de infección y completa las constantes.</div>
+    <details class="dd" id="newsDet" open style="margin-top:8px"><summary>Desglose NEWS2</summary><div class="rows" id="newsRows"></div></details>
+    <details class="dd" open><summary>Otras escalas y señales</summary><div class="rows" id="otherRows"></div></details>
+   </div>
+  </aside>
+ </div>
+</section>
+
+<!-- ============ PROTOCOLO ============ -->
+<section class="view" id="view-protocolo" role="tabpanel" aria-labelledby="tab-protocolo" hidden>
+  <div class="toolbar">
+    <input type="search" id="protSearch" placeholder="Buscar en el protocolo: lactato, noradrenalina, hemocultivos…" aria-label="Buscar en el protocolo">
+    <button class="btn" id="protOpen" type="button">Abrir todo</button>
+    <button class="btn" id="protClose" type="button">Cerrar todo</button>
+  </div>
+  <div class="acc" id="protAcc"></div>
+</section>
+
+<!-- ============ ANTIBIÓTICOS ============ -->
+<section class="view" id="view-antibioticos" role="tabpanel" aria-labelledby="tab-antibioticos" hidden>
+  <div class="call warn"><b>Antibioterapia empírica.</b> Pautas transcritas de la presentación. Confirma dosis, alergias, función renal y epidemiología local con la guía PROA del hospital antes de prescribir.</div>
+  <div class="toolbar"><input type="search" id="abxSearch" placeholder="Buscar fármaco o foco: meropenem, vancomicina, EPOC…" aria-label="Buscar antibiótico"></div>
+  <div class="chips" id="abxChips" role="group" aria-label="Filtrar por foco"></div>
+  <div class="abx" id="abxList"></div>
+</section>
+
+<!-- ============ PREGUNTAR ============ -->
+<section class="view" id="view-preguntar" role="tabpanel" aria-labelledby="tab-preguntar" hidden>
+  <div class="card">
+    <h2>Pregunta sobre el protocolo</h2>
+    <p class="sub">Escribe tu duda con tus palabras. Busca en las respuestas del protocolo de la unidad y te dice de qué sección salen. No usa datos del paciente.</p>
+    <form class="q-box" id="qForm"><input type="search" id="qInput" placeholder="¿Cuándo activo el Código Sepsis? ¿Qué fluidos uso? ¿Cuándo pongo noradrenalina?" aria-label="Tu pregunta"><button class="btn pri" type="submit">Preguntar</button></form>
+    <div class="sugg" id="qSugg"></div>
+  </div>
+  <div class="ans" id="qAns" aria-live="polite"></div>
+</section>
+
+<!-- ============ REPASAR ============ -->
+<section class="view" id="view-repasar" role="tabpanel" aria-labelledby="tab-repasar" hidden>
+  <h2 style="margin-bottom:10px">Cifras que hay que recordar</h2>
+  <div class="keys" id="keys"></div>
+  <div class="card" style="margin-top:20px" id="quizCard">
+    <div class="sec-h"><h2>Test de repaso</h2><span class="pill teal" id="qzCount"></span></div>
+    <div class="prog"><i id="qzBar"></i></div>
+    <div id="qzBody"></div>
+  </div>
+</section>
+
+<p class="disc">Herramienta de apoyo docente y de consulta rápida elaborada a partir de la presentación indicada. No sustituye al juicio clínico ni a los protocolos vigentes del centro. La puntuación NEWS2 nunca debe reemplazar la valoración clínica: una puntuación baja no descarta la necesidad de tratamiento urgente.</p>
+</div>
+<div class="toast" id="toast" role="status" hidden></div>
+<script>
+/* ================= DATOS DEL PROTOCOLO ================= */
+const RISK_FACTORS = [
+ 'Edad avanzada','Institucionalizado','Inmunosupresión o corticoides','Comorbilidad crónica (DM, EPOC, IRC, cáncer)',
+ 'Dispositivos invasivos (catéteres, sondas, VM)','Sondaje vesical permanente','Ingreso o cirugía reciente',
+ 'Antibiótico reciente o mala respuesta','Oncológico con quimioterapia reciente','Esplenectomizado','Técnica invasiva reciente'
+];
+
+const BUNDLE = [
+ {id:'lact',  t:'Lactato sérico', d:'Medir al inicio y repetir si >2 mmol/L.', lim:null},
+ {id:'hemo',  t:'Hemocultivos (2 tandas) antes del antibiótico', d:'Sin retrasar la antibioterapia. Demora asumible: 45 min.', lim:45},
+ {id:'atb',   t:'Antibiótico iv de amplio espectro', d:'Primera hora (recomendación 1B). Con NEWS2 ≥ 7, en menos de 1 hora.', lim:60},
+ {id:'o2',    t:'Oxigenoterapia', d:'Mantener SpO₂ ≥ 94 % (88–92 % en EPOC).', lim:null},
+ {id:'fluid', t:'Cristaloides balanceados', d:'30 ml/kg si hipotensión o lactato ≥ 4 mmol/L. Bolos con reevaluación.', lim:null},
+ {id:'vaso',  t:'Noradrenalina si PAM < 65 tras fluidos', d:'Puede iniciarse por vía periférica proximal mientras se canaliza una central.', lim:null},
+ {id:'reev',  t:'Reevaluación hemodinámica', d:'Constantes, diuresis, relleno capilar y lactato cada 30–60 min.', lim:60},
+ {id:'rel',   t:'Repetir lactato', d:'A las 2–4 h para valorar respuesta.', lim:240},
+ {id:'foco',  t:'Control del foco infeccioso', d:'Drenaje, retirada de dispositivo o cirugía en las primeras 6–12 h.', lim:720},
+ {id:'tev',   t:'Profilaxis tromboembólica', d:'HBPM salvo contraindicación.', lim:null},
+ {id:'time',  t:'Reevaluación y «antibiotic time-out»', d:'A las 24–48 h: mantener, cambiar o suspender.', lim:null}
+];
+
+const PROTOCOL = [
+{id:'ctx', title:'1. Impacto y definiciones', blocks:[
+ {t:'ul', x:['49 millones de casos de sepsis al año y 11 millones de muertes atribuibles. Una de cada 5 muertes en el mundo se relaciona con la sepsis.',
+  'Alrededor de 1 de cada 3 supervivientes fallece en el primer año tras el alta (complicaciones cardiovasculares, infecciones recurrentes, deterioro funcional grave). Es la «mortalidad extendida».',
+  'La sepsis no es un evento aislado: es el inicio de un síndrome de larga duración y un indicador clave de calidad asistencial.',
+  'Un protocolo estructurado reduce mortalidad y mejora eficiencia y seguridad: identificación inmediata, muestras microbiológicas, antibiótico adecuado precoz, estabilización hemodinámica y comunicación SUAP–SUH–UCI–enfermería.']},
+ {t:'h', x:'Definiciones (Sepsis-3)'},
+ {t:'ul', x:['<b>Sepsis:</b> disfunción orgánica potencialmente mortal causada por una respuesta desregulada del huésped a la infección. Se pasa del criterio de SRIS a la disfunción orgánica.',
+  '<b>Shock séptico:</b> sepsis con alteraciones circulatorias, celulares y metabólicas graves y riesgo elevado de muerte. Operativamente: necesidad de vasopresores para mantener PAM ≥ 65 mmHg y lactato > 2 mmol/L pese a una resucitación adecuada con fluidos.']},
+ {t:'h', x:'Fisiopatología'},
+ {t:'ul', x:['«Inflamación intravascular maligna»: incontrolada, no regulada y que se autoperpetúa.',
+  'Inflamasoma NLRP3: se activa por DAMPs y señales de estrés celular → activa caspasa-1 («tijera molecular») → madura IL-1β e IL-18 → piroptosis (muerte celular inflamatoria y lítica).',
+  '<b>Inmunotrombosis:</b> estado procoagulante; inflamación + cascada de coagulación → CID.',
+  '<b>Inmunoparálisis:</b> tras la fase hiperinflamatoria, apoptosis masiva y linfopenia. Explica las infecciones secundarias (nosocomiales) y la mortalidad tardía.']}
+]},
+{id:'crit', title:'2. Criterios de sospecha', blocks:[
+ {t:'h', x:'Criterios clínicos'},
+ {t:'table', head:['Signos de infección','Signos de disfunción orgánica'], rows:[
+  ['Fiebre >38 °C o hipotermia <36 °C','Neurológico: confusión, desorientación, somnolencia, Glasgow <13'],
+  ['Escalofríos, malestar general','Renal: oliguria <0,5 ml/kg/h durante 2 h o aumento de creatinina ≥0,3 mg/dL'],
+  ['Síntomas focales: tos, disnea, disuria, dolor abdominal, heridas infectadas','Cardiovascular: PAS <90 mmHg o TAM <65 mmHg persistente'],
+  ['','Respiratorio: SatO₂ <90 % o necesidad de oxígeno suplementario'],
+  ['','Hepático: bilirrubina >2 mg/dL']]},
+ {t:'p', x:'<b>Factores de riesgo:</b> edad avanzada, inmunosupresión, comorbilidades crónicas (DM, EPOC, insuficiencia renal, cáncer) y dispositivos invasivos (catéteres, sondas, ventilación mecánica). En el ámbito extrahospitalario añadir: institucionalizados, ingreso o cirugía recientes, antibiótico reciente o mala respuesta, oncológicos con quimioterapia reciente, sondaje vesical permanente, técnicas invasivas recientes, esplenectomizados.'},
+ {t:'h', x:'Criterios analíticos'},
+ {t:'table', head:['Parámetro','Valor de alarma','Interpretación'], rows:[
+  ['Lactato','>2 mmol/L','Hipoperfusión tisular; >4 mmol/L riesgo alto de shock'],
+  ['Leucocitos','>12.000 o <4.000 /mm³','Respuesta inflamatoria o inmunosupresión'],
+  ['Procalcitonina','>0,5 ng/mL','Probable infección bacteriana'],
+  ['PCR','Elevada','Indicador inespecífico de inflamación'],
+  ['Creatinina','Elevada o aumento ≥0,3 mg/dL','Disfunción renal aguda'],
+  ['Bilirrubina','>2 mg/dL','Disfunción hepática'],
+  ['Plaquetas','<100.000 /mm³','Disfunción hematológica'],
+  ['Gasometría arterial','Lactato y acidosis metabólica','Hipoperfusión'],
+  ['Hemocultivos','Antes del antibiótico','Confirmación microbiológica']]},
+ {t:'call', x:'La interpretación no es aislada: se hace dentro del contexto clínico y combinando parámetros.'}
+]},
+{id:'esc', title:'3. Escalas: qSOFA, NEWS2 y SOFA', blocks:[
+ {t:'h', x:'qSOFA'},
+ {t:'ul', x:['Propuesta para sospechar disfunción orgánica. Dos o más criterios = alerta de alto riesgo: evaluación completa y monitorización estrecha.',
+  'Ventajas: muy rápido, útil en cribado, sin laboratorio.',
+  'Limitaciones: no debe usarse sola para activar el Código Sepsis; baja sensibilidad en geriátricos o con comorbilidades; solo indica vigilancia y evaluación adicional. Según las últimas guías no es la mejor opción, aunque puede seguir utilizándose.']},
+ {t:'h', x:'NEWS2'},
+ {t:'ul', x:['Herramienta estandarizada clave, incluida en la guía NICE 2024. Estratifica el riesgo de enfermedad grave o muerte por sepsis en adultos. Es la mejor opción según la literatura actual.',
+  '<b>La puntuación nunca debe reemplazar al juicio clínico.</b> Un 3 en un solo parámetro indica mayor riesgo de disfunción orgánica y exige revisión prioritaria.']},
+ {t:'table', head:['Puntuación','Riesgo','Antibiótico iv de amplio espectro'], rows:[
+  ['≥ 7','Alto','En menos de 1 hora'],
+  ['5–6','Moderado','Se puede diferir hasta 3 h para obtener un diagnóstico más específico'],
+  ['1–4','Bajo','Se puede diferir hasta 6 h mientras se recopila información'],
+  ['0','Muy bajo','—']]},
+ {t:'call warn', x:'<b>Limitaciones:</b> casi la mitad de los pacientes (48,2 %) que necesitaban tratamiento urgente tenían NEWS2 ≤ 4. Las intervenciones urgentes más frecuentes con NEWS2 ≤ 4: cirugía de emergencia, antibiótico iv en fracturas abiertas, insulina en cetoacidosis o síndrome hiperosmolar, reducción de fracturas o luxaciones que amenazan la extremidad y antídotos en intoxicaciones graves.'},
+ {t:'h', x:'SOFA'},
+ {t:'ul', x:['Evalúa disfunción orgánica y gravedad. Cada órgano puntúa 0–4. Sepsis = aumento ≥ 2 puntos sobre el basal; más puntuación, más mortalidad.',
+  'Parámetros: respiratorio (PaO₂/FiO₂), coagulación (plaquetas), hepático (bilirrubina), cardiovascular (presión arterial y vasopresores), neurológico (Glasgow) y renal (creatinina o diuresis).',
+  'Limitación: requiere laboratorio y signos completos, no siempre disponible en los primeros minutos.']},
+ {t:'h', x:'Otros indicadores'},
+ {t:'ul', x:['Lactato sérico: hipoperfusión tisular y predictor de mortalidad.','Procalcitonina y PCR: infección bacteriana.','Diuresis horaria y presión venosa central: monitorización orgánica.','ScvO₂ si está disponible: perfusión tisular.',
+  'EtCO₂ < 24,5 mmHg: posible signo de gravedad; buena correlación con HCO₃ y pCO₂, correlación inversa débil con lactato. Si no se pueden seriar analíticas, monitorizar con EtCO₂.']},
+ {t:'call', x:'Las escalas de alerta temprana complementan, no sustituyen, al juicio clínico. Interpreta los parámetros en el contexto completo.'}
+]},
+{id:'cod', title:'4. Activación del Código Sepsis', blocks:[
+ {t:'p', x:'El Código Sepsis es un protocolo estructurado de alerta temprana para detectar la sepsis de forma precoz, iniciar el tratamiento de forma inmediata y organizada, y mantener un seguimiento intensivo en las primeras horas críticas.'},
+ {t:'h', x:'Activación hospitalaria'},
+ {t:'ul', x:['<b>Hora 0</b> = impresión clínica de infección + NEWS2 ≥ 7 + Rankin < 3.',
+  '<b>Criterios ampliados:</b> sospecha de infección y al menos uno de: disfunción orgánica (SOFA ≥ 2 o NEWS2 ≥ 5), lactato > 2 mmol/L, hipotensión persistente tras la fluidoterapia inicial.']},
+ {t:'h', x:'Criterios de exclusión'},
+ {t:'ul', x:['Enfermedad en situación terminal o pronóstico vital limitado a corto plazo.','Mala calidad de vida o alta dependencia (Rankin > 3).']},
+ {t:'call warn', x:'<b>Aviso:</b> la presentación activa con Rankin &lt; 3 y excluye con Rankin &gt; 3. El Rankin 3 no queda cubierto de forma explícita; decide con criterio clínico.'},
+ {t:'h', x:'Criterios de valoración por UCI'},
+ {t:'ul', x:['NEWS2 ≥ 7 o deterioro progresivo hasta 7.','Hipotensión o hiperlactacidemia persistente en las primeras horas.','Necesidad de fármacos vasoactivos.','Disfunción grave, persistente o progresiva de órganos (cardiovascular, neurológico, respiratorio, renal, hepático, coagulación).','Deterioro clínico progresivo.']},
+ {t:'h', x:'Paquete de la «Hora Cero»'},
+ {t:'table', head:['Acción','Objetivo'], rows:[
+  ['Reconocimiento clínico de la sepsis','Activar el protocolo'],
+  ['Oxigenoterapia','SpO₂ ≥ 94 %'],
+  ['Lactato sérico','Medir y repetir si ≥ 2 mmol/L'],
+  ['Hemocultivos antes del antibiótico','Sin retrasar el inicio del tratamiento'],
+  ['Antibiótico de amplio espectro','Administrar en la primera hora'],
+  ['Fluidoterapia inicial','Bolos (30 ml/kg si hipotensión o lactato ≥ 4)'],
+  ['Vasopresores si PAM < 65 mmHg','Mantener perfusión'],
+  ['Reevaluación continua','Constantes, diuresis, lactato y respuesta clínica cada 30–60 min']]},
+ {t:'h', x:'Fase extrahospitalaria'},
+ {t:'ul', x:['Es una patología tiempo-dependiente. Se activa un «Código Sospecha de Sepsis»: no se puede llegar a un diagnóstico definitivo.',
+  'Hora Cero: momento en que se establece la sospecha y se inicia el paquete de medidas, apoyado en las escalas.',
+  'Se activa con sospecha clínica + NEWS2 ≥ 7 + Rankin < 3.',
+  'Monitorizar y registrar: TA, ritmo, FC, FR, SpO₂, EtCO₂, glucemia, temperatura, Glasgow; escalas NEWS2, qSOFA y Rankin; lactato, pCO₂, HCO₃⁻ y creatinina en gasometría venosa.',
+  'Obtener cultivos antes del antibiótico siempre que no suponga un retraso importante; se asumen 45 minutos como demora aceptable, individualizando.',
+  'Canalizar al menos una vía periférica, sondaje urinario para control de diuresis e iniciar el paquete de medidas.']}
+]},
+{id:'abcde', title:'5. Enfoque ABCDE en la primera hora', blocks:[
+ {t:'table', head:['','Evaluar','Actuar'], rows:[
+  ['<b>A</b> Vía aérea','Permeabilidad; ronquidos, estridor, secreciones. Riesgo alto si hay alteración de conciencia.','Maniobras básicas, cánulas. Si compromiso respiratorio o Glasgow ≤ 8, valorar IOT. Preparar fluidos y vasopresores antes de intubar.'],
+  ['<b>B</b> Respiración','FR, SpO₂, patrón. Taquipnea >22 rpm, músculos accesorios, cianosis. La FR es de los primeros signos.','O₂ para SpO₂ ≥ 94 %. Valorar ventilación no invasiva o invasiva. Gasometría: acidosis metabólica y lactato.'],
+  ['<b>C</b> Circulación','TA, FC, relleno capilar, temperatura, piel moteada, oliguria. Lactato ≥ 2 hipoperfusión; ≥ 4 mayor mortalidad. Medir al inicio y a las 2–4 h.','Fluidos con reevaluación (diuresis >0,5 ml/kg/h). Ecografía si congestión (VCI, función cardíaca). Noradrenalina si PAM < 65 tras fluidos. ECG, PA invasiva si es posible, diuresis horaria.'],
+  ['<b>D</b> Neurológico','Glasgow o AVPU. Confusión o agitación (encefalopatía séptica). Glucemia capilar.','Garantizar oxigenación y perfusión. Corregir glucemia <70 mg/dL, tratar convulsiones. Evitar sedación innecesaria.'],
+  ['<b>E</b> Exposición','Desnudar y buscar foco: heridas, catéteres, úlceras, piel, abscesos, abdomen, periné, pulmones. Temperatura (también hipotermia).','Cultivos (sangre, orina, esputo, LCR…) sin retrasar el antibiótico. Antibiótico de amplio espectro en la 1.ª hora. Control del foco.']]}
+]},
+{id:'atb', title:'6. Antibioterapia: principios', blocks:[
+ {t:'ul', x:['Instaurar en la <b>primera hora</b> (recomendación 1B), tras obtener cultivos (al menos 2 tandas de hemocultivos, periféricos o de catéter, más cultivo del foco si es posible) y sin retrasar la primera dosis.',
+  'Vía intravenosa, dosis óptima y preferiblemente en infusión prolongada.',
+  'Gramnegativos multirresistentes en sepsis grave: valorar combinación (betalactámico + aminoglucósido o fluoroquinolona).',
+  'Añadir cobertura anti-MRSA (vancomicina o linezolid) con factores de riesgo o signos compatibles (neumonía necrosante, infección dérmica grave, dispositivos).',
+  'En no neutropénicos no se justifica el antifúngico de rutina, salvo sospecha o colonización múltiple por Candida.',
+  'Antibiotic time-out a las 24–48 h: sin cultivos positivos y con sospecha débil, suspender; con patógeno sensible, reducir espectro, dosis y duración. Lactato y procalcitonina pueden guiar la suspensión.',
+  'Cada hora de retraso se asocia a más mortalidad, pero también importa elegir bien según foco, resistencias locales y antecedentes, y desescalar pronto.']},
+ {t:'call', x:'Consulta la pestaña <b>Antibióticos</b> para las pautas por foco.'}
+]},
+{id:'fluid', title:'7. Fluidoterapia', blocks:[
+ {t:'h', x:'Tipo de fluido'},
+ {t:'ul', x:['<b>Cristaloides balanceados</b> (Ringer lactato, Plasma-Lyte): composición similar al plasma, menos acidosis hiperclorémica y menos fracaso renal.',
+  '<b>Suero salino 0,9 %:</b> cloro muy superior al plasmático → hipercloremia y acidosis metabólica hiperclorémica, peor función renal y hemodinamia, más inflamación y edema intersticial.']},
+ {t:'h', x:'Reanimación inicial'},
+ {t:'ul', x:['30 ml/kg de cristaloides en las primeras 3 h si hipotensión o lactato ≥ 4 mmol/L. Ejemplo: 70 kg → 2.100 ml en 2–3 h.',
+  'La Surviving Sepsis Campaign 2021 propone un volumen personalizado guiado por la respuesta (10–20 ml/kg en bolos fraccionados).',
+  '<b>Estrategia con bolos:</b> primer bolo de 250–500 ml (5 ml/kg) en 10–15 min; reevaluar tras cada bolo.',
+  'Si mejora (PAM, lactato, diuresis, perfusión), continuar. Si no mejora o hay congestión, parar fluidos y pasar a vasopresores. Ante falta de respuesta, descartar causa obstructiva o cardiogénica y signos de sobrecarga; no seguir dando volumen a ciegas.']},
+ {t:'table', head:['Objetivo de reanimación','Valor'], rows:[['PAM','≥ 65 mmHg'],['Lactato','Tendencia descendente'],['Diuresis','≥ 0,5 ml/kg/h'],['Relleno capilar','< 3 s'],['ScvO₂','≥ 70 %']]}
+]},
+{id:'vaso', title:'8. Vasopresores', blocks:[
+ {t:'ul', x:['Vasopresores precoces, no inmediatos. Objetivo: restaurar la perfusión, no solo subir la tensión.',
+  'Responde a fluidos si: relleno capilar < 3 s, PAM ≥ 65, baja la FC, mejora la conciencia y desciende el lactato.']},
+ {t:'h', x:'Indicaciones'},
+ {t:'ul', x:['Shock séptico con PAM < 65 mmHg tras fluidoterapia adecuada.','Hipotensión persistente con hipoperfusión (oliguria, lactato > 2).','Intolerancia a fluidos por sobrecarga o edema pulmonar.','Compromiso rápido de la perfusión pese a la expansión inicial.']},
+ {t:'p', x:'Iniciar sin demora, incluso por vía periférica proximal mientras se canaliza un acceso central.'},
+ {t:'h', x:'Noradrenalina: fármaco de elección'},
+ {t:'ul', x:['Agonista α1 y β1. Sube la PAM sobre todo por aumento de resistencias; leve aumento del gasto.',
+  'Dosis inicial 0,05–0,1 µg/kg/min; habitual 0,1–1 µg/kg/min. Titular cada 5–10 min (la diapositiva también indica cada 2–3 min). Meta PAM ≥ 65 mmHg.',
+  'Menos arritmias y menor mortalidad que dopamina. Preferible vía central; en emergencia puede iniciarse periférica vigilando extravasación.']},
+ {t:'h', x:'Estrategia en Urgencias'},
+ {t:'ul', x:['Confirmar reanimación con 30 ml/kg de cristaloides balanceados.','Noradrenalina precoz si PAM < 65, incluso periférica.','Titulación progresiva.','Monitorizar: PA invasiva, ECG y FC, perfusión periférica y diuresis, lactato seriado (la diapositiva indica cada 6 h en este punto).',
+  'Si no se alcanza PAM ≥ 65 con dosis altas: añadir vasopresina 0,03 U/min; considerar adrenalina.','Disfunción miocárdica: añadir dobutamina (más arritmias).','Shock refractario: valorar hidrocortisona 200 mg/día y angiotensina II de rescate.']}
+]},
+{id:'comp', title:'9. Medidas complementarias', blocks:[
+ {t:'h', x:'Profilaxis gástrica'},
+ {t:'ul', x:['Indicada si: ventilación mecánica > 48 h, coagulopatía (INR > 1,5 o plaquetas < 50.000/µL), shock prolongado o dosis altas de vasopresores, o antecedente de úlcera o sangrado digestivo reciente.','Omeprazol 40 mg iv/24 h o pantoprazol 40 mg iv/12–24 h. Retirar al desaparecer los factores de riesgo (riesgo de C. difficile y neumonía nosocomial).']},
+ {t:'h', x:'Profilaxis tromboembólica'},
+ {t:'ul', x:['Obligatoria salvo contraindicación.','Enoxaparina 40 mg sc/24 h (ClCr < 30 ml/min: 20 mg/24 h). Obesidad mórbida: 40 mg/12 h.','Heparina no fraccionada 5.000 UI sc/8 h si insuficiencia renal avanzada o sangrado previo.','Profilaxis mecánica si hay contraindicación farmacológica.']},
+ {t:'h', x:'Control glucémico'},
+ {t:'ul', x:['Objetivo 140–180 mg/dL con insulina iv según protocolo.','Evitar control intensivo (< 110 mg/dL): más hipoglucemia y mortalidad.','Glucemia cada 1–2 h en fase crítica.']},
+ {t:'h', x:'Temperatura'},
+ {t:'ul', x:['Fiebre moderada (≤ 38,5 °C) puede ser beneficiosa. Tratar solo si > 39 °C o malestar significativo, con paracetamol o medios físicos.','En shock refractario, el control activo de temperatura puede reducir el consumo metabólico.']},
+ {t:'h', x:'Control del foco'},
+ {t:'p', x:'Junto con el antibiótico determina el pronóstico. Si no se elimina el foco, la mortalidad supera el 50 %. Debe hacerse en las primeras <b>6–12 h</b>, con la técnica menos invasiva y más eficaz. No retrasar la cirugía si el paciente está inestable: se reanima a la vez.'},
+ {t:'table', head:['Foco','Intervención','Observaciones'], rows:[
+  ['Abdominal','Drenaje percutáneo o cirugía urgente','Colecciones, abscesos, peritonitis. Evitar retrasos > 12 h'],
+  ['Torácico','Drenaje pleural','Empiema o derrame paraneumónico complicado'],
+  ['Urinario','Nefrostomía o cambio de sonda','Obstrucción o absceso perirrenal'],
+  ['Partes blandas','Desbridamiento quirúrgico amplio','Imprescindible en fascitis necrosante o mionecrosis'],
+  ['Dispositivos','Retirada inmediata de catéteres, prótesis o material','Asociar cobertura antibiótica adecuada']]},
+ {t:'h', x:'Corticoides'},
+ {t:'ul', x:['Indicados en shock refractario (PAM < 65 pese a fluidos y vasopresores), noradrenalina prolongada a dosis altas (> 0,5–1 µg/kg/min) o sospecha de insuficiencia suprarrenal relativa.','Hidrocortisona 200 mg iv/día (50 mg/6 h o perfusión continua), 5–7 días o hasta retirar vasopresores; retirada progresiva.','Reduce la duración del shock y la dosis de vasopresores; sin beneficio demostrado en mortalidad (Cochrane 2019).','Contraindicaciones relativas: úlcera activa, sangrado digestivo reciente, infección micótica no tratada.']},
+ {t:'h', x:'Transfusión de hematíes'},
+ {t:'ul', x:['Estrategia restrictiva: transfundir con Hb ≤ 7 g/dL. Objetivo postransfusión 7–9 g/dL.','Excepciones (shock hemorrágico, isquemia miocárdica activa, hipoxia tisular refractaria): umbral 8–9 g/dL según contexto.']},
+ {t:'h', x:'Ecografía clínica (POCUS): protocolo RUSH'},
+ {t:'ul', x:['Evalúa la causa del shock y la respuesta a la reanimación. Acrónimo HI-MAP: Heart, IVC, Morrison/FAST, Aorta y Pulmonary.','Patrón distributivo del shock séptico: contractilidad conservada o aumentada, VCI dilatada y poco colapsable, sin hipovolemia ni taponamiento.','Ayuda a localizar el foco: consolidaciones, derrames pleurales, abscesos, líquido libre peritoneal.']}
+]},
+{id:'post', title:'10. Cuidados postagudos', blocks:[
+ {t:'p', x:'Tras el shock séptico puede aparecer el síndrome post-sepsis: debilidad, neuropatía, inmunodepresión y alteraciones cognitivas.'},
+ {t:'ul', x:['Evitar la inmovilización prolongada: fisioterapia temprana.','Nutrición adecuada y control proteico.','Revisar antibióticos y suspender los innecesarios (estrategia PROA).','Rehabilitación respiratoria y muscular.','Control de glucemia y electrolitos.','Detección precoz de delirio o disfunción cognitiva.','Abordaje funcional y psicológico con equipos multidisciplinares.']}
+]}
+];
+/* ================= ANTIBIÓTICOS ================= */
+const ABX_FOCI = [['all','Todos'],['shock','Shock séptico'],['resp','Respiratorio'],['piel','Piel y partes blandas'],['uri','Urinario'],['abd','Intraabdominal'],['rf','Patógenos resistentes']];
+/* reg: {l: etiqueta, a: [líneas unidas por «+»]} ; cada línea del array a es un bloque; entre bloques se muestra «+» o «o» según r.j */
+const ABX = [
+{f:'shock', t:'Shock séptico: pauta empírica', n:['Resumen del manejo antimicrobiano empírico en shock séptico según el foco.'], r:[
+ {l:'Foco desconocido', a:['Meropenem 1–2 g/8 h o imipenem 1 g/6 h','+ Daptomicina 6–10 mg/kg/24 h o vancomicina 15–20 mg/kg/8–12 h','± aminoglucósido si antibiótico previo']},
+ {l:'Alérgicos a betalactámicos', a:['Tigeciclina 100 mg/12 h','+ Amikacina 15–20 mg/kg/24 h','± fluoroquinolona']},
+ {l:'Urológico', a:['Imipenem 1 g/6 h o meropenem 1 g/8 h o cefepime 2 g/12 h','+ Daptomicina 6–10 mg/kg/24 h','± amikacina 15–20 mg/kg/día']},
+ {l:'Piel y partes blandas (IPPB) / fascitis', a:['Piperacilina-tazobactam 4 g/6 h o ceftolozano-tazobactam 1/0,5 g/8 h','+ Metronidazol 500 mg/8 h, o ceftazidima-avibactam 2/0,5 g/8 h, o meropenem 1 g/8 h / imipenem 1 g/6 h','± vancomicina / daptomicina / linezolid','± fluconazol o equinocandina, o bien tigeciclina + amikacina']},
+ {l:'Respiratorio e intraabdominal', a:['Ver NAC grave y apartado intraabdominal']}]},
+
+{f:'resp', t:'Neumonía comunitaria (NAC) con sepsis', n:['En NAC grave se asocian S. pneumoniae o Legionella; betalactámico + macrólido mejora la supervivencia.'], r:[
+ {l:'Pauta base', a:['Ceftriaxona 2 g/24 h iv o cefotaxima 2 g/6–8 h o ceftarolina 600 mg/12 h','+ Azitromicina 500 mg/24 h o moxifloxacino 400 mg/24 h o levofloxacino 500 mg/12 h','± linezolid 600 mg/12 h (si factores de riesgo de S. aureus)','± oseltamivir 75 mg/12 h (si epidemia gripal en la comunidad)']},
+ {l:'Notas', a:['Si > 65 años, comorbilidad crónica significativa u otros factores de gramnegativos, la diapositiva indica seleccionar cefditoreno.','FDA y EMA recomiendan evitar fluoroquinolonas si hay alternativa.']}]},
+
+{f:'resp', t:'NAC con sospecha de Pseudomonas', n:['Nosocomial o asociada a ventilador: predominan Pseudomonas y Acinetobacter; ajustar según antibiograma.'], r:[
+ {l:'Antipseudomónico', a:['Cefepime 2 g/12 h o meropenem 1 g/8 h o piperacilina-tazobactam 4/0,5 g/6–8 h o ceftolozano-tazobactam 1–2 g/0,5–1 g cada 8 h o ceftazidima-avibactam 2 g/0,5 g/8 h','+ Levofloxacino 500 mg/12 h o ciprofloxacino 400 mg/8 h o tobramicina 6 mg/kg/24 h o amikacina 15 mg/kg/24 h','(Plantear aminoglucósidos o colistina nebulizados)']},
+ {l:'Si sospecha de SARM', a:['Ceftobiprol 500 mg/8 h en perfusión extendida, o asociar linezolid o vancomicina']}]},
+
+{f:'resp', t:'Sospecha de aspiración', n:[], r:[{l:'Pauta', a:['Ertapenem 1 g/24 h iv o amoxicilina-clavulánico 2 g/8 h iv']}]},
+
+{f:'resp', t:'Neumonía en EPOC', n:['Según riesgo de infección por Pseudomonas.'], r:[
+ {l:'Sin riesgo de Pseudomonas', a:['Elección: amoxicilina-clavulánico, ceftriaxona o cefotaxima','Alternativa: levofloxacino o moxifloxacino','Microorganismos: S. pneumoniae resistente a penicilina, enterobacterias']},
+ {l:'Con riesgo de Pseudomonas', a:['Añadir a lo anterior un betalactámico con actividad antipseudomónica (ceftazidima, piperacilina-tazobactam, imipenem o meropenem, cefepima, ceftolozano-tazobactam)','Alternativa: quinolona antipseudomónica (ciprofloxacino 500–750 mg/12 h o levofloxacino 500 mg/12 h)']}]},
+
+{f:'piel', t:'IPPB necrotizante', n:['Requiere cobertura de Gram positivos, Gram negativos y anaerobios, con desbridamiento quirúrgico precoz.'], r:[
+ {l:'Opción 1', a:['Piperacilina-tazobactam 4/0,5 g/6–8 h o meropenem 1–2 g/8 h','+ Daptomicina 6–10 mg/kg/24 h','+ Clindamicina 600 mg/6 h']},
+ {l:'Opción 2', a:['Piperacilina-tazobactam 4/0,5 g/6–8 h o meropenem 1 g/8 h','+ Linezolid 600 mg/12 h iv']},
+ {l:'Opción 3', a:['Piperacilina-tazobactam 4/0,5 g/6–8 h o meropenem 1 g/8 h','+ Vancomicina 15–20 mg/kg/8–12 h','+ Clindamicina 600 mg/6 h']}]},
+
+{f:'piel', t:'IPPB no necrotizante', n:['Sin criterios de ingreso salvo que se indique.'], r:[
+ {l:'Sin factores de riesgo de SAMR · sin ingreso', a:['Cefditoreno 400 mg/12 h o cefalexina 500 mg/6–8 h o cefadroxilo 500 mg/8–12 h o amoxicilina-clavulánico 875/125 mg/8 h','Alérgicos: moxifloxacino 400 mg/24 h o clindamicina 600 mg/8 h','Dalbavancina 1500 mg dosis única iv si riesgo de mala adherencia']},
+ {l:'Sin factores de riesgo de SAMR · con ingreso', a:['Amoxicilina-clavulánico 2 g/8 h, o ceftriaxona + cloxacilina 2 g/6 h, o moxifloxacino 400 mg/24 h']},
+ {l:'Con factores de riesgo de SAMR · sin ingreso', a:['Clindamicina 600 mg/8 h vo, doxiciclina 100 mg/12 h vo o trimetoprim-sulfametoxazol 160/800 mg/12 h vo','Alternativas según contexto: linezolid 600 mg/12 h vo, tedizolid 200 mg/24 h vo o dalbavancina 1500 mg dosis única iv']},
+ {l:'Con factores de riesgo de SAMR · con ingreso', a:['Linezolid 600 mg/12 h, daptomicina 6–10 mg/kg/24 h (de elección en inmunosupresión, deterioro hemodinámico o ClCr < 50 ml/min), ceftarolina 600 mg/12 h o tedizolid 200 mg/24 h','En IPPB secundarias (herida quirúrgica, mordedura, úlcera por presión) asociar tratamiento para gramnegativos: ertapenem 1 g/24 h ± anti-SAMR si hay factores de BLEE']},
+ {l:'Factores de riesgo', a:['<b>SAMR:</b> infección o colonización previa, hospitalización > 14 días, antibiótico en 3 meses previos, centro sociosanitario con prevalencia > 20 %, úlceras grandes o de larga evolución, diálisis, cirugía reciente','<b>BLEE:</b> > 65 años, diabetes, hospitalización reciente, antibiótico en 2 meses previos, infección previa por enterobacteria']}]},
+
+{f:'piel', t:'Pie diabético infectado', n:['Toma de cultivos (biopsia de tejido profundo de elección). Desbridamiento, drenaje y resección si osteomielitis.'], r:[
+ {l:'Leve, sin riesgo para la extremidad, Charlson < 3', a:['Manejo ambulatorio, vía oral, 7–14 días','Sin riesgo de SAMR: cefditoreno o amoxicilina-clavulánico (alergia: moxifloxacino, levofloxacino o clindamicina)','Con riesgo de SAMR: ceftriaxona, ciprofloxacino o levofloxacino (ertapenem si BLEE) con cotrimoxazol o linezolid. No usar cotrimoxazol en cuadros muy necróticos o supurativos ni clindamicina sin conocer su sensibilidad']},
+ {l:'Moderada-grave, riesgo para la extremidad o Charlson ≥ 3', a:['Hospitalización, antibiótico iv empírico 2–4 semanas (hasta 6 con osteomielitis)','Moderada: ertapenem, o piperacilina-tazobactam (si riesgo de Pseudomonas), o amoxicilina-clavulánico 2 g/6–8 h iv (sin riesgo de BLEE, Pseudomonas ni SARM) ± linezolid, daptomicina, ceftarolina o vancomicina','Grave: imipenem o meropenem, o piperacilina-tazobactam (si Pseudomonas) + linezolid, daptomicina, ceftarolina o vancomicina','Alternativa: tigeciclina + fluoroquinolona, amikacina o piperacilina-tazobactam','Destino: con isquemia, Cirugía Vascular; sin isquemia, Endocrinología o Medicina Interna']}]},
+
+{f:'uri', t:'Infección urinaria con sepsis', n:['E. coli es lo más frecuente, pero las BLEE son cada vez más prevalentes. Con edad > 65 años, hospitalización reciente, antibiótico previo o instrumentación urinaria, iniciar un carbapenémico hasta tener microbiología.'], r:[
+ {l:'Sin factores de riesgo de multirresistentes', a:['Ceftriaxona 2 g/24 h iv o cefotaxima 1–2 g/8 h','± gentamicina 5 mg/kg/día o amikacina 15–20 mg/kg/día (dosis única, infusión ≥ 30 min; contraindicada en gestantes)','Alternativa a cefalosporinas: fosfomicina disódica 6 g/8 h iv','Alérgicos: gentamicina o amikacina en dosis única diaria hasta antibiograma']},
+ {l:'Con factores de riesgo y sepsis grave o shock', a:['BLEE: ertapenem 1 g/24 h iv o fosfomicina disódica 6 g/8 h iv','Pseudomonas: piperacilina-tazobactam 4 g/6 h, ceftazidima 1–2 g/8–12 h, cefepime 1–2 g/8–12 h, ceftolozano-tazobactam 1/0,5 g/8 h, ceftazidima-avibactam 2/0,5 g/8 h o meropenem 2 g/8 h','Enterobacterias multirresistentes: ceftazidima-avibactam o ceftolozano-tazobactam','Enterococcus faecalis: ampicilina 1 g/6 h + amikacina 15–20 mg/kg/día']},
+ {l:'Portador de sonda, doble J, prótesis o válvulas', a:['Vancomicina, teicoplanina, daptomicina o linezolid (cobertura de Enterococcus)']}]},
+
+{f:'uri', t:'Prostatitis aguda', n:[], r:[
+ {l:'Pauta', a:['Ceftriaxona 2 g/24 h iv','+ Gentamicina 4,5–5 mg/kg/día, tobramicina 5–7 mg/kg/día, ciprofloxacino 500 mg/12 h o levofloxacino 500 mg/24 h','(Puede prolongarse 4–6 semanas)']},
+ {l:'Según sospecha', a:['BLEE: ertapenem 1 g/24 h iv','Pseudomonas sin sepsis grave: piperacilina-tazobactam 4 g/6 h, ceftazidima 1–2 g/8–12 h o cefepime 1–2 g/8–12 h','Sepsis grave o multirresistentes: imipenem 0,5–1 g/6–8 h, meropenem 0,5–1 g/6–8 h, ceftolozano-tazobactam 1/0,5 g/8 h o ceftazidima-avibactam 2/0,5 g/8 h']}]},
+
+{f:'abd', t:'Infección intraabdominal', n:['Requiere cobertura frente a anaerobios y enterobacterias. Peritonitis postoperatoria o nutrición parenteral prolongada: valorar antifúngico.'], r:[
+ {l:'Sin factores de mala evolución', a:['Piperacilina-tazobactam o ertapenem','± fluconazol o tigeciclina','(Alternativa: ceftriaxona + metronidazol)']},
+ {l:'Con factores de mala evolución', a:['Imipenem o meropenem, o ceftolozano-tazobactam 1–2 g/0,5–1 g/8 h, o ceftazidima-avibactam 2 g/0,5 g/8 h','+ Metronidazol 500 mg/8 h iv (con ceftolozano o ceftazidima)','± fluconazol 200–400 mg/24 h o tigeciclina','Candida: caspofungina 50 mg/24 h (1.ª dosis 70 mg) o anidulafungina 100 mg/24 h (1.ª dosis 200 mg)']},
+ {l:'Factores de mala evolución', a:['Edad > 65 años, shock séptico, comorbilidad, peritonitis fecaloidea o mal control del foco, riesgo de BLEE, Pseudomonas, Enterococcus o Candida']}]},
+
+{f:'rf', t:'Enterobacterias BLEE', n:[], r:[
+ {l:'Tratamiento', a:['Ertapenem']},
+ {l:'Factores de riesgo', a:['Hospitalización previa > 15 días','Diabetes, IRC, trasplante renal, hepatopatía avanzada, ITU de repetición','Antibiótico en los 3 meses previos','Sonda nasogástrica o endoscopia terapéutica','Infección previa por enterobacteria BLEE']}]},
+{f:'rf', t:'Pseudomonas spp.', n:[], r:[
+ {l:'Tratamiento', a:['Imipenem/meropenem, o ceftolozano-tazobactam 1–2 g/0,5–1 g/8 h, o ceftazidima-avibactam 2 g/0,5 g/8 h iv','+ Metronidazol 500 mg/8 h','Piperacilina-tazobactam o tigeciclina + amikacina, o tigeciclina + cefepime 2 g/8 h']},
+ {l:'Factores de riesgo', a:['Infección intraabdominal nosocomial','Antibiótico previo, neutropenia','CPRE o drenaje biliar previos']}]},
+{f:'rf', t:'Enterococcus spp.', n:[], r:[
+ {l:'Tratamiento', a:['Daptomicina + linezolid + vancomicina (según la diapositiva)']},
+ {l:'Factores de riesgo', a:['Inmunodeprimidos, trasplantados de órgano sólido','Tratamiento de rescate de infección intraabdominal','Valvulopatía u otro factor de riesgo de endocarditis','Origen colónico o postoperatorio']}]},
+{f:'rf', t:'Candida', n:[], r:[
+ {l:'Tratamiento', a:['Fluconazol 200–400 mg/24 h','En shock séptico o fluconazol previo: caspofungina 50 mg/24 h (1.ª dosis 70 mg) o anidulafungina 100 mg/24 h (1.ª dosis 200 mg)']},
+ {l:'Factores de riesgo', a:['Infección intraabdominal postoperatoria de foco gastroduodenal','Levaduras en la tinción de Gram','Puntuación ≥ 3: cirugía (1), nutrición parenteral (1), colonización multifocal (1), sepsis grave (2)']}]}
+];
+
+/* ================= PREGUNTAS Y RESPUESTAS ================= */
+/* k: palabras clave extra; s: sección de origen */
+const KB = [
+ {q:'¿Cuándo se activa el Código Sepsis en el hospital?', s:'Activación del Código Sepsis', k:'activar activacion hora cero criterios codigo', a:'Cuando hay impresión clínica de infección + <b>NEWS2 ≥ 7</b> + <b>Rankin &lt; 3</b>. Ese momento es la <b>Hora 0</b>. Los criterios ampliados exigen sospecha de infección y además disfunción orgánica (SOFA ≥ 2 o NEWS2 ≥ 5), lactato &gt; 2 mmol/L o hipotensión persistente tras fluidos.'},
+ {q:'¿Qué es la Hora 0?', s:'Activación del Código Sepsis', k:'hora cero hora de oro primera hora', a:'El momento en que se establece la sospecha de sepsis y se inicia el paquete de medidas apoyado en las escalas. Desde ahí cuenta la primera hora («hora de oro»).'},
+ {q:'¿Cuándo NO se activa el Código Sepsis? Criterios de exclusión', s:'Activación del Código Sepsis', k:'exclusion excluir terminal paliativo rankin dependencia calidad de vida', a:'<ul><li>Enfermedad en situación terminal o pronóstico vital limitado a corto plazo.</li><li>Mala calidad de vida o alta dependencia (Rankin &gt; 3).</li></ul>Ojo: con Rankin 3 el protocolo no lo aclara; decide con criterio clínico.'},
+ {q:'¿Qué hago en la primera hora? Paquete de la Hora Cero', s:'Activación del Código Sepsis', k:'paquete bundle primera hora medidas que hacer', a:'<ul><li>Medir lactato y repetir si &gt; 2 mmol/L.</li><li>Hemocultivos antes del antibiótico, sin retrasarlo.</li><li>Antibiótico empírico de amplio espectro iv en la primera hora.</li><li>Cristaloides 30 ml/kg en bolos si hipotensión o lactato ≥ 4.</li><li>Vasopresores si PAM &lt; 65 tras fluidos.</li><li>Oxígeno para SpO₂ ≥ 94 %.</li><li>Reevaluar cada 30–60 min.</li></ul>'},
+ {q:'¿Qué puntuación NEWS2 implica alto riesgo y qué hago con el antibiótico?', s:'Escalas', k:'news2 news puntuacion riesgo alto moderado bajo antibiotico tiempo', a:'<ul><li><b>≥ 7</b> riesgo alto: antibiótico iv de amplio espectro en menos de 1 hora.</li><li><b>5–6</b> riesgo moderado: se puede diferir hasta 3 h para afinar el diagnóstico.</li><li><b>1–4</b> riesgo bajo: se puede diferir hasta 6 h mientras se recopila información.</li><li><b>0</b> riesgo muy bajo.</li></ul>Un 3 en un solo parámetro exige revisión prioritaria.'},
+ {q:'¿Una puntuación NEWS2 baja descarta sepsis?', s:'Escalas', k:'news2 baja descarta limitaciones 48', a:'No. Casi la mitad (48,2 %) de los pacientes que necesitaban tratamiento urgente tenían NEWS2 ≤ 4. La escala complementa el juicio clínico y nunca lo sustituye.'},
+ {q:'¿Sirve el qSOFA para activar el Código Sepsis?', s:'Escalas', k:'qsofa quick sofa activar cribado', a:'No debe usarse solo para activar el Código. Es rápido y no requiere laboratorio, pero tiene baja sensibilidad en geriátricos y pacientes con comorbilidades. Dos o más criterios indican alerta y necesidad de evaluación completa. Las últimas guías prefieren NEWS2.'},
+ {q:'¿Qué es el SOFA y cuándo hay sepsis según él?', s:'Escalas', k:'sofa disfuncion organica puntos', a:'Puntúa 0–4 por órgano (respiratorio, coagulación, hepático, cardiovascular, neurológico, renal). Hay sepsis con un aumento ≥ 2 puntos sobre el basal. Requiere laboratorio, por eso no siempre está disponible en los primeros minutos.'},
+ {q:'¿Cómo se define la sepsis y el shock séptico?', s:'Impacto y definiciones', k:'definicion sepsis 3 shock septico sepsis-3 concepto', a:'<b>Sepsis:</b> disfunción orgánica potencialmente mortal por una respuesta desregulada del huésped a la infección (Sepsis-3). <b>Shock séptico:</b> necesidad de vasopresores para mantener PAM ≥ 65 mmHg y lactato &gt; 2 mmol/L pese a una buena resucitación con fluidos.'},
+ {q:'¿Qué niveles de lactato son relevantes?', s:'ABCDE / Criterios', k:'lactato acido lactico hipoperfusion 2 4 repetir cada horas', a:'<ul><li><b>≥ 2 mmol/L:</b> hipoperfusión tisular, aunque la tensión sea normal.</li><li><b>≥ 4 mmol/L:</b> mayor mortalidad; indica 30 ml/kg de cristaloides y manejo intensivo.</li><li>Medir al inicio y repetir a las 2–4 h para valorar la respuesta.</li></ul>'},
+ {q:'¿Qué fluidos uso y cuánto volumen?', s:'Fluidoterapia', k:'fluidos liquidos cristaloides suero ringer volumen 30 ml kg bolos reanimacion', a:'<ul><li>Cristaloides <b>balanceados</b> (Ringer lactato, Plasma-Lyte) mejor que suero salino 0,9 %.</li><li>30 ml/kg en las primeras 3 h si hipotensión o lactato ≥ 4 (70 kg → 2.100 ml).</li><li>La SSC 2021 propone volumen guiado por respuesta: 10–20 ml/kg en bolos.</li><li>Bolos de 250–500 ml (5 ml/kg) en 10–15 min, reevaluando tras cada uno.</li></ul>'},
+ {q:'¿Por qué evitar el suero salino fisiológico?', s:'Fluidoterapia', k:'suero salino fisiologico ssf cloro acidosis hiperclorémica renal', a:'Su cloro es muy superior al plasmático: provoca hipercloremia y acidosis metabólica hiperclorémica, empeora la función renal y la hemodinamia, y aumenta la inflamación y el edema intersticial.'},
+ {q:'¿Cuándo dejo de poner fluidos?', s:'Fluidoterapia', k:'parar fluidos sobrecarga congestion respuesta no responde', a:'Si tras el bolo no mejoran PAM, lactato, diuresis o perfusión, o hay signos de congestión: parar fluidos y pasar a vasopresores. Antes, descarta causa obstructiva o cardiogénica. No sigas dando volumen a ciegas; usa ecografía (VCI, función cardíaca) si hay riesgo de sobrecarga.'},
+ {q:'¿Qué objetivos tiene la reanimación?', s:'Fluidoterapia', k:'objetivos pam diuresis relleno capilar scvo2 metas', a:'PAM ≥ 65 mmHg, lactato en descenso, diuresis ≥ 0,5 ml/kg/h, relleno capilar &lt; 3 s y ScvO₂ ≥ 70 %.'},
+ {q:'¿Cuándo pongo noradrenalina y a qué dosis?', s:'Vasopresores', k:'noradrenalina norepinefrina vasopresor dosis pam 65 periferica central', a:'<ul><li>Si PAM &lt; 65 mmHg tras fluidos adecuados, o hipotensión con hipoperfusión, o intolerancia a fluidos.</li><li>Dosis inicial 0,05–0,1 µg/kg/min; habitual 0,1–1 µg/kg/min; meta PAM ≥ 65.</li><li>Puede iniciarse por vía periférica proximal mientras se canaliza una central, vigilando extravasación.</li></ul>'},
+ {q:'¿Y si la noradrenalina no basta?', s:'Vasopresores', k:'vasopresina adrenalina dobutamina hidrocortisona angiotensina refractario', a:'Añadir vasopresina 0,03 U/min; considerar adrenalina. Con disfunción miocárdica, dobutamina (más arritmias). En shock refractario valorar hidrocortisona 200 mg/día y angiotensina II de rescate.'},
+ {q:'¿Cuándo uso corticoides?', s:'Medidas complementarias', k:'corticoides hidrocortisona esteroides shock refractario', a:'En shock refractario (PAM &lt; 65 pese a fluidos y vasopresores), noradrenalina &gt; 0,5–1 µg/kg/min mantenida o sospecha de insuficiencia suprarrenal relativa. Hidrocortisona 200 mg iv/día (50 mg/6 h o perfusión), 5–7 días o hasta retirar vasopresores. Acorta el shock; no demuestra beneficio en mortalidad.'},
+ {q:'¿Cuándo extraigo hemocultivos y cuánto puedo esperar?', s:'Antibioterapia', k:'hemocultivos cultivos muestras antes antibiotico 45 minutos demora', a:'Siempre antes del antibiótico (al menos 2 tandas, periféricos y/o de catéter, más cultivo del foco) si no retrasa la primera dosis. En el ámbito extrahospitalario se asumen 45 minutos de demora, individualizando.'},
+ {q:'¿Cuándo debe ponerse el antibiótico?', s:'Antibioterapia', k:'antibiotico atb tiempo primera hora 1b amplio espectro', a:'En la primera hora (recomendación 1B), por vía intravenosa, a dosis óptima y preferiblemente en infusión prolongada. Con NEWS2 ≥ 7, en menos de 1 hora; con 5–6 se puede diferir hasta 3 h y con 1–4 hasta 6 h si hace falta afinar el diagnóstico.'},
+ {q:'¿Qué antibiótico pongo en una neumonía con sepsis?', s:'Antibióticos', k:'neumonia nac respiratorio ceftriaxona azitromicina levofloxacino', a:'NAC: ceftriaxona 2 g/24 h (o cefotaxima 2 g/6–8 h o ceftarolina 600 mg/12 h) <b>+</b> azitromicina 500 mg/24 h (o moxifloxacino o levofloxacino), ± linezolid si riesgo de S. aureus, ± oseltamivir en epidemia gripal. Con sospecha de Pseudomonas, un betalactámico antipseudomónico + quinolona o aminoglucósido. Ver pestaña Antibióticos.'},
+ {q:'¿Qué antibiótico en un foco urinario?', s:'Antibióticos', k:'urinario itu orina pielonefritis ertapenem ceftriaxona blee', a:'Sin factores de riesgo: ceftriaxona 2 g/24 h ± gentamicina o amikacina. Con factores de BLEE (&gt; 65 años, hospitalización o antibiótico recientes, instrumentación): ertapenem 1 g/24 h hasta tener microbiología. Con Pseudomonas: piperacilina-tazobactam, cefepime, ceftazidima o meropenem. Con sonda, doble J o prótesis, cubrir Enterococcus.'},
+ {q:'¿Qué antibiótico en foco abdominal?', s:'Antibióticos', k:'abdominal intraabdominal peritonitis piperacilina metronidazol', a:'Cobertura de anaerobios y enterobacterias: piperacilina-tazobactam o ertapenem (o ceftriaxona + metronidazol). Con factores de mala evolución: imipenem/meropenem (o ceftolozano o ceftazidima-avibactam + metronidazol). Valorar antifúngico en peritonitis postoperatoria o nutrición parenteral prolongada.'},
+ {q:'¿Qué antibiótico en infección de piel y partes blandas?', s:'Antibióticos', k:'piel partes blandas ippb celulitis fascitis necrotizante sarm', a:'Necrotizante: piperacilina-tazobactam o meropenem + daptomicina, linezolid o vancomicina (+ clindamicina según pauta), con desbridamiento quirúrgico precoz. No necrotizante: cefalosporina o amoxicilina-clavulánico; con riesgo de SAMR, clindamicina, doxiciclina o cotrimoxazol; con ingreso y SAMR, linezolid, daptomicina o ceftarolina.'},
+ {q:'¿Qué antibiótico en shock séptico de foco desconocido?', s:'Antibióticos', k:'shock septico foco desconocido meropenem imipenem daptomicina vancomicina alergia betalactamicos', a:'Meropenem 1–2 g/8 h o imipenem 1 g/6 h + daptomicina 6–10 mg/kg/24 h o vancomicina 15–20 mg/kg/8–12 h ± aminoglucósido si hubo antibiótico previo. En alérgicos a betalactámicos: tigeciclina 100 mg/12 h + amikacina 15–20 mg/kg/24 h ± fluoroquinolona.'},
+ {q:'¿Cuándo añado cobertura frente a SARM?', s:'Antibioterapia', k:'sarm mrsa vancomicina linezolid anti-mrsa', a:'Con factores de riesgo o signos compatibles: neumonía necrosante, infección dérmica grave, dispositivos. Opciones: vancomicina, linezolid (también daptomicina o ceftarolina según el foco).'},
+ {q:'¿Cuándo uso antifúngicos?', s:'Antibioterapia', k:'antifungico candida fluconazol caspofungina anidulafungina equinocandina', a:'En no neutropénicos no se usan de rutina; solo con sospecha o colonización múltiple por Candida (p. ej. peritonitis postoperatoria, nutrición parenteral prolongada). Fluconazol 200–400 mg/24 h; en shock o fluconazol previo, caspofungina o anidulafungina.'},
+ {q:'¿Qué es el antibiotic time-out?', s:'Antibioterapia', k:'time-out desescalada desescalar suspender 24 48 reevaluacion duracion', a:'La reevaluación clínica y microbiológica a las 24–48 h. Cultivos negativos y sospecha débil: suspender. Patógeno sensible: reducir espectro, dosis y duración. El lactato y la procalcitonina pueden ayudar a decidir la suspensión.'},
+ {q:'¿Qué factores de riesgo hacen pensar en BLEE?', s:'Antibióticos', k:'blee ertapenem factores riesgo enterobacterias', a:'Hospitalización previa &gt; 15 días, diabetes, IRC, trasplante renal, hepatopatía avanzada, ITU de repetición, antibiótico en los 3 meses previos, sonda nasogástrica, endoscopia terapéutica o infección previa por BLEE. Tratamiento: ertapenem.'},
+ {q:'¿Cuál es el enfoque ABCDE?', s:'ABCDE', k:'abcde via aerea respiracion circulacion neurologico exposicion', a:'<ul><li><b>A</b> vía aérea permeable; IOT si compromiso o Glasgow ≤ 8.</li><li><b>B</b> FR y SpO₂; objetivo ≥ 94 %.</li><li><b>C</b> TA, FC, relleno, lactato; fluidos y vasopresores.</li><li><b>D</b> Glasgow o AVPU y glucemia.</li><li><b>E</b> exponer y buscar foco; cultivos y antibiótico.</li></ul>'},
+ {q:'¿Qué hago con la vía aérea antes de intubar a un paciente séptico?', s:'ABCDE', k:'intubar iot intubacion via aerea glasgow 8 hipotension', a:'Si hay compromiso respiratorio o Glasgow ≤ 8, valorar IOT y ventilación mecánica. Anticipa que la hipotensión y la hipoperfusión complican la intubación: prepara fluidos y vasopresores antes del procedimiento.'},
+ {q:'¿Cuál es el objetivo de saturación de oxígeno?', s:'ABCDE', k:'saturacion spo2 oxigeno oxigenoterapia 94 epoc', a:'SpO₂ ≥ 94 %. En EPOC o hipercapnia la escala 2 de NEWS2 considera objetivo 88–92 %.'},
+ {q:'¿Cuándo hay que controlar el foco infeccioso?', s:'Medidas complementarias', k:'foco control drenaje cirugia 6 12 horas desbridamiento retirar catéter', a:'En las primeras <b>6–12 h</b>, con la técnica menos invasiva y más eficaz (drenaje percutáneo o cirugía abdominal, drenaje pleural, nefrostomía o cambio de sonda, desbridamiento, retirada de dispositivos). Sin control del foco la mortalidad supera el 50 %. No retrases la cirugía en un paciente inestable.'},
+ {q:'¿Qué objetivo de glucemia tengo en sepsis?', s:'Medidas complementarias', k:'glucemia glucosa insulina control glucemico 140 180', a:'140–180 mg/dL con insulina iv según protocolo. Evita el control intensivo (&lt; 110) por riesgo de hipoglucemia. Controles cada 1–2 h en fase crítica. Corrige glucemias &lt; 70 mg/dL.'},
+ {q:'¿Cuándo trato la fiebre?', s:'Medidas complementarias', k:'fiebre temperatura paracetamol antitermico', a:'Solo si Tª &gt; 39 °C o malestar significativo, con paracetamol o medios físicos. La fiebre moderada (≤ 38,5 °C) puede potenciar la respuesta inmune.'},
+ {q:'¿Qué profilaxis tromboembólica pongo?', s:'Medidas complementarias', k:'tromboprofilaxis heparina enoxaparina hbpm trombosis tev', a:'Obligatoria salvo contraindicación. Enoxaparina 40 mg sc/24 h (ClCr &lt; 30: 20 mg/24 h; obesidad mórbida: 40 mg/12 h). Heparina no fraccionada 5.000 UI sc/8 h si insuficiencia renal avanzada o sangrado previo. Medias o compresión intermitente si hay contraindicación farmacológica.'},
+ {q:'¿Cuándo hago profilaxis gástrica?', s:'Medidas complementarias', k:'profilaxis gastrica omeprazol pantoprazol ibp ulcera estres', a:'Con ventilación mecánica &gt; 48 h, coagulopatía (INR &gt; 1,5 o plaquetas &lt; 50.000), shock prolongado o dosis altas de vasopresores, o antecedente de úlcera o sangrado. Omeprazol 40 mg iv/24 h o pantoprazol 40 mg iv/12–24 h. Retirar cuando desaparezca el riesgo.'},
+ {q:'¿Cuándo transfundir hematíes?', s:'Medidas complementarias', k:'transfusion hematies hemoglobina hb concentrado', a:'Estrategia restrictiva: con Hb ≤ 7 g/dL, con objetivo de 7–9. Con shock hemorrágico, isquemia miocárdica activa o hipoxia tisular refractaria se pueden considerar umbrales de 8–9 g/dL.'},
+ {q:'¿Para qué sirve la ecografía (RUSH) en el shock?', s:'Medidas complementarias', k:'ecografia pocus rush himap vci', a:'Evalúa la causa del shock y la respuesta a la reanimación. HI-MAP: Heart, IVC, Morrison/FAST, Aorta, Pulmonary. En el shock séptico (distributivo): contractilidad conservada o aumentada, VCI dilatada y poco colapsable, sin hipovolemia ni taponamiento.'},
+ {q:'¿Cuándo valoro ingreso en UCI?', s:'Activación del Código Sepsis', k:'uci intensivos ingreso critico valoracion', a:'NEWS2 ≥ 7 o deterioro progresivo hasta 7; hipotensión o hiperlactacidemia persistente en las primeras horas; necesidad de vasoactivos; disfunción grave, persistente o progresiva de órganos; deterioro clínico progresivo.'},
+ {q:'¿Qué es el EtCO₂ y para qué sirve?', s:'Escalas', k:'etco2 capnografia capnografía prehospitalario', a:'Valores bajos (&lt; 24,5 mmHg) junto con otros signos orientan precozmente a gravedad. Correlaciona bien con HCO₃ y pCO₂ y débilmente (inversa) con lactato. Si no se pueden seriar analíticas en el medio prehospitalario, monitorizar con EtCO₂.'},
+ {q:'¿Qué hago en el medio extrahospitalario?', s:'Activación del Código Sepsis', k:'extrahospitalario prehospitalario suap 061 ambulancia', a:'Activar «Código Sospecha de Sepsis» con sospecha clínica + NEWS2 ≥ 7 + Rankin &lt; 3 y marcar la Hora Cero. Monitorizar y registrar constantes (incluidos EtCO₂, glucemia, Glasgow), escalas, gasometría venosa con lactato, hemocultivos, vía periférica y sondaje urinario, e iniciar el paquete de medidas.'},
+ {q:'¿Qué factores de riesgo aumentan la sospecha de sepsis?', s:'Criterios de sospecha', k:'factores riesgo ancianos inmunosupresion institucionalizado esplenectomizado oncologico', a:'Edad avanzada, institucionalización, ingreso o cirugía reciente, antibiótico reciente, oncológicos con quimioterapia, dispositivos intravasculares, sonda vesical permanente, técnicas invasivas recientes, inmunosupresión o corticoides, esplenectomía y comorbilidades crónicas (DM, EPOC, IRC, cáncer).'},
+ {q:'¿Qué signos de disfunción orgánica debo buscar?', s:'Criterios de sospecha', k:'disfuncion organica signos neurologico renal cardiovascular respiratorio hepatico oliguria', a:'<ul><li>Neurológico: confusión, somnolencia, Glasgow &lt; 13.</li><li>Renal: oliguria &lt; 0,5 ml/kg/h 2 h o creatinina +0,3 mg/dL.</li><li>Cardiovascular: PAS &lt; 90 o PAM &lt; 65 persistente.</li><li>Respiratorio: SatO₂ &lt; 90 % o necesidad de O₂.</li><li>Hepático: bilirrubina &gt; 2 mg/dL.</li></ul>'},
+ {q:'¿Qué es la mortalidad extendida y el síndrome post-sepsis?', s:'Cuidados postagudos', k:'mortalidad extendida postsepsis post-sepsis alta supervivientes', a:'Aproximadamente 1 de cada 3 supervivientes fallece en el primer año. El síndrome post-sepsis cursa con debilidad, neuropatía, inmunodepresión y alteraciones cognitivas. Se previene con fisioterapia temprana, nutrición, uso racional de antibióticos (PROA), rehabilitación, control glucémico y detección precoz del delirio.'},
+ {q:'¿Qué es la inmunotrombosis y la inmunoparálisis?', s:'Impacto y definiciones', k:'inmunotrombosis inmunoparalisis fisiopatologia cid linfopenia inflamasoma', a:'Dos ejes del daño celular. <b>Inmunotrombosis:</b> estado procoagulante con inflamación + coagulación → CID. <b>Inmunoparálisis:</b> inmunosupresión profunda con apoptosis masiva y linfopenia; explica las infecciones nosocomiales y la mortalidad tardía.'}
+];
+
+/* ================= CIFRAS CLAVE ================= */
+const KEYS = [
+ ['NEWS2 ≥ 7','Riesgo alto. Activa el Código con infección y Rankin < 3'],
+ ['< 1 h','Antibiótico iv de amplio espectro'],
+ ['≤ 45 min','Demora asumible para hemocultivos'],
+ ['30 ml/kg','Cristaloides si hipotensión o lactato ≥ 4'],
+ ['PAM ≥ 65','Objetivo de perfusión'],
+ ['> 2 / ≥ 4','Lactato: hipoperfusión / mayor mortalidad'],
+ ['SpO₂ ≥ 94 %','Objetivo de oxigenación'],
+ ['0,05–0,1','µg/kg/min: dosis inicial de noradrenalina'],
+ ['6–12 h','Control del foco'],
+ ['24–48 h','Antibiotic time-out'],
+ ['30–60 min','Reevaluación hemodinámica'],
+ ['2–4 h','Repetir lactato'],
+ ['140–180','Glucemia objetivo (mg/dL)'],
+ ['Hb ≤ 7','Umbral de transfusión (g/dL)'],
+ ['200 mg/día','Hidrocortisona en shock refractario'],
+ ['< 24,5','EtCO₂ de gravedad (mmHg)']
+];
+
+/* ================= TEST ================= */
+const QUIZ = [
+ {q:'Con NEWS2 ≥ 7, ¿en cuánto tiempo debe administrarse el antibiótico iv de amplio espectro?', o:['En menos de 1 hora','Hasta 3 horas','Hasta 6 horas','Tras el resultado de cultivos'], c:0, e:'NEWS2 ≥ 7 es riesgo alto: antibiótico en menos de 1 hora. Con 5–6 se puede diferir hasta 3 h y con 1–4 hasta 6 h.'},
+ {q:'¿Qué combinación define la Hora 0 del Código Sepsis hospitalario?', o:['qSOFA ≥ 2 y fiebre','Impresión de infección + NEWS2 ≥ 7 + Rankin < 3','Lactato > 2 y leucocitosis','PCT > 0,5 y PCR elevada'], c:1, e:'Infección sospechada, NEWS2 ≥ 7 y Rankin < 3. El qSOFA no debe usarse solo para activar el Código.'},
+ {q:'¿Cuál es un criterio de exclusión del Código Sepsis?', o:['Edad > 65 años','Diabetes mellitus','Rankin > 3 o enfermedad terminal','Lactato > 4'], c:2, e:'Se excluye a pacientes terminales o con pronóstico limitado y a los muy dependientes (Rankin > 3).'},
+ {q:'¿Qué volumen inicial de cristaloides se indica con hipotensión o lactato ≥ 4 mmol/L?', o:['10 ml/kg','20 ml/kg','30 ml/kg','50 ml/kg'], c:2, e:'30 ml/kg en las primeras 3 h, en bolos con reevaluación (70 kg → 2.100 ml).'},
+ {q:'¿Qué fluido se prefiere en la reanimación inicial?', o:['Suero salino 0,9 %','Cristaloides balanceados','Coloides sintéticos','Suero glucosado'], c:1, e:'Ringer lactato o Plasma-Lyte: menos acidosis hiperclorémica y menos fracaso renal que el salino.'},
+ {q:'¿Cuál es el vasopresor de primera elección?', o:['Dopamina','Dobutamina','Noradrenalina','Adrenalina'], c:2, e:'Noradrenalina, con PAM objetivo ≥ 65 mmHg. Puede iniciarse por vía periférica proximal mientras se canaliza una central.'},
+ {q:'¿Cómo se define el shock séptico en el protocolo?', o:['Fiebre y taquicardia','Vasopresores para PAM ≥ 65 y lactato > 2 pese a fluidos','Lactato > 2 sin hipotensión','NEWS2 ≥ 5'], c:1, e:'Necesidad de vasopresores para mantener PAM ≥ 65 mmHg y lactato > 2 mmol/L pese a una resucitación adecuada.'},
+ {q:'¿Qué demora se considera asumible para extraer hemocultivos antes del antibiótico?', o:['5 minutos','15 minutos','45 minutos','2 horas'], c:2, e:'Se establecen 45 minutos como demora asumible, individualizando según la situación clínica.'},
+ {q:'¿En qué plazo debe controlarse el foco infeccioso?', o:['0–1 h','6–12 h','24 h','48–72 h'], c:1, e:'Primeras 6–12 horas, con la técnica menos invasiva y más eficaz.'},
+ {q:'¿Cuál es el umbral restrictivo de transfusión de hematíes?', o:['Hb ≤ 5 g/dL','Hb ≤ 7 g/dL','Hb ≤ 9 g/dL','Hb ≤ 10 g/dL'], c:1, e:'Hb ≤ 7 g/dL, con objetivo postransfusión de 7–9. Excepciones: shock hemorrágico, isquemia miocárdica activa o hipoxia refractaria.'},
+ {q:'¿Qué objetivo de glucemia se recomienda?', o:['< 110 mg/dL','80–110 mg/dL','140–180 mg/dL','> 200 mg/dL'], c:2, e:'140–180 mg/dL. El control intensivo (< 110) aumenta hipoglucemia y mortalidad.'},
+ {q:'¿Qué pauta corresponde a una NAC con sepsis?', o:['Ceftriaxona + azitromicina','Ertapenem en monoterapia','Cefalexina oral','Meropenem + fluconazol'], c:0, e:'Betalactámico (ceftriaxona, cefotaxima o ceftarolina) + macrólido (o quinolona). Mejora la supervivencia.'},
+ {q:'¿Cuándo se indica hidrocortisona?', o:['En toda sepsis','Con PAM > 65','En shock refractario a fluidos y vasopresores','Solo en la fase postaguda'], c:2, e:'Shock refractario o noradrenalina alta mantenida: 200 mg/día, 5–7 días. Acorta el shock sin beneficio demostrado en mortalidad.'},
+ {q:'¿Qué indica una puntuación de 3 en un único parámetro NEWS2?', o:['Nada relevante','Revisión prioritaria','Alta segura','Activar siempre el Código'], c:1, e:'Aumenta el riesgo de disfunción orgánica y requiere revisión prioritaria, aunque el total sea bajo.'},
+ {q:'¿Cuándo se hace el «antibiotic time-out»?', o:['A los 30 min','A las 6 h','A las 24–48 h','A los 7 días'], c:2, e:'Reevaluación clínica y microbiológica a las 24–48 h: mantener, desescalar o suspender.'},
+ {q:'Lactato ≥ 4 mmol/L: ¿qué significa?', o:['Valor normal','Hipoperfusión leve','Mayor mortalidad; indica 30 ml/kg y manejo intensivo','Solo vigilar'], c:2, e:'≥ 2 es hipoperfusión tisular; ≥ 4 se asocia a mayor mortalidad y exige manejo intensivo.'}
+];
+/* ================= UTILIDADES ================= */
+const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const num = (id) => { const el = $(id); if (!el || el.value === '') return null; const n = parseFloat(String(el.value).replace(',', '.')); return isNaN(n) ? null : n; };
+const pad = (n) => String(n).padStart(2, '0');
+const fmtHM = (ms) => { const d = new Date(ms); return pad(d.getHours()) + ':' + pad(d.getMinutes()); };
+const fmtDT = (ms) => { const d = new Date(ms); return pad(d.getDate()) + '/' + pad(d.getMonth() + 1) + '/' + d.getFullYear() + ' ' + fmtHM(ms); };
+const fmtDur = (ms) => { const s = Math.max(0, Math.floor(ms / 1000)); return pad(Math.floor(s / 3600)) + ':' + pad(Math.floor(s % 3600 / 60)) + ':' + pad(s % 60); };
+const norm = (s) => String(s).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
+const stripHtml = (h) => { const d = document.createElement('div'); d.innerHTML = h; return d.textContent || ''; };
+const r1 = (n) => Math.round(n * 10) / 10;
+let toastT;
+function toast(msg) { const t = $('toast'); t.textContent = msg; t.hidden = false; clearTimeout(toastT); toastT = setTimeout(() => { t.hidden = true; }, 3200); }
+
+/* ================= TEMA Y PESTAÑAS ================= */
+function applyTheme(t) { if (t) document.documentElement.setAttribute('data-theme', t); else document.documentElement.removeAttribute('data-theme'); }
+try { const t = localStorage.getItem('sepsis-theme'); if (t === 'dark' || t === 'light') applyTheme(t); } catch (e) {}
+$('themeBtn').addEventListener('click', () => {
+  const cur = document.documentElement.getAttribute('data-theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+  const next = cur === 'dark' ? 'light' : 'dark'; applyTheme(next);
+  try { localStorage.setItem('sepsis-theme', next); } catch (e) {}
+});
+const VIEWS = ['paciente', 'protocolo', 'antibioticos', 'preguntar', 'repasar'];
+function showView(v, push) {
+  if (!VIEWS.includes(v)) v = 'paciente';
+  VIEWS.forEach((n) => { $('view-' + n).hidden = n !== v; $('tab-' + n).setAttribute('aria-selected', String(n === v)); });
+  if (push) { try { history.replaceState(null, '', '#' + v); } catch (e) { try { location.hash = v; } catch (e2) {} } }
+  window.scrollTo(0, 0);
+}
+document.querySelectorAll('.tab').forEach((b) => b.addEventListener('click', () => showView(b.dataset.view, true)));
+
+/* ================= NEWS2 ================= */
+function newsParts() {
+  const rr = num('vRR'), sp = num('vSpO2'), sbp = num('vSBP'), hr = num('vHR'), t = num('vTemp');
+  const o2 = $('vO2').checked, copd = $('vCOPD').checked, cons = $('vCons').value;
+  const P = [];
+  const add = (k, label, shown, pts) => P.push({ k, label, shown, pts });
+  if (rr !== null) add('rr', 'Frecuencia respiratoria', rr + ' rpm', rr <= 8 ? 3 : rr <= 11 ? 1 : rr <= 20 ? 0 : rr <= 24 ? 2 : 3);
+  if (sp !== null) {
+    let p;
+    if (copd) { p = sp <= 83 ? 3 : sp <= 85 ? 2 : sp <= 87 ? 1 : sp <= 92 ? 0 : (o2 ? (sp <= 94 ? 1 : sp <= 96 ? 2 : 3) : 0); }
+    else { p = sp <= 91 ? 3 : sp <= 93 ? 2 : sp <= 95 ? 1 : 0; }
+    add('sp', 'SpO₂' + (copd ? ' (escala 2)' : ''), sp + ' %', p);
+  }
+  add('o2', 'Oxígeno suplementario', o2 ? 'Sí' : 'Aire ambiente', o2 ? 2 : 0);
+  if (sbp !== null) add('sbp', 'TA sistólica', sbp + ' mmHg', sbp <= 90 ? 3 : sbp <= 100 ? 2 : sbp <= 110 ? 1 : sbp <= 219 ? 0 : 3);
+  if (hr !== null) add('hr', 'Frecuencia cardíaca', hr + ' lpm', hr <= 40 ? 3 : hr <= 50 ? 1 : hr <= 90 ? 0 : hr <= 110 ? 1 : hr <= 130 ? 2 : 3);
+  add('cons', 'Nivel de conciencia', cons === 'A' ? 'Alerta' : ({C:'Confusión nueva',V:'Voz',P:'Dolor',U:'Sin respuesta'})[cons], cons === 'A' ? 0 : 3);
+  if (t !== null) add('t', 'Temperatura', t + ' °C', t <= 35 ? 3 : t <= 36 ? 1 : t <= 38 ? 0 : t <= 39 ? 1 : 2);
+  const present = ['rr', 'sp', 'sbp', 'hr', 't'].filter((k) => P.some((p) => p.k === k)).length;
+  const total = P.reduce((a, p) => a + p.pts, 0);
+  return { P, total, missing: 5 - present, any: present > 0, any3: P.some((p) => p.pts === 3) };
+}
+function riskOf(total) {
+  if (total >= 7) return { l: 'alto', name: 'Riesgo alto', sub: 'Antibiótico iv de amplio espectro en menos de 1 hora.' };
+  if (total >= 5) return { l: 'mod', name: 'Riesgo moderado', sub: 'Se puede diferir el antibiótico hasta 3 h para obtener un diagnóstico más específico.' };
+  if (total >= 1) return { l: 'bajo', name: 'Riesgo bajo', sub: 'Se puede diferir el antibiótico hasta 6 h mientras se recopila más información.' };
+  return { l: 'muybajo', name: 'Riesgo muy bajo', sub: 'Una puntuación baja no descarta la necesidad de tratamiento urgente.' };
+}
+
+/* ================= EVALUACIÓN COMPLETA ================= */
+function evaluate() {
+  const N = newsParts();
+  const sbp = num('vSBP'), dbp = num('vDBP'), rr = num('vRR'), sp = num('vSpO2');
+  const map = (sbp !== null && dbp !== null) ? (sbp + 2 * dbp) / 3 : null;
+  const lact = num('lLact'), gcs = num('vGCS'), urine = num('vUrine');
+  const cr = num('lCr'), crB = num('lCrB'), bili = num('lBili'), plt = num('lPlt'), wbc = num('lWBC'), pct = num('lPCT'), et = num('lEt'), glu = num('vGlu');
+  const cons = $('vCons').value, o2 = $('vO2').checked;
+  const rankin = $('pRankin').value === '' ? null : parseInt($('pRankin').value, 10);
+  const infect = $('pInfect').checked, terminal = $('pTerminal').checked;
+  const hypo = $('cHypo').checked, vaso = $('cVaso').checked, sofa2 = $('cSOFA').checked;
+  const weight = num('pWeight');
+  // qSOFA
+  const q = []; if (rr !== null && rr >= 22) q.push('FR ≥ 22'); if (sbp !== null && sbp <= 100) q.push('TAS ≤ 100'); if (cons !== 'A' || (gcs !== null && gcs < 15)) q.push('Alteración mental');
+  const qHas = rr !== null || sbp !== null || cons !== 'A' || gcs !== null;
+  // disfunción orgánica (según criterios del protocolo)
+  const org = [];
+  if (cons !== 'A' || (gcs !== null && gcs < 13)) org.push('Neurológica');
+  if ((urine !== null && urine < 0.5) || (cr !== null && crB !== null && cr - crB >= 0.3)) org.push('Renal');
+  if ((sbp !== null && sbp < 90) || (map !== null && map < 65)) org.push('Cardiovascular');
+  if ((sp !== null && sp < 90) || o2) org.push('Respiratoria');
+  if (bili !== null && bili > 2) org.push('Hepática');
+  if (plt !== null && plt < 100000) org.push('Hematológica');
+  const lactHigh = lact !== null && lact > 2, lact4 = lact !== null && lact >= 4;
+  const shock = vaso && lact !== null && lact > 2;
+  const needFluids = (sbp !== null && sbp < 90) || (map !== null && map < 65) || lact4;
+  const needVaso = hypo || vaso || (map !== null && map < 65 && isDone('fluid'));
+  // veredicto
+  let v = { cls: '', title: 'Código Sepsis', txt: 'Marca la impresión clínica de infección y completa las constantes.' };
+  const hasNews = N.any;
+  const news = N.total;
+  if (terminal) v = { cls: 'excl', title: 'Código Sepsis no indicado', txt: 'Criterio de exclusión: enfermedad terminal o pronóstico vital limitado. Trata según el plan individualizado.' };
+  else if (rankin !== null && rankin > 3) v = { cls: 'excl', title: 'Código Sepsis no indicado', txt: 'Criterio de exclusión: Rankin > 3 (mala calidad de vida o alta dependencia).' };
+  else if (!infect) v = { cls: '', title: 'Sin sospecha de infección marcada', txt: 'El Código parte de la impresión clínica de infección. Si la hay, márcala arriba.' };
+  else if (hasNews && news >= 7 && rankin !== null && rankin < 3) v = { cls: 'act', title: 'ACTIVAR CÓDIGO SEPSIS', txt: 'Infección + NEWS2 ≥ 7 + Rankin < 3. Marca la Hora 0 y lanza el paquete de la primera hora.' };
+  else if (hasNews && news >= 7 && rankin === null) v = { cls: 'warn', title: 'NEWS2 ≥ 7: falta el Rankin', txt: 'Con Rankin < 3 se activa el Código Sepsis. Indica el Rankin previo.' };
+  else if (hasNews && news >= 7 && rankin === 3) v = { cls: 'warn', title: 'NEWS2 ≥ 7 con Rankin 3', txt: 'El protocolo activa con Rankin < 3 y excluye con > 3. El 3 no está cubierto: decide con criterio clínico. Trata como sepsis de alto riesgo.' };
+  else if ((hasNews && news >= 5) || lactHigh || hypo || sofa2) {
+    const why = []; if (hasNews && news >= 5) why.push('NEWS2 ' + news); if (lactHigh) why.push('lactato > 2'); if (hypo) why.push('hipotensión persistente tras fluidos'); if (sofa2) why.push('SOFA ≥ 2');
+    v = { cls: 'warn', title: 'Cumple criterios ampliados', txt: 'Infección + ' + why.join(', ') + '. Valora activar el Código Sepsis (criterios ampliados) con tu criterio clínico.' };
+  }
+  else if (hasNews) v = { cls: 'ok', title: 'No cumple criterios de activación', txt: 'Reevalúa si cambian las constantes. Un NEWS2 bajo no descarta la necesidad de tratamiento urgente.' };
+  return { N, map, lact, lactHigh, lact4, shock, needFluids, needVaso, q, qHas, org, v, weight, rankin, infect, glu, wbc, pct, et, urine, hypo, vaso, sofa2 };
+}
+
+/* ================= PINTAR RESULTADO ================= */
+let EV = null;
+function ptHtml(p) { return '<span class="pt p' + p + '">' + p + '</span>'; }
+function render() {
+  EV = evaluate();
+  const N = EV.N;
+  let lvl = 'none', big = '–', name = 'Introduce las constantes', sub = 'Puntuación de alerta temprana', chip = 'Sin constantes';
+  if (N.any) {
+    const r = riskOf(N.total); lvl = r.l; big = String(N.total); name = r.name; sub = r.sub;
+    chip = r.name + (N.missing ? ' · faltan ' + N.missing : '');
+  }
+  $('bigScore').dataset.l = lvl; $('bigNum').textContent = big;
+  $('riskTxt').textContent = name; $('riskSub').textContent = sub + (N.any && N.missing ? ' Faltan ' + N.missing + ' constante(s) por introducir.' : '');
+  const chipEl = $('liveChip'); chipEl.dataset.l = lvl === 'muybajo' ? 'bajo' : lvl; $('liveScore').textContent = big; $('liveTxt').textContent = chip;
+  const f3 = $('flag3');
+  const three = N.P.filter((p) => p.pts === 3).map((p) => p.label);
+  f3.hidden = !three.length; f3.textContent = three.length ? 'Puntuación 3 en un parámetro (' + three.join(', ') + '): revisión prioritaria.' : '';
+  const vd = $('verdict'); vd.className = 'verdict ' + EV.v.cls; vd.innerHTML = '<b>' + esc(EV.v.title) + '</b>' + esc(EV.v.txt);
+  $('newsRows').innerHTML = N.P.length ? N.P.map((p) => '<div class="r"><span>' + esc(p.label) + '</span><b>' + esc(p.shown) + ptHtml(p.pts) + '</b></div>').join('') : '<div class="legend">Sin datos todavía.</div>';
+  const o = [];
+  o.push(['qSOFA', EV.qHas ? EV.q.length + '/3' + (EV.q.length ? ' (' + EV.q.join(', ') + ')' : '') + (EV.q.length >= 2 ? ' · alerta' : '') : '—']);
+  if (EV.map !== null) o.push(['PAM', r1(EV.map) + ' mmHg' + (EV.map < 65 ? ' · < 65' : '')]);
+  if (EV.lact !== null) o.push(['Lactato', EV.lact + ' mmol/L' + (EV.lact4 ? ' · ≥ 4, mayor mortalidad' : EV.lactHigh ? ' · hipoperfusión' : ' · normal')]);
+  o.push(['Disfunción orgánica', EV.org.length ? EV.org.join(', ') : (N.any ? 'No detectada' : '—')]);
+  if (EV.wbc !== null) o.push(['Leucocitos', EV.wbc + (EV.wbc > 12000 || EV.wbc < 4000 ? ' · alterado' : ' · normal')]);
+  if (EV.pct !== null) o.push(['Procalcitonina', EV.pct + ' ng/mL' + (EV.pct > 0.5 ? ' · probable bacteriana' : '')]);
+  if (EV.et !== null) o.push(['EtCO₂', EV.et + ' mmHg' + (EV.et < 24.5 ? ' · < 24,5' : '')]);
+  if (EV.glu !== null) o.push(['Glucemia', EV.glu + ' mg/dL' + (EV.glu < 70 ? ' · corregir hipoglucemia' : EV.glu > 180 ? ' · > 180, insulina' : '')]);
+  if (EV.shock) o.push(['Shock séptico', 'Sí · vasopresores + lactato > 2']);
+  $('otherRows').innerHTML = o.map((x) => '<div class="r"><span>' + x[0] + '</span><b>' + esc(x[1]) + '</b></div>').join('');
+  renderCalc(); renderBundleStatus(); updateExport();
+}
+
+/* ================= HORA 0 Y PAQUETE ================= */
+const ST = { h0: null, done: {} };
+function isDone(id) { return !!(ST.done[id]); }
+function buildBundle() {
+  $('bundle').innerHTML = BUNDLE.map((b) => '<div class="b-item" id="bi-' + b.id + '"><input type="checkbox" id="bc-' + b.id + '" aria-labelledby="bt-' + b.id + '"><div class="t" id="bt-' + b.id + '">' + esc(b.t) + '</div><div class="ts" id="bs-' + b.id + '"></div><div class="d">' + esc(b.d) + '</div></div>').join('');
+  BUNDLE.forEach((b) => $('bc-' + b.id).addEventListener('change', (e) => {
+    if (e.target.checked) ST.done[b.id] = Date.now(); else delete ST.done[b.id];
+    renderBundleStatus(); updateExport();
+  }));
+}
+function renderBundleStatus() {
+  const now = Date.now();
+  BUNDLE.forEach((b) => {
+    const it = $('bi-' + b.id), ts = $('bs-' + b.id), done = ST.done[b.id];
+    it.classList.toggle('done', !!done);
+    $('bc-' + b.id).checked = !!done;
+    let txt = '', late = false;
+    if (done) {
+      txt = fmtHM(done);
+      if (ST.h0) { const m = Math.round((done - ST.h0) / 60000); txt += ' · +' + m + ' min'; if (b.lim && m > b.lim) { late = true; txt += ' (fuera de plazo)'; } }
+    } else if (ST.h0 && b.lim) {
+      const left = Math.ceil((ST.h0 + b.lim * 60000 - now) / 60000);
+      if (left >= 0) txt = 'Quedan ' + left + ' min'; else { txt = 'Pasan ' + (-left) + ' min'; late = true; }
+    }
+    ts.textContent = txt; ts.classList.toggle('late', late);
+  });
+  const c = $('clock'), sub = $('clockSub');
+  if (ST.h0) { c.textContent = fmtDur(now - ST.h0); sub.textContent = 'Hora 0: ' + fmtDT(ST.h0); }
+  else { c.textContent = '--:--:--'; sub.textContent = 'Aún sin Hora 0'; }
+  $('h0Btn').hidden = !!ST.h0; $('h0Clear').hidden = !ST.h0;
+}
+setInterval(() => { if (ST.h0) renderBundleStatus(); }, 1000);
+$('h0Btn').addEventListener('click', () => { ST.h0 = Date.now(); renderBundleStatus(); updateExport(); toast('Hora 0 marcada a las ' + fmtHM(ST.h0)); });
+$('h0Clear').addEventListener('click', () => { ST.h0 = null; renderBundleStatus(); updateExport(); });
+function renderCalc() {
+  const w = EV.weight, el = $('calc');
+  let html = '';
+  const recs = [];
+  if (EV.needFluids) recs.push('Cumple criterio de 30 ml/kg (hipotensión o lactato ≥ 4).');
+  if (EV.needVaso) recs.push('Hipotensión persistente o shock: noradrenalina, también por vía periférica proximal.');
+  if (recs.length) html += '<div style="grid-column:1/-1;background:var(--amber-soft);border-color:var(--amber)"><small style="color:var(--amber);font-weight:600">Según los datos introducidos</small>' + recs.map(esc).join('<br>') + '</div>';
+  if (w) {
+    const f = (n) => Math.round(n).toLocaleString('es-ES');
+    html += '<div><small>Cristaloides 30 ml/kg (3 h)</small><b>' + f(w * 30) + ' ml</b></div>' +
+      '<div><small>Primer bolo 5 ml/kg</small><b>' + f(w * 5) + ' ml en 10–15 min</b></div>' +
+      '<div><small>Volumen guiado 10–20 ml/kg</small><b>' + f(w * 10) + '–' + f(w * 20) + ' ml</b></div>' +
+      '<div><small>Diuresis objetivo ≥ 0,5 ml/kg/h</small><b>' + f(w * 0.5) + ' ml/h</b></div>' +
+      '<div><small>Noradrenalina inicial 0,05–0,1 µg/kg/min</small><b>' + r1(w * 0.05) + '–' + r1(w * 0.1) + ' µg/min</b></div>' +
+      '<div><small>Noradrenalina habitual 0,1–1 µg/kg/min</small><b>' + r1(w * 0.1) + '–' + r1(w) + ' µg/min</b></div>';
+  } else html += '<div style="grid-column:1/-1"><small>Introduce el peso para calcular volúmenes y dosis.</small></div>';
+  el.innerHTML = html;
+}
+
+/* ================= EXPORTAR ================= */
+let DL = null;
+(async () => { try { DL = window.claude && window.claude.use ? await window.claude.use('downloads') : null; } catch (e) { DL = null; } setExportUI(); })();
+function setExportUI() {
+  ['exCsv', 'exJson', 'exTxt'].forEach((id) => { $(id).hidden = !DL; });
+  $('exNote').textContent = DL ? 'Se te pedirá confirmar el guardado.' : 'Guardar archivo no disponible aquí. Usa «Copiar informe».';
+}
+function collect() {
+  const g = (id) => { const el = $(id); return el.type === 'checkbox' ? (el.checked ? 'Sí' : 'No') : el.value; };
+  const N = EV.N, r = N.any ? riskOf(N.total) : null;
+  const F = [
+    ['Exportado', fmtDT(Date.now())], ['NHC / identificador', g('pId')], ['Edad', g('pAge')], ['Sexo', g('pSex')], ['Peso kg', g('pWeight')],
+    ['Rankin previo', g('pRankin')], ['Foco sospechado', g('pFocus')], ['Impresión clínica de infección', g('pInfect')], ['Enfermedad terminal', g('pTerminal')],
+    ['Factores de riesgo', Array.from(document.querySelectorAll('#rfBox input:checked')).map((i) => i.dataset.label).join(' | ')],
+    ['FR rpm', g('vRR')], ['SpO2 %', g('vSpO2')], ['O2 suplementario', g('vO2')], ['Escala 2 SpO2 (EPOC)', g('vCOPD')], ['TAS mmHg', g('vSBP')], ['TAD mmHg', g('vDBP')],
+    ['PAM mmHg', EV.map !== null ? String(r1(EV.map)) : ''], ['FC lpm', g('vHR')], ['Temperatura C', g('vTemp')],
+    ['Conciencia', $('vCons').selectedOptions[0].textContent], ['Glasgow', g('vGCS')], ['Glucemia mg/dL', g('vGlu')], ['Diuresis ml/kg/h', g('vUrine')],
+    ['Lactato mmol/L', g('lLact')], ['Leucocitos', g('lWBC')], ['Procalcitonina ng/mL', g('lPCT')], ['PCR mg/L', g('lCRP')], ['Creatinina mg/dL', g('lCr')], ['Creatinina basal mg/dL', g('lCrB')],
+    ['Bilirrubina mg/dL', g('lBili')], ['Plaquetas', g('lPlt')], ['Hemoglobina g/dL', g('lHb')], ['EtCO2 mmHg', g('lEt')],
+    ['SOFA >= 2', g('cSOFA')], ['Hipotension persistente tras fluidos', g('cHypo')], ['Vasopresores', g('cVaso')],
+    ['NEWS2 total', N.any ? String(N.total) + (N.missing ? ' (incompleto, faltan ' + N.missing + ')' : '') : ''], ['NEWS2 riesgo', r ? r.name : ''],
+    ['NEWS2 desglose', N.P.map((p) => p.label + ' ' + p.shown + ' = ' + p.pts).join(' | ')],
+    ['qSOFA', EV.qHas ? EV.q.length + '/3' : ''], ['Disfuncion organica', EV.org.join(' | ')],
+    ['Shock septico', EV.shock ? 'Sí' : 'No'], ['Resultado Codigo Sepsis', EV.v.title], ['Detalle', EV.v.txt],
+    ['Hora 0', ST.h0 ? fmtDT(ST.h0) : '']
+  ];
+  BUNDLE.forEach((b) => { const d = ST.done[b.id]; F.push([b.t, d ? fmtDT(d) + (ST.h0 ? ' (+' + Math.round((d - ST.h0) / 60000) + ' min)' : '') : 'No registrado']); });
+  F.push(['Notas', $('pNotes').value.replace(/\s*\n\s*/g, ' / ')]);
+  return F;
+}
+function reportText() {
+  const F = collect();
+  const L = ['CÓDIGO SEPSIS · URGENCIAS HOSPITAL DE ANTEQUERA', 'Ficha del paciente', '------------------------------------------------'];
+  F.forEach(([k, v]) => { if (v !== '' && v !== undefined) L.push(k + ': ' + v); });
+  L.push('------------------------------------------------', 'Basado en la actualización de sepsis del 04-may-2026. Herramienta de apoyo; no sustituye al juicio clínico.');
+  return L.join('\n');
+}
+function updateExport() { if ($('exPrev')) $('exPrev').value = reportText(); }
+function fname(ext) { const id = ($('pId').value || 'paciente').replace(/[^\wÀ-ÿ-]+/g, '_').slice(0, 30); const d = new Date(); return 'sepsis_' + id + '_' + d.getFullYear() + pad(d.getMonth() + 1) + pad(d.getDate()) + '_' + pad(d.getHours()) + pad(d.getMinutes()) + '.' + ext; }
+async function save(ext, data) {
+  if (!DL) return;
+  try { const r = await DL.save({ filename: fname(ext), data }); toast(r.status === 'saved' ? 'Archivo guardado' : 'Archivo enviado'); }
+  catch (e) { if (e && e.code === 'declined') toast('Guardado cancelado'); else toast('No se pudo guardar el archivo en esta vista'); }
+}
+$('exCsv').addEventListener('click', () => {
+  const F = collect(), q = (s) => '"' + String(s).replace(/"/g, '""') + '"';
+  save('csv', '﻿' + F.map((x) => q(x[0])).join(';') + '\r\n' + F.map((x) => q(x[1])).join(';') + '\r\n');
+});
+$('exJson').addEventListener('click', () => { const o = {}; collect().forEach(([k, v]) => { o[k] = v; }); save('json', JSON.stringify(o, null, 2)); });
+$('exTxt').addEventListener('click', () => save('txt', reportText()));
+$('exCopy').addEventListener('click', async () => {
+  const t = reportText();
+  try { await navigator.clipboard.writeText(t); toast('Informe copiado'); }
+  catch (e) { const p = $('exPrev'); p.focus(); p.select(); toast('Selecciona y copia el texto de la vista previa'); }
+});
+$('newBtn').addEventListener('click', () => { $('newBtn').hidden = true; $('newConfirm').hidden = false; });
+$('newNo').addEventListener('click', () => { $('newBtn').hidden = false; $('newConfirm').hidden = true; });
+$('newYes').addEventListener('click', () => {
+  document.querySelectorAll('#view-paciente input, #view-paciente select, #view-paciente textarea').forEach((el) => {
+    if (el.id === 'exPrev') return;
+    if (el.type === 'checkbox') el.checked = false; else if (el.tagName === 'SELECT') el.selectedIndex = 0; else el.value = '';
+  });
+  ST.h0 = null; ST.done = {};
+  $('newBtn').hidden = false; $('newConfirm').hidden = true; render(); toast('Datos borrados');
+});
+
+/* ================= PROTOCOLO ================= */
+function blockHtml(b) {
+  switch (b.t) {
+    case 'h': return '<h4>' + esc(b.x) + '</h4>';
+    case 'p': return '<p>' + b.x + '</p>';
+    case 'ul': return '<ul>' + b.x.map((i) => '<li>' + i + '</li>').join('') + '</ul>';
+    case 'call': return '<div class="call">' + b.x + '</div>';
+    case 'call warn': return '<div class="call warn">' + b.x + '</div>';
+    case 'table': return '<div class="tw" tabindex="0"><table><thead><tr>' + b.head.map((h) => '<th>' + esc(h) + '</th>').join('') + '</tr></thead><tbody>' + b.rows.map((r) => '<tr>' + r.map((c) => '<td>' + c + '</td>').join('') + '</tr>').join('') + '</tbody></table></div>';
+  }
+  return '';
+}
+const PROT_TEXT = {};
+function buildProtocol() {
+  $('protAcc').innerHTML = PROTOCOL.map((s, i) => {
+    PROT_TEXT[s.id] = norm(s.title + ' ' + s.blocks.map((b) => stripHtml(b.t === 'table' ? b.head.join(' ') + ' ' + b.rows.map((r) => r.join(' ')).join(' ') : (b.t === 'ul' ? b.x.join(' ') : b.x))).join(' '));
+    return '<details id="ps-' + s.id + '"' + (i === 0 ? ' open' : '') + '><summary>' + esc(s.title) + '</summary><div class="body">' + s.blocks.map(blockHtml).join('') + '</div></details>';
+  }).join('') + '<div class="empty" id="protEmpty" hidden>Ninguna sección contiene ese texto.</div>';
+}
+$('protSearch').addEventListener('input', () => {
+  const q = norm($('protSearch').value).trim(); let any = false;
+  PROTOCOL.forEach((s) => {
+    const d = $('ps-' + s.id), hit = !q || PROT_TEXT[s.id].includes(q);
+    d.hidden = !hit; if (hit) any = true; if (q && hit) d.open = true;
+  });
+  $('protEmpty').hidden = any;
+});
+$('protOpen').addEventListener('click', () => PROTOCOL.forEach((s) => { $('ps-' + s.id).open = true; }));
+$('protClose').addEventListener('click', () => PROTOCOL.forEach((s) => { $('ps-' + s.id).open = false; }));
+
+/* ================= ANTIBIÓTICOS ================= */
+let abxFocus = 'all';
+function lineHtml(l) {
+  if (l.startsWith('+ ')) return '<div class="ln"><span class="plus">+</span>' + l.slice(2) + '</div>';
+  return '<div class="ln">' + l + '</div>';
+}
+function renderAbx() {
+  $('abxChips').innerHTML = ABX_FOCI.map(([k, n]) => '<button type="button" class="chipb" data-k="' + k + '" aria-pressed="' + (abxFocus === k) + '">' + esc(n) + '</button>').join('');
+  const q = norm($('abxSearch').value).trim();
+  const list = ABX.filter((e) => (abxFocus === 'all' || e.f === abxFocus) && (!q || norm(e.t + ' ' + e.n.join(' ') + ' ' + e.r.map((r) => r.l + ' ' + r.a.join(' ')).join(' ')).includes(q)));
+  $('abxList').innerHTML = list.length ? list.map((e) => '<div class="card"><h3>' + esc(e.t) + '</h3>' + e.n.map((n) => '<p class="sub">' + esc(n) + '</p>').join('') + e.r.map((r) => '<div class="reg"><div class="lab">' + esc(r.l) + '</div>' + r.a.map(lineHtml).join('') + '</div>').join('') + '</div>').join('') : '<div class="empty" style="grid-column:1/-1">No hay pautas con ese filtro.</div>';
+  document.querySelectorAll('#abxChips .chipb').forEach((b) => b.addEventListener('click', () => { abxFocus = b.dataset.k; renderAbx(); }));
+}
+$('abxSearch').addEventListener('input', renderAbx);
+
+/* ================= PREGUNTAR ================= */
+const STOP = new Set('que el la los las de del en y o u un una unos unas es se para por con cuando como cual cuales hago pongo uso debo hay al a lo mi si no me mas muy hacer cuanto cuantos cuanta sobre'.split(' '));
+function toks(s) { return norm(s).replace(/[^a-z0-9\s]/g, ' ').split(/\s+/).filter((t) => t.length > 1 && !STOP.has(t)); }
+const KBI = KB.map((e) => ({ e, head: toks(e.q + ' ' + e.k), body: toks(stripHtml(e.a)), qn: norm(e.q + ' ' + e.k) }));
+function tokMatch(t, w) { return w === t || (t.length >= 4 && w.startsWith(t)) || (w.length >= 4 && t.startsWith(w)) || (t.length >= 6 && w.length >= 6 && t.slice(0, 6) === w.slice(0, 6)); }
+function search(query) {
+  const T = toks(query); if (!T.length) return [];
+  const out = KBI.map((it) => {
+    let sc = 0, hit = 0;
+    T.forEach((t) => { if (it.head.some((w) => tokMatch(t, w))) { sc += 3; hit++; } else if (it.body.some((w) => tokMatch(t, w))) { sc += 1; hit++; } });
+    const nq = norm(query).trim(); if (nq.length > 5 && it.qn.includes(nq)) sc += 6;
+    return { it, hit, sc: sc / Math.sqrt(T.length), frac: hit / T.length };
+  }).filter((x) => x.frac >= 0.6 && x.sc >= 1.2).sort((a, b) => b.sc - a.sc);
+  return out.slice(0, 4).map((x) => x.it.e);
+}
+function ask(query) {
+  const box = $('qAns'); const r = search(query);
+  if (!query.trim()) { box.innerHTML = ''; return; }
+  box.innerHTML = r.length ? r.map((e) => '<div class="card"><div class="qq">' + esc(e.q) + '</div><div class="aa">' + e.a + '</div><div class="src">Sección: ' + esc(e.s) + '</div></div>').join('')
+    : '<div class="empty">No encuentro eso en el protocolo. Prueba con otras palabras (p. ej. «lactato», «noradrenalina», «hemocultivos») o abre la pestaña Protocolo.</div>';
+}
+function buildSugg() {
+  const picks = [0, 4, 9, 14, 17, 18, 25, 28, 33];
+  $('qSugg').innerHTML = picks.filter((i) => KB[i]).map((i) => '<button type="button" class="chipb" data-i="' + i + '">' + esc(KB[i].q) + '</button>').join('');
+  document.querySelectorAll('#qSugg .chipb').forEach((b) => b.addEventListener('click', () => { const e = KB[+b.dataset.i]; $('qInput').value = e.q; ask(e.q); }));
+}
+$('qForm').addEventListener('submit', (ev) => { ev.preventDefault(); ask($('qInput').value); });
+
+/* ================= REPASAR ================= */
+let qz = { order: [], i: 0, score: 0, answered: false };
+function shuffle(a) { for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+function quizStart() { qz = { order: shuffle(QUIZ.map((_, i) => i)), i: 0, score: 0, answered: false }; quizRender(); }
+function quizRender() {
+  const body = $('qzBody'), n = qz.order.length;
+  $('qzBar').style.width = (qz.i / n * 100) + '%';
+  if (qz.i >= n) {
+    $('qzCount').textContent = 'Terminado';
+    const pct = Math.round(qz.score / n * 100);
+    body.innerHTML = '<div class="quiz-q">Resultado: ' + qz.score + ' de ' + n + ' (' + pct + ' %)</div><p>' + (pct >= 80 ? 'Muy bien. Domina el protocolo.' : pct >= 50 ? 'Vas bien. Repasa las secciones en las que has fallado.' : 'Conviene repasar el protocolo y volver a intentarlo.') + '</p><button class="btn pri" id="qzAgain" type="button">Repetir test</button>';
+    $('qzAgain').addEventListener('click', quizStart); return;
+  }
+  const Q = QUIZ[qz.order[qz.i]];
+  $('qzCount').textContent = 'Pregunta ' + (qz.i + 1) + ' de ' + n;
+  body.innerHTML = '<div class="quiz-q">' + esc(Q.q) + '</div>' + Q.o.map((o, k) => '<button type="button" class="opt" data-k="' + k + '">' + esc(o) + '</button>').join('') + '<div class="explain" id="qzEx" hidden></div>';
+  qz.answered = false;
+  body.querySelectorAll('.opt').forEach((b) => b.addEventListener('click', () => {
+    if (qz.answered) return; qz.answered = true;
+    const k = +b.dataset.k, ok = k === Q.c; if (ok) qz.score++;
+    body.querySelectorAll('.opt').forEach((x) => { x.disabled = true; if (+x.dataset.k === Q.c) x.classList.add('ok'); else if (x === b) x.classList.add('ko'); });
+    const ex = $('qzEx'); ex.hidden = false;
+    ex.innerHTML = '<b>' + (ok ? 'Correcto. ' : 'No es esa. ') + '</b>' + esc(Q.e) + '<div style="margin-top:10px"><button class="btn pri" id="qzNext" type="button">' + (qz.i + 1 >= n ? 'Ver resultado' : 'Siguiente') + '</button></div>';
+    $('qzNext').addEventListener('click', () => { qz.i++; quizRender(); }); $('qzNext').focus();
+  }));
+}
+function buildKeys() { $('keys').innerHTML = KEYS.map((k) => '<div class="key"><b>' + esc(k[0]) + '</b><span>' + esc(k[1]) + '</span></div>').join(''); }
+
+/* ================= ARRANQUE ================= */
+$('rfBox').innerHTML = RISK_FACTORS.map((r, i) => '<label class="chk"><input type="checkbox" id="rf' + i + '" data-label="' + esc(r) + '"><span>' + esc(r) + '</span></label>').join('');
+buildBundle(); buildProtocol(); renderAbx(); buildSugg(); buildKeys(); quizStart();
+document.querySelectorAll('#view-paciente input, #view-paciente select, #view-paciente textarea').forEach((el) => {
+  if (el.id === 'exPrev' || el.closest('#bundle')) return;
+  el.addEventListener('input', render); el.addEventListener('change', render);
+});
+render(); setExportUI();
+(function () { let h = ''; try { h = location.hash.replace('#', ''); } catch (e) {} showView(VIEWS.includes(h) ? h : 'paciente', false); })();
+</script>
+
+
+<!-- Barra común del Portal SUH Antequera -->
+<style>
+  .suhdock{position:fixed;left:14px;bottom:14px;z-index:2147483000;display:flex;align-items:center;gap:4px;padding:5px;border-radius:999px;background:#0c2a4a;box-shadow:0 10px 30px -8px rgba(12,42,74,.55);font:600 13px/1 'Plus Jakarta Sans',system-ui,-apple-system,'Segoe UI',sans-serif;transition:opacity .2s}
+  .suhdock a{display:inline-flex;align-items:center;justify-content:center;gap:7px;height:34px;min-width:34px;padding:0 9px;border-radius:999px;color:#fff;text-decoration:none}
+  .suhdock a:hover{background:rgba(255,255,255,.14)}
+  .suhdock a.suhdock-home{background:#fff;color:#0c2a4a;padding:0 12px 0 4px}
+  .suhdock a.suhdock-home img{width:26px;height:26px;border-radius:50%;object-fit:contain;background:#fff}
+  .suhdock svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  .suhdock .suhdock-x{opacity:.6;min-width:26px;padding:0}
+  .suhdock.suhdock-min a:not(.suhdock-home){display:none}
+  .suhdock.suhdock-min a.suhdock-home span{display:none}
+  .suhdock.suhdock-min a.suhdock-home{padding:0 4px}
+  @media print{.suhdock{display:none!important}}
+</style>
+<nav class="suhdock" aria-label="Portal SUH Antequera">
+  <a class="suhdock-home" href="../index.html#herramientas" title="Volver al Portal de Supervisión SUH Antequera"><img src="../img/logo-suh.jpg" alt=""><span>Portal SUH</span></a>
+  <a href="https://www.instagram.com/suh_antequera_/" target="_blank" rel="noopener" title="Instagram @suh_antequera_"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><path d="M17.5 6.5h.01"/></svg></a>
+  <a href="https://www.facebook.com/p/Suh-Antequera-61568582212569/" target="_blank" rel="noopener" title="Facebook SUH Antequera"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+  <a href="https://x.com/saludnortemalag" target="_blank" rel="noopener" title="X @saludnortemalag" style="font-size:15px">𝕏</a>
+  <a class="suhdock-x" href="#" title="Minimizar barra" onclick="this.parentNode.classList.toggle('suhdock-min');return false;"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></a>
+</nav>
+</body></html>
